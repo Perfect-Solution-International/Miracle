@@ -84,4 +84,12 @@ export const API_ROUTES = {
   reports: {
     summary: "/reports/summary",
   },
+  opportunities: {
+    list: "/opportunities",
+    featured: "/opportunities/featured",
+    detail: (slug: string) => `/opportunities/${slug}`,
+  },
+  cms: {
+    testimonials: "/cms/testimonials",
+  },
 } as const;

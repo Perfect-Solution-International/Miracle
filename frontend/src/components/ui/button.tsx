@@ -18,6 +18,13 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        // Marketing-site variants. Red is reserved for the single most important
+        // action in a view; `inverse` pairs are for dark navy and blue surfaces.
+        accent:
+          "bg-brand-red text-white shadow-sm hover:bg-brand-red-dark focus-visible:ring-brand-red/40",
+        inverse: "bg-white text-brand-blue-dark shadow-sm hover:bg-brand-blue-light",
+        "outline-inverse":
+          "border-white/30 bg-transparent text-white hover:border-white/60 hover:bg-white/10 aria-expanded:bg-white/10",
       },
       size: {
         default:
@@ -25,6 +32,8 @@ const buttonVariants = cva(
         xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        /** Call-to-action size used on the public site. */
+        xl: "h-12 gap-2 rounded-lg px-6 text-[0.95rem] font-semibold has-data-[icon=inline-end]:pr-5 has-data-[icon=inline-start]:pl-5",
         icon: "size-8",
         "icon-xs":
           "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
