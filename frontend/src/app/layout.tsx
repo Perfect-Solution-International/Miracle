@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Manrope } from "next/font/google";
 
 import { Suspense } from "react";
 
@@ -8,7 +8,13 @@ import { RootProvider, getSessionPromise } from "@/providers/root-provider";
 
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+// One brand typeface across the whole product. Self-hosted by next/font, so no
+// request to Google at runtime and no layout shift while it loads.
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  display: "swap",
+});
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 /**
@@ -47,7 +53,7 @@ export default function RootLayout({
 
   return (
     <html lang={APP_CONFIG.locale} suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${manrope.variable} ${geistMono.variable} antialiased`}>
         {/* Lets keyboard users jump past the sidebar and header. */}
         <a
           href="#main-content"

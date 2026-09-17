@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48" role="img" aria-labelledby="t">
+  <title id="t">Miracle International</title>
+  <!-- Interim mark. Replace this file with the approved Miracle International logo. -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="24" cy="24" r="19" stroke="#FFFFFF" stroke-width="3"/>
+    <path d="M9 30c8-4 22-6 31-17" stroke="#DF2021" stroke-width="3"/>
+    <path d="M24 5c-6 6-8.5 12-8.5 19S18 37 24 43M24 5c6 6 8.5 12 8.5 19S30 37 24 43M5.5 20h37" stroke="#FFFFFF" stroke-width="1.6" opacity=".55"/>
+  </g>
+  <text x="54" y="23" fill="#FFFFFF" font-family="Manrope, Inter, Arial, sans-serif" font-size="19" font-weight="800" letter-spacing="1.2">MIRACLE</text>
+  <text x="54.5" y="39" fill="#9DBEEB" font-family="Manrope, Inter, Arial, sans-serif" font-size="9.4" font-weight="700" letter-spacing="3.1">INTERNATIONAL</text>
+</svg>

@@ -435,18 +435,7 @@ export const PORTAL_NAVIGATION: Record<Portal, readonly NavSection[]> = {
   admin: ADMIN_NAV,
 };
 
-/** Top-level marketing navigation for the public site. */
-export const PUBLIC_NAVIGATION = [
-  { title: "About", href: ROUTES.public.about },
-  { title: "Services", href: ROUTES.public.services },
-  { title: "Global Sourcing", href: ROUTES.public.globalSourcing },
-  { title: "Wholesale", href: ROUTES.public.wholesaleProducts },
-  { title: "Business Solutions", href: ROUTES.public.businessSolutions },
-  { title: "Investment", href: ROUTES.public.investmentFranchise },
-  { title: "Travel", href: ROUTES.public.travelTourism },
-  { title: "IT Solutions", href: ROUTES.public.itSolutions },
-  { title: "Contact", href: ROUTES.public.contact },
-] as const;
+/** Public site navigation lives in `./public-navigation.ts`. */
 
 export const PORTAL_LABELS: Record<Portal, string> = {
   public: "Miracle International",
