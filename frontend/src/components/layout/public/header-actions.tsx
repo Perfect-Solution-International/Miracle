@@ -32,7 +32,7 @@ export function HeaderActions() {
           size="lg"
           className="text-ink hidden px-3 font-semibold md:inline-flex"
         >
-          <Link href={ROUTES.auth.login}>Login</Link>
+          <Link href={ROUTES.customer.dashboard}>Login</Link>
         </Button>
       )}
 

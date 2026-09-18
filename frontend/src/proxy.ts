@@ -36,7 +36,12 @@ export function proxy(request: NextRequest): NextResponse {
     return NextResponse.redirect(new URL(ROUTES.public.home, request.url));
   }
 
-  return NextResponse.next();
+  // Layouts can't read the pathname themselves, so it's forwarded here for the
+  // customer layout to tell the public dashboard route apart from its
+  // protected siblings under the same `/customer` segment.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", pathname);
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {

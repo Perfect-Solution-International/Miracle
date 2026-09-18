@@ -124,7 +124,7 @@ export function MobileNavigation() {
           </Button>
           <Button asChild variant="outline" size="xl" className="w-full">
             <Link
-              href={isAuthenticated ? PORTAL_HOME[ability.portal] : ROUTES.auth.login}
+              href={isAuthenticated ? PORTAL_HOME[ability.portal] : ROUTES.customer.dashboard}
               onClick={close}
             >
               {isAuthenticated ? "Go to Dashboard" : "Login"}
