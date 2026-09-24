@@ -538,3 +538,38 @@ export const TRAVEL_PACKAGE_DETAILS: readonly TravelPackageDetail[] = [
 export function getTravelPackageDetail(slug: string): TravelPackageDetail | undefined {
   return TRAVEL_PACKAGE_DETAILS.find((entry) => entry.slug === slug);
 }
+
+export interface TravelPackageFilters {
+  /** Free text, matched against the location, title and destination list. */
+  destination?: string;
+  /** Exact `TravelPackageType` match, from the quick planner or a category card. */
+  type?: string;
+  /** Coarse Sri Lanka vs. international split, from the travel category cards. */
+  region?: string;
+}
+
+/** Applies the quick planner's search params to the package catalogue. Every
+ * provided filter must match (AND), and an empty/absent filter is a no-op. */
+export function filterTravelPackages(
+  packages: readonly TravelPackageDetail[],
+  filters: TravelPackageFilters,
+): readonly TravelPackageDetail[] {
+  const destination = filters.destination?.trim().toLowerCase();
+  const type = filters.type?.trim().toLowerCase();
+  const region = filters.region?.trim().toLowerCase();
+
+  return packages.filter((pkg) => {
+    if (
+      destination &&
+      !pkg.location.toLowerCase().includes(destination) &&
+      !pkg.title.toLowerCase().includes(destination) &&
+      !pkg.destinations.some((place) => place.toLowerCase().includes(destination))
+    ) {
+      return false;
+    }
+    if (type && pkg.travelType !== type) return false;
+    if (region === "sri-lanka" && pkg.location !== "Sri Lanka") return false;
+    if (region === "international" && pkg.location === "Sri Lanka") return false;
+    return true;
+  });
+}

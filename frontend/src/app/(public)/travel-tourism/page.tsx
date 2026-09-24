@@ -5,10 +5,18 @@ import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
 import {
   BusinessTravelSection,
+  CustomizeTripSection,
+  filterTravelPackages,
+  PopularDestinationsSection,
+  QuickTravelPlanner,
+  TravelCategoriesSection,
+  TravelGuidesSection,
   TravelHero,
   TravelPackagesSection,
-  TravelServicesRow,
-  TravelTypeSection,
+  TravelProcessSection,
+  TravelServicesSection,
+  TRAVEL_PACKAGE_DETAILS,
+  WhyChooseUsSection,
 } from "@/features/travel";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
@@ -23,23 +31,44 @@ export const metadata: Metadata = buildPageMetadata({
   image: SITE_MEDIA.businessTravel,
 });
 
-export default function Page() {
+function firstValue(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const filters = {
+    destination: firstValue(params.destination),
+    type: firstValue(params.type),
+    region: firstValue(params.region),
+  };
+  const hasFilters = Boolean(filters.destination || filters.type || filters.region);
+  const packages = filterTravelPackages(TRAVEL_PACKAGE_DETAILS, filters);
+
   return (
     <>
       <TravelHero />
-      <TravelTypeSection />
-      <TravelServicesRow />
-      <TravelPackagesSection />
+      <QuickTravelPlanner />
+      <TravelServicesSection />
+      <TravelPackagesSection packages={packages} isFiltered={hasFilters} />
+      <CustomizeTripSection />
+      <TravelCategoriesSection />
+      <PopularDestinationsSection />
       <BusinessTravelSection />
+      <WhyChooseUsSection />
+      <TravelProcessSection />
+      <TravelGuidesSection />
 
       <CtaBanner
-        eyebrow="Plan Your Perfect Trip"
-        title="Can't Find the Package You're Looking For?"
-        description="Tell us what you need and we'll help you create a suitable travel solution."
-        primary={{
-          label: "Tell Us What You Need",
-          href: ROUTES.public.tellUsWhatYouNeed,
-        }}
+        eyebrow="Start Planning"
+        title="Ready to Start Your Journey?"
+        description="Whether you need a complete travel package or a trip designed specifically for you, we're here to help."
+        primary={{ label: "Explore Packages", href: "#packages" }}
+        secondary={{ label: "Plan My Trip", href: "#customize-trip" }}
       />
     </>
   );

@@ -6,9 +6,7 @@ import { Eyebrow } from "@/components/common/eyebrow";
 import { Button } from "@/components/ui/button";
 import { SITE_MEDIA } from "@/config/site-media";
 
-import { TripPlannerDialog } from "./trip-planner-dialog";
-
-/** Full-bleed travel hero with the page's two primary actions. */
+/** Full-bleed cinematic hero with the page's two primary actions. */
 export function TravelHero() {
   return (
     <section
@@ -34,24 +32,22 @@ export function TravelHero() {
           id="travel-hero-heading"
           className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-white sm:text-5xl"
         >
-          Explore the World. Travel with Confidence.
+          Your Journey, Our Expertise.
         </h1>
         <p className="max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
-          Complete travel solutions for local &amp; international journeys, tailored to
-          your needs.
+          Discover destinations, explore unforgettable experiences, and create a journey
+          designed around your needs.
         </p>
 
         <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-          <TripPlannerDialog
-            trigger={
-              <Button variant="accent" size="xl">
-                Plan Your Trip
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Button>
-            }
-          />
+          <Button asChild variant="accent" size="xl">
+            <Link href="#packages">
+              Explore Travel Packages
+              <ArrowRight data-icon="inline-end" aria-hidden="true" />
+            </Link>
+          </Button>
           <Button asChild variant="outline-inverse" size="xl">
-            <Link href="#packages">Explore Packages</Link>
+            <Link href="#customize-trip">Plan Your Trip</Link>
           </Button>
         </div>
       </div>

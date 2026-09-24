@@ -66,21 +66,26 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
               </p>
             </div>
 
-            <span className="text-ink inline-flex w-fit items-center gap-1.5 text-sm font-semibold">
-              <CalendarDays aria-hidden="true" className="text-brand-blue size-4" />
-              {detail.duration.days} Days / {detail.duration.nights} Nights
-            </span>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5">
+              <span className="text-ink inline-flex w-fit items-center gap-1.5 text-sm font-semibold">
+                <CalendarDays aria-hidden="true" className="text-brand-blue size-4" />
+                {detail.duration.days} Days / {detail.duration.nights} Nights
+              </span>
+              <span className="text-ink text-sm font-extrabold">{detail.startingPrice}</span>
+            </div>
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
             <Button asChild variant="accent" size="xl">
               <Link href={ROUTES.public.tellUsWhatYouNeed}>
-                Request This Package
+                Book This Package
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="xl">
-              <Link href={ROUTES.public.tellUsWhatYouNeed}>Customize Package</Link>
+              <Link href={`${ROUTES.public.travelTourism}#customize-trip`}>
+                Customize This Package
+              </Link>
             </Button>
           </div>
         </div>

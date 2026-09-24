@@ -2,19 +2,23 @@ import {
   BedDouble,
   Briefcase,
   Car,
+  Compass,
   FileCheck2,
   Globe2,
+  Heart,
   Landmark,
   MapPinned,
   Plane,
   Sparkles,
   Stamp,
-  Umbrella,
   Users,
   type LucideIcon,
 } from "lucide-react";
 
+import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
+
+import type { TravelPackageType } from "../types/travel-package-detail.types";
 
 export interface TravelHighlight {
   label: string;
@@ -138,88 +142,83 @@ export const TRAVEL_CATEGORIES: readonly TravelCategory[] = [
   },
 ];
 
-export interface TravelType {
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
-  description: string;
-}
-
-/** "Choose Your Travel Type" cards. */
-export const TRAVEL_TYPES: readonly TravelType[] = [
-  {
-    icon: Landmark,
-    title: "Inbound Travel",
-    subtitle: "Explore Sri Lanka",
-    description:
-      "Tours, stays and local transport arranged for visitors discovering Sri Lanka.",
-  },
-  {
-    icon: Globe2,
-    title: "Outbound Travel",
-    subtitle: "Explore the World",
-    description: "Flights, visas and itineraries arranged for travel beyond Sri Lanka.",
-  },
-];
-
-export interface TravelPackage {
+export interface TravelCategoryCard {
+  id: string;
   icon: LucideIcon;
   image: SiteImage;
   title: string;
   description: string;
-  cta: string;
-  /** Present only for packages with a full detail page at `ROUTES.public.travelPackage(slug)`. */
-  slug?: string;
+  href: string;
 }
 
-/** "Featured Travel Packages" cards. Illustrative categories, not fixed
- * bookable inventory — every card leads to the inquiry form. */
-export const TRAVEL_PACKAGES: readonly TravelPackage[] = [
+const packagesFilteredBy = (params: Record<string, string>) =>
+  `${ROUTES.public.travelTourism}?${new URLSearchParams(params).toString()}#packages`;
+
+/** "Travel Categories" showcase — broader trip types than the service list,
+ * each linking to a matching filter on the packages grid or its own section. */
+export const TRAVEL_CATEGORY_CARDS: readonly TravelCategoryCard[] = [
   {
-    icon: MapPinned,
-    image: SITE_MEDIA.travelPackages.sriLankaExplorer,
-    title: "Sri Lanka Explorer",
-    description:
-      "A multi-day itinerary covering Sri Lanka's key highlights, customized to your dates.",
-    cta: "View Package",
-    slug: "sri-lanka-explorer",
+    id: "inbound",
+    icon: Landmark,
+    image: SITE_MEDIA.travelCategoryCards.inbound,
+    title: "Inbound Travel",
+    description: "Tours, stays and local transport arranged for visitors discovering Sri Lanka.",
+    href: packagesFilteredBy({ region: "sri-lanka" }),
   },
   {
+    id: "outbound",
     icon: Globe2,
-    image: SITE_MEDIA.travelPackages.internationalEscape,
-    title: "International Escape",
-    description: "Flights, stay and local transport bundled for a getaway abroad.",
-    cta: "View Package",
+    image: SITE_MEDIA.travelCategoryCards.outbound,
+    title: "Outbound Travel",
+    description: "Flights, visas and itineraries arranged for travel beyond Sri Lanka.",
+    href: packagesFilteredBy({ region: "international" }),
   },
   {
-    icon: Briefcase,
-    image: SITE_MEDIA.travelPackages.businessTravelPackage,
-    title: "Business Travel",
-    description:
-      "Flights, accommodation and transport planned around your meeting schedule.",
-    cta: "View Package",
-  },
-  {
-    icon: Umbrella,
-    image: SITE_MEDIA.travelPackages.beachAndLeisure,
-    title: "Beach & Leisure",
-    description: "Coastal stays and leisure itineraries for a relaxed getaway.",
-    cta: "View Package",
-  },
-  {
+    id: "family-holidays",
     icon: Users,
-    image: SITE_MEDIA.travelPackages.familyAndGroupEscape,
-    title: "Family & Group Escape",
-    description:
-      "Group-friendly itineraries with accommodation and transport for everyone.",
-    cta: "View Package",
+    image: SITE_MEDIA.travelCategoryCards.familyHolidays,
+    title: "Family Holidays",
+    description: "Group-friendly itineraries with something for every generation.",
+    href: packagesFilteredBy({ type: "family" satisfies TravelPackageType }),
   },
   {
+    id: "honeymoon",
+    icon: Heart,
+    image: SITE_MEDIA.travelCategoryCards.honeymoon,
+    title: "Honeymoon",
+    description: "Private, romantic escapes for couples celebrating a new chapter.",
+    href: packagesFilteredBy({ type: "honeymoon" satisfies TravelPackageType }),
+  },
+  {
+    id: "adventure",
+    icon: Compass,
+    image: SITE_MEDIA.travelCategoryCards.adventure,
+    title: "Adventure Travel",
+    description: "Rafting, hiking and safari trips for a more active itinerary.",
+    href: packagesFilteredBy({ type: "adventure" satisfies TravelPackageType }),
+  },
+  {
+    id: "business",
+    icon: Briefcase,
+    image: SITE_MEDIA.travelCategoryCards.business,
+    title: "Business Travel",
+    description: "End-to-end coordination for meetings, conferences and supplier visits.",
+    href: `${ROUTES.public.travelTourism}#business-travel`,
+  },
+  {
+    id: "luxury",
     icon: Sparkles,
-    image: SITE_MEDIA.travelPackages.customTravelPackage,
-    title: "Custom Travel Package",
-    description:
-      "Tell us your dates, destinations and budget — we'll put together a package around it.",
-    cta: "Request Now",
+    image: SITE_MEDIA.travelCategoryCards.luxury,
+    title: "Luxury Travel",
+    description: "Five-star stays and private transport for a fully elevated trip.",
+    href: `${ROUTES.public.travelTourism}#packages`,
+  },
+  {
+    id: "customized",
+    icon: MapPinned,
+    image: SITE_MEDIA.travelCategoryCards.customized,
+    title: "Customized Tours",
+    description: "Tell us your dates, destinations and budget — we'll design around it.",
+    href: `${ROUTES.public.travelTourism}#customize-trip`,
   },
 ];

@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { NavigationMenu } from "radix-ui";
 
@@ -10,6 +11,13 @@ import type {
   PublicNavLink,
 } from "@/config/public-navigation";
 import { cn } from "@/lib/utils";
+
+/** Tailwind purges unused class strings, so the column count must be a
+ * literal lookup rather than an interpolated `grid-cols-${n}`. */
+const GROUP_COLUMNS: Record<number, string> = {
+  2: "grid-cols-2",
+  3: "grid-cols-3",
+};
 
 /**
  * Panel content for a desktop navigation menu. Links go through
@@ -35,7 +43,13 @@ export function MegaMenuPanel({
         isWide ? "grid grid-cols-[1fr_17rem]" : feature ? "grid grid-cols-[1fr_15rem]" : "",
       )}
     >
-      <div className={cn("p-6", isWide && "grid grid-cols-3 gap-6")}>
+      <div
+        className={cn(
+          "p-6",
+          isWide && "grid gap-6",
+          isWide && (GROUP_COLUMNS[groups.length] ?? "grid-cols-3"),
+        )}
+      >
         {groups.map((group) => (
           <div key={group.title} className="space-y-3">
             <p className="text-muted-foreground px-3 text-[0.7rem] font-bold tracking-[0.16em] uppercase">
@@ -111,7 +125,20 @@ function MenuLink({ link }: { link: PublicNavLink }) {
 function MenuFeature({ feature }: { feature: PublicNavFeature }) {
   return (
     <div className="bg-navy relative isolate flex flex-col justify-between gap-6 overflow-hidden p-6 text-white">
-      <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
+      {feature.image ? (
+        <>
+          <Image
+            src={feature.image.src}
+            alt={feature.image.alt}
+            fill
+            sizes="15rem"
+            className="-z-20 object-cover"
+          />
+          <div className="from-navy via-navy/85 absolute inset-0 -z-10 bg-gradient-to-t to-navy/40" />
+        </>
+      ) : (
+        <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
+      )}
       <div
         aria-hidden="true"
         className="bg-brand-blue absolute -right-16 -bottom-16 -z-10 size-48 rounded-full opacity-50 blur-3xl"

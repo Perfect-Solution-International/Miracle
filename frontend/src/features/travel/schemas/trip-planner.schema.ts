@@ -27,6 +27,7 @@ export const tripPlannerSchema = z
     budgetRange: z.string().optional(),
     accommodation: z.string().min(1, "Select an accommodation preference"),
     transportation: z.string().min(1, "Select a transportation option"),
+    travelType: z.string().optional(),
     interests: z.array(z.string()).default([]),
     specialRequirements: z.string().trim().max(2000).optional(),
   })
