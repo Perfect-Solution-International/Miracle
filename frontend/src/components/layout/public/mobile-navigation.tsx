@@ -124,7 +124,11 @@ export function MobileNavigation() {
           </Button>
           <Button asChild variant="outline" size="xl" className="w-full">
             <Link
+ Imasha
               href={isAuthenticated ? PORTAL_HOME[ability.portal] : ROUTES.customer.dashboard}
+
+              href={isAuthenticated ? PORTAL_HOME[ability.portal] : ROUTES.auth.login}
+ main
               onClick={close}
             >
               {isAuthenticated ? "Go to Dashboard" : "Login"}

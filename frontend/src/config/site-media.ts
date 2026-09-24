@@ -67,6 +67,7 @@ export const SITE_MEDIA = {
     src: unsplash("1460925895917-afdab827c52f"),
     alt: "Laptop displaying a business analytics dashboard",
   },
+ Imasha
   travelPackages: {
     sriLankaExplorer: {
       src: unsplash("1751247026229-518bfec9b5e6"),
@@ -93,6 +94,8 @@ export const SITE_MEDIA = {
       alt: "Map, camera and passport laid out on a table while planning a trip",
     },
   },
+
+ main
   categories: {
     vehicles: {
       src: unsplash("1494976388531-d1058494cdd8"),
