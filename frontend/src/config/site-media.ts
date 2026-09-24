@@ -67,6 +67,32 @@ export const SITE_MEDIA = {
     src: unsplash("1460925895917-afdab827c52f"),
     alt: "Laptop displaying a business analytics dashboard",
   },
+  travelPackages: {
+    sriLankaExplorer: {
+      src: unsplash("1751247026229-518bfec9b5e6"),
+      alt: "Sigiriya rock fortress in Sri Lanka lit by sunset",
+    },
+    internationalEscape: {
+      src: unsplash("1622123865942-f858cd6557a5"),
+      alt: "City skyline under a clear blue sky",
+    },
+    businessTravelPackage: {
+      src: unsplash("1772991221654-49aa6e0a98bc"),
+      alt: "Traveller walking through a sunlit modern airport terminal",
+    },
+    beachAndLeisure: {
+      src: unsplash("1760815153715-9fce4c3644a3"),
+      alt: "Tropical beach with a hammock strung between palm trees",
+    },
+    familyAndGroupEscape: {
+      src: unsplash("1475503572774-15a45e5d60b9"),
+      alt: "Family holding hands together on the seashore",
+    },
+    customTravelPackage: {
+      src: unsplash("1646303297330-17073f7823c3"),
+      alt: "Map, camera and passport laid out on a table while planning a trip",
+    },
+  },
   categories: {
     vehicles: {
       src: unsplash("1494976388531-d1058494cdd8"),

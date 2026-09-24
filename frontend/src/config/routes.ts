@@ -8,6 +8,7 @@ export const ROUTES = {
     about: "/about",
     services: "/services",
     globalSourcing: "/global-sourcing",
+    importExport: "/import-export",
     wholesaleProducts: "/wholesale-products",
     businessSolutions: "/business-solutions",
     investmentFranchise: "/investment-franchise",

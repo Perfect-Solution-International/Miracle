@@ -4,9 +4,14 @@
  * Other features import from here, never from internal paths, so the module's
  * internals can be refactored without breaking consumers.
  */
+export { ForgotPasswordForm } from "./components/forgot-password-form";
 export { LoginForm } from "./components/login-form";
+export { RegisterForm } from "./components/register-form";
+export { ResetPasswordForm } from "./components/reset-password-form";
+export { useForgotPassword } from "./hooks/use-forgot-password";
 export { useLogin } from "./hooks/use-login";
 export { useRegister } from "./hooks/use-register";
+export { useResetPassword } from "./hooks/use-reset-password";
 export { useCurrentUser } from "./hooks/use-current-user";
 export { authApi } from "./api/auth.api";
 export { authKeys } from "./api/auth.keys";

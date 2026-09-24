@@ -1,67 +1,67 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Section } from "@/components/common/section";
 import { ROUTES } from "@/config/routes";
-import { getCurrentUser } from "@/server/dal/session";
+import {
+  NeedHelpCard,
+  RequestExamplesFaqSection,
+  RequirementInquiryForm,
+  RequirementProcessSteps,
+  SidebarTestimonialCard,
+  TellUsWhatYouNeedHero,
+  WhyShareCard,
+} from "@/features/requirements";
+import { getPublishedTestimonials } from "@/features/testimonials";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: "Tell Us What You Need",
-  description:
-    "Describe your product requirement and our sourcing team will find verified suppliers and prepare quotations.",
-};
+const TITLE = "Tell Us What You Need";
+const DESCRIPTION =
+  "Share your requirements with us, and our expert team will provide or coordinate the right solution from A to Z.";
 
-/**
- * Public entry point to the sourcing funnel.
- *
- * Uses `getCurrentUser()` rather than `verifySession()` so guests are not
- * redirected: signed-in customers go straight to the form, everyone else is
- * invited to register first.
- */
-export default async function TellUsWhatYouNeedPage() {
-  const user = await getCurrentUser();
+export const metadata: Metadata = buildPageMetadata({
+  title: TITLE,
+  description: DESCRIPTION,
+  path: ROUTES.public.tellUsWhatYouNeed,
+});
+
+/** Public entry point to the sourcing funnel: a single lead-capture form open
+ * to every visitor, no account required to get in touch. */
+export default async function Page() {
+  const testimonials = await getPublishedTestimonials();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 md:px-6">
-      <h1 className="text-3xl font-semibold tracking-tight">Tell us what you need</h1>
-      <p className="text-muted-foreground mt-3">
-        Share your product requirement and our sourcing team will identify verified
-        suppliers, negotiate pricing, and prepare a quotation for you.
-      </p>
+    <>
+      <TellUsWhatYouNeedHero />
 
-      <Card className="mt-10">
-        <CardHeader>
-          <CardTitle>{user ? "Submit a requirement" : "Get started"}</CardTitle>
-          <CardDescription>
-            {user
-              ? "Your requirement will be routed to our procurement team."
-              : "Create an account to submit a requirement and track its progress."}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-wrap gap-3">
-          {user ? (
-            <Button asChild>
-              <Link href="/customer/requirements/new">Continue to the form</Link>
-            </Button>
-          ) : (
-            <>
-              <Button asChild>
-                <Link href={ROUTES.auth.register}>Create an account</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href={ROUTES.auth.login}>Sign in</Link>
-              </Button>
-            </>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+      <Section spacing="compact">
+        <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-10">
+          <RequirementInquiryForm />
+
+          <div className="flex flex-col gap-6">
+            <WhyShareCard />
+            <NeedHelpCard />
+            <SidebarTestimonialCard testimonials={testimonials} />
+          </div>
+        </div>
+      </Section>
+
+      <Section tone="navy" aria-labelledby="process-heading">
+        <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
+        <p className="text-brand-blue-muted text-center text-xs font-bold tracking-[0.18em] uppercase">
+          How It Works
+        </p>
+        <h2
+          id="process-heading"
+          className="mx-auto mt-2 max-w-xl text-center text-3xl font-extrabold tracking-tight text-white sm:text-4xl"
+        >
+          A Simple Process for Your Needs
+        </h2>
+        <RequirementProcessSteps className="mt-12 lg:mt-16" />
+      </Section>
+
+      <Section tone="surface">
+        <RequestExamplesFaqSection />
+      </Section>
+    </>
   );
 }
