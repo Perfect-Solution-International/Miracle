@@ -1,7 +1,6 @@
 import {
   ArrowDownToLine,
   ArrowUpFromLine,
-  BadgeCheck,
   Briefcase,
   Building2,
   Compass,
@@ -192,8 +191,42 @@ export const BUSINESS_SOLUTION_LINKS: readonly PublicNavLink[] = [
   },
 ];
 
+/** Links shown in the primary navbar's "Services" dropdown. */
+export const MAIN_NAV_SERVICE_LINKS: readonly PublicNavLink[] = [
+  {
+    title: "Trading",
+    href: ROUTES.public.wholesaleProducts,
+    description: "Bulk supply at negotiated terms",
+    icon: Warehouse,
+  },
+  {
+    title: "Franchise",
+    href: servicesAnchor("franchise"),
+    description: "Acquire or expand a franchise",
+    icon: Handshake,
+  },
+  {
+    title: "Import & Export",
+    href: ROUTES.public.importExport,
+    description: "Clearance, documentation and delivery",
+    icon: Globe2,
+  },
+  {
+    title: "Investment Opportunities",
+    href: ROUTES.public.investmentFranchise,
+    description: "Evaluate and structure opportunities",
+    icon: TrendingUp,
+  },
+  {
+    title: "Marketing & Advertising",
+    href: servicesAnchor("advertising"),
+    description: "Promotion and business visibility",
+    icon: Megaphone,
+  },
+];
+
 export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
-  { kind: "link", title: "About", href: ROUTES.public.about },
+  { kind: "link", title: "Home", href: ROUTES.public.home },
   {
     kind: "menu",
     title: "Services",
@@ -212,76 +245,11 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       cta: "Submit a requirement",
     },
   },
-  { kind: "link", title: "Global Sourcing", href: ROUTES.public.globalSourcing },
-  {
-    kind: "menu",
-    title: "Wholesale & Products",
-    href: ROUTES.public.wholesaleProducts,
-    groups: [
-      {
-        title: "Product Categories",
-        links: [
-          ...WHOLESALE_CATEGORY_LINKS.slice(0, 6),
-          { title: "View all products", href: ROUTES.public.products },
-        ],
-      },
-    ],
-    feature: {
-      eyebrow: "Can't find a product?",
-      title: "We source it for you",
-      description:
-        "Send the specification and quantity. We compare suppliers and return a quotation.",
-      href: ROUTES.public.requestQuotation,
-      cta: "Request a quotation",
-    },
-  },
-  {
-    kind: "menu",
-    title: "Business Solutions",
-    href: ROUTES.public.businessSolutions,
-    groups: [{ title: "Business Solutions", links: BUSINESS_SOLUTION_LINKS }],
-  },
-  {
-    kind: "menu",
-    title: "More",
-    groups: [
-      {
-        title: "Explore",
-        links: [
-          {
-            title: "Investment & Franchise",
-            href: ROUTES.public.investmentFranchise,
-            description: "Opportunities to invest and grow",
-            icon: TrendingUp,
-          },
-          {
-            title: "Travel & Tourism",
-            href: ROUTES.public.travelTourism,
-            description: "Visas, flights and business travel",
-            icon: Plane,
-          },
-          {
-            title: "IT Solutions",
-            href: ROUTES.public.itSolutions,
-            description: "Digital systems for growing businesses",
-            icon: Laptop,
-          },
-          {
-            title: "How It Works",
-            href: ROUTES.public.howItWorks,
-            description: "From requirement to delivery",
-            icon: BadgeCheck,
-          },
-          {
-            title: "Contact Us",
-            href: ROUTES.public.contact,
-            description: "Speak with our team",
-            icon: Globe2,
-          },
-        ],
-      },
-    ],
-  },
+  { kind: "link", title: "Business Solutions", href: ROUTES.public.businessSolutions },
+  { kind: "link", title: "Travel & Tourism", href: ROUTES.public.travelTourism },
+  { kind: "link", title: "IT Solutions", href: ROUTES.public.itSolutions },
+  { kind: "link", title: "About Us", href: ROUTES.public.about },
+  { kind: "link", title: "Contact Us", href: ROUTES.public.contact },
 ];
 
 /** Flat list for the mobile drawer, grouped into collapsible sections. */

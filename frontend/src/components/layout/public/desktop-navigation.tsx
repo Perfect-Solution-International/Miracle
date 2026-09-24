@@ -46,7 +46,11 @@ export function DesktopNavigation() {
     >
       <NavigationMenu.List className="flex items-center gap-0.5">
         {PUBLIC_MAIN_NAV.map((item) => (
-          <NavItem key={item.title} item={item} active={isNavItemActive(pathname, item)} />
+          <NavItem
+            key={item.title}
+            item={item}
+            active={isNavItemActive(pathname, item, PUBLIC_MAIN_NAV)}
+          />
         ))}
       </NavigationMenu.List>
     </NavigationMenu.Root>

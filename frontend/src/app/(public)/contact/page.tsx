@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Get in touch with our team.",
-  openGraph: {
-    title: "Contact",
-    description: "Get in touch with our team.",
-  },
-};
+import { ROUTES } from "@/config/routes";
+import { SITE_MEDIA } from "@/config/site-media";
+import { ContactDetailsSection, ContactHero, LocationSection } from "@/features/contact";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
+const TITLE = "Contact Us";
+const DESCRIPTION =
+  "Reach out to us for inquiries, quotations or any business requirements. Our team will get back to you as soon as possible.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: TITLE,
+  description: DESCRIPTION,
+  path: ROUTES.public.contact,
+  image: SITE_MEDIA.heroPort,
+});
 
 export default function Page() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 md:px-6">
-      <h1 className="text-3xl font-semibold tracking-tight">Contact</h1>
-      <p className="text-muted-foreground mt-3 max-w-2xl">Get in touch with our team.</p>
-      <p className="text-muted-foreground mt-10 text-sm">
-        This page is part of the planned public site and is awaiting content.
-      </p>
-    </div>
+    <>
+      <ContactHero />
+      <ContactDetailsSection />
+      <LocationSection />
+    </>
   );
 }
