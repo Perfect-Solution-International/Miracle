@@ -13,6 +13,7 @@ export const ROUTES = {
     businessSolutions: "/business-solutions",
     investmentFranchise: "/investment-franchise",
     travelTourism: "/travel-tourism",
+    travelPackage: (slug: string) => `/travel-tourism/packages/${slug}`,
     itSolutions: "/it-solutions",
     products: "/products",
     product: (slug: string) => `/products/${slug}`,

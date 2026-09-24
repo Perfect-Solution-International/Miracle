@@ -168,6 +168,8 @@ export interface TravelPackage {
   title: string;
   description: string;
   cta: string;
+  /** Present only for packages with a full detail page at `ROUTES.public.travelPackage(slug)`. */
+  slug?: string;
 }
 
 /** "Featured Travel Packages" cards. Illustrative categories, not fixed
@@ -180,6 +182,7 @@ export const TRAVEL_PACKAGES: readonly TravelPackage[] = [
     description:
       "A multi-day itinerary covering Sri Lanka's key highlights, customized to your dates.",
     cta: "View Package",
+    slug: "sri-lanka-explorer",
   },
   {
     icon: Globe2,

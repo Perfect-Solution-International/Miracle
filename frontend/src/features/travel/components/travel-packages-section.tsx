@@ -10,8 +10,9 @@ import { ROUTES } from "@/config/routes";
 import { TRAVEL_PACKAGES } from "../data/travel.content";
 
 /**
- * Illustrative package categories, not fixed bookable inventory — every card
- * leads to the inquiry form since there is no backend catalogue yet.
+ * Illustrative package categories, not fixed bookable inventory. Cards with a
+ * `slug` link to that package's detail page; the rest lead straight to the
+ * inquiry form since there is no backend catalogue yet.
  */
 export function TravelPackagesSection() {
   return (
@@ -30,7 +31,7 @@ export function TravelPackagesSection() {
       />
 
       <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
-        {TRAVEL_PACKAGES.map(({ icon: Icon, image, title, description, cta }) => (
+        {TRAVEL_PACKAGES.map(({ icon: Icon, image, title, description, cta, slug }) => (
           <li
             key={title}
             className="shadow-soft flex h-full flex-col overflow-hidden rounded-2xl border bg-white"
@@ -57,7 +58,13 @@ export function TravelPackagesSection() {
                 </p>
               </div>
               <Button asChild variant="outline" className="text-ink w-full">
-                <Link href={ROUTES.public.tellUsWhatYouNeed}>
+                <Link
+                  href={
+                    slug
+                      ? ROUTES.public.travelPackage(slug)
+                      : ROUTES.public.tellUsWhatYouNeed
+                  }
+                >
                   {cta}
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Link>
