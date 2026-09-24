@@ -156,7 +156,7 @@ export const BUSINESS_SOLUTION_LINKS: readonly PublicNavLink[] = [
 /** Links shown in the primary navbar's "Travel & Tourism" dropdown. */
 export const TRAVEL_NAV_LINKS = {
   services: [
-    { title: "Visa Services", href: travelAnchor("visa"), icon: Stamp },
+    { title: "Visa Services", href: ROUTES.public.visaServices, icon: Stamp },
     { title: "Flight Tickets", href: travelAnchor("flights"), icon: Plane },
     { title: "Work Visa Support", href: travelAnchor("work-visa"), icon: FileCheck2 },
     { title: "Accommodation", href: travelAnchor("accommodation"), icon: BedDouble },
@@ -287,7 +287,7 @@ export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
   {
     title: "Travel & Support",
     links: [
-      { title: "Visa Assistance", href: `${ROUTES.public.travelTourism}#visa` },
+      { title: "Visa Assistance", href: ROUTES.public.visaServices },
       { title: "Flight Ticketing", href: `${ROUTES.public.travelTourism}#flights` },
       { title: "Travel & Tourism", href: ROUTES.public.travelTourism },
       { title: "Accommodation", href: `${ROUTES.public.travelTourism}#accommodation` },

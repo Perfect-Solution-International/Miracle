@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
+import { ROUTES } from "@/config/routes";
 
 import { TRAVEL_CATEGORIES } from "../data/travel.content";
 
@@ -23,12 +24,12 @@ export function TravelServicesSection() {
 
   const categoryCard = (category: (typeof TRAVEL_CATEGORIES)[number]): ServiceCard => ({
     // "business-travel" has its own dedicated section further down the page,
-    // which owns that anchor id — this card only links to it.
-    id: category.id === "business-travel" ? undefined : category.id,
+    // and "visa" now has its own full page — neither owns this anchor id.
+    id: category.id === "business-travel" || category.id === "visa" ? undefined : category.id,
     icon: category.icon,
     title: category.title,
     summary: category.summary,
-    href: `#${category.id}`,
+    href: category.id === "visa" ? ROUTES.public.visaServices : `#${category.id}`,
   });
 
   const cards: readonly ServiceCard[] = [visa, flights, workVisa, accommodation]

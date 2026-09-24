@@ -14,6 +14,7 @@ export const ROUTES = {
     investmentFranchise: "/investment-franchise",
     travelTourism: "/travel-tourism",
     travelPackage: (slug: string) => `/travel-tourism/packages/${slug}`,
+    visaServices: "/travel-tourism/visa-services",
     itSolutions: "/it-solutions",
     products: "/products",
     product: (slug: string) => `/products/${slug}`,

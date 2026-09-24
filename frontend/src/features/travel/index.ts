@@ -10,7 +10,6 @@ export { TravelCategoriesSection } from "./components/travel-categories-section"
 export { PopularDestinationsSection } from "./components/popular-destinations-section";
 export { BusinessTravelSection } from "./components/business-travel-section";
 export { WhyChooseUsSection } from "./components/why-choose-us-section";
-export { TravelProcessSection } from "./components/travel-process-section";
 export { TravelGuidesSection } from "./components/travel-guides-section";
 
 export { PackageHero } from "./components/package-detail/package-hero";
@@ -33,7 +32,6 @@ export {
   INTERNATIONAL_DESTINATIONS,
 } from "./data/travel-destinations.content";
 export { WHY_CHOOSE_US_FEATURES } from "./data/why-choose-us.content";
-export { TRAVEL_PROCESS_STEPS } from "./data/travel-process.content";
 export { TRAVEL_GUIDE_CARDS } from "./data/travel-guides.content";
 
 export type { TravelCategory, TravelHighlight, TravelCategoryCard } from "./data/travel.content";

@@ -13,7 +13,6 @@ import {
   TravelGuidesSection,
   TravelHero,
   TravelPackagesSection,
-  TravelProcessSection,
   TravelServicesSection,
   TRAVEL_PACKAGE_DETAILS,
   WhyChooseUsSection,
@@ -60,7 +59,6 @@ export default async function Page({
       <PopularDestinationsSection />
       <BusinessTravelSection />
       <WhyChooseUsSection />
-      <TravelProcessSection />
       <TravelGuidesSection />
 
       <CtaBanner
