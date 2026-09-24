@@ -73,7 +73,7 @@ export const SITE_MEDIA = {
       alt: "Modern glass office towers in Colombo's financial district",
     },
     kandy: {
-      src: unsplash("1533105079780-92b9be482077"),
+      src: unsplash("1544644181-1484b3fdfc62"),
       alt: "Tiered temple on a lake surrounded by misty hills",
     },
     ella: {
@@ -143,7 +143,7 @@ export const SITE_MEDIA = {
       alt: "Wild elephant standing among dense jungle foliage",
     },
     culturalSriLankaExperience: {
-      src: unsplash("1533105079780-92b9be482077"),
+      src: unsplash("1544644181-1484b3fdfc62"),
       alt: "Tiered temple on a lake surrounded by misty hills",
     },
     dubaiCityEscape: {
@@ -173,8 +173,8 @@ export const SITE_MEDIA = {
       alt: "Family holding hands together on the seashore",
     },
     honeymoon: {
-      src: unsplash("1544644181-1484b3fdfc62"),
-      alt: "Seaplane beside overwater bungalows in the Maldives",
+      src: unsplash("1590523277543-a94d2e4eb00b"),
+      alt: "Aerial view of overwater bungalows in a Maldivian atoll",
     },
     adventure: {
       src: unsplash("1465310477141-6fb93167a273"),

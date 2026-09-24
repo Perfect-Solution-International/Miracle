@@ -1,10 +1,6 @@
 import {
-  ArrowDownToLine,
-  ArrowUpFromLine,
-  BadgeCheck,
   BedDouble,
   Briefcase,
-  Building2,
   Car,
   Compass,
   Factory,
@@ -13,14 +9,11 @@ import {
   Handshake,
   Heart,
   Landmark,
-  Laptop,
-  Lightbulb,
   Luggage,
   MapPinned,
   Megaphone,
   Plane,
   Rocket,
-  Search,
   Sparkles,
   Stamp,
   TrendingUp,
@@ -82,80 +75,39 @@ const travelAnchor = (id: string) => `${ROUTES.public.travelTourism}#${id}`;
 const travelPackagesFilteredBy = (params: Record<string, string>) =>
   `${ROUTES.public.travelTourism}?${new URLSearchParams(params).toString()}#packages`;
 
-export const SERVICE_LINKS = {
-  trade: [
-    {
-      title: "Import",
-      href: servicesAnchor("import"),
-      description: "Clearance, documentation and delivery",
-      icon: ArrowDownToLine,
-    },
-    {
-      title: "Export",
-      href: servicesAnchor("export"),
-      description: "Reach buyers in international markets",
-      icon: ArrowUpFromLine,
-    },
-    {
-      title: "Wholesale Trading",
-      href: servicesAnchor("wholesale"),
-      description: "Bulk supply at negotiated terms",
-      icon: Warehouse,
-    },
-    {
-      title: "Product Sourcing",
-      href: ROUTES.public.globalSourcing,
-      description: "Verified suppliers across global markets",
-      icon: Search,
-    },
-  ],
-  growth: [
-    {
-      title: "Business Consulting",
-      href: servicesAnchor("business-consulting"),
-      description: "Plans, feasibility and market entry",
-      icon: Lightbulb,
-    },
-    {
-      title: "Business Setup",
-      href: servicesAnchor("business-setup"),
-      description: "Registration, premises and operations",
-      icon: Building2,
-    },
-    {
-      title: "Investment Support",
-      href: servicesAnchor("investment"),
-      description: "Evaluate and structure opportunities",
-      icon: TrendingUp,
-    },
-    {
-      title: "Franchise Support",
-      href: servicesAnchor("franchise"),
-      description: "Acquire or expand a franchise",
-      icon: Handshake,
-    },
-  ],
-  support: [
-    {
-      title: "Visa Assistance",
-      href: servicesAnchor("visa"),
-      description: "Guidance and application support",
-      icon: Stamp,
-    },
-    {
-      title: "IT Solutions",
-      href: ROUTES.public.itSolutions,
-      description: "Software, web and POS systems",
-      icon: Laptop,
-    },
-    {
-      title: "Advertising",
-      href: servicesAnchor("advertising"),
-      description: "Promotion and business visibility",
-      icon: Megaphone,
-    },
-  ],
-} as const satisfies Record<string, readonly PublicNavLink[]>;
+/** Links shown in the primary navbar's "Services" dropdown. */
+export const MAIN_NAV_SERVICE_LINKS: readonly PublicNavLink[] = [
+  {
+    title: "Trading",
+    href: ROUTES.public.wholesaleProducts,
+    description: "Bulk supply at negotiated terms",
+    icon: Warehouse,
+  },
+  {
+    title: "Franchise",
+    href: servicesAnchor("franchise"),
+    description: "Acquire or expand a franchise",
+    icon: Handshake,
+  },
+  {
+    title: "Import & Export",
+    href: ROUTES.public.importExport,
+    description: "Clearance, documentation and delivery",
+    icon: Globe2,
+  },
+  {
+    title: "Investment Opportunities",
+    href: ROUTES.public.investmentFranchise,
+    description: "Evaluate and structure opportunities",
+    icon: TrendingUp,
+  },
+  {
+    title: "Marketing & Advertising",
+    href: servicesAnchor("advertising"),
+    description: "Promotion and business visibility",
+    icon: Megaphone,
+  },
+];
 
 export const WHOLESALE_CATEGORY_LINKS: readonly PublicNavLink[] = [
   { title: "Machinery", href: categoryHref("machinery") },
@@ -241,16 +193,11 @@ export const TRAVEL_NAV_LINKS = {
 
 export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
   { kind: "link", title: "Home", href: ROUTES.public.home },
-  { kind: "link", title: "About Us", href: ROUTES.public.about },
   {
     kind: "menu",
     title: "Services",
     href: ROUTES.public.services,
-    groups: [
-      { title: "Trade & Sourcing", links: SERVICE_LINKS.trade },
-      { title: "Business Growth", links: SERVICE_LINKS.growth },
-      { title: "Support Services", links: SERVICE_LINKS.support },
-    ],
+    groups: [{ title: "Services", links: MAIN_NAV_SERVICE_LINKS }],
     feature: {
       eyebrow: "Not sure where to start?",
       title: "Tell us what your business needs",
@@ -260,28 +207,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       cta: "Submit a requirement",
     },
   },
-  {
-    kind: "menu",
-    title: "Wholesale & Products",
-    href: ROUTES.public.wholesaleProducts,
-    groups: [
-      {
-        title: "Product Categories",
-        links: [
-          ...WHOLESALE_CATEGORY_LINKS.slice(0, 6),
-          { title: "View all products", href: ROUTES.public.products },
-        ],
-      },
-    ],
-    feature: {
-      eyebrow: "Can't find a product?",
-      title: "We source it for you",
-      description:
-        "Send the specification and quantity. We compare suppliers and return a quotation.",
-      href: ROUTES.public.requestQuotation,
-      cta: "Request a quotation",
-    },
-  },
+  { kind: "link", title: "Business Solutions", href: ROUTES.public.businessSolutions },
   {
     kind: "menu",
     title: "Travel & Tourism",
@@ -299,43 +225,9 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       image: SITE_MEDIA.travelNavFeature,
     },
   },
-  {
-    kind: "menu",
-    title: "Business Solutions",
-    href: ROUTES.public.businessSolutions,
-    groups: [{ title: "Business Solutions", links: BUSINESS_SOLUTION_LINKS }],
-  },
+  { kind: "link", title: "IT Solutions", href: ROUTES.public.itSolutions },
+  { kind: "link", title: "About Us", href: ROUTES.public.about },
   { kind: "link", title: "Contact Us", href: ROUTES.public.contact },
-  {
-    kind: "menu",
-    title: "More",
-    groups: [
-      {
-        title: "Explore",
-        links: [
-          { title: "Global Sourcing", href: ROUTES.public.globalSourcing },
-          {
-            title: "Investment & Franchise",
-            href: ROUTES.public.investmentFranchise,
-            description: "Opportunities to invest and grow",
-            icon: TrendingUp,
-          },
-          {
-            title: "IT Solutions",
-            href: ROUTES.public.itSolutions,
-            description: "Digital systems for growing businesses",
-            icon: Laptop,
-          },
-          {
-            title: "How It Works",
-            href: ROUTES.public.howItWorks,
-            description: "From requirement to delivery",
-            icon: BadgeCheck,
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 /** Flat list for the mobile drawer, grouped into collapsible sections. */
@@ -345,19 +237,16 @@ export const PUBLIC_MOBILE_NAV: readonly PublicNavGroup[] = [
     links: [
       { title: "Home", href: ROUTES.public.home },
       { title: "About Us", href: ROUTES.public.about },
+      { title: "IT Solutions", href: ROUTES.public.itSolutions },
       { title: "How It Works", href: ROUTES.public.howItWorks },
       { title: "Contact Us", href: ROUTES.public.contact },
     ],
   },
   {
     title: "Services",
-    links: [
-      { title: "All Services", href: ROUTES.public.services },
-      { title: "Global Sourcing", href: ROUTES.public.globalSourcing },
-      { title: "Investment & Franchise", href: ROUTES.public.investmentFranchise },
-      { title: "IT Solutions", href: ROUTES.public.itSolutions },
-    ],
+    links: [{ title: "All Services", href: ROUTES.public.services }, ...MAIN_NAV_SERVICE_LINKS],
   },
+  { title: "Business Solutions", links: BUSINESS_SOLUTION_LINKS },
   {
     title: "Travel & Tourism",
     links: [
@@ -366,15 +255,6 @@ export const PUBLIC_MOBILE_NAV: readonly PublicNavGroup[] = [
       ...TRAVEL_NAV_LINKS.experiences,
     ],
   },
-  {
-    title: "Wholesale & Products",
-    links: [
-      { title: "Wholesale", href: ROUTES.public.wholesaleProducts },
-      ...WHOLESALE_CATEGORY_LINKS.slice(0, 4),
-      { title: "View All Products", href: ROUTES.public.products },
-    ],
-  },
-  { title: "Business Solutions", links: BUSINESS_SOLUTION_LINKS },
 ];
 
 export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
