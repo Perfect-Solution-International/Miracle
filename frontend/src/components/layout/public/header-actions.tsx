@@ -32,11 +32,7 @@ export function HeaderActions() {
           size="lg"
           className="text-ink hidden px-3 font-semibold md:inline-flex"
         >
- Imasha
           <Link href={ROUTES.customer.dashboard}>Login</Link>
-
-          <Link href={ROUTES.auth.login}>Login</Link>
- main
         </Button>
       )}
 
