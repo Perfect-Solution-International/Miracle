@@ -4,30 +4,25 @@ import { CtaBanner } from "@/components/common/cta-banner";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
 import {
-  BusinessTravelSection,
   CustomizeTripSection,
   filterTravelPackages,
-  PopularDestinationsSection,
-  QuickTravelPlanner,
-  TravelCategoriesSection,
-  TravelGuidesSection,
+  InboundHighlightSection,
   TravelHero,
   TravelPackagesSection,
   TravelServicesSection,
   TRAVEL_PACKAGE_DETAILS,
-  WhyChooseUsSection,
 } from "@/features/travel";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Travel & Tourism";
 const DESCRIPTION =
-  "Complete travel solutions for local & international journeys, tailored to your needs.";
+  "Discover Sri Lanka with thoughtfully designed tours, complete travel support and personalized trip planning.";
 
 export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: ROUTES.public.travelTourism,
-  image: SITE_MEDIA.businessTravel,
+  image: SITE_MEDIA.travelPackagesFull.sriLankaHighlights,
 });
 
 function firstValue(value: string | string[] | undefined): string | undefined {
@@ -40,33 +35,28 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const params = await searchParams;
+  const hasExplicitFilters = Boolean(params.destination || params.type || params.region);
   const filters = {
     destination: firstValue(params.destination),
     type: firstValue(params.type),
     region: firstValue(params.region),
   };
-  const hasFilters = Boolean(filters.destination || filters.type || filters.region);
   const packages = filterTravelPackages(TRAVEL_PACKAGE_DETAILS, filters);
 
   return (
     <>
       <TravelHero />
-      <QuickTravelPlanner />
       <TravelServicesSection />
-      <TravelPackagesSection packages={packages} isFiltered={hasFilters} />
+      <InboundHighlightSection />
+      <TravelPackagesSection packages={packages} isFiltered={hasExplicitFilters} />
       <CustomizeTripSection />
-      <TravelCategoriesSection />
-      <PopularDestinationsSection />
-      <BusinessTravelSection />
-      <WhyChooseUsSection />
-      <TravelGuidesSection />
 
       <CtaBanner
         eyebrow="Start Planning"
-        title="Ready to Start Your Journey?"
-        description="Whether you need a complete travel package or a trip designed specifically for you, we're here to help."
-        primary={{ label: "Explore Packages", href: "#packages" }}
-        secondary={{ label: "Plan My Trip", href: "#customize-trip" }}
+        title="Your Sri Lankan Journey Starts Here."
+        description="Choose a package or tell us what kind of journey you want. We'll help you plan the rest."
+        primary={{ label: "Explore Sri Lanka Tours", href: "#packages" }}
+        secondary={{ label: "Build Your Own Trip", href: "#customize-trip" }}
       />
     </>
   );

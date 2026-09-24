@@ -51,6 +51,7 @@ export function TripPlannerForm({ className }: { className?: string }) {
       fullName: "",
       email: "",
       phone: "",
+      startingLocation: "",
       destination: "",
       startDate: "",
       endDate: "",
@@ -123,18 +124,32 @@ export function TripPlannerForm({ className }: { className?: string }) {
           />
           <FormField
             control={form.control}
-            name="destination"
+            name="startingLocation"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Destination</FormLabel>
+                <FormLabel>Starting Location</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Sigiriya, Sri Lanka" {...field} />
+                  <Input placeholder="e.g. Colombo, Sri Lanka" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
+
+        <FormField
+          control={form.control}
+          name="destination"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Destinations</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g. Sigiriya, Kandy, Ella" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <div className="grid gap-4 sm:grid-cols-2">
           <FormField

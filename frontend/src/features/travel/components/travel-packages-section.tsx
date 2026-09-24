@@ -17,9 +17,15 @@ import type { TravelPackageDetail } from "../types/travel-package-detail.types";
 export function TravelPackagesSection({
   packages,
   isFiltered,
+  eyebrow = "Featured Packages",
+  title = "Explore Sri Lanka Tour Packages",
+  description = "Experience the island through carefully designed journeys, from golden beaches and misty mountains to ancient cities and wildlife adventures.",
 }: {
   packages: readonly TravelPackageDetail[];
   isFiltered: boolean;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
 }) {
   return (
     <Section
@@ -31,9 +37,9 @@ export function TravelPackagesSection({
       <SectionHeading
         id="packages-heading"
         align="center"
-        eyebrow="Featured Packages"
-        title="Explore Our Travel Packages"
-        description="Ready-made itineraries across Sri Lanka and popular international destinations — every one can be adjusted to fit your trip."
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
       />
 
       {packages.length > 0 ? (

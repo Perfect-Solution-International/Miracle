@@ -12,8 +12,8 @@ export function CustomizeTripSection() {
         <SectionHeading
           id="customize-trip-heading"
           eyebrow="Build Your Own Trip"
-          title="Make Your Trip, Your Way."
-          description="Tell us what you need and our travel team will create a journey around your preferences."
+          title="Build Your Own Sri Lanka Trip"
+          description="Choose where you want to go, what you want to experience and how you want to travel. We'll help create a journey around your preferences."
         />
 
         <div className="shadow-lift rounded-3xl border bg-white p-6 sm:p-8">

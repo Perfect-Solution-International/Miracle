@@ -1,23 +1,16 @@
 import {
-  BedDouble,
   Briefcase,
-  Car,
   Compass,
   Factory,
   FileCheck2,
   Globe2,
   Handshake,
-  Heart,
   Landmark,
-  Luggage,
-  MapPinned,
   Megaphone,
   Plane,
   Rocket,
-  Sparkles,
   Stamp,
   TrendingUp,
-  Users,
   Warehouse,
   type LucideIcon,
 } from "lucide-react";
@@ -71,9 +64,6 @@ const servicesAnchor = (id: string) => `${ROUTES.public.services}#${id}`;
 const solutionsAnchor = (id: string) => `${ROUTES.public.businessSolutions}#${id}`;
 const categoryHref = (slug: string) =>
   `${ROUTES.public.products}?category=${encodeURIComponent(slug)}`;
-const travelAnchor = (id: string) => `${ROUTES.public.travelTourism}#${id}`;
-const travelPackagesFilteredBy = (params: Record<string, string>) =>
-  `${ROUTES.public.travelTourism}?${new URLSearchParams(params).toString()}#packages`;
 
 /** Links shown in the primary navbar's "Services" dropdown. */
 export const MAIN_NAV_SERVICE_LINKS: readonly PublicNavLink[] = [
@@ -153,43 +143,40 @@ export const BUSINESS_SOLUTION_LINKS: readonly PublicNavLink[] = [
   },
 ];
 
-/** Links shown in the primary navbar's "Travel & Tourism" dropdown. */
-export const TRAVEL_NAV_LINKS = {
-  services: [
-    { title: "Visa Services", href: ROUTES.public.visaServices, icon: Stamp },
-    { title: "Flight Tickets", href: travelAnchor("flights"), icon: Plane },
-    { title: "Work Visa Support", href: travelAnchor("work-visa"), icon: FileCheck2 },
-    { title: "Accommodation", href: travelAnchor("accommodation"), icon: BedDouble },
-    { title: "Vehicle Arrangements", href: travelAnchor("transport"), icon: Car },
-    { title: "Travel Guides", href: travelAnchor("guides"), icon: MapPinned },
-  ],
-  experiences: [
-    { title: "Travel Packages", href: travelAnchor("packages"), icon: Luggage },
-    {
-      title: "Inbound Travel",
-      href: travelPackagesFilteredBy({ region: "sri-lanka" }),
-      icon: Landmark,
-    },
-    {
-      title: "Outbound Travel",
-      href: travelPackagesFilteredBy({ region: "international" }),
-      icon: Globe2,
-    },
-    { title: "Business Travel", href: travelAnchor("business-travel"), icon: Briefcase },
-    {
-      title: "Family Holidays",
-      href: travelPackagesFilteredBy({ type: "family" }),
-      icon: Users,
-    },
-    { title: "Honeymoon", href: travelPackagesFilteredBy({ type: "honeymoon" }), icon: Heart },
-    {
-      title: "Adventure Travel",
-      href: travelPackagesFilteredBy({ type: "adventure" }),
-      icon: Compass,
-    },
-    { title: "Customized Tours", href: travelAnchor("customize-trip"), icon: Sparkles },
-  ],
-} as const satisfies Record<string, readonly PublicNavLink[]>;
+/** Links shown in the primary navbar's "Travel & Tourism" dropdown — the five
+ * core travel services only, per the site's Travel & Tourism structure. */
+export const TRAVEL_NAV_LINKS: readonly PublicNavLink[] = [
+  {
+    title: "Inbound Travel (Sri Lanka)",
+    href: ROUTES.public.inboundTravel,
+    description: "Customized tours and local support across Sri Lanka",
+    icon: Landmark,
+  },
+  {
+    title: "Outbound Travel",
+    href: ROUTES.public.outboundTravel,
+    description: "International travel assistance for your destination",
+    icon: Globe2,
+  },
+  {
+    title: "Visa Services",
+    href: ROUTES.public.visaServices,
+    description: "Guidance for your travel visa requirements",
+    icon: Stamp,
+  },
+  {
+    title: "Flight Tickets",
+    href: ROUTES.public.flightTickets,
+    description: "Domestic and international flight options",
+    icon: Plane,
+  },
+  {
+    title: "Work Visa Support",
+    href: ROUTES.public.workVisa,
+    description: "Guidance for work-related travel and visa requirements",
+    icon: FileCheck2,
+  },
+];
 
 export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
   { kind: "link", title: "Home", href: ROUTES.public.home },
@@ -212,10 +199,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
     kind: "menu",
     title: "Travel & Tourism",
     href: ROUTES.public.travelTourism,
-    groups: [
-      { title: "Travel Services", links: TRAVEL_NAV_LINKS.services },
-      { title: "Travel Experiences", links: TRAVEL_NAV_LINKS.experiences },
-    ],
+    groups: [{ title: "Travel Services", links: TRAVEL_NAV_LINKS }],
     feature: {
       eyebrow: "Featured Package",
       title: "Sri Lanka Highlights",
@@ -251,8 +235,7 @@ export const PUBLIC_MOBILE_NAV: readonly PublicNavGroup[] = [
     title: "Travel & Tourism",
     links: [
       { title: "Travel & Tourism Home", href: ROUTES.public.travelTourism },
-      ...TRAVEL_NAV_LINKS.services,
-      ...TRAVEL_NAV_LINKS.experiences,
+      ...TRAVEL_NAV_LINKS,
     ],
   },
 ];
@@ -287,16 +270,12 @@ export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
   {
     title: "Travel & Support",
     links: [
-      { title: "Visa Assistance", href: ROUTES.public.visaServices },
-      { title: "Flight Ticketing", href: `${ROUTES.public.travelTourism}#flights` },
       { title: "Travel & Tourism", href: ROUTES.public.travelTourism },
-      { title: "Accommodation", href: `${ROUTES.public.travelTourism}#accommodation` },
-      { title: "Transportation", href: `${ROUTES.public.travelTourism}#transport` },
-      {
-        title: "Business Travel",
-        href: `${ROUTES.public.travelTourism}#business-travel`,
-      },
-      { title: "Supplier Visit", href: `${ROUTES.public.travelTourism}#supplier-visits` },
+      { title: "Inbound Travel", href: ROUTES.public.inboundTravel },
+      { title: "Outbound Travel", href: ROUTES.public.outboundTravel },
+      { title: "Visa Assistance", href: ROUTES.public.visaServices },
+      { title: "Flight Tickets", href: ROUTES.public.flightTickets },
+      { title: "Work Visa Support", href: ROUTES.public.workVisa },
     ],
   },
   {

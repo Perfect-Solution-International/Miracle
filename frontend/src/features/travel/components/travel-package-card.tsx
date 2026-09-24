@@ -53,12 +53,17 @@ export function TravelPackageCard({ pkg }: { pkg: TravelPackageDetail }) {
 
         <div className="mt-auto flex flex-col gap-4 pt-3">
           <p className="text-ink text-base font-extrabold">{pkg.startingPrice}</p>
-          <Button asChild className="w-full">
-            <Link href={ROUTES.public.travelPackage(pkg.slug)}>
-              View Package
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
+          <div className="flex gap-3">
+            <Button asChild className="flex-1">
+              <Link href={ROUTES.public.travelPackage(pkg.slug)}>
+                View Package
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="flex-1">
+              <Link href={`${ROUTES.public.travelTourism}#customize-trip`}>Customize</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </li>

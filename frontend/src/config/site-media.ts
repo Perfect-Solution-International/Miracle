@@ -100,6 +100,14 @@ export const SITE_MEDIA = {
       src: unsplash("1549366021-9f761d450615"),
       alt: "Wild elephant standing among dense jungle foliage",
     },
+    bentota: {
+      src: unsplash("1760815153715-9fce4c3644a3"),
+      alt: "Golden beach lined with palm trees on Sri Lanka's south coast",
+    },
+    arugamBay: {
+      src: unsplash("1465310477141-6fb93167a273"),
+      alt: "Surfer paddling out at a tropical beach break",
+    },
     dubai: {
       src: unsplash("1512453979798-5ea266f8880c"),
       alt: "Dubai skyline with the Burj Khalifa at sunset",
