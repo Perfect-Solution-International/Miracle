@@ -1,7 +1,10 @@
 import {
   ArrowDownToLine,
   ArrowUpFromLine,
+ Imasha
+
   BadgeCheck,
+ main
   Briefcase,
   Building2,
   Compass,
@@ -192,17 +195,60 @@ export const BUSINESS_SOLUTION_LINKS: readonly PublicNavLink[] = [
   },
 ];
 
+ Imasha
+/** Links shown in the primary navbar's "Services" dropdown. */
+export const MAIN_NAV_SERVICE_LINKS: readonly PublicNavLink[] = [
+  {
+    title: "Trading",
+    href: ROUTES.public.wholesaleProducts,
+    description: "Bulk supply at negotiated terms",
+    icon: Warehouse,
+  },
+  {
+    title: "Franchise",
+    href: servicesAnchor("franchise"),
+    description: "Acquire or expand a franchise",
+    icon: Handshake,
+  },
+  {
+    title: "Import & Export",
+    href: ROUTES.public.importExport,
+    description: "Clearance, documentation and delivery",
+    icon: Globe2,
+  },
+  {
+    title: "Investment Opportunities",
+    href: ROUTES.public.investmentFranchise,
+    description: "Evaluate and structure opportunities",
+    icon: TrendingUp,
+  },
+  {
+    title: "Marketing & Advertising",
+    href: servicesAnchor("advertising"),
+    description: "Promotion and business visibility",
+    icon: Megaphone,
+  },
+];
+
+export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
+  { kind: "link", title: "Home", href: ROUTES.public.home },
+
 export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
   { kind: "link", title: "About", href: ROUTES.public.about },
+ main
   {
     kind: "menu",
     title: "Services",
     href: ROUTES.public.services,
+ Imasha
+    groups: [{ title: "Services", links: MAIN_NAV_SERVICE_LINKS }],
+
     groups: [
       { title: "Trade & Sourcing", links: SERVICE_LINKS.trade },
       { title: "Business Growth", links: SERVICE_LINKS.growth },
       { title: "Travel & Technology", links: SERVICE_LINKS.support },
     ],
+ main
     feature: {
       eyebrow: "Not sure where to start?",
       title: "Tell us what your business needs",
@@ -212,6 +258,13 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       cta: "Submit a requirement",
     },
   },
+ Imasha
+  { kind: "link", title: "Business Solutions", href: ROUTES.public.businessSolutions },
+  { kind: "link", title: "Travel & Tourism", href: ROUTES.public.travelTourism },
+  { kind: "link", title: "IT Solutions", href: ROUTES.public.itSolutions },
+  { kind: "link", title: "About Us", href: ROUTES.public.about },
+  { kind: "link", title: "Contact Us", href: ROUTES.public.contact },
+
   { kind: "link", title: "Global Sourcing", href: ROUTES.public.globalSourcing },
   {
     kind: "menu",
@@ -282,6 +335,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       },
     ],
   },
+ main
 ];
 
 /** Flat list for the mobile drawer, grouped into collapsible sections. */

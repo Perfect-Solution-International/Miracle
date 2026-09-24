@@ -27,7 +27,10 @@ export const registerSchema = z
     country: requiredString("Country", 80),
     password: passwordSchema,
     confirmPassword: z.string(),
-    acceptTerms: z.literal(true, {
+    // `z.boolean().refine(...)` rather than `z.literal(true)`: a checkbox's
+    // form state must be able to start `false`, and a plain boolean keeps
+    // that legal at the type level while still rejecting `false` on submit.
+    acceptTerms: z.boolean().refine((value) => value === true, {
       message: "You must accept the terms to continue",
     }),
   })

@@ -1,6 +1,17 @@
 /** Public surface of the requirements feature. */
 export { RequirementStatusBadge } from "./components/requirement-status";
 export { CreateRequirementForm } from "./components/create-requirement-form";
+export { TellUsWhatYouNeedHero } from "./components/tell-us-what-you-need-hero";
+export { RequirementInquiryForm } from "./components/requirement-inquiry-form";
+export { WhyShareCard } from "./components/why-share-card";
+export { NeedHelpCard } from "./components/need-help-card";
+export { SidebarTestimonialCard } from "./components/sidebar-testimonial-card";
+export { RequirementProcessSteps } from "./components/requirement-process-steps";
+export { RequestExamplesFaqSection } from "./components/request-examples-faq-section";
+export {
+  requirementInquirySchema,
+  type RequirementInquiryInput,
+} from "./schemas/requirement-inquiry.schema";
 export { useRequirements } from "./hooks/use-requirements";
 export {
   useRequirement,

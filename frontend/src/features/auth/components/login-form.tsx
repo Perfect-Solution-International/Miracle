@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
@@ -19,13 +20,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { ROUTES } from "@/config/routes";
 import { applyBackendErrors } from "@/lib/validation/backend-errors";
 
@@ -47,6 +41,7 @@ export function LoginForm() {
   const searchParams = useSearchParams();
   const login = useLogin();
   const [formError, setFormError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const sessionExpired = searchParams.get("reason") === "session-expired";
 
@@ -70,8 +65,10 @@ export function LoginForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Sign in</CardTitle>
-        <CardDescription>Access your Miracle International account.</CardDescription>
+        <h1 className="text-xl font-semibold">Sign in</h1>
+        <p className="text-muted-foreground text-sm">
+          Welcome back. Enter your details to continue.
+        </p>
       </CardHeader>
       <CardContent>
         {sessionExpired ? (
@@ -114,41 +111,63 @@ export function LoginForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex items-center justify-between">
-                    <FormLabel>Password</FormLabel>
-                    <Link
-                      href={ROUTES.auth.forgotPassword}
-                      className="text-muted-foreground hover:text-foreground text-xs"
+                  <FormLabel>Password</FormLabel>
+                  <div className="relative">
+                    <FormControl>
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        autoComplete="current-password"
+                        className="pr-9"
+                        {...field}
+                      />
+                    </FormControl>
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((value) => !value)}
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                      className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2"
                     >
-                      Forgot password?
-                    </Link>
+                      {showPassword ? (
+                        <EyeOff aria-hidden="true" className="size-4" />
+                      ) : (
+                        <Eye aria-hidden="true" className="size-4" />
+                      )}
+                    </button>
                   </div>
-                  <FormControl>
-                    <Input type="password" autoComplete="current-password" {...field} />
-                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="rememberMe"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center gap-2 space-y-0">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      id="rememberMe"
-                    />
-                  </FormControl>
-                  <FormLabel htmlFor="rememberMe" className="text-sm font-normal">
-                    Keep me signed in
-                  </FormLabel>
-                </FormItem>
-              )}
-            />
+            <div className="flex items-center justify-between">
+              <FormField
+                control={form.control}
+                name="rememberMe"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center gap-2 space-y-0">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        id="rememberMe"
+                      />
+                    </FormControl>
+                    <FormLabel
+                      htmlFor="rememberMe"
+                      className="cursor-pointer text-sm font-normal"
+                    >
+                      Remember me
+                    </FormLabel>
+                  </FormItem>
+                )}
+              />
+              <Link
+                href={ROUTES.auth.forgotPassword}
+                className="text-muted-foreground hover:text-foreground text-sm"
+              >
+                Forgot password?
+              </Link>
+            </div>
 
             <Button
               type="submit"
@@ -168,9 +187,9 @@ export function LoginForm() {
         </Form>
 
         <p className="text-muted-foreground mt-6 text-center text-sm">
-          New to Miracle International?{" "}
+          Don&apos;t have an account?{" "}
           <Link href={ROUTES.auth.register} className="text-foreground font-medium">
-            Create an account
+            Register
           </Link>
         </p>
       </CardContent>

@@ -8,6 +8,7 @@ export const ROUTES = {
     about: "/about",
     services: "/services",
     globalSourcing: "/global-sourcing",
+    importExport: "/import-export",
     wholesaleProducts: "/wholesale-products",
     businessSolutions: "/business-solutions",
     investmentFranchise: "/investment-franchise",
@@ -99,7 +100,15 @@ export const AUTH_PATHS: readonly string[] = [
   ROUTES.auth.forgotPassword,
 ];
 
+/**
+ * Portal paths that are public despite living under a protected prefix.
+ * Kept separate from `PROTECTED_PATH_PREFIXES` so the exception is explicit
+ * and doesn't have to be threaded through every prefix check.
+ */
+export const PUBLIC_PATH_OVERRIDES: readonly string[] = [ROUTES.customer.dashboard];
+
 export function isProtectedPath(pathname: string): boolean {
+  if (PUBLIC_PATH_OVERRIDES.includes(pathname)) return false;
   return PROTECTED_PATH_PREFIXES.some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
   );

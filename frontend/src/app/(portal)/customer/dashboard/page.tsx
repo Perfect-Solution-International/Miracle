@@ -7,7 +7,7 @@ import { StatCard } from "@/components/data-display/stat-card";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ROUTES } from "@/config/routes";
-import { verifySession } from "@/server/dal/session";
+import { getCurrentUser } from "@/server/dal/session";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -15,16 +15,17 @@ export const metadata: Metadata = {
 };
 
 /**
- * Customer landing page. Reads the session on the server, so the greeting is
- * rendered without a client-side fetch or a loading flash.
+ * Customer landing page. Public route — reads the session when present, so a
+ * signed-in user still gets a personal greeting, but renders a generic one
+ * for a signed-out visitor rather than bouncing them to login.
  */
 export default async function CustomerDashboardPage() {
-  const user = await verifySession();
+  const user = await getCurrentUser();
 
   return (
     <>
       <PageHeader
-        title={`Welcome back, ${user.firstName || "there"}`}
+        title={`Welcome back, ${user?.firstName || "there"}`}
         description="Your sourcing activity at a glance."
         actions={
           <Button asChild>
