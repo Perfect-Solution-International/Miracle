@@ -48,7 +48,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: ROUTES.public.websiteDevelopment,
-  image: SITE_MEDIA.technology,
+  image: SITE_MEDIA.itSolutions.websiteDevelopmentHero,
 });
 
 type IconItem = { title: string; description: string; icon: LucideIcon };
@@ -234,7 +234,7 @@ export default function Page() {
           { label: "IT Solutions", href: ROUTES.public.itSolutions },
           { label: TITLE },
         ]}
-        image={SITE_MEDIA.technology}
+        image={SITE_MEDIA.itSolutions.websiteDevelopmentHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button asChild variant="accent" size="xl">
@@ -300,7 +300,7 @@ export default function Page() {
       <Section aria-labelledby="why-heading">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <MediaFrame
-            image={SITE_MEDIA.businessMeeting}
+            image={SITE_MEDIA.itSolutions.websiteDevelopmentSupport}
             aspect="aspect-[4/3]"
             className="reveal shadow-lift order-last lg:order-first"
           />

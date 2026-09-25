@@ -1,12 +1,19 @@
 import {
+  Bot,
   Briefcase,
+  ClipboardList,
+  CodeXml,
   Compass,
   Factory,
   FileCheck2,
   Globe2,
   Handshake,
+  Headphones,
   Landmark,
+  Layers3,
   Megaphone,
+  MonitorCog,
+  Network,
   Plane,
   Rocket,
   Stamp,
@@ -61,7 +68,6 @@ export type PublicNavItem =
     };
 
 const servicesAnchor = (id: string) => `${ROUTES.public.services}#${id}`;
-const solutionsAnchor = (id: string) => `${ROUTES.public.businessSolutions}#${id}`;
 const categoryHref = (slug: string) =>
   `${ROUTES.public.products}?category=${encodeURIComponent(slug)}`;
 
@@ -113,33 +119,96 @@ export const WHOLESALE_CATEGORY_LINKS: readonly PublicNavLink[] = [
 export const BUSINESS_SOLUTION_LINKS: readonly PublicNavLink[] = [
   {
     title: "Start a Business",
-    href: solutionsAnchor("start-a-business"),
-    description: "From idea to a trading company",
+    href: ROUTES.public.businessStart,
+    description: "Turn an idea into a practical business setup.",
     icon: Rocket,
   },
   {
-    title: "Business Consulting",
-    href: solutionsAnchor("business-consulting"),
-    description: "Expert guidance at every stage",
-    icon: Compass,
+    title: "Business Consultation",
+    href: ROUTES.public.businessConsultation,
+    description: "Get practical guidance for business decisions.",
+    icon: Handshake,
   },
   {
-    title: "Business Setup",
-    href: solutionsAnchor("business-setup"),
-    description: "Registration, premises and systems",
+    title: "Business Planning",
+    href: ROUTES.public.businessPlanning,
+    description: "Build a clear plan for operations and growth.",
+    icon: ClipboardList,
+  },
+  {
+    title: "Business Setup Support",
+    href: ROUTES.public.businessSetup,
+    description: "Get support turning plans into action.",
     icon: Briefcase,
   },
   {
-    title: "Manufacturing Setup",
-    href: solutionsAnchor("manufacturing-setup"),
-    description: "Machinery, lines and raw materials",
+    title: "Business Expansion",
+    href: ROUTES.public.businessExpansion,
+    description: "Prepare for the next stage of growth.",
+    icon: TrendingUp,
+  },
+  {
+    title: "Machinery & Equipment",
+    href: ROUTES.public.businessMachinery,
+    description: "Source practical equipment for business needs.",
     icon: Factory,
   },
   {
-    title: "Business Expansion",
-    href: solutionsAnchor("business-expansion"),
-    description: "New markets, products and locations",
-    icon: TrendingUp,
+    title: "Business Technology",
+    href: ROUTES.public.businessTechnology,
+    description: "Use technology to improve business operations.",
+    icon: MonitorCog,
+  },
+  {
+    title: "Business Support",
+    href: ROUTES.public.businessSupport,
+    description: "Get ongoing support as the business grows.",
+    icon: Headphones,
+  },
+];
+
+export const IT_SOLUTION_LINKS: readonly PublicNavLink[] = [
+  {
+    title: "Website Development",
+    href: ROUTES.public.websiteDevelopment,
+    description: "Modern websites built around business goals.",
+    icon: Globe2,
+  },
+  {
+    title: "Software Development",
+    href: ROUTES.public.softwareDevelopment,
+    description: "Custom software designed for real workflows.",
+    icon: CodeXml,
+  },
+  {
+    title: "POS Systems",
+    href: ROUTES.public.posSystemDevelopment,
+    description: "Sales, stock and reporting systems for operations.",
+    icon: MonitorCog,
+  },
+  {
+    title: "Business Management Systems",
+    href: ROUTES.public.businessManagementSystems,
+    description: "Connected systems for managing business processes.",
+    icon: Network,
+  },
+  {
+    title: "Digital Solutions",
+    href: ROUTES.public.digitalSolutions,
+    description: "Practical digital tools for modern businesses.",
+    icon: Layers3,
+  },
+  {
+    title: "IT Consulting",
+    href: ROUTES.public.itConsulting,
+    description: "Clear technology guidance aligned with business needs.",
+    icon: Compass,
+  },
+  {
+    title: "Business Automation",
+    href: ROUTES.public.businessAutomation,
+    description: "Reduce repetitive work with smarter workflows.",
+    icon: Bot,
   },
 ];
 
@@ -194,7 +263,20 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       cta: "Submit a requirement",
     },
   },
-  { kind: "link", title: "Business Solutions", href: ROUTES.public.businessSolutions },
+  {
+    kind: "menu",
+    title: "Business Solutions",
+    href: ROUTES.public.businessSolutions,
+    groups: [{ title: "Business Solutions", links: BUSINESS_SOLUTION_LINKS }],
+    feature: {
+      eyebrow: "Ready to move forward?",
+      title: "Build your business with the right support",
+      description:
+        "Tell us where you are now and what you want to achieve. Our team can help you identify the next practical step.",
+      href: ROUTES.public.contact,
+      cta: "Talk to Our Team",
+    },
+  },
   {
     kind: "menu",
     title: "Travel & Tourism",
@@ -206,10 +288,27 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       description: "Sigiriya, Kandy, Ella and Galle on one 7-day itinerary.",
       href: ROUTES.public.travelPackage("sri-lanka-highlights"),
       cta: "View Package",
+ Imasha
       image: SITE_MEDIA.travelPackagesFull.sriLankaHighlights,
+
+      image: SITE_MEDIA.travelDestinations.sigiriya,
     },
   },
-  { kind: "link", title: "IT Solutions", href: ROUTES.public.itSolutions },
+  {
+    kind: "menu",
+    title: "IT Solutions",
+    href: ROUTES.public.itSolutions,
+    groups: [{ title: "IT Solutions", links: IT_SOLUTION_LINKS }],
+    feature: {
+      eyebrow: "Need the right technology?",
+      title: "Tell us what your business needs",
+      description:
+        "Share the challenge, workflow or system you want to improve and we’ll help identify the right technology approach.",
+      href: ROUTES.public.contact,
+      cta: "Discuss Your IT Needs",
+ develop
+    },
+  },
   { kind: "link", title: "About Us", href: ROUTES.public.about },
   { kind: "link", title: "Contact Us", href: ROUTES.public.contact },
 ];
@@ -221,21 +320,36 @@ export const PUBLIC_MOBILE_NAV: readonly PublicNavGroup[] = [
     links: [
       { title: "Home", href: ROUTES.public.home },
       { title: "About Us", href: ROUTES.public.about },
-      { title: "IT Solutions", href: ROUTES.public.itSolutions },
       { title: "How It Works", href: ROUTES.public.howItWorks },
       { title: "Contact Us", href: ROUTES.public.contact },
     ],
   },
   {
     title: "Services",
-    links: [{ title: "All Services", href: ROUTES.public.services }, ...MAIN_NAV_SERVICE_LINKS],
+    links: [
+      { title: "All Services", href: ROUTES.public.services },
+      ...MAIN_NAV_SERVICE_LINKS,
+    ],
   },
-  { title: "Business Solutions", links: BUSINESS_SOLUTION_LINKS },
+  {
+    title: "Business Solutions",
+    links: [
+      { title: "Business Solutions Home", href: ROUTES.public.businessSolutions },
+      ...BUSINESS_SOLUTION_LINKS,
+    ],
+  },
   {
     title: "Travel & Tourism",
     links: [
       { title: "Travel & Tourism Home", href: ROUTES.public.travelTourism },
       ...TRAVEL_NAV_LINKS,
+    ],
+  },
+  {
+    title: "IT Solutions",
+    links: [
+      { title: "IT Solutions Home", href: ROUTES.public.itSolutions },
+      ...IT_SOLUTION_LINKS,
     ],
   },
 ];
