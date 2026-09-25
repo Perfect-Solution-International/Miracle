@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
-import { ImportExportHero } from "@/features/import-export";
+import { ImportExportLanding } from "@/features/import-export/components/import-export-landing";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Import & Export";
@@ -17,5 +17,5 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function Page() {
-  return <ImportExportHero />;
+  return <ImportExportLanding />;
 }
