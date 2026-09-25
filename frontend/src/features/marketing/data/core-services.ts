@@ -30,14 +30,14 @@ export const CORE_SERVICES: readonly ServiceSummary[] = [
     id: "wholesale",
     title: "Wholesale Trading",
     description: "Bulk supply of consumer and industrial goods on negotiated terms.",
-    href: ROUTES.public.servicesTrading,
+    href: ROUTES.public.wholesaleProducts,
     icon: Warehouse,
   },
   {
     id: "import-export",
     title: "Import & Export",
     description: "Documentation, clearance, and freight coordination across borders.",
-    href: ROUTES.public.servicesImportExport,
+    href: `${ROUTES.public.services}#import`,
     icon: Ship,
   },
   {
@@ -51,7 +51,7 @@ export const CORE_SERVICES: readonly ServiceSummary[] = [
     id: "investment-franchise",
     title: "Investment & Franchise",
     description: "Explore, evaluate, and structure business opportunities.",
-    href: ROUTES.public.servicesInvestment,
+    href: ROUTES.public.investmentFranchise,
     icon: TrendingUp,
   },
   {
@@ -72,7 +72,7 @@ export const CORE_SERVICES: readonly ServiceSummary[] = [
     id: "business-support",
     title: "Advertising & Business Support",
     description: "Promotion, branding, and day-to-day operational support.",
-    href: ROUTES.public.servicesMarketingAdvertising,
+    href: `${ROUTES.public.services}#advertising`,
     icon: Megaphone,
   },
 ];

@@ -20,14 +20,12 @@ export const MISSION_VISION_VALUES: readonly PrincipleItem[] = [
   {
     icon: Handshake,
     title: "Our Mission",
-    id: "mission",
     description:
       "To empower businesses by providing reliable global sourcing, trading and business solutions.",
   },
   {
     icon: Eye,
     title: "Our Vision",
-    id: "vision",
     description:
       "To be a leading international business solutions provider, recognized for trust, innovation and customer success.",
   },

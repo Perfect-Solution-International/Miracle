@@ -4,12 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ArrowRight,
   Copy,
+  Hash,
   LayoutGrid,
   MapPin,
   NotebookPen,
   Package,
   Send,
   Ship,
+  Wallet,
 } from "lucide-react";
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
@@ -75,7 +77,9 @@ export function ImportExportRequestForm({ className }: { className?: string }) {
       category: "",
       requestType: "import",
       country: "",
+      quantity: "",
       specifications: "",
+      budget: "",
       additionalRequirements: "",
     },
   });
@@ -89,7 +93,9 @@ export function ImportExportRequestForm({ className }: { className?: string }) {
     form.reset({
       ...values,
       productName: "",
+      quantity: "",
       specifications: "",
+      budget: "",
     });
   }
 
@@ -282,6 +288,33 @@ export function ImportExportRequestForm({ className }: { className?: string }) {
 
           <FormField
             control={form.control}
+            name="quantity"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Quantity <RequiredMark />
+                </FormLabel>
+                <div className="relative">
+                  <Hash
+                    aria-hidden="true"
+                    className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+                  />
+                  <FormControl>
+                    <Input
+                      inputMode="numeric"
+                      placeholder="Enter quantity"
+                      className="pl-9"
+                      {...field}
+                    />
+                  </FormControl>
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="specifications"
             render={({ field }) => (
               <FormItem>
@@ -300,6 +333,28 @@ export function ImportExportRequestForm({ className }: { className?: string }) {
                       className="pl-9"
                       {...field}
                     />
+                  </FormControl>
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="budget"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Budget <RequiredMark />
+                </FormLabel>
+                <div className="relative">
+                  <Wallet
+                    aria-hidden="true"
+                    className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+                  />
+                  <FormControl>
+                    <Input placeholder="Enter your budget" className="pl-9" {...field} />
                   </FormControl>
                 </div>
                 <FormMessage />

@@ -76,12 +76,7 @@ function TradeRouteMap() {
 
 export function GlobalPresenceSection() {
   return (
-    <Section
-      id="global-network"
-      tone="surface"
-      aria-labelledby="global-presence-heading"
-      className="scroll-mt-24"
-    >
+    <Section tone="surface" aria-labelledby="global-presence-heading">
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr_0.8fr] lg:items-center lg:gap-10">
         <div className="flex flex-col gap-6">
           <SectionHeading

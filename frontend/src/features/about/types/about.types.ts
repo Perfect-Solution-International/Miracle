@@ -3,8 +3,6 @@ import type { LucideIcon } from "lucide-react";
 export interface PrincipleItem {
   icon: LucideIcon;
   title: string;
-  /** Anchor id for a nav link that targets this specific card. */
-  id?: string;
   /** Either a short paragraph or a list of values, never both. */
   description?: string;
   bullets?: readonly string[];
