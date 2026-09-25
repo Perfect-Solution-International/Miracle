@@ -21,10 +21,10 @@ export function isNavItemActive(
   if (item.kind === "link") return isActivePath(pathname, item.href);
   if (item.href && isActivePath(pathname, item.href)) return true;
 
-  const ownedByAnotherTopLevelLink = allItems.some(
-    (other) => other !== item && other.kind === "link" && isActivePath(pathname, other.href),
+  const ownedByAnotherTopLevelItem = allItems.some(
+    (other) => other !== item && other.href && isActivePath(pathname, other.href),
   );
-  if (ownedByAnotherTopLevelLink) return false;
+  if (ownedByAnotherTopLevelItem) return false;
 
   return item.groups.some((group) =>
     group.links.some((link) => !link.href.includes("#") && isActivePath(pathname, link.href)),

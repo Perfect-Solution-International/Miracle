@@ -37,7 +37,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: ROUTES.public.businessAutomation,
-  image: SITE_MEDIA.manufacturing,
+  image: SITE_MEDIA.itSolutions.businessAutomationHero,
 });
 
 type IconItem = { title: string; description: string; icon: LucideIcon };
@@ -160,7 +160,7 @@ export default function Page() {
           { label: "IT Solutions", href: ROUTES.public.itSolutions },
           { label: TITLE },
         ]}
-        image={SITE_MEDIA.manufacturing}
+        image={SITE_MEDIA.itSolutions.businessAutomationHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button asChild variant="accent" size="xl">
