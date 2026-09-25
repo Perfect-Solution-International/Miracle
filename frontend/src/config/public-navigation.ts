@@ -1,28 +1,21 @@
 import {
-  ArrowDownToLine,
-  ArrowUpFromLine,
- Imasha
-
-  BadgeCheck,
- main
   Briefcase,
-  Building2,
   Compass,
   Factory,
+  FileCheck2,
   Globe2,
   Handshake,
-  Laptop,
-  Lightbulb,
+  Landmark,
   Megaphone,
   Plane,
   Rocket,
-  Search,
   Stamp,
   TrendingUp,
   Warehouse,
   type LucideIcon,
 } from "lucide-react";
 
+import { SITE_MEDIA, type SiteImage } from "./site-media";
 import { ROUTES } from "./routes";
 
 /**
@@ -52,6 +45,8 @@ export interface PublicNavFeature {
   description: string;
   href: string;
   cta: string;
+  /** Small photo behind the panel copy, for menus where a visual helps (e.g. Travel & Tourism). */
+  image?: SiteImage;
 }
 
 export type PublicNavItem =
@@ -70,86 +65,39 @@ const solutionsAnchor = (id: string) => `${ROUTES.public.businessSolutions}#${id
 const categoryHref = (slug: string) =>
   `${ROUTES.public.products}?category=${encodeURIComponent(slug)}`;
 
-export const SERVICE_LINKS = {
-  trade: [
-    {
-      title: "Import",
-      href: servicesAnchor("import"),
-      description: "Clearance, documentation and delivery",
-      icon: ArrowDownToLine,
-    },
-    {
-      title: "Export",
-      href: servicesAnchor("export"),
-      description: "Reach buyers in international markets",
-      icon: ArrowUpFromLine,
-    },
-    {
-      title: "Wholesale Trading",
-      href: servicesAnchor("wholesale"),
-      description: "Bulk supply at negotiated terms",
-      icon: Warehouse,
-    },
-    {
-      title: "Product Sourcing",
-      href: ROUTES.public.globalSourcing,
-      description: "Verified suppliers across global markets",
-      icon: Search,
-    },
-  ],
-  growth: [
-    {
-      title: "Business Consulting",
-      href: servicesAnchor("business-consulting"),
-      description: "Plans, feasibility and market entry",
-      icon: Lightbulb,
-    },
-    {
-      title: "Business Setup",
-      href: servicesAnchor("business-setup"),
-      description: "Registration, premises and operations",
-      icon: Building2,
-    },
-    {
-      title: "Investment Support",
-      href: servicesAnchor("investment"),
-      description: "Evaluate and structure opportunities",
-      icon: TrendingUp,
-    },
-    {
-      title: "Franchise Support",
-      href: servicesAnchor("franchise"),
-      description: "Acquire or expand a franchise",
-      icon: Handshake,
-    },
-  ],
-  support: [
-    {
-      title: "Travel Services",
-      href: ROUTES.public.travelTourism,
-      description: "Business travel and tourism",
-      icon: Plane,
-    },
-    {
-      title: "Visa Assistance",
-      href: servicesAnchor("visa"),
-      description: "Guidance and application support",
-      icon: Stamp,
-    },
-    {
-      title: "IT Solutions",
-      href: ROUTES.public.itSolutions,
-      description: "Software, web and POS systems",
-      icon: Laptop,
-    },
-    {
-      title: "Advertising",
-      href: servicesAnchor("advertising"),
-      description: "Promotion and business visibility",
-      icon: Megaphone,
-    },
-  ],
-} as const satisfies Record<string, readonly PublicNavLink[]>;
+/** Links shown in the primary navbar's "Services" dropdown. */
+export const MAIN_NAV_SERVICE_LINKS: readonly PublicNavLink[] = [
+  {
+    title: "Trading",
+    href: ROUTES.public.wholesaleProducts,
+    description: "Bulk supply at negotiated terms",
+    icon: Warehouse,
+  },
+  {
+    title: "Franchise",
+    href: servicesAnchor("franchise"),
+    description: "Acquire or expand a franchise",
+    icon: Handshake,
+  },
+  {
+    title: "Import & Export",
+    href: ROUTES.public.importExport,
+    description: "Clearance, documentation and delivery",
+    icon: Globe2,
+  },
+  {
+    title: "Investment Opportunities",
+    href: ROUTES.public.investmentFranchise,
+    description: "Evaluate and structure opportunities",
+    icon: TrendingUp,
+  },
+  {
+    title: "Marketing & Advertising",
+    href: servicesAnchor("advertising"),
+    description: "Promotion and business visibility",
+    icon: Megaphone,
+  },
+];
 
 export const WHOLESALE_CATEGORY_LINKS: readonly PublicNavLink[] = [
   { title: "Machinery", href: categoryHref("machinery") },
@@ -195,60 +143,48 @@ export const BUSINESS_SOLUTION_LINKS: readonly PublicNavLink[] = [
   },
 ];
 
- Imasha
-/** Links shown in the primary navbar's "Services" dropdown. */
-export const MAIN_NAV_SERVICE_LINKS: readonly PublicNavLink[] = [
+/** Links shown in the primary navbar's "Travel & Tourism" dropdown — the five
+ * core travel services only, per the site's Travel & Tourism structure. */
+export const TRAVEL_NAV_LINKS: readonly PublicNavLink[] = [
   {
-    title: "Trading",
-    href: ROUTES.public.wholesaleProducts,
-    description: "Bulk supply at negotiated terms",
-    icon: Warehouse,
+    title: "Inbound Travel (Sri Lanka)",
+    href: ROUTES.public.inboundTravel,
+    description: "Customized tours and local support across Sri Lanka",
+    icon: Landmark,
   },
   {
-    title: "Franchise",
-    href: servicesAnchor("franchise"),
-    description: "Acquire or expand a franchise",
-    icon: Handshake,
-  },
-  {
-    title: "Import & Export",
-    href: ROUTES.public.importExport,
-    description: "Clearance, documentation and delivery",
+    title: "Outbound Travel",
+    href: ROUTES.public.outboundTravel,
+    description: "International travel assistance for your destination",
     icon: Globe2,
   },
   {
-    title: "Investment Opportunities",
-    href: ROUTES.public.investmentFranchise,
-    description: "Evaluate and structure opportunities",
-    icon: TrendingUp,
+    title: "Visa Services",
+    href: ROUTES.public.visaServices,
+    description: "Guidance for your travel visa requirements",
+    icon: Stamp,
   },
   {
-    title: "Marketing & Advertising",
-    href: servicesAnchor("advertising"),
-    description: "Promotion and business visibility",
-    icon: Megaphone,
+    title: "Flight Tickets",
+    href: ROUTES.public.flightTickets,
+    description: "Domestic and international flight options",
+    icon: Plane,
+  },
+  {
+    title: "Work Visa Support",
+    href: ROUTES.public.workVisa,
+    description: "Guidance for work-related travel and visa requirements",
+    icon: FileCheck2,
   },
 ];
 
 export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
   { kind: "link", title: "Home", href: ROUTES.public.home },
-
-export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
-  { kind: "link", title: "About", href: ROUTES.public.about },
- main
   {
     kind: "menu",
     title: "Services",
     href: ROUTES.public.services,
- Imasha
     groups: [{ title: "Services", links: MAIN_NAV_SERVICE_LINKS }],
-
-    groups: [
-      { title: "Trade & Sourcing", links: SERVICE_LINKS.trade },
-      { title: "Business Growth", links: SERVICE_LINKS.growth },
-      { title: "Travel & Technology", links: SERVICE_LINKS.support },
-    ],
- main
     feature: {
       eyebrow: "Not sure where to start?",
       title: "Tell us what your business needs",
@@ -258,84 +194,24 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       cta: "Submit a requirement",
     },
   },
- Imasha
   { kind: "link", title: "Business Solutions", href: ROUTES.public.businessSolutions },
-  { kind: "link", title: "Travel & Tourism", href: ROUTES.public.travelTourism },
+  {
+    kind: "menu",
+    title: "Travel & Tourism",
+    href: ROUTES.public.travelTourism,
+    groups: [{ title: "Travel Services", links: TRAVEL_NAV_LINKS }],
+    feature: {
+      eyebrow: "Featured Package",
+      title: "Sri Lanka Highlights",
+      description: "Sigiriya, Kandy, Ella and Galle on one 7-day itinerary.",
+      href: ROUTES.public.travelPackage("sri-lanka-highlights"),
+      cta: "View Package",
+      image: SITE_MEDIA.travelNavFeature,
+    },
+  },
   { kind: "link", title: "IT Solutions", href: ROUTES.public.itSolutions },
   { kind: "link", title: "About Us", href: ROUTES.public.about },
   { kind: "link", title: "Contact Us", href: ROUTES.public.contact },
-
-  { kind: "link", title: "Global Sourcing", href: ROUTES.public.globalSourcing },
-  {
-    kind: "menu",
-    title: "Wholesale & Products",
-    href: ROUTES.public.wholesaleProducts,
-    groups: [
-      {
-        title: "Product Categories",
-        links: [
-          ...WHOLESALE_CATEGORY_LINKS.slice(0, 6),
-          { title: "View all products", href: ROUTES.public.products },
-        ],
-      },
-    ],
-    feature: {
-      eyebrow: "Can't find a product?",
-      title: "We source it for you",
-      description:
-        "Send the specification and quantity. We compare suppliers and return a quotation.",
-      href: ROUTES.public.requestQuotation,
-      cta: "Request a quotation",
-    },
-  },
-  {
-    kind: "menu",
-    title: "Business Solutions",
-    href: ROUTES.public.businessSolutions,
-    groups: [{ title: "Business Solutions", links: BUSINESS_SOLUTION_LINKS }],
-  },
-  {
-    kind: "menu",
-    title: "More",
-    groups: [
-      {
-        title: "Explore",
-        links: [
-          {
-            title: "Investment & Franchise",
-            href: ROUTES.public.investmentFranchise,
-            description: "Opportunities to invest and grow",
-            icon: TrendingUp,
-          },
-          {
-            title: "Travel & Tourism",
-            href: ROUTES.public.travelTourism,
-            description: "Visas, flights and business travel",
-            icon: Plane,
-          },
-          {
-            title: "IT Solutions",
-            href: ROUTES.public.itSolutions,
-            description: "Digital systems for growing businesses",
-            icon: Laptop,
-          },
-          {
-            title: "How It Works",
-            href: ROUTES.public.howItWorks,
-            description: "From requirement to delivery",
-            icon: BadgeCheck,
-          },
-          {
-            title: "Contact Us",
-            href: ROUTES.public.contact,
-            description: "Speak with our team",
-            icon: Globe2,
-          },
-        ],
-      },
-    ],
-  },
- main
 ];
 
 /** Flat list for the mobile drawer, grouped into collapsible sections. */
@@ -345,29 +221,23 @@ export const PUBLIC_MOBILE_NAV: readonly PublicNavGroup[] = [
     links: [
       { title: "Home", href: ROUTES.public.home },
       { title: "About Us", href: ROUTES.public.about },
+      { title: "IT Solutions", href: ROUTES.public.itSolutions },
       { title: "How It Works", href: ROUTES.public.howItWorks },
       { title: "Contact Us", href: ROUTES.public.contact },
     ],
   },
   {
     title: "Services",
-    links: [
-      { title: "All Services", href: ROUTES.public.services },
-      { title: "Global Sourcing", href: ROUTES.public.globalSourcing },
-      { title: "Investment & Franchise", href: ROUTES.public.investmentFranchise },
-      { title: "Travel & Tourism", href: ROUTES.public.travelTourism },
-      { title: "IT Solutions", href: ROUTES.public.itSolutions },
-    ],
-  },
-  {
-    title: "Wholesale & Products",
-    links: [
-      { title: "Wholesale", href: ROUTES.public.wholesaleProducts },
-      ...WHOLESALE_CATEGORY_LINKS.slice(0, 4),
-      { title: "View All Products", href: ROUTES.public.products },
-    ],
+    links: [{ title: "All Services", href: ROUTES.public.services }, ...MAIN_NAV_SERVICE_LINKS],
   },
   { title: "Business Solutions", links: BUSINESS_SOLUTION_LINKS },
+  {
+    title: "Travel & Tourism",
+    links: [
+      { title: "Travel & Tourism Home", href: ROUTES.public.travelTourism },
+      ...TRAVEL_NAV_LINKS,
+    ],
+  },
 ];
 
 export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
@@ -400,16 +270,12 @@ export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
   {
     title: "Travel & Support",
     links: [
-      { title: "Visa Assistance", href: `${ROUTES.public.travelTourism}#visa` },
-      { title: "Flight Ticketing", href: `${ROUTES.public.travelTourism}#flights` },
       { title: "Travel & Tourism", href: ROUTES.public.travelTourism },
-      { title: "Accommodation", href: `${ROUTES.public.travelTourism}#accommodation` },
-      { title: "Transportation", href: `${ROUTES.public.travelTourism}#transport` },
-      {
-        title: "Business Travel",
-        href: `${ROUTES.public.travelTourism}#business-travel`,
-      },
-      { title: "Supplier Visit", href: `${ROUTES.public.travelTourism}#supplier-visits` },
+      { title: "Inbound Travel", href: ROUTES.public.inboundTravel },
+      { title: "Outbound Travel", href: ROUTES.public.outboundTravel },
+      { title: "Visa Assistance", href: ROUTES.public.visaServices },
+      { title: "Flight Tickets", href: ROUTES.public.flightTickets },
+      { title: "Work Visa Support", href: ROUTES.public.workVisa },
     ],
   },
   {
