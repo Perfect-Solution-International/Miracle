@@ -8,6 +8,7 @@ import {
   RequirementInquiryForm,
   RequirementProcessSteps,
   SidebarTestimonialCard,
+  SourcingCtaSection,
   TellUsWhatYouNeedHero,
   WhyShareCard,
 } from "@/features/requirements";
@@ -32,6 +33,8 @@ export default async function Page() {
   return (
     <>
       <TellUsWhatYouNeedHero />
+
+      <SourcingCtaSection />
 
       <Section spacing="compact">
         <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-10">

@@ -2,6 +2,7 @@
 export { RequirementStatusBadge } from "./components/requirement-status";
 export { CreateRequirementForm } from "./components/create-requirement-form";
 export { TellUsWhatYouNeedHero } from "./components/tell-us-what-you-need-hero";
+export { SourcingCtaSection } from "./components/sourcing-cta-section";
 export { RequirementInquiryForm } from "./components/requirement-inquiry-form";
 export { WhyShareCard } from "./components/why-share-card";
 export { NeedHelpCard } from "./components/need-help-card";

@@ -1,30 +1,9 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-
-import { CtaBanner } from "@/components/common/cta-banner";
 import { JsonLd } from "@/components/common/json-ld";
 import { APP_CONFIG } from "@/config/app";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
-import { BusinessPathwaySection } from "@/features/business";
-import {
-  BusinessEcosystemSection,
-  CompanyIntroSection,
-  CoreServicesSection,
-  HomeHero,
-  HowItWorksSection,
-  InternationalValueSection,
-  TravelItSection,
-  TrustStrip,
-  WhyChooseSection,
-} from "@/features/marketing";
-import {
-  FeaturedOpportunitiesSection,
-  FeaturedOpportunitiesSkeleton,
-} from "@/features/opportunities";
-import { WholesaleCategoriesSection } from "@/features/products";
-import { GlobalSourcingSection } from "@/features/sourcing";
-import { TestimonialsSection } from "@/features/testimonials";
+import { HomeGateway } from "@/features/marketing/components/home-gateway";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -62,38 +41,7 @@ export default function HomePage() {
         }}
       />
 
-      <HomeHero />
-      <TrustStrip />
-      <CompanyIntroSection />
-      <CoreServicesSection />
-      <GlobalSourcingSection />
-      <WholesaleCategoriesSection />
-      <BusinessPathwaySection />
-      <HowItWorksSection />
-      <InternationalValueSection />
-      <BusinessEcosystemSection />
-      <WhyChooseSection />
-
-      <Suspense fallback={<FeaturedOpportunitiesSkeleton />}>
-        <FeaturedOpportunitiesSection />
-      </Suspense>
-
-      <TravelItSection />
-
-      <Suspense fallback={null}>
-        <TestimonialsSection />
-      </Suspense>
-
-      <CtaBanner
-        eyebrow="Start Today"
-        title="Have a Business Requirement?"
-        description="Tell us what you need and let our team coordinate the right solution — from suppliers and quotations to delivery and support."
-        primary={{
-          label: "Tell Us What You Need",
-          href: ROUTES.public.tellUsWhatYouNeed,
-        }}
-        secondary={{ label: "Contact Our Team", href: ROUTES.public.contact }}
-      />
+      <HomeGateway />
     </>
   );
 }

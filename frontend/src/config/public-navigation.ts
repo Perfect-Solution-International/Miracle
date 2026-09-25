@@ -288,6 +288,9 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       description: "Sigiriya, Kandy, Ella and Galle on one 7-day itinerary.",
       href: ROUTES.public.travelPackage("sri-lanka-highlights"),
       cta: "View Package",
+ Imasha
+      image: SITE_MEDIA.travelPackagesFull.sriLankaHighlights,
+
       image: SITE_MEDIA.travelDestinations.sigiriya,
     },
   },
@@ -303,6 +306,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
         "Share the challenge, workflow or system you want to improve and we’ll help identify the right technology approach.",
       href: ROUTES.public.contact,
       cta: "Discuss Your IT Needs",
+ develop
     },
   },
   { kind: "link", title: "About Us", href: ROUTES.public.about },
