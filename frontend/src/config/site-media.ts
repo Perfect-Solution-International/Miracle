@@ -253,10 +253,68 @@ export const SITE_MEDIA = {
       alt: "Map, camera and passport laid out on a table while planning a trip",
     },
   },
-  travelNavFeature: {
-    src: unsplash("1751247026229-518bfec9b5e6"),
-    alt: "Sigiriya rock fortress in Sri Lanka lit by sunset",
+
+  itSolutions: {
+    websiteDevelopment: {
+      src: unsplash("1498050108023-c5249f4df085"),
+      alt: "Laptop showing a code editor with a website preview on the monitor behind it",
+    },
+
+    softwareDevelopment: {
+      src: unsplash("1461749280684-dccba630e2f6"),
+      alt: "Close-up of application source code displayed on a monitor",
+    },
+
+    posSystem: {
+      src: unsplash("1556740758-90de374c12ad"),
+      alt: "Retail staff member using a point-of-sale tablet at a store counter",
+    },
+
+    businessManagementSystems: {
+      src: unsplash("1551288049-bebda4e38f71"),
+      alt: "Business analytics dashboard displayed across multiple charts on a monitor",
+    },
+
+    digitalSolutions: {
+      src: unsplash("1573164713988-8665fc963095"),
+      alt: "IT professional reviewing a laptop beside a server room data rack",
+    },
+
+    itConsulting: {
+      src: unsplash("1516321318423-f06f85e504b3"),
+      alt: "Consultant pointing at a laptop screen while advising a client",
+    },
+
+    businessAutomation: {
+      src: unsplash("1531746790731-6c087fecd65a"),
+      alt: "Robotic arm reaching forward, representing automated business processes",
+    },
   },
+
+  businessSolutions: {
+    startBusiness: {
+      src: unsplash("1531482615713-2afd69097998"),
+      alt: "Entrepreneurs reviewing an idea together on a laptop in a startup office",
+    },
+
+    businessPlanning: {
+      src: unsplash("1454165804606-c3d57bc86b40"),
+      alt: "Business plan sketched out on paper beside an open laptop",
+    },
+
+    businessSetup: {
+      src: unsplash("1522071820081-009f0129c71c"),
+      alt: "Team collaborating around laptops while setting up a new business workflow",
+    },
+
+    businessSupport: {
+      src: unsplash("1552664730-d307ca884978"),
+      alt: "Business advisor presenting a strategy on sticky notes to a support team",
+    },
+  },
+
+  // Main
+
   categories: {
     vehicles: {
       src: unsplash("1494976388531-d1058494cdd8"),

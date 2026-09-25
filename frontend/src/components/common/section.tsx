@@ -3,8 +3,8 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
 const TONES = {
-  default: "bg-background text-foreground",
-  surface: "bg-surface text-foreground",
+  default: "bg-transparent text-foreground",
+  surface: "bg-transparent text-foreground",
   navy: "bg-navy text-white",
   blue: "bg-brand-blue text-white",
 } as const;

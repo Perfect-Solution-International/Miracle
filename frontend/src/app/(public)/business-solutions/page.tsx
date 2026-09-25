@@ -29,7 +29,7 @@ import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
-import { SITE_MEDIA } from "@/config/site-media";
+import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Business Solutions";
@@ -45,36 +45,41 @@ export const metadata: Metadata = buildPageMetadata({
 
 type IconItem = { title: string; description: string; icon: LucideIcon };
 
-const solutions: (IconItem & { href: string })[] = [
+const solutions: (IconItem & { href: string; image: SiteImage })[] = [
   {
     title: "Start a Business",
     description: "Turn a promising idea into a clear, practical path to market.",
     icon: Lightbulb,
     href: ROUTES.public.tellUsWhatYouNeed,
+    image: SITE_MEDIA.businessSolutions.startBusiness,
   },
   {
     title: "Business Consultation",
     description: "Make confident decisions with experienced, business-focused guidance.",
     icon: Handshake,
     href: ROUTES.public.itConsulting,
+    image: SITE_MEDIA.handshake,
   },
   {
     title: "Business Planning",
     description: "Build a focused plan around your market, operations and growth goals.",
     icon: ClipboardList,
     href: ROUTES.public.tellUsWhatYouNeed,
+    image: SITE_MEDIA.businessSolutions.businessPlanning,
   },
   {
     title: "Business Setup Support",
     description: "Get practical support through the details that turn plans into action.",
     icon: Settings2,
     href: ROUTES.public.contact,
+    image: SITE_MEDIA.businessSolutions.businessSetup,
   },
   {
     title: "Business Expansion",
     description: "Find the people, systems and opportunities needed for the next stage.",
     icon: TrendingUp,
     href: ROUTES.public.tellUsWhatYouNeed,
+    image: SITE_MEDIA.cityTowers,
   },
   {
     title: "Machinery & Equipment",
@@ -82,6 +87,7 @@ const solutions: (IconItem & { href: string })[] = [
       "Source the equipment and operational tools that keep your business moving.",
     icon: Package,
     href: ROUTES.public.products,
+    image: SITE_MEDIA.manufacturing,
   },
   {
     title: "Business Technology",
@@ -89,12 +95,14 @@ const solutions: (IconItem & { href: string })[] = [
       "Use connected digital systems to improve operations, visibility and control.",
     icon: CodeXml,
     href: ROUTES.public.itSolutions,
+    image: SITE_MEDIA.technology,
   },
   {
     title: "Business Support",
     description: "Keep momentum with a partner invested in your long-term progress.",
     icon: Headphones,
     href: ROUTES.public.contact,
+    image: SITE_MEDIA.businessSolutions.businessSupport,
   },
 ];
 
@@ -198,9 +206,12 @@ export default function Page() {
           <div className="from-brand-blue-dark/85 absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t to-transparent" />
         </div>
 
-        <div className="container-page flex flex-col items-center gap-6 py-20 text-center md:py-28">
+        <div className="container-page flex flex-col items-center gap-6 py-16 text-center md:py-20">
           <Breadcrumb items={[{ label: TITLE }]} tone="inverse" />
-          <Eyebrow tone="inverse">Business Solutions</Eyebrow>
+          <span className="border-brand-blue-muted/40 bg-white/10 text-brand-blue-muted inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold tracking-[0.18em] uppercase backdrop-blur-sm">
+            <Building2 aria-hidden="true" className="size-3.5" />
+            Business Solutions
+          </span>
           <h1
             id="business-solutions-hero-heading"
             className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl"
@@ -224,7 +235,22 @@ export default function Page() {
         </div>
       </section>
 
-      <Section id="solutions" tone="surface" aria-labelledby="solutions-heading">
+      <Section
+        id="solutions"
+        tone="surface"
+        spacing="compact"
+        aria-labelledby="solutions-heading"
+      >
+        <div aria-hidden="true" className="bg-grid absolute inset-0 -z-10 opacity-60" />
+        <div
+          aria-hidden="true"
+          className="bg-brand-blue-light/60 absolute -top-24 -right-16 -z-10 size-[28rem] rounded-full blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="bg-brand-blue/10 absolute -bottom-32 -left-24 -z-10 size-[26rem] rounded-full blur-3xl"
+        />
+
         <SectionHeading
           id="solutions-heading"
           eyebrow="What We Do"
@@ -232,30 +258,45 @@ export default function Page() {
           description="Whether you are starting out, improving an established operation or preparing to expand, we bring the right expertise and resources together."
           align="center"
         />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
           {solutions.map((solution) => (
             <article
               key={solution.title}
-              className="group bg-card hover:border-brand-blue/30 hover:shadow-lift relative flex min-h-64 flex-col rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1"
+              className="group bg-card hover:border-brand-blue/30 hover:shadow-lift relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 hover:-translate-y-1"
             >
-              <span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue inline-flex size-11 items-center justify-center rounded-lg transition-colors duration-300 group-hover:text-white">
-                <solution.icon aria-hidden="true" className="size-5" />
-              </span>
-              <h3 className="text-ink mt-5 text-lg font-bold">
-                <Link href={solution.href} className="after:absolute after:inset-0">
-                  {solution.title}
-                </Link>
-              </h3>
-              <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-                {solution.description}
-              </p>
-              <span className="text-brand-blue mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold">
-                Learn More
-                <ArrowRight
-                  aria-hidden="true"
-                  className="size-4 transition-transform group-hover:translate-x-1"
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={solution.image.src}
+                  alt={solution.image.alt}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-              </span>
+                <div
+                  aria-hidden="true"
+                  className="from-navy/50 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+                />
+                <span className="bg-white/95 text-brand-blue shadow-soft absolute bottom-3 left-3 inline-flex size-11 items-center justify-center rounded-lg backdrop-blur">
+                  <solution.icon aria-hidden="true" className="size-5" />
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="text-ink text-lg font-bold">
+                  <Link href={solution.href} className="after:absolute after:inset-0">
+                    {solution.title}
+                  </Link>
+                </h3>
+                <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+                  {solution.description}
+                </p>
+                <span className="text-brand-blue mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold">
+                  Learn More
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="size-4 transition-transform group-hover:translate-x-1"
+                  />
+                </span>
+              </div>
             </article>
           ))}
         </div>
