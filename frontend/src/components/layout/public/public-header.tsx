@@ -12,9 +12,9 @@ import { MobileNavigation } from "./mobile-navigation";
 export function PublicHeader() {
   return (
     <HeaderShell>
-      <BrandLogo preload />
-      <DesktopNavigation />
-      <div className="flex items-center gap-1 sm:gap-2">
+      <BrandLogo preload className="justify-self-start" />
+      <DesktopNavigation className="justify-self-center" />
+      <div className="flex items-center justify-self-end gap-1 sm:gap-2">
         <HeaderActions />
         <MobileNavigation />
       </div>
