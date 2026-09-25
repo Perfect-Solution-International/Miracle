@@ -67,6 +67,58 @@ export const SITE_MEDIA = {
     src: unsplash("1460925895917-afdab827c52f"),
     alt: "Laptop displaying a business analytics dashboard",
   },
+  investment: {
+    hero: {
+      src: unsplash("1556761175-b413da4baf72"),
+      alt: "Business professionals reviewing an investment strategy together",
+    },
+    partnership: {
+      src: unsplash("1521737711867-e3b97375f902"),
+      alt: "International business team discussing a growth plan around a table",
+    },
+    analysis: {
+      src: unsplash("1551836022-d5d88e9218df"),
+      alt: "Professional reviewing financial charts and business performance data",
+    },
+    planning: {
+      src: unsplash("1454165804606-c3d57bc86b40"),
+      alt: "Business planning workspace with charts and notes",
+    },
+    growth: {
+      src: unsplash("1460925895917-afdab827c52f"),
+      alt: "Business growth analytics displayed on a laptop",
+    },
+  },
+  services: {
+    hero: {
+      src: unsplash("1552664730-d307ca884978"),
+      alt: "Business professionals collaborating in a bright international office",
+    },
+    introduction: {
+      src: unsplash("1504384308090-c894fdcc538d"),
+      alt: "Entrepreneur reviewing a business plan at a modern workspace",
+    },
+    trading: {
+      src: unsplash("1524758631624-e2822e304c36"),
+      alt: "Business team discussing products and commercial opportunities",
+    },
+    franchise: {
+      src: unsplash("1542744173-8e7e53415bb0"),
+      alt: "Entrepreneurs planning a growing business together",
+    },
+    importExport: {
+      src: unsplash("1566576912321-d58ddd7a6088"),
+      alt: "Cargo containers and logistics operations at a global port",
+    },
+    investment: {
+      src: unsplash("1556742049-0cfed4f6a45d"),
+      alt: "Professionals reviewing business growth and investment information",
+    },
+    marketing: {
+      src: unsplash("1531482615713-2afd69097998"),
+      alt: "Creative business team developing a marketing strategy",
+    },
+  },
   travelDestinations: {
     colombo: {
       src: unsplash("1486406146926-c627a92ad1ab"),
