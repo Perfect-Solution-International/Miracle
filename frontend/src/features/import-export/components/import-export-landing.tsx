@@ -26,7 +26,7 @@ import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "re
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { SITE_MEDIA } from "@/config/site-media";
+import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
 import { cn } from "@/lib/utils";
 
 const COUNTRY_CODES =
