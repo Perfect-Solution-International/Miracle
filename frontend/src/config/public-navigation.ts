@@ -63,6 +63,8 @@ export type PublicNavItem =
       title: string;
       /** Landing page for the whole menu; also used for active-state matching. */
       href?: string;
+      /** Render the title link and dropdown trigger as separate controls. */
+      separateLinkAndTrigger?: boolean;
       groups: readonly PublicNavGroup[];
       feature?: PublicNavFeature;
     };
@@ -267,6 +269,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
     kind: "menu",
     title: "Business Solutions",
     href: ROUTES.public.businessSolutions,
+    separateLinkAndTrigger: true,
     groups: [{ title: "Business Solutions", links: BUSINESS_SOLUTION_LINKS }],
     feature: {
       eyebrow: "Ready to move forward?",
@@ -275,12 +278,14 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
         "Tell us where you are now and what you want to achieve. Our team can help you identify the next practical step.",
       href: ROUTES.public.contact,
       cta: "Talk to Our Team",
+      image: SITE_MEDIA.businessSolutions.partnership,
     },
   },
   {
     kind: "menu",
     title: "Travel & Tourism",
     href: ROUTES.public.travelTourism,
+    separateLinkAndTrigger: true,
     groups: [{ title: "Travel Services", links: TRAVEL_NAV_LINKS }],
     feature: {
       eyebrow: "Featured Package",
@@ -295,6 +300,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
     kind: "menu",
     title: "IT Solutions",
     href: ROUTES.public.itSolutions,
+    separateLinkAndTrigger: true,
     groups: [{ title: "IT Solutions", links: IT_SOLUTION_LINKS }],
     feature: {
       eyebrow: "Need the right technology?",
@@ -303,6 +309,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
         "Share the challenge, workflow or system you want to improve and we’ll help identify the right technology approach.",
       href: ROUTES.public.contact,
       cta: "Discuss Your IT Needs",
+      image: SITE_MEDIA.itSolutions.overview,
     },
   },
   { kind: "link", title: "About Us", href: ROUTES.public.about },
