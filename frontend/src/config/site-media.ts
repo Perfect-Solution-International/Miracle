@@ -67,6 +67,10 @@ export const SITE_MEDIA = {
     src: unsplash("1460925895917-afdab827c52f"),
     alt: "Laptop displaying a business analytics dashboard",
   },
+  foodProducts: {
+    src: unsplash("1542838132-92c53300491e"),
+    alt: "Fresh produce arranged for commercial food supply",
+  },
   investment: {
     hero: {
       src: unsplash("1556761175-b413da4baf72"),
@@ -314,6 +318,81 @@ export const SITE_MEDIA = {
   },
 
   // Main
+
+  productCategories: {
+    consumer: {
+      src: unsplash("1513506003901-1e6a229e2d15"),
+      alt: "Everyday household and consumer products arranged for retail supply",
+    },
+    food: {
+      src: unsplash("1542838132-92c53300491e"),
+      alt: "Fresh and packaged food products arranged for commercial supply",
+    },
+    electronics: {
+      src: unsplash("1498049794561-7780e7231661"),
+      alt: "Modern consumer electronics and connected devices",
+    },
+    electrical: {
+      src: unsplash("1558618666-fcd25c85cd64"),
+      alt: "Electrical cables and components used in commercial installations",
+    },
+    vehicles: {
+      src: unsplash("1494976388531-d1058494cdd8"),
+      alt: "Professional vehicle and automotive supply scene",
+    },
+    clothing: {
+      src: unsplash("1489987707025-afc232f7ea0f"),
+      alt: "Garments and apparel arranged in a professional clothing collection",
+    },
+    homeOffice: {
+      src: unsplash("1497366754035-f200968a6e72"),
+      alt: "Modern practical office furniture and workplace equipment",
+    },
+    furniture: {
+      src: unsplash("1555041469-a586c61ea9bc"),
+      alt: "Modern commercial furniture collection",
+    },
+    wood: {
+      src: unsplash("1549490349-8643362247b5"),
+      alt: "Timber and finished wood materials for commercial use",
+    },
+    machinery: {
+      src: unsplash("1513828583688-c52646db42da"),
+      alt: "Industrial machinery and production equipment",
+    },
+    industrial: {
+      src: unsplash("1504328345606-18bbc8c9d7d1"),
+      alt: "Industrial equipment and materials in a manufacturing environment",
+    },
+    packaging: {
+      src: unsplash("1586528116311-ad8dd3c8310d"),
+      alt: "Commercial packaging and containers prepared for dispatch",
+    },
+    construction: {
+      src: unsplash("1581091226825-a6a2a5aee158"),
+      alt: "Construction and building materials used on a project site",
+    },
+    agriculture: {
+      src: unsplash("1500382017468-9049fed747ef"),
+      alt: "Agricultural crops and farm products in a cultivated field",
+    },
+    beauty: {
+      src: unsplash("1556228578-8c89e6adf883"),
+      alt: "Beauty and personal care products arranged for retail supply",
+    },
+    medical: {
+      src: unsplash("1576091160399-112ba8d25d1d"),
+      alt: "Professional medical equipment in a healthcare environment",
+    },
+    business: {
+      src: unsplash("1497366216548-37526070297c"),
+      alt: "Commercial equipment and supplies in a modern business environment",
+    },
+    other: {
+      src: unsplash("1556761175-b413da4baf72"),
+      alt: "Diverse product sourcing discussion for a business requirement",
+    },
+  },
 
   categories: {
     vehicles: {

@@ -1,112 +1,194 @@
-import { Eyebrow } from "@/components/common/eyebrow";
+import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 
 import { HERO_SERVICE_ICONS, HERO_STATS } from "../data/tell-us-what-you-need.content";
 
-const HEX_CLIP = "[clip-path:polygon(50%_0%,100%_25%,100%_75%,50%_100%,0%_75%,0%_25%)]";
-
-/** Hero for the public intake page: brand promise, service hexagons, and the
- * four value-proposition stats that lead into the form below. */
+/** Light-mode hero for the public intake page.
+ *
+ * Background: blurred satellite image under a bright white-to-blue-light
+ * gradient overlay — subtle photo texture without losing legibility.
+ * All text uses dark navy / ink tones. Stats bar uses white glassmorphic cards
+ * on a soft brand-blue-light base.
+ */
 export function TellUsWhatYouNeedHero() {
   return (
     <section
       aria-labelledby="tell-us-heading"
-      className="from-navy to-brand-blue-dark relative isolate overflow-hidden bg-gradient-to-br"
+      className="relative isolate overflow-hidden bg-white"
     >
-      <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
+      {/* ── Full-width background image (blurred, very bright) ── */}
+      <div aria-hidden="true" className="absolute inset-0 -z-20">
+        <Image
+          src="/brand/hero-bg.jpg"
+          alt=""
+          fill
+          priority
+          quality={85}
+          sizes="100vw"
+          className="object-cover object-center"
+          style={{ filter: "blur(4px) brightness(1.6) saturate(0.5) opacity(0.22)" }}
+        />
+      </div>
 
-      <div className="container-page grid gap-12 pt-14 pb-16 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-10 lg:pt-20">
-        <div className="flex flex-col gap-5">
-          <Eyebrow tone="inverse">Tell Us What You Need</Eyebrow>
-          <h1
-            id="tell-us-heading"
-            className="text-4xl leading-[1.08] font-extrabold tracking-tight text-white sm:text-5xl"
-          >
-            Your Needs.
-            <br />
-            <span className="text-brand-red">Our Solutions.</span>
-          </h1>
-          <p className="max-w-lg text-base leading-relaxed text-white/75 sm:text-lg">
-            Share your requirements with us, and our expert team will provide or
-            coordinate the right solution from A to Z.
-          </p>
+      {/* Light gradient overlay */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(160deg, #ffffff 0%, #eaf1fb 40%, #f0f5fd 70%, #ffffff 100%)",
+        }}
+      />
+
+      {/* Faint grid texture */}
+      <div aria-hidden="true" className="bg-grid absolute inset-0 -z-10 opacity-50" />
+
+      {/* Ambient glow orbs — light blue / light red */}
+      <div
+        aria-hidden="true"
+        className="pulse-glow pointer-events-none absolute -top-24 -right-24 -z-10 size-[500px] rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(17,80,168,0.10) 0%, rgba(17,80,168,0.03) 55%, transparent 78%)",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pulse-glow pointer-events-none absolute -bottom-32 -left-16 -z-10 size-[420px] rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(223,32,33,0.07) 0%, rgba(17,80,168,0.05) 50%, transparent 75%)",
+          animationDelay: "2s",
+        }}
+      />
+
+      {/* ── Main content ───────────────────────────────────────── */}
+      <div className="container-page flex flex-col items-center pt-20 pb-0 text-center lg:pt-28">
+
+        {/* Eyebrow pill */}
+        <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-brand-blue/15 bg-brand-blue-light/70 px-4 py-1.5 backdrop-blur-sm">
+          <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-red" />
+          <span className="text-[0.72rem] font-bold tracking-[0.2em] text-brand-blue uppercase">
+            Miracle International
+          </span>
+          <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-red" />
         </div>
 
-        <div className="hidden lg:block">
-          <div className="mx-auto grid w-fit grid-cols-3 items-center gap-5">
-            {HERO_SERVICE_ICONS.slice(0, 2).map(({ icon: Icon, label }) => (
-              <HexIcon key={label} icon={Icon} label={label} />
-            ))}
-            <div className="col-start-2 row-span-3 row-start-1">
-              <CenterHex />
-            </div>
-            {HERO_SERVICE_ICONS.slice(2).map(({ icon: Icon, label }) => (
-              <HexIcon key={label} icon={Icon} label={label} />
-            ))}
-          </div>
+        {/* Headline */}
+        <h1
+          id="tell-us-heading"
+          className="mx-auto max-w-4xl text-5xl leading-[1.04] font-extrabold tracking-tight text-ink sm:text-6xl lg:text-7xl"
+        >
+          Your Needs.{" "}
+          <span
+            className="block sm:inline"
+            style={{
+              background: "linear-gradient(135deg, #1150a8 0%, #0b3b80 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Our Solutions.
+          </span>
+        </h1>
 
-          <div className="mt-6 flex flex-col items-end gap-2 pr-2 text-right">
-            <p className="font-serif text-lg leading-tight text-white/90 italic">
-              From Ideas to
-              <br />
-              Real Results
+        {/* Sub-headline */}
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink/60 sm:text-lg lg:text-xl">
+          Share your requirements with us — products, services, or international
+          sourcing — and our expert team will coordinate the perfect solution
+          from&nbsp;A&nbsp;to&nbsp;Z.
+        </p>
+
+        {/* Service badge strip */}
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          {HERO_SERVICE_ICONS.map(({ icon: Icon, label }) => (
+            <div
+              key={label}
+              className={cn(
+                "flex items-center gap-2 rounded-full border border-brand-blue/15 bg-white px-4 py-2",
+                "text-sm font-semibold text-navy shadow-sm",
+                "transition-all duration-200 hover:border-brand-blue/40 hover:bg-brand-blue-light hover:shadow-md",
+              )}
+            >
+              <Icon aria-hidden="true" className="size-4 text-brand-blue" />
+              {label}
+            </div>
+          ))}
+          <div
+            className={cn(
+              "flex items-center gap-2 rounded-full border border-brand-red/20 bg-white px-4 py-2",
+              "text-sm font-semibold text-navy shadow-sm",
+              "transition-all duration-200 hover:border-brand-red/40 hover:bg-red-50 hover:shadow-md",
+            )}
+          >
+            <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-red" />
+            &amp; More
+          </div>
+        </div>
+
+        {/* Floating quote card */}
+        <div className="float-slow relative mt-14 hidden w-full max-w-lg lg:flex lg:justify-center">
+          <div
+            className="relative rounded-2xl border border-brand-blue/12 px-8 py-5 shadow-soft backdrop-blur-sm"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(234,241,251,0.9) 0%, rgba(255,255,255,0.95) 100%)",
+            }}
+          >
+            <p className="text-base font-bold tracking-wide text-ink">
+              &ldquo;One request. Countless possibilities.&rdquo;
             </p>
-            <span aria-hidden="true" className="bg-brand-red h-0.5 w-10 rounded-full" />
+            <p className="mt-1 text-xs text-ink/45">
+              Products · Sourcing · Services · Consultation
+            </p>
+            <span aria-hidden="true" className="absolute top-3 left-3 size-1.5 rounded-full bg-brand-red" />
+            <span aria-hidden="true" className="absolute right-3 bottom-3 size-1.5 rounded-full bg-brand-blue" />
           </div>
         </div>
       </div>
 
-      <div className="container-page pb-14 lg:pb-20">
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-          {HERO_STATS.map(({ icon: Icon, title, subtitle }) => (
+      {/* ── Stats bar ──────────────────────────────────────────── */}
+      <div className="container-page mt-16 pb-0">
+        {/* Accent shimmer line */}
+        <div
+          aria-hidden="true"
+          className="shimmer-line mx-auto mb-0 h-px max-w-3xl rounded-full"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent 0%, rgba(17,80,168,0.25) 20%, rgba(223,32,33,0.35) 50%, rgba(17,80,168,0.25) 80%, transparent 100%)",
+          }}
+        />
+
+        <ul className="grid grid-cols-2 divide-x divide-brand-blue/8 border-x border-brand-blue/8 sm:grid-cols-4">
+          {HERO_STATS.map(({ icon: Icon, title, subtitle }, i) => (
             <li
               key={title}
-              className="flex items-center gap-3 rounded-xl border border-white/15 bg-white/10 p-3.5 backdrop-blur sm:p-4"
+              className={cn(
+                "flex flex-col items-center gap-3 px-4 py-8 text-center sm:py-10",
+                i === 0 && "sm:items-start sm:text-left",
+                i === HERO_STATS.length - 1 && "sm:items-end sm:text-right",
+              )}
             >
-              <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-white/15">
-                <Icon aria-hidden="true" className="size-4.5 text-white" />
+              <span
+                className={cn(
+                  "inline-flex size-10 shrink-0 items-center justify-center rounded-xl",
+                  i === 0
+                    ? "bg-brand-red/10 text-brand-red"
+                    : "bg-brand-blue-light text-brand-blue",
+                )}
+              >
+                <Icon aria-hidden="true" className="size-5" />
               </span>
-              <span className="flex flex-col leading-tight">
-                <span className="text-sm font-bold text-white">{title}</span>
-                <span className="text-xs text-white/70">{subtitle}</span>
+              <span className="flex flex-col gap-0.5 leading-tight">
+                <span className="text-base font-extrabold text-ink">{title}</span>
+                <span className="text-xs font-medium text-ink/50">{subtitle}</span>
               </span>
             </li>
           ))}
         </ul>
       </div>
     </section>
-  );
-}
-
-function HexIcon({
-  icon: Icon,
-  label,
-}: {
-  icon: (typeof HERO_SERVICE_ICONS)[number]["icon"];
-  label: string;
-}) {
-  return (
-    <div className="flex flex-col items-center gap-2">
-      <div className={cn("relative flex size-16 items-center justify-center", HEX_CLIP)}>
-        <span className="absolute inset-0 border border-white/25 bg-white/10" />
-        <Icon aria-hidden="true" className="relative size-6 text-white" />
-      </div>
-      <span className="text-[0.65rem] font-semibold tracking-wide text-white/70 uppercase">
-        {label}
-      </span>
-    </div>
-  );
-}
-
-function CenterHex() {
-  return (
-    <div className={cn("relative flex size-36 items-center justify-center", HEX_CLIP)}>
-      <span className="bg-brand-red absolute inset-0" />
-      <p className="relative px-4 text-center text-sm leading-tight font-extrabold tracking-wide text-white uppercase">
-        You Tell Us
-        <br />
-        We Deliver
-      </p>
-    </div>
   );
 }

@@ -206,7 +206,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       description: "Sigiriya, Kandy, Ella and Galle on one 7-day itinerary.",
       href: ROUTES.public.travelPackage("sri-lanka-highlights"),
       cta: "View Package",
-      image: SITE_MEDIA.travelNavFeature,
+      image: SITE_MEDIA.travelPackagesFull.sriLankaHighlights,
     },
   },
   { kind: "link", title: "IT Solutions", href: ROUTES.public.itSolutions },

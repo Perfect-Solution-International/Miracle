@@ -294,6 +294,46 @@ body > .theme-light {
   }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+
+@utility float-slow {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: float 7s ease-in-out infinite;
+  }
+}
+
+@utility float-medium {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: float 5s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.18; transform: scale(1); }
+  50%       { opacity: 0.32; transform: scale(1.06); }
+}
+
+@utility pulse-glow {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+}
+
+@keyframes shimmer-line {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+@utility shimmer-line {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: shimmer-line 1s var(--ease-brand) 0.4s both;
+    transform-origin: left center;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
