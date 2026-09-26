@@ -1,3 +1,4 @@
+import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
 import { TravelSubpageHero } from "@/features/travel";
 
@@ -5,11 +6,15 @@ import { TravelSubpageHero } from "@/features/travel";
 export function FlightTicketsHero() {
   return (
     <TravelSubpageHero
-      breadcrumbLabel="Flight Tickets"
-      title="Flight Tickets"
-      description="Find suitable domestic and international flight options based on your travel plans and preferences."
+      breadcrumbs={[
+        { label: "Travel & Tourism", href: ROUTES.public.travelTourism },
+        { label: "Flight Tickets" },
+      ]}
+      categoryLabel="Flight Assistance"
+      title="Your Journey Starts With the Right Flight"
+      description="Tell us your travel requirements and let our team help coordinate suitable flight options for your journey."
       image={SITE_MEDIA.businessTravel}
-      primary={{ label: "Request Flight Options", href: "#flight-request-form" }}
+      primary={{ label: "Request Flight Tickets", href: "#flight-request-form" }}
     />
   );
 }

@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -180,14 +181,23 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
   );
 }
 
-export function InvestmentLanding() {
+export function InvestmentLanding({
+  breadcrumbs = [{ label: "Investment Opportunities" }],
+}: {
+  breadcrumbs?: readonly BreadcrumbItem[];
+} = {}) {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const openForm = () => setIsFormOpen(true);
 
   return (
     <>
       <main>
-        <section className="bg-brand-blue-light/45"><div className="container-page grid gap-10 py-16 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:py-24"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Practical investment support</p><h1 className="text-ink mt-5 text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">Investment Opportunities That Create Possibilities</h1><p className="text-muted-foreground mt-7 max-w-xl text-lg leading-relaxed">Explore business opportunities, investment projects and practical business ideas with professional support from Miracle International.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={openForm}>Explore Investment Opportunities <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="outline" onClick={openForm}>Submit Your Investment Requirement</Button></div></div><div className="relative min-h-[360px] overflow-hidden rounded-3xl border border-white bg-white p-3 shadow-soft sm:min-h-[470px]"><Image src={SITE_MEDIA.investment.hero.src} alt={SITE_MEDIA.investment.hero.alt} fill priority sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" /><div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/70 bg-white/90 p-5 backdrop-blur-sm"><p className="text-brand-blue text-sm font-bold">Ideas become clearer with the right support</p><p className="text-ink mt-1 font-semibold">Explore, evaluate and coordinate the next step.</p></div></div></div></section>
+        <section className="bg-brand-blue-light/45">
+          <div className="container-page grid gap-10 py-16 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:py-24">
+            <div className="max-w-2xl">
+              <Breadcrumb items={breadcrumbs} />
+              <p className="mt-8 text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Practical investment support</p>
+              <h1 className="text-ink mt-5 text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">Investment Opportunities That Create Possibilities</h1><p className="text-muted-foreground mt-7 max-w-xl text-lg leading-relaxed">Explore business opportunities, investment projects and practical business ideas with professional support from Miracle International.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={openForm}>Explore Investment Opportunities <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="outline" onClick={openForm}>Submit Your Investment Requirement</Button></div></div><div className="relative min-h-[360px] overflow-hidden rounded-3xl border border-white bg-white p-3 shadow-soft sm:min-h-[470px]"><Image src={SITE_MEDIA.investment.hero.src} alt={SITE_MEDIA.investment.hero.alt} fill priority sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" /><div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/70 bg-white/90 p-5 backdrop-blur-sm"><p className="text-brand-blue text-sm font-bold">Ideas become clearer with the right support</p><p className="text-ink mt-1 font-semibold">Explore, evaluate and coordinate the next step.</p></div></div></div></section>
 
         <section className="section-y bg-white"><div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div className="relative min-h-[300px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.investment.partnership.src} alt={SITE_MEDIA.investment.partnership.alt} fill sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover" /></div><div className="max-w-xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A clearer path forward</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Explore New Business &amp; Investment Possibilities</h2><p className="text-muted-foreground mt-5 text-lg leading-relaxed">Whether you are looking for an investment opportunity, exploring a new business idea, or seeking support for an existing project, Miracle International helps connect opportunities with practical business solutions.</p><Button variant="outline" size="lg" onClick={openForm} className="mt-7">Explore Opportunities <ArrowRight data-icon="inline-end" /></Button></div></div></section>
 

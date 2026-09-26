@@ -31,6 +31,7 @@ export const ROUTES = {
     visaServices: "/travel-tourism/visa-services",
     inboundTravel: "/travel-tourism/inbound",
     outboundTravel: "/travel-tourism/outbound",
+    inboundOutbound: "/travel-tourism/inbound-outbound",
     flightTickets: "/travel-tourism/flight-tickets",
     workVisa: "/travel-tourism/work-visa",
     itSolutions: "/it-solutions",

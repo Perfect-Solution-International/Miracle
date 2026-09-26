@@ -20,9 +20,9 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { SITE_MEDIA } from "@/config/site-media";
 
 const SUPPORT_OPTIONS = [
@@ -185,7 +185,11 @@ function SupportModal({ open, onClose }: { open: boolean; onClose: () => void })
   );
 }
 
-export function FranchiseLanding() {
+export function FranchiseLanding({
+  breadcrumbs = [{ label: "Franchise Opportunities" }],
+}: {
+  breadcrumbs?: readonly BreadcrumbItem[];
+} = {}) {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const openForm = () => setIsFormOpen(true);
 
@@ -194,7 +198,10 @@ export function FranchiseLanding() {
       <main>
         <section className="bg-brand-blue-light/45">
           <div className="container-page grid gap-10 py-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:py-24">
-            <div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Franchise support, made practical</p><h1 className="text-ink mt-5 text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">Build Your Business With a Franchise</h1><p className="text-muted-foreground mt-7 max-w-xl text-lg leading-relaxed">Explore franchise opportunities and get professional support from business selection and planning to setup, product supply and ongoing operations.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={openForm}>Explore Franchise Opportunities <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="outline" onClick={openForm}>Get Franchise Support</Button></div></div>
+            <div className="max-w-2xl">
+              <Breadcrumb items={breadcrumbs} />
+              <p className="mt-8 text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Franchise support, made practical</p>
+              <h1 className="text-ink mt-5 text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">Build Your Business With a Franchise</h1><p className="text-muted-foreground mt-7 max-w-xl text-lg leading-relaxed">Explore franchise opportunities and get professional support from business selection and planning to setup, product supply and ongoing operations.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={openForm}>Explore Franchise Opportunities <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="outline" onClick={openForm}>Get Franchise Support</Button></div></div>
             <div className="relative min-h-[360px] overflow-hidden rounded-3xl border border-white bg-white p-3 shadow-soft sm:min-h-[470px]"><Image src={SITE_MEDIA.franchise.hero.src} alt={SITE_MEDIA.franchise.hero.alt} fill priority sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" /><div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/70 bg-white/90 p-5 backdrop-blur-sm"><p className="text-brand-blue text-sm font-bold">A partner for the next stage</p><p className="text-ink mt-1 font-semibold">From first idea to confident operations.</p></div></div>
           </div>
         </section>

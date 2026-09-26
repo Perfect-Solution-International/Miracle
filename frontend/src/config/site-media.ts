@@ -201,8 +201,8 @@ export const SITE_MEDIA = {
       alt: "Palm-fringed river winding through green hill country",
     },
     sigiriya: {
-      src: unsplash("1751247026229-518bfec9b5e6"),
-      alt: "Sigiriya rock fortress in Sri Lanka lit by sunset",
+      src: "/images/travel/sigiriya-inbound-hero.jpg",
+      alt: "Ancient Sigiriya rock fortress rising above green forest canopy in Sri Lanka",
     },
     mirissa: {
       src: unsplash("1760815153715-9fce4c3644a3"),
@@ -279,10 +279,26 @@ export const SITE_MEDIA = {
       alt: "Blue train crossing the Nine Arch Bridge through green hills in Ella",
     },
   },
+  travelHeroBright: {
+    src: unsplash("1507525428034-b723cf961d3e"),
+    alt: "Bright sunlit turquoise coastline and clear ocean waters",
+  },
+  travelHeroInboundOutbound: {
+    src: unsplash("1488646953014-85cb44e25828"),
+    alt: "Traveller exploring scenic destinations and international cultural landmarks",
+  },
+  workVisaHero: {
+    src: unsplash("1522202176988-66273c2fd55f"),
+    alt: "International professionals collaborating in a modern global work environment",
+  },
+  inboundHero: {
+    src: "/images/travel/sigiriya-inbound-hero.jpg",
+    alt: "Ancient Sigiriya rock fortress rising above green forest canopy in Sri Lanka",
+  },
   travelCategoryCards: {
     inbound: {
-      src: unsplash("1751247026229-518bfec9b5e6"),
-      alt: "Sigiriya rock fortress in Sri Lanka lit by sunset",
+      src: "/images/travel/sigiriya-inbound-hero.jpg",
+      alt: "Ancient Sigiriya rock fortress rising above green forest canopy in Sri Lanka",
     },
     outbound: {
       src: unsplash("1500835556837-99ac94a94552"),
