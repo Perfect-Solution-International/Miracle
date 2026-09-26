@@ -3,6 +3,7 @@ import {
   Globe2,
   Landmark,
   Plane,
+  SlidersHorizontal,
   Stamp,
   type LucideIcon,
 } from "lucide-react";
@@ -17,42 +18,54 @@ export interface TravelServiceCard {
   href: string;
 }
 
-/** "Travel Services" — the five core services, each with its own dedicated page. */
+/** "Travel Services" — the 6 core services for Travel & Tourism. */
 export const TRAVEL_SERVICE_CARDS: readonly TravelServiceCard[] = [
   {
     icon: Landmark,
-    title: "Inbound Travel (Sri Lanka)",
+    title: "Inbound Tours",
     description:
-      "Discover Sri Lanka with customized tours, local experiences and complete travel support.",
-    cta: "Explore Sri Lanka",
+      "Curated journeys across Sri Lanka, from cultural heritage and tea hills to pristine beaches and wildlife.",
+    cta: "Explore Service",
     href: ROUTES.public.inboundTravel,
   },
   {
     icon: Globe2,
-    title: "Outbound Travel",
-    description: "Plan your international journey with travel assistance tailored to your destination.",
-    cta: "Explore",
+    title: "Outbound Tours",
+    description:
+      "Handcrafted international holidays, family trips, and honeymoon packages to destinations worldwide.",
+    cta: "Explore Service",
     href: ROUTES.public.outboundTravel,
   },
   {
-    icon: Stamp,
-    title: "Visa Services",
-    description: "Get guidance and assistance for your travel visa requirements.",
-    cta: "Explore",
-    href: ROUTES.public.visaServices,
+    icon: SlidersHorizontal,
+    title: "Customized Trips",
+    description:
+      "Bespoke travel itineraries tailored to your dates, interests, preferred destinations, and style.",
+    cta: "Plan Your Trip",
+    href: `${ROUTES.public.travelTourism}#customize-trip`,
   },
   {
     icon: Plane,
     title: "Flight Tickets",
-    description: "Find flight options for your domestic and international journeys.",
-    cta: "Explore",
+    description:
+      "Competitive domestic and international airfares with route options and airline booking support.",
+    cta: "Book Flights",
     href: ROUTES.public.flightTickets,
+  },
+  {
+    icon: Stamp,
+    title: "Visa & Passport Assistance",
+    description:
+      "Expert guidance for tourist, business, and transit visa applications and documentation.",
+    cta: "Get Visa Help",
+    href: ROUTES.public.visaServices,
   },
   {
     icon: FileCheck2,
     title: "Work Visa Support",
-    description: "Get guidance for work-related travel and visa requirements.",
-    cta: "Explore",
+    description:
+      "Professional assistance with work visa categories, embassy requirements, and document preparation.",
+    cta: "View Support",
     href: ROUTES.public.workVisa,
   },
 ];

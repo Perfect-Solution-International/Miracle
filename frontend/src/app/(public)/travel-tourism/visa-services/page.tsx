@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 
 import { ROUTES } from "@/config/routes";
 import {
+  VisaAssistanceSection,
   VisaBenefitsSection,
   VisaHero,
-  VisaRequestForm,
-  VisaTypesSection,
 } from "@/features/visa-services";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
@@ -24,12 +22,7 @@ export default function Page() {
   return (
     <>
       <VisaHero />
-      <VisaTypesSection />
-
-      <Suspense fallback={null}>
-        <VisaRequestForm />
-      </Suspense>
-
+      <VisaAssistanceSection />
       <VisaBenefitsSection />
     </>
   );

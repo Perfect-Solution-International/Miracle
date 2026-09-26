@@ -2,12 +2,8 @@
 
 import {
   ArrowRight,
-  BriefcaseBusiness,
-  Check,
   CheckCircle2,
-  FileText,
   UploadCloud,
-  X,
 } from "lucide-react";
 import { useId, useState } from "react";
 
@@ -56,7 +52,11 @@ function UploadField({ label, onFiles }: { label: string; onFiles: (files: File[
   );
 }
 
-export function WorkVisaSupportForm() {
+export interface WorkVisaSupportFormProps {
+  embedded?: boolean;
+}
+
+export function WorkVisaSupportForm({ embedded = false }: WorkVisaSupportFormProps = {}) {
   const [submitted, setSubmitted] = useState(false);
   const [files, setFiles] = useState<Record<string, File[]>>({});
 
@@ -65,45 +65,51 @@ export function WorkVisaSupportForm() {
   }
 
   if (submitted) {
+    const successCard = (
+      <div className="mx-auto max-w-2xl rounded-3xl border border-slate-200/80 bg-white px-6 py-14 text-center shadow-lift sm:px-12">
+        <div className="bg-brand-blue-light text-brand-blue mx-auto grid size-16 place-items-center rounded-full">
+          <CheckCircle2 aria-hidden="true" className="size-8" />
+        </div>
+        <p className="text-brand-blue mt-6 text-xs font-bold tracking-[0.16em] uppercase">Request Received</p>
+        <h2 className="text-ink mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Request Submitted Successfully
+        </h2>
+        <p className="text-muted-foreground mx-auto mt-4 max-w-lg leading-relaxed">
+          Thank you. Our team will review your work visa support request and contact you shortly.
+        </p>
+        <Button type="button" variant="outline" size="lg" className="mt-8" onClick={() => setSubmitted(false)}>
+          Submit another request
+        </Button>
+      </div>
+    );
+
+    if (embedded) {
+      return <div id="work-visa-request">{successCard}</div>;
+    }
+
     return (
       <section id="work-visa-request" className="bg-surface scroll-mt-24 px-5 py-16 sm:px-8 md:py-24">
-        <div className="mx-auto max-w-2xl rounded-2xl border bg-white px-6 py-14 text-center shadow-lift sm:px-12">
-          <div className="bg-brand-blue-light text-brand-blue mx-auto grid size-16 place-items-center rounded-full">
-            <CheckCircle2 aria-hidden="true" className="size-8" />
-          </div>
-          <p className="text-brand-blue mt-6 text-xs font-bold tracking-[0.16em] uppercase">Request Received</p>
-          <h2 className="text-ink mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Request Submitted Successfully
-          </h2>
-          <p className="text-muted-foreground mx-auto mt-4 max-w-lg leading-relaxed">
-            Thank you. Our team will review your work visa support request and contact you shortly.
-          </p>
-          <Button type="button" variant="outline" size="lg" className="mt-8" onClick={() => setSubmitted(false)}>
-            Submit another request
-          </Button>
-        </div>
+        {successCard}
       </section>
     );
   }
 
-  return (
-    <section id="work-visa-request" className="bg-surface scroll-mt-24 px-5 py-16 sm:px-8 md:py-24">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-10 max-w-2xl">
-          <p className="text-brand-blue text-xs font-bold tracking-[0.16em] uppercase">Start with your requirements</p>
-          <h2 className="text-ink mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Work Visa Support Request</h2>
-          <p className="text-muted-foreground mt-4 leading-relaxed">
-            Share your employment and travel details. Miracle International will review your situation and guide you through the next steps.
-          </p>
-        </div>
+  const formCard = (
+    <div id="work-visa-request" className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-lift sm:p-10">
+      <div className="mb-8 text-center sm:text-left">
+        <p className="text-brand-blue text-xs font-bold tracking-[0.16em] uppercase">Requirements Intake</p>
+        <h2 className="text-ink mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">Work Visa Support Request</h2>
+        <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Share your employment and travel details. Miracle International will review your situation and guide you through the next steps.
+        </p>
+      </div>
 
-        <form
-          className="rounded-2xl border bg-white p-5 shadow-lift sm:p-8 md:p-10"
-          onSubmit={(event) => {
-            event.preventDefault();
-            setSubmitted(true);
-          }}
-        >
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          setSubmitted(true);
+        }}
+      >
           <div className="space-y-10">
             <fieldset className="space-y-5">
               <legend className="flex items-center gap-2 text-lg font-bold">
@@ -163,7 +169,16 @@ export function WorkVisaSupportForm() {
             </div>
           </div>
         </form>
-      </div>
+    </div>
+  );
+
+  if (embedded) {
+    return formCard;
+  }
+
+  return (
+    <section id="work-visa-request" className="bg-surface scroll-mt-24 px-5 py-16 sm:px-8 md:py-24">
+      <div className="mx-auto max-w-5xl">{formCard}</div>
     </section>
   );
 }

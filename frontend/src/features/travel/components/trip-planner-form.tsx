@@ -44,7 +44,13 @@ import {
  * `RequirementInquiryForm`), so submission confirms receipt locally; wire this
  * to a real mutation once the intake API exists.
  */
-export function TripPlannerForm({ className }: { className?: string }) {
+export function TripPlannerForm({
+  className,
+  defaultDestination,
+}: {
+  className?: string;
+  defaultDestination?: string;
+}) {
   const form = useForm<TripPlannerFormInput, unknown, TripPlannerInput>({
     resolver: zodResolver(tripPlannerSchema),
     defaultValues: {
@@ -52,7 +58,7 @@ export function TripPlannerForm({ className }: { className?: string }) {
       email: "",
       phone: "",
       startingLocation: "",
-      destination: "",
+      destination: defaultDestination ?? "",
       startDate: "",
       endDate: "",
       travelers: 1,

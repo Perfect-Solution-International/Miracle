@@ -17,12 +17,12 @@ import {
   ShieldCheck,
   Truck,
   Users,
-  Warehouse,
   X,
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 
+import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -106,12 +106,6 @@ const CATEGORIES: readonly [string, string, LucideIcon, SiteImage][] = [
     "Home, office, hospitality, institutional and customized furniture requirements.",
     Home,
     SITE_MEDIA.productCategories.furniture,
-  ],
-  [
-    "Wood Products",
-    "Timber, wooden products, furniture materials, wood-based products, and customized requirements.",
-    Warehouse,
-    SITE_MEDIA.productCategories.wood,
   ],
   [
     "Machinery & Equipment",
@@ -486,15 +480,6 @@ const CATEGORY_EXAMPLES: Readonly<Record<string, readonly string[]>> = {
     "Institutional furniture",
     "Customized furniture",
   ],
-  "Wood Products": [
-    "Timber",
-    "Wooden boards",
-    "Plywood",
-    "Doors",
-    "Wood components",
-    "Wooden packaging",
-    "Construction wood products",
-  ],
   "Machinery & Equipment": [
     "Production equipment",
     "Industrial machinery",
@@ -542,7 +527,6 @@ const CATEGORY_EXAMPLES: Readonly<Record<string, readonly string[]>> = {
   ],
   "Medical & Healthcare Products": [
     "Medical equipment",
-    "Healthcare supplies",
     "Professional devices",
     "Clinic products",
     "Safety and care products",
@@ -567,7 +551,6 @@ const EXPORT_FROM_SRI_LANKA = new Set([
   "Consumer Products",
   "Food & Beverages",
   "Clothing & Apparel",
-  "Wood Products",
   "Furniture",
   "Beauty & Personal Care Products",
   "Industrial Products",
@@ -600,13 +583,6 @@ function getCategoryDetail(
     [
       "What You Can Request",
       [...examples, "Examples only - other related products can also be requested."],
-    ],
-    [
-      "Import or Export",
-      [
-        "Import: International products -> Sri Lanka.",
-        "Export: Sri Lankan products -> International market.",
-      ],
     ],
     ...(EXPORT_FROM_SRI_LANKA.has(title)
       ? [
@@ -744,6 +720,12 @@ function DetailModal({
 
   if (!detail) return null;
 
+  const requestSection = detail.sections.find(([title]) => title === "What You Can Request");
+  const exportSection = detail.sections.find(([title]) => title === "Export from Sri Lanka");
+  const otherSections = detail.sections.filter(
+    ([title]) => title !== "What You Can Request" && title !== "Export from Sri Lanka",
+  );
+
   return (
     <div
       className="bg-navy/40 fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
@@ -754,7 +736,7 @@ function DetailModal({
         if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div className="bg-popover text-popover-foreground relative flex max-h-[90vh] w-[calc(100vw-2rem)] max-w-[84rem] flex-col overflow-hidden rounded-[2rem] shadow-2xl">
+      <div className="bg-popover text-popover-foreground relative flex max-h-[90vh] w-[calc(100vw-2rem)] max-w-4xl flex-col overflow-hidden rounded-[2rem] shadow-2xl">
         <button
           type="button"
           onClick={onClose}
@@ -763,13 +745,13 @@ function DetailModal({
         >
           <X aria-hidden="true" className="size-5" />
         </button>
-        <div className="grid min-h-0 overflow-y-auto lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="relative min-h-64 lg:min-h-[70vh]">
+        <div className="grid min-h-0 overflow-y-auto lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative min-h-64 sm:min-h-72 lg:min-h-full">
             <Image
               src={detail.image.src}
               alt={detail.image.alt}
               fill
-              sizes="(min-width: 1024px) 40vw, 100vw"
+              sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />
             <div
@@ -780,25 +762,48 @@ function DetailModal({
               Miracle International
             </p>
           </div>
-          <div className="p-6 sm:p-9">
-            <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-              Trade detail
-            </p>
-            <h2
-              id="detail-modal-title"
-              className="text-ink mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl"
-            >
-              {detail.title}
-            </h2>
-            <p className="text-muted-foreground mt-4 text-base leading-relaxed">
-              {detail.description}
-            </p>
-            <p className="text-ink mt-6 leading-relaxed">{detail.intro}</p>
-            <div className="mt-7 grid gap-6 sm:grid-cols-2">
-              {detail.sections.map(([title, items]) => (
-                <div key={title}>
-                  <h3 className="text-ink text-sm font-bold uppercase">{title}</h3>
-                  <ul className="mt-3 space-y-2">
+          <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-9">
+            <div>
+              <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
+                Trade detail
+              </p>
+              <h2
+                id="detail-modal-title"
+                className="text-ink mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl"
+              >
+                {detail.title}
+              </h2>
+              <p className="text-muted-foreground mt-3 text-sm leading-relaxed sm:text-base">
+                {detail.description}
+              </p>
+              <p className="text-ink mt-4 text-sm leading-relaxed">{detail.intro}</p>
+
+              {requestSection ? (
+                <div className="mt-6">
+                  <h3 className="text-ink text-xs font-bold tracking-wider uppercase">
+                    {requestSection[0]}
+                  </h3>
+                  <ul className="mt-3 grid gap-2.5 sm:grid-cols-2">
+                    {requestSection[1].map((item) => (
+                      <li
+                        key={item}
+                        className="text-muted-foreground flex items-start gap-2 text-sm leading-relaxed"
+                      >
+                        <Check
+                          aria-hidden="true"
+                          className="text-brand-blue mt-0.5 size-4 shrink-0"
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {otherSections.map(([title, items]) => (
+                <div key={title} className="mt-5">
+                  <h3 className="text-ink text-xs font-bold tracking-wider uppercase">{title}</h3>
+                  <ul className="mt-2.5 space-y-1.5">
                     {items.map((item) => (
                       <li
                         key={item}
@@ -808,19 +813,39 @@ function DetailModal({
                           aria-hidden="true"
                           className="text-brand-blue mt-0.5 size-4 shrink-0"
                         />
-                        {item}
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               ))}
+
+              {exportSection ? (
+                <div className="border-brand-blue/15 bg-brand-blue-light/50 mt-6 rounded-2xl border p-4 sm:p-5">
+                  <div className="flex items-start gap-3">
+                    <Globe2
+                      aria-hidden="true"
+                      className="text-brand-blue mt-0.5 size-5 shrink-0"
+                    />
+                    <div>
+                      <h4 className="text-ink text-xs font-bold tracking-wider uppercase">
+                        Export from Sri Lanka
+                      </h4>
+                      <p className="text-muted-foreground mt-1 text-xs leading-relaxed sm:text-sm">
+                        {exportSection[1][0]}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
+
+            <div className="mt-7 flex flex-wrap gap-3 border-t pt-5">
               <Button size="xl" onClick={() => onRequest()}>
                 Submit Import / Export Request
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Button>
-              {detail.sections.some(([title]) => title === "Export from Sri Lanka") ? (
+              {exportSection ? (
                 <Button size="xl" variant="outline" onClick={() => onRequest("export")}>
                   Submit Export Requirement
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
@@ -1150,7 +1175,11 @@ function FeatureCard({
   );
 }
 
-export function ImportExportLanding() {
+export function ImportExportLanding({
+  breadcrumbs = [{ label: "Import & Export" }],
+}: {
+  breadcrumbs?: readonly BreadcrumbItem[];
+} = {}) {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [requestType, setRequestType] = useState<RequestType>("import");
   const [selectedDetail, setSelectedDetail] = useState<DetailContent | null>(null);
@@ -1169,7 +1198,8 @@ export function ImportExportLanding() {
         <section className="relative overflow-hidden bg-white">
           <div className="container-page grid items-center gap-12 py-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14 lg:py-24">
             <div className="max-w-2xl">
-              <p className="text-brand-red text-xs font-bold tracking-[0.2em] uppercase">
+              <Breadcrumb items={breadcrumbs} />
+              <p className="mt-8 text-brand-red text-xs font-bold tracking-[0.2em] uppercase">
                 Import &amp; Export
               </p>
               <h1 className="text-ink mt-5 text-5xl leading-[0.98] font-extrabold tracking-tight sm:text-6xl lg:text-7xl">

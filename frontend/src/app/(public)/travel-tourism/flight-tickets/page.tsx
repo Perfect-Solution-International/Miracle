@@ -4,8 +4,6 @@ import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
 import {
   FlightAssistanceSection,
-  FlightFinalCta,
-  FlightRequestForm,
   FlightTicketsHero,
 } from "@/features/flight-tickets";
 import { buildPageMetadata } from "@/lib/seo/metadata";
@@ -26,8 +24,6 @@ export default function Page() {
     <>
       <FlightTicketsHero />
       <FlightAssistanceSection />
-      <FlightRequestForm />
-      <FlightFinalCta />
     </>
   );
 }

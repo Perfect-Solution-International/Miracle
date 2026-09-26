@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { ROUTES } from "@/config/routes";
 import { InvestmentLanding } from "@/features/investment/components/investment-landing";
 
 export const metadata: Metadata = {
@@ -8,5 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <InvestmentLanding />;
+  return (
+    <InvestmentLanding
+      breadcrumbs={[
+        { label: "Services", href: ROUTES.public.services },
+        { label: "Investment" },
+      ]}
+    />
+  );
 }

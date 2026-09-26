@@ -1,16 +1,13 @@
 import {
-  BedDouble,
-  Calendar,
   Car,
-  MapPinned,
+  Compass,
+  Headphones,
+  Hotel,
+  MapPin,
   Plane,
-  Sparkles,
-  Users,
-  type LucideIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
 
-import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { ROUTES } from "@/config/routes";
@@ -34,20 +31,44 @@ export const metadata: Metadata = buildPageMetadata({
   image: SITE_MEDIA.travelCategoryCards.inbound,
 });
 
-interface InboundHighlight {
-  icon: LucideIcon;
-  label: string;
-}
-
-const INBOUND_HIGHLIGHTS: readonly InboundHighlight[] = [
-  { icon: MapPinned, label: "Customized Sri Lankan tours" },
-  { icon: Plane, label: "Airport transfers" },
-  { icon: BedDouble, label: "Accommodation" },
-  { icon: Car, label: "Vehicle arrangements" },
-  { icon: Sparkles, label: "Local experiences" },
-  { icon: Users, label: "Tour guides" },
-  { icon: Calendar, label: "Flexible itineraries" },
-];
+const INBOUND_SERVICES = [
+  {
+    icon: MapPin,
+    title: "Customized Sri Lanka Itineraries",
+    description:
+      "Handcrafted tour plans covering ancient Sigiriya, Kandy heritage, Nuwara Eliya tea hills, and scenic southern beaches.",
+  },
+  {
+    icon: Car,
+    title: "Chauffeured Private Transport",
+    description:
+      "Dedicated air-conditioned luxury sedans, vans, and coaches driven by experienced English-speaking tourist chauffeurs.",
+  },
+  {
+    icon: Hotel,
+    title: "Handpicked Boutique Stays",
+    description:
+      "Verified reservations at 4-star and 5-star hotels, colonial tea bungalows, and ocean-facing luxury resorts.",
+  },
+  {
+    icon: Plane,
+    title: "Airport Transfers & Meet & Greet",
+    description:
+      "Smooth on-arrival reception at Bandaranaike International Airport (BIA) with private direct transfers to your hotel.",
+  },
+  {
+    icon: Compass,
+    title: "Certified Tourist Guides",
+    description:
+      "Licensed national and site guides sharing authentic island stories, wildlife sightings, and cultural heritage.",
+  },
+  {
+    icon: Headphones,
+    title: "24/7 Dedicated Trip Care",
+    description:
+      "Continuous on-ground support and direct coordinator access throughout your journey across Sri Lanka.",
+  },
+] as const;
 
 export default function Page() {
   const packages = filterTravelPackages(TRAVEL_PACKAGE_DETAILS, { region: "sri-lanka" });
@@ -55,47 +76,45 @@ export default function Page() {
   return (
     <>
       <TravelSubpageHero
-        breadcrumbLabel="Inbound Travel"
-        title="Discover Sri Lanka With Us"
-        description="Customized tours, local experiences and complete travel support for visitors discovering Sri Lanka."
-        image={SITE_MEDIA.travelCategoryCards.inbound}
-        primary={{ label: "Explore Sri Lanka Tours", href: `${ROUTES.public.travelTourism}#packages` }}
-        secondary={{ label: "Build Your Own Trip", href: `${ROUTES.public.travelTourism}#customize-trip` }}
+        breadcrumbs={[
+          { label: "Travel & Tourism", href: ROUTES.public.travelTourism },
+          { label: "Inbound Travel" },
+        ]}
+        categoryLabel="Inbound Travel"
+        title="Explore Sri Lanka & Travel Beyond"
+        description="Discover unforgettable journeys in Sri Lanka or explore international destinations with travel options designed around your needs."
+        image={SITE_MEDIA.inboundHero}
+        primary={{ label: "Explore Travel Packages", href: "#packages" }}
       />
 
-      <Section aria-labelledby="inbound-what-heading">
+      {/* 1. Travel Packages directly after Hero */}
+      <TravelPackagesSection packages={packages} isFiltered showTabs={false} />
+
+      {/* 2. Inbound Services & Details after Packages */}
+      <Section className="bg-slate-50/60 py-16 sm:py-20" aria-labelledby="inbound-features-heading">
         <SectionHeading
-          id="inbound-what-heading"
+          id="inbound-features-heading"
           align="center"
-          eyebrow="Inbound Travel"
-          title="Experience Sri Lanka With Us"
-          description="From the moment you land to the moment you depart, we take care of every detail of your Sri Lanka journey."
+          eyebrow="Sri Lanka Travel Services"
+          title="Everything Arranged for an Effortless Holiday"
+          description="From the moment you touch down to your final departure, Miracle International manages every logistical detail so you can immerse yourself in the wonders of Sri Lanka."
         />
 
-        <ul className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-          {INBOUND_HIGHLIGHTS.map(({ icon: Icon, label }) => (
-            <li
-              key={label}
-              className="shadow-soft flex flex-col items-center gap-3 rounded-2xl border bg-white p-6 text-center transition-shadow hover:shadow-lift"
+        <div className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {INBOUND_SERVICES.map(({ icon: Icon, title, description }) => (
+            <div
+              key={title}
+              className="shadow-soft hover:shadow-lift group flex flex-col items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-6 transition-all"
             >
-              <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-xl">
-                <Icon aria-hidden="true" className="size-5" />
-              </span>
-              <p className="text-ink text-sm font-bold">{label}</p>
-            </li>
+              <div className="bg-brand-blue-light/70 text-brand-blue flex size-12 items-center justify-center rounded-xl transition-colors group-hover:bg-brand-blue group-hover:text-white">
+                <Icon aria-hidden="true" className="size-6" />
+              </div>
+              <h3 className="text-ink text-lg font-bold">{title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </Section>
-
-      <TravelPackagesSection packages={packages} isFiltered />
-
-      <CtaBanner
-        eyebrow="Start Planning"
-        title="Ready to Discover Sri Lanka?"
-        description="Choose a ready-made package or tell us what kind of journey you want, and we'll help you plan the rest."
-        primary={{ label: "Explore Sri Lanka Tours", href: `${ROUTES.public.travelTourism}#packages` }}
-        secondary={{ label: "Build Your Own Trip", href: `${ROUTES.public.travelTourism}#customize-trip` }}
-      />
     </>
   );
 }

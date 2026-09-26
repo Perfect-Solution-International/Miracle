@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { ROUTES } from "@/config/routes";
 import { TradingLanding } from "@/features/trading/components/trading-landing";
 
 export const metadata: Metadata = {
@@ -8,5 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <TradingLanding />;
+  return (
+    <TradingLanding
+      breadcrumbs={[
+        { label: "Services", href: ROUTES.public.services },
+        { label: "Trading" },
+      ]}
+    />
+  );
 }

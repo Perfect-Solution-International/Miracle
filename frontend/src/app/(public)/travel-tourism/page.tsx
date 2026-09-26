@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
 
-import { CtaBanner } from "@/components/common/cta-banner";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
 import {
-  CustomizeTripSection,
   filterTravelPackages,
-  InboundHighlightSection,
-  TravelHero,
-  TravelPackagesSection,
-  TravelServicesSection,
+  TravelLanding,
   TRAVEL_PACKAGE_DETAILS,
 } from "@/features/travel";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
-const TITLE = "Travel & Tourism";
+const TITLE = "Travel & Tourism | Miracle International";
 const DESCRIPTION =
-  "Discover Sri Lanka with thoughtfully designed tours, complete travel support and personalized trip planning.";
+  "Travel beyond boundaries. Explore destinations, plan customized journeys, arrange flights, and get travel support with Miracle International.";
 
 export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
@@ -35,7 +30,6 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const params = await searchParams;
-  const hasExplicitFilters = Boolean(params.destination || params.type || params.region);
   const filters = {
     destination: firstValue(params.destination),
     type: firstValue(params.type),
@@ -43,21 +37,5 @@ export default async function Page({
   };
   const packages = filterTravelPackages(TRAVEL_PACKAGE_DETAILS, filters);
 
-  return (
-    <>
-      <TravelHero />
-      <TravelServicesSection />
-      <InboundHighlightSection />
-      <TravelPackagesSection packages={packages} isFiltered={hasExplicitFilters} />
-      <CustomizeTripSection />
-
-      <CtaBanner
-        eyebrow="Start Planning"
-        title="Your Sri Lankan Journey Starts Here."
-        description="Choose a package or tell us what kind of journey you want. We'll help you plan the rest."
-        primary={{ label: "Explore Sri Lanka Tours", href: "#packages" }}
-        secondary={{ label: "Build Your Own Trip", href: "#customize-trip" }}
-      />
-    </>
-  );
+  return <TravelLanding initialPackages={packages} />;
 }

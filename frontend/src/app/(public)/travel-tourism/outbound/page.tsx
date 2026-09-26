@@ -1,7 +1,13 @@
-import { BedDouble, Globe2, Plane, Sparkles, Stamp, type LucideIcon } from "lucide-react";
+import {
+  CalendarCheck,
+  Globe2,
+  Hotel,
+  Plane,
+  ShieldCheck,
+  Stamp,
+} from "lucide-react";
 import type { Metadata } from "next";
 
-import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { ROUTES } from "@/config/routes";
@@ -24,18 +30,44 @@ export const metadata: Metadata = buildPageMetadata({
   image: SITE_MEDIA.travelCategoryCards.outbound,
 });
 
-interface OutboundHighlight {
-  icon: LucideIcon;
-  label: string;
-}
-
-const OUTBOUND_HIGHLIGHTS: readonly OutboundHighlight[] = [
-  { icon: Globe2, label: "International travel" },
-  { icon: Plane, label: "Flight tickets" },
-  { icon: Stamp, label: "Visa support" },
-  { icon: BedDouble, label: "Accommodation" },
-  { icon: Sparkles, label: "Customized trips" },
-];
+const OUTBOUND_SERVICES = [
+  {
+    icon: Globe2,
+    title: "International Holiday Packages",
+    description:
+      "Handcrafted vacation packages to Dubai, Maldives, Singapore, Malaysia, Thailand, and European gateways.",
+  },
+  {
+    icon: Plane,
+    title: "Flight Routing & Ticketing",
+    description:
+      "Convenient airline connections, optimal departure timings, and competitive fares across all cabin classes.",
+  },
+  {
+    icon: Stamp,
+    title: "Tourist Visa Support",
+    description:
+      "Country-specific document preparation, appointment booking, and visa submission guidance.",
+  },
+  {
+    icon: Hotel,
+    title: "Global Hotel & Resort Reservations",
+    description:
+      "Carefully selected centrally located city hotels, family suites, and luxury overwater villas.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Customized Travel Itineraries",
+    description:
+      "Tailor your schedule with the right mix of guided cultural sightseeing and free leisure time.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Pre-Departure & Travel Assistance",
+    description:
+      "Airport briefing, transit regulations advice, and responsive coordinator support throughout your trip.",
+  },
+] as const;
 
 export default function Page() {
   const packages = filterTravelPackages(TRAVEL_PACKAGE_DETAILS, { region: "international" });
@@ -43,52 +75,45 @@ export default function Page() {
   return (
     <>
       <TravelSubpageHero
-        breadcrumbLabel="Outbound Travel"
-        title="Explore Beyond Sri Lanka"
-        description="International travel, flight tickets, visa support and accommodation — arranged for you."
-        image={SITE_MEDIA.travelCategoryCards.outbound}
-        primary={{ label: "Tell Us What You Need", href: ROUTES.public.tellUsWhatYouNeed }}
-        secondary={{ label: "Visa Assistance", href: ROUTES.public.visaServices }}
+        breadcrumbs={[
+          { label: "Travel & Tourism", href: ROUTES.public.travelTourism },
+          { label: "Outbound Travel" },
+        ]}
+        categoryLabel="Outbound Travel"
+        title="Explore Sri Lanka & Travel Beyond"
+        description="Discover unforgettable journeys in Sri Lanka or explore international destinations with travel options designed around your needs."
+        image={SITE_MEDIA.travelHeroInboundOutbound}
+        primary={{ label: "Explore Travel Packages", href: "#packages" }}
       />
 
-      <Section aria-labelledby="outbound-what-heading">
+      {/* 1. Travel Packages directly after Hero */}
+      <TravelPackagesSection packages={packages} isFiltered showTabs={false} />
+
+      {/* 2. Outbound Services & Details after Packages */}
+      <Section className="bg-slate-50/60 py-16 sm:py-20" aria-labelledby="outbound-features-heading">
         <SectionHeading
-          id="outbound-what-heading"
+          id="outbound-features-heading"
           align="center"
-          eyebrow="Outbound Travel"
-          title="What We Arrange"
+          eyebrow="International Travel Coordination"
+          title="Seamless Holidays Beyond Sri Lanka"
+          description="Whether you are traveling for a family holiday, a honeymoon escape, or leisure exploration, we arrange every element of your international journey."
         />
 
-        <ul className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-3 lg:mt-12 lg:grid-cols-5">
-          {OUTBOUND_HIGHLIGHTS.map(({ icon: Icon, label }) => (
-            <li
-              key={label}
-              className="shadow-soft flex flex-col items-center gap-2.5 rounded-2xl border bg-white p-5 text-center"
+        <div className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {OUTBOUND_SERVICES.map(({ icon: Icon, title, description }) => (
+            <div
+              key={title}
+              className="shadow-soft hover:shadow-lift group flex flex-col items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-6 transition-all"
             >
-              <span className="bg-brand-blue-light text-brand-blue inline-flex size-10 items-center justify-center rounded-full">
-                <Icon aria-hidden="true" className="size-4.5" />
-              </span>
-              <p className="text-ink text-sm font-semibold">{label}</p>
-            </li>
+              <div className="bg-brand-blue-light/70 text-brand-blue flex size-12 items-center justify-center rounded-xl transition-colors group-hover:bg-brand-blue group-hover:text-white">
+                <Icon aria-hidden="true" className="size-6" />
+              </div>
+              <h3 className="text-ink text-lg font-bold">{title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </Section>
-
-      <TravelPackagesSection
-        packages={packages}
-        isFiltered
-        eyebrow="Featured Packages"
-        title="International Packages"
-        description="Ready-made international itineraries — every one can be adjusted to fit your trip."
-      />
-
-      <CtaBanner
-        eyebrow="Start Planning"
-        title="Ready to Travel Beyond Sri Lanka?"
-        description="Tell us where you want to go and our travel team will take care of flights, visas and the rest."
-        primary={{ label: "Tell Us What You Need", href: ROUTES.public.tellUsWhatYouNeed }}
-        secondary={{ label: "Visa Assistance", href: ROUTES.public.visaServices }}
-      />
     </>
   );
 }
