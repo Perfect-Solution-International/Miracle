@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { Breadcrumb } from "@/components/common/breadcrumb";
 import { cn } from "@/lib/utils";
 
 import { HERO_SERVICE_ICONS, HERO_STATS } from "../data/tell-us-what-you-need.content";
@@ -64,7 +65,8 @@ export function TellUsWhatYouNeedHero() {
       />
 
       {/* ── Main content ───────────────────────────────────────── */}
-      <div className="container-page flex flex-col items-center pt-20 pb-0 text-center lg:pt-28">
+      <div className="container-page flex flex-col items-center pt-14 pb-0 text-center lg:pt-20">
+        <Breadcrumb items={[{ label: "Tell Us What You Need" }]} className="mb-6" />
 
         {/* Eyebrow pill */}
         <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-brand-blue/15 bg-brand-blue-light/70 px-4 py-1.5 backdrop-blur-sm">

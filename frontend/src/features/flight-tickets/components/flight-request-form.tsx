@@ -49,7 +49,18 @@ function RequiredMark() {
  * exists. This collects the customer's requirements only — it is not a
  * booking engine, and no flight is confirmed by submitting it.
  */
-export function FlightRequestForm() {
+export interface FlightRequestFormProps {
+  embedded?: boolean;
+}
+
+/**
+ * "Submit Flight Request" form. There is no backend intake endpoint for this
+ * yet (same situation as `ContactForm` and `VisaRequestForm`), so submission
+ * confirms receipt locally; wire this to a real mutation once the intake API
+ * exists. This collects the customer's requirements only — it is not a
+ * booking engine, and no flight is confirmed by submitting it.
+ */
+export function FlightRequestForm({ embedded = false }: FlightRequestFormProps = {}) {
   const form = useForm<FlightRequestFormInput, unknown, FlightRequestInput>({
     resolver: zodResolver(flightRequestSchema),
     defaultValues: {
@@ -77,29 +88,28 @@ export function FlightRequestForm() {
     form.reset();
   }
 
-  return (
-    <Section
+  const formCard = (
+    <div
       id="flight-request-form"
-      tone="surface"
-      aria-labelledby="flight-request-heading"
-      className="scroll-mt-24"
+      className="shadow-lift rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10"
     >
-      <div className="mx-auto max-w-2xl">
-        <div className="shadow-lift rounded-3xl border bg-white p-6 sm:p-10">
-          <div className="text-center">
-            <h2
-              id="flight-request-heading"
-              className="text-ink text-2xl font-extrabold tracking-tight sm:text-3xl"
-            >
-              Request Flight Options
-            </h2>
-            <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-              Share your travel requirements and our team will get back to you with suitable
-              flight options.
-            </p>
-          </div>
+      <div className="text-center sm:text-left">
+        <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">
+          Request Flight Options
+        </p>
+        <h2
+          id="flight-request-heading"
+          className="text-ink mt-1.5 text-2xl font-extrabold tracking-tight sm:text-3xl"
+        >
+          Tell Us Your Flight Plan
+        </h2>
+        <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Share your travel requirements and our team will get back to you with suitable
+          flight options.
+        </p>
+      </div>
 
-          <Form {...form}>
+      <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
               className="mt-8 space-y-8"
@@ -360,8 +370,21 @@ export function FlightRequestForm() {
               </div>
             </form>
           </Form>
-        </div>
-      </div>
+    </div>
+  );
+
+  if (embedded) {
+    return formCard;
+  }
+
+  return (
+    <Section
+      id="flight-request-form"
+      tone="surface"
+      aria-labelledby="flight-request-heading"
+      className="scroll-mt-24"
+    >
+      <div className="mx-auto max-w-2xl">{formCard}</div>
     </Section>
   );
 }

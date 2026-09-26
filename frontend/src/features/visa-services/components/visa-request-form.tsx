@@ -52,7 +52,18 @@ function RequiredMark() {
  * intake API exists. File selection is local-only for the same reason —
  * nothing is actually uploaded.
  */
-export function VisaRequestForm() {
+export interface VisaRequestFormProps {
+  embedded?: boolean;
+}
+
+/**
+ * "Request Visa Assistance" form. There is no backend intake endpoint for
+ * this yet (same situation as `ContactForm` and `RequirementInquiryForm`), so
+ * submission confirms receipt locally; wire this to a real mutation once the
+ * intake API exists. File selection is local-only for the same reason —
+ * nothing is actually uploaded.
+ */
+export function VisaRequestForm({ embedded = false }: VisaRequestFormProps = {}) {
   const searchParams = useSearchParams();
   const [files, setFiles] = useState<File[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -95,26 +106,26 @@ export function VisaRequestForm() {
     setFiles((current) => [...current, ...Array.from(list)]);
   }
 
-  return (
-    <Section
+  const formCard = (
+    <div
       id="visa-request-form"
-      aria-labelledby="visa-request-heading"
-      className="scroll-mt-24"
+      className="shadow-lift rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10"
     >
-      <div className="mx-auto max-w-2xl">
-        <div className="shadow-lift rounded-3xl border bg-white p-6 sm:p-10">
-          <div className="text-center">
-            <h2
-              id="visa-request-heading"
-              className="text-ink text-2xl font-extrabold tracking-tight sm:text-3xl"
-            >
-              Request Visa Assistance
-            </h2>
-            <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-              Provide your basic travel details and our team will contact you with the next
-              steps.
-            </p>
-          </div>
+      <div className="text-center sm:text-left">
+        <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">
+          Visa Application Intake
+        </p>
+        <h2
+          id="visa-request-heading"
+          className="text-ink mt-1.5 text-2xl font-extrabold tracking-tight sm:text-3xl"
+        >
+          Request Visa Assistance
+        </h2>
+        <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Provide your basic travel details and our team will contact you with the next
+          steps.
+        </p>
+      </div>
 
           <Form {...form}>
             <form
@@ -427,8 +438,20 @@ export function VisaRequestForm() {
               </div>
             </form>
           </Form>
-        </div>
-      </div>
+    </div>
+  );
+
+  if (embedded) {
+    return formCard;
+  }
+
+  return (
+    <Section
+      id="visa-request-form"
+      aria-labelledby="visa-request-heading"
+      className="scroll-mt-24"
+    >
+      <div className="mx-auto max-w-2xl">{formCard}</div>
     </Section>
   );
 }

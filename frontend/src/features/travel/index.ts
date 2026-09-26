@@ -1,12 +1,19 @@
 /** Public surface of the travel & tourism feature. */
+export { TravelLanding } from "./components/travel-landing";
 export { TravelHero } from "./components/travel-hero";
+export {
+  InboundOutboundSection,
+  InboundTravelSection,
+  OutboundTravelSection,
+} from "./components/inbound-outbound-section";
 export { TravelServicesSection } from "./components/travel-services-section";
 export { TravelPackagesSection } from "./components/travel-packages-section";
 export { TravelPackageCard } from "./components/travel-package-card";
-export { CustomizeTripSection } from "./components/customize-trip-section";
+export { CustomizeTripSection, CustomizeTripModal } from "./components/customize-trip-section";
 export { TripPlannerForm } from "./components/trip-planner-form";
 export { InboundHighlightSection } from "./components/inbound-highlight-section";
 export { TravelSubpageHero } from "./components/travel-subpage-hero";
+export { CompactBlurredHero } from "./components/compact-blurred-hero";
 
 export { PackageHero } from "./components/package-detail/package-hero";
 export { PackageOverviewSection } from "./components/package-detail/package-overview-section";

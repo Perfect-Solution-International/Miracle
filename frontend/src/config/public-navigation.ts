@@ -293,9 +293,6 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
       description: "Sigiriya, Kandy, Ella and Galle on one 7-day itinerary.",
       href: ROUTES.public.travelPackage("sri-lanka-highlights"),
       cta: "View Package",
- Imasha
-      image: SITE_MEDIA.travelPackagesFull.sriLankaHighlights,
-
       image: SITE_MEDIA.travelDestinations.sigiriya,
     },
   },

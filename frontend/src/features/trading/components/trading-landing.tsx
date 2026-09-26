@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -183,7 +184,11 @@ function Field({ label, value, onChange, placeholder, type = "text", required = 
   return <label className="text-ink text-sm font-semibold">{label} {required && <span className="text-brand-red">*</span>}{optional && <span className="text-muted-foreground font-normal">(Optional)</span>}<Input type={type} value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} className="mt-2" /></label>;
 }
 
-export function TradingLanding() {
+export function TradingLanding({
+  breadcrumbs = [{ label: "Trading Solutions" }],
+}: {
+  breadcrumbs?: readonly BreadcrumbItem[];
+} = {}) {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   return (
@@ -192,7 +197,8 @@ export function TradingLanding() {
         <section className="overflow-hidden bg-[linear-gradient(120deg,#f8fbff_0%,#ffffff_55%,#f0f6ff_100%)]">
           <div className="container-page grid gap-12 py-16 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:py-24">
             <div className="max-w-2xl">
-              <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A clearer way to trade</p>
+              <Breadcrumb items={breadcrumbs} />
+              <p className="mt-8 text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A clearer way to trade</p>
               <h1 className="text-ink mt-5 max-w-2xl text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">Trading Solutions for Local &amp; Global Markets</h1>
               <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed sm:text-xl">Connect with suppliers, buyers and products through simple and reliable trading solutions designed for businesses of all sizes.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={() => setIsFormOpen(true)}>Start a Trading Request <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="outline" asChild><a href="#services">Explore Trading Services</a></Button></div>
