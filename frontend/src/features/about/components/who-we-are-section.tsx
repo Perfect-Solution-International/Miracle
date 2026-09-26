@@ -12,7 +12,7 @@ import { MISSION_VISION_VALUES } from "../data/about.content";
 
 export function WhoWeAreSection() {
   return (
-    <Section aria-labelledby="who-we-are-heading">
+    <Section id="company" aria-labelledby="who-we-are-heading" className="scroll-mt-24">
       <div className="grid gap-12 lg:grid-cols-[1.1fr_0.85fr_1fr] lg:items-center lg:gap-10">
         <div className="flex flex-col gap-6">
           <SectionHeading
@@ -60,8 +60,8 @@ export function WhoWeAreSection() {
         </div>
 
         <div className="divide-border divide-y rounded-2xl border p-2 sm:p-3">
-          {MISSION_VISION_VALUES.map(({ icon: Icon, title, description, bullets }) => (
-            <div key={title} className="flex gap-4 p-4">
+          {MISSION_VISION_VALUES.map(({ icon: Icon, title, id, description, bullets }) => (
+            <div key={title} id={id} className="scroll-mt-24 flex gap-4 p-4">
               <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 shrink-0 items-center justify-center rounded-lg">
                 <Icon aria-hidden="true" className="size-5" />
               </span>

@@ -35,14 +35,14 @@ function ActiveMarker({ active }: { active: boolean }) {
  * Wide menus are positioned against the header container; compact ones sit
  * under their trigger.
  */
-export function DesktopNavigation() {
+export function DesktopNavigation({ className }: { className?: string }) {
   const pathname = usePathname();
 
   return (
     <NavigationMenu.Root
       aria-label="Primary"
       delayDuration={80}
-      className="hidden xl:block"
+      className={cn("hidden xl:block", className)}
     >
       <NavigationMenu.List className="flex items-center gap-0.5">
         {PUBLIC_MAIN_NAV.map((item) => (

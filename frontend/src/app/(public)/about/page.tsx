@@ -9,6 +9,7 @@ import {
 } from "@/features/about";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
+import { CoreServicesSection, HowItWorksSection, WhyChooseSection } from "@/features/marketing";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "About Us";
@@ -29,6 +30,17 @@ export default function Page() {
       <WhoWeAreSection />
       <CompanyStatsBand />
       <OurStorySection />
+
+      <div id="services" className="scroll-mt-24">
+        <CoreServicesSection />
+      </div>
+      <div id="how-we-work" className="scroll-mt-24">
+        <HowItWorksSection />
+      </div>
+      <div id="why-choose-us" className="scroll-mt-24">
+        <WhyChooseSection />
+      </div>
+
       <GlobalPresenceSection />
     </>
   );
