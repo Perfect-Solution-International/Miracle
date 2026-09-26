@@ -78,19 +78,46 @@ function NavItem({ item, active }: { item: PublicNavItem; active: boolean }) {
 
   const isMega = item.groups.length > 1;
   const hasFeature = Boolean(item.feature);
+  const hasSeparateParentLink = Boolean(item.href && item.separateLinkAndTrigger);
 
   // Radix wraps the list in a positioned element that spans the menu bar, so
   // wide panels are centred on it; compact dropdowns hang under their trigger.
   return (
     <NavigationMenu.Item className={isMega || hasFeature ? "static" : "relative"}>
-      <NavigationMenu.Trigger data-active={active} className={cn(triggerClass, "group")}>
-        {item.title}
-        <ChevronDown
-          aria-hidden="true"
-          className="size-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180"
-        />
-        <ActiveMarker active={active} />
-      </NavigationMenu.Trigger>
+      {hasSeparateParentLink ? (
+        <div className="relative flex items-center">
+          <NavigationMenu.Link asChild active={active}>
+            <Link
+              href={item.href!}
+              aria-current={active ? "page" : undefined}
+              data-active={active}
+              className={cn(triggerClass, "rounded-r-none pr-1")}
+            >
+              {item.title}
+            </Link>
+          </NavigationMenu.Link>
+          <NavigationMenu.Trigger
+            data-active={active}
+            aria-label={`Open ${item.title} menu`}
+            className="group text-ink/80 hover:text-brand-blue focus-visible:ring-ring data-[state=open]:text-brand-blue inline-flex h-10 items-center justify-center rounded-md rounded-l-none px-1.5 transition-colors outline-none focus-visible:ring-2"
+          >
+            <ChevronDown
+              aria-hidden="true"
+              className="size-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180"
+            />
+          </NavigationMenu.Trigger>
+          <ActiveMarker active={active} />
+        </div>
+      ) : (
+        <NavigationMenu.Trigger data-active={active} className={cn(triggerClass, "group")}>
+          {item.title}
+          <ChevronDown
+            aria-hidden="true"
+            className="size-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180"
+          />
+          <ActiveMarker active={active} />
+        </NavigationMenu.Trigger>
+      )}
 
       <NavigationMenu.Content
         className={cn(
@@ -105,7 +132,11 @@ function NavItem({ item, active }: { item: PublicNavItem; active: boolean }) {
         <MegaMenuPanel
           groups={item.groups}
           feature={item.feature}
-          landing={item.href ? { title: `Explore ${item.title}`, href: item.href } : undefined}
+          landing={
+            item.href && !hasSeparateParentLink
+              ? { title: `Explore ${item.title}`, href: item.href }
+              : undefined
+          }
         />
       </NavigationMenu.Content>
     </NavigationMenu.Item>
