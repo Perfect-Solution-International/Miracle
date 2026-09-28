@@ -1,28 +1,39 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import {
   ArrowRight,
   BarChart3,
-  Check,
+  Bot,
+  Briefcase,
+  Calendar,
+  CheckCircle2,
+  ChevronRight,
   Clock3,
+  CodeXml,
+  FileCheck2,
   FileUp,
   Globe2,
   Handshake,
-  Laptop2,
+  Layers3,
   Mail,
   MapPin,
   Megaphone,
-  PackageSearch,
+  MonitorCog,
+  Network,
   Phone,
   Plane,
+  Rocket,
+  ShieldCheck,
   Ship,
-  Store,
+  SlidersHorizontal,
+  Sparkles,
   TrendingUp,
   Users,
   X,
+  type LucideIcon,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -30,148 +41,140 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { APP_CONFIG } from "@/config/app";
 import { ROUTES } from "@/config/routes";
-import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
+import { SITE_MEDIA } from "@/config/site-media";
+import { cn } from "@/lib/utils";
 
-const SHORTCUTS = [
-  [
-    "Services",
-    "Explore our complete business service network.",
-    Megaphone,
-    ROUTES.public.services,
-  ],
-  [
-    "Global Sourcing",
-    "Find products and suppliers internationally.",
-    Globe2,
-    ROUTES.public.globalSourcing,
-  ],
-  [
-    "Wholesale & Products",
-    "Browse commercial products and supply options.",
-    Store,
-    ROUTES.public.wholesaleProducts,
-  ],
-  [
-    "Business Solutions",
-    "Practical support for starting and growing.",
-    BarChart3,
-    ROUTES.public.businessSolutions,
-  ],
-  [
-    "Investment & Franchise",
-    "Discover opportunities and business ideas.",
-    TrendingUp,
-    ROUTES.public.investmentFranchise,
-  ],
-  [
-    "Travel & Tourism",
-    "Plan business and leisure travel with confidence.",
-    Plane,
-    ROUTES.public.travelTourism,
-  ],
-  [
-    "IT Solutions",
-    "Build better digital tools for your business.",
-    Laptop2,
-    ROUTES.public.itSolutions,
-  ],
-  [
-    "Contact Us",
-    "Talk with our team about your next step.",
-    Phone,
-    ROUTES.public.contact,
-  ],
-] as const;
-
-const SERVICES = [
-  [
-    "Trading",
-    "Local and international trading, wholesale supply, bulk orders and supplier-buyer connections.",
-    Globe2,
-    ROUTES.public.servicesTrading,
-  ],
-  [
-    "Franchise",
-    "Franchise opportunities with support for setup, product supply and business development.",
-    Handshake,
-    ROUTES.public.servicesFranchise,
-  ],
-  [
-    "Import & Export",
-    "We coordinate sourcing, suppliers, shipping and the international trade process.",
-    Ship,
-    ROUTES.public.servicesImportExport,
-  ],
-  [
-    "Investment Opportunities",
-    "Explore business opportunities, investment projects and practical business ideas.",
-    TrendingUp,
-    ROUTES.public.servicesInvestment,
-  ],
-  [
-    "Marketing & Advertising",
-    "Digital marketing, social media, advertising and brand solutions for growing businesses.",
-    Megaphone,
-    ROUTES.public.servicesMarketingAdvertising,
-  ],
-] as const;
-
-const OPPORTUNITIES = [
+/** 4 Core Pillars of Miracle International */
+const CORE_PILLARS = [
   {
-    title: "Investment Opportunities",
+    id: "business-solutions",
+    title: "Business Solutions",
+    tagline: "Planning, setup, equipment & strategic expansion",
     description:
-      "Explore business opportunities, investment projects and business ideas.",
-    image: SITE_MEDIA.services.investment,
-    href: ROUTES.public.servicesInvestment,
-    label: "Explore Investment",
+      "Comprehensive advisory and operational support to turn ideas into structured, high-performing enterprises.",
+    icon: Briefcase,
+    href: ROUTES.public.businessSolutions,
+    badge: "Enterprise Growth",
+    highlights: [
+      "Start a Business & Registration",
+      "Business Consultation & Strategy",
+      "Machinery & Equipment Sourcing",
+      "Setup Support & Market Expansion",
+    ],
+    gradient: "from-blue-600/10 via-indigo-600/5 to-transparent",
+    accentColor: "text-blue-600",
   },
   {
-    title: "Franchise Opportunities",
-    description: "Explore franchise models with support for setup and development.",
-    image: SITE_MEDIA.services.franchise,
-    href: ROUTES.public.servicesFranchise,
-    label: "Explore Franchise",
+    id: "it-solutions",
+    title: "IT & Digital Solutions",
+    tagline: "Websites, custom software, POS & enterprise systems",
+    description:
+      "Tailored digital engineering and automation tools built to modernize operations, scale workflows, and boost productivity.",
+    icon: CodeXml,
+    href: ROUTES.public.itSolutions,
+    badge: "Technology & Engineering",
+    highlights: [
+      "Modern Website & Web App Dev",
+      "Custom Software & Cloud Systems",
+      "POS & Retail Management Systems",
+      "Business Automation & IT Consulting",
+    ],
+    gradient: "from-indigo-600/10 via-purple-600/5 to-transparent",
+    accentColor: "text-indigo-600",
+  },
+  {
+    id: "travel-tourism",
+    title: "Travel & Tourism",
+    tagline: "Inbound Sri Lanka, outbound tours, visas & flights",
+    description:
+      "Full-spectrum travel coordination for international visitors exploring Sri Lanka and outbound travelers going abroad.",
+    icon: Plane,
+    href: ROUTES.public.travelTourism,
+    badge: "Global Travel Desk",
+    highlights: [
+      "Sri Lanka Inbound Experiential Tours",
+      "Outbound International Packages",
+      "Worldwide Visa & Passport Support",
+      "Flight Ticketing & Work Visa Guidance",
+    ],
+    gradient: "from-sky-600/10 via-blue-600/5 to-transparent",
+    accentColor: "text-sky-600",
+  },
+  {
+    id: "global-services",
+    title: "Trade & Global Services",
+    tagline: "Trading, franchise, import/export & investment",
+    description:
+      "Facilitating cross-border trade operations, turnkey franchise partnerships, and vetted investment structures.",
+    icon: Globe2,
+    href: ROUTES.public.services,
+    badge: "Cross-Border Trade",
+    highlights: [
+      "International Trading Coordination",
+      "Import & Export Documentation",
+      "Franchise Brand Acquisition",
+      "Strategic Investment Opportunities",
+    ],
+    gradient: "from-emerald-600/10 via-teal-600/5 to-transparent",
+    accentColor: "text-emerald-600",
   },
 ] as const;
 
-const WHY_US = [
-  [
-    "Global Connections",
-    "Connect with international suppliers, businesses and opportunities.",
-    Globe2,
-  ],
-  [
-    "Multiple Solutions",
-    "Access business, trade, travel and technology support in one place.",
-    BarChart3,
-  ],
-  [
-    "Customized Support",
-    "Solutions are structured around your specific requirement.",
-    PackageSearch,
-  ],
-  [
-    "Professional Coordination",
-    "We help coordinate the process from requirement to completion.",
-    Handshake,
-  ],
-  [
-    "Business Focused",
-    "Designed to support individuals, entrepreneurs and businesses.",
-    Users,
-  ],
+/** Why Work With Miracle International */
+const VALUE_PILLARS = [
+  {
+    title: "One Central Strategic Partner",
+    description:
+      "No need to juggle multiple vendors. We handle business setup, technology, trade, and travel through a unified team.",
+    icon: Handshake,
+  },
+  {
+    title: "End-to-End Execution",
+    description:
+      "From initial requirement analysis and feasibility to complete deployment, ongoing logistics, and support.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Custom-Tailored Solutions",
+    description:
+      "Every project is structured precisely around your unique goals, budget parameters, and operational timelines.",
+    icon: SlidersHorizontal,
+  },
+  {
+    title: "Global Reach & Local Expertise",
+    description:
+      "International network across key trading hubs, paired with deep local market know-how and regulatory compliance.",
+    icon: Globe2,
+  },
 ] as const;
 
-const PROCESS = [
-  ["01", "Tell Us What You Need", "Submit your requirement."],
-  ["02", "We Understand", "Our team reviews your needs."],
-  [
-    "03",
-    "We Find the Right Options",
-    "We identify suitable products, suppliers, services or opportunities.",
-  ],
-  ["04", "You Review", "Review the available options and requirements."],
-  ["05", "We Coordinate", "We help coordinate the next steps."],
+/** 5-Step Process Timeline */
+const PROCESS_STEPS = [
+  {
+    step: "01",
+    title: "Submit Your Requirement",
+    description: "Share your business goal, project scope, travel dates, or technical needs with our team.",
+  },
+  {
+    step: "02",
+    title: "Expert Needs Analysis",
+    description: "Our multidisciplinary specialists review feasibility, resource allocation, and practical options.",
+  },
+  {
+    step: "03",
+    title: "Tailored Proposal",
+    description: "We prepare a structured, transparent roadmap, itinerary, or technical blueprint with clear timelines.",
+  },
+  {
+    step: "04",
+    title: "Review & Alignment",
+    description: "Fine-tune details, adjust preferences, and align on deliverables with zero ambiguity.",
+  },
+  {
+    step: "05",
+    title: "Seamless Delivery",
+    description: "Our team coordinates execution from start to finish, backed by dedicated ongoing support.",
+  },
 ] as const;
 
 type RequirementForm = {
@@ -196,116 +199,6 @@ const INITIAL_FORM: RequirementForm = {
   additional: "",
 };
 
-function SectionIntro({
-  eyebrow,
-  title,
-  description,
-  inverse = false,
-}: {
-  eyebrow: string;
-  title: string;
-  description?: string;
-  inverse?: boolean;
-}) {
-  return (
-    <div className="max-w-3xl">
-      <p
-        className={`${inverse ? "text-brand-blue-muted" : "text-brand-red"} text-xs font-bold tracking-[0.18em] uppercase`}
-      >
-        {eyebrow}
-      </p>
-      <h2
-        className={`${inverse ? "text-white" : "text-ink"} mt-3 text-3xl leading-tight font-extrabold tracking-tight sm:text-4xl lg:text-5xl`}
-      >
-        {title}
-      </h2>
-      {description ? (
-        <p
-          className={`${inverse ? "text-white/70" : "text-muted-foreground"} mt-4 max-w-2xl text-base leading-relaxed sm:text-lg`}
-        >
-          {description}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
-function ArrowLabel({ children }: { children: string }) {
-  return (
-    <span className="text-brand-blue inline-flex items-center gap-2 text-sm font-bold">
-      {children}
-      <ArrowRight
-        aria-hidden="true"
-        className="size-4 transition-transform group-hover:translate-x-1"
-      />
-    </span>
-  );
-}
-
-function MediaSection({
-  title,
-  description,
-  image,
-  href,
-  label,
-  points,
-  reverse = false,
-}: {
-  title: string;
-  description: string;
-  image: SiteImage;
-  href: string;
-  label: string;
-  points: readonly string[];
-  reverse?: boolean;
-}) {
-  return (
-    <section className="section-y bg-white">
-      <div
-        className={`container-page grid items-center gap-10 lg:grid-cols-2 lg:gap-16 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
-      >
-        <div className="shadow-soft relative aspect-[4/3] overflow-hidden rounded-3xl">
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(min-width: 1024px) 48vw, 100vw"
-            className="object-cover transition-transform duration-700 hover:scale-105"
-          />
-        </div>
-        <div>
-          <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-            Explore more
-          </p>
-          <h2 className="text-ink mt-3 text-3xl leading-tight font-extrabold tracking-tight sm:text-4xl">
-            {title}
-          </h2>
-          <p className="text-muted-foreground mt-4 text-base leading-relaxed sm:text-lg">
-            {description}
-          </p>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-            {points.map((point) => (
-              <li
-                key={point}
-                className="text-ink flex items-center gap-2 text-sm font-medium"
-              >
-                <Check aria-hidden="true" className="text-brand-blue size-4 shrink-0" />
-                {point}
-              </li>
-            ))}
-          </ul>
-          <Button asChild size="lg" variant="outline" className="mt-7">
-            <Link href={href}>
-              {label}
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function RequirementModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [form, setForm] = useState(INITIAL_FORM);
   const [fileCount, setFileCount] = useState(0);
@@ -326,8 +219,10 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
   }, [onClose, open]);
 
   if (!open) return null;
+
   const update = (field: keyof RequirementForm, value: string) =>
     setForm((current) => ({ ...current, [field]: value }));
+
   const close = () => {
     setForm(INITIAL_FORM);
     setFileCount(0);
@@ -335,16 +230,11 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
     setError("");
     onClose();
   };
+
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (
-      !form.fullName ||
-      !form.email ||
-      !form.contact ||
-      !form.category ||
-      !form.details
-    ) {
-      setError("Please complete the required fields.");
+    if (!form.fullName || !form.email || !form.contact || !form.category || !form.details) {
+      setError("Please complete all required fields.");
       return;
     }
     setSubmitted(true);
@@ -352,7 +242,7 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
 
   return (
     <div
-      className="bg-navy/40 fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+      className="bg-navy/50 fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 backdrop-blur-md"
       role="dialog"
       aria-modal="true"
       aria-labelledby="requirement-modal-title"
@@ -360,19 +250,20 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
         if (event.target === event.currentTarget) close();
       }}
     >
-      <div className="bg-popover text-popover-foreground relative flex max-h-[calc(100vh-2rem)] w-full max-w-3xl flex-col overflow-hidden rounded-2xl shadow-2xl">
+      <div className="bg-popover text-popover-foreground relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl shadow-2xl border border-slate-200/80">
         <button
           type="button"
           onClick={close}
           aria-label="Close requirement form"
-          className="text-muted-foreground hover:bg-muted hover:text-ink absolute top-4 right-4 z-10 inline-flex size-9 items-center justify-center rounded-full"
+          className="text-muted-foreground hover:bg-slate-100 hover:text-ink absolute top-4 right-4 z-10 inline-flex size-9 items-center justify-center rounded-full transition-colors"
         >
           <X aria-hidden="true" className="size-5" />
         </button>
+
         {submitted ? (
           <div className="flex min-h-[420px] flex-col items-center justify-center px-6 py-16 text-center">
-            <span className="bg-brand-blue-light text-brand-blue inline-flex size-16 items-center justify-center rounded-full">
-              <Check aria-hidden="true" className="size-8" />
+            <span className="bg-brand-blue-light text-brand-blue inline-flex size-16 items-center justify-center rounded-2xl shadow-sm">
+              <CheckCircle2 aria-hidden="true" className="size-8" />
             </span>
             <h2
               id="requirement-modal-title"
@@ -380,8 +271,9 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
             >
               Request Submitted Successfully
             </h2>
-            <p className="text-muted-foreground mt-3 max-w-md leading-relaxed">
-              Thank you. Our team will review your requirement and contact you shortly.
+            <p className="text-muted-foreground mt-3 max-w-md text-sm leading-relaxed">
+              Thank you, {form.fullName}. Our team has received your requirement and will contact
+              you promptly with tailored options.
             </p>
             <Button size="lg" onClick={close} className="mt-7">
               Done
@@ -389,124 +281,150 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
           </div>
         ) : (
           <>
-            <div className="border-b px-6 py-6 pr-16 sm:px-8">
-              <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-                Miracle International
-              </p>
+            <div className="border-b border-slate-100 bg-gradient-to-r from-slate-50 via-white to-brand-blue-light/20 px-6 py-5 pr-14 sm:px-8">
+              <span className="bg-brand-blue-light text-brand-blue inline-flex items-center gap-1.5 rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                <Sparkles className="size-3" />
+                Miracle International Desk
+              </span>
               <h2
                 id="requirement-modal-title"
-                className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl"
+                className="text-ink mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl"
               >
                 Tell Us What You Need
               </h2>
-              <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-                Share your requirement and our team will help you find the right solution.
+              <p className="text-muted-foreground mt-1 text-xs sm:text-sm leading-relaxed">
+                Share your requirements and our specialists will coordinate the ideal solution.
               </p>
             </div>
+
             <form
               onSubmit={submit}
-              className="overflow-y-auto px-6 py-6 sm:px-8"
+              className="overflow-y-auto px-6 py-6 sm:px-8 space-y-4"
               noValidate
             >
               <div className="grid gap-4 sm:grid-cols-2">
-                <Field label="Full Name *">
+                <div>
+                  <label className="text-ink block text-xs font-bold mb-1.5">
+                    Full Name <span className="text-brand-red">*</span>
+                  </label>
                   <Input
                     required
+                    placeholder="Your name"
                     value={form.fullName}
-                    onChange={(event) => update("fullName", event.target.value)}
+                    onChange={(e) => update("fullName", e.target.value)}
                   />
-                </Field>
-                <Field label="Email *">
+                </div>
+                <div>
+                  <label className="text-ink block text-xs font-bold mb-1.5">
+                    Email Address <span className="text-brand-red">*</span>
+                  </label>
                   <Input
                     required
                     type="email"
+                    placeholder="you@company.com"
                     value={form.email}
-                    onChange={(event) => update("email", event.target.value)}
+                    onChange={(e) => update("email", e.target.value)}
                   />
-                </Field>
-                <Field label="Contact Number *">
-                  <Input
-                    required
-                    type="tel"
-                    value={form.contact}
-                    onChange={(event) => update("contact", event.target.value)}
-                  />
-                </Field>
-                <Field label="WhatsApp Number">
-                  <Input
-                    type="tel"
-                    value={form.whatsapp}
-                    onChange={(event) => update("whatsapp", event.target.value)}
-                  />
-                </Field>
-                <Field label="Requirement Category *" full>
-                  <select
-                    required
-                    value={form.category}
-                    onChange={(event) => update("category", event.target.value)}
-                    className="border-input bg-background text-ink mt-2 flex h-11 w-full rounded-lg border px-3 text-sm"
-                  >
-                    <option value="">Select a category</option>
-                    {[
-                      "Trading",
-                      "Global Sourcing",
-                      "Wholesale & Products",
-                      "Business Solutions",
-                      "Travel & Tourism",
-                      "IT Solutions",
-                      "Investment & Franchise",
-                      "Other",
-                    ].map((option) => (
-                      <option key={option}>{option}</option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="Requirement Details *" full>
-                  <Textarea
-                    required
-                    rows={4}
-                    value={form.details}
-                    onChange={(event) => update("details", event.target.value)}
-                  />
-                </Field>
-                <Field label="Country">
-                  <Input
-                    value={form.country}
-                    onChange={(event) => update("country", event.target.value)}
-                  />
-                </Field>
-                <Field label="Additional Requirements">
-                  <Textarea
-                    rows={2}
-                    value={form.additional}
-                    onChange={(event) => update("additional", event.target.value)}
-                  />
-                </Field>
+                </div>
               </div>
-              <label className="border-input bg-surface mt-5 flex cursor-pointer items-center gap-3 rounded-xl border border-dashed p-4 text-sm font-semibold">
-                <FileUp aria-hidden="true" className="text-brand-blue size-5" />
-                <span>
-                  Optional Document Upload
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="text-ink block text-xs font-bold mb-1.5">
+                    Contact Number <span className="text-brand-red">*</span>
+                  </label>
+                  <Input
+                    required
+                    type="tel"
+                    placeholder="Phone with country code"
+                    value={form.contact}
+                    onChange={(e) => update("contact", e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label className="text-ink block text-xs font-bold mb-1.5">
+                    WhatsApp Number (Optional)
+                  </label>
+                  <Input
+                    type="tel"
+                    placeholder="WhatsApp number"
+                    value={form.whatsapp}
+                    onChange={(e) => update("whatsapp", e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-ink block text-xs font-bold mb-1.5">
+                  Requirement Category <span className="text-brand-red">*</span>
+                </label>
+                <select
+                  required
+                  value={form.category}
+                  onChange={(e) => update("category", e.target.value)}
+                  className="border-input bg-background text-ink flex h-10 w-full rounded-xl border px-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue"
+                >
+                  <option value="">Select a category</option>
+                  <option value="Business Solutions">Business Solutions (Start, Plan, Expand)</option>
+                  <option value="IT & Digital Solutions">IT Solutions (Web, Software, POS, Automation)</option>
+                  <option value="Travel & Tourism">Travel & Tourism (Inbound, Outbound, Visas, Flights)</option>
+                  <option value="Trade & Sourcing">Trading & Cross-Border Services</option>
+                  <option value="Investment & Franchise">Investment & Franchise Opportunities</option>
+                  <option value="General Business Inquiry">General Business Inquiry</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-ink block text-xs font-bold mb-1.5">
+                  Requirement Details <span className="text-brand-red">*</span>
+                </label>
+                <Textarea
+                  required
+                  rows={3}
+                  placeholder="Describe what you want to achieve, timelines, budget expectations, or specific preferences..."
+                  value={form.details}
+                  onChange={(e) => update("details", e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="text-ink block text-xs font-bold mb-1.5">Country / Location</label>
+                <Input
+                  placeholder="e.g. Sri Lanka, UAE, United Kingdom"
+                  value={form.country}
+                  onChange={(e) => update("country", e.target.value)}
+                />
+              </div>
+
+              <label className="border-input bg-slate-50/70 hover:bg-brand-blue-light/20 flex cursor-pointer items-center gap-3 rounded-2xl border border-dashed p-3.5 text-xs font-semibold transition-colors">
+                <FileUp aria-hidden="true" className="text-brand-blue size-5 shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <span className="text-ink block">Attach Reference Document (Optional)</span>
+                  <span className="text-muted-foreground block text-[11px] font-normal">
+                    PDF, DOCX, or images up to 10MB
+                  </span>
                   <Input
                     type="file"
                     multiple
-                    onChange={(event) => setFileCount(event.target.files?.length ?? 0)}
-                    className="mt-2 block h-auto border-0 p-0 text-xs shadow-none"
+                    onChange={(e) => setFileCount(e.target.files?.length ?? 0)}
+                    className="hidden"
                   />
                   {fileCount > 0 ? (
-                    <small className="text-muted-foreground block font-normal">
+                    <span className="text-brand-blue font-bold text-xs mt-1 block">
                       {fileCount} file{fileCount === 1 ? "" : "s"} selected
-                    </small>
+                    </span>
                   ) : null}
-                </span>
+                </div>
               </label>
+
               {error ? (
-                <p className="text-brand-red mt-4 text-sm font-semibold" role="alert">
+                <p className="text-brand-red text-xs font-bold" role="alert">
                   {error}
                 </p>
               ) : null}
-              <Button type="submit" size="xl" className="mt-6 w-full">
-                Submit Request
+
+              <Button type="submit" size="xl" className="w-full mt-2">
+                Submit Requirement
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Button>
             </form>
@@ -517,333 +435,577 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
   );
 }
 
-function Field({
-  label,
-  full = false,
-  children,
-}: {
-  label: string;
-  full?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <label className={`text-ink text-sm font-semibold ${full ? "sm:col-span-2" : ""}`}>
-      {label}
-      {children}
-    </label>
-  );
-}
-
 export function HomeGateway() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const openForm = () => setIsFormOpen(true);
 
   return (
-    <>
-      <section className="relative isolate overflow-hidden bg-white">
+    <div className="relative overflow-hidden">
+      {/* ─────────────────────────────────────────────────────────────
+          1. HERO SECTION: Liquid Glass Enterprise Aesthetic
+      ───────────────────────────────────────────────────────────── */}
+      <section className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-16 lg:pt-16 lg:pb-24">
+        {/* Subtle Ambient Liquid Mesh Background */}
         <div
           aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top_left,black_20%,transparent_70%)]"
+          className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[550px] w-[800px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
         />
-        <div className="container-page grid items-center gap-10 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:py-24">
-          <div className="max-w-2xl">
-            <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-              Global trade • sourcing • solutions
-            </p>
-            <h1 className="text-ink mt-4 text-4xl leading-[1.04] font-extrabold tracking-tight sm:text-6xl">
-              Global Business Solutions. One Trusted Partner.
-            </h1>
-            <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed sm:text-xl">
-              Connecting people and businesses with global opportunities, products,
-              services and practical solutions.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button size="xl" onClick={openForm}>
-                Tell Us What You Need
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Button>
-              <Button size="xl" variant="outline" asChild>
-                <Link href="#solutions">Explore Our Solutions</Link>
-              </Button>
+        <div
+          aria-hidden="true"
+          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)]"
+        />
+
+        <div className="container-page">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
+            {/* Left Content Column */}
+            <div className="space-y-6 lg:col-span-7">
+              {/* Badge with glowing pulse */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
+                  <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
+                </span>
+                Integrated Global Business &amp; Travel Solutions
+              </div>
+
+              <h1 className="text-ink text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl leading-[1.08]">
+                One Trusted Partner For{" "}
+                <span className="bg-gradient-to-r from-brand-blue via-indigo-600 to-navy bg-clip-text text-transparent">
+                  Business, Tech &amp; Global Growth.
+                </span>
+              </h1>
+
+              <p className="text-muted-foreground max-w-2xl text-base sm:text-lg leading-relaxed">
+                Miracle International empowers enterprises and individuals through strategic{" "}
+                <strong className="text-ink font-semibold">Business Solutions</strong>, cutting-edge{" "}
+                <strong className="text-ink font-semibold">IT &amp; Software Engineering</strong>,{" "}
+                premium <strong className="text-ink font-semibold">Travel &amp; Tourism</strong>, and{" "}
+                reliable <strong className="text-ink font-semibold">Cross-Border Trade</strong>.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                <Button size="xl" onClick={openForm} className="shadow-lift gap-2">
+                  <Sparkles className="size-4.5" />
+                  Tell Us What You Need
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                </Button>
+                <Button size="xl" variant="outline" asChild className="bg-white/80 backdrop-blur-sm">
+                  <Link href="#pillars">Explore Core Pillars</Link>
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Visual Card with Layered Floating Elements */}
+            <div className="relative lg:col-span-5">
+              <div className="relative aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden rounded-3xl border-4 border-white shadow-2xl">
+                <Image
+                  src={SITE_MEDIA.investment.partnership.src}
+                  alt={SITE_MEDIA.investment.partnership.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="from-navy/70 via-navy/20 to-transparent absolute inset-0 bg-gradient-to-t" />
+
+                {/* Bottom Overlay Label */}
+                <div className="absolute bottom-5 left-5 right-5 text-white">
+                  <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
+                    <Globe2 className="size-3.5" />
+                    International Reach
+                  </span>
+                  <p className="text-base sm:text-lg font-bold">
+                    Connecting Opportunities Across Continents
+                  </p>
+                </div>
+              </div>
+
+              {/* Floating Glassmorphic Pill */}
+              <div className="absolute -top-4 -left-4 hidden sm:flex items-center gap-3 rounded-2xl border border-white/80 bg-white/90 p-3 shadow-xl backdrop-blur-md">
+                <div className="flex size-10 items-center justify-center rounded-xl bg-brand-blue text-white shadow-xs">
+                  <CheckCircle2 className="size-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-ink">Verified Advisory</p>
+                  <p className="text-[11px] text-muted-foreground">Expert Multi-Sector Support</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="shadow-lift relative aspect-[4/3] overflow-hidden rounded-3xl border-8 border-white lg:aspect-[5/4]">
-            <Image
-              src={SITE_MEDIA.investment.partnership.src}
-              alt={SITE_MEDIA.investment.partnership.alt}
-              fill
-              priority
-              sizes="(min-width: 1024px) 56vw, 100vw"
-              className="object-cover"
-            />
-            <span className="text-ink shadow-soft absolute top-5 left-5 rounded-full bg-white/95 px-4 py-2 text-xs font-bold">
-              <Globe2 aria-hidden="true" className="text-brand-blue mr-2 inline size-4" />
-              Connected worldwide
-            </span>
-          </div>
         </div>
       </section>
 
-      <section id="solutions" className="section-y bg-surface">
+      {/* ─────────────────────────────────────────────────────────────
+          2. CORE PILLARS: Interactive 4-Pillar Solutions Grid
+      ───────────────────────────────────────────────────────────── */}
+      <section id="pillars" className="section-y bg-slate-50/70 border-y border-slate-200/70 scroll-mt-20">
         <div className="container-page">
-          <SectionIntro
-            eyebrow="Start anywhere"
-            title="Explore Our Solutions"
-            description="Everything you need to connect, source, trade, grow and move forward."
-          />
-          <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {SHORTCUTS.map(([title, description, Icon, href]) => (
-              <Link
-                key={title}
-                href={href}
-                className="group hover:border-brand-blue/40 hover:shadow-soft rounded-2xl border bg-white p-5 transition-all hover:-translate-y-1"
-              >
-                <Icon
-                  aria-hidden="true"
-                  className="text-brand-blue size-6 transition-transform group-hover:scale-110"
-                />
-                <h3 className="text-ink mt-5 font-bold">{title}</h3>
-                <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-                  {description}
-                </p>
-                <span className="mt-5">
-                  <ArrowLabel>Explore</ArrowLabel>
-                </span>
-              </Link>
-            ))}
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="bg-brand-blue-light text-brand-blue rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+              Our Core Architecture
+            </span>
+            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Four Comprehensive Strategic Divisions
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              Explore how Miracle International coordinates specialized capabilities across business, technology, tourism, and global trade.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {CORE_PILLARS.map((pillar) => {
+              const Icon = pillar.icon;
+              return (
+                <div
+                  key={pillar.id}
+                  className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/40 hover:shadow-lift overflow-hidden"
+                >
+                  <div
+                    aria-hidden="true"
+                    className={cn(
+                      "pointer-events-none absolute inset-0 bg-gradient-to-b opacity-0 transition-opacity duration-300 group-hover:opacity-100 -z-0",
+                      pillar.gradient,
+                    )}
+                  />
+
+                  <div className="relative z-10 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="bg-brand-blue-light text-brand-blue inline-flex size-12 items-center justify-center rounded-2xl shadow-xs transition-transform group-hover:scale-110">
+                        <Icon className="size-6" />
+                      </span>
+                      <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-bold text-muted-foreground">
+                        {pillar.badge}
+                      </span>
+                    </div>
+
+                    <div>
+                      <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors">
+                        {pillar.title}
+                      </h3>
+                      <p className="text-muted-foreground mt-2 text-xs sm:text-sm leading-relaxed">
+                        {pillar.description}
+                      </p>
+                    </div>
+
+                    <ul className="space-y-2 pt-2 border-t border-slate-100">
+                      {pillar.highlights.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-xs text-ink font-medium">
+                          <CheckCircle2 className="size-3.5 text-brand-blue mt-0.5 shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="relative z-10 pt-6 mt-6 border-t border-slate-100">
+                    <Link
+                      href={pillar.href}
+                      className="text-brand-blue inline-flex items-center gap-1.5 text-xs font-bold transition-all group-hover:gap-2.5"
+                    >
+                      Explore {pillar.title}
+                      <ArrowRight className="size-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
+      {/* ─────────────────────────────────────────────────────────────
+          3. IN-DEPTH SUMMARY: Business Solutions
+      ───────────────────────────────────────────────────────────── */}
       <section className="section-y bg-white">
-        <div className="container-page grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <SectionIntro
-              eyebrow="About Miracle International"
-              title="Connecting Needs With Global Possibilities"
-              description="Miracle International provides integrated business, trade, sourcing, investment, travel and technology solutions designed around the needs of individuals and businesses."
-            />
-            <p className="text-muted-foreground mt-4 max-w-xl leading-relaxed">
-              Our approach is simple: understand what you need, connect you with the right
-              opportunities and coordinate the solution from start to finish.
+        <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="space-y-6 lg:col-span-6">
+            <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
+              Business Solutions
+            </span>
+            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Turn Business Visions Into Practical, Scalable Operations.
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              Whether you are launching a new startup, structuring a business plan, sourcing machinery, or scaling into new territories, our business specialists guide you through every milestone.
             </p>
-            <Button asChild size="lg" variant="outline" className="mt-7">
-              <Link href={ROUTES.public.about}>
-                Discover Our Story
+
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              {[
+                { title: "Start a Business", desc: "Entity setup & registrations", href: ROUTES.public.businessStart },
+                { title: "Business Consultation", desc: "Strategic feasibility & planning", href: ROUTES.public.businessConsultation },
+                { title: "Business Planning", desc: "Financial & operational models", href: ROUTES.public.businessPlanning },
+                { title: "Machinery & Equipment", desc: "Industrial sourcing & supply", href: ROUTES.public.businessMachinery },
+                { title: "Setup Support", desc: "Turnkey operational launching", href: ROUTES.public.businessSetup },
+                { title: "Business Expansion", desc: "Scaling and market entry", href: ROUTES.public.businessExpansion },
+              ].map((sub) => (
+                <Link
+                  key={sub.title}
+                  href={sub.href}
+                  className="group rounded-xl border border-slate-200/80 bg-slate-50/50 p-3 transition-all hover:bg-brand-blue-light/30 hover:border-brand-blue/30"
+                >
+                  <p className="text-ink text-xs sm:text-sm font-bold group-hover:text-brand-blue transition-colors flex items-center justify-between">
+                    {sub.title}
+                    <ChevronRight className="size-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </p>
+                  <p className="text-muted-foreground text-[11px] mt-0.5">{sub.desc}</p>
+                </Link>
+              ))}
+            </div>
+
+            <Button asChild size="lg" className="mt-4">
+              <Link href={ROUTES.public.businessSolutions}>
+                Explore All Business Solutions
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Link>
             </Button>
           </div>
-          <div className="shadow-soft relative aspect-[4/3] overflow-hidden rounded-3xl">
-            <Image
-              src={SITE_MEDIA.handshake.src}
-              alt={SITE_MEDIA.handshake.alt}
-              fill
-              sizes="(min-width: 1024px) 48vw, 100vw"
-              className="object-cover"
-            />
+
+          <div className="relative lg:col-span-6">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 shadow-xl">
+              <Image
+                src={SITE_MEDIA.businessSolutions.partnership.src}
+                alt={SITE_MEDIA.businessSolutions.partnership.alt}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <div className="from-navy/70 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="text-xs font-bold uppercase tracking-wider text-brand-blue-muted">
+                  Strategic Advisory
+                </span>
+                <p className="text-lg font-bold mt-1">Structured Support at Every Growth Phase</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section-y bg-surface">
-        <div className="container-page">
-          <SectionIntro
-            eyebrow="What we do"
-            title="Our Main Services"
-            description="Core services designed to help you trade, grow, invest and build new opportunities."
-          />
-          <div className="mt-10 grid gap-5 lg:grid-cols-12">
-            {SERVICES.map(([title, description, Icon, href], index) => (
-              <article
-                key={title}
-                className={`group hover:border-brand-blue/40 hover:shadow-soft flex min-h-56 flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1 ${index === 0 ? "lg:bg-brand-blue lg:col-span-6 lg:min-h-72 lg:text-white" : index < 3 ? "lg:col-span-3" : "lg:col-span-6"}`}
-              >
-                <Icon
-                  aria-hidden="true"
-                  className={`size-7 transition-transform group-hover:scale-110 ${index === 0 ? "text-brand-blue-muted" : "text-brand-blue"}`}
-                />
-                <h3
-                  className={`mt-6 text-xl font-bold ${index === 0 ? "text-white" : "text-ink"}`}
-                >
-                  {title}
-                </h3>
-                <p
-                  className={`mt-3 text-sm leading-relaxed ${index === 0 ? "text-white/75" : "text-muted-foreground"}`}
-                >
-                  {description}
-                </p>
+      {/* ─────────────────────────────────────────────────────────────
+          4. IN-DEPTH SUMMARY: IT & Digital Solutions
+      ───────────────────────────────────────────────────────────── */}
+      <section className="section-y bg-slate-50/80 border-t border-slate-200/70">
+        <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="order-2 lg:order-1 relative lg:col-span-6">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 shadow-xl">
+              <Image
+                src={SITE_MEDIA.itSolutions.overview.src}
+                alt={SITE_MEDIA.itSolutions.overview.alt}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <div className="from-navy/70 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="text-xs font-bold uppercase tracking-wider text-brand-blue-muted">
+                  Technology Engineering
+                </span>
+                <p className="text-lg font-bold mt-1">Modern Digital Systems for Real Workflows</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2 space-y-6 lg:col-span-6">
+            <span className="bg-indigo-100 text-indigo-700 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
+              IT &amp; Digital Solutions
+            </span>
+            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Engineering Modern Software, Web &amp; Management Systems.
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              We build practical digital applications, websites, POS software, and workflow automation systems tailored to streamline business operations and boost customer engagement.
+            </p>
+
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              {[
+                { title: "Website Development", desc: "Responsive, high-speed portals", href: ROUTES.public.websiteDevelopment },
+                { title: "Software Development", desc: "Custom cloud & enterprise apps", href: ROUTES.public.softwareDevelopment },
+                { title: "POS Systems", desc: "Point of sale & inventory software", href: ROUTES.public.posSystemDevelopment },
+                { title: "Management Systems", desc: "Connected business ERP & BMS", href: ROUTES.public.businessManagementSystems },
+                { title: "Digital Solutions", desc: "Modern digital tools & APIs", href: ROUTES.public.digitalSolutions },
+                { title: "Business Automation", desc: "Workflow reduction & AI tools", href: ROUTES.public.businessAutomation },
+              ].map((sub) => (
                 <Link
-                  href={href}
-                  className={`mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold ${index === 0 ? "text-white" : "text-brand-blue"}`}
+                  key={sub.title}
+                  href={sub.href}
+                  className="group rounded-xl border border-slate-200/80 bg-white p-3 transition-all hover:bg-indigo-50/50 hover:border-indigo-300"
                 >
-                  Explore {title}
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="size-4 transition-transform group-hover:translate-x-1"
-                  />
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <MediaSection
-        title="Need Something? We Can Help You Find It."
-        description="Tell us what product or business requirement you have. We help identify suitable suppliers and sourcing opportunities from international markets."
-        image={SITE_MEDIA.services.trading}
-        href={ROUTES.public.globalSourcing}
-        label="Explore Global Sourcing"
-        points={[
-          "Product Sourcing",
-          "Supplier Search",
-          "Supplier Verification",
-          "Bulk Purchasing",
-        ]}
-      />
-      <MediaSection
-        title="Wholesale & Products"
-        description="Access commercial products and wholesale supply solutions for businesses, organizations and bulk buyers."
-        image={SITE_MEDIA.warehouse}
-        href={ROUTES.public.wholesaleProducts}
-        label="Explore Wholesale & Products"
-        points={[
-          "Wholesale Products",
-          "Bulk Orders",
-          "Commercial Supply",
-          "Business Products",
-        ]}
-        reverse
-      />
-      <MediaSection
-        title="Build. Develop. Expand."
-        description="Practical business solutions to help you start, improve, develop and expand your business."
-        image={SITE_MEDIA.services.introduction}
-        href={ROUTES.public.businessSolutions}
-        label="Explore Business Solutions"
-        points={[
-          "Business Setup",
-          "Business Development",
-          "Business Consulting",
-          "Market Expansion",
-          "Business Support",
-        ]}
-      />
-
-      <section className="section-y bg-surface">
-        <div className="container-page">
-          <SectionIntro
-            eyebrow="Opportunities to explore"
-            title="Explore New Business Opportunities"
-            description="Discover investment and franchise opportunities with practical information and professional support."
-          />
-          <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            {OPPORTUNITIES.map(({ title, description, image, href, label }) => (
-              <article
-                key={title}
-                className="overflow-hidden rounded-2xl border bg-white"
-              >
-                <div className="relative aspect-[2.1] overflow-hidden">
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-ink text-2xl font-bold">{title}</h3>
-                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-                    {description}
+                  <p className="text-ink text-xs sm:text-sm font-bold group-hover:text-indigo-600 transition-colors flex items-center justify-between">
+                    {sub.title}
+                    <ChevronRight className="size-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </p>
-                  <Button asChild variant="outline" size="lg" className="mt-6">
-                    <Link href={href}>
-                      {label}
-                      <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                    </Link>
-                  </Button>
+                  <p className="text-muted-foreground text-[11px] mt-0.5">{sub.desc}</p>
+                </Link>
+              ))}
+            </div>
+
+            <Button asChild size="lg" className="mt-4">
+              <Link href={ROUTES.public.itSolutions}>
+                Explore All IT Solutions
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          5. IN-DEPTH SUMMARY: Travel & Tourism
+      ───────────────────────────────────────────────────────────── */}
+      <section className="section-y bg-white border-t border-slate-200/70">
+        <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="space-y-6 lg:col-span-6">
+            <span className="bg-sky-100 text-sky-700 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
+              Travel &amp; Tourism Desk
+            </span>
+            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Curated Inbound Sri Lanka &amp; International Outbound Journeys.
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              Experience hand-crafted holiday itineraries, private luxury transport, certified guides, flight ticketing, and visa support for international visitors and outbound travelers alike.
+            </p>
+
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              {[
+                { title: "Inbound Sri Lanka", desc: "Heritage, safari, beaches & hills", href: ROUTES.public.inboundTravel },
+                { title: "Outbound Travel", desc: "Dubai, Maldives, Singapore & more", href: ROUTES.public.outboundTravel },
+                { title: "Visa Assistance", desc: "Tourist & ETA documentation", href: ROUTES.public.visaServices },
+                { title: "Flight Tickets", desc: "Competitive airline ticketing", href: ROUTES.public.flightTickets },
+                { title: "Work Visa Support", desc: "Corporate & work permit advice", href: ROUTES.public.workVisa },
+                { title: "Customized Itineraries", desc: "Tailored to your dates & party", href: `${ROUTES.public.travelTourism}#customize-trip` },
+              ].map((sub) => (
+                <Link
+                  key={sub.title}
+                  href={sub.href}
+                  className="group rounded-xl border border-slate-200/80 bg-slate-50/50 p-3 transition-all hover:bg-sky-50/60 hover:border-sky-300"
+                >
+                  <p className="text-ink text-xs sm:text-sm font-bold group-hover:text-sky-700 transition-colors flex items-center justify-between">
+                    {sub.title}
+                    <ChevronRight className="size-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </p>
+                  <p className="text-muted-foreground text-[11px] mt-0.5">{sub.desc}</p>
+                </Link>
+              ))}
+            </div>
+
+            <Button asChild size="lg" className="mt-4">
+              <Link href={ROUTES.public.travelTourism}>
+                Explore Travel Packages &amp; Services
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
+
+          <div className="relative lg:col-span-6">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 shadow-xl">
+              <Image
+                src={SITE_MEDIA.travelDestinations.sigiriya.src}
+                alt={SITE_MEDIA.travelDestinations.sigiriya.alt}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <div className="from-navy/70 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="text-xs font-bold uppercase tracking-wider text-brand-blue-muted">
+                  Curated Travel Experiences
+                </span>
+                <p className="text-lg font-bold mt-1">Authentic Destinations, Professional Concierge</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          6. IN-DEPTH SUMMARY: Global Trade, Franchise & Investment
+      ───────────────────────────────────────────────────────────── */}
+      <section className="section-y bg-slate-50/80 border-t border-slate-200/70">
+        <div className="container-page space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="bg-emerald-100 text-emerald-700 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+              Cross-Border Commerce
+            </span>
+            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Trade Operations, Franchise &amp; Strategic Ventures
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              Unlock strategic market expansion through structured trading agreements, international import/export clearance, turnkey franchise setups, and verified investment opportunities.
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            {/* Card 1: Investment & Franchise */}
+            <div className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-emerald-300 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="bg-emerald-100 text-emerald-700 inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
+                    <TrendingUp className="size-5.5" />
+                  </span>
+                  <div>
+                    <span className="text-emerald-700 text-xs font-bold uppercase">Ventures</span>
+                    <h3 className="text-ink text-xl font-bold">Investment &amp; Franchise Solutions</h3>
+                  </div>
                 </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <MediaSection
-        title="Travel Beyond Boundaries"
-        description="From customized journeys to flights, visa support and travel assistance, explore travel solutions designed around your needs."
-        image={SITE_MEDIA.businessTravel}
-        href={ROUTES.public.travelTourism}
-        label="Explore Travel & Tourism"
-        points={[
-          "Inbound Travel",
-          "Outbound Travel",
-          "Customized Trips",
-          "Flight Tickets",
-          "Visa & Passport",
-          "Work Visa Support",
-        ]}
-        reverse
-      />
-      <MediaSection
-        title="Technology That Supports Your Business"
-        description="Build your digital presence with practical technology and IT solutions for modern businesses."
-        image={SITE_MEDIA.technology}
-        href={ROUTES.public.itSolutions}
-        label="Explore IT Solutions"
-        points={[
-          "Website Development",
-          "Web Applications",
-          "Business Systems",
-          "Digital Solutions",
-          "IT Consulting",
-        ]}
-      />
-
-      <section className="section-y bg-white">
-        <div className="container-page">
-          <SectionIntro
-            eyebrow="Why Miracle International"
-            title="Why Work With Miracle International?"
-          />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {WHY_US.map(([title, description, Icon]) => (
-              <article key={title} className="rounded-2xl border bg-white p-5">
-                <Icon aria-hidden="true" className="text-brand-blue size-6" />
-                <h3 className="text-ink mt-5 text-sm font-bold">{title}</h3>
-                <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-                  {description}
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Evaluate vetted commercial opportunities, structured equity partnerships, and turnkey franchise business models with full setup guidance.
                 </p>
-              </article>
-            ))}
+                <ul className="space-y-2 pt-2 border-t border-slate-100 text-xs font-medium text-ink">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="size-3.5 text-emerald-600" />
+                    <span>Commercial project assessment &amp; feasibility</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="size-3.5 text-emerald-600" />
+                    <span>Turnkey franchise brand licensing &amp; setup</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="size-3.5 text-emerald-600" />
+                    <span>Business expansion and partner structuring</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-6 mt-6 border-t border-slate-100 flex gap-3">
+                <Button asChild variant="outline" size="default">
+                  <Link href={ROUTES.public.servicesInvestment}>Investment</Link>
+                </Button>
+                <Button asChild variant="outline" size="default">
+                  <Link href={ROUTES.public.servicesFranchise}>Franchise</Link>
+                </Button>
+              </div>
+            </div>
+
+            {/* Card 2: International Trading & Import/Export */}
+            <div className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-emerald-300 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="bg-emerald-100 text-emerald-700 inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
+                    <Ship className="size-5.5" />
+                  </span>
+                  <div>
+                    <span className="text-emerald-700 text-xs font-bold uppercase">Global Trade</span>
+                    <h3 className="text-ink text-xl font-bold">Trading, Import &amp; Export</h3>
+                  </div>
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Seamless cross-border trading contracts, custom clearance documentation, freight coordination, and market marketing solutions.
+                </p>
+                <ul className="space-y-2 pt-2 border-t border-slate-100 text-xs font-medium text-ink">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="size-3.5 text-emerald-600" />
+                    <span>International buyer &amp; supplier contract mediation</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="size-3.5 text-emerald-600" />
+                    <span>Customs clearance &amp; compliance documentation</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="size-3.5 text-emerald-600" />
+                    <span>Brand marketing &amp; advertising visibility</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-6 mt-6 border-t border-slate-100 flex gap-3">
+                <Button asChild variant="outline" size="default">
+                  <Link href={ROUTES.public.servicesTrading}>Trading Services</Link>
+                </Button>
+                <Button asChild variant="outline" size="default">
+                  <Link href={ROUTES.public.servicesImportExport}>Import &amp; Export</Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* ─────────────────────────────────────────────────────────────
+          7. VALUE PROPOSITIONS: Why Work With Miracle International
+      ───────────────────────────────────────────────────────────── */}
+      <section className="section-y bg-white border-t border-slate-200/70">
+        <div className="container-page">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="bg-brand-red/10 text-brand-red rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+              The Miracle Advantage
+            </span>
+            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Why Partner With Miracle International?
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              We combine multi-sector capabilities under one roof so you experience seamless coordination without fragmented vendors.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {VALUE_PILLARS.map((val) => {
+              const Icon = val.icon;
+              return (
+                <div
+                  key={val.title}
+                  className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
+                >
+                  <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
+                    <Icon className="size-5.5" />
+                  </span>
+                  <h3 className="text-ink text-lg font-bold mt-4">{val.title}</h3>
+                  <p className="text-muted-foreground text-xs sm:text-sm mt-2 leading-relaxed">
+                    {val.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          8. HOW IT WORKS: Executive 5-Step Process Timeline
+      ───────────────────────────────────────────────────────────── */}
       <section className="section-y bg-navy relative isolate overflow-hidden text-white">
-        <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
+        <div
+          aria-hidden="true"
+          className="bg-grid-inverse absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_50%,transparent_90%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-40 -left-40 -z-10 size-96 rounded-full bg-brand-blue/20 blur-[120px]"
+        />
+
         <div className="container-page">
-          <SectionIntro
-            eyebrow="A clear path forward"
-            title="How It Works"
-            description="A simple process from your first requirement to the next practical step."
-            inverse
-          />
-          <div className="mt-12 grid gap-8 md:grid-cols-5">
-            {PROCESS.map(([number, title, description], index) => (
-              <div key={number} className="relative">
-                <span className="text-brand-blue-muted text-sm font-bold">{number}</span>
-                <h3 className="mt-3 text-lg font-bold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/65">
-                  {description}
-                </p>
-                {index < PROCESS.length - 1 ? (
-                  <span
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="bg-white/10 text-brand-blue-muted rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+              A Clear Path Forward
+            </span>
+            <h2 className="text-white text-3xl font-extrabold tracking-tight sm:text-4xl">
+              How We Work With You
+            </h2>
+            <p className="text-white/70 text-sm sm:text-base leading-relaxed">
+              A streamlined, transparent five-step process from your initial inquiry to final delivery.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-5">
+            {PROCESS_STEPS.map((item, index) => (
+              <div
+                key={item.step}
+                className="relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20"
+              >
+                <div>
+                  <span className="text-brand-blue-muted font-extrabold text-sm tracking-wider">
+                    STEP {item.step}
+                  </span>
+                  <h3 className="text-white text-base font-bold mt-2.5">{item.title}</h3>
+                  <p className="text-white/65 text-xs sm:text-sm leading-relaxed mt-2">
+                    {item.description}
+                  </p>
+                </div>
+                {index < PROCESS_STEPS.length - 1 ? (
+                  <div
                     aria-hidden="true"
-                    className="bg-brand-blue-muted/40 absolute top-2 left-9 hidden h-px w-[calc(100%-2rem)] md:block"
-                  />
+                    className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-20 text-white/30"
+                  >
+                    <ChevronRight className="size-5" />
+                  </div>
                 ) : null}
               </div>
             ))}
@@ -851,86 +1013,145 @@ export function HomeGateway() {
         </div>
       </section>
 
-      <section className="section-y bg-brand-blue-light/55">
+      {/* ─────────────────────────────────────────────────────────────
+          9. DIRECT ACTION BANNER: Tell Us What You Need
+      ───────────────────────────────────────────────────────────── */}
+      <section className="section-y bg-gradient-to-b from-slate-50 to-white">
         <div className="container-page">
-          <div className="shadow-soft rounded-3xl bg-white px-6 py-12 sm:px-12 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:py-16">
-            <div>
-              <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-                Start a conversation
-              </p>
-              <h2 className="text-ink mt-3 max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl">
-                Have a Requirement? Let’s Find the Right Solution.
-              </h2>
-              <p className="text-muted-foreground mt-4 max-w-2xl leading-relaxed">
-                Whether you need a product, supplier, business solution, travel service,
-                investment opportunity or technology service, tell us what you need.
-              </p>
+          <div className="relative isolate overflow-hidden rounded-3xl border border-brand-blue/20 bg-gradient-to-r from-brand-blue-light/40 via-white to-brand-blue-light/30 p-8 sm:p-12 shadow-lift">
+            <div className="grid items-center gap-8 lg:grid-cols-12">
+              <div className="space-y-4 lg:col-span-8">
+                <span className="bg-brand-blue text-white rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                  Direct Requirement Desk
+                </span>
+                <h2 className="text-ink text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                  Have a Specific Requirement or Project in Mind?
+                </h2>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl">
+                  Whether you need business advisory, software development, an inbound or outbound holiday package, or global trade support, share your requirement and our team will prepare a structured proposal for you.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row lg:flex-col lg:items-end justify-center gap-3 lg:col-span-4">
+                <Button size="xl" onClick={openForm} className="shadow-lift gap-2 w-full sm:w-auto">
+                  <Sparkles className="size-4.5" />
+                  Submit Your Requirement
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                </Button>
+                <Button size="lg" variant="outline" asChild className="bg-white/90">
+                  <Link href={ROUTES.public.contact}>Talk to an Advisor</Link>
+                </Button>
+              </div>
             </div>
-            <Button size="xl" onClick={openForm} className="mt-7 shrink-0 lg:mt-0">
-              Tell Us What You Need
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Button>
           </div>
         </div>
       </section>
 
-      <section className="section-y bg-white">
-        <div className="container-page grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
-          <div>
-            <SectionIntro
-              eyebrow="Let’s connect"
-              title="Ready to Talk Through Your Next Step?"
-              description="Have a question or need assistance? Our team is ready to help."
-            />
-            <div className="mt-7 grid gap-4 sm:grid-cols-2">
+      {/* ─────────────────────────────────────────────────────────────
+          10. CONTACT STRIP & EXECUTIVE SUPPORT
+      ───────────────────────────────────────────────────────────── */}
+      <section className="section-y bg-white border-t border-slate-200/70">
+        <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="space-y-6 lg:col-span-7">
+            <div>
+              <span className="text-brand-red text-xs font-bold tracking-wider uppercase">
+                Let&apos;s Connect
+              </span>
+              <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl mt-2">
+                Ready to Discuss Your Next Step?
+              </h2>
+              <p className="text-muted-foreground text-sm sm:text-base mt-2 leading-relaxed">
+                Contact our client support desk directly or visit our office for a personalized consultation.
+              </p>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
               <a
                 href={`tel:${APP_CONFIG.support.phone.replace(/\s+/g, "")}`}
-                className="text-ink flex items-center gap-3 text-sm font-semibold"
+                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue/30"
               >
-                <Phone className="text-brand-blue size-5" />
-                {APP_CONFIG.support.phone}
+                <span className="bg-brand-blue-light text-brand-blue size-10 rounded-xl flex items-center justify-center shrink-0">
+                  <Phone className="size-5" />
+                </span>
+                <div>
+                  <span className="text-muted-foreground block text-[11px] font-semibold">Direct Phone</span>
+                  <span className="text-ink text-sm font-bold group-hover:text-brand-blue transition-colors">
+                    {APP_CONFIG.support.phone}
+                  </span>
+                </div>
               </a>
+
               <a
                 href={`mailto:${APP_CONFIG.support.email}`}
-                className="text-ink flex items-center gap-3 text-sm font-semibold"
+                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue/30"
               >
-                <Mail className="text-brand-blue size-5" />
-                {APP_CONFIG.support.email}
+                <span className="bg-brand-blue-light text-brand-blue size-10 rounded-xl flex items-center justify-center shrink-0">
+                  <Mail className="size-5" />
+                </span>
+                <div>
+                  <span className="text-muted-foreground block text-[11px] font-semibold">Email Inquiry</span>
+                  <span className="text-ink text-sm font-bold group-hover:text-brand-blue transition-colors">
+                    {APP_CONFIG.support.email}
+                  </span>
+                </div>
               </a>
-              <span className="text-ink flex items-center gap-3 text-sm font-semibold">
-                <MapPin className="text-brand-blue size-5" />
-                {APP_CONFIG.support.address}
-              </span>
-              <span className="text-ink flex items-center gap-3 text-sm font-semibold">
-                <Clock3 className="text-brand-blue size-5" />
-                {APP_CONFIG.support.hours}
-              </span>
+
+              <div className="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4">
+                <span className="bg-brand-blue-light text-brand-blue size-10 rounded-xl flex items-center justify-center shrink-0">
+                  <MapPin className="size-5" />
+                </span>
+                <div>
+                  <span className="text-muted-foreground block text-[11px] font-semibold">Head Office</span>
+                  <span className="text-ink text-sm font-bold">{APP_CONFIG.support.address}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4">
+                <span className="bg-brand-blue-light text-brand-blue size-10 rounded-xl flex items-center justify-center shrink-0">
+                  <Clock3 className="size-5" />
+                </span>
+                <div>
+                  <span className="text-muted-foreground block text-[11px] font-semibold">Business Hours</span>
+                  <span className="text-ink text-sm font-bold">{APP_CONFIG.support.hours}</span>
+                </div>
+              </div>
             </div>
-            <div className="mt-7 flex flex-wrap gap-3">
+
+            <div className="flex flex-wrap gap-3 pt-2">
               <Button asChild size="lg">
                 <Link href={ROUTES.public.contact}>
-                  Contact Us
+                  Contact Support Desk
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" onClick={openForm}>
-                Send an Inquiry
+                Send Rapid Inquiry
               </Button>
             </div>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-            <Image
-              src={SITE_MEDIA.businessMeeting.src}
-              alt={SITE_MEDIA.businessMeeting.alt}
-              fill
-              sizes="(min-width: 1024px) 32vw, 100vw"
-              className="object-cover"
-            />
+
+          <div className="relative lg:col-span-5">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 shadow-xl">
+              <Image
+                src={SITE_MEDIA.businessMeeting.src}
+                alt={SITE_MEDIA.businessMeeting.alt}
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover"
+              />
+              <div className="from-navy/70 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="text-xs font-bold uppercase tracking-wider text-brand-blue-muted">
+                  Client Collaboration
+                </span>
+                <p className="text-base sm:text-lg font-bold mt-1">Dedicated Professional Support</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Requirement Intake Modal */}
       <RequirementModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
-    </>
+    </div>
   );
 }

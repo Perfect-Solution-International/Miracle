@@ -10,8 +10,10 @@ import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
 
+import { useTravelStore } from "@/lib/storage/travel-store";
+import type { TravelPackage } from "@/components/admin-travel/types";
+import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inquiry-modal";
 import { TravelPackageCard } from "./travel-package-card";
-import type { TravelPackageDetail } from "../types/travel-package-detail.types";
 
 const FILTER_TABS = [
   { id: "all", label: "All Packages" },
@@ -20,7 +22,7 @@ const FILTER_TABS = [
 ] as const;
 
 export function TravelPackagesSection({
-  packages,
+  packages: propPackages,
   isFiltered = false,
   showTabs = true,
   eyebrow,
@@ -28,23 +30,47 @@ export function TravelPackagesSection({
   description,
   onCustomizePackage,
 }: {
-  packages: readonly TravelPackageDetail[];
+  packages?: readonly TravelPackage[];
   isFiltered?: boolean;
   showTabs?: boolean;
   eyebrow?: string;
   title?: string;
   description?: string;
-  onCustomizePackage?: (pkg: TravelPackageDetail) => void;
+  onCustomizePackage?: (pkg: TravelPackage) => void;
 }) {
+  const { packages: storePackages } = useTravelStore();
   const [activeTab, setActiveTab] = useState<"all" | "sri-lanka" | "international">("all");
+  const [plannerModal, setPlannerModal] = useState<{
+    open: boolean;
+    package: TravelPackage | null;
+    mode: "inquiry" | "customize";
+  }>({
+    open: false,
+    package: null,
+    mode: "customize",
+  });
+
+  const activePackagesList = propPackages ?? storePackages.filter((p) => p.status !== "Inactive");
 
   const displayedPackages = useMemo(() => {
-    if (!showTabs || activeTab === "all") return packages;
+    if (!showTabs || activeTab === "all") return activePackagesList;
     if (activeTab === "sri-lanka") {
-      return packages.filter((p) => p.location.toLowerCase().includes("sri lanka"));
+      return activePackagesList.filter((p) => p.travelType === "Inbound");
     }
-    return packages.filter((p) => !p.location.toLowerCase().includes("sri lanka"));
-  }, [packages, activeTab, showTabs]);
+    return activePackagesList.filter((p) => p.travelType === "Outbound");
+  }, [activePackagesList, activeTab, showTabs]);
+
+  const handleCustomize = (pkg: TravelPackage) => {
+    if (onCustomizePackage) {
+      onCustomizePackage(pkg);
+    } else {
+      setPlannerModal({
+        open: true,
+        package: pkg,
+        mode: "customize",
+      });
+    }
+  };
 
   return (
     <Section
@@ -92,7 +118,7 @@ export function TravelPackagesSection({
             <TravelPackageCard
               key={pkg.slug}
               pkg={pkg}
-              onCustomize={onCustomizePackage}
+              onCustomize={handleCustomize}
             />
           ))}
         </ul>
@@ -115,6 +141,14 @@ export function TravelPackagesSection({
           </Button>
         </div>
       )}
+
+      {/* Trip & Package Planner Modal */}
+      <PublicTravelInquiryModal
+        open={plannerModal.open}
+        onOpenChange={(open) => setPlannerModal((prev) => ({ ...prev, open }))}
+        defaultPackage={plannerModal.package}
+        mode={plannerModal.mode}
+      />
     </Section>
   );
 }

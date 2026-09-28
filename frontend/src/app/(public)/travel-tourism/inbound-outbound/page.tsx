@@ -15,7 +15,6 @@ import { SITE_MEDIA } from "@/config/site-media";
 import {
   TravelPackagesSection,
   TravelSubpageHero,
-  TRAVEL_PACKAGE_DETAILS,
 } from "@/features/travel";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
@@ -86,7 +85,7 @@ export default function Page() {
       />
 
       {/* 2. Travel Packages directly after Hero */}
-      <TravelPackagesSection packages={TRAVEL_PACKAGE_DETAILS} showTabs={false} />
+      <TravelPackagesSection showTabs={false} />
 
       {/* 3. Details & Services Section after Packages */}
       <Section className="bg-slate-50/60 py-16 sm:py-20" aria-labelledby="travel-details-heading">

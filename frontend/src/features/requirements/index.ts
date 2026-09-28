@@ -8,6 +8,7 @@ export { WhyShareCard } from "./components/why-share-card";
 export { NeedHelpCard } from "./components/need-help-card";
 export { SidebarTestimonialCard } from "./components/sidebar-testimonial-card";
 export { RequirementProcessSteps } from "./components/requirement-process-steps";
+export { IntakeIndustryGallery } from "./components/intake-industry-gallery";
 export { RequestExamplesFaqSection } from "./components/request-examples-faq-section";
 export {
   requirementInquirySchema,

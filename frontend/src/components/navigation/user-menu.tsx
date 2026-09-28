@@ -18,6 +18,7 @@ import {
 import { ROUTES } from "@/config/routes";
 import { api } from "@/lib/api/client";
 import { API_ROUTES } from "@/lib/api/endpoints";
+import { clearTestAdminAuthState } from "@/lib/auth/dev-admin-auth";
 import { getRoleDefinition } from "@/lib/permissions/roles";
 import { useAuth } from "@/providers/auth-provider";
 
@@ -41,7 +42,8 @@ export function UserMenu() {
   async function handleSignOut() {
     setIsSigningOut(true);
     try {
-      await api.post(API_ROUTES.auth.logout);
+      clearTestAdminAuthState();
+      await api.post(API_ROUTES.auth.logout).catch(() => {});
     } finally {
       // Navigate regardless: the cookie may already be gone server-side.
       router.replace(ROUTES.auth.login);

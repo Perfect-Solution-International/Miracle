@@ -274,9 +274,41 @@ export const SITE_MEDIA = {
       src: unsplash("1590523277543-a94d2e4eb00b"),
       alt: "Aerial view of overwater bungalows in a Maldivian atoll",
     },
+    singaporeMalaysia: {
+      src: unsplash("1565967511849-76a60a516170"),
+      alt: "Marina Bay Sands illuminated at twilight in Singapore",
+    },
+    thailandExplorer: {
+      src: unsplash("1552465011-b4e21bf6e79a"),
+      alt: "Scenic limestone islands and turquoise waters in Thailand",
+    },
     ellaScenic: {
       src: unsplash("1566296314736-6eaac1ca0cb9"),
       alt: "Blue train crossing the Nine Arch Bridge through green hills in Ella",
+    },
+    dubaiDesert: {
+      src: unsplash("1518684079-3c830dcef090"),
+      alt: "Golden desert sand dunes at sunset during Dubai desert safari",
+    },
+    kandyTemple: {
+      src: unsplash("1588598198321-9735fd52455b"),
+      alt: "Temple of the Sacred Tooth Relic by the lake in Kandy",
+    },
+    galleLighthouse: {
+      src: unsplash("1586861635167-e5223aadc9fe"),
+      alt: "Galle Fort lighthouse overlooking the ocean",
+    },
+    kitulgalaRafting: {
+      src: unsplash("1530866495561-507c9faab2ed"),
+      alt: "White water rafters paddling through river rapids",
+    },
+    bangkokWatArun: {
+      src: unsplash("1508009603885-50cf7c579365"),
+      alt: "Wat Arun temple reflecting over the Chao Phraya River at dusk",
+    },
+    petronasTowers: {
+      src: unsplash("1596422846543-75c6fc197f07"),
+      alt: "Petronas Twin Towers illuminated at night in Kuala Lumpur",
     },
   },
   travelHeroBright: {

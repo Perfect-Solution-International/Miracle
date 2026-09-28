@@ -1,10 +1,11 @@
-import { Clock, Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, MessageSquare, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 
 import { BrandLogo } from "@/components/common/brand-logo";
 import { SocialLinks } from "@/components/common/social-links";
 import { APP_CONFIG, CURRENT_YEAR } from "@/config/app";
 import { PUBLIC_FOOTER_NAV, PUBLIC_LEGAL_NAV } from "@/config/public-navigation";
+import { ROUTES } from "@/config/routes";
 
 function ContactItem({
   icon: Icon,
@@ -56,13 +57,15 @@ export function PublicFooter() {
 
       <div className="container-page pt-16 pb-10 md:pt-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+          {/* Brand & Contact Column */}
           <div className="space-y-6 lg:col-span-4 lg:pr-8">
             <BrandLogo variant="inverse" />
-            <p className="max-w-sm text-sm leading-relaxed">
-              A global B2B, wholesale, and business solutions platform connecting
-              businesses with suppliers, logistics, technology, and professional services
-              across international markets.
+            <p className="max-w-sm text-sm leading-relaxed text-white/80">
+              A trusted global platform connecting businesses with international suppliers,
+              enterprise IT &amp; software solutions, end-to-end trade operations, and premium
+              inbound &amp; outbound travel services.
             </p>
+
             <ul className="space-y-3 text-sm">
               <ContactItem icon={MapPin}>{support.address}</ContactItem>
               <ContactItem icon={Phone} href={`tel:${support.phone.replace(/\s+/g, "")}`}>
@@ -73,19 +76,23 @@ export function PublicFooter() {
               </ContactItem>
               <ContactItem icon={Clock}>{support.hours}</ContactItem>
             </ul>
-            <SocialLinks tone="inverse" />
+
+            <div className="pt-2">
+              <SocialLinks tone="inverse" />
+            </div>
           </div>
 
+          {/* Navigation Columns (5 categories matching site offerings) */}
           <nav
             aria-label="Footer"
-            className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-8"
+            className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:grid-cols-5 lg:col-span-8"
           >
             {PUBLIC_FOOTER_NAV.map((group) => (
-              <div key={group.title} className="space-y-5">
-                <h2 className="text-sm font-bold tracking-wide text-white">
+              <div key={group.title} className="space-y-4">
+                <h2 className="text-sm font-bold tracking-wide text-white border-b border-white/10 pb-2">
                   {group.title}
                 </h2>
-                <ul className="space-y-3 text-sm">
+                <ul className="space-y-2.5 text-sm">
                   {group.links.map((link) => (
                     <li key={`${group.title}-${link.title}`}>
                       <Link
@@ -102,6 +109,7 @@ export function PublicFooter() {
           </nav>
         </div>
 
+        {/* Bottom Bar: Copyright & Legal */}
         <div className="mt-16 flex flex-col-reverse gap-5 border-t border-white/10 pt-8 text-sm md:flex-row md:items-center md:justify-between">
           <p>
             &copy; {CURRENT_YEAR} {APP_CONFIG.name}. All rights reserved.
