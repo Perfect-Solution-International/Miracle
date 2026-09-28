@@ -16,8 +16,6 @@ import { SourcingProcessTimeline } from "./sourcing-process-timeline";
 export function GlobalSourcingSection() {
   return (
     <Section tone="navy" aria-labelledby="sourcing-heading">
-      <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
-
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col gap-10">
           <SectionHeading

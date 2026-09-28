@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -412,15 +411,9 @@ export function ServicesOverview() {
             aria-hidden="true"
             className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-emerald-500/15 via-brand-blue/10 to-teal-500/10 blur-[100px]"
           />
-          <div
-            aria-hidden="true"
-            className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)] opacity-50"
-          />
 
           <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
             <div className="max-w-2xl space-y-5">
-              <Breadcrumb items={[{ label: "Services" }]} />
-
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
                 <span className="relative flex size-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-600 opacity-75" />

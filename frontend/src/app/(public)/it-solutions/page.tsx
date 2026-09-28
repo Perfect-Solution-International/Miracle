@@ -19,7 +19,6 @@ import {
   Settings2,
   Sparkles,
   Target,
-  TrendingUp,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -27,7 +26,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
@@ -38,6 +36,7 @@ import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
 
+import landingStyles from "../landing-surfaces.module.css";
 import { AnimatedCircuitBackground } from "./animated-circuit-background";
 import circuitStyles from "./animated-circuit-background.module.css";
 
@@ -208,98 +207,48 @@ const businessBenefits = [
 
 export default function Page() {
   return (
-    <main className={circuitStyles.page}>
+    <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
       <AnimatedCircuitBackground />
       <section
         aria-labelledby="it-solutions-hero-heading"
-        className={cn(
-          "relative isolate overflow-hidden border-b",
-          circuitStyles.glassSection,
-        )}
+        className={`relative isolate overflow-hidden border-b border-slate-200/80 ${landingStyles.travelHero}`}
       >
-        <div className="container-page grid gap-10 py-12 md:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-16 lg:py-20">
-          <div className="max-w-2xl">
-            <Breadcrumb items={[{ label: TITLE }]} />
+        <div className="container-page flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
+          <Eyebrow className="rounded-full border border-white/80 bg-white/95 px-4 py-1.5 font-extrabold text-navy shadow-sm backdrop-blur-md">
+            Technology Engineering &amp; Digital Solutions
+          </Eyebrow>
 
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/60 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-600 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-indigo-600" />
-              </span>
-              Technology Engineering &amp; Digital Solutions
-            </div>
+          <h1
+            id="it-solutions-hero-heading"
+            className="text-ink max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl md:text-6xl"
+          >
+            Technology That Moves{" "}
+            <span className="via-brand-blue to-navy bg-gradient-to-r from-indigo-600 bg-clip-text text-transparent">
+              Your Business Forward.
+            </span>
+          </h1>
 
-            <h1
-              id="it-solutions-hero-heading"
-              className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
-            >
-              Technology That Moves{" "}
-              <span className="bg-gradient-to-r from-indigo-600 via-brand-blue to-navy bg-clip-text text-transparent">
-                Your Business Forward.
-              </span>
-            </h1>
+          <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-800 sm:text-lg [text-shadow:_0_1px_10px_rgba(255,255,255,0.9),_0_0_2px_rgba(255,255,255,0.8)]">
+            {DESCRIPTION}
+          </p>
 
-            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-              {DESCRIPTION}
-            </p>
-
-            <div className="flex flex-col gap-3 sm:flex-row pt-2">
-              <Button asChild variant="accent" size="xl" className="shadow-lift">
-                <a href="#services">
-                  Explore Our IT Solutions
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
-                <Link href={ROUTES.public.contact}>Talk to Our Tech Team</Link>
-              </Button>
-            </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-2xl">
-            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
-              <Image
-                src={SITE_MEDIA.itSolutions.hero.src}
-                alt={SITE_MEDIA.itSolutions.hero.alt}
-                fill
-                preload
-                sizes="(min-width: 1024px) 52vw, 100vw"
-                className="object-cover"
-              />
-              <div
-                aria-hidden="true"
-                className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
-              />
-              <div className="absolute bottom-5 left-5 right-5 text-white">
-                <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
-                  <Code2 className="size-3.5" />
-                  Full-Stack Engineering
-                </span>
-                <p className="text-base sm:text-lg font-bold">
-                  Robust Systems Built For Mission-Critical Operations
-                </p>
-              </div>
-            </div>
-            <div
-              className={cn(
-                "shadow-lift absolute right-4 bottom-0 left-4 flex items-center justify-between rounded-2xl border px-5 py-4 sm:right-0 sm:left-0",
-                circuitStyles.glassCard,
-              )}
-            >
-              <span className="text-ink text-sm font-bold">Build</span>
-              <ArrowRight aria-hidden="true" className="text-brand-blue/50 size-4" />
-              <span className="text-ink text-sm font-bold">Automate</span>
-              <ArrowRight aria-hidden="true" className="text-brand-blue/50 size-4" />
-              <span className="text-brand-blue text-sm font-bold">Scale</span>
-            </div>
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+            <Button asChild variant="accent" size="xl" className="shadow-lift">
+              <a href="#services">
+                Explore Our IT Solutions
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="xl" className="bg-white">
+              <Link href={ROUTES.public.contact}>Talk to Our Tech Team</Link>
+            </Button>
           </div>
         </div>
       </section>
 
       <Section
         aria-labelledby="it-overview-heading"
-        className={circuitStyles.glassSection}
-        containerClassName="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16"
+        containerClassName="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-12"
       >
         <div>
           <SectionHeading
@@ -308,14 +257,14 @@ export default function Page() {
             title="Digital Solutions for a More Efficient, Connected Business"
             description="We design practical, scalable technology around the way your business works. From customer-facing experiences to the systems behind daily operations, every solution starts with a clear business need."
           />
-          <Button asChild variant="outline" size="xl" className="mt-7">
+          <Button asChild variant="outline" size="xl" className="mt-5">
             <a href="#how-we-work">
               Learn More About Our Approach
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </a>
           </Button>
         </div>
-        <div className="relative pb-8">
+        <div className="relative">
           <div className="shadow-lift relative aspect-[3/2] overflow-hidden rounded-3xl border border-white">
             <Image
               src={SITE_MEDIA.itSolutions.overview.src}
@@ -332,14 +281,14 @@ export default function Page() {
           <div
             className={cn(
               "shadow-soft relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border sm:grid-cols-2",
-              circuitStyles.glassCard,
+              circuitStyles.solidCard,
             )}
           >
             {overviewBenefits.map(({ title, description, icon: Icon }, index) => (
               <div
                 key={title}
                 className={cn(
-                  "flex gap-3 p-4",
+                  "flex gap-3 p-3.5",
                   index % 2 === 1 && "sm:border-l",
                   index > 1 && "border-t",
                 )}
@@ -362,7 +311,7 @@ export default function Page() {
       <Section
         id="services"
         aria-labelledby="it-services-heading"
-        className={cn("scroll-mt-24", circuitStyles.glassSection)}
+        className="scroll-mt-24"
       >
         <SectionHeading
           id="it-services-heading"
@@ -371,13 +320,14 @@ export default function Page() {
           title="Comprehensive IT Solutions to Support Your Business"
           description="Choose a specialist service or bring us the wider challenge. Our team connects the right technology around your requirement."
         />
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
           {services.map((service, index) => (
             <li
               key={service.title}
               className={cn(
                 "group/card shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-2xl border transition-shadow",
-                circuitStyles.glassCard,
+                circuitStyles.solidCard,
+                circuitStyles.serviceCard,
               )}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
@@ -423,40 +373,36 @@ export default function Page() {
       <Section
         id="how-we-work"
         aria-labelledby="it-process-heading"
-        className={cn(circuitStyles.glassSection, circuitStyles.processSection)}
+        className={landingStyles.lightProcess}
       >
-        <div
-          aria-hidden="true"
-          className="bg-grid-inverse absolute inset-0 -z-20 opacity-75"
-        />
         <SectionHeading
           id="it-process-heading"
           eyebrow="How We Work"
           title="A Clear Process From Idea to Implementation"
           description="A focused process keeps decisions visible, the solution practical and the work connected to your goals."
         />
-        <ol className="border-brand-blue-muted/35 relative mt-12 grid gap-7 border-l pl-7 lg:mt-16 lg:grid-cols-6 lg:gap-5 lg:border-t lg:border-l-0 lg:pl-0">
+        <ol className="border-brand-blue-muted/35 relative mt-8 grid gap-6 border-l pl-6 lg:mt-10 lg:grid-cols-6 lg:gap-4 lg:border-t lg:border-l-0 lg:pl-0">
           {process.map(({ step, title, description, icon: Icon }, index) => (
-            <li key={step} className="relative flex gap-4 lg:flex-col lg:gap-5 lg:pt-8">
+            <li key={step} className="relative flex gap-3.5 lg:flex-col lg:gap-3.5 lg:pt-5">
               <span
                 aria-hidden="true"
                 className={cn(
-                  "ring-navy absolute top-5 -left-[2.05rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
+                  "ring-navy absolute top-4 -left-[1.8rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
                   index === 0 ? "bg-brand-red" : "bg-brand-blue-muted",
                 )}
               />
-              <span className="text-brand-blue-muted/25 hidden text-5xl leading-none font-bold lg:block">
+              <span className="text-brand-blue-muted/25 hidden text-4xl leading-none font-bold lg:block">
                 {step}
               </span>
-              <span className="text-brand-blue-muted flex size-11 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5">
-                <Icon aria-hidden="true" className="size-5" />
+              <span className="text-brand-blue-muted flex size-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-xs">
+                <Icon aria-hidden="true" className="size-4.5" />
               </span>
               <div>
                 <span className="text-brand-blue-muted text-xs font-bold tracking-widest lg:hidden">
                   {step}
                 </span>
-                <h3 className="font-bold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/60">
+                <h3 className="font-bold text-white text-base">{title}</h3>
+                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-white/60">
                   {description}
                 </p>
               </div>
@@ -467,8 +413,7 @@ export default function Page() {
 
       <Section
         aria-labelledby="it-why-heading"
-        className={circuitStyles.glassSection}
-        containerClassName="grid gap-12 lg:grid-cols-[0.82fr_0.9fr_0.82fr] lg:items-center lg:gap-10"
+        containerClassName="grid gap-8 lg:grid-cols-[0.85fr_0.9fr_0.85fr] lg:items-center lg:gap-8"
       >
         <div>
           <SectionHeading
@@ -477,14 +422,14 @@ export default function Page() {
             title="More Than Technology. A Partner for Your Growth."
             description="We connect technology decisions to the wider business, helping you choose and build solutions that are useful today and adaptable tomorrow."
           />
-          <Button asChild variant="outline" size="xl" className="mt-7">
+          <Button asChild variant="outline" size="xl" className="mt-5">
             <Link href={ROUTES.public.contact}>
               Talk to Our Team
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>
           </Button>
         </div>
-        <div className="shadow-lift relative aspect-[4/5] overflow-hidden rounded-3xl">
+        <div className="shadow-lift relative aspect-[4/4.2] overflow-hidden rounded-3xl">
           <Image
             src={SITE_MEDIA.itSolutions.partnership.src}
             alt={SITE_MEDIA.itSolutions.partnership.alt}
@@ -499,13 +444,13 @@ export default function Page() {
         </div>
         <ul className="border-brand-blue/15 border-t">
           {reasons.map(({ title, description, icon: Icon }) => (
-            <li key={title} className="border-brand-blue/15 flex gap-4 border-b py-5">
-              <span className="bg-brand-blue-light text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-full">
-                <Icon aria-hidden="true" className="size-5" />
+            <li key={title} className="border-brand-blue/15 flex gap-3.5 border-b py-3">
+              <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-full">
+                <Icon aria-hidden="true" className="size-4.5" />
               </span>
               <div>
-                <h3 className="text-ink font-bold">{title}</h3>
-                <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+                <h3 className="text-ink font-bold text-sm sm:text-base">{title}</h3>
+                <p className="text-muted-foreground mt-0.5 text-xs sm:text-sm leading-relaxed">
                   {description}
                 </p>
               </div>
@@ -516,8 +461,7 @@ export default function Page() {
 
       <Section
         aria-labelledby="it-benefits-heading"
-        className={circuitStyles.glassSection}
-        containerClassName="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16"
+        containerClassName="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-12"
       >
         <div>
           <SectionHeading
@@ -526,16 +470,16 @@ export default function Page() {
             title="Better Systems. Better Decisions. Better Growth."
             description="Connected technology helps teams work with less friction, gives management a clearer view and creates a stronger foundation for sustainable growth."
           />
-          <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
+          <ul className="mt-6 grid gap-x-8 sm:grid-cols-2">
             {businessBenefits.map(({ title, icon: Icon }) => (
               <li
                 key={title}
-                className="border-brand-blue/15 flex items-center gap-3 border-b py-4"
+                className="border-brand-blue/15 flex items-center gap-3.5 border-b py-3 sm:py-3.5"
               >
-                <span className="text-brand-blue shadow-soft flex size-9 shrink-0 items-center justify-center rounded-lg bg-white">
+                <span className="text-brand-blue shadow-soft flex size-8 shrink-0 items-center justify-center rounded-lg bg-white">
                   <Icon aria-hidden="true" className="size-4" />
                 </span>
-                <span className="text-ink text-sm font-semibold">{title}</span>
+                <span className="text-ink text-sm font-semibold sm:text-base">{title}</span>
                 <Check aria-hidden="true" className="text-brand-blue/45 ml-auto size-4" />
               </li>
             ))}
@@ -557,7 +501,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
-        className={cn("bg-transparent", circuitStyles.ctaSection)}
+        className={landingStyles.ctaSection}
         eyebrow="Ready to Get Started?"
         title="Let's Build the Right IT Solution for Your Business"
         description="Tell us what you want to achieve and our team will help you find the most practical and effective way forward."

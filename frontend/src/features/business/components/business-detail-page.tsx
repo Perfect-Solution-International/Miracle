@@ -2,7 +2,6 @@ import { ArrowRight, Check, ChevronRight, Network } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
@@ -35,23 +34,9 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 left-1/2 -z-10 -translate-x-1/2 h-96 w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
       />
-      <div
-        aria-hidden="true"
-        className={cn(
-          "absolute inset-0 -z-10 opacity-65",
-          dark ? "bg-grid-inverse" : "bg-grid",
-        )}
-      />
       <div className="max-w-2xl">
-        <Breadcrumb
-          tone={dark ? "inverse" : "default"}
-          items={[
-            { label: "Business Solutions", href: ROUTES.public.businessSolutions },
-            { label: detail.title },
-          ]}
-        />
         {/* Pulsing Live Badge Pill */}
-        <div className="mt-8">
+        <div>
           <div
             className={cn(
               "inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 backdrop-blur-md shadow-xs border",
@@ -387,9 +372,6 @@ function BusinessProcess({ detail }: { detail: BusinessDetail }) {
       aria-labelledby="process-heading"
       className={light ? "bg-brand-blue-light/30" : undefined}
     >
-      {!light ? (
-        <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
-      ) : null}
       <SectionHeading
         id="process-heading"
         eyebrow="Our Process"

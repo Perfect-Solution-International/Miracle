@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 
-import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
+import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ export interface SubpageTemplateProps {
   title: string;
   description: string;
   badgeText?: string;
-  breadcrumbs: readonly BreadcrumbItem[];
+  breadcrumbs?: readonly BreadcrumbItem[];
   image?: SiteImage;
   stats?: readonly SubpageStat[];
   features?: readonly SubpageFeature[];
@@ -85,16 +85,8 @@ export function SubpageTemplate({
           aria-hidden="true"
           className="pointer-events-none absolute -top-32 left-1/2 -z-10 -translate-x-1/2 h-[480px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[120px]"
         />
-        <div
-          aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-        />
 
         <div className="container-page">
-          <div className="mb-6">
-            <Breadcrumb items={breadcrumbs} />
-          </div>
-
           <div
             className={cn(
               "grid gap-10",

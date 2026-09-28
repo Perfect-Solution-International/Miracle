@@ -2,9 +2,12 @@
 
 import { useMemo, useState } from "react";
 
+import landingStyles from "@/app/(public)/landing-surfaces.module.css";
+
 import { CustomizeTripModal, CustomizeTripSection } from "./customize-trip-section";
 import { InboundTravelSection, OutboundTravelSection } from "./inbound-outbound-section";
 import { TravelHero } from "./travel-hero";
+import { TravelCinematicBackground } from "./travel-cinematic-background";
 import { TravelPackagesSection } from "./travel-packages-section";
 import { TravelServicesSection } from "./travel-services-section";
 import type { TravelPackageDetail } from "../types/travel-package-detail.types";
@@ -16,7 +19,10 @@ export function TravelLanding({
 }) {
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState<string | undefined>();
-  const [searchFilter, setSearchFilter] = useState<{ destination: string; travelType: string }>({
+  const [searchFilter, setSearchFilter] = useState<{
+    destination: string;
+    travelType: string;
+  }>({
     destination: "",
     travelType: "all",
   });
@@ -31,7 +37,12 @@ export function TravelLanding({
         const matchesDestinations = pkg.destinations.some((d) =>
           d.toLowerCase().includes(destQuery),
         );
-        if (!matchesLocation && !matchesTitle && !matchesTagline && !matchesDestinations) {
+        if (
+          !matchesLocation &&
+          !matchesTitle &&
+          !matchesTagline &&
+          !matchesDestinations
+        ) {
           return false;
         }
       }
@@ -64,7 +75,8 @@ export function TravelLanding({
 
   return (
     <>
-      <main>
+      <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
+        <TravelCinematicBackground />
         {/* 1. Hero Section with Light Background and Professional Search Bar */}
         <TravelHero onExplore={handleExplore} />
 
@@ -77,7 +89,9 @@ export function TravelLanding({
         {/* 4. Travel Packages Section */}
         <TravelPackagesSection
           packages={filteredPackages}
-          isFiltered={Boolean(searchFilter.destination || searchFilter.travelType !== "all")}
+          isFiltered={Boolean(
+            searchFilter.destination || searchFilter.travelType !== "all",
+          )}
           onCustomizePackage={handleOpenCustomizeWithPackage}
         />
 

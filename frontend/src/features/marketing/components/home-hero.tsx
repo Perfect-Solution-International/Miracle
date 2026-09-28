@@ -21,10 +21,6 @@ export function HomeHero() {
       aria-labelledby="home-hero-heading"
       className="relative isolate overflow-hidden bg-white"
     >
-      <div
-        aria-hidden="true"
-        className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top_left,black_20%,transparent_70%)]"
-      />
 
       <div className="container-page grid items-center gap-12 pt-10 pb-16 md:pt-14 lg:grid-cols-12 lg:gap-10 lg:pt-16 lg:pb-24">
         <div className="flex flex-col gap-7 lg:col-span-6 xl:col-span-6">

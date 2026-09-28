@@ -1,21 +1,6 @@
-import Image from "next/image";
+import { PageBackground } from "@/app/(public)/page-background";
 
-import styles from "./travel-cinematic-background.module.css";
-
-/** Decorative background for the Travel & Tourism landing hero only. */
+/** Scenery-only background for the Travel & Tourism landing page. */
 export function TravelCinematicBackground() {
-  return (
-    <div aria-hidden="true" className={styles.background}>
-      <Image
-        src="/images/travel/travel-hero-cinematic.png"
-        alt=""
-        fill
-        preload
-        unoptimized
-        sizes="100vw"
-        className={styles.image}
-      />
-      <div className={styles.haze} />
-    </div>
-  );
+  return <PageBackground src="/images/travel/travel-hero-cinematic.png" unoptimized />;
 }

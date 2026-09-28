@@ -47,10 +47,6 @@ export function CtaBanner({
             aria-hidden="true"
             className="pointer-events-none absolute -bottom-24 -left-24 -z-10 size-96 rounded-full bg-brand-red/20 blur-3xl"
           />
-          <div
-            aria-hidden="true"
-            className="bg-grid-inverse absolute inset-0 -z-10 opacity-30"
-          />
 
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl space-y-4">

@@ -45,10 +45,6 @@ export function PublicFooter() {
 
   return (
     <footer className="bg-navy relative isolate overflow-hidden text-white/70">
-      <div
-        aria-hidden="true"
-        className="bg-grid-inverse absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black,transparent_70%)]"
-      />
       {/* Brand accent: blue-to-red hairline along the top edge. */}
       <div
         aria-hidden="true"

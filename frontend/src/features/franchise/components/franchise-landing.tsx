@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
+import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SITE_MEDIA } from "@/config/site-media";
@@ -202,17 +202,11 @@ export function FranchiseLanding({
             aria-hidden="true"
             className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-[450px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
           />
-          <div
-            aria-hidden="true"
-            className="bg-grid absolute inset-0 -z-10 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-          />
 
           <div className="container-page grid gap-10 py-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:py-24">
             <div className="max-w-2xl">
-              <Breadcrumb items={breadcrumbs} />
-              
               {/* Pulsing Live Badge Pill */}
-              <div className="mt-7">
+              <div>
                 <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
                   <span className="relative flex size-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
@@ -262,7 +256,7 @@ export function FranchiseLanding({
 
         <section className="section-y bg-white"><div className="container-page"><div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between"><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Explore by industry</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Franchise Opportunities</h2><p className="text-muted-foreground mt-4 text-lg">Explore business opportunities across different industries.</p></div><button type="button" onClick={openForm} className="text-brand-blue inline-flex items-center gap-2 text-sm font-bold">Looking for something specific? <ArrowRight className="size-4" /></button></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{OPPORTUNITIES.map(([title, description, image]) => <article key={title} className="group overflow-hidden rounded-2xl border bg-white shadow-sm transition-shadow hover:shadow-soft"><div className="relative aspect-[1.65] overflow-hidden"><Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-105" /></div><div className="p-5"><h3 className="text-ink text-lg font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p><button type="button" onClick={openForm} className="text-brand-blue mt-5 inline-flex items-center gap-2 text-sm font-bold">View Opportunities <ArrowRight className="size-4" /></button></div></article>)}</div></div></section>
 
-        <section className="section-y bg-brand-blue-light/35"><div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"><div className="relative min-h-[470px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.franchise.opening.src} alt={SITE_MEDIA.franchise.opening.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A simple customer journey</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">From Idea to Opening Day</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">We support you through every important stage of starting your franchise business.</p><div className="relative mt-9 space-y-6 before:absolute before:top-3 before:bottom-3 before:left-[17px] before:w-px before:bg-brand-blue/25">{JOURNEY.map(([number, title, description]) => <div key={number} className="relative flex gap-5"><span className="bg-brand-blue text-white relative z-10 inline-flex size-9 shrink-0 items-center justify-center rounded-full text-xs font-bold">{number}</span><div><h3 className="text-ink font-bold">{title}</h3><p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p></div></div>)}</div></div></div></section>
+        <section className="section-y bg-white border-t border-slate-100"><div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"><div className="relative min-h-[470px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.franchise.opening.src} alt={SITE_MEDIA.franchise.opening.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A simple customer journey</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">From Idea to Opening Day</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">We support you through every important stage of starting your franchise business.</p><div className="relative mt-9 space-y-6 before:absolute before:top-3 before:bottom-3 before:left-[17px] before:w-px before:bg-brand-blue/25">{JOURNEY.map(([number, title, description]) => <div key={number} className="relative flex gap-5"><span className="bg-brand-blue text-white relative z-10 inline-flex size-9 shrink-0 items-center justify-center rounded-full text-xs font-bold">{number}</span><div><h3 className="text-ink font-bold">{title}</h3><p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p></div></div>)}</div></div></div></section>
 
         <section className="section-y bg-white"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Prepare with confidence</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">What Do You Need to Start?</h2></div><div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{REQUIREMENTS.map(([title, description, Icon]) => <article key={title} className="rounded-2xl border bg-white p-5"><Icon className="text-brand-blue size-6" /><h3 className="text-ink mt-5 text-sm font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p></article>)}</div><p className="text-muted-foreground mt-7 text-sm">Requirements may vary depending on the selected franchise opportunity.</p></div></section>
 

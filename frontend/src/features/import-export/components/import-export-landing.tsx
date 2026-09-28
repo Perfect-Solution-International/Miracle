@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 
-import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
+import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -1195,17 +1195,11 @@ export function ImportExportLanding({
             aria-hidden="true"
             className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-[450px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
           />
-          <div
-            aria-hidden="true"
-            className="bg-grid absolute inset-0 -z-10 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-          />
 
           <div className="container-page grid items-center gap-12 py-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14 lg:py-24">
             <div className="max-w-2xl">
-              <Breadcrumb items={breadcrumbs} />
-              
               {/* Pulsing Live Badge Pill */}
-              <div className="mt-7">
+              <div>
                 <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
                   <span className="relative flex size-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />

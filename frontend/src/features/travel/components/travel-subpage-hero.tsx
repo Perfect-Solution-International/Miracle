@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 
-import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
+import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import type { SiteImage } from "@/config/site-media";
@@ -41,11 +41,6 @@ export function TravelSubpageHero({
   breadcrumbs,
   highlights,
 }: TravelSubpageHeroProps) {
-  const trail: readonly BreadcrumbItem[] = breadcrumbs ?? [
-    { label: "Travel & Tourism", href: ROUTES.public.travelTourism },
-    { label: categoryLabel },
-  ];
-
   const travelHighlights = highlights ?? [
     "Verified Stays & Transport",
     "24/7 Dedicated Concierge",
@@ -62,16 +57,8 @@ export function TravelSubpageHero({
         aria-hidden="true"
         className="pointer-events-none absolute -top-32 left-1/2 -z-10 -translate-x-1/2 h-[480px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[120px]"
       />
-      <div
-        aria-hidden="true"
-        className="bg-grid absolute inset-0 -z-10 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-      />
 
       <div className="container-page">
-        <div className="mb-6">
-          <Breadcrumb items={trail} />
-        </div>
-
         <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
           {/* Left Column: Copy & Actions */}
           <div className="flex flex-col items-start gap-5">

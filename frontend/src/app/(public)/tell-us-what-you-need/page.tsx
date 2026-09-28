@@ -68,7 +68,6 @@ export default async function Page() {
           aria-hidden="true"
           className="pointer-events-none absolute -top-24 left-1/2 -z-10 -translate-x-1/2 h-96 w-full max-w-5xl rounded-full bg-gradient-to-tr from-brand-blue/25 via-indigo-500/15 to-brand-red/15 blur-[100px]"
         />
-        <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10 opacity-60" />
 
         <div className="flex flex-col items-center text-center">
           <p className="text-brand-blue-muted text-xs font-bold tracking-[0.2em] uppercase">

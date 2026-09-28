@@ -4,8 +4,8 @@ import { Calendar, Compass, MapPin, Search, Users } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
 import { Eyebrow } from "@/components/common/eyebrow";
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
+import landingStyles from "@/app/(public)/landing-surfaces.module.css";
 import {
   Select,
   SelectContent,
@@ -13,8 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-import { TravelCinematicBackground } from "./travel-cinematic-background";
 
 const TRAVEL_TYPES = [
   { value: "all", label: "All Travel Types" },
@@ -65,12 +63,15 @@ export function TravelHero({
   return (
     <section
       aria-labelledby="travel-hero-heading"
-      className="relative isolate overflow-hidden border-b bg-slate-50"
+      className={`relative isolate overflow-hidden border-b border-slate-200/80 ${landingStyles.travelHero}`}
     >
-      <TravelCinematicBackground />
-      <div className="container-page flex flex-col items-center gap-5 py-12 text-center sm:py-16 md:py-20">
-        <Breadcrumb items={[{ label: "Travel & Tourism" }]} />
-        <Eyebrow tone="default">Miracle International Travel &amp; Tourism</Eyebrow>
+      <div className="container-page flex flex-col items-center gap-5 pt-20 pb-12 text-center sm:pt-28 sm:pb-16 md:pt-36 md:pb-20">
+        <Eyebrow
+          tone="default"
+          className="rounded-full border border-white/80 bg-white/95 px-4 py-1.5 font-extrabold text-navy shadow-sm backdrop-blur-md"
+        >
+          Miracle International Travel &amp; Tourism
+        </Eyebrow>
 
         <h1
           id="travel-hero-heading"
@@ -79,7 +80,7 @@ export function TravelHero({
           Travel Beyond Boundaries
         </h1>
 
-        <p className="text-muted-foreground max-w-2xl text-base leading-relaxed sm:text-lg">
+        <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-800 sm:text-lg [text-shadow:_0_1px_10px_rgba(255,255,255,0.9),_0_0_2px_rgba(255,255,255,0.8)]">
           Explore destinations, plan customized journeys, arrange flights, and get travel
           support with Miracle International.
         </p>
@@ -102,7 +103,7 @@ export function TravelHero({
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
                   placeholder="Where do you want to go?"
-                  className="text-ink placeholder:text-slate-400 w-full bg-transparent text-sm font-semibold focus:outline-none"
+                  className="text-ink w-full bg-transparent text-sm font-semibold placeholder:text-slate-400 focus:outline-none"
                 />
               </div>
             </div>
