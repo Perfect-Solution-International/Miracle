@@ -1,23 +1,25 @@
 import {
   ArrowRight,
   Bot,
-  Cloud,
+  BriefcaseBusiness,
+  ChartNoAxesCombined,
+  Check,
   Code2,
   Compass,
-  Crosshair,
-  Database,
+  Eye,
   Gauge,
   Globe2,
+  Handshake,
   Headphones,
   Layers3,
   Lightbulb,
   MonitorCog,
   Network,
-  Palette,
-  Rocket,
   SearchCheck,
-  ShieldCheck,
-  Smartphone,
+  Settings2,
+  Sparkles,
+  Target,
+  TrendingUp,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -32,294 +34,330 @@ import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
-import { SITE_MEDIA } from "@/config/site-media";
+import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { cn } from "@/lib/utils";
+
+import { AnimatedKeyboardBackground } from "./animated-keyboard-background";
+import keyboardStyles from "./animated-keyboard-background.module.css";
 
 const TITLE = "IT Solutions";
 const DESCRIPTION =
-  "Technology that fits the way your business works, from high-performing websites to connected systems and intelligent automation.";
+  "Modern IT solutions designed to streamline operations, improve efficiency and support long-term growth.";
 
 export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: ROUTES.public.itSolutions,
-  image: SITE_MEDIA.earthNight,
+  image: SITE_MEDIA.itSolutions.hero,
 });
 
 type IconItem = { title: string; description: string; icon: LucideIcon };
+type Service = IconItem & { href: string; image: SiteImage };
 
-const services: (IconItem & { href: string })[] = [
+const overviewBenefits: IconItem[] = [
   {
-    title: "Website Development",
-    description: "Fast, credible websites designed to turn attention into opportunity.",
-    icon: Globe2,
-    href: ROUTES.public.websiteDevelopment,
+    title: "Business-Focused Technology",
+    description: "Technology decisions shaped around real operating goals.",
+    icon: BriefcaseBusiness,
   },
   {
-    title: "Software Development",
-    description: "Custom applications shaped around your workflows, data and ambitions.",
-    icon: Code2,
-    href: ROUTES.public.softwareDevelopment,
+    title: "Custom Solutions",
+    description: "Systems designed for your workflows and priorities.",
+    icon: Settings2,
   },
   {
-    title: "POS System Development",
-    description: "Reliable sales, stock and reporting systems for busy businesses.",
-    icon: MonitorCog,
-    href: ROUTES.public.posSystemDevelopment,
-  },
-  {
-    title: "Business Management Systems",
-    description: "One connected platform for operations, people, inventory and insight.",
-    icon: Network,
-    href: ROUTES.public.businessManagementSystems,
-  },
-  {
-    title: "Digital Solutions",
-    description: "Connected digital tools that replace friction with momentum.",
-    icon: Layers3,
-    href: ROUTES.public.digitalSolutions,
-  },
-  {
-    title: "IT Consulting",
-    description: "Clear, practical technology advice aligned with your business goals.",
-    icon: Compass,
-    href: ROUTES.public.itConsulting,
-  },
-  {
-    title: "Business Automation",
-    description: "Thoughtful automation that gives your team time back every day.",
-    icon: Bot,
-    href: ROUTES.public.businessAutomation,
-  },
-];
-
-const reasons: IconItem[] = [
-  {
-    title: "Tailored Solutions",
-    description:
-      "Every recommendation starts with your business, customers and real operating context.",
-    icon: Lightbulb,
-  },
-  {
-    title: "Modern Technologies",
-    description:
-      "We use proven, current tools that support performance today and change tomorrow.",
-    icon: Code2,
-  },
-  {
-    title: "Secure Development",
-    description:
-      "Security, access control and dependable data practices are considered from day one.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Scalable Systems",
-    description:
-      "Architecture that can grow with your users, locations, data and ambitions.",
-    icon: Gauge,
-  },
-  {
-    title: "Reliable Support",
-    description:
-      "A responsive partner for improvements, maintenance and the questions after launch.",
+    title: "Reliable Support & Maintenance",
+    description: "Practical assistance through launch and ongoing use.",
     icon: Headphones,
   },
   {
-    title: "Business-Focused Approach",
-    description:
-      "Technology choices are measured by the value they create for your team and customers.",
-    icon: Crosshair,
+    title: "Scalable for Future Growth",
+    description: "A stronger foundation for changing business needs.",
+    icon: ChartNoAxesCombined,
   },
 ];
 
-const capabilities = [
-  { label: "Web platforms", icon: Globe2 },
-  { label: "Business software", icon: Code2 },
-  { label: "Cloud infrastructure", icon: Cloud },
-  { label: "Data & integrations", icon: Database },
-  { label: "Mobile experiences", icon: Smartphone },
-  { label: "Intelligent workflows", icon: Workflow },
+const services: readonly Service[] = [
+  {
+    title: "Website Development",
+    description:
+      "Modern websites built around credibility, performance and business goals.",
+    icon: Globe2,
+    href: ROUTES.public.websiteDevelopment,
+    image: SITE_MEDIA.itSolutions.websiteDevelopment,
+  },
+  {
+    title: "Software Development",
+    description:
+      "Custom software designed for real workflows, users and operational needs.",
+    icon: Code2,
+    href: ROUTES.public.softwareDevelopment,
+    image: SITE_MEDIA.itSolutions.softwareDevelopment,
+  },
+  {
+    title: "POS Systems",
+    description:
+      "Reliable sales, stock and reporting systems for everyday business operations.",
+    icon: MonitorCog,
+    href: ROUTES.public.posSystemDevelopment,
+    image: SITE_MEDIA.itSolutions.posSystem,
+  },
+  {
+    title: "Business Management Systems",
+    description:
+      "Connected systems that bring operations, people and information together.",
+    icon: Network,
+    href: ROUTES.public.businessManagementSystems,
+    image: SITE_MEDIA.itSolutions.businessManagementSystems,
+  },
+  {
+    title: "Digital Solutions",
+    description:
+      "Practical digital tools that make work easier and customer experiences stronger.",
+    icon: Layers3,
+    href: ROUTES.public.digitalSolutions,
+    image: SITE_MEDIA.itSolutions.digitalSolutions,
+  },
+  {
+    title: "IT Consulting",
+    description: "Clear technology guidance aligned with your business priorities.",
+    icon: Compass,
+    href: ROUTES.public.itConsulting,
+    image: SITE_MEDIA.itSolutions.itConsulting,
+  },
+  {
+    title: "Business Automation",
+    description: "Smarter workflows that reduce repetitive work and improve consistency.",
+    icon: Bot,
+    href: ROUTES.public.businessAutomation,
+    image: SITE_MEDIA.itSolutions.businessAutomation,
+  },
 ];
 
-const process = [
+const process: (IconItem & { step: string })[] = [
   {
     step: "01",
-    title: "Discovery",
-    description: "Understand the business, users and opportunity.",
+    title: "Understand",
+    description: "Learn how your business works and where technology can help.",
     icon: SearchCheck,
   },
   {
     step: "02",
-    title: "Planning",
-    description: "Define the right scope, priorities and route forward.",
+    title: "Plan",
+    description: "Define the right scope, priorities and practical direction.",
     icon: Compass,
   },
   {
     step: "03",
     title: "Design",
-    description: "Shape a clear experience around real people and tasks.",
-    icon: Palette,
+    description: "Shape the experience, workflows and technical foundation.",
+    icon: Lightbulb,
   },
   {
     step: "04",
-    title: "Development",
-    description: "Build the solution in focused, reviewable stages.",
+    title: "Build",
+    description: "Develop the solution in focused, reviewable stages.",
     icon: Code2,
   },
   {
     step: "05",
-    title: "Testing",
-    description: "Check quality, security and performance before launch.",
-    icon: ShieldCheck,
+    title: "Implement",
+    description: "Introduce the system with a clear, supported transition.",
+    icon: Settings2,
   },
   {
     step: "06",
-    title: "Deployment",
-    description: "Launch with a smooth, supported transition into use.",
-    icon: Rocket,
-  },
-  {
-    step: "07",
     title: "Support",
-    description: "Keep improving the solution as your business evolves.",
+    description: "Keep the solution useful as your business evolves.",
     icon: Headphones,
   },
-] satisfies (IconItem & { step: string })[];
+];
+
+const reasons: IconItem[] = [
+  {
+    title: "Business-First Approach",
+    description: "Solutions designed around your goals.",
+    icon: Target,
+  },
+  {
+    title: "End-to-End Expertise",
+    description: "From planning to ongoing support.",
+    icon: Workflow,
+  },
+  {
+    title: "Reliable & Transparent",
+    description: "Clear communication at every step.",
+    icon: Eye,
+  },
+  {
+    title: "Long-Term Partnership",
+    description: "Technology that can grow with your business.",
+    icon: Handshake,
+  },
+];
+
+const businessBenefits = [
+  { title: "More efficient operations", icon: Gauge },
+  { title: "Improved data visibility", icon: Eye },
+  { title: "Better customer experience", icon: Sparkles },
+  { title: "Connected systems and teams", icon: Network },
+  { title: "Reduced manual work", icon: Bot },
+  { title: "A stronger foundation for growth", icon: ChartNoAxesCombined },
+] as const;
 
 export default function Page() {
   return (
-    <>
+    <main className={keyboardStyles.page}>
+      <AnimatedKeyboardBackground />
       <section
         aria-labelledby="it-solutions-hero-heading"
-        className="relative isolate overflow-hidden border-b"
+        className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
       >
-        <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <Image
-            src={SITE_MEDIA.earthNight.src}
-            alt=""
-            fill
-            preload
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="bg-brand-blue-dark/65 absolute inset-0" />
-          <div className="from-brand-blue-dark/80 absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t to-transparent" />
-        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-indigo-500/15 via-brand-blue/10 to-purple-500/10 blur-[100px]"
+        />
+        <div
+          aria-hidden="true"
+          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)] opacity-50"
+        />
 
-        <div className="container-page flex flex-col items-center gap-6 py-20 text-center md:py-28">
-          <Breadcrumb items={[{ label: TITLE }]} tone="inverse" />
-          <Eyebrow tone="inverse">Technology That Moves Business Forward</Eyebrow>
-          <h1
-            id="it-solutions-hero-heading"
-            className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-white sm:text-5xl"
-          >
-            {TITLE}
-          </h1>
-          <p className="max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
-            {DESCRIPTION}
-          </p>
+        <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
+          <div className="max-w-2xl space-y-5">
+            <Breadcrumb items={[{ label: TITLE }]} />
 
-          <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="accent" size="xl">
-              <Link href={ROUTES.public.tellUsWhatYouNeed}>
-                Discuss Your Requirements
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline-inverse" size="xl">
-              <a href="#services">Explore IT Services</a>
-            </Button>
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/60 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-600 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-indigo-600" />
+              </span>
+              Technology Engineering &amp; Digital Solutions
+            </div>
+
+            <h1
+              id="it-solutions-hero-heading"
+              className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+            >
+              Technology That Moves{" "}
+              <span className="bg-gradient-to-r from-indigo-600 via-brand-blue to-navy bg-clip-text text-transparent">
+                Your Business Forward.
+              </span>
+            </h1>
+
+            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
+              {DESCRIPTION}
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row pt-2">
+              <Button asChild variant="accent" size="xl" className="shadow-lift">
+                <a href="#services">
+                  Explore Our IT Solutions
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
+                <Link href={ROUTES.public.contact}>Talk to Our Tech Team</Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-2xl">
+            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
+              <Image
+                src={SITE_MEDIA.itSolutions.hero.src}
+                alt={SITE_MEDIA.itSolutions.hero.alt}
+                fill
+                preload
+                sizes="(min-width: 1024px) 52vw, 100vw"
+                className="object-cover"
+              />
+              <div
+                aria-hidden="true"
+                className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
+              />
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
+                  <Code2 className="size-3.5" />
+                  Full-Stack Engineering
+                </span>
+                <p className="text-base sm:text-lg font-bold">
+                  Robust Systems Built For Mission-Critical Operations
+                </p>
+              </div>
+            </div>
+
+            {/* Floating Glass Pill */}
+            <div className="shadow-xl absolute -bottom-5 right-4 left-4 flex items-center justify-between rounded-2xl border border-white/80 bg-white/95 px-6 py-3.5 backdrop-blur-md sm:right-6 sm:left-6">
+              <span className="text-ink text-xs sm:text-sm font-bold flex items-center gap-1.5">
+                <Code2 className="size-4 text-indigo-600" />
+                Build
+              </span>
+              <ArrowRight aria-hidden="true" className="text-indigo-600/50 size-4" />
+              <span className="text-ink text-xs sm:text-sm font-bold flex items-center gap-1.5">
+                <Bot className="size-4 text-indigo-600" />
+                Automate
+              </span>
+              <ArrowRight aria-hidden="true" className="text-indigo-600/50 size-4" />
+              <span className="text-indigo-600 text-xs sm:text-sm font-bold flex items-center gap-1.5">
+                <TrendingUp className="size-4 text-indigo-600" />
+                Scale
+              </span>
+            </div>
           </div>
         </div>
       </section>
 
-      <Section id="services" aria-labelledby="services-heading" tone="surface">
-        <SectionHeading
-          id="services-heading"
-          eyebrow="What We Do"
-          title="One Technology Partner, Every Digital Need"
-          description="Choose the specialist service you need today, or bring us the bigger picture. Our team connects the pieces into technology that works together."
-          align="center"
-        />
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-          {services.map((service) => (
-            <article
-              key={service.title}
-              className="group bg-card hover:border-brand-blue/30 hover:shadow-lift relative flex min-h-64 flex-col rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1"
-            >
-              <span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue inline-flex size-11 items-center justify-center rounded-lg transition-colors duration-300 group-hover:text-white">
-                <service.icon aria-hidden="true" className="size-5" />
-              </span>
-              <h3 className="text-ink mt-5 text-lg font-bold">
-                <Link href={service.href} className="after:absolute after:inset-0">
-                  {service.title}
-                </Link>
-              </h3>
-              <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-                {service.description}
-              </p>
-              <span className="text-brand-blue mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold">
-                Learn More{" "}
-                <ArrowRight
-                  aria-hidden="true"
-                  className="size-4 transition-transform group-hover:translate-x-1"
-                />
-              </span>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section aria-labelledby="why-heading">
-        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-20">
+      <Section
+        aria-labelledby="it-overview-heading"
+        containerClassName="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16"
+      >
+        <div>
           <SectionHeading
-            id="why-heading"
-            eyebrow="Why Miracle International"
-            title="Technology With a Business Mindset"
-            description="The best solution is not always the biggest one. We bring clarity to complex decisions and build what creates a measurable difference."
+            id="it-overview-heading"
+            eyebrow="About Our IT Solutions"
+            title="Digital Solutions for a More Efficient, Connected Business"
+            description="We design practical, scalable technology around the way your business works. From customer-facing experiences to the systems behind daily operations, every solution starts with a clear business need."
           />
-          <ul className="grid gap-x-8 gap-y-8 sm:grid-cols-2">
-            {reasons.map((reason) => (
-              <li key={reason.title} className="reveal flex gap-4">
-                <span className="bg-brand-blue-light text-brand-blue inline-flex size-10 shrink-0 items-center justify-center rounded-full">
-                  <reason.icon aria-hidden="true" className="size-5" />
-                </span>
-                <div className="space-y-1.5">
-                  <h3 className="text-ink font-bold">{reason.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {reason.description}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <Button asChild variant="outline" size="xl" className="mt-7">
+            <a href="#how-we-work">
+              Learn More About Our Approach
+              <ArrowRight data-icon="inline-end" aria-hidden="true" />
+            </a>
+          </Button>
         </div>
-      </Section>
-
-      <Section tone="navy" aria-labelledby="capabilities-heading">
-        <div className="bg-grid-inverse absolute inset-0 -z-10 opacity-70" />
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20">
-          <SectionHeading
-            id="capabilities-heading"
-            eyebrow="Capabilities"
-            title="A Connected View of Your Technology"
-            description="From the customer-facing experience to the systems behind it, we help you build a coherent digital foundation."
-            tone="inverse"
-          />
-          <div className="grid gap-3 sm:grid-cols-2">
-            {capabilities.map((capability, index) => (
+        <div className="relative pb-8">
+          <div className="shadow-lift relative aspect-[3/2] overflow-hidden rounded-3xl border border-white">
+            <Image
+              src={SITE_MEDIA.itSolutions.overview.src}
+              alt={SITE_MEDIA.itSolutions.overview.alt}
+              fill
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              className="object-cover"
+            />
+            <div
+              aria-hidden="true"
+              className="from-navy/25 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+            />
+          </div>
+          <div className="shadow-soft relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border bg-white sm:grid-cols-2">
+            {overviewBenefits.map(({ title, description, icon: Icon }, index) => (
               <div
-                key={capability.label}
-                className="reveal hover:border-brand-blue-muted/50 flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-5 transition-colors duration-300 hover:bg-white/[0.08]"
+                key={title}
+                className={cn(
+                  "flex gap-3 p-4",
+                  index % 2 === 1 && "sm:border-l",
+                  index > 1 && "border-t",
+                )}
               >
-                <span className="text-brand-blue-muted inline-flex size-10 items-center justify-center rounded-lg bg-white/10">
-                  <capability.icon aria-hidden="true" className="size-5" />
+                <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-lg">
+                  <Icon aria-hidden="true" className="size-4" />
                 </span>
                 <div>
-                  <span className="text-xs font-bold tracking-[0.16em] text-white/40">
-                    0{index + 1}
-                  </span>
-                  <p className="mt-1 font-bold text-white">{capability.label}</p>
+                  <h3 className="text-ink text-sm font-bold">{title}</h3>
+                  <p className="text-muted-foreground mt-1 text-xs leading-relaxed">
+                    {description}
+                  </p>
                 </div>
               </div>
             ))}
@@ -327,34 +365,99 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section aria-labelledby="process-heading">
+      <Section
+        id="services"
+        aria-labelledby="it-services-heading"
+        className="bg-brand-blue-light/25 scroll-mt-24"
+      >
         <SectionHeading
-          id="process-heading"
-          eyebrow="How We Work"
-          title="From First Conversation to Lasting Value"
-          description="A clear process keeps the work focused, the decisions visible and the outcome connected to your goals."
+          id="it-services-heading"
           align="center"
+          eyebrow="Our Services"
+          title="Comprehensive IT Solutions to Support Your Business"
+          description="Choose a specialist service or bring us the wider challenge. Our team connects the right technology around your requirement."
         />
-        <ol className="relative mt-12 grid gap-8 md:grid-cols-2 lg:mt-16 lg:grid-cols-7 lg:gap-4">
-          <span
-            aria-hidden="true"
-            className="bg-brand-blue/20 absolute top-6 right-[7%] left-[7%] hidden h-px lg:block"
-          />
-          {process.map((item) => (
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+          {services.map((service, index) => (
             <li
-              key={item.step}
-              className="reveal relative flex gap-4 lg:flex-col lg:items-center lg:gap-4 lg:text-center"
+              key={service.title}
+              className="group/card shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition-shadow"
             >
-              <span className="bg-background border-brand-blue text-brand-blue relative z-10 inline-flex size-12 shrink-0 items-center justify-center rounded-full border-2 shadow-sm">
-                <item.icon aria-hidden="true" className="size-5" />
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={service.image.src}
+                  alt={service.image.alt}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 motion-safe:group-hover/card:scale-105"
+                />
+                <div
+                  aria-hidden="true"
+                  className="from-navy/60 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+                />
+                <span className="absolute top-4 left-4 text-xs font-bold tracking-[0.16em] text-white/85">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="text-brand-blue shadow-soft absolute right-4 bottom-4 flex size-11 items-center justify-center rounded-xl bg-white/95">
+                  <service.icon aria-hidden="true" className="size-5" />
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="text-ink text-lg font-bold">{service.title}</h3>
+                <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+                  {service.description}
+                </p>
+                <Link
+                  href={service.href}
+                  className="group/link text-brand-blue hover:text-brand-blue-dark mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold"
+                >
+                  Learn More
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="size-4 transition-transform group-hover/link:translate-x-1"
+                  />
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section id="how-we-work" tone="navy" aria-labelledby="it-process-heading">
+        <div
+          aria-hidden="true"
+          className="bg-grid-inverse absolute inset-0 -z-20 opacity-75"
+        />
+        <SectionHeading
+          id="it-process-heading"
+          eyebrow="How We Work"
+          title="A Clear Process From Idea to Implementation"
+          description="A focused process keeps decisions visible, the solution practical and the work connected to your goals."
+          tone="inverse"
+        />
+        <ol className="border-brand-blue-muted/35 relative mt-12 grid gap-7 border-l pl-7 lg:mt-16 lg:grid-cols-6 lg:gap-5 lg:border-t lg:border-l-0 lg:pl-0">
+          {process.map(({ step, title, description, icon: Icon }, index) => (
+            <li key={step} className="relative flex gap-4 lg:flex-col lg:gap-5 lg:pt-8">
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "ring-navy absolute top-5 -left-[2.05rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
+                  index === 0 ? "bg-brand-red" : "bg-brand-blue-muted",
+                )}
+              />
+              <span className="text-brand-blue-muted/25 hidden text-5xl leading-none font-bold lg:block">
+                {step}
+              </span>
+              <span className="text-brand-blue-muted flex size-11 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5">
+                <Icon aria-hidden="true" className="size-5" />
               </span>
               <div>
-                <span className="text-brand-blue text-xs font-bold tracking-[0.18em] uppercase">
-                  {item.step}
+                <span className="text-brand-blue-muted text-xs font-bold tracking-widest lg:hidden">
+                  {step}
                 </span>
-                <h3 className="text-ink mt-1 font-bold">{item.title}</h3>
-                <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-                  {item.description}
+                <h3 className="font-bold text-white">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/60">
+                  {description}
                 </p>
               </div>
             </li>
@@ -362,40 +465,108 @@ export default function Page() {
         </ol>
       </Section>
 
-      <Section tone="surface" aria-labelledby="outcomes-heading">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-20">
+      <Section
+        aria-labelledby="it-why-heading"
+        containerClassName="grid gap-12 lg:grid-cols-[0.82fr_0.9fr_0.82fr] lg:items-center lg:gap-10"
+      >
+        <div>
           <SectionHeading
-            id="outcomes-heading"
-            eyebrow="Built for Progress"
-            title="A Better Digital Foundation Starts Here"
-            description="Whether you are starting from scratch or improving what already exists, we turn technical complexity into practical next steps."
+            id="it-why-heading"
+            eyebrow="Why Choose Miracle International"
+            title="More Than Technology. A Partner for Your Growth."
+            description="We connect technology decisions to the wider business, helping you choose and build solutions that are useful today and adaptable tomorrow."
           />
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {[
-              ["01", "Clearer decisions"],
-              ["02", "Faster operations"],
-              ["03", "Stronger security"],
-              ["04", "Room to grow"],
-            ].map(([number, label]) => (
-              <div key={number} className="bg-card rounded-xl border p-5">
-                <span className="text-brand-blue text-2xl font-extrabold">{number}</span>
-                <p className="text-ink mt-8 text-sm font-bold">{label}</p>
+          <Button asChild variant="outline" size="xl" className="mt-7">
+            <Link href={ROUTES.public.contact}>
+              Talk to Our Team
+              <ArrowRight data-icon="inline-end" aria-hidden="true" />
+            </Link>
+          </Button>
+        </div>
+        <div className="shadow-lift relative aspect-[4/5] overflow-hidden rounded-3xl">
+          <Image
+            src={SITE_MEDIA.itSolutions.partnership.src}
+            alt={SITE_MEDIA.itSolutions.partnership.alt}
+            fill
+            sizes="(min-width: 1024px) 32vw, 90vw"
+            className="object-cover"
+          />
+          <div
+            aria-hidden="true"
+            className="from-navy/35 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+          />
+        </div>
+        <ul className="border-brand-blue/15 border-t">
+          {reasons.map(({ title, description, icon: Icon }) => (
+            <li key={title} className="border-brand-blue/15 flex gap-4 border-b py-5">
+              <span className="bg-brand-blue-light text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-full">
+                <Icon aria-hidden="true" className="size-5" />
+              </span>
+              <div>
+                <h3 className="text-ink font-bold">{title}</h3>
+                <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+                  {description}
+                </p>
               </div>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section
+        aria-labelledby="it-benefits-heading"
+        className="bg-brand-blue-light/25"
+        containerClassName="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16"
+      >
+        <div>
+          <SectionHeading
+            id="it-benefits-heading"
+            eyebrow="Business Impact"
+            title="Better Systems. Better Decisions. Better Growth."
+            description="Connected technology helps teams work with less friction, gives management a clearer view and creates a stronger foundation for sustainable growth."
+          />
+          <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
+            {businessBenefits.map(({ title, icon: Icon }) => (
+              <li
+                key={title}
+                className="border-brand-blue/15 flex items-center gap-3 border-b py-4"
+              >
+                <span className="text-brand-blue shadow-soft flex size-9 shrink-0 items-center justify-center rounded-lg bg-white">
+                  <Icon aria-hidden="true" className="size-4" />
+                </span>
+                <span className="text-ink text-sm font-semibold">{title}</span>
+                <Check aria-hidden="true" className="text-brand-blue/45 ml-auto size-4" />
+              </li>
             ))}
-          </div>
+          </ul>
+        </div>
+        <div className="shadow-lift relative aspect-[3/2] overflow-hidden rounded-3xl border border-white">
+          <Image
+            src={SITE_MEDIA.itSolutions.impact.src}
+            alt={SITE_MEDIA.itSolutions.impact.alt}
+            fill
+            sizes="(min-width: 1024px) 52vw, 100vw"
+            className="object-cover"
+          />
+          <div
+            aria-hidden="true"
+            className="from-navy/35 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+          />
         </div>
       </Section>
 
       <CtaBanner
-        eyebrow="Ready to Move Forward?"
-        title="Let’s Find the Right IT Solution for Your Business"
-        description="Tell us what you are trying to achieve, where things are getting stuck or what you want to build next. We will help you map the right way forward."
-        primary={{
-          label: "Tell Us What You Need",
+        className="bg-transparent"
+        eyebrow="Ready to Get Started?"
+        title="Let's Build the Right IT Solution for Your Business"
+        description="Tell us what you want to achieve and our team will help you find the most practical and effective way forward."
+        primary={{ label: "Discuss Your IT Needs", href: ROUTES.public.contact }}
+        secondary={{
+          label: "Request a Consultation",
           href: ROUTES.public.tellUsWhatYouNeed,
         }}
-        secondary={{ label: "Contact Our Team", href: ROUTES.public.contact }}
+        headingId="it-cta-heading"
       />
-    </>
+    </main>
   );
 }

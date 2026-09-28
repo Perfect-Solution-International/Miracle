@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 
 import { ROUTES } from "@/config/routes";
+import { SITE_MEDIA } from "@/config/site-media";
 import {
+  VisaAssistanceSection,
   VisaBenefitsSection,
   VisaHero,
-  VisaRequestForm,
-  VisaTypesSection,
 } from "@/features/visa-services";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
@@ -18,18 +17,14 @@ export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: ROUTES.public.visaServices,
+  image: SITE_MEDIA.travelCategoryCards.customized,
 });
 
 export default function Page() {
   return (
     <>
       <VisaHero />
-      <VisaTypesSection />
-
-      <Suspense fallback={null}>
-        <VisaRequestForm />
-      </Suspense>
-
+      <VisaAssistanceSection />
       <VisaBenefitsSection />
     </>
   );

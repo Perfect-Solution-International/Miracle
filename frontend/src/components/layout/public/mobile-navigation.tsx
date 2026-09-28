@@ -15,12 +15,12 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { APP_CONFIG } from "@/config/app";
-import { PUBLIC_MOBILE_NAV } from "@/config/public-navigation";
+import { PUBLIC_MAIN_NAV, PUBLIC_MOBILE_NAV } from "@/config/public-navigation";
 import { PORTAL_HOME, ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/providers/auth-provider";
 
-import { isActivePath } from "./nav-utils";
+import { isActivePath, isNavItemActive } from "./nav-utils";
 
 /**
  * Navigation drawer below the xl breakpoint.
@@ -63,9 +63,12 @@ export function MobileNavigation() {
         <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-3 py-4">
           <ul className="space-y-1">
             {PUBLIC_MOBILE_NAV.map((group, index) => {
-              const groupActive = group.links.some(
-                (link) => !link.href.includes("#") && isActivePath(pathname, link.href),
-              );
+              const topLevelItem = PUBLIC_MAIN_NAV.find((item) => item.title === group.title);
+              const groupActive = topLevelItem
+                ? isNavItemActive(pathname, topLevelItem, PUBLIC_MAIN_NAV)
+                : group.links.some(
+                    (link) => !link.href.includes("#") && isActivePath(pathname, link.href),
+                  );
               return (
                 <li key={group.title}>
                   <details
@@ -84,7 +87,7 @@ export function MobileNavigation() {
                         const active =
                           !link.href.includes("#") && isActivePath(pathname, link.href);
                         return (
-                          <li key={link.href}>
+                          <li key={`${link.title}-${link.href}`}>
                             <Link
                               href={link.href}
                               onClick={close}

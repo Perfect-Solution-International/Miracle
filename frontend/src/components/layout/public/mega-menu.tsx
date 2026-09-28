@@ -39,7 +39,7 @@ export function MegaMenuPanel({
   return (
     <div
       className={cn(
-        "bg-popover shadow-lift overflow-hidden rounded-2xl border",
+        "bg-popover shadow-lift max-h-[calc(100dvh-9rem)] overflow-x-hidden overflow-y-auto rounded-2xl border",
         isWide ? "grid grid-cols-[1fr_17rem]" : feature ? "grid grid-cols-[1fr_15rem]" : "",
       )}
     >
@@ -62,7 +62,7 @@ export function MegaMenuPanel({
               )}
             >
               {group.links.map((link) => (
-                <li key={link.href}>
+                <li key={`${link.title}-${link.href}`}>
                   <MenuLink link={link} />
                 </li>
               ))}

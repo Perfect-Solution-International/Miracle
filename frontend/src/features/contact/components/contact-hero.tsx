@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { Breadcrumb } from "@/components/common/breadcrumb";
 import { Eyebrow } from "@/components/common/eyebrow";
 import { SITE_MEDIA } from "@/config/site-media";
 
@@ -25,6 +26,7 @@ export function ContactHero() {
 
       <div className="container-page grid gap-6 py-14 lg:grid-cols-[1.4fr_1fr] lg:items-start lg:gap-10 lg:py-20">
         <div className="flex flex-col gap-4">
+          <Breadcrumb items={[{ label: "Contact Us" }]} />
           <Eyebrow>Get in Touch</Eyebrow>
           <h1
             id="contact-heading"

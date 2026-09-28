@@ -29,7 +29,7 @@ export function HeaderShell({ children }: { children: ReactNode }) {
           : "border-transparent bg-white",
       )}
     >
-      <div className="container-page relative flex h-[4.5rem] items-center justify-between gap-6 transition-[height] duration-300 group-data-[scrolled=true]/header:h-16 lg:h-20">
+      <div className="container-page flex h-[4.5rem] items-center justify-between gap-4 transition-[height] duration-300 group-data-[scrolled=true]/header:h-16 lg:h-20">
         {children}
       </div>
     </header>

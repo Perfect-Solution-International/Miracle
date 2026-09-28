@@ -47,7 +47,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: ROUTES.public.posSystemDevelopment,
-  image: SITE_MEDIA.technology,
+  image: SITE_MEDIA.itSolutions.posSystemHero,
 });
 
 const overviewPoints = [
@@ -230,7 +230,7 @@ export default function Page() {
           { label: "IT Solutions", href: ROUTES.public.itSolutions },
           { label: "POS System Development" },
         ]}
-        image={SITE_MEDIA.technology}
+        image={SITE_MEDIA.itSolutions.posSystemHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button asChild variant="accent" size="xl">
