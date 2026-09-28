@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import landingStyles from "@/app/(public)/landing-surfaces.module.css";
+import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inquiry-modal";
 
 import { CustomizeTripModal, CustomizeTripSection } from "./customize-trip-section";
 import { InboundTravelSection, OutboundTravelSection } from "./inbound-outbound-section";
@@ -40,17 +41,15 @@ export function TravelLanding({
 
       if (searchFilter.destination) {
         const destQuery = searchFilter.destination.toLowerCase().trim();
-        const matchesLocation = pkg.location.toLowerCase().includes(destQuery);
-        const matchesTitle = pkg.title.toLowerCase().includes(destQuery);
-        const matchesTagline = pkg.tagline.toLowerCase().includes(destQuery);
-        const matchesDestinations = pkg.destinations.some((d) =>
-          d.toLowerCase().includes(destQuery),
-        );
+        const matchesDestination = destination.toLowerCase().includes(destQuery);
+        const matchesTitle = title.toLowerCase().includes(destQuery);
+        const matchesTagline = tagline.toLowerCase().includes(destQuery);
+        const matchesCountry = country.toLowerCase().includes(destQuery);
         if (
-          !matchesLocation &&
+          !matchesDestination &&
           !matchesTitle &&
           !matchesTagline &&
-          !matchesDestinations
+          !matchesCountry
         ) {
           return false;
         }
