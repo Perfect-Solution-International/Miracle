@@ -30,6 +30,7 @@ export const TRAVEL_PACKAGE_DETAILS: readonly TravelPackageDetail[] = [
     location: "Sri Lanka",
     travelers: "2–10 Travellers",
     travelType: "leisure",
+    travelDirection: "Inbound",
     duration: { days: 7, nights: 6 },
     startingPrice: "From $650 per person",
     highlights: [
@@ -160,6 +161,7 @@ export const TRAVEL_PACKAGE_DETAILS: readonly TravelPackageDetail[] = [
     location: "Sri Lanka",
     travelers: "2–8 Travellers",
     travelType: "leisure",
+    travelDirection: "Inbound",
     duration: { days: 5, nights: 4 },
     startingPrice: "From $420 per person",
     highlights: [
@@ -277,6 +279,7 @@ export const TRAVEL_PACKAGE_DETAILS: readonly TravelPackageDetail[] = [
     location: "Sri Lanka",
     travelers: "2–8 Travellers",
     travelType: "adventure",
+    travelDirection: "Inbound",
     duration: { days: 8, nights: 7 },
     startingPrice: "From $780 per person",
     highlights: [
@@ -410,6 +413,7 @@ export const TRAVEL_PACKAGE_DETAILS: readonly TravelPackageDetail[] = [
     location: "Sri Lanka",
     travelers: "2–10 Travellers",
     travelType: "cultural",
+    travelDirection: "Inbound",
     duration: { days: 6, nights: 5 },
     startingPrice: "From $590 per person",
     highlights: [
@@ -534,6 +538,7 @@ export const TRAVEL_PACKAGE_DETAILS: readonly TravelPackageDetail[] = [
     location: "Dubai, UAE",
     travelers: "2–8 Travellers",
     travelType: "leisure",
+    travelDirection: "Outbound",
     duration: { days: 5, nights: 4 },
     startingPrice: "From $890 per person",
     highlights: [
@@ -652,6 +657,7 @@ export const TRAVEL_PACKAGE_DETAILS: readonly TravelPackageDetail[] = [
     location: "Maldives",
     travelers: "2 Travellers",
     travelType: "honeymoon",
+    travelDirection: "Outbound",
     duration: { days: 4, nights: 3 },
     startingPrice: "From $1,450 per person",
     highlights: [
@@ -764,6 +770,7 @@ export const TRAVEL_PACKAGE_DETAILS: readonly TravelPackageDetail[] = [
     location: "Singapore & Malaysia",
     travelers: "2–10 Travellers",
     travelType: "family",
+    travelDirection: "Outbound",
     duration: { days: 6, nights: 5 },
     startingPrice: "From $980 per person",
     highlights: [
@@ -888,6 +895,7 @@ export const TRAVEL_PACKAGE_DETAILS: readonly TravelPackageDetail[] = [
     location: "Thailand",
     travelers: "2–10 Travellers",
     travelType: "leisure",
+    travelDirection: "Outbound",
     duration: { days: 5, nights: 4 },
     startingPrice: "From $620 per person",
     highlights: [

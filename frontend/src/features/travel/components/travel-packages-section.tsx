@@ -10,10 +10,10 @@ import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
 
-import { CustomizeTripModal } from "./customize-trip-section";
-import { PackageDetailModal } from "./package-detail-modal";
+import { useTravelStore } from "@/lib/storage/travel-store";
+import type { TravelPackage } from "@/components/admin-travel/types";
+import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inquiry-modal";
 import { TravelPackageCard } from "./travel-package-card";
-import type { TravelPackageDetail } from "../types/travel-package-detail.types";
 
 const FILTER_TABS = [
   { id: "all", label: "All Packages" },
@@ -22,7 +22,7 @@ const FILTER_TABS = [
 ] as const;
 
 export function TravelPackagesSection({
-  packages,
+  packages: propPackages,
   isFiltered = false,
   showTabs = true,
   eyebrow,
@@ -30,35 +30,37 @@ export function TravelPackagesSection({
   description,
   onCustomizePackage,
 }: {
-  packages: readonly TravelPackageDetail[];
+  packages?: readonly TravelPackage[];
   isFiltered?: boolean;
   showTabs?: boolean;
   eyebrow?: string;
   title?: string;
   description?: string;
-  onCustomizePackage?: (pkg: TravelPackageDetail) => void;
+  onCustomizePackage?: (pkg: TravelPackage) => void;
 }) {
+  const { packages: storePackages } = useTravelStore();
   const [activeTab, setActiveTab] = useState<"all" | "sri-lanka" | "international">("all");
-  const [selectedDetailPackage, setSelectedDetailPackage] = useState<TravelPackageDetail | null>(null);
   const [plannerModal, setPlannerModal] = useState<{
     open: boolean;
-    package: TravelPackageDetail | null;
-    mode: "book" | "customize";
+    package: TravelPackage | null;
+    mode: "inquiry" | "customize";
   }>({
     open: false,
     package: null,
     mode: "customize",
   });
 
-  const displayedPackages = useMemo(() => {
-    if (!showTabs || activeTab === "all") return packages;
-    if (activeTab === "sri-lanka") {
-      return packages.filter((p) => p.location.toLowerCase().includes("sri lanka"));
-    }
-    return packages.filter((p) => !p.location.toLowerCase().includes("sri lanka"));
-  }, [packages, activeTab, showTabs]);
+  const activePackagesList = propPackages ?? storePackages.filter((p) => p.status !== "Inactive");
 
-  const handleCustomize = (pkg: TravelPackageDetail) => {
+  const displayedPackages = useMemo(() => {
+    if (!showTabs || activeTab === "all") return activePackagesList;
+    if (activeTab === "sri-lanka") {
+      return activePackagesList.filter((p) => p.travelType === "Inbound");
+    }
+    return activePackagesList.filter((p) => p.travelType === "Outbound");
+  }, [activePackagesList, activeTab, showTabs]);
+
+  const handleCustomize = (pkg: TravelPackage) => {
     if (onCustomizePackage) {
       onCustomizePackage(pkg);
     } else {
@@ -68,14 +70,6 @@ export function TravelPackagesSection({
         mode: "customize",
       });
     }
-  };
-
-  const handleBook = (pkg: TravelPackageDetail) => {
-    setPlannerModal({
-      open: true,
-      package: pkg,
-      mode: "book",
-    });
   };
 
   return (
@@ -124,7 +118,6 @@ export function TravelPackagesSection({
             <TravelPackageCard
               key={pkg.slug}
               pkg={pkg}
-              onViewPackage={(item) => setSelectedDetailPackage(item)}
               onCustomize={handleCustomize}
             />
           ))}
@@ -149,20 +142,11 @@ export function TravelPackagesSection({
         </div>
       )}
 
-      {/* Package Detail Modal */}
-      <PackageDetailModal
-        pkg={selectedDetailPackage}
-        open={Boolean(selectedDetailPackage)}
-        onClose={() => setSelectedDetailPackage(null)}
-        onCustomize={handleCustomize}
-        onBook={handleBook}
-      />
-
       {/* Trip & Package Planner Modal */}
-      <CustomizeTripModal
+      <PublicTravelInquiryModal
         open={plannerModal.open}
-        onClose={() => setPlannerModal((prev) => ({ ...prev, open: false }))}
-        packageDetail={plannerModal.package}
+        onOpenChange={(open) => setPlannerModal((prev) => ({ ...prev, open }))}
+        defaultPackage={plannerModal.package}
         mode={plannerModal.mode}
       />
     </Section>
