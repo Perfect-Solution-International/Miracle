@@ -38,8 +38,8 @@ import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
 
-import { AnimatedKeyboardBackground } from "./animated-keyboard-background";
-import keyboardStyles from "./animated-keyboard-background.module.css";
+import { AnimatedCircuitBackground } from "./animated-circuit-background";
+import circuitStyles from "./animated-circuit-background.module.css";
 
 const TITLE = "IT Solutions";
 const DESCRIPTION =
@@ -208,8 +208,8 @@ const businessBenefits = [
 
 export default function Page() {
   return (
-    <main className={keyboardStyles.page}>
-      <AnimatedKeyboardBackground />
+    <main className={circuitStyles.page}>
+      <AnimatedCircuitBackground />
       <section
         aria-labelledby="it-solutions-hero-heading"
         className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
@@ -310,6 +310,7 @@ export default function Page() {
 
       <Section
         aria-labelledby="it-overview-heading"
+        className={circuitStyles.glassSection}
         containerClassName="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16"
       >
         <div>
@@ -340,7 +341,12 @@ export default function Page() {
               className="from-navy/25 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
             />
           </div>
-          <div className="shadow-soft relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border bg-white sm:grid-cols-2">
+          <div
+            className={cn(
+              "shadow-soft relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border sm:grid-cols-2",
+              circuitStyles.glassCard,
+            )}
+          >
             {overviewBenefits.map(({ title, description, icon: Icon }, index) => (
               <div
                 key={title}
@@ -368,7 +374,7 @@ export default function Page() {
       <Section
         id="services"
         aria-labelledby="it-services-heading"
-        className="bg-brand-blue-light/25 scroll-mt-24"
+        className={cn("scroll-mt-24", circuitStyles.glassSection)}
       >
         <SectionHeading
           id="it-services-heading"
@@ -381,7 +387,10 @@ export default function Page() {
           {services.map((service, index) => (
             <li
               key={service.title}
-              className="group/card shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition-shadow"
+              className={cn(
+                "group/card shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-2xl border transition-shadow",
+                circuitStyles.glassCard,
+              )}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
@@ -423,7 +432,11 @@ export default function Page() {
         </ul>
       </Section>
 
-      <Section id="how-we-work" tone="navy" aria-labelledby="it-process-heading">
+      <Section
+        id="how-we-work"
+        aria-labelledby="it-process-heading"
+        className={cn(circuitStyles.glassSection, circuitStyles.processSection)}
+      >
         <div
           aria-hidden="true"
           className="bg-grid-inverse absolute inset-0 -z-20 opacity-75"
@@ -433,7 +446,6 @@ export default function Page() {
           eyebrow="How We Work"
           title="A Clear Process From Idea to Implementation"
           description="A focused process keeps decisions visible, the solution practical and the work connected to your goals."
-          tone="inverse"
         />
         <ol className="border-brand-blue-muted/35 relative mt-12 grid gap-7 border-l pl-7 lg:mt-16 lg:grid-cols-6 lg:gap-5 lg:border-t lg:border-l-0 lg:pl-0">
           {process.map(({ step, title, description, icon: Icon }, index) => (
@@ -467,6 +479,7 @@ export default function Page() {
 
       <Section
         aria-labelledby="it-why-heading"
+        className={circuitStyles.glassSection}
         containerClassName="grid gap-12 lg:grid-cols-[0.82fr_0.9fr_0.82fr] lg:items-center lg:gap-10"
       >
         <div>
@@ -515,7 +528,7 @@ export default function Page() {
 
       <Section
         aria-labelledby="it-benefits-heading"
-        className="bg-brand-blue-light/25"
+        className={circuitStyles.glassSection}
         containerClassName="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16"
       >
         <div>
@@ -556,7 +569,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
-        className="bg-transparent"
+        className={cn("bg-transparent", circuitStyles.ctaSection)}
         eyebrow="Ready to Get Started?"
         title="Let's Build the Right IT Solution for Your Business"
         description="Tell us what you want to achieve and our team will help you find the most practical and effective way forward."
