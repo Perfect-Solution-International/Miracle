@@ -16,6 +16,15 @@ import type { Portal } from "@/lib/permissions/roles";
 import { useAuth } from "@/providers/auth-provider";
 import { cn } from "@/lib/utils";
 
+import { LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { ROUTES } from "@/config/routes";
+import { clearTestAdminAuthState } from "@/lib/auth/dev-admin-auth";
+import { api } from "@/lib/api/client";
+import { API_ROUTES } from "@/lib/api/endpoints";
+
 /**
  * The one sidebar used by the customer, supplier, staff, and admin portals.
  *
@@ -25,7 +34,9 @@ import { cn } from "@/lib/utils";
  */
 export function AppSidebar({ portal }: { portal: Portal }) {
   const pathname = usePathname();
+  const router = useRouter();
   const { ability } = useAuth();
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   const sections = useMemo(
     () => filterSections(PORTAL_NAVIGATION[portal], ability),
@@ -33,6 +44,17 @@ export function AppSidebar({ portal }: { portal: Portal }) {
   );
 
   const PortalIcon = PORTAL_ICONS[portal];
+
+  async function handleSignOut() {
+    setIsSigningOut(true);
+    try {
+      clearTestAdminAuthState();
+      await api.post(API_ROUTES.auth.logout).catch(() => {});
+    } finally {
+      router.replace(ROUTES.auth.login);
+      router.refresh();
+    }
+  }
 
   return (
     <nav aria-label="Main navigation" className="flex h-full flex-col gap-6 p-4">
@@ -59,6 +81,18 @@ export function AppSidebar({ portal }: { portal: Portal }) {
             </ul>
           </div>
         ))}
+      </div>
+
+      <div className="border-t pt-3">
+        <button
+          type="button"
+          onClick={handleSignOut}
+          disabled={isSigningOut}
+          className="focus-visible:ring-ring text-muted-foreground hover:bg-destructive/10 hover:text-destructive flex w-full items-center gap-2.5 rounded-md px-2 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
+        >
+          <LogOut className="size-4 shrink-0" aria-hidden="true" />
+          <span className="truncate">{isSigningOut ? "Signing out..." : "Sign out"}</span>
+        </button>
       </div>
     </nav>
   );

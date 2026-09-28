@@ -1268,19 +1268,7 @@ export function ImportExportLanding({
 
         <section id="services" className="section-y bg-white">
           <div className="container-page">
-            <div className="max-w-3xl">
-              <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-                Two ways to move forward
-              </p>
-              <h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Import &amp; Export Solutions
-              </h2>
-              <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed">
-                Tell us what you need to import or export, and our team will help
-                coordinate the relevant sourcing and trade requirements.
-              </p>
-            </div>
-            <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <div className="grid gap-6 lg:grid-cols-2">
               <FeatureCard
                 title="Import"
                 description="Source products from international markets and coordinate the import process based on your requirements."
@@ -1316,18 +1304,9 @@ export function ImportExportLanding({
         <section className="section-y bg-surface">
           <div className="container-page">
             <div className="max-w-3xl">
-              <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-                Product categories
-              </p>
-              <h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
+              <h2 className="text-ink text-4xl font-extrabold tracking-tight sm:text-5xl">
                 Product Categories
               </h2>
-              <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed">
-                Explore the types of products we can help you source, supply, import, or
-                export. These categories are examples, not limitations. If you need a
-                product that is not listed, simply tell us what you need and we will
-                review your requirement.
-              </p>
             </div>
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {CATEGORIES.map(([title, description, Icon, image]) => (

@@ -49,6 +49,13 @@ export interface TravelPackageDetail {
   location: string;
   travelers: string;
   travelType: TravelPackageType;
+  /**
+   * Explicit travel direction used for filtering related packages and
+   * determining which currency / market the package targets.
+   * "Inbound"  = international visitors coming TO Sri Lanka.
+   * "Outbound" = Sri Lankan travelers going to international destinations.
+   */
+  travelDirection: "Inbound" | "Outbound";
   duration: {
     days: number;
     nights: number;
