@@ -1,7 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -37,23 +39,85 @@ import {
   type TripPlannerFormInput,
   type TripPlannerInput,
 } from "../schemas/trip-planner.schema";
+import type { TravelPackageDetail } from "../types/travel-package-detail.types";
+
+function mapPackageTypeToOption(travelType?: string): string {
+  if (!travelType) return "";
+  const match = QUICK_PLANNER_TRAVEL_TYPES.find(
+    (t) => t.toLowerCase() === travelType.toLowerCase(),
+  );
+  return match ?? "Leisure";
+}
+
+function mapAccommodationPreference(title?: string): string {
+  if (!title) return "";
+  const lower = title.toLowerCase();
+  if (lower.includes("5") || lower.includes("luxury")) return "Luxury (5-star)";
+  if (lower.includes("3") || lower.includes("standard")) return "Standard (3-star)";
+  return "Comfort (4-star)";
+}
+
+function mapInterestsFromPackage(pkg?: TravelPackageDetail | null): string[] {
+  if (!pkg) return [];
+  const type = pkg.travelType?.toLowerCase() || "";
+  if (type === "adventure") return ["Adventure & Outdoor", "Sightseeing", "Wildlife & Nature"];
+  if (type === "cultural") return ["Cultural & Heritage", "Sightseeing"];
+  if (type === "honeymoon") return ["Beach & Relaxation", "Sightseeing"];
+  if (type === "family") return ["Sightseeing", "Beach & Relaxation", "Cultural & Heritage"];
+  return ["Sightseeing", "Beach & Relaxation"];
+}
+
+export interface TripPlannerFormProps {
+  className?: string;
+  defaultDestination?: string;
+  packageDetail?: TravelPackageDetail | null;
+  mode?: "book" | "customize";
+  onSuccess?: () => void;
+}
 
 /**
- * "Make Your Trip, Your Way" customization form. There is no backend intake
- * endpoint for this yet (same situation as `ContactForm` and
- * `RequirementInquiryForm`), so submission confirms receipt locally; wire this
- * to a real mutation once the intake API exists.
+ * "Make Your Trip, Your Way" customization & booking form.
+ * Pre-fills package details accurately when opened from "Book This Package" or "Customize This Package".
  */
 export function TripPlannerForm({
   className,
   defaultDestination,
-}: {
-  className?: string;
-  defaultDestination?: string;
-}) {
-  const form = useForm<TripPlannerFormInput, unknown, TripPlannerInput>({
-    resolver: zodResolver(tripPlannerSchema),
-    defaultValues: {
+  packageDetail,
+  mode = "customize",
+  onSuccess,
+}: TripPlannerFormProps) {
+  const isBooking = mode === "book";
+
+  const getComputedDefaults = (): TripPlannerFormInput => {
+    if (packageDetail) {
+      const destinationText =
+        packageDetail.destinations?.length > 0
+          ? packageDetail.destinations.join(", ")
+          : packageDetail.location;
+
+      const specialReq = isBooking
+        ? `Package Booking Inquiry: ${packageDetail.title} (${packageDetail.duration.days} Days / ${packageDetail.duration.nights} Nights, ${packageDetail.location}). Starting Quote: ${packageDetail.startingPrice}.`
+        : `Customization based on: ${packageDetail.title} (${packageDetail.duration.days} Days / ${packageDetail.duration.nights} Nights).`;
+
+      return {
+        fullName: "",
+        email: "",
+        phone: "",
+        startingLocation: isBooking ? (packageDetail.location.includes("Sri Lanka") ? "International" : "Colombo, Sri Lanka") : "",
+        destination: destinationText,
+        startDate: "",
+        endDate: "",
+        travelers: 2,
+        budgetRange: "$1,500 – $3,000",
+        accommodation: mapAccommodationPreference(packageDetail.accommodation?.title),
+        transportation: "Private chauffeur",
+        travelType: mapPackageTypeToOption(packageDetail.travelType),
+        interests: mapInterestsFromPackage(packageDetail),
+        specialRequirements: specialReq,
+      };
+    }
+
+    return {
       fullName: "",
       email: "",
       phone: "",
@@ -68,14 +132,30 @@ export function TripPlannerForm({
       travelType: "",
       interests: [],
       specialRequirements: "",
-    },
+    };
+  };
+
+  const form = useForm<TripPlannerFormInput, unknown, TripPlannerInput>({
+    resolver: zodResolver(tripPlannerSchema),
+    defaultValues: getComputedDefaults(),
   });
 
+  useEffect(() => {
+    form.reset(getComputedDefaults());
+  }, [packageDetail, mode, defaultDestination]);
+
   function onSubmit(values: TripPlannerInput) {
-    toast.success(`Thanks, ${values.fullName}!`, {
-      description: "Our travel desk will get back to you with a personalized itinerary.",
-    });
+    if (isBooking && packageDetail) {
+      toast.success(`Booking request received, ${values.fullName}!`, {
+        description: `We have received your booking inquiry for ${packageDetail.title}. Our travel desk will contact you shortly to confirm dates and arrangements.`,
+      });
+    } else {
+      toast.success(`Thanks, ${values.fullName}!`, {
+        description: "Our travel desk will get back to you with a personalized itinerary and quotation.",
+      });
+    }
     form.reset();
+    if (onSuccess) onSuccess();
   }
 
   return (
@@ -85,6 +165,41 @@ export function TripPlannerForm({
         className={cn("space-y-5", className)}
         noValidate
       >
+        {/* Selected Package Banner */}
+        {packageDetail ? (
+          <div className="flex items-center gap-3.5 rounded-2xl border border-brand-blue/20 bg-brand-blue-light/40 p-3 sm:p-4 shadow-xs">
+            <div className="relative size-16 shrink-0 overflow-hidden rounded-xl border border-white shadow-xs">
+              <Image
+                src={packageDetail.image.src}
+                alt={packageDetail.image.alt}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <span
+                  className={cn(
+                    "rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
+                    isBooking
+                      ? "bg-brand-blue text-white"
+                      : "bg-brand-red text-white",
+                  )}
+                >
+                  {isBooking ? "Package Booking Mode" : "Customizing Package"}
+                </span>
+                <span className="text-muted-foreground text-xs font-semibold">
+                  {packageDetail.duration.days} Days / {packageDetail.duration.nights} Nights
+                </span>
+              </div>
+              <p className="text-ink truncate text-sm sm:text-base font-bold mt-1">
+                {packageDetail.title}
+              </p>
+              <p className="text-brand-blue text-xs font-extrabold">{packageDetail.startingPrice}</p>
+            </div>
+          </div>
+        ) : null}
+
         <div className="grid gap-4 sm:grid-cols-2">
           <FormField
             control={form.control}
@@ -133,9 +248,9 @@ export function TripPlannerForm({
             name="startingLocation"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Starting Location</FormLabel>
+                <FormLabel>Starting City / Country</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Colombo, Sri Lanka" {...field} />
+                  <Input placeholder="e.g. Colombo, London, Dubai" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -148,9 +263,9 @@ export function TripPlannerForm({
           name="destination"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Destinations</FormLabel>
+              <FormLabel>Destination(s)</FormLabel>
               <FormControl>
-                <Input placeholder="e.g. Sigiriya, Kandy, Ella" {...field} />
+                <Input placeholder="e.g. Sigiriya, Kandy, Galle" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -163,7 +278,7 @@ export function TripPlannerForm({
             name="startDate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Travel Date (Start)</FormLabel>
+                <FormLabel>Preferred Start Date</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
                 </FormControl>
@@ -176,7 +291,7 @@ export function TripPlannerForm({
             name="endDate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Travel Date (End)</FormLabel>
+                <FormLabel>Preferred End Date</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
                 </FormControl>
@@ -241,7 +356,7 @@ export function TripPlannerForm({
             name="budgetRange"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Budget (Optional)</FormLabel>
+                <FormLabel>Estimated Budget per Person (Optional)</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger className="w-full">
@@ -318,7 +433,7 @@ export function TripPlannerForm({
             const selectedInterests: string[] = field.value ?? [];
             return (
               <FormItem>
-                <FormLabel>Activities & Interests (Optional)</FormLabel>
+                <FormLabel>Activities &amp; Experiences (Optional)</FormLabel>
                 <div className="flex flex-wrap gap-2">
                   {INTEREST_OPTIONS.map((interest) => {
                     const selected = selectedInterests.includes(interest);
@@ -356,11 +471,11 @@ export function TripPlannerForm({
           name="specialRequirements"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Special Requirements (Optional)</FormLabel>
+              <FormLabel>Special Requirements &amp; Notes (Optional)</FormLabel>
               <FormControl>
                 <Textarea
                   rows={3}
-                  placeholder="Dietary needs, accessibility, celebrations, or anything else we should know..."
+                  placeholder="Dietary needs, preferred flight times, room arrangements, or custom requests..."
                   {...field}
                 />
               </FormControl>
@@ -381,9 +496,16 @@ export function TripPlannerForm({
               <Loader2 className="animate-spin" aria-hidden="true" />
               Submitting...
             </>
+          ) : isBooking ? (
+            <>
+              <CheckCircle2 className="size-5" />
+              Submit Booking Inquiry
+              <ArrowRight data-icon="inline-end" aria-hidden="true" />
+            </>
           ) : (
             <>
-              Create My Trip
+              <Sparkles className="size-5" />
+              Submit Customized Trip Request
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </>
           )}

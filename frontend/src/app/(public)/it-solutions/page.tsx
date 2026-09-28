@@ -19,6 +19,7 @@ import {
   Settings2,
   Sparkles,
   Target,
+  TrendingUp,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -219,33 +220,44 @@ export default function Page() {
         <div className="container-page grid gap-10 py-12 md:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-16 lg:py-20">
           <div className="max-w-2xl">
             <Breadcrumb items={[{ label: TITLE }]} />
-            <div className="mt-6">
-              <Eyebrow>IT Solutions</Eyebrow>
+
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/60 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-600 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-indigo-600" />
+              </span>
+              Technology Engineering &amp; Digital Solutions
             </div>
+
             <h1
               id="it-solutions-hero-heading"
-              className="text-ink mt-5 max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl"
+              className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
             >
               Technology That Moves{" "}
-              <span className="text-brand-blue">Your Business Forward</span>
+              <span className="bg-gradient-to-r from-indigo-600 via-brand-blue to-navy bg-clip-text text-transparent">
+                Your Business Forward.
+              </span>
             </h1>
-            <p className="text-muted-foreground mt-5 max-w-xl text-base leading-relaxed sm:text-lg">
+
+            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
               {DESCRIPTION}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild variant="accent" size="xl">
+
+            <div className="flex flex-col gap-3 sm:flex-row pt-2">
+              <Button asChild variant="accent" size="xl" className="shadow-lift">
                 <a href="#services">
                   Explore Our IT Solutions
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </a>
               </Button>
-              <Button asChild variant="outline" size="xl">
-                <Link href={ROUTES.public.contact}>Talk to Our Team</Link>
+              <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
+                <Link href={ROUTES.public.contact}>Talk to Our Tech Team</Link>
               </Button>
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-2xl pb-8 sm:pl-8">
-            <div className="shadow-lift relative aspect-[4/3] overflow-hidden rounded-3xl border border-white">
+
+          <div className="relative mx-auto w-full max-w-2xl">
+            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
               <Image
                 src={SITE_MEDIA.itSolutions.hero.src}
                 alt={SITE_MEDIA.itSolutions.hero.alt}
@@ -256,8 +268,17 @@ export default function Page() {
               />
               <div
                 aria-hidden="true"
-                className="from-navy/35 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+                className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
               />
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
+                  <Code2 className="size-3.5" />
+                  Full-Stack Engineering
+                </span>
+                <p className="text-base sm:text-lg font-bold">
+                  Robust Systems Built For Mission-Critical Operations
+                </p>
+              </div>
             </div>
             <div
               className={cn(

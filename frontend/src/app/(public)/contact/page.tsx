@@ -4,6 +4,7 @@ import {
   ChevronRight,
   Code2,
   FileText,
+  Handshake,
   MessageSquare,
   Plane,
 } from "lucide-react";
@@ -130,44 +131,59 @@ export default function Page() {
     <main>
       <section
         aria-labelledby="contact-hero-heading"
-        className="relative isolate overflow-hidden border-b bg-white/50"
+        className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
       >
-        <div aria-hidden="true" className="bg-grid absolute inset-0 -z-20 opacity-40" />
         <div
           aria-hidden="true"
-          className="bg-brand-blue/10 absolute -top-32 right-0 -z-10 size-[34rem] rounded-full blur-3xl"
+          className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
         />
-        <div className="container-page grid gap-10 py-12 md:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-16 lg:py-20">
-          <div className="max-w-2xl">
+        <div
+          aria-hidden="true"
+          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)] opacity-50"
+        />
+
+        <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
+          <div className="max-w-2xl space-y-5">
             <Breadcrumb items={[{ label: TITLE }]} />
-            <div className="mt-6">
-              <Eyebrow>Contact Miracle International</Eyebrow>
+
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
+              </span>
+              Direct Support &amp; Client Advisory
             </div>
+
             <h1
               id="contact-hero-heading"
-              className="text-ink mt-5 max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl"
+              className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
             >
-              Let&apos;s Talk About <span className="text-brand-blue">What You Need</span>
+              Let&apos;s Talk About{" "}
+              <span className="bg-gradient-to-r from-brand-blue via-indigo-600 to-navy bg-clip-text text-transparent">
+                What You Need.
+              </span>
             </h1>
-            <p className="text-muted-foreground mt-5 max-w-xl text-base leading-relaxed sm:text-lg">
+
+            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
               Reach out with an inquiry, quotation request or business requirement. Our
-              team is ready to help you find the right next step.
+              multidisciplinary team is ready to structure the right solution for you.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild variant="accent" size="xl">
+
+            <div className="flex flex-col gap-3 sm:flex-row pt-2">
+              <Button asChild variant="accent" size="xl" className="shadow-lift">
                 <a href="#contact-form">
                   Send an Inquiry
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </a>
               </Button>
-              <Button asChild variant="outline" size="xl">
+              <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
                 <Link href={ROUTES.public.tellUsWhatYouNeed}>Share a Requirement</Link>
               </Button>
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-2xl pb-8 sm:pl-8">
-            <div className="shadow-lift relative aspect-[4/3] overflow-hidden rounded-3xl border border-white">
+          <div className="relative mx-auto w-full max-w-2xl">
+            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
               <Image
                 src={SITE_MEDIA.handshake.src}
                 alt={SITE_MEDIA.handshake.alt}
@@ -178,14 +194,21 @@ export default function Page() {
               />
               <div
                 aria-hidden="true"
-                className="from-navy/45 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+                className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
               />
-              <p className="absolute right-6 bottom-6 left-6 text-xl font-bold text-white">
-                Business <span className="text-brand-blue-muted">•</span> Travel{" "}
-                <span className="text-brand-blue-muted">•</span> Technology
-              </p>
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
+                  <Handshake className="size-3.5" />
+                  Client Partnership
+                </span>
+                <p className="text-base sm:text-lg font-bold">
+                  Open Channels For Quick Collaboration
+                </p>
+              </div>
             </div>
-            <div className="shadow-lift absolute right-4 bottom-0 left-4 grid gap-3 rounded-2xl border bg-white p-4 sm:right-0 sm:left-0 sm:grid-cols-2">
+
+            {/* Floating Glass Pill */}
+            <div className="shadow-xl absolute -bottom-5 right-4 left-4 grid gap-3 rounded-2xl border border-white/80 bg-white/95 p-3.5 backdrop-blur-md sm:right-6 sm:left-6 sm:grid-cols-2">
               {[phone, email].map((channel) => {
                 if (!channel) return null;
                 const Icon = channel.icon;
