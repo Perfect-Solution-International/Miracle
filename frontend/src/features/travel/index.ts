@@ -9,6 +9,7 @@ export {
 export { TravelServicesSection } from "./components/travel-services-section";
 export { TravelPackagesSection } from "./components/travel-packages-section";
 export { TravelPackageCard } from "./components/travel-package-card";
+export { PackageDetailModal } from "./components/package-detail-modal";
 export { CustomizeTripSection, CustomizeTripModal } from "./components/customize-trip-section";
 export { TripPlannerForm } from "./components/trip-planner-form";
 export { InboundHighlightSection } from "./components/inbound-highlight-section";

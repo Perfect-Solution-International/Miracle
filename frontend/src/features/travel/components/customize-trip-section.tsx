@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { SITE_MEDIA } from "@/config/site-media";
 
 import { TripPlannerForm } from "./trip-planner-form";
+import type { TravelPackageDetail } from "../types/travel-package-detail.types";
 
 const PERKS = [
   "Choose your exact destination & route",
@@ -18,15 +19,21 @@ const PERKS = [
   "Preferred accommodation & transport style",
 ] as const;
 
+export interface CustomizeTripModalProps {
+  open: boolean;
+  onClose: () => void;
+  initialDestination?: string;
+  packageDetail?: TravelPackageDetail | null;
+  mode?: "book" | "customize";
+}
+
 export function CustomizeTripModal({
   open,
   onClose,
   initialDestination,
-}: {
-  open: boolean;
-  onClose: () => void;
-  initialDestination?: string;
-}) {
+  packageDetail,
+  mode = "customize",
+}: CustomizeTripModalProps) {
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -42,9 +49,11 @@ export function CustomizeTripModal({
 
   if (!open) return null;
 
+  const isBooking = mode === "book";
+
   return (
     <div
-      className="bg-navy/40 fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+      className="bg-navy/45 fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="customize-modal-title"
@@ -52,9 +61,9 @@ export function CustomizeTripModal({
         if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div className="bg-popover text-popover-foreground relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl shadow-2xl">
+      <div className="bg-popover text-popover-foreground relative flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl shadow-2xl border border-slate-200/80">
         {/* Header */}
-        <div className="border-b px-6 py-5 pr-14 sm:px-8">
+        <div className="border-b px-6 py-5 pr-14 sm:px-8 bg-slate-50/70">
           <button
             type="button"
             onClick={onClose}
@@ -64,23 +73,33 @@ export function CustomizeTripModal({
             <X aria-hidden="true" className="size-5" />
           </button>
           <p className="text-brand-red text-xs font-bold tracking-wider uppercase">
-            Miracle Travel Desk
+            {isBooking ? "Package Booking Request" : "Miracle Travel Desk"}
           </p>
           <h2
             id="customize-modal-title"
             className="text-ink mt-1 text-2xl font-extrabold sm:text-3xl"
           >
-            Customize Your Trip
+            {isBooking
+              ? `Book ${packageDetail?.title || "Package"}`
+              : packageDetail
+                ? `Customize: ${packageDetail.title}`
+                : "Customize Your Trip"}
           </h2>
           <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
-            Tell us your travel preferences, dates, and requirements. Our travel specialists
-            will put together a tailored itinerary and quotation for you.
+            {isBooking
+              ? "Confirm your travel dates and traveler details. Our team will verify availability and arrange your booking."
+              : "Tell us your travel preferences, dates, and requirements. Our travel specialists will put together a tailored itinerary and quotation for you."}
           </p>
         </div>
 
         {/* Form Container */}
         <div className="overflow-y-auto px-6 py-6 sm:px-8">
-          <TripPlannerForm defaultDestination={initialDestination} />
+          <TripPlannerForm
+            defaultDestination={initialDestination}
+            packageDetail={packageDetail}
+            mode={mode}
+            onSuccess={onClose}
+          />
         </div>
       </div>
     </div>

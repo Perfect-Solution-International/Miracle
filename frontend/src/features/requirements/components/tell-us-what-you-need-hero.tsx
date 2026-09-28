@@ -1,195 +1,206 @@
+import {
+  ArrowRight,
+  Briefcase,
+  CheckCircle2,
+  Clock,
+  Code2,
+  Cpu,
+  Factory,
+  Globe2,
+  Headphones,
+  Package,
+  Plane,
+  ShieldCheck,
+  Sparkles,
+  TrendingUp,
+} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { Breadcrumb } from "@/components/common/breadcrumb";
+import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/config/routes";
+import { SITE_MEDIA } from "@/config/site-media";
 import { cn } from "@/lib/utils";
 
-import { HERO_SERVICE_ICONS, HERO_STATS } from "../data/tell-us-what-you-need.content";
+export const CATEGORY_CARDS = [
+  {
+    id: "sourcing",
+    title: "Global Sourcing & Trade",
+    description: "Machinery, raw materials, wholesale goods & international supply chain.",
+    image: SITE_MEDIA.portAerial,
+    icon: Globe2,
+    badge: "50+ Countries",
+  },
+  {
+    id: "it",
+    title: "IT & Software Engineering",
+    description: "Custom ERPs, POS systems, web & mobile applications, and automation.",
+    image: SITE_MEDIA.technology,
+    icon: Code2,
+    badge: "Enterprise Ready",
+  },
+  {
+    id: "machinery",
+    title: "Machinery & Equipment",
+    description: "Industrial equipment, production lines, and commercial tools.",
+    image: SITE_MEDIA.manufacturing,
+    icon: Factory,
+    badge: "Certified Quality",
+  },
+  {
+    id: "travel",
+    title: "Travel & Tourism Support",
+    description: "Bespoke Sri Lanka tours, outbound journeys, flight ticketing & visa handling.",
+    image: SITE_MEDIA.businessTravel,
+    icon: Plane,
+    badge: "End-to-End Care",
+  },
+];
 
-/** Light-mode hero for the public intake page.
- *
- * Background: blurred satellite image under a bright white-to-blue-light
- * gradient overlay — subtle photo texture without losing legibility.
- * All text uses dark navy / ink tones. Stats bar uses white glassmorphic cards
- * on a soft brand-blue-light base.
- */
 export function TellUsWhatYouNeedHero() {
   return (
     <section
       aria-labelledby="tell-us-heading"
-      className="relative isolate overflow-hidden bg-white"
+      className="relative isolate overflow-hidden border-b border-border/40 bg-white/70 backdrop-blur-md pt-8 pb-16 lg:pb-24"
     >
-      {/* ── Full-width background image (blurred, very bright) ── */}
-      <div aria-hidden="true" className="absolute inset-0 -z-20">
-        <Image
-          src="/brand/hero-bg.jpg"
-          alt=""
-          fill
-          priority
-          quality={85}
-          sizes="100vw"
-          className="object-cover object-center"
-          style={{ filter: "blur(4px) brightness(1.6) saturate(0.5) opacity(0.22)" }}
-        />
-      </div>
-
-      {/* Light gradient overlay */}
+      {/* Liquid Ambient Glow Mesh */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(160deg, #ffffff 0%, #eaf1fb 40%, #f0f5fd 70%, #ffffff 100%)",
-        }}
-      />
-
-      {/* Faint grid texture */}
-      <div aria-hidden="true" className="bg-grid absolute inset-0 -z-10 opacity-50" />
-
-      {/* Ambient glow orbs — light blue / light red */}
-      <div
-        aria-hidden="true"
-        className="pulse-glow pointer-events-none absolute -top-24 -right-24 -z-10 size-[500px] rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(17,80,168,0.10) 0%, rgba(17,80,168,0.03) 55%, transparent 78%)",
-        }}
+        className="pointer-events-none absolute -top-32 left-1/2 -z-10 -translate-x-1/2 h-[520px] w-full max-w-7xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/12 blur-[120px]"
       />
       <div
         aria-hidden="true"
-        className="pulse-glow pointer-events-none absolute -bottom-32 -left-16 -z-10 size-[420px] rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(223,32,33,0.07) 0%, rgba(17,80,168,0.05) 50%, transparent 75%)",
-          animationDelay: "2s",
-        }}
+        className="bg-grid absolute inset-0 -z-10 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"
       />
 
-      {/* ── Main content ───────────────────────────────────────── */}
-      <div className="container-page flex flex-col items-center pt-14 pb-0 text-center lg:pt-20">
-        <Breadcrumb items={[{ label: "Tell Us What You Need" }]} className="mb-6" />
+      <div className="container-page">
+        {/* Breadcrumb & Pulsing Status Badge */}
+        <div className="flex flex-col items-center text-center">
+          <Breadcrumb items={[{ label: "Tell Us What You Need" }]} className="mb-5" />
 
-        {/* Eyebrow pill */}
-        <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-brand-blue/15 bg-brand-blue-light/70 px-4 py-1.5 backdrop-blur-sm">
-          <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-red" />
-          <span className="text-[0.72rem] font-bold tracking-[0.2em] text-brand-blue uppercase">
-            Miracle International
-          </span>
-          <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-red" />
-        </div>
-
-        {/* Headline */}
-        <h1
-          id="tell-us-heading"
-          className="mx-auto max-w-4xl text-5xl leading-[1.04] font-extrabold tracking-tight text-ink sm:text-6xl lg:text-7xl"
-        >
-          Your Needs.{" "}
-          <span
-            className="block sm:inline"
-            style={{
-              background: "linear-gradient(135deg, #1150a8 0%, #0b3b80 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Our Solutions.
-          </span>
-        </h1>
-
-        {/* Sub-headline */}
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink/60 sm:text-lg lg:text-xl">
-          Share your requirements with us — products, services, or international
-          sourcing — and our expert team will coordinate the perfect solution
-          from&nbsp;A&nbsp;to&nbsp;Z.
-        </p>
-
-        {/* Service badge strip */}
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          {HERO_SERVICE_ICONS.map(({ icon: Icon, label }) => (
-            <div
-              key={label}
-              className={cn(
-                "flex items-center gap-2 rounded-full border border-brand-blue/15 bg-white px-4 py-2",
-                "text-sm font-semibold text-navy shadow-sm",
-                "transition-all duration-200 hover:border-brand-blue/40 hover:bg-brand-blue-light hover:shadow-md",
-              )}
-            >
-              <Icon aria-hidden="true" className="size-4 text-brand-blue" />
-              {label}
-            </div>
-          ))}
-          <div
-            className={cn(
-              "flex items-center gap-2 rounded-full border border-brand-red/20 bg-white px-4 py-2",
-              "text-sm font-semibold text-navy shadow-sm",
-              "transition-all duration-200 hover:border-brand-red/40 hover:bg-red-50 hover:shadow-md",
-            )}
-          >
-            <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-red" />
-            &amp; More
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
+            <span className="relative flex size-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
+            </span>
+            <span className="text-xs font-bold tracking-widest text-brand-blue uppercase">
+              Global Procurement &amp; Solutions Hub
+            </span>
           </div>
-        </div>
 
-        {/* Floating quote card */}
-        <div className="float-slow relative mt-14 hidden w-full max-w-lg lg:flex lg:justify-center">
-          <div
-            className="relative rounded-2xl border border-brand-blue/12 px-8 py-5 shadow-soft backdrop-blur-sm"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(234,241,251,0.9) 0%, rgba(255,255,255,0.95) 100%)",
-            }}
+          <h1
+            id="tell-us-heading"
+            className="mt-6 max-w-4xl text-4xl leading-[1.06] font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-[4rem]"
           >
-            <p className="text-base font-bold tracking-wide text-ink">
-              &ldquo;One request. Countless possibilities.&rdquo;
-            </p>
-            <p className="mt-1 text-xs text-ink/45">
-              Products · Sourcing · Services · Consultation
-            </p>
-            <span aria-hidden="true" className="absolute top-3 left-3 size-1.5 rounded-full bg-brand-red" />
-            <span aria-hidden="true" className="absolute right-3 bottom-3 size-1.5 rounded-full bg-brand-blue" />
-          </div>
-        </div>
-      </div>
+            Your Requirements.{" "}
+            <span className="bg-gradient-to-r from-brand-blue via-indigo-600 to-brand-blue bg-clip-text text-transparent">
+              Engineered From A to Z.
+            </span>
+          </h1>
 
-      {/* ── Stats bar ──────────────────────────────────────────── */}
-      <div className="container-page mt-16 pb-0">
-        {/* Accent shimmer line */}
-        <div
-          aria-hidden="true"
-          className="shimmer-line mx-auto mb-0 h-px max-w-3xl rounded-full"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent 0%, rgba(17,80,168,0.25) 20%, rgba(223,32,33,0.35) 50%, rgba(17,80,168,0.25) 80%, transparent 100%)",
-          }}
-        />
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
+            Tell us what products, enterprise software, industrial machinery, or travel
+            services you require. Our specialists coordinate verified solutions, transparent
+            pricing, and flawless execution.
+          </p>
 
-        <ul className="grid grid-cols-2 divide-x divide-brand-blue/8 border-x border-brand-blue/8 sm:grid-cols-4">
-          {HERO_STATS.map(({ icon: Icon, title, subtitle }, i) => (
-            <li
-              key={title}
-              className={cn(
-                "flex flex-col items-center gap-3 px-4 py-8 text-center sm:py-10",
-                i === 0 && "sm:items-start sm:text-left",
-                i === HERO_STATS.length - 1 && "sm:items-end sm:text-right",
-              )}
-            >
-              <span
-                className={cn(
-                  "inline-flex size-10 shrink-0 items-center justify-center rounded-xl",
-                  i === 0
-                    ? "bg-brand-red/10 text-brand-red"
-                    : "bg-brand-blue-light text-brand-blue",
-                )}
+          {/* SLA Trust Badges */}
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            {[
+              { icon: Clock, text: "24-Hour Guaranteed Quote" },
+              { icon: ShieldCheck, text: "Verified Quality Compliance" },
+              { icon: Headphones, text: "Dedicated Project Advisor" },
+            ].map(({ icon: Icon, text }) => (
+              <div
+                key={text}
+                className="flex items-center gap-2 rounded-full border border-brand-blue/15 bg-white/90 px-4 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-sm"
               >
-                <Icon aria-hidden="true" className="size-5" />
-              </span>
-              <span className="flex flex-col gap-0.5 leading-tight">
-                <span className="text-base font-extrabold text-ink">{title}</span>
-                <span className="text-xs font-medium text-ink/50">{subtitle}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+                <Icon className="size-3.5 text-brand-blue" />
+                <span>{text}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Quick Anchor CTA */}
+          <div className="mt-8 flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center justify-center gap-3.5">
+            <Button
+              asChild
+              variant="accent"
+              size="xl"
+              className="shadow-xl shadow-brand-red/20 font-bold"
+            >
+              <a href="#intake-form">
+                Fill Intake Form <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="xl" className="bg-white/80">
+              <Link href={ROUTES.public.contact}>Speak to an Advisor</Link>
+            </Button>
+          </div>
+        </div>
+
+        {/* ─── 4 Visual Category Selector Cards with Real Images ─── */}
+        <div className="mt-14 lg:mt-20">
+          <div className="mb-6 flex flex-col items-center text-center">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-blue">
+              Select Your Area of Interest
+            </span>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Choose a category below to explore specific capabilities or jump straight into the form.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {CATEGORY_CARDS.map((cat) => {
+              const Icon = cat.icon;
+              return (
+                <a
+                  key={cat.id}
+                  href="#intake-form"
+                  className="group relative flex flex-col overflow-hidden rounded-3xl border border-border/70 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/40 hover:shadow-2xl"
+                >
+                  {/* Image Container with Gradient Overlay */}
+                  <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                    <Image
+                      src={cat.image.src}
+                      alt={cat.image.alt}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent"
+                    />
+                    {/* Badge */}
+                    <span className="absolute top-3 right-3 rounded-full border border-white/30 bg-navy/70 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur-md">
+                      {cat.badge}
+                    </span>
+                    {/* Floating Icon */}
+                    <div className="absolute bottom-3 left-3 flex size-9 items-center justify-center rounded-xl bg-white/95 text-brand-blue shadow-md backdrop-blur-sm">
+                      <Icon className="size-5" />
+                    </div>
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-base font-bold text-ink transition-colors group-hover:text-brand-blue">
+                      {cat.title}
+                    </h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                      {cat.description}
+                    </p>
+                    <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-bold text-brand-blue">
+                      <span>Select category</span>
+                      <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

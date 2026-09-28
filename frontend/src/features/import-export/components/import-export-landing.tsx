@@ -845,12 +845,6 @@ function DetailModal({
                 Submit Import / Export Request
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Button>
-              {exportSection ? (
-                <Button size="xl" variant="outline" onClick={() => onRequest("export")}>
-                  Submit Export Requirement
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </Button>
-              ) : null}
             </div>
           </div>
         </div>
@@ -975,7 +969,7 @@ function RequestModal({
               className="overflow-y-auto px-6 py-6 sm:px-8"
               noValidate
             >
-              <div className="bg-brand-blue-light grid gap-1 rounded-xl p-1 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="bg-brand-blue-light grid grid-cols-2 gap-1 rounded-xl p-1">
                 {REQUEST_TYPES.map(([value, label]) => (
                   <button
                     key={value}
@@ -1195,22 +1189,43 @@ export function ImportExportLanding({
   return (
     <>
       <main>
-        <section className="relative overflow-hidden bg-white">
+        <section className="relative isolate overflow-hidden border-b border-border/40 bg-white/75 backdrop-blur-md">
+          {/* Liquid Ambient Glow Mesh */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-[450px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+          />
+          <div
+            aria-hidden="true"
+            className="bg-grid absolute inset-0 -z-10 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"
+          />
+
           <div className="container-page grid items-center gap-12 py-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14 lg:py-24">
             <div className="max-w-2xl">
               <Breadcrumb items={breadcrumbs} />
-              <p className="mt-8 text-brand-red text-xs font-bold tracking-[0.2em] uppercase">
-                Import &amp; Export
-              </p>
+              
+              {/* Pulsing Live Badge Pill */}
+              <div className="mt-7">
+                <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
+                  <span className="relative flex size-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
+                    <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
+                  </span>
+                  <span className="text-xs font-bold tracking-widest text-brand-blue uppercase">
+                    Cross-Border Trade & Logistics
+                  </span>
+                </div>
+              </div>
+
               <h1 className="text-ink mt-5 text-5xl leading-[0.98] font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
                 Connecting Products With Global Markets
               </h1>
-              <p className="text-muted-foreground mt-7 max-w-xl text-lg leading-relaxed sm:text-xl">
+              <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed sm:text-xl">
                 We help businesses source products internationally and coordinate import
                 and export requirements through practical, end-to-end trade support.
               </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Button size="xl" onClick={() => openForm()}>
+              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row">
+                <Button size="xl" variant="accent" onClick={() => openForm()} className="shadow-lg shadow-brand-red/20">
                   Submit Import / Export Request
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
@@ -1219,7 +1234,7 @@ export function ImportExportLanding({
                 </Button>
               </div>
             </div>
-            <div className="shadow-lift relative aspect-[4/3] overflow-hidden rounded-[2rem] border-8 border-white lg:-mr-24 lg:aspect-[16/9] lg:translate-x-6 xl:-mr-40">
+            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-[2rem] border-8 border-white bg-slate-100 lg:-mr-24 lg:aspect-[16/9] lg:translate-x-6 xl:-mr-40">
               <Image
                 src={SITE_MEDIA.portAerial.src}
                 alt=""
@@ -1234,13 +1249,13 @@ export function ImportExportLanding({
                 fill
                 priority
                 sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 56vw, 100vw"
-                className="scale-[1.02] object-cover brightness-[0.98] saturate-[0.9]"
+                className="scale-[1.02] object-cover brightness-[0.98] saturate-[0.9] transition-transform duration-700 hover:scale-105"
               />
               <div
                 aria-hidden="true"
                 className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white/65 via-white/15 to-transparent"
               />
-              <span className="text-ink shadow-soft absolute top-5 left-5 rounded-full bg-white/95 px-4 py-2 text-xs font-bold">
+              <span className="text-ink shadow-soft absolute top-5 left-5 rounded-full bg-white/95 px-4 py-2 text-xs font-bold backdrop-blur-sm">
                 <Globe2
                   aria-hidden="true"
                   className="text-brand-blue mr-2 inline size-4"

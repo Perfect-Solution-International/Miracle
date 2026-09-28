@@ -18,7 +18,15 @@ export type TravelPackageType =
   | "family"
   | "honeymoon"
   | "adventure"
+  | "cultural"
   | "business";
+
+export interface WhatToExpectItem {
+  title: string;
+  description: string;
+  image?: SiteImage;
+  badge?: string;
+}
 
 /**
  * Full content for a single travel package — both the summary shown on its
@@ -32,6 +40,8 @@ export interface TravelPackageDetail {
   tagline: string;
   /** Cover photo used on the card and the detail page hero. */
   image: SiteImage;
+  /** Secondary highlight photo for the detail layout. */
+  secondaryImage?: SiteImage;
   /** Extra photos for the detail page's gallery, cover image excluded. */
   gallery: readonly SiteImage[];
   popular?: boolean;
@@ -48,6 +58,8 @@ export interface TravelPackageDetail {
   startingPrice: string;
   /** Short bullet highlights shown on the listing card. */
   highlights: readonly string[];
+  /** Structured "What to Expect" points with clear, short descriptions for left-content / right-image layout. */
+  whatToExpect: readonly WhatToExpectItem[];
   about: string;
   destinations: readonly string[];
   itinerary: readonly PackageItineraryDay[];

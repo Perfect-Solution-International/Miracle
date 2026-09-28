@@ -29,7 +29,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: ROUTES.public.workVisa,
-  image: SITE_MEDIA.travelCategoryCards.customized,
+  image: SITE_MEDIA.workVisaHero,
 });
 
 const WORK_VISA_PILLARS = [

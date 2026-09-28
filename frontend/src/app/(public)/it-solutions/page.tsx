@@ -19,6 +19,7 @@ import {
   Settings2,
   Sparkles,
   Target,
+  TrendingUp,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -207,43 +208,58 @@ export default function Page() {
     <main>
       <section
         aria-labelledby="it-solutions-hero-heading"
-        className="relative isolate overflow-hidden border-b bg-white/50"
+        className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
       >
-        <div aria-hidden="true" className="bg-grid absolute inset-0 -z-20 opacity-40" />
         <div
           aria-hidden="true"
-          className="bg-brand-blue/10 absolute -top-32 right-0 -z-10 size-[34rem] rounded-full blur-3xl"
+          className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-indigo-500/15 via-brand-blue/10 to-purple-500/10 blur-[100px]"
         />
-        <div className="container-page grid gap-10 py-12 md:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-16 lg:py-20">
-          <div className="max-w-2xl">
+        <div
+          aria-hidden="true"
+          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)] opacity-50"
+        />
+
+        <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
+          <div className="max-w-2xl space-y-5">
             <Breadcrumb items={[{ label: TITLE }]} />
-            <div className="mt-6">
-              <Eyebrow>IT Solutions</Eyebrow>
+
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/60 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-600 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-indigo-600" />
+              </span>
+              Technology Engineering &amp; Digital Solutions
             </div>
+
             <h1
               id="it-solutions-hero-heading"
-              className="text-ink mt-5 max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl"
+              className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
             >
               Technology That Moves{" "}
-              <span className="text-brand-blue">Your Business Forward</span>
+              <span className="bg-gradient-to-r from-indigo-600 via-brand-blue to-navy bg-clip-text text-transparent">
+                Your Business Forward.
+              </span>
             </h1>
-            <p className="text-muted-foreground mt-5 max-w-xl text-base leading-relaxed sm:text-lg">
+
+            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
               {DESCRIPTION}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild variant="accent" size="xl">
+
+            <div className="flex flex-col gap-3 sm:flex-row pt-2">
+              <Button asChild variant="accent" size="xl" className="shadow-lift">
                 <a href="#services">
                   Explore Our IT Solutions
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </a>
               </Button>
-              <Button asChild variant="outline" size="xl">
-                <Link href={ROUTES.public.contact}>Talk to Our Team</Link>
+              <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
+                <Link href={ROUTES.public.contact}>Talk to Our Tech Team</Link>
               </Button>
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-2xl pb-8 sm:pl-8">
-            <div className="shadow-lift relative aspect-[4/3] overflow-hidden rounded-3xl border border-white">
+
+          <div className="relative mx-auto w-full max-w-2xl">
+            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
               <Image
                 src={SITE_MEDIA.itSolutions.hero.src}
                 alt={SITE_MEDIA.itSolutions.hero.alt}
@@ -254,15 +270,35 @@ export default function Page() {
               />
               <div
                 aria-hidden="true"
-                className="from-navy/35 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+                className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
               />
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
+                  <Code2 className="size-3.5" />
+                  Full-Stack Engineering
+                </span>
+                <p className="text-base sm:text-lg font-bold">
+                  Robust Systems Built For Mission-Critical Operations
+                </p>
+              </div>
             </div>
-            <div className="shadow-lift absolute right-4 bottom-0 left-4 flex items-center justify-between rounded-2xl border bg-white px-5 py-4 sm:right-0 sm:left-0">
-              <span className="text-ink text-sm font-bold">Build</span>
-              <ArrowRight aria-hidden="true" className="text-brand-blue/50 size-4" />
-              <span className="text-ink text-sm font-bold">Automate</span>
-              <ArrowRight aria-hidden="true" className="text-brand-blue/50 size-4" />
-              <span className="text-brand-blue text-sm font-bold">Scale</span>
+
+            {/* Floating Glass Pill */}
+            <div className="shadow-xl absolute -bottom-5 right-4 left-4 flex items-center justify-between rounded-2xl border border-white/80 bg-white/95 px-6 py-3.5 backdrop-blur-md sm:right-6 sm:left-6">
+              <span className="text-ink text-xs sm:text-sm font-bold flex items-center gap-1.5">
+                <Code2 className="size-4 text-indigo-600" />
+                Build
+              </span>
+              <ArrowRight aria-hidden="true" className="text-indigo-600/50 size-4" />
+              <span className="text-ink text-xs sm:text-sm font-bold flex items-center gap-1.5">
+                <Bot className="size-4 text-indigo-600" />
+                Automate
+              </span>
+              <ArrowRight aria-hidden="true" className="text-indigo-600/50 size-4" />
+              <span className="text-indigo-600 text-xs sm:text-sm font-bold flex items-center gap-1.5">
+                <TrendingUp className="size-4 text-indigo-600" />
+                Scale
+              </span>
             </div>
           </div>
         </div>

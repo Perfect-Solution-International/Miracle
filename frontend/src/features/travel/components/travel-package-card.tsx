@@ -14,9 +14,11 @@ import type { TravelPackageDetail } from "../types/travel-package-detail.types";
 export function TravelPackageCard({
   pkg,
   onCustomize,
+  onViewPackage,
 }: {
   pkg: TravelPackageDetail;
   onCustomize?: (pkg: TravelPackageDetail) => void;
+  onViewPackage?: (pkg: TravelPackageDetail) => void;
 }) {
   return (
     <li className="shadow-soft group/card flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition-shadow hover:shadow-lift">
@@ -73,12 +75,24 @@ export function TravelPackageCard({
         <div className="mt-auto flex flex-col gap-3 pt-3">
           <p className="text-ink text-base font-extrabold">{pkg.startingPrice}</p>
           <div className="flex gap-2.5">
-            <Button asChild className="flex-1" size="default">
-              <Link href={ROUTES.public.travelPackage(pkg.slug)}>
+            {onViewPackage ? (
+              <Button
+                type="button"
+                className="flex-1"
+                size="default"
+                onClick={() => onViewPackage(pkg)}
+              >
                 View Package
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Link>
-            </Button>
+              </Button>
+            ) : (
+              <Button asChild className="flex-1" size="default">
+                <Link href={ROUTES.public.travelPackage(pkg.slug)}>
+                  View Package
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                </Link>
+              </Button>
+            )}
             {onCustomize ? (
               <Button
                 type="button"

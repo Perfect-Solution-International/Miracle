@@ -24,9 +24,17 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
       spacing="none"
       tone={dark ? "navy" : "default"}
       aria-labelledby="business-detail-heading"
-      className={dark ? undefined : "bg-brand-blue-light/40"}
+      className={cn(
+        "relative isolate overflow-hidden",
+        dark ? undefined : "bg-white/70 backdrop-blur-md",
+      )}
       containerClassName="grid gap-10 py-12 md:py-16 lg:grid-cols-[1fr_0.96fr] lg:items-center lg:gap-16 lg:py-20"
     >
+      {/* Liquid Ambient Glow Mesh */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 left-1/2 -z-10 -translate-x-1/2 h-96 w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+      />
       <div
         aria-hidden="true"
         className={cn(
@@ -42,13 +50,39 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
             { label: detail.title },
           ]}
         />
-        <div className="mt-9">
-          <Eyebrow tone={dark ? "inverse" : "default"}>{detail.title}</Eyebrow>
+        {/* Pulsing Live Badge Pill */}
+        <div className="mt-8">
+          <div
+            className={cn(
+              "inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 backdrop-blur-md shadow-xs border",
+              dark
+                ? "border-white/20 bg-white/10 text-white"
+                : "border-brand-blue/20 bg-brand-blue/5 text-brand-blue",
+            )}
+          >
+            <span className="relative flex size-2">
+              <span
+                className={cn(
+                  "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
+                  dark ? "bg-brand-red" : "bg-brand-blue",
+                )}
+              />
+              <span
+                className={cn(
+                  "relative inline-flex size-2 rounded-full",
+                  dark ? "bg-brand-red" : "bg-brand-blue",
+                )}
+              />
+            </span>
+            <span className="text-xs font-bold tracking-widest uppercase">
+              {detail.title}
+            </span>
+          </div>
         </div>
         <h1
           id="business-detail-heading"
           className={cn(
-            "mt-5 max-w-2xl text-4xl leading-[1.09] font-bold tracking-tight sm:text-5xl lg:text-[3.5rem]",
+            "mt-5 max-w-2xl text-4xl leading-[1.09] font-extrabold tracking-tight sm:text-5xl lg:text-[3.5rem]",
             dark ? "text-white" : "text-ink",
           )}
         >
@@ -56,22 +90,22 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
         </h1>
         <p
           className={cn(
-            "mt-6 max-w-xl text-lg leading-relaxed font-medium",
-            dark ? "text-white/90" : "text-ink",
+            "mt-6 max-w-xl text-lg leading-relaxed font-semibold",
+            dark ? "text-white/90" : "text-ink/90",
           )}
         >
           {detail.lead}
         </p>
         <p
           className={cn(
-            "mt-4 max-w-xl leading-relaxed",
+            "mt-4 max-w-xl leading-relaxed text-base",
             dark ? "text-white/70" : "text-muted-foreground",
           )}
         >
           {detail.introduction}
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl">
+          <Button asChild variant="accent" size="xl" className="shadow-lg shadow-brand-red/20">
             <Link href={detail.cta.href}>
               {detail.cta.label} <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>
@@ -85,18 +119,18 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
         <div
           aria-hidden="true"
           className={cn(
-            "bg-brand-blue absolute top-5 h-[72%] w-[72%] rounded-[1.75rem]",
+            "bg-gradient-to-tr from-brand-blue/30 to-brand-red/20 absolute top-5 h-[76%] w-[76%] rounded-[2rem] blur-xl opacity-80",
             detail.reverseFeature ? "right-0" : "left-0",
           )}
         />
-        <div className="shadow-soft relative mx-3 aspect-[1.18] overflow-hidden rounded-[1.5rem] border-4 border-white">
+        <div className="shadow-2xl relative mx-3 aspect-[1.18] overflow-hidden rounded-[1.75rem] border-4 border-white bg-slate-100">
           <Image
             src={detail.image.src}
             alt={detail.image.alt}
             fill
             preload
             sizes="(min-width: 1280px) 550px, (min-width: 1024px) 45vw, 90vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-700 hover:scale-105"
           />
           <div
             aria-hidden="true"
@@ -105,7 +139,7 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
         </div>
         <div
           className={cn(
-            "shadow-soft absolute bottom-0 w-[42%] overflow-hidden rounded-2xl border-4 border-white bg-white",
+            "shadow-2xl absolute bottom-0 w-[44%] overflow-hidden rounded-2xl border-4 border-white bg-white backdrop-blur-sm",
             detail.reverseFeature ? "left-0" : "right-0",
           )}
         >
@@ -121,13 +155,13 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
         </div>
         <div
           className={cn(
-            "border-border/70 shadow-soft absolute bottom-10 max-w-[56%] rounded-xl border bg-white px-4 py-3",
+            "border-border/70 shadow-xl absolute bottom-8 max-w-[58%] rounded-2xl border bg-white/95 backdrop-blur-md px-4 py-3",
             detail.reverseFeature ? "right-0" : "left-0",
           )}
         >
           <span
             aria-hidden="true"
-            className="bg-brand-red mr-2 inline-block size-2 rounded-full"
+            className="bg-brand-red mr-2 inline-block size-2 rounded-full animate-pulse"
           />
           <span className="text-brand-blue-dark text-xs font-bold sm:text-sm">
             {detail.heroLabel}
