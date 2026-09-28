@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
 
+import { CustomizeTripModal } from "./customize-trip-section";
+import { PackageDetailModal } from "./package-detail-modal";
 import { TravelPackageCard } from "./travel-package-card";
 import type { TravelPackageDetail } from "../types/travel-package-detail.types";
 
@@ -37,6 +39,16 @@ export function TravelPackagesSection({
   onCustomizePackage?: (pkg: TravelPackageDetail) => void;
 }) {
   const [activeTab, setActiveTab] = useState<"all" | "sri-lanka" | "international">("all");
+  const [selectedDetailPackage, setSelectedDetailPackage] = useState<TravelPackageDetail | null>(null);
+  const [plannerModal, setPlannerModal] = useState<{
+    open: boolean;
+    package: TravelPackageDetail | null;
+    mode: "book" | "customize";
+  }>({
+    open: false,
+    package: null,
+    mode: "customize",
+  });
 
   const displayedPackages = useMemo(() => {
     if (!showTabs || activeTab === "all") return packages;
@@ -45,6 +57,26 @@ export function TravelPackagesSection({
     }
     return packages.filter((p) => !p.location.toLowerCase().includes("sri lanka"));
   }, [packages, activeTab, showTabs]);
+
+  const handleCustomize = (pkg: TravelPackageDetail) => {
+    if (onCustomizePackage) {
+      onCustomizePackage(pkg);
+    } else {
+      setPlannerModal({
+        open: true,
+        package: pkg,
+        mode: "customize",
+      });
+    }
+  };
+
+  const handleBook = (pkg: TravelPackageDetail) => {
+    setPlannerModal({
+      open: true,
+      package: pkg,
+      mode: "book",
+    });
+  };
 
   return (
     <Section
@@ -92,7 +124,8 @@ export function TravelPackagesSection({
             <TravelPackageCard
               key={pkg.slug}
               pkg={pkg}
-              onCustomize={onCustomizePackage}
+              onViewPackage={(item) => setSelectedDetailPackage(item)}
+              onCustomize={handleCustomize}
             />
           ))}
         </ul>
@@ -115,6 +148,23 @@ export function TravelPackagesSection({
           </Button>
         </div>
       )}
+
+      {/* Package Detail Modal */}
+      <PackageDetailModal
+        pkg={selectedDetailPackage}
+        open={Boolean(selectedDetailPackage)}
+        onClose={() => setSelectedDetailPackage(null)}
+        onCustomize={handleCustomize}
+        onBook={handleBook}
+      />
+
+      {/* Trip & Package Planner Modal */}
+      <CustomizeTripModal
+        open={plannerModal.open}
+        onClose={() => setPlannerModal((prev) => ({ ...prev, open: false }))}
+        packageDetail={plannerModal.package}
+        mode={plannerModal.mode}
+      />
     </Section>
   );
 }

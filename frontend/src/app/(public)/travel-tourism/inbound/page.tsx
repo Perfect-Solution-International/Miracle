@@ -80,9 +80,9 @@ export default function Page() {
           { label: "Travel & Tourism", href: ROUTES.public.travelTourism },
           { label: "Inbound Travel" },
         ]}
-        categoryLabel="Inbound Travel"
-        title="Explore Sri Lanka & Travel Beyond"
-        description="Discover unforgettable journeys in Sri Lanka or explore international destinations with travel options designed around your needs."
+        categoryLabel="Inbound Travel (Sri Lanka)"
+        title="Discover Sri Lanka: Ancient Heritage, Hill Country & Coast"
+        description="Immerse yourself in the wonders of Sri Lanka with handpicked hotels, private chauffeured transport, and authentic local experiences."
         image={SITE_MEDIA.inboundHero}
         primary={{ label: "Explore Travel Packages", href: "#packages" }}
       />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ROUTES } from "@/config/routes";
+import { SITE_MEDIA } from "@/config/site-media";
 import {
   VisaAssistanceSection,
   VisaBenefitsSection,
@@ -16,6 +17,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: ROUTES.public.visaServices,
+  image: SITE_MEDIA.travelCategoryCards.customized,
 });
 
 export default function Page() {

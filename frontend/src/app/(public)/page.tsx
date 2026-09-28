@@ -8,9 +8,9 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
   // The root page uses the full brand title rather than the "%s | brand" template.
-  title: { absolute: `${APP_CONFIG.name} | Global Trade, Sourcing & Business Solutions` },
+  title: { absolute: `${APP_CONFIG.name} | Business Solutions, IT Services & Global Travel` },
   description:
-    "Miracle International connects businesses with global suppliers, wholesale products, logistics, business setup, technology, and travel services — coordinated by one partner.",
+    "Miracle International is your trusted partner for integrated business solutions, enterprise IT & software engineering, curated inbound & outbound travel, and cross-border trade.",
   path: ROUTES.public.home,
   image: SITE_MEDIA.heroPort,
 });

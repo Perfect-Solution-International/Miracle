@@ -79,9 +79,9 @@ export default function Page() {
           { label: "Travel & Tourism", href: ROUTES.public.travelTourism },
           { label: "Outbound Travel" },
         ]}
-        categoryLabel="Outbound Travel"
-        title="Explore Sri Lanka & Travel Beyond"
-        description="Discover unforgettable journeys in Sri Lanka or explore international destinations with travel options designed around your needs."
+        categoryLabel="Outbound Travel (Worldwide)"
+        title="International Destinations & Worldwide Holidays"
+        description="Explore popular international getaways across Dubai, Maldives, Singapore, Malaysia, Thailand, and beyond with complete visa and logistics support."
         image={SITE_MEDIA.travelHeroInboundOutbound}
         primary={{ label: "Explore Travel Packages", href: "#packages" }}
       />
