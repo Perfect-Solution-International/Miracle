@@ -1,7 +1,6 @@
 "use client";
 
 import { Calendar, Compass, MapPin, Search, Users } from "lucide-react";
-import Image from "next/image";
 import { useState, type FormEvent } from "react";
 
 import { Eyebrow } from "@/components/common/eyebrow";
@@ -14,7 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SITE_MEDIA } from "@/config/site-media";
+
+import { TravelCinematicBackground } from "./travel-cinematic-background";
 
 const TRAVEL_TYPES = [
   { value: "all", label: "All Travel Types" },
@@ -67,19 +67,7 @@ export function TravelHero({
       aria-labelledby="travel-hero-heading"
       className="relative isolate overflow-hidden border-b bg-slate-50"
     >
-      {/* Light, Bright, Clean Travel Background */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <Image
-          src={SITE_MEDIA.travelHeroBright.src}
-          alt={SITE_MEDIA.travelHeroBright.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div className="from-white/92 via-white/82 to-white/96 absolute inset-0 bg-gradient-to-b" />
-      </div>
-
+      <TravelCinematicBackground />
       <div className="container-page flex flex-col items-center gap-5 py-12 text-center sm:py-16 md:py-20">
         <Breadcrumb items={[{ label: "Travel & Tourism" }]} />
         <Eyebrow tone="default">Miracle International Travel &amp; Tourism</Eyebrow>
