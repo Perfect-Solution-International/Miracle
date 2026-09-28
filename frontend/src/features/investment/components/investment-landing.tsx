@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
+import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -198,17 +198,11 @@ export function InvestmentLanding({
             aria-hidden="true"
             className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-[450px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
           />
-          <div
-            aria-hidden="true"
-            className="bg-grid absolute inset-0 -z-10 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-          />
 
           <div className="container-page grid gap-10 py-16 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:py-24">
             <div className="max-w-2xl">
-              <Breadcrumb items={breadcrumbs} />
-              
               {/* Pulsing Live Badge Pill */}
-              <div className="mt-7">
+              <div>
                 <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
                   <span className="relative flex size-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
@@ -258,7 +252,7 @@ export function InvestmentLanding({
 
         <section className="section-y bg-white"><div className="container-page grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center"><div className="relative min-h-[470px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.investment.analysis.src} alt={SITE_MEDIA.investment.analysis.alt} fill sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover" /></div><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Explore by sector</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Investment Opportunities</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">Explore opportunities across different business sectors.</p><div className="mt-8 grid gap-3 sm:grid-cols-2">{CATEGORIES.map(([title, Icon]) => <button type="button" onClick={openForm} key={title} className="hover:border-brand-blue/40 flex items-center gap-3 rounded-xl border bg-white p-4 text-left transition-colors"><Icon className="text-brand-blue size-5 shrink-0" /><span className="text-ink text-sm font-semibold">{title}</span><ChevronRight className="text-muted-foreground ml-auto size-4" /></button>)}</div><Button size="lg" onClick={openForm} className="mt-8">Explore Opportunities <ArrowRight data-icon="inline-end" /></Button></div></div></section>
 
-        <section className="section-y bg-brand-blue-light/35"><div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Ideas with potential</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Business Opportunities</h2><p className="text-muted-foreground mt-4 max-w-xl text-lg leading-relaxed">Explore opportunities to start, expand or participate in different types of businesses.</p><div className="mt-9 grid gap-3 sm:grid-cols-2">{BUSINESS_OPPORTUNITIES.map(([title, description, Icon]) => <article key={title} className="rounded-xl border bg-white p-4"><Icon className="text-brand-blue size-5" /><h3 className="text-ink mt-4 text-sm font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-xs leading-relaxed">{description}</p></article>)}</div></div><div className="relative min-h-[440px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.investment.planning.src} alt={SITE_MEDIA.investment.planning.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div></div></section>
+        <section className="section-y bg-white border-t border-slate-100"><div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Ideas with potential</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Business Opportunities</h2><p className="text-muted-foreground mt-4 max-w-xl text-lg leading-relaxed">Explore opportunities to start, expand or participate in different types of businesses.</p><div className="mt-9 grid gap-3 sm:grid-cols-2">{BUSINESS_OPPORTUNITIES.map(([title, description, Icon]) => <article key={title} className="rounded-xl border bg-white p-4"><Icon className="text-brand-blue size-5" /><h3 className="text-ink mt-4 text-sm font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-xs leading-relaxed">{description}</p></article>)}</div></div><div className="relative min-h-[440px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.investment.planning.src} alt={SITE_MEDIA.investment.planning.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div></div></section>
 
         <section className="section-y bg-white"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">No invented listings</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Investment Projects</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">Explore projects that may require investment, business participation or strategic support.</p></div><div className="mt-10 rounded-3xl border border-dashed bg-surface px-6 py-14 text-center sm:px-12"><CircleDollarSign className="text-brand-blue mx-auto size-10" /><h3 className="text-ink mt-5 text-2xl font-bold">No Investment Projects Available</h3><p className="text-muted-foreground mx-auto mt-3 max-w-lg">New opportunities will be added as they become available.</p><Button size="lg" onClick={openForm} className="mt-7">Submit Your Investment Requirement <ArrowRight data-icon="inline-end" /></Button></div></div></section>
 

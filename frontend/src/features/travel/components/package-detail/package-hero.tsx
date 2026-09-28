@@ -4,7 +4,6 @@ import { ArrowRight, CalendarDays, Compass, MapPin, SlidersHorizontal, Star, Use
 import Image from "next/image";
 import { useState } from "react";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inquiry-modal";
 import { ROUTES } from "@/config/routes";
@@ -57,23 +56,6 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
             <div className="from-navy/70 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
           </div>
 
-          <Breadcrumb
-            className="mt-6"
-            items={[
-              { label: "Travel & Tourism", href: ROUTES.public.travelTourism },
-              {
-                label:
-                  detail.travelDirection === "Inbound" ? "Inbound Tours" : "Outbound Tours",
-                href:
-                  detail.travelDirection === "Inbound"
-                    ? ROUTES.public.inboundTravel
-                    : ROUTES.public.outboundTravel,
-              },
-              { label: detail.title },
-            ]}
-          />
-
-          {/* Package Summary Card */}
           <div className="shadow-lift mt-6 flex flex-col gap-6 rounded-3xl border bg-white p-6 sm:p-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="flex flex-col gap-4">
               {/* Badges */}

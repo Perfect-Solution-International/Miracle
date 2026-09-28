@@ -15,7 +15,6 @@ import { MARKET_DESTINATIONS, MARKET_HUB } from "../data/about.content";
 function TradeRouteMap() {
   return (
     <div className="bg-brand-blue-light relative isolate overflow-hidden rounded-2xl p-6 sm:p-10">
-      <div aria-hidden="true" className="bg-grid absolute inset-0 -z-10 opacity-40" />
       <svg viewBox="0 0 100 100" role="presentation" className="aspect-[16/10] w-full">
         {MARKET_DESTINATIONS.map((pin) => {
           const midX = (MARKET_HUB.x + pin.x) / 2;

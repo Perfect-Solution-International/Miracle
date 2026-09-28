@@ -33,7 +33,7 @@ export function InboundTravelSection() {
     <section
       id="inbound"
       aria-labelledby="inbound-heading"
-      className="scroll-mt-24 border-b bg-white py-12 lg:py-16"
+      className="scroll-mt-24 bg-white py-12 lg:py-16"
     >
       <div className="container-page">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
@@ -101,7 +101,7 @@ export function OutboundTravelSection() {
     <section
       id="outbound"
       aria-labelledby="outbound-heading"
-      className="scroll-mt-24 border-b bg-surface py-12 lg:py-16"
+      className="scroll-mt-24 bg-white border-t border-slate-100 py-12 lg:py-16"
     >
       <div className="container-page">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">

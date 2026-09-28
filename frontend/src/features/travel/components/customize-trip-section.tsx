@@ -138,8 +138,7 @@ export function CustomizeTripSection({
         aria-labelledby="customize-trip-heading"
         className="scroll-mt-24 py-12 lg:py-16"
       >
-        <div className="shadow-soft rounded-3xl border bg-white p-6 sm:p-10 lg:p-12">
-          <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+        <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
             {/* Travel Image with compact proportions */}
             <div className="relative aspect-[4/3] max-h-80 w-full overflow-hidden rounded-2xl sm:max-h-96">
               <Image
@@ -192,7 +191,6 @@ export function CustomizeTripSection({
               </div>
             </div>
           </div>
-        </div>
       </Section>
 
       {!onOpenModal ? (

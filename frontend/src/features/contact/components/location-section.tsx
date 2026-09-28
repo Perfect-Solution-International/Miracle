@@ -20,7 +20,6 @@ const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=
 function MapPreview() {
   return (
     <div className="bg-brand-blue-light relative isolate flex min-h-80 flex-col overflow-hidden rounded-2xl border">
-      <div aria-hidden="true" className="bg-grid absolute inset-0 -z-10 opacity-50" />
 
       <Link
         href={MAPS_SEARCH_URL}

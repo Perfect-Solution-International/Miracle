@@ -444,15 +444,11 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           1. HERO SECTION: Liquid Glass Enterprise Aesthetic
       ───────────────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-16 lg:pt-16 lg:pb-24">
+      <section className="relative isolate overflow-hidden bg-white pt-8 pb-16 lg:pt-16 lg:pb-24">
         {/* Subtle Ambient Liquid Mesh Background */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[550px] w-[800px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
-        />
-        <div
-          aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)]"
         />
 
         <div className="container-page">
@@ -539,7 +535,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           2. CORE PILLARS: Interactive 4-Pillar Solutions Grid
       ───────────────────────────────────────────────────────────── */}
-      <section id="pillars" className="section-y bg-slate-50/70 border-y border-slate-200/70 scroll-mt-20">
+      <section id="pillars" className="section-y bg-white border-t border-slate-100 scroll-mt-20">
         <div className="container-page">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="bg-brand-blue-light text-brand-blue rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
@@ -617,7 +613,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           3. IN-DEPTH SUMMARY: Business Solutions
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-white">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="space-y-6 lg:col-span-6">
             <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
@@ -685,7 +681,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           4. IN-DEPTH SUMMARY: IT & Digital Solutions
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-slate-50/80 border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="order-2 lg:order-1 relative lg:col-span-6">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 shadow-xl">
@@ -753,7 +749,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           5. IN-DEPTH SUMMARY: Travel & Tourism
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-white border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="space-y-6 lg:col-span-6">
             <span className="bg-sky-100 text-sky-700 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
@@ -821,7 +817,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           6. IN-DEPTH SUMMARY: Global Trade, Franchise & Investment
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-slate-50/80 border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="bg-emerald-100 text-emerald-700 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
@@ -922,7 +918,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           7. VALUE PROPOSITIONS: Why Work With Miracle International
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-white border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="bg-brand-red/10 text-brand-red rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
@@ -962,10 +958,6 @@ export function HomeGateway() {
           8. HOW IT WORKS: Executive 5-Step Process Timeline
       ───────────────────────────────────────────────────────────── */}
       <section className="section-y bg-navy relative isolate overflow-hidden text-white">
-        <div
-          aria-hidden="true"
-          className="bg-grid-inverse absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_50%,transparent_90%)]"
-        />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-40 -left-40 -z-10 size-96 rounded-full bg-brand-blue/20 blur-[120px]"
@@ -1016,7 +1008,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           9. DIRECT ACTION BANNER: Tell Us What You Need
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-gradient-to-b from-slate-50 to-white">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page">
           <div className="relative isolate overflow-hidden rounded-3xl border border-brand-blue/20 bg-gradient-to-r from-brand-blue-light/40 via-white to-brand-blue-light/30 p-8 sm:p-12 shadow-lift">
             <div className="grid items-center gap-8 lg:grid-cols-12">
@@ -1049,7 +1041,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           10. CONTACT STRIP & EXECUTIVE SUPPORT
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-white border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="space-y-6 lg:col-span-7">
             <div>

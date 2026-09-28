@@ -137,7 +137,7 @@ function MenuFeature({ feature }: { feature: PublicNavFeature }) {
           <div className="from-navy via-navy/85 absolute inset-0 -z-10 bg-gradient-to-t to-navy/40" />
         </>
       ) : (
-        <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
+        null
       )}
       <div
         aria-hidden="true"

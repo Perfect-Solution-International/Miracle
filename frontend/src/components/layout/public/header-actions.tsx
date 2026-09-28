@@ -13,7 +13,7 @@ export function HeaderActions() {
 
   return (
     <div className="flex items-center gap-2">
-      {isAuthenticated ? (
+      {isAuthenticated && (
         <Button
           asChild
           variant="ghost"
@@ -24,15 +24,6 @@ export function HeaderActions() {
             <LayoutDashboard data-icon="inline-start" aria-hidden="true" />
             Dashboard
           </Link>
-        </Button>
-      ) : (
-        <Button
-          asChild
-          variant="ghost"
-          size="lg"
-          className="text-ink hidden px-3 font-semibold md:inline-flex"
-        >
-          <Link href={ROUTES.auth.login}>Login</Link>
         </Button>
       )}
 
