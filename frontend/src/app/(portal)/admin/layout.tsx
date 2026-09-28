@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { AdminAuthGuard } from "@/components/admin-dashboard/admin-auth-guard";
 import { PortalShell } from "@/components/layout/portal-shell";
 import { verifySession } from "@/server/dal/session";
 
@@ -7,5 +8,9 @@ import { verifySession } from "@/server/dal/session";
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   await verifySession();
 
-  return <PortalShell portal="admin">{children}</PortalShell>;
+  return (
+    <AdminAuthGuard>
+      <PortalShell portal="admin">{children}</PortalShell>
+    </AdminAuthGuard>
+  );
 }

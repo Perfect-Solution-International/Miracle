@@ -289,9 +289,9 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
     groups: [{ title: "Travel Services", links: TRAVEL_NAV_LINKS }],
     feature: {
       eyebrow: "Featured Package",
-      title: "Sri Lanka Highlights",
-      description: "Sigiriya, Kandy, Ella and Galle on one 7-day itinerary.",
-      href: ROUTES.public.travelPackage("sri-lanka-highlights"),
+      title: "Sri Lanka Signature Heritage & Wildlife",
+      description: "Sigiriya, Kandy, Nuwara Eliya, Yala, and Galle Fort on a premier 10-day expedition.",
+      href: ROUTES.public.travelPackage("sri-lanka-signature-heritage-wildlife"),
       cta: "View Package",
       image: SITE_MEDIA.travelDestinations.sigiriya,
     },

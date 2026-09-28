@@ -24,6 +24,8 @@ export { PackageInclusionsSection } from "./components/package-detail/package-in
 export { PackageLogisticsSection } from "./components/package-detail/package-logistics-section";
 export { PackageVisaSection } from "./components/package-detail/package-visa-section";
 export { PackageAudienceSection } from "./components/package-detail/package-audience-section";
+export { PackageRelatedSection } from "./components/package-detail/package-related-section";
+export { AdminPackageDetailPage } from "./components/package-detail/admin-package-detail-page";
 
 export { TRAVEL_SERVICE_CARDS } from "./data/travel.content";
 export {

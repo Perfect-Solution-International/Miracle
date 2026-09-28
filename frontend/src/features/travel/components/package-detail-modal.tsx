@@ -348,7 +348,7 @@ export function PackageDetailModal({
                 }
               }}
             >
-              Book This Package
+              Send Inquiry
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Button>
           </div>

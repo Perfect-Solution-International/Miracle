@@ -4,11 +4,12 @@ import type { ReactNode } from "react";
 
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { NotificationMenu } from "@/components/navigation/notification-menu";
+import { PortalSearch } from "@/components/navigation/portal-search";
 import { UserMenu } from "@/components/navigation/user-menu";
 
 /**
- * Top bar for the authenticated portals: navigation trigger, breadcrumbs, and
- * the account and notification menus.
+ * Top bar for the authenticated portals: navigation trigger, breadcrumbs, search,
+ * and the account and notification menus.
  */
 export function DashboardHeader({ mobileNavTrigger }: { mobileNavTrigger?: ReactNode }) {
   return (
@@ -16,11 +17,13 @@ export function DashboardHeader({ mobileNavTrigger }: { mobileNavTrigger?: React
       <div className="flex h-14 items-center gap-3 px-4 md:px-6">
         {mobileNavTrigger}
 
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 flex items-center gap-4">
           <Breadcrumbs />
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
+          <PortalSearch />
+          <div className="h-4 w-px bg-border hidden sm:block" />
           <NotificationMenu />
           <UserMenu />
         </div>

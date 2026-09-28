@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 import { ROUTES } from "@/config/routes";
-import {
-  getTravelPackageDetail,
-  PackageGallerySection,
-  PackageHero,
-  PackageInclusionsSection,
-  PackageItinerarySection,
-  PackageOverviewSection,
-  TRAVEL_PACKAGE_DETAILS,
-} from "@/features/travel";
+import { DEFAULT_PACKAGES } from "@/lib/storage/default-travel-packages";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { PackageDetailClient } from "./package-detail-client";
 
 export function generateStaticParams() {
-  return TRAVEL_PACKAGE_DETAILS.map((detail) => ({ slug: detail.slug }));
+  return DEFAULT_PACKAGES.filter((p) => Boolean(p.slug)).map((p) => ({
+    slug: p.slug as string,
+  }));
 }
 
 export async function generateMetadata({
@@ -23,14 +17,22 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const detail = getTravelPackageDetail(slug);
-  if (!detail) return {};
+  const pkg = DEFAULT_PACKAGES.find((p) => p.slug === slug);
+
+  if (!pkg) {
+    return {
+      title: "Travel Package | Miracle International",
+      description: "Explore our exclusive travel and holiday packages.",
+    };
+  }
 
   return buildPageMetadata({
-    title: detail.title,
-    description: detail.tagline,
-    path: ROUTES.public.travelPackage(detail.slug),
-    image: detail.image,
+    title: `${pkg.name} | Miracle International`,
+    description: pkg.shortDescription || pkg.description || "Discover Sri Lanka and world travel experiences.",
+    path: ROUTES.public.travelPackage(pkg.slug || slug),
+    image: pkg.coverImage || pkg.images?.[0]
+      ? { src: pkg.coverImage || pkg.images?.[0] || "", alt: pkg.name }
+      : undefined,
   });
 }
 
@@ -40,16 +42,5 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const detail = getTravelPackageDetail(slug);
-  if (!detail) notFound();
-
-  return (
-    <>
-      <PackageHero detail={detail} />
-      <PackageGallerySection detail={detail} />
-      <PackageOverviewSection detail={detail} />
-      <PackageItinerarySection detail={detail} />
-      <PackageInclusionsSection detail={detail} />
-    </>
-  );
+  return <PackageDetailClient slug={slug} />;
 }

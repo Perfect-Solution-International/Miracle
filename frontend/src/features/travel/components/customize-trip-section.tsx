@@ -9,6 +9,7 @@ import { Section } from "@/components/common/section";
 import { Button } from "@/components/ui/button";
 import { SITE_MEDIA } from "@/config/site-media";
 
+import type { TravelPackage } from "@/components/admin-travel/types";
 import { TripPlannerForm } from "./trip-planner-form";
 import type { TravelPackageDetail } from "../types/travel-package-detail.types";
 
@@ -23,7 +24,7 @@ export interface CustomizeTripModalProps {
   open: boolean;
   onClose: () => void;
   initialDestination?: string;
-  packageDetail?: TravelPackageDetail | null;
+  packageDetail?: TravelPackage | TravelPackageDetail | null;
   mode?: "book" | "customize";
 }
 
@@ -75,16 +76,25 @@ export function CustomizeTripModal({
           <p className="text-brand-red text-xs font-bold tracking-wider uppercase">
             {isBooking ? "Package Booking Request" : "Miracle Travel Desk"}
           </p>
-          <h2
-            id="customize-modal-title"
-            className="text-ink mt-1 text-2xl font-extrabold sm:text-3xl"
-          >
-            {isBooking
-              ? `Book ${packageDetail?.title || "Package"}`
-              : packageDetail
-                ? `Customize: ${packageDetail.title}`
-                : "Customize Your Trip"}
-          </h2>
+          {(() => {
+            const pkgTitle = packageDetail
+              ? "title" in packageDetail
+                ? packageDetail.title
+                : packageDetail.name
+              : "";
+            return (
+              <h2
+                id="customize-modal-title"
+                className="text-ink mt-1 text-2xl font-extrabold sm:text-3xl"
+              >
+                {isBooking
+                  ? `Book ${pkgTitle || "Package"}`
+                  : pkgTitle
+                    ? `Customize: ${pkgTitle}`
+                    : "Customize Your Trip"}
+              </h2>
+            );
+          })()}
           <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
             {isBooking
               ? "Confirm your travel dates and traveler details. Our team will verify availability and arrange your booking."

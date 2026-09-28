@@ -10,13 +10,15 @@ import { TravelHero } from "./travel-hero";
 import { TravelCinematicBackground } from "./travel-cinematic-background";
 import { TravelPackagesSection } from "./travel-packages-section";
 import { TravelServicesSection } from "./travel-services-section";
-import type { TravelPackageDetail } from "../types/travel-package-detail.types";
+import { useTravelStore } from "@/lib/storage/travel-store";
+import type { TravelPackage } from "@/components/admin-travel/types";
 
 export function TravelLanding({
   initialPackages,
 }: {
-  initialPackages: readonly TravelPackageDetail[];
+  initialPackages?: readonly TravelPackage[];
 }) {
+  const { packages: storePackages } = useTravelStore();
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState<string | undefined>();
   const [searchFilter, setSearchFilter] = useState<{
@@ -27,8 +29,15 @@ export function TravelLanding({
     travelType: "all",
   });
 
+  const allPackages = initialPackages ?? storePackages.filter((p) => p.status !== "Inactive");
+
   const filteredPackages = useMemo(() => {
-    return initialPackages.filter((pkg) => {
+    return allPackages.filter((pkg) => {
+      const title = pkg.name;
+      const destination = pkg.destination;
+      const tagline = pkg.shortDescription || pkg.description || "";
+      const country = pkg.country || "";
+
       if (searchFilter.destination) {
         const destQuery = searchFilter.destination.toLowerCase().trim();
         const matchesLocation = pkg.location.toLowerCase().includes(destQuery);
@@ -47,13 +56,16 @@ export function TravelLanding({
         }
       }
       if (searchFilter.travelType && searchFilter.travelType !== "all") {
-        if (pkg.travelType !== searchFilter.travelType) {
+        if (searchFilter.travelType === "Inbound" && pkg.travelType !== "Inbound") {
+          return false;
+        }
+        if (searchFilter.travelType === "Outbound" && pkg.travelType !== "Outbound") {
           return false;
         }
       }
       return true;
     });
-  }, [initialPackages, searchFilter]);
+  }, [allPackages, searchFilter]);
 
   const handleExplore = (query: { destination: string; travelType: string }) => {
     setSearchFilter(query);
@@ -63,8 +75,8 @@ export function TravelLanding({
     }
   };
 
-  const handleOpenCustomizeWithPackage = (pkg: TravelPackageDetail) => {
-    setSelectedDestination(pkg.location);
+  const handleOpenCustomizeWithPackage = (pkg: TravelPackage) => {
+    setSelectedDestination(pkg.destination);
     setIsCustomizeOpen(true);
   };
 
@@ -102,11 +114,12 @@ export function TravelLanding({
         <CustomizeTripSection onOpenModal={handleOpenCustomize} />
       </main>
 
-      {/* Centered Trip Customization Modal */}
-      <CustomizeTripModal
+      {/* Unified Trip Customization / Inquiry Modal */}
+      <PublicTravelInquiryModal
         open={isCustomizeOpen}
-        onClose={() => setIsCustomizeOpen(false)}
-        initialDestination={selectedDestination}
+        onOpenChange={setIsCustomizeOpen}
+        defaultDestination={selectedDestination}
+        mode="customize"
       />
     </>
   );
