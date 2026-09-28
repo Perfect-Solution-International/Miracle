@@ -38,6 +38,9 @@ import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
 
+import { AnimatedKeyboardBackground } from "./animated-keyboard-background";
+import keyboardStyles from "./animated-keyboard-background.module.css";
+
 const TITLE = "IT Solutions";
 const DESCRIPTION =
   "Modern IT solutions designed to streamline operations, improve efficiency and support long-term growth.";
@@ -205,7 +208,8 @@ const businessBenefits = [
 
 export default function Page() {
   return (
-    <main>
+    <main className={keyboardStyles.page}>
+      <AnimatedKeyboardBackground />
       <section
         aria-labelledby="it-solutions-hero-heading"
         className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
@@ -552,6 +556,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        className="bg-transparent"
         eyebrow="Ready to Get Started?"
         title="Let's Build the Right IT Solution for Your Business"
         description="Tell us what you want to achieve and our team will help you find the most practical and effective way forward."
