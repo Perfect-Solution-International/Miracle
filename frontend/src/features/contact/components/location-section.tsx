@@ -57,7 +57,7 @@ function MapPreview() {
 
 function OfficeInviteCard() {
   return (
-    <div className="relative isolate min-h-80 overflow-hidden rounded-2xl">
+    <div className="relative isolate min-h-80 overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
       <Image
         src={SITE_MEDIA.cityTowers.src}
         alt={SITE_MEDIA.cityTowers.alt}
@@ -67,22 +67,22 @@ function OfficeInviteCard() {
       />
       <div
         aria-hidden="true"
-        className="from-navy/90 via-navy/50 absolute inset-0 bg-gradient-to-t to-transparent"
+        className="absolute inset-0 bg-gradient-to-t from-white via-white/90 to-white/10"
       />
       <div className="relative flex h-full flex-col justify-end gap-3 p-8">
         <span aria-hidden="true" className="bg-brand-red h-0.5 w-8 rounded-full" />
-        <p className="text-xs font-bold tracking-[0.16em] text-white/70 uppercase">
+        <p className="text-xs font-bold tracking-[0.16em] text-brand-blue uppercase">
           Visit Our Office
         </p>
-        <h2 className="text-2xl font-extrabold text-white sm:text-3xl">
+        <h2 className="text-2xl font-extrabold text-ink sm:text-3xl">
           We Welcome You to Our Office
         </h2>
-        <p className="max-w-md text-sm leading-relaxed text-white/75">
+        <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
           Feel free to visit us at our headquarters in {APP_CONFIG.support.address}. Our
           team is happy to meet you and discuss how we can support your business needs.
         </p>
         <div>
-          <Button asChild variant="outline-inverse" size="lg">
+          <Button asChild variant="outline" size="lg" className="bg-white">
             <Link href={MAPS_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer">
               Get Directions
               <ArrowRight data-icon="inline-end" aria-hidden="true" />

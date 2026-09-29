@@ -22,7 +22,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
-import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
@@ -31,6 +30,8 @@ import { SITE_MEDIA } from "@/config/site-media";
 import { GlobalPresenceSection, MISSION_VISION_VALUES } from "@/features/about";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
+
+import lightPageStyles from "../light-page.module.css";
 
 const TITLE = "About Us";
 const DESCRIPTION =
@@ -143,7 +144,7 @@ export default function Page() {
   const values = MISSION_VISION_VALUES.find((item) => item.title === "Our Values");
 
   return (
-    <main>
+    <main className="bg-white">
       <section
         aria-labelledby="about-hero-heading"
         className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
@@ -269,11 +270,11 @@ export default function Page() {
             aria-hidden="true"
             className="from-navy/45 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
           />
-          <div className="bg-navy/80 absolute right-5 bottom-5 left-5 rounded-2xl border border-white/20 p-5 text-white backdrop-blur-sm sm:left-auto sm:max-w-xs">
-            <p className="text-brand-blue-muted text-xs font-bold tracking-[0.16em] uppercase">
+          <div className="absolute right-5 bottom-5 left-5 rounded-2xl border border-slate-200/80 bg-white/95 p-5 text-ink shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-sm sm:left-auto sm:max-w-xs">
+            <p className="text-brand-blue text-xs font-bold tracking-[0.16em] uppercase">
               One Connected Platform
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-white/80">
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Trade, business, travel and technology support brought together around the
               requirement.
             </p>
@@ -283,7 +284,7 @@ export default function Page() {
 
       <Section
         aria-labelledby="purpose-heading"
-        className="bg-brand-blue-light/25"
+        className="bg-slate-50"
         containerClassName="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16"
       >
         <div className="shadow-lift relative aspect-[4/5] max-h-[36rem] overflow-hidden rounded-3xl border border-white">
@@ -397,36 +398,35 @@ export default function Page() {
         </ul>
       </Section>
 
-      <Section id="how-we-work" tone="navy" aria-labelledby="company-process-heading">
+      <Section id="how-we-work" className="bg-slate-50" aria-labelledby="company-process-heading">
         <SectionHeading
           id="company-process-heading"
           eyebrow="How We Work"
           title="A Clear, Coordinated Way Forward"
           description="One connected process keeps requirements, decisions and delivery moving in the same direction."
-          tone="inverse"
         />
-        <ol className="border-brand-blue-muted/35 relative mt-12 grid gap-7 border-l pl-7 lg:mt-16 lg:grid-cols-5 lg:gap-6 lg:border-t lg:border-l-0 lg:pl-0">
+        <ol className="relative mt-12 grid gap-7 border-l border-slate-200 pl-7 lg:mt-16 lg:grid-cols-5 lg:gap-6 lg:border-t lg:border-l-0 lg:pl-0">
           {process.map(({ step, title, description, icon: Icon }, index) => (
             <li key={step} className="relative flex gap-4 lg:flex-col lg:gap-5 lg:pt-8">
               <span
                 aria-hidden="true"
                 className={cn(
-                  "ring-navy absolute top-5 -left-[2.05rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
-                  index === 0 ? "bg-brand-red" : "bg-brand-blue-muted",
+                  "absolute top-5 -left-[2.05rem] z-10 size-2.5 rounded-full ring-4 ring-slate-50 lg:-top-[0.35rem] lg:left-0",
+                  index === 0 ? "bg-brand-red" : "bg-brand-blue",
                 )}
               />
-              <span className="text-brand-blue-muted/25 hidden text-5xl leading-none font-bold lg:block">
+              <span className="hidden text-5xl leading-none font-bold text-brand-blue/25 lg:block">
                 {step}
               </span>
-              <span className="text-brand-blue-muted flex size-11 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-slate-200/80 bg-white text-brand-blue shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
                 <Icon aria-hidden="true" className="size-5" />
               </span>
               <div>
-                <span className="text-brand-blue-muted text-xs font-bold tracking-widest lg:hidden">
+                <span className="text-brand-blue text-xs font-bold tracking-widest lg:hidden">
                   {step}
                 </span>
-                <h3 className="font-bold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/60">
+                <h3 className="font-bold text-ink">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {description}
                 </p>
               </div>
@@ -472,7 +472,9 @@ export default function Page() {
         </ul>
       </Section>
 
-      <GlobalPresenceSection />
+      <div className="bg-slate-50">
+        <GlobalPresenceSection />
+      </div>
 
       <CtaBanner
         eyebrow="Start a Conversation"
@@ -481,6 +483,7 @@ export default function Page() {
         primary={{ label: "Contact Us", href: ROUTES.public.contact }}
         secondary={{ label: "Explore Our Services", href: ROUTES.public.services }}
         headingId="about-cta-heading"
+        className={lightPageStyles.lightCta}
       />
     </main>
   );
