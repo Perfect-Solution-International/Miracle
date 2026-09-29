@@ -63,8 +63,15 @@ export function TravelHero({
   return (
     <section
       aria-labelledby="travel-hero-heading"
-      className={`relative isolate overflow-hidden border-b border-slate-200/80 ${landingStyles.travelHero}`}
+      className={`relative isolate overflow-hidden border-b border-slate-200/80 md:!bg-fixed ${landingStyles.travelHero}`}
+      style={{
+        backgroundImage: 'url("/images/travel/travel-hero-cinematic.png")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
+      <div aria-hidden="true" className={landingStyles.heroOverlay} />
       <div className="container-page flex flex-col items-center gap-5 pt-20 pb-12 text-center sm:pt-28 sm:pb-16 md:pt-36 md:pb-20">
         <Eyebrow
           tone="default"
@@ -75,12 +82,12 @@ export function TravelHero({
 
         <h1
           id="travel-hero-heading"
-          className="text-ink max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl md:text-6xl"
+          className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-white [text-shadow:_0_2px_12px_rgba(5,15,30,0.5)] sm:text-5xl md:text-6xl"
         >
           Travel Beyond Boundaries
         </h1>
 
-        <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-800 sm:text-lg [text-shadow:_0_1px_10px_rgba(255,255,255,0.9),_0_0_2px_rgba(255,255,255,0.8)]">
+        <p className="max-w-2xl text-base leading-relaxed font-medium text-white/90 [text-shadow:_0_1px_8px_rgba(5,15,30,0.5)] sm:text-lg">
           Explore destinations, plan customized journeys, arrange flights, and get travel
           support with Miracle International.
         </p>

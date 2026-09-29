@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 
-import { AnnouncementBar } from "@/components/layout/public/announcement-bar";
 import { PublicFooter } from "@/components/layout/public/public-footer";
 import { PublicHeader } from "@/components/layout/public/public-header";
 
@@ -13,7 +12,6 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
   return (
     <div className="theme-light bg-background text-foreground flex min-h-svh flex-col pt-[4.5rem] lg:pt-20">
       <PublicHeader />
-      <AnnouncementBar />
       <main id="main-content" className="flex-1">
         {children}
       </main>
