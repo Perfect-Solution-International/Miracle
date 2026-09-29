@@ -41,7 +41,7 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
 
   return (
     <>
-      <section className="bg-surface border-b">
+      <section className="bg-white border-b border-slate-100">
         <div className="container-page pt-8 pb-10 md:pt-10 md:pb-14">
           {/* Hero Image */}
           <div className="relative aspect-[16/7] overflow-hidden rounded-3xl shadow-sm">

@@ -179,7 +179,7 @@ export function PublicTravelPackageGrid({
                             className="inline-flex items-center gap-1 text-[11px] font-medium bg-muted/60 text-muted-foreground px-2 py-0.5 rounded-md"
                           >
                             <Star className="size-2.5 text-amber-500 fill-amber-500" />
-                            <span className="truncate max-w-[130px]">{hl}</span>
+                            <span className="truncate max-w-[130px]">{typeof hl === "string" ? hl : hl.title}</span>
                           </span>
                         ))}
                       </div>

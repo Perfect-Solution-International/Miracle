@@ -38,6 +38,24 @@ export interface ItineraryDay {
   image?: string;
 }
 
+export interface PackageHighlight {
+  title: string;
+  description?: string;
+  icon?: string;
+}
+
+export interface PackageOffer {
+  enabled: boolean;
+  title?: string;
+  description?: string;
+  offerType?: "Percentage Discount" | "Fixed Amount" | "Special Offer";
+  originalPrice?: number | null;
+  offerPrice?: number | null;
+  startDate?: string;
+  endDate?: string;
+  status?: "Active" | "Expired" | "Scheduled" | "Inactive";
+}
+
 export interface TravelPackage {
   id: string;
   slug?: string;
@@ -46,24 +64,32 @@ export interface TravelPackage {
   destination: string;
   country?: string;
   duration: string;
+  durationDays?: number | null;
+  durationNights?: number | null;
   price?: number | null;
   currency?: Currency;
+  priceOnRequest?: boolean;
   shortDescription: string;
   description: string;
-  highlights?: string[];
+  highlights?: (string | PackageHighlight)[];
   itinerary?: ItineraryDay[];
   includedItems?: string[];
+  customIncludedItems?: string[];
   includedServices?: string;
   accommodation?: string;
   transportation?: string;
   whatToExpect?: string;
+  whatToExpectImages?: string[];
   entryRequirements?: string;
   visaInformation?: string;
+  visaNotes?: string;
+  offers?: PackageOffer;
   images: string[];
   coverImage?: string;
   status: PackageStatus;
   createdAt: string;
   updatedAt?: string;
+  lastUpdated?: string;
 }
 
 export interface TravelPackageFormData {
@@ -72,19 +98,26 @@ export interface TravelPackageFormData {
   destination: string;
   country?: string;
   duration: string;
+  durationDays?: number | null;
+  durationNights?: number | null;
   price?: number | null;
   currency?: Currency;
+  priceOnRequest?: boolean;
   shortDescription: string;
   description: string;
-  highlights?: string[];
+  highlights?: (string | PackageHighlight)[];
   itinerary?: ItineraryDay[];
   includedItems?: string[];
+  customIncludedItems?: string[];
   includedServices?: string;
   accommodation?: string;
   transportation?: string;
   whatToExpect?: string;
+  whatToExpectImages?: string[];
   entryRequirements?: string;
   visaInformation?: string;
+  visaNotes?: string;
+  offers?: PackageOffer;
   images: string[];
   coverImage?: string;
   status: PackageStatus;
@@ -148,3 +181,22 @@ export interface PublicTravelInquiryFormData {
   additionalRequirements?: string;
   documents?: string[];
 }
+
+export type ReviewStatus = "Pending" | "Approved" | "Rejected";
+
+export interface PackageReview {
+  id: string;
+  packageId?: string;
+  packageName: string;
+  packageSlug?: string;
+  inquiryId?: string;
+  customerName: string;
+  customerEmail?: string;
+  customerLocation?: string;
+  rating: number;
+  reviewTitle?: string;
+  reviewText: string;
+  status: ReviewStatus;
+  createdAt: string;
+}
+

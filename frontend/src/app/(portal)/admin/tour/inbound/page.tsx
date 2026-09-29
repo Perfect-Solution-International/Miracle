@@ -1,16 +1,5 @@
-import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
-import { TravelInboundView } from "@/components/admin-travel/travel-inbound-view";
-import { requirePermission } from "@/server/dal/require-permission";
-
-export const metadata: Metadata = {
-  title: "Inbound Tour Packages | Miracle International Admin",
-  description: "Manage Sri Lanka Inbound tour itineraries and pricing.",
-  robots: { index: false, follow: false },
-};
-
-export default async function TourInboundAdminPage() {
-  await requirePermission("travel.manage");
-
-  return <TravelInboundView />;
+export default function TourInboundRedirectPage() {
+  redirect("/admin/tours/inbound");
 }

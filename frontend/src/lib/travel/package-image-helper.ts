@@ -5,15 +5,15 @@ export const SRI_LANKA_DESTINATION_IMAGES = {
   sigiriya:
     "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock Fortress
   kandy:
-    "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Temple of the Sacred Tooth & Kandy Lake
+    "https://cdn.getyourguide.com/img/location/5c83eaa670873.jpeg/99.jpg", // Kandy Temple of the Tooth & Lake (GetYourGuide)
   galle:
     "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Dutch Fort & Lighthouse
   ella:
     "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge
   nuwaraEliya:
-    "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&auto=format&fit=crop&q=80", // Ceylon Tea Hills & Plantations
+    "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&auto=format&fit=crop&q=80", // Nuwara Eliya Ceylon Tea Plantations Guide
   beachBentota:
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80", // Golden Tropical Beaches & Palms
+    "https://www.srilankaclassytours.com/medias/place/big/574/thumb.jpg", // Bentota Beach (Sri Lanka Classy Tours)
   beachMirissa:
     "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&auto=format&fit=crop&q=80", // Mirissa Coconut Tree Hill & Bay
   yalaSafari:

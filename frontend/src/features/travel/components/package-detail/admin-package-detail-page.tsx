@@ -59,7 +59,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
   return (
     <>
       {/* Top Hero Section */}
-      <section className="bg-surface border-b">
+      <section className="bg-white border-b border-slate-100">
         <div className="container-page pt-6 pb-8 md:pt-8 md:pb-10">
           {/* Breadcrumb Navigation */}
           <Breadcrumb
@@ -118,7 +118,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
       </section>
 
       {/* Main Content Area - 2-Column Desktop Layout */}
-      <section className="bg-slate-50/40 py-10 lg:py-14">
+      <section className="bg-white py-10 lg:py-14">
         <div className="container-page">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             
@@ -186,7 +186,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                   About This Itinerary
                 </h3>
                 {pkg.shortDescription ? (
-                  <p className="text-sm sm:text-base text-ink font-medium leading-relaxed bg-slate-50/80 p-4 rounded-2xl border border-slate-100">
+                  <p className="text-sm sm:text-base text-ink font-medium leading-relaxed bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
                     {pkg.shortDescription}
                   </p>
                 ) : null}
@@ -209,13 +209,13 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                     {pkg.highlights.map((hl, i) => (
                       <div
                         key={i}
-                        className="flex items-start gap-3 rounded-2xl border border-slate-100 bg-slate-50/60 p-4 transition-all hover:bg-white hover:border-brand-blue/30 hover:shadow-xs"
+                        className="flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 transition-all hover:border-brand-blue/40 shadow-xs hover:shadow-soft"
                       >
                         <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white text-xs font-bold mt-0.5 shadow-xs">
                           {i + 1}
                         </span>
                         <span className="text-xs sm:text-sm font-semibold text-ink leading-relaxed">
-                          {hl}
+                          {typeof hl === "string" ? hl : hl.title}
                         </span>
                       </div>
                     ))}
@@ -233,7 +233,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                   <h3 className="font-heading text-2xl font-extrabold text-ink">
                     Day-by-Day Journey Plan
                   </h3>
-                  <Badge variant="outline" className="text-xs font-semibold self-start sm:self-auto">
+                  <Badge variant="outline" className="text-xs font-semibold self-start sm:self-auto bg-white">
                     {pkg.duration}
                   </Badge>
                 </div>
@@ -247,7 +247,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                           {item.day}
                         </span>
 
-                        <div className="rounded-2xl border border-slate-100 bg-slate-50/70 p-5 transition-all group-hover:bg-white group-hover:border-slate-200 group-hover:shadow-xs">
+                        <div className="rounded-2xl border border-slate-200/80 bg-white p-5 transition-all group-hover:border-brand-blue/30 shadow-xs group-hover:shadow-soft">
                           <span className="text-[11px] font-bold text-brand-blue uppercase tracking-wider block">
                             Day {String(item.day).padStart(2, "0")}
                           </span>
@@ -258,7 +258,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                             {item.description}
                           </p>
                           {item.image ? (
-                            <div className="mt-3 aspect-[16/9] max-h-48 overflow-hidden rounded-xl">
+                            <div className="mt-3 aspect-[16/9] max-h-48 overflow-hidden rounded-xl bg-slate-100 border border-slate-100">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img
                                 src={item.image}
@@ -272,7 +272,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                     ))}
                   </div>
                 ) : (
-                  <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/60 p-8 text-center space-y-2">
+                  <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center space-y-2">
                     <Info className="size-6 text-brand-blue mx-auto" />
                     <p className="text-sm font-semibold text-ink">
                       Itinerary details will be provided upon inquiry.
@@ -299,7 +299,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                     {pkg.includedItems.map((item, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-3 rounded-xl border border-emerald-100 bg-emerald-50/40 px-4 py-3"
+                        className="flex items-center gap-3 rounded-xl border border-emerald-100 bg-white px-4 py-3 shadow-xs"
                       >
                         <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white">
                           <Check className="size-3.5 stroke-[2.5]" />
@@ -310,7 +310,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                   </div>
 
                   {pkg.includedServices ? (
-                    <div className="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    <div className="mt-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs text-xs sm:text-sm text-muted-foreground leading-relaxed">
                       <strong className="text-ink">Included Services:</strong> {pkg.includedServices}
                     </div>
                   ) : null}
@@ -318,7 +318,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                   {/* Accommodation & Transport Cards */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                     {pkg.accommodation ? (
-                      <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 p-5 space-y-2">
+                      <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-2 shadow-xs">
                         <div className="flex items-center gap-2 text-brand-blue">
                           <BedDouble className="size-4.5" />
                           <span className="text-xs font-bold uppercase tracking-wider">Accommodation</span>
@@ -328,7 +328,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                     ) : null}
 
                     {pkg.transportation ? (
-                      <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 p-5 space-y-2">
+                      <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-2 shadow-xs">
                         <div className="flex items-center gap-2 text-brand-blue">
                           <Car className="size-4.5" />
                           <span className="text-xs font-bold uppercase tracking-wider">Transportation</span>
@@ -366,7 +366,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                   <h3 className="font-heading text-2xl font-extrabold text-ink">
                     Important Travel Guidelines
                   </h3>
-                  <div className="rounded-2xl border border-slate-100 bg-slate-50 p-5 space-y-3">
+                  <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-3 shadow-xs">
                     {pkg.entryRequirements ? (
                       <div className="flex items-start gap-3">
                         <ShieldCheck className="size-4.5 text-brand-blue shrink-0 mt-0.5" />
@@ -382,7 +382,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                     ) : null}
 
                     {pkg.visaInformation ? (
-                      <div className="flex items-start gap-3 border-t border-slate-200/60 pt-3">
+                      <div className="flex items-start gap-3 border-t border-slate-100 pt-3">
                         <Stamp className="size-4.5 text-brand-blue shrink-0 mt-0.5" />
                         <div>
                           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -412,7 +412,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                     {pkg.images.map((src, i) => (
                       <div
                         key={i}
-                        className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted group/img"
+                        className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white border border-slate-100 group/img shadow-xs"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -509,7 +509,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                 </div>
 
                 {/* Direct Consultation Box */}
-                <div className="rounded-2xl bg-blue-50/60 border border-blue-100 p-4 space-y-2 text-xs">
+                <div className="rounded-2xl bg-white border border-slate-200/80 p-4 space-y-2 text-xs shadow-xs">
                   <div className="flex items-center gap-2 text-brand-blue font-bold">
                     <Headphones className="size-4" />
                     <span>Need Immediate Assistance?</span>
@@ -624,7 +624,7 @@ function RelatedAdminPackages({ pkg }: { pkg: TravelPackage }) {
   return (
     <section
       aria-labelledby="related-admin-packages-heading"
-      className="border-t bg-slate-50/70 py-12 lg:py-16"
+      className="border-t border-slate-100 bg-white py-12 lg:py-16"
     >
       <div className="container-page">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
