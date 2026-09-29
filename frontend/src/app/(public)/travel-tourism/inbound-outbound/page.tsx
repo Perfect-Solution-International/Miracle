@@ -88,7 +88,7 @@ export default function Page() {
       <TravelPackagesSection showTabs={false} />
 
       {/* 3. Details & Services Section after Packages */}
-      <Section className="bg-slate-50/60 py-16 sm:py-20" aria-labelledby="travel-details-heading">
+      <Section className="bg-white py-16 sm:py-20 border-t border-slate-100" aria-labelledby="travel-details-heading">
         <SectionHeading
           id="travel-details-heading"
           align="center"

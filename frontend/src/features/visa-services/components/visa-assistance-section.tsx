@@ -53,7 +53,7 @@ const SERVICE_PILLARS = [
  */
 export function VisaAssistanceSection() {
   return (
-    <Section className="bg-slate-50/60 py-14 sm:py-20" aria-labelledby="visa-assistance-heading">
+    <Section className="bg-white py-14 sm:py-20 border-t border-slate-100" aria-labelledby="visa-assistance-heading">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 items-start">
         {/* Left Column: Details & Guidance */}
         <div className="flex flex-col gap-8 lg:col-span-5">

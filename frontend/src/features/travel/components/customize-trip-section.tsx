@@ -136,7 +136,7 @@ export function CustomizeTripSection({
       <Section
         id="customize-trip"
         aria-labelledby="customize-trip-heading"
-        className="scroll-mt-24 py-12 lg:py-16"
+        className="bg-white scroll-mt-24 py-12 lg:py-16 border-t border-slate-100"
       >
         <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
             {/* Travel Image with compact proportions */}
