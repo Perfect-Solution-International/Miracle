@@ -42,24 +42,19 @@
   }
 }
 
-.travelHero::before {
+.heroOverlay {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  background: radial-gradient(
-    ellipse 75% 65% at 50% 50%,
-    rgb(255 255 255 / 82%) 0%,
-    rgb(255 255 255 / 60%) 40%,
-    rgb(255 255 255 / 20%) 72%,
-    transparent 92%
-  );
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgb(6 18 35 / 34%);
   pointer-events: none;
-  content: "";
 }
 
 .travelHero > :global(.container-page) {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .lightProcess :global(.bg-grid-inverse) {

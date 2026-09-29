@@ -255,6 +255,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
     kind: "menu",
     title: "Services",
     href: ROUTES.public.services,
+    separateLinkAndTrigger: true,
     groups: [{ title: "Services", links: MAIN_NAV_SERVICE_LINKS }],
     feature: {
       eyebrow: "Not sure where to start?",

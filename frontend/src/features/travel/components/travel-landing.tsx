@@ -8,7 +8,6 @@ import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inqu
 import { CustomizeTripModal, CustomizeTripSection } from "./customize-trip-section";
 import { InboundTravelSection, OutboundTravelSection } from "./inbound-outbound-section";
 import { TravelHero } from "./travel-hero";
-import { TravelCinematicBackground } from "./travel-cinematic-background";
 import { TravelPackagesSection } from "./travel-packages-section";
 import { TravelServicesSection } from "./travel-services-section";
 import { useTravelStore } from "@/lib/storage/travel-store";
@@ -87,7 +86,6 @@ export function TravelLanding({
   return (
     <>
       <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
-        <TravelCinematicBackground />
         {/* 1. Hero Section with Light Background and Professional Search Bar */}
         <TravelHero onExplore={handleExplore} />
 

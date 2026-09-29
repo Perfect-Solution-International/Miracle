@@ -37,7 +37,6 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
 
 import landingStyles from "../landing-surfaces.module.css";
-import { AnimatedCircuitBackground } from "./animated-circuit-background";
 import circuitStyles from "./animated-circuit-background.module.css";
 
 const TITLE = "IT Solutions";
@@ -208,11 +207,17 @@ const businessBenefits = [
 export default function Page() {
   return (
     <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
-      <AnimatedCircuitBackground />
       <section
         aria-labelledby="it-solutions-hero-heading"
-        className={`relative isolate overflow-hidden border-b border-slate-200/80 ${landingStyles.travelHero}`}
+        className={`relative isolate overflow-hidden border-b border-slate-200/80 md:!bg-fixed ${landingStyles.travelHero}`}
+        style={{
+          backgroundImage: 'url("/images/it-solutions/it-hero-bg.png")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
       >
+        <div aria-hidden="true" className={landingStyles.heroOverlay} />
         <div className="container-page flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
           <Eyebrow className="rounded-full border border-white/80 bg-white/95 px-4 py-1.5 font-extrabold text-navy shadow-sm backdrop-blur-md">
             Technology Engineering &amp; Digital Solutions
@@ -220,15 +225,15 @@ export default function Page() {
 
           <h1
             id="it-solutions-hero-heading"
-            className="text-ink max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl md:text-6xl"
+            className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-white [text-shadow:_0_2px_12px_rgba(5,15,30,0.5)] sm:text-5xl md:text-6xl"
           >
             Technology That Moves{" "}
-            <span className="via-brand-blue to-navy bg-gradient-to-r from-indigo-600 bg-clip-text text-transparent">
+            <span className="text-white">
               Your Business Forward.
             </span>
           </h1>
 
-          <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-800 sm:text-lg [text-shadow:_0_1px_10px_rgba(255,255,255,0.9),_0_0_2px_rgba(255,255,255,0.8)]">
+          <p className="max-w-2xl text-base leading-relaxed font-medium text-white/90 [text-shadow:_0_1px_8px_rgba(5,15,30,0.5)] sm:text-lg">
             {DESCRIPTION}
           </p>
 
