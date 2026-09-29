@@ -1,0 +1,29 @@
+.lightCta > div > div {
+  border-color: rgb(226 232 240 / 0.8);
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgb(15 23 42 / 0.06);
+}
+
+.lightCta h2 {
+  color: #0f172a;
+}
+
+.lightCta p {
+  color: #64748b;
+}
+
+.lightCta span {
+  color: #1150a8;
+  background: #eaf1fb;
+}
+
+.lightCta :global([data-variant="outline-inverse"]) {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.lightCta :global([data-variant="outline-inverse"]:hover) {
+  border-color: #1150a8;
+  background: #eaf1fb;
+}
