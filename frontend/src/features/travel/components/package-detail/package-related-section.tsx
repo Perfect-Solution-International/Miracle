@@ -34,7 +34,7 @@ export function PackageRelatedSection({ detail }: { detail: TravelPackageDetail 
   return (
     <section
       aria-labelledby="related-packages-heading"
-      className="border-t bg-slate-50/70 py-12 lg:py-16"
+      className="border-t border-slate-100 bg-white py-12 lg:py-16"
     >
       <div className="container-page">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">

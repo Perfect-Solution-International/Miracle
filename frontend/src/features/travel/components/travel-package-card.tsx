@@ -109,15 +109,18 @@ export function TravelPackageCard({
 
             {highlights.length > 0 ? (
               <div className="flex flex-wrap gap-1.5 pt-1">
-                {highlights.slice(0, 2).map((hl: string, i: number) => (
-                  <span
-                    key={i}
-                    className="inline-flex items-center gap-1 text-[11px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md truncate max-w-[130px]"
-                  >
-                    <Star className="size-2.5 text-amber-500 fill-amber-500 shrink-0" />
-                    <span className="truncate">{hl}</span>
-                  </span>
-                ))}
+                {highlights.slice(0, 2).map((hl, i) => {
+                  const hlText = typeof hl === "string" ? hl : hl.title;
+                  return (
+                    <span
+                      key={i}
+                      className="inline-flex items-center gap-1 text-[11px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md truncate max-w-[130px]"
+                    >
+                      <Star className="size-2.5 text-amber-500 fill-amber-500 shrink-0" />
+                      <span className="truncate">{hlText}</span>
+                    </span>
+                  );
+                })}
               </div>
             ) : null}
 

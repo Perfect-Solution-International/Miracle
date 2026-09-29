@@ -138,7 +138,7 @@ export function PackageReviewsSection({
       {isFormOpen ? (
         <form
           onSubmit={handleSubmitReview}
-          className="rounded-2xl border border-brand-blue/30 bg-blue-50/30 dark:bg-muted/30 p-5 sm:p-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300"
+          className="rounded-2xl border border-brand-blue/30 bg-white p-5 sm:p-6 space-y-4 shadow-xs animate-in fade-in slide-in-from-top-2 duration-300"
         >
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-navy dark:text-foreground">
@@ -268,7 +268,7 @@ export function PackageReviewsSection({
       ) : null}
 
       {/* Ratings Overview Summary */}
-      <div className="flex flex-col sm:flex-row items-center gap-6 p-5 rounded-2xl bg-slate-50 dark:bg-muted/30 border border-slate-200/80 dark:border-border/60">
+      <div className="flex flex-col sm:flex-row items-center gap-6 p-5 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
         <div className="text-center sm:border-r border-slate-200 dark:border-border/80 sm:pr-8">
           <div className="font-heading text-4xl sm:text-5xl font-extrabold text-navy dark:text-foreground">
             {avgRating}
@@ -314,7 +314,7 @@ export function PackageReviewsSection({
           {reviews.map((rev) => (
             <div
               key={rev.id}
-              className="p-5 rounded-2xl border border-slate-100 dark:border-border/60 bg-slate-50/40 dark:bg-muted/10 space-y-2.5 transition-all hover:border-slate-200"
+              className="p-5 rounded-2xl border border-slate-200/80 bg-white space-y-2.5 transition-all shadow-xs hover:shadow-soft hover:border-slate-300"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-center gap-2.5">
@@ -360,7 +360,7 @@ export function PackageReviewsSection({
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/60 p-8 text-center space-y-2">
+        <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center space-y-2">
           <Star className="size-8 text-slate-300 mx-auto mb-1" />
           <p className="text-xs sm:text-sm font-semibold text-navy dark:text-foreground">
             No reviews yet for this itinerary

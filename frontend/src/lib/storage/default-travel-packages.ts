@@ -6,23 +6,23 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
   {
     id: "pkg-inbound-01",
     slug: "sri-lanka-signature-heritage-wildlife",
-    name: "Sri Lanka Signature Heritage & Wildlife Expedition",
+    name: "Kandy Sacred Heritage & Royal Cultural Expedition",
     travelType: "Inbound",
-    destination: "Sigiriya, Kandy, Nuwara Eliya, Yala, Galle, Colombo",
+    destination: "Kandy, Peradeniya, Sigiriya, Nuwara Eliya & Colombo",
     country: "Sri Lanka",
     duration: "10 Days / 9 Nights",
     price: 240000,
     currency: "LKR",
     shortDescription:
-      "A premier 10-day private journey across Sigiriya rock fortress, Kandy temples, Ella tea hills, Yala safaris, Galle Fort, and Colombo.",
+      "A premier 10-day private journey across the Sacred Temple of the Tooth in Kandy, royal botanical gardens, Sigiriya rock, and scenic highlands.",
     description:
-      "Experience the very best of Sri Lanka with our signature private expedition. Starting in the cultural triangle, ascend the Sigiriya rock fortress, wander through royal botanical gardens in Kandy, board the scenic blue train to the highlands, and embark on thrilling game drives in Yala National Park before exploring historic Galle Fort and Colombo city.",
+      "Experience the spiritual and cultural heart of Sri Lanka in Kandy. Visit the UNESCO World Heritage Temple of the Sacred Tooth Relic, stroll the royal botanical gardens in Peradeniya, watch traditional Kandyan cultural dancers, explore Sigiriya rock fortress, and board the scenic mountain train to the misty highlands.",
     highlights: [
+      "Temple of the Sacred Tooth Relic in Kandy",
+      "Peradeniya Royal Botanic Gardens walking tour",
+      "Kandyan cultural dance & drumming evening show",
       "Sigiriya Lion Rock Fortress climb",
-      "Temple of the Tooth Relic in Kandy",
-      "Scenic Ella Nine Arch Bridge train journey",
-      "Big game safari in Yala National Park",
-      "UNESCO Galle Dutch Fort walking tour",
+      "Scenic Ella & Nuwara Eliya tea hills train journey",
       "Colombo City Highlights & Shopping",
     ],
     itinerary: [
@@ -104,15 +104,15 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
     entryRequirements: "Passport valid for minimum 6 months from departure date.",
     visaInformation: "Online ETA tourist visa pre-approval required prior to boarding.",
     images: [
+      "https://cdn.getyourguide.com/img/location/5c83eaa670873.jpeg/99.jpg", // Kandy Temple of the Tooth & Lake (GetYourGuide)
       "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock
-      "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Temple of the Tooth
       "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Fort Lighthouse
       "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge
       "https://images.unsplash.com/photo-1581852017103-68accd55096a?w=1200&auto=format&fit=crop&q=80", // Yala Wildlife Elephant Safari
       "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo City & Coast
     ],
     coverImage:
-      "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock
+      "https://cdn.getyourguide.com/img/location/5c83eaa670873.jpeg/99.jpg", // Kandy Temple of the Tooth & Lake (GetYourGuide)
     status: "Active",
     createdAt: "Sep 28, 2026",
   },
@@ -121,24 +121,24 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
   {
     id: "pkg-inbound-02",
     slug: "sri-lanka-coastal-cultural-escape",
-    name: "Classic Sri Lanka Culture & Coastline Escape",
+    name: "Classic Bentota Beach, Culture & Coastline Escape",
     travelType: "Inbound",
-    destination: "Colombo, Dambulla, Sigiriya, Kandy, Bentota & Galle",
+    destination: "Bentota Beach, Galle, Dambulla, Sigiriya & Colombo",
     country: "Sri Lanka",
     duration: "7 Days / 6 Nights",
     price: 165000,
     currency: "LKR",
     shortDescription:
-      "A scenic 7-day tour combining Sigiriya, Kandy cultural monuments, Colombo highlights, and Galle Fort coastline.",
+      "Unwind on the golden sands of Bentota beach, enjoy water sports, Madu river safaris, Sigiriya rock fortress, and Galle Fort.",
     description:
-      "Explore the UNESCO World Heritage Golden Cave Temple of Dambulla, ascend Sigiriya rock fortress, experience the sacred Temple of the Tooth in Kandy, explore Colombo, and unwind at beachfront luxury resorts near Galle Fort.",
+      "Relax at premier beachfront resorts in Bentota. Cruise the mangrove islets of Madu River on an eco-boat safari, enjoy thrilling water sports, visit a sea turtle hatchery, explore UNESCO World Heritage Sigiriya rock fortress, and stroll along the historic ramparts of Galle Fort.",
     highlights: [
-      "Sigiriya Lion Rock Citadel",
-      "Temple of the Tooth in Kandy",
+      "Bentota golden sandy beach leisure & water sports",
+      "Madu River boat safari in Balapitiya",
+      "Kosgoda sea turtle conservation project",
+      "Sigiriya Lion Rock Citadel climb",
       "Galle Fort colonial ramparts & lighthouse",
       "Colombo City sightseeing",
-      "Madu River boat safari in Balapitiya",
-      "Water sports in Bentota beach",
     ],
     itinerary: [
       {
@@ -163,8 +163,8 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
       },
       {
         day: 5,
-        title: "Bentota Golden Beach Leisure",
-        description: "Full day of beach relaxation, Ayurvedic spa treatments, and water sports.",
+        title: "Bentota Golden Beach Leisure & Water Sports",
+        description: "Full day of beach relaxation, Ayurvedic spa treatments, jet skiing, and water sports along Bentota beach.",
       },
       {
         day: 6,
@@ -186,18 +186,19 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
     includedServices: "4-star beachfront resort stays, air-conditioned sedan transfer, daily breakfast.",
     accommodation: "4-Star & 5-Star beach resorts and boutique hotels",
     transportation: "Private air-conditioned sedan with professional driver",
-    whatToExpect: "Leisurely paced itinerary suitable for families, couples, and relaxed explorers.",
+    whatToExpect: "Leisurely paced itinerary suitable for families, couples, and relaxed beach explorers.",
     entryRequirements: "Passport valid for at least 6 months.",
     visaInformation: "Sri Lanka ETA tourist visa assistance provided.",
     images: [
-      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Coast
+      "https://www.srilankaclassytours.com/medias/place/big/574/thumb.jpg", // Bentota Beach (Sri Lanka Classy Tours)
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80", // Bentota Golden Beach
+      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Coast
       "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Temple
       "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock
       "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo Highlights
     ],
     coverImage:
-      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Coast
+      "https://www.srilankaclassytours.com/medias/place/big/574/thumb.jpg", // Bentota Beach (Sri Lanka Classy Tours)
     status: "Active",
     createdAt: "Sep 28, 2026",
   },
@@ -206,24 +207,24 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
   {
     id: "pkg-inbound-03",
     slug: "sri-lanka-hill-country-ella-tea-trails",
-    name: "Hill Country, Ella & Misty Tea Trails",
+    name: "Nuwara Eliya Tea Plantations & Highland Scenic Trails",
     travelType: "Inbound",
-    destination: "Kandy, Nuwara Eliya, Horton Plains & Ella",
+    destination: "Nuwara Eliya, Horton Plains, Kandy & Ella",
     country: "Sri Lanka",
     duration: "6 Days / 5 Nights",
     price: 155000,
     currency: "LKR",
     shortDescription:
-      "Ride the world-famous blue train through misty Ceylon tea valleys, hike Little Adam's Peak, and explore Ella Nine Arch Bridge.",
+      "Discover the rolling emerald tea plantations of Nuwara Eliya, tour historic tea factories, and ride the scenic highland train.",
     description:
-      "Immerse yourself in the emerald mountains of Sri Lanka's central highlands. Experience the legendary scenic train from Kandy to Ella, tour historic colonial tea estates, hike through cloud forests in Horton Plains to World's End, and witness panoramic waterfalls.",
+      "Immerse yourself in the emerald mountains of Nuwara Eliya, Sri Lanka's famed tea country. Tour Pedro & Damro tea estates, taste authentic Ceylon tea, hike through misty cloud forests in Horton Plains to World's End, and ride the iconic scenic blue train through Ella.",
     highlights: [
+      "Nuwara Eliya Ceylon tea plantation & factory private tour",
       "Iconic Kandy-to-Ella scenic mountain train ride",
+      "Horton Plains National Park & World's End trekking",
       "Demodara Nine Arch Bridge sunrise photoshoot",
       "Little Adam's Peak & Ella Rock trekking",
-      "Ceylon tea factory tour & private tasting",
-      "Horton Plains National Park & World's End",
-      "Ramboda and Ravana scenic waterfalls",
+      "Ramboda and Devon scenic waterfalls",
     ],
     itinerary: [
       {
@@ -271,13 +272,13 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
     entryRequirements: "Passport valid for 6+ months.",
     visaInformation: "Online Sri Lanka ETA tourist visa assistance included.",
     images: [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&auto=format&fit=crop&q=80", // Nuwara Eliya Tea Hills & Plantations Guide
       "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge & Blue Train
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&auto=format&fit=crop&q=80", // Nuwara Eliya Tea Hills
       "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1200&auto=format&fit=crop&q=80", // Little Adam's Peak Ella
       "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Lake & Heritage
     ],
     coverImage:
-      "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&auto=format&fit=crop&q=80", // Nuwara Eliya Tea Hills & Plantations Guide
     status: "Active",
     createdAt: "Sep 28, 2026",
   },

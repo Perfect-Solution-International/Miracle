@@ -11,8 +11,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { AdminStatCard } from "@/components/admin-dashboard/admin-stat-card";
+import { Button } from "@/components/ui/button";
 import { useTravelStore } from "@/lib/storage/travel-store";
-import { AdminTravelNavHeader } from "./admin-travel-nav-header";
 import { TravelPackageDetailsDialog } from "./travel-package-details-dialog";
 import { TravelPackageDialog } from "./travel-package-dialog";
 import { TravelPackagesTable } from "./travel-packages-table";
@@ -24,6 +24,7 @@ export function TravelOutboundView() {
     addPackage,
     updatePackage,
     deletePackage,
+    togglePackageStatus,
   } = useTravelStore();
 
   const [packageModalOpen, setPackageModalOpen] = useState(false);
@@ -32,7 +33,7 @@ export function TravelOutboundView() {
   const [viewPackage, setViewPackage] = useState<TravelPackage | null>(null);
   const [viewPackageModalOpen, setViewPackageModalOpen] = useState(false);
 
-  // Exact real statistics from actual package data
+  // Exact real statistics from actual database / API store
   const totalOutboundCount = outboundPackages.length;
   const activeCount = outboundPackages.filter((p) => p.status === "Active").length;
   const draftCount = outboundPackages.filter((p) => p.status === "Draft").length;
@@ -57,14 +58,24 @@ export function TravelOutboundView() {
     const target = outboundPackages.find((p) => p.id === id);
     if (!target) return;
     deletePackage(id);
-    toast.success(`Outbound package "${target.name}" removed.`);
+    toast.success(`Outbound package "${target.name}" deleted successfully.`);
+  };
+
+  const handleToggleStatus = (pkg: TravelPackage) => {
+    const nextStatus = pkg.status === "Active" ? "Inactive" : "Active";
+    togglePackageStatus(pkg.id, nextStatus);
+    toast.success(
+      nextStatus === "Active"
+        ? `Package "${pkg.name}" is now Active & published.`
+        : `Package "${pkg.name}" is now Inactive (hidden from public website).`
+    );
   };
 
   const handleSubmitPackage = (data: TravelPackageFormData, editId?: string) => {
     const payload: TravelPackageFormData = {
       ...data,
       travelType: "Outbound",
-      currency: data.currency || "USD",
+      currency: "USD",
     };
 
     if (editId) {
@@ -77,53 +88,80 @@ export function TravelOutboundView() {
   };
 
   return (
-    <div className="space-y-6">
-      <AdminTravelNavHeader onAddPackage={handleOpenAdd} addPackageLabel="+ Add Outbound Package" />
+    <div className="space-y-6 pb-12">
+      {/* Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/60 pb-5">
+        <div>
+          <div className="flex items-center gap-2.5">
+            <h1 className="font-heading text-2xl font-bold tracking-tight text-navy dark:text-foreground">
+              Outbound Tours
+            </h1>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand-blue border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800">
+              <Globe2 className="size-3.5" />
+              International Itineraries
+            </span>
+          </div>
+          <p className="text-xs text-muted-foreground mt-1 max-w-3xl leading-relaxed">
+            Manage international outbound tour packages, pricing, offers, itineraries and customer-facing travel information.
+          </p>
+        </div>
 
-      {/* Real Statistics from actual package data */}
+        <Button
+          onClick={handleOpenAdd}
+          className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-semibold gap-1.5 shadow-sm h-9 self-start sm:self-auto rounded-xl shrink-0"
+        >
+          <Plus className="size-4" />
+          Add Outbound Package
+        </Button>
+      </div>
+
+      {/* Real Statistics Overview Cards (0 if empty, no fake statistics) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <AdminStatCard
-          label="Total Outbound Packages"
+          label="Total Packages"
           value={String(totalOutboundCount)}
           icon={Globe2}
-          hint="All international tour packages"
+          hint="All international tour itineraries"
           accentColor="blue"
         />
         <AdminStatCard
           label="Active Packages"
           value={String(activeCount)}
           icon={CheckCircle2}
-          hint="Publicly live on website"
+          hint="Published live on travel website"
           accentColor="navy"
         />
         <AdminStatCard
           label="Draft Packages"
           value={String(draftCount)}
           icon={FileEdit}
-          hint="Unpublished drafts"
+          hint="Unpublished drafts in preparation"
           accentColor="blue"
         />
         <AdminStatCard
           label="Inactive Packages"
           value={String(inactiveCount)}
           icon={Archive}
-          hint="Archived / hidden"
+          hint="Archived / hidden from public"
           accentColor="navy"
         />
       </div>
 
-      {/* Outbound Packages Table */}
+      {/* Outbound Tour Packages Management Section */}
       <TravelPackagesTable
         packages={outboundPackages}
+        travelType="Outbound"
         onViewPackage={handleView}
         onEditPackage={handleEdit}
         onDeletePackage={handleDelete}
         onAddPackage={handleOpenAdd}
+        onToggleStatus={handleToggleStatus}
         title="Outbound Tour Packages"
-        description="Manage international holiday packages, flight itineraries, Dubai/Maldives tours, and status."
+        description="Manage international holiday packages, pricing in USD, visa details, itineraries, and publishing status."
+        addLabel="Add Outbound Package"
       />
 
-      {/* Modals */}
+      {/* Package Add / Edit Modal (13 Sections) */}
       <TravelPackageDialog
         open={packageModalOpen}
         onOpenChange={setPackageModalOpen}
@@ -132,6 +170,7 @@ export function TravelOutboundView() {
         defaultTravelType="Outbound"
       />
 
+      {/* View Package Details Modal */}
       <TravelPackageDetailsDialog
         packageItem={viewPackage}
         open={viewPackageModalOpen}

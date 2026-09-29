@@ -125,37 +125,50 @@ export function TravelSubpageHero({
             </div>
           </div>
 
-          {/* Right Column: Crisp High-Resolution Framed Visual Card */}
+          {/* Right Column: Liquid Glass Framed Hero Showcase Card */}
           <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-            {/* Glowing Backdrop */}
-            <div
-              aria-hidden="true"
-              className="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-brand-blue/25 via-indigo-500/15 to-brand-red/20 blur-2xl opacity-75"
-            />
+            {/* Outer Liquid Glass Frame */}
+            <div className="relative mx-auto rounded-[2.5rem] p-3 sm:p-4 bg-gradient-to-b from-white/95 via-white/70 to-white/90 backdrop-blur-2xl border border-white shadow-[0_25px_60px_-15px_rgba(8,112,184,0.18)] ring-1 ring-black/5">
+              <div className="relative aspect-[16/11] sm:aspect-[1.25] overflow-hidden rounded-[2rem] bg-slate-100 group shadow-inner">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 45vw, 95vw"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
 
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white bg-slate-100 shadow-2xl sm:aspect-[1.25]">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 45vw, 95vw"
-                className="object-cover transition-transform duration-700 hover:scale-105"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent"
-              />
+                {/* Specular Liquid Glass Sheen */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 pointer-events-none"
+                />
 
-              {/* Floating Verified Badge */}
-              <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-2xl border border-white/25 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur-md">
-                <span className="flex size-7 items-center justify-center rounded-full bg-brand-blue text-white shadow-xs">
-                  <ShieldCheck className="size-4" />
-                </span>
-                <span className="flex flex-col leading-tight">
-                  <span className="text-xs font-bold text-navy">Miracle Verified Experience</span>
-                  <span className="text-[10px] text-muted-foreground">Certified Quality &amp; Care</span>
-                </span>
+                {/* Soft Light Vignette */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none"
+                />
+
+                {/* Floating Liquid Glass Badge (Top Right) */}
+                <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5 rounded-full border border-white/60 bg-white/85 px-3.5 py-1.5 text-xs font-extrabold text-navy shadow-lg backdrop-blur-xl">
+                  <Sparkles className="size-3.5 text-amber-500 fill-amber-500" />
+                  <span>Curated Premium Travel</span>
+                </div>
+
+                {/* Floating Liquid Glass Review Card (Bottom Left) */}
+                <div className="absolute bottom-3.5 left-3.5 right-3.5 sm:right-auto flex items-center gap-3 rounded-2xl border border-white/70 bg-white/95 p-3 shadow-xl backdrop-blur-2xl">
+                  <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue to-indigo-600 text-white shadow-sm shrink-0">
+                    <ShieldCheck className="size-5" />
+                  </div>
+                  <div className="flex flex-col text-left">
+                    <span className="text-xs font-black text-navy">Miracle Verified Experience</span>
+                    <span className="text-[11px] font-semibold text-slate-600">
+                      100% Certified Quality &amp; Dedicated Care
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

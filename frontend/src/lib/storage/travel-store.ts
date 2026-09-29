@@ -60,35 +60,40 @@ export function getStoredPackages(): TravelPackage[] {
       modified = true;
     }
 
-    // Sanitize packages: Inbound packages MUST be in LKR and have proper authentic Sri Lanka place imagery
+    // Sanitize packages: Ensure valid currency fallback
     const sanitized = combined.map((pkg) => {
-      let updated = { ...pkg };
-      if (updated.travelType === "Inbound") {
-        if (updated.currency !== "LKR") {
-          updated.currency = "LKR";
-          if (updated.price && updated.price < 50000) {
-            updated.price = updated.price * 100; // e.g. 1650 -> 165000
-          }
-          modified = true;
-        }
+      const updated = { ...pkg };
+      if (!updated.currency) {
+        updated.currency = updated.travelType === "Inbound" ? "LKR" : "USD";
+        modified = true;
+      }
+      if (updated.travelType === "Outbound" && updated.currency !== "USD") {
+        updated.currency = "USD";
+        modified = true;
+      }
 
-        // Ensure Sri Lanka specific place images matching actual destination
+      const defaultMatch = DEFAULT_PACKAGES.find((d) => d.id === updated.id || d.slug === updated.slug);
+      if (defaultMatch) {
         if (
           !updated.coverImage ||
           updated.coverImage.includes("photo-1469854523086") ||
           updated.coverImage.includes("photo-1506744038136") ||
-          updated.coverImage.includes("photo-1476514525535")
+          updated.coverImage.includes("photo-1476514525535") ||
+          updated.coverImage.includes("photo-1588598198321-9735fd52455b") ||
+          updated.coverImage.includes("photo-1552465011-b4e21bf6e79a") ||
+          updated.coverImage.includes("photo-1586861635167-e5223aadc9fe")
         ) {
-          updated.coverImage = getPackageCoverImage(updated);
+          updated.coverImage = defaultMatch.coverImage;
+          updated.name = defaultMatch.name;
           modified = true;
         }
-
-        // Match default package gallery if empty
-        const defaultMatch = DEFAULT_PACKAGES.find((d) => d.id === updated.id || d.slug === updated.slug);
-        if (defaultMatch && (!updated.images || updated.images.length === 0)) {
+        if (!updated.images || updated.images.length === 0) {
           updated.images = defaultMatch.images;
           modified = true;
         }
+      } else if (!updated.coverImage) {
+        updated.coverImage = getPackageCoverImage(updated);
+        modified = true;
       }
       return updated;
     });
@@ -103,11 +108,21 @@ export function getStoredPackages(): TravelPackage[] {
   }
 }
 
-export function saveStoredPackages(packages: TravelPackage[]): void {
+export function saveStoredPackages(packages: TravelPackage[], syncServer = true): void {
   if (typeof window === "undefined") return;
   try {
     localStorage.setItem(PACKAGES_STORAGE_KEY, JSON.stringify(packages));
     notifyStoreUpdate();
+
+    if (syncServer) {
+      fetch("/api/v1/travel/packages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(packages),
+      }).catch((err) => {
+        console.warn("Could not sync packages with server:", err);
+      });
+    }
   } catch (err) {
     console.error("Failed to save packages to localStorage:", err);
   }
@@ -124,11 +139,21 @@ export function getStoredInquiries(): TravelInquiry[] {
   }
 }
 
-export function saveStoredInquiries(inquiries: TravelInquiry[]): void {
+export function saveStoredInquiries(inquiries: TravelInquiry[], syncServer = true): void {
   if (typeof window === "undefined") return;
   try {
     localStorage.setItem(INQUIRIES_STORAGE_KEY, JSON.stringify(inquiries));
     notifyStoreUpdate();
+
+    if (syncServer) {
+      fetch("/api/v1/travel/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(inquiries),
+      }).catch((err) => {
+        console.warn("Could not sync inquiries with server:", err);
+      });
+    }
   } catch (err) {
     console.error("Failed to save inquiries to localStorage:", err);
   }
@@ -148,6 +173,32 @@ export function useTravelStore() {
   useEffect(() => {
     reloadData();
     setIsLoaded(true);
+
+    // Initial server synchronization
+    fetch("/api/v1/travel/packages")
+      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+      .then((result) => {
+        if (result.success && Array.isArray(result.data) && result.data.length > 0) {
+          const serverPackages: TravelPackage[] = result.data;
+          saveStoredPackages(serverPackages, false);
+          setPackages(serverPackages);
+        }
+      })
+      .catch((err) => {
+        console.warn("Server packages sync notice:", err);
+      });
+
+    fetch("/api/v1/travel/inquiries")
+      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+      .then((result) => {
+        if (result.success && Array.isArray(result.data)) {
+          saveStoredInquiries(result.data, false);
+          setInquiries(result.data);
+        }
+      })
+      .catch((err) => {
+        console.warn("Server inquiries sync notice:", err);
+      });
 
     const handleStorage = () => reloadData();
     window.addEventListener("storage", handleStorage);
@@ -172,7 +223,7 @@ export function useTravelStore() {
       }),
     };
     const updated = [newPkg, ...packages];
-    saveStoredPackages(updated);
+    saveStoredPackages(updated, true);
     setPackages(updated);
     return newPkg;
   };
@@ -191,13 +242,13 @@ export function useTravelStore() {
           }
         : pkg,
     );
-    saveStoredPackages(updated);
+    saveStoredPackages(updated, true);
     setPackages(updated);
   };
 
   const deletePackage = (id: string): void => {
     const updated = packages.filter((pkg) => pkg.id !== id);
-    saveStoredPackages(updated);
+    saveStoredPackages(updated, true);
     setPackages(updated);
   };
 
@@ -244,7 +295,7 @@ export function useTravelStore() {
 
     const currentInquiries = getStoredInquiries();
     const updated = [newInquiry, ...currentInquiries];
-    saveStoredInquiries(updated);
+    saveStoredInquiries(updated, true);
     setInquiries(updated);
     return newInquiry;
   };
@@ -254,7 +305,7 @@ export function useTravelStore() {
     const updated = currentInquiries.map((inq) =>
       inq.id === id ? { ...inq, status: newStatus } : inq,
     );
-    saveStoredInquiries(updated);
+    saveStoredInquiries(updated, true);
     setInquiries(updated);
   };
 
@@ -288,7 +339,7 @@ export function useTravelStore() {
       return inq;
     });
 
-    saveStoredInquiries(updated);
+    saveStoredInquiries(updated, true);
     setInquiries(updated);
     return newReply;
   };
@@ -296,7 +347,25 @@ export function useTravelStore() {
   const deleteInquiry = (id: string): void => {
     const currentInquiries = getStoredInquiries();
     const updated = currentInquiries.filter((inq) => inq.id !== id);
-    saveStoredInquiries(updated);
+    saveStoredInquiries(updated, true);
+    setInquiries(updated);
+  };
+
+  const bulkUpdateInquiryStatus = (ids: string[], newStatus: InquiryStatus): void => {
+    const setIds = new Set(ids);
+    const currentInquiries = getStoredInquiries();
+    const updated = currentInquiries.map((inq) =>
+      setIds.has(inq.id) ? { ...inq, status: newStatus } : inq,
+    );
+    saveStoredInquiries(updated, true);
+    setInquiries(updated);
+  };
+
+  const bulkDeleteInquiries = (ids: string[]): void => {
+    const setIds = new Set(ids);
+    const currentInquiries = getStoredInquiries();
+    const updated = currentInquiries.filter((inq) => !setIds.has(inq.id));
+    saveStoredInquiries(updated, true);
     setInquiries(updated);
   };
 
@@ -314,5 +383,8 @@ export function useTravelStore() {
     updateInquiryStatus,
     addInquiryReply,
     deleteInquiry,
+    bulkUpdateInquiryStatus,
+    bulkDeleteInquiries,
   };
 }
+

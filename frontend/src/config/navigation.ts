@@ -280,37 +280,20 @@ const ADMIN_NAV: readonly NavSection[] = [
         icon: LayoutDashboard,
         permissions: [],
       },
-    ],
-  },
-  {
-    title: "Tour",
-    items: [
-      {
-        title: "All Tours",
-        href: ROUTES.admin.tourAll,
-        icon: Compass,
-        permissions: ["travel.manage"],
-        matchNested: false,
-      },
       {
         title: "Inbound Tours",
-        href: ROUTES.admin.tourInbound,
+        href: ROUTES.admin.toursInbound,
         icon: Palmtree,
         permissions: ["travel.manage"],
-        matchNested: false,
+        matchNested: true,
       },
       {
         title: "Outbound Tours",
-        href: ROUTES.admin.tourOutbound,
+        href: ROUTES.admin.toursOutbound,
         icon: Globe2,
         permissions: ["travel.manage"],
-        matchNested: false,
+        matchNested: true,
       },
-    ],
-  },
-  {
-    title: "",
-    items: [
       {
         title: "Inquiries",
         href: ROUTES.admin.inquiries,
