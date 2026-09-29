@@ -21,7 +21,7 @@ import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
-import { PageHero } from "@/components/common/page-hero";
+import { ItDetailHero } from "@/features/it-solutions/components/it-detail-hero";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
@@ -152,7 +152,7 @@ const whyChooseUs: IconItem[] = [
 export default function Page() {
   return (
     <>
-      <PageHero
+      <ItDetailHero
         eyebrow="IT Solutions"
         title={TITLE}
         description={DESCRIPTION}
@@ -173,7 +173,7 @@ export default function Page() {
             <a href="#services">Explore Services</a>
           </Button>
         </div>
-      </PageHero>
+      </ItDetailHero>
 
       {/* Overview */}
       <Section aria-labelledby="overview-heading">

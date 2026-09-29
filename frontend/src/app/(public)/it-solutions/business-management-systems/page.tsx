@@ -31,7 +31,7 @@ import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
-import { PageHero } from "@/components/common/page-hero";
+import { ItDetailHero } from "@/features/it-solutions/components/it-detail-hero";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
@@ -241,7 +241,7 @@ const benefits: IconItem[] = [
 export default function Page() {
   return (
     <>
-      <PageHero
+      <ItDetailHero
         eyebrow="IT Solutions"
         title={TITLE}
         description={DESCRIPTION}
@@ -252,17 +252,17 @@ export default function Page() {
         image={SITE_MEDIA.itSolutions.businessManagementSystemsHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl">
+          <Button asChild variant="accent" size="xl" className="h-auto min-h-12 whitespace-normal text-center">
             <Link href={ROUTES.public.tellUsWhatYouNeed}>
               Transform the Way You Manage Your Business
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="xl" className="text-ink">
+          <Button asChild variant="secondary-hero" size="xl">
             <a href="#solutions">Explore Solutions</a>
           </Button>
         </div>
-      </PageHero>
+      </ItDetailHero>
 
       {/* Introduction */}
       <Section aria-labelledby="overview-heading">

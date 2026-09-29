@@ -13,6 +13,7 @@ import {
   Network,
   Package,
   Rocket,
+  SearchCheck,
   Settings2,
   ShieldCheck,
   TrendingUp,
@@ -140,33 +141,57 @@ const overviewValues: IconItem[] = [
 ];
 
 const journey: (IconItem & { step: string })[] = [
-  { step: "01", title: "Idea", description: "Clarify the opportunity.", icon: Lightbulb },
+  { step: "01", title: "Idea", description: "Test the need, audience and potential value of the idea.", icon: Lightbulb },
   {
     step: "02",
-    title: "Planning",
-    description: "Set direction and priorities.",
+    title: "Plan",
+    description: "Set priorities, resources and a practical direction.",
     icon: Compass,
   },
   {
     step: "03",
     title: "Setup",
-    description: "Coordinate essential resources.",
+    description: "Coordinate people, suppliers, systems and requirements.",
     icon: Building2,
   },
-  { step: "04", title: "Launch", description: "Put the plan into motion.", icon: Rocket },
+  { step: "04", title: "Operate", description: "Put the plan into motion and organize day-to-day work.", icon: Rocket },
   {
     step: "05",
-    title: "Growth",
-    description: "Strengthen daily operations.",
+    title: "Grow",
+    description: "Improve capacity, visibility and coordination as demand changes.",
     icon: ChartColumn,
   },
   {
     step: "06",
-    title: "Expansion",
-    description: "Prepare for what comes next.",
+    title: "Scale",
+    description: "Assess what needs to change before taking on a larger opportunity.",
     icon: Globe2,
   },
 ];
+
+const workingProcess = [
+  { title: "Understand", description: "Discuss the goal, current position and the decision you need to make.", icon: Headphones },
+  { title: "Assess", description: "Review practical requirements, constraints and the options available.", icon: SearchCheck },
+  { title: "Plan", description: "Set priorities and a sequence of actions suited to the business.", icon: ClipboardList },
+  { title: "Coordinate", description: "Bring relevant people, suppliers and services into the work.", icon: Network },
+  { title: "Deliver", description: "Work through the agreed steps and review progress as needs change.", icon: Check },
+  { title: "Support", description: "Stay available for operational questions and the next stage of work.", icon: Headphones },
+] as const;
+
+const commonNeeds = [
+  { title: "Starting a new business", description: "Clarify an idea, assess the opportunity and organize launch priorities.", href: ROUTES.public.businessStart },
+  { title: "Improving an existing operation", description: "Review workflows, coordination and the systems that support everyday work.", href: ROUTES.public.businessSupport },
+  { title: "Planning expansion", description: "Consider capacity, resources and operating changes before moving into a new opportunity.", href: ROUTES.public.businessExpansion },
+  { title: "Introducing technology", description: "Match useful digital systems to a defined business problem or process.", href: ROUTES.public.businessTechnology },
+  { title: "Sourcing machinery and equipment", description: "Define operational needs and compare equipment options and implementation considerations.", href: ROUTES.public.businessMachinery },
+  { title: "Organizing connected support", description: "Bring planning, setup, sourcing and specialist services into a coordinated approach.", href: ROUTES.public.businessConsultation },
+] as const;
+
+const connectedServices = [
+  { title: "IT Solutions", description: "Digital systems and technology work when an operating need calls for them.", href: ROUTES.public.itSolutions },
+  { title: "Trading Services", description: "Supplier and buyer connections can support sourcing or market activity.", href: ROUTES.public.servicesTrading },
+  { title: "Import & Export", description: "Cross-border documentation and logistics support can connect to supply plans.", href: ROUTES.public.servicesImportExport },
+] as const;
 
 const advantages: IconItem[] = [
   {
@@ -217,31 +242,35 @@ export default function Page() {
     <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
       <section
         aria-labelledby="business-solutions-hero-heading"
-        className={`relative isolate overflow-hidden border-b border-slate-200/80 md:!bg-fixed ${landingStyles.travelHero}`}
-        style={{
-          backgroundImage: 'url("/images/business-solutions/business-background.png")',
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
+        className={`relative isolate overflow-hidden bg-white ${landingStyles.travelHero}`}
       >
-        <div aria-hidden="true" className={landingStyles.heroOverlay} />
-        <div className="container-page flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
+          style={{ backgroundImage: 'url("/images/business-solutions/business-background.png")' }}
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-white/25" />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.62)_0%,rgba(255,255,255,0.30)_42%,rgba(255,255,255,0.08)_78%,rgba(255,255,255,0.18)_100%)]"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-white/55 via-transparent to-white" />
+        <div className="container-page relative z-10 flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
           <Eyebrow className="rounded-full border border-white/80 bg-white/95 px-4 py-1.5 font-extrabold text-navy shadow-sm backdrop-blur-md">
             Business Solutions &amp; Enterprise Growth
           </Eyebrow>
 
           <h1
             id="business-solutions-hero-heading"
-            className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-white [text-shadow:_0_2px_12px_rgba(5,15,30,0.5)] sm:text-5xl md:text-6xl"
+            className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl"
           >
             Build Smarter.{" "}
-            <span className="text-white">
+            <span className="text-navy">
               Grow Stronger.
             </span>
           </h1>
 
-          <p className="max-w-2xl text-base leading-relaxed font-medium text-white/90 [text-shadow:_0_1px_8px_rgba(5,15,30,0.5)] sm:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
             Practical business support designed to help turn ideas, plans and
             opportunities into well-organized, sustainable, and scalable operations.
           </p>
@@ -412,6 +441,70 @@ export default function Page() {
             </li>
           ))}
         </ol>
+      </Section>
+
+      <Section aria-labelledby="business-process-heading">
+        <SectionHeading
+          id="business-process-heading"
+          eyebrow="How We Work With Businesses"
+          title="A Practical Way to Move Work Forward"
+          description="The approach starts with your requirement and adapts to its scope. Each step helps connect decisions to the work that follows."
+        />
+        <ol className="mt-10 grid gap-x-8 gap-y-7 md:grid-cols-2 lg:grid-cols-3">
+          {workingProcess.map(({ title, description, icon: Icon }, index) => (
+            <li key={title} className="flex gap-4 border-t border-slate-200 pt-5">
+              <span className="text-brand-blue flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-blue-light">
+                <Icon aria-hidden="true" className="size-5" />
+              </span>
+              <div>
+                <span className="text-brand-blue text-xs font-bold tracking-widest">0{index + 1}</span>
+                <h3 className="text-ink mt-1 text-lg font-bold">{title}</h3>
+                <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section aria-labelledby="business-needs-heading">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+          <div>
+            <SectionHeading
+              id="business-needs-heading"
+              eyebrow="Common Business Needs"
+              title="Support Shaped Around the Work at Hand"
+              description="A requirement may start in one area and touch several others. These are examples of the situations our Business Solutions can help you explore."
+            />
+            <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
+              {commonNeeds.map(({ title, description, href }) => (
+                <li key={title} className="border-b border-slate-200 py-4">
+                  <h3 className="text-ink text-sm font-bold sm:text-base">{title}</h3>
+                  <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
+                  <Link href={href} className="text-brand-blue mt-3 inline-flex items-center gap-1 text-sm font-semibold hover:underline">
+                    Explore support <ArrowRight aria-hidden="true" className="size-4" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <aside className="self-start rounded-3xl border border-brand-blue/15 bg-brand-blue-light/35 p-6 sm:p-8">
+            <span className="text-brand-blue text-xs font-bold tracking-widest uppercase">Connected Business Support</span>
+            <h3 className="text-ink mt-3 text-2xl font-extrabold tracking-tight">When One Requirement Spans Several Services</h3>
+            <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+              Business planning can lead to technology, sourcing or cross-border needs. We help identify which services are relevant and coordinate the next steps around the same objective.
+            </p>
+            <ul className="mt-6 border-t border-brand-blue/15">
+              {connectedServices.map(({ title, description, href }) => (
+                <li key={title} className="border-b border-brand-blue/15 py-4">
+                  <Link href={href} className="text-brand-blue inline-flex items-center gap-1.5 font-bold hover:underline">
+                    {title} <ArrowRight aria-hidden="true" className="size-4" />
+                  </Link>
+                  <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
       </Section>
 
       <Section
