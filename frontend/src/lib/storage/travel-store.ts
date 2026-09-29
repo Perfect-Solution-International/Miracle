@@ -16,6 +16,7 @@ const PACKAGES_STORAGE_KEY = "miracle_admin_travel_packages";
 const INQUIRIES_STORAGE_KEY = "miracle_admin_travel_inquiries";
 const TRAVEL_EVENT_KEY = "miracle_travel_store_updated";
 
+import { getPackageCoverImage } from "@/lib/travel/package-image-helper";
 import { DEFAULT_PACKAGES } from "./default-travel-packages";
 export { DEFAULT_PACKAGES } from "./default-travel-packages";
 
@@ -36,8 +37,31 @@ export function getStoredPackages(): TravelPackage[] {
     const parsed: TravelPackage[] = JSON.parse(raw);
     let modified = false;
 
+    const DEPRECATED_PACKAGE_IDS = new Set(["pkg-inbound-05", "pkg-inbound-06"]);
+    const DEPRECATED_PACKAGE_SLUGS = new Set([
+      "sri-lanka-luxury-romantic-honeymoon",
+      "sri-lanka-family-island-discovery",
+    ]);
+
+    // Remove any deprecated packages from previously cached storage
+    let combined = parsed.filter(
+      (p) => !DEPRECATED_PACKAGE_IDS.has(p.id) && (!p.slug || !DEPRECATED_PACKAGE_SLUGS.has(p.slug))
+    );
+    if (combined.length !== parsed.length) {
+      modified = true;
+    }
+
+    // Merge any missing default packages while retaining all admin-created / customized packages
+    const existingIds = new Set(combined.map((p) => p.id));
+    const missingDefaults = DEFAULT_PACKAGES.filter((def) => !existingIds.has(def.id));
+    
+    if (missingDefaults.length > 0) {
+      combined = [...combined, ...missingDefaults];
+      modified = true;
+    }
+
     // Sanitize packages: Inbound packages MUST be in LKR and have proper authentic Sri Lanka place imagery
-    const sanitized = parsed.map((pkg) => {
+    const sanitized = combined.map((pkg) => {
       let updated = { ...pkg };
       if (updated.travelType === "Inbound") {
         if (updated.currency !== "LKR") {
@@ -48,51 +72,21 @@ export function getStoredPackages(): TravelPackage[] {
           modified = true;
         }
 
-        // Ensure Sri Lanka specific place images
+        // Ensure Sri Lanka specific place images matching actual destination
         if (
           !updated.coverImage ||
           updated.coverImage.includes("photo-1469854523086") ||
           updated.coverImage.includes("photo-1506744038136") ||
           updated.coverImage.includes("photo-1476514525535")
         ) {
-          if (
-            updated.slug?.includes("coastal") ||
-            updated.name.toLowerCase().includes("coast") ||
-            updated.name.toLowerCase().includes("bentota")
-          ) {
-            updated.coverImage =
-              "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80"; // Galle Fort & Lighthouse
-          } else {
-            updated.coverImage =
-              "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80"; // Sigiriya Lion Rock
-          }
+          updated.coverImage = getPackageCoverImage(updated);
           modified = true;
         }
 
-        if (updated.slug === "sri-lanka-signature-heritage-wildlife") {
-          updated.coverImage =
-            "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80"; // Sigiriya
-          updated.images = [
-            "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock Fortress
-            "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Temple of the Tooth
-            "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Dutch Fort & Lighthouse
-            "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo City & Skyline
-            "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge
-            "https://images.unsplash.com/photo-1581852017103-68accd55096a?w=1200&auto=format&fit=crop&q=80", // Yala Wildlife Elephant Safari
-          ];
-          modified = true;
-        }
-
-        if (updated.slug === "sri-lanka-coastal-cultural-escape") {
-          updated.coverImage =
-            "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80"; // Galle Lighthouse
-          updated.images = [
-            "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Fort
-            "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Sacred Tooth Relic
-            "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock Fortress
-            "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo Highlights
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80", // Bentota Golden Beach
-          ];
+        // Match default package gallery if empty
+        const defaultMatch = DEFAULT_PACKAGES.find((d) => d.id === updated.id || d.slug === updated.slug);
+        if (defaultMatch && (!updated.images || updated.images.length === 0)) {
+          updated.images = defaultMatch.images;
           modified = true;
         }
       }
@@ -214,7 +208,9 @@ export function useTravelStore() {
   // --- Inquiry Actions ---
   const submitInquiry = (data: PublicTravelInquiryFormData): TravelInquiry => {
     const refNum = `TRV-${Math.floor(100000 + Math.random() * 900000)}`;
-    const travelType: TravelType = data.inquiryType.includes("Outbound") ? "Outbound" : "Inbound";
+    const travelType: TravelType =
+      data.travelType ||
+      (data.inquiryType.includes("Outbound") ? "Outbound" : "Inbound");
     
     const newInquiry: TravelInquiry = {
       id: `inq-${Date.now()}`,
@@ -226,7 +222,13 @@ export function useTravelStore() {
       inquiryType: data.inquiryType,
       travelType,
       packageName: data.selectedPackage,
+      packageId: data.packageId,
+      packageSlug: data.packageSlug,
       destination: data.destination,
+      country: data.country || (travelType === "Inbound" ? "Sri Lanka" : ""),
+      duration: data.duration,
+      packagePrice: data.packagePrice,
+      packageCurrency: data.packageCurrency,
       travelDate: data.preferredTravelDate,
       travelers: data.travelers,
       additionalRequirements: data.additionalRequirements || "",

@@ -46,6 +46,9 @@ interface TravelPackagesTableProps {
   onEditPackage: (pkg: TravelPackage) => void;
   onDeletePackage: (id: string) => void;
   onAddPackage: () => void;
+  onToggleStatus?: (pkg: TravelPackage) => void;
+  title?: string;
+  description?: string;
 }
 
 export function TravelPackagesTable({
@@ -54,6 +57,9 @@ export function TravelPackagesTable({
   onEditPackage,
   onDeletePackage,
   onAddPackage,
+  onToggleStatus,
+  title = "Travel Packages",
+  description = "Published, draft, and inbound/outbound travel itineraries",
 }: TravelPackagesTableProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("ALL");
@@ -77,14 +83,14 @@ export function TravelPackagesTable({
         <div>
           <div className="flex items-center gap-2">
             <CardTitle className="text-base font-bold text-navy dark:text-foreground">
-              Travel Packages
+              {title}
             </CardTitle>
             <span className="rounded-full bg-brand-blue-light px-2 py-0.5 text-xs font-semibold text-brand-blue dark:bg-brand-blue/20">
               {filteredPackages.length} total
             </span>
           </div>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Published, draft, and inbound/outbound travel itineraries
+            {description}
           </p>
         </div>
 

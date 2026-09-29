@@ -18,6 +18,8 @@ import type { TravelPackage, TravelType } from "@/components/admin-travel/types"
 import { ROUTES } from "@/config/routes";
 import { PublicTravelInquiryModal } from "./public-travel-inquiry-modal";
 
+import { getPackageCoverImage } from "@/lib/travel/package-image-helper";
+
 export interface PublicTravelPackageGridProps {
   packages: TravelPackage[];
   filterType?: TravelType;
@@ -35,8 +37,8 @@ export function PublicTravelPackageGrid({
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
 
   const filtered = filterType
-    ? packages.filter((p) => p.travelType === filterType && p.status !== "Inactive")
-    : packages.filter((p) => p.status !== "Inactive");
+    ? packages.filter((p) => p.travelType === filterType && p.status === "Active")
+    : packages.filter((p) => p.status === "Active");
 
   const handleOpenInquiry = (pkg: TravelPackage, e: React.MouseEvent) => {
     e.preventDefault();
@@ -91,10 +93,7 @@ export function PublicTravelPackageGrid({
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
           {filtered.map((pkg) => {
-            const cover =
-              pkg.coverImage ||
-              pkg.images?.[0] ||
-              "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&auto=format&fit=crop&q=80";
+            const cover = getPackageCoverImage(pkg);
 
             const detailHref = pkg.slug
               ? ROUTES.public.travelPackage(pkg.slug)

@@ -34,8 +34,18 @@ export function AdminTravelNavHeader({
 
   const NAV_ITEMS = [
     {
+      label: "All Tours",
+      href: "/admin/tour",
+      altHref: "/admin/travel",
+      icon: Compass,
+      count: packages.length,
+      badgeColor: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200",
+      description: "All Tour Packages",
+    },
+    {
       label: "Inbound Tours",
-      href: "/admin/travel/inbound",
+      href: "/admin/tour/inbound",
+      altHref: "/admin/travel/inbound",
       icon: Palmtree,
       count: inboundPackages.length,
       badgeColor: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300",
@@ -43,7 +53,8 @@ export function AdminTravelNavHeader({
     },
     {
       label: "Outbound Tours",
-      href: "/admin/travel/outbound",
+      href: "/admin/tour/outbound",
+      altHref: "/admin/travel/outbound",
       icon: Globe2,
       count: outboundPackages.length,
       badgeColor: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300",
@@ -85,7 +96,10 @@ export function AdminTravelNavHeader({
       <div className="flex flex-wrap items-center gap-2 border-b border-border/60 pb-2">
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href || (pathname === "/admin/travel" && item.href === "/admin/travel/inbound");
+          const isActive =
+            pathname === item.href ||
+            pathname === item.altHref ||
+            (item.href === "/admin/tour" && (pathname === "/admin/tour" || pathname === "/admin/travel" || pathname === "/admin/tour/packages" || pathname === "/admin/travel/packages"));
 
           return (
             <Link
@@ -94,7 +108,7 @@ export function AdminTravelNavHeader({
               className={cn(
                 "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition-all border",
                 isActive
-                  ? "bg-card text-brand-blue border-brand-blue/30 shadow-xs font-semibold"
+                  ? "bg-card text-brand-blue border-brand-blue/40 shadow-xs font-semibold ring-1 ring-brand-blue/20"
                   : "bg-muted/30 text-muted-foreground border-transparent hover:bg-muted hover:text-foreground",
               )}
             >

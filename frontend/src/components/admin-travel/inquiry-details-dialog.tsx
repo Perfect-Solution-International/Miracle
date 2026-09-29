@@ -275,8 +275,12 @@ export function InquiryDetailsDialog({
                   <span className="font-semibold text-brand-blue">{inquiry.inquiryType}</span>
                 </div>
                 <div className="flex justify-between">
+                  <span className="text-muted-foreground">Travel Type:</span>
+                  <span className="font-semibold text-foreground">{inquiry.travelType}</span>
+                </div>
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Package Name:</span>
-                  <span className="font-semibold text-foreground text-right truncate max-w-[180px]">
+                  <span className="font-semibold text-foreground text-right truncate max-w-[200px]">
                     {inquiry.packageName || "Custom Itinerary"}
                   </span>
                 </div>
@@ -287,6 +291,33 @@ export function InquiryDetailsDialog({
                     {inquiry.destination || "Not specified"}
                   </span>
                 </div>
+                {inquiry.country ? (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Country:</span>
+                    <span className="font-medium text-foreground flex items-center gap-1">
+                      <Globe2 className="size-3 text-emerald-600" />
+                      {inquiry.country}
+                    </span>
+                  </div>
+                ) : null}
+                {inquiry.duration ? (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Duration:</span>
+                    <span className="font-medium text-foreground flex items-center gap-1">
+                      <Clock className="size-3 text-amber-600" />
+                      {inquiry.duration}
+                    </span>
+                  </div>
+                ) : null}
+                {inquiry.packagePrice != null ? (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Package Price:</span>
+                    <span className="font-bold text-navy dark:text-brand-blue">
+                      {inquiry.packageCurrency || (inquiry.travelType === "Inbound" ? "LKR" : "USD")}{" "}
+                      {inquiry.packagePrice.toLocaleString()}
+                    </span>
+                  </div>
+                ) : null}
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Preferred Date:</span>
                   <span className="font-medium text-foreground flex items-center gap-1">
@@ -298,7 +329,7 @@ export function InquiryDetailsDialog({
                   <span className="text-muted-foreground">Travelers Count:</span>
                   <span className="font-semibold text-foreground flex items-center gap-1">
                     <Users className="size-3 text-brand-blue" />
-                    {inquiry.travelers}
+                    {inquiry.travelers} Pax
                   </span>
                 </div>
               </div>

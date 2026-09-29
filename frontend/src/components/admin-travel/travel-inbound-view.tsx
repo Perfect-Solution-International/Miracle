@@ -1,11 +1,9 @@
 "use client";
 
 import {
-  CalendarCheck,
+  Archive,
   CheckCircle2,
-  Clock,
-  Compass,
-  Package,
+  FileEdit,
   Palmtree,
   Plus,
 } from "lucide-react";
@@ -13,7 +11,6 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { AdminStatCard } from "@/components/admin-dashboard/admin-stat-card";
-import { Button } from "@/components/ui/button";
 import { useTravelStore } from "@/lib/storage/travel-store";
 import { AdminTravelNavHeader } from "./admin-travel-nav-header";
 import { TravelPackageDetailsDialog } from "./travel-package-details-dialog";
@@ -24,7 +21,6 @@ import type { TravelPackage, TravelPackageFormData } from "./types";
 export function TravelInboundView() {
   const {
     inboundPackages,
-    inquiries,
     addPackage,
     updatePackage,
     deletePackage,
@@ -36,10 +32,11 @@ export function TravelInboundView() {
   const [viewPackage, setViewPackage] = useState<TravelPackage | null>(null);
   const [viewPackageModalOpen, setViewPackageModalOpen] = useState(false);
 
+  // Exact real statistics from actual package data
+  const totalInboundCount = inboundPackages.length;
   const activeCount = inboundPackages.filter((p) => p.status === "Active").length;
   const draftCount = inboundPackages.filter((p) => p.status === "Draft").length;
-  const inboundInquiries = inquiries.filter((i) => i.travelType === "Inbound");
-  const pendingInquiriesCount = inboundInquiries.filter((i) => i.status === "New" || i.status === "Reviewing").length;
+  const inactiveCount = inboundPackages.filter((p) => p.status === "Inactive").length;
 
   const handleOpenAdd = () => {
     setEditingPackage(null);
@@ -60,7 +57,7 @@ export function TravelInboundView() {
     const target = inboundPackages.find((p) => p.id === id);
     if (!target) return;
     deletePackage(id);
-    toast.success(`Inbound package "${target.name}" deleted.`);
+    toast.success(`Inbound package "${target.name}" removed.`);
   };
 
   const handleSubmitPackage = (data: TravelPackageFormData, editId?: string) => {
@@ -68,6 +65,7 @@ export function TravelInboundView() {
       ...data,
       travelType: "Inbound",
       country: data.country || "Sri Lanka",
+      currency: "LKR",
     };
 
     if (editId) {
@@ -83,11 +81,11 @@ export function TravelInboundView() {
     <div className="space-y-6">
       <AdminTravelNavHeader onAddPackage={handleOpenAdd} addPackageLabel="+ Add Inbound Package" />
 
-      {/* Summary Stats for Inbound */}
+      {/* Real Statistics from actual package data */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <AdminStatCard
-          label="Inbound Packages"
-          value={String(inboundPackages.length)}
+          label="Total Inbound Packages"
+          value={String(totalInboundCount)}
           icon={Palmtree}
           hint="All Sri Lanka itineraries"
           accentColor="blue"
@@ -96,23 +94,22 @@ export function TravelInboundView() {
           label="Active Packages"
           value={String(activeCount)}
           icon={CheckCircle2}
-          hint="Publicly visible on website"
+          hint="Publicly live on website"
           accentColor="navy"
         />
         <AdminStatCard
-          label="Draft Itineraries"
+          label="Draft Packages"
           value={String(draftCount)}
-          icon={Package}
-          hint="Unpublished packages"
+          icon={FileEdit}
+          hint="Unpublished drafts"
           accentColor="blue"
         />
         <AdminStatCard
-          label="Inbound Inquiries"
-          value={String(inboundInquiries.length)}
-          icon={Clock}
-          hint={pendingInquiriesCount > 0 ? `${pendingInquiriesCount} awaiting review` : "All inquiries up to date"}
-          highlight={pendingInquiriesCount > 0}
-          accentColor={pendingInquiriesCount > 0 ? "red" : "navy"}
+          label="Inactive Packages"
+          value={String(inactiveCount)}
+          icon={Archive}
+          hint="Archived / hidden"
+          accentColor="navy"
         />
       </div>
 
@@ -123,6 +120,8 @@ export function TravelInboundView() {
         onEditPackage={handleEdit}
         onDeletePackage={handleDelete}
         onAddPackage={handleOpenAdd}
+        title="Inbound Tour Packages"
+        description="Manage Sri Lanka holiday packages, itineraries, pricing, and publishing status."
       />
 
       {/* Modals */}
@@ -131,6 +130,7 @@ export function TravelInboundView() {
         onOpenChange={setPackageModalOpen}
         onSubmit={handleSubmitPackage}
         editingPackage={editingPackage}
+        defaultTravelType="Inbound"
       />
 
       <TravelPackageDetailsDialog

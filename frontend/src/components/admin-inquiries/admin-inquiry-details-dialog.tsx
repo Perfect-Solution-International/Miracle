@@ -8,6 +8,7 @@ import {
   FileSpreadsheet,
   FileText,
   FileUp,
+  Globe2,
   History,
   Mail,
   MapPin,
@@ -310,11 +311,21 @@ export function AdminInquiryDetailsDialog({
                 </div>
 
                 <div className="space-y-3 text-xs">
-                  <div>
-                    <span className="text-muted-foreground block text-[11px]">Inquiry Type</span>
-                    <Badge className="bg-brand-blue/10 text-brand-blue border-brand-blue/20 font-bold text-xs mt-0.5">
-                      {inquiry.inquiryType}
-                    </Badge>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-muted-foreground block text-[11px]">Inquiry Type</span>
+                      <Badge className="bg-brand-blue/10 text-brand-blue border-brand-blue/20 font-bold text-xs mt-0.5">
+                        {inquiry.inquiryType}
+                      </Badge>
+                    </div>
+                    {inquiry.travelType ? (
+                      <div>
+                        <span className="text-muted-foreground block text-[11px] text-right">Travel Type</span>
+                        <Badge variant="outline" className="text-xs font-semibold mt-0.5">
+                          {inquiry.travelType}
+                        </Badge>
+                      </div>
+                    ) : null}
                   </div>
 
                   {inquiry.packageName ? (
@@ -326,13 +337,45 @@ export function AdminInquiryDetailsDialog({
 
                   {inquiry.destination ? (
                     <div>
-                      <span className="text-muted-foreground block text-[11px]">Destination(s) / Preferred Places</span>
+                      <span className="text-muted-foreground block text-[11px]">Destination(s)</span>
                       <span className="font-bold text-ink flex items-center gap-1.5 mt-0.5">
                         <MapPin className="size-3.5 text-sky-500 shrink-0" />
                         {inquiry.destination}
                       </span>
                     </div>
                   ) : null}
+
+                  {inquiry.country ? (
+                    <div>
+                      <span className="text-muted-foreground block text-[11px]">Country</span>
+                      <span className="font-semibold text-ink flex items-center gap-1.5 mt-0.5">
+                        <Globe2 className="size-3.5 text-emerald-600 shrink-0" />
+                        {inquiry.country}
+                      </span>
+                    </div>
+                  ) : null}
+
+                  <div className="grid grid-cols-2 gap-3 pt-1 border-t border-slate-100">
+                    {inquiry.duration ? (
+                      <div>
+                        <span className="text-muted-foreground block text-[11px]">Duration</span>
+                        <span className="font-semibold text-ink flex items-center gap-1 mt-0.5">
+                          <Clock className="size-3.5 text-amber-600" />
+                          {inquiry.duration}
+                        </span>
+                      </div>
+                    ) : null}
+
+                    {inquiry.packagePrice != null ? (
+                      <div>
+                        <span className="text-muted-foreground block text-[11px]">Package Price</span>
+                        <span className="font-bold text-navy mt-0.5 block">
+                          {inquiry.packageCurrency || (inquiry.travelType === "Inbound" ? "LKR" : "USD")}{" "}
+                          {inquiry.packagePrice.toLocaleString()}
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
 
                   <div className="grid grid-cols-2 gap-3 pt-1 border-t border-slate-100">
                     {inquiry.travelDate ? (
@@ -350,7 +393,7 @@ export function AdminInquiryDetailsDialog({
                         <span className="text-muted-foreground block text-[11px]">Travelers / Pax</span>
                         <span className="font-bold text-ink flex items-center gap-1 mt-0.5">
                           <Users className="size-3.5 text-brand-blue" />
-                          {inquiry.travelers}
+                          {inquiry.travelers} Pax
                         </span>
                       </div>
                     ) : null}

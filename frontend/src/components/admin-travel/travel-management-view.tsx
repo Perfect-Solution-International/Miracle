@@ -79,7 +79,7 @@ export function TravelManagementView() {
   return (
     <div className="space-y-6">
       {/* 1. Nav Header */}
-      <AdminTravelNavHeader onAddPackage={handleOpenAddPackage} addPackageLabel="+ Add Travel Package" />
+      <AdminTravelNavHeader onAddPackage={handleOpenAddPackage} addPackageLabel="+ Add New Tour Package" />
 
       {/* 2. Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -127,6 +127,8 @@ export function TravelManagementView() {
         onEditPackage={handleEditPackage}
         onDeletePackage={handleDeletePackage}
         onAddPackage={handleOpenAddPackage}
+        title="All Tour Packages"
+        description="Comprehensive management of all Inbound (Sri Lanka) and Outbound (International) tour itineraries."
       />
 
       {/* 4. Modals and Dialogs */}

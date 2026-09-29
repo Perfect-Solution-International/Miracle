@@ -2,20 +2,28 @@
 
 import {
   AlertCircle,
+  ArrowDown,
+  ArrowRight,
+  ArrowUp,
+  Calendar,
   Check,
   CheckCircle2,
+  Clock,
+  Compass,
   DollarSign,
+  Eye,
   FileText,
-  Globe,
   Globe2,
-  HelpCircle,
   Image as ImageIcon,
   Info,
   Layers,
   MapPin,
+  MoveLeft,
+  MoveRight,
   Palmtree,
   Plus,
   PlusCircle,
+  Send,
   ShieldAlert,
   Sparkles,
   Star,
@@ -47,28 +55,31 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import type {
   Currency,
+  ItineraryDay,
   PackageStatus,
   TravelPackage,
   TravelPackageFormData,
   TravelType,
 } from "./types";
+import { getPackageCoverImage } from "@/lib/travel/package-image-helper";
 
 interface TravelPackageDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSubmit: (data: TravelPackageFormData, editId?: string) => void;
   editingPackage?: TravelPackage | null;
+  defaultTravelType?: TravelType;
 }
 
 const PRESET_HIGHLIGHTS = [
-  "Beach experience",
-  "Cultural attractions",
-  "Wildlife experience",
-  "Mountain / hill country",
-  "Adventure activities",
-  "Ayurveda & Wellness",
-  "UNESCO Heritage Sites",
-  "Scenic Train Rides",
+  "Beach experience & Oceanfront Villas",
+  "UNESCO World Heritage Cultural Sites",
+  "Wildlife Safari & Leopard Tracking",
+  "Scenic Highland Tea Trails & Train Ride",
+  "Ayurveda Wellness & Herbal Spas",
+  "Historic Colonial Forts & Architecture",
+  "Snorkeling, Surfing & Water Sports",
+  "Luxury Mountain Chalets & Panoramas",
 ];
 
 const PRESET_INCLUDED_OPTIONS = [
@@ -79,7 +90,7 @@ const PRESET_INCLUDED_OPTIONS = [
   "Guided Tours",
   "Activities",
   "Meals",
-  "Travel Insurance Assistance",
+  "Other",
 ];
 
 const DEFAULT_FORM: TravelPackageFormData = {
@@ -89,7 +100,7 @@ const DEFAULT_FORM: TravelPackageFormData = {
   country: "Sri Lanka",
   duration: "",
   price: null,
-  currency: "USD",
+  currency: "LKR",
   shortDescription: "",
   description: "",
   highlights: [],
@@ -116,6 +127,7 @@ export function TravelPackageDialog({
   onOpenChange,
   onSubmit,
   editingPackage,
+  defaultTravelType,
 }: TravelPackageDialogProps) {
   const [formData, setFormData] = useState<TravelPackageFormData>(DEFAULT_FORM);
   const [priceInput, setPriceInput] = useState<string>("");
@@ -124,6 +136,12 @@ export function TravelPackageDialog({
   const [imageUrlInput, setImageUrlInput] = useState<string>("");
   const [error, setError] = useState<string>("");
 
+  // New Itinerary Day Input Temporary State
+  const [newDayTitle, setNewDayTitle] = useState("");
+  const [newDayLocation, setNewDayLocation] = useState("");
+  const [newDayDesc, setNewDayDesc] = useState("");
+  const [newDayImage, setNewDayImage] = useState("");
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const isEditing = Boolean(editingPackage);
 
@@ -131,7 +149,7 @@ export function TravelPackageDialog({
     if (editingPackage) {
       setFormData({
         name: editingPackage.name || "",
-        travelType: editingPackage.travelType || "Inbound",
+        travelType: editingPackage.travelType || defaultTravelType || "Inbound",
         destination: editingPackage.destination || "",
         country: editingPackage.country || (editingPackage.travelType === "Inbound" ? "Sri Lanka" : ""),
         duration: editingPackage.duration || "",
@@ -140,7 +158,7 @@ export function TravelPackageDialog({
         shortDescription: editingPackage.shortDescription || "",
         description: editingPackage.description || "",
         highlights: editingPackage.highlights || [],
-        itinerary: editingPackage.itinerary || [],
+        itinerary: editingPackage.itinerary ? [...editingPackage.itinerary] : [],
         includedItems:
           editingPackage.includedItems && editingPackage.includedItems.length > 0
             ? editingPackage.includedItems
@@ -162,14 +180,24 @@ export function TravelPackageDialog({
       });
       setPriceInput(editingPackage.price != null ? String(editingPackage.price) : "");
     } else {
-      setFormData(DEFAULT_FORM);
+      const initialType = defaultTravelType || "Inbound";
+      setFormData({
+        ...DEFAULT_FORM,
+        travelType: initialType,
+        country: initialType === "Inbound" ? "Sri Lanka" : "",
+        currency: initialType === "Inbound" ? "LKR" : "USD",
+      });
       setPriceInput("");
     }
     setError("");
     setHighlightInput("");
     setCustomIncludedInput("");
     setImageUrlInput("");
-  }, [editingPackage, open]);
+    setNewDayTitle("");
+    setNewDayLocation("");
+    setNewDayDesc("");
+    setNewDayImage("");
+  }, [editingPackage, defaultTravelType, open]);
 
   const updateField = <K extends keyof TravelPackageFormData>(
     field: K,
@@ -195,6 +223,59 @@ export function TravelPackageDialog({
       "highlights",
       current.filter((_, i) => i !== index),
     );
+  };
+
+  // --- Day-by-Day Itinerary Management ---
+  const handleAddItineraryDay = () => {
+    if (!newDayTitle.trim() && !newDayDesc.trim()) return;
+    const currentItinerary = formData.itinerary || [];
+    const nextDayNum = currentItinerary.length + 1;
+
+    const newDay: ItineraryDay = {
+      day: nextDayNum,
+      title: newDayTitle.trim() || `Day ${nextDayNum} Itinerary`,
+      location: newDayLocation.trim() || undefined,
+      description: newDayDesc.trim(),
+      image: newDayImage.trim() || undefined,
+    };
+
+    updateField("itinerary", [...currentItinerary, newDay]);
+    setNewDayTitle("");
+    setNewDayLocation("");
+    setNewDayDesc("");
+    setNewDayImage("");
+  };
+
+  const handleUpdateDay = (index: number, updatedFields: Partial<ItineraryDay>) => {
+    const current = [...(formData.itinerary || [])];
+    if (current[index]) {
+      current[index] = { ...current[index], ...updatedFields };
+      updateField("itinerary", current);
+    }
+  };
+
+  const handleDeleteDay = (index: number) => {
+    const current = (formData.itinerary || []).filter((_, i) => i !== index);
+    // Renumber days
+    const renumbered = current.map((day, idx) => ({ ...day, day: idx + 1 }));
+    updateField("itinerary", renumbered);
+  };
+
+  const handleMoveDay = (index: number, direction: "up" | "down") => {
+    const current = [...(formData.itinerary || [])];
+    const targetIdx = direction === "up" ? index - 1 : index + 1;
+    if (targetIdx < 0 || targetIdx >= current.length) return;
+
+    const a = current[index];
+    const b = current[targetIdx];
+    if (!a || !b) return;
+
+    current[index] = b;
+    current[targetIdx] = a;
+
+    // Renumber days
+    const renumbered = current.map((day, idx) => ({ ...day, day: idx + 1 }));
+    updateField("itinerary", renumbered);
   };
 
   // --- Included Items Management ---
@@ -283,6 +364,20 @@ export function TravelPackageDialog({
     }));
   };
 
+  const handleMoveImage = (index: number, direction: "left" | "right") => {
+    const current = [...(formData.images || [])];
+    const targetIdx = direction === "left" ? index - 1 : index + 1;
+    if (targetIdx < 0 || targetIdx >= current.length) return;
+
+    const a = current[index];
+    const b = current[targetIdx];
+    if (!a || !b) return;
+
+    current[index] = b;
+    current[targetIdx] = a;
+    updateField("images", current);
+  };
+
   const handleSetCoverImage = (img: string) => {
     updateField("coverImage", img);
   };
@@ -310,7 +405,7 @@ export function TravelPackageDialog({
     const payload: TravelPackageFormData = {
       ...formData,
       price: parsedPrice,
-      currency: formData.currency || "USD",
+      currency: formData.currency || (formData.travelType === "Inbound" ? "LKR" : "USD"),
       status: effectiveStatus,
       coverImage: formData.coverImage || formData.images[0] || "",
     };
@@ -320,35 +415,39 @@ export function TravelPackageDialog({
     onOpenChange(false);
   };
 
+  // Preview helper values
+  const previewCover = formData.coverImage || formData.images[0] || getPackageCoverImage(formData);
+  const parsedPriceNum = priceInput.trim() !== "" && !isNaN(Number(priceInput)) ? Number(priceInput) : formData.price;
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-5xl w-[95vw] lg:w-[90vw] max-h-[92vh] flex flex-col p-0 rounded-2xl shadow-2xl bg-card border border-border/80 overflow-hidden">
+      <DialogContent className="max-w-6xl w-[96vw] lg:w-[92vw] max-h-[94vh] flex flex-col p-0 rounded-2xl shadow-2xl bg-card border border-border/80 overflow-hidden">
         {/* Modal Header */}
-        <DialogHeader className="p-6 pb-4 border-b border-border/70 bg-gradient-to-r from-slate-50 via-white to-blue-50/40 dark:from-slate-900/60 dark:via-card dark:to-slate-900/30">
+        <DialogHeader className="p-6 pb-4 border-b border-border/70 bg-gradient-to-r from-slate-50 via-white to-blue-50/40 dark:from-slate-900/60 dark:via-card dark:to-slate-900/30 shrink-0">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2.5">
                 <div className="flex size-8 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
-                  <Palmtree className="size-4.5" />
+                  {formData.travelType === "Inbound" ? <Palmtree className="size-4.5" /> : <Globe2 className="size-4.5" />}
                 </div>
                 <DialogTitle className="text-xl font-bold text-navy dark:text-foreground">
-                  {isEditing ? "Edit Travel Package" : "Add New Travel Package"}
+                  {isEditing ? `Edit ${formData.travelType} Package` : `Create New ${formData.travelType} Package`}
                 </DialogTitle>
                 <Badge
                   variant="outline"
                   className={
                     formData.status === "Active"
-                      ? "bg-emerald-50 text-emerald-700 border-emerald-300 dark:bg-emerald-950/40 dark:text-emerald-400"
+                      ? "bg-emerald-50 text-emerald-700 border-emerald-300 dark:bg-emerald-950/40 dark:text-emerald-400 font-bold"
                       : formData.status === "Draft"
-                        ? "bg-amber-50 text-amber-700 border-amber-300 dark:bg-amber-950/40 dark:text-amber-400"
-                        : "bg-muted text-muted-foreground"
+                        ? "bg-amber-50 text-amber-700 border-amber-300 dark:bg-amber-950/40 dark:text-amber-400 font-bold"
+                        : "bg-muted text-muted-foreground font-bold"
                   }
                 >
                   {formData.status}
                 </Badge>
               </div>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
-                Configure comprehensive itinerary specifications, pricing, highlights, services, and media assets.
+                Configure complete package specifications, pricing, itinerary, card preview, and media assets.
               </DialogDescription>
             </div>
 
@@ -402,7 +501,7 @@ export function TravelPackageDialog({
           ) : null}
 
           {/* ========================================================================= */}
-          {/* SECTION 1 — BASIC PACKAGE INFORMATION */}
+          {/* SECTION 1 — BASIC INFORMATION */}
           {/* ========================================================================= */}
           <div className="bg-card rounded-xl border border-border/70 p-5 md:p-6 shadow-sm space-y-5">
             <div className="flex items-center gap-2.5 border-b border-border/50 pb-3">
@@ -410,7 +509,7 @@ export function TravelPackageDialog({
                 1
               </div>
               <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
-                Basic Package Information
+                Section 1 — Basic Information
               </h3>
             </div>
 
@@ -419,11 +518,11 @@ export function TravelPackageDialog({
               <div className="md:col-span-2 space-y-1.5">
                 <Label htmlFor="pkg-name" className="text-xs font-semibold flex items-center justify-between">
                   <span>Package Name <span className="text-brand-red">*</span></span>
-                  <span className="text-[11px] text-muted-foreground font-normal">Primary title displayed across website and itineraries</span>
+                  <span className="text-[11px] text-muted-foreground font-normal">Primary title for public package cards and detail pages</span>
                 </Label>
                 <Input
                   id="pkg-name"
-                  placeholder="e.g. Sri Lanka Cultural & Wildlife Heritage Tour"
+                  placeholder="e.g. Sri Lanka Signature Heritage & Wildlife Expedition"
                   value={formData.name}
                   onChange={(e) => updateField("name", e.target.value)}
                   className="h-10 text-xs font-medium bg-background"
@@ -441,12 +540,15 @@ export function TravelPackageDialog({
                   onValueChange={(val) => {
                     const newType = val as TravelType;
                     updateField("travelType", newType);
-                    if (newType === "Inbound" && !formData.country) {
+                    if (newType === "Inbound") {
                       updateField("country", "Sri Lanka");
+                      updateField("currency", "LKR");
+                    } else {
+                      updateField("currency", "USD");
                     }
                   }}
                 >
-                  <SelectTrigger id="pkg-type" className="h-10 text-xs bg-background">
+                  <SelectTrigger id="pkg-type" className="h-10 text-xs bg-background font-medium">
                     <SelectValue placeholder="Select type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -463,10 +565,10 @@ export function TravelPackageDialog({
                 </Label>
                 <Input
                   id="pkg-country"
-                  placeholder="e.g. Sri Lanka, Maldives, UAE"
+                  placeholder="e.g. Sri Lanka, United Arab Emirates, Maldives"
                   value={formData.country || ""}
                   onChange={(e) => updateField("country", e.target.value)}
-                  className="h-10 text-xs bg-background"
+                  className="h-10 text-xs bg-background font-medium"
                 />
               </div>
 
@@ -477,10 +579,10 @@ export function TravelPackageDialog({
                 </Label>
                 <Input
                   id="pkg-dest"
-                  placeholder="e.g. Colombo, Sigiriya, Kandy, Nuwara Eliya, Yala"
+                  placeholder="e.g. Sigiriya, Kandy, Nuwara Eliya & Yala"
                   value={formData.destination}
                   onChange={(e) => updateField("destination", e.target.value)}
-                  className="h-10 text-xs bg-background"
+                  className="h-10 text-xs bg-background font-medium"
                   required
                 />
               </div>
@@ -495,7 +597,7 @@ export function TravelPackageDialog({
                   placeholder="e.g. 7 Days / 6 Nights"
                   value={formData.duration}
                   onChange={(e) => updateField("duration", e.target.value)}
-                  className="h-10 text-xs bg-background"
+                  className="h-10 text-xs bg-background font-medium"
                   required
                 />
               </div>
@@ -504,19 +606,19 @@ export function TravelPackageDialog({
               <div className="space-y-1.5">
                 <Label htmlFor="pkg-price" className="text-xs font-semibold flex items-center justify-between">
                   <span>Package Price</span>
-                  <span className="text-[11px] text-muted-foreground font-normal">Optional / Leave empty if on inquiry</span>
+                  <span className="text-[11px] text-muted-foreground font-normal">Starting price (Leave empty if on request)</span>
                 </Label>
                 <div className="flex gap-2">
                   <Select
-                    value={formData.currency || "USD"}
+                    value={formData.currency || (formData.travelType === "Inbound" ? "LKR" : "USD")}
                     onValueChange={(val) => updateField("currency", val as Currency)}
                   >
-                    <SelectTrigger className="h-10 w-28 text-xs bg-background font-medium">
-                      <SelectValue placeholder="USD" />
+                    <SelectTrigger className="h-10 w-28 text-xs bg-background font-bold text-navy dark:text-foreground">
+                      <SelectValue placeholder="Currency" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="USD">USD ($)</SelectItem>
                       <SelectItem value="LKR">LKR (Rs)</SelectItem>
+                      <SelectItem value="USD">USD ($)</SelectItem>
                     </SelectContent>
                   </Select>
                   <Input
@@ -524,73 +626,57 @@ export function TravelPackageDialog({
                     type="number"
                     min="0"
                     step="any"
-                    placeholder="e.g. 1450"
+                    placeholder="e.g. 185000"
                     value={priceInput}
                     onChange={(e) => setPriceInput(e.target.value)}
-                    className="h-10 text-xs flex-1 bg-background font-medium"
+                    className="h-10 text-xs flex-1 bg-background font-bold"
                   />
                 </div>
               </div>
 
               {/* Short Description */}
-              <div className="md:col-span-2 space-y-1.5">
+              <div className="space-y-1.5">
                 <Label htmlFor="pkg-short-desc" className="text-xs font-semibold">
-                  Short Description / Tagline
+                  Short Description (Card Summary)
                 </Label>
                 <Input
                   id="pkg-short-desc"
-                  placeholder="Brief one-line summary highlighting the unique experience (e.g. An unforgettable 7-day luxury wildlife & cultural expedition)"
+                  placeholder="One-sentence tagline shown on package cards"
                   value={formData.shortDescription}
                   onChange={(e) => updateField("shortDescription", e.target.value)}
                   className="h-10 text-xs bg-background"
+                />
+              </div>
+
+              {/* Full Description */}
+              <div className="md:col-span-2 space-y-1.5">
+                <Label htmlFor="pkg-desc" className="text-xs font-semibold">
+                  Full Package Overview &amp; Narrative
+                </Label>
+                <Textarea
+                  id="pkg-desc"
+                  rows={4}
+                  placeholder="Comprehensive description for the package detail page covering milestones, scenic landscapes, culture, and highlights..."
+                  value={formData.description}
+                  onChange={(e) => updateField("description", e.target.value)}
+                  className="text-xs leading-relaxed bg-background min-h-[100px]"
                 />
               </div>
             </div>
           </div>
 
           {/* ========================================================================= */}
-          {/* SECTION 2 — PACKAGE DESCRIPTION */}
+          {/* SECTION 2 — PACKAGE CARD INFORMATION & LIVE PREVIEW */}
           {/* ========================================================================= */}
-          <div className="bg-card rounded-xl border border-border/70 p-5 md:p-6 shadow-sm space-y-4">
-            <div className="flex items-center gap-2.5 border-b border-border/50 pb-3">
-              <div className="flex size-6 items-center justify-center rounded-md bg-brand-blue/10 text-brand-blue font-bold text-xs">
-                2
-              </div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
-                Package Description
-              </h3>
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="pkg-desc" className="text-xs font-semibold">
-                Full Package Overview &amp; Itinerary Summary
-              </Label>
-              <Textarea
-                id="pkg-desc"
-                rows={5}
-                placeholder="Provide a comprehensive narrative of the journey, daily overview, scenic routes, historical context, and tour milestones..."
-                value={formData.description}
-                onChange={(e) => updateField("description", e.target.value)}
-                className="text-xs leading-relaxed bg-background min-h-[120px]"
-              />
-              <p className="text-[11px] text-muted-foreground">
-                Detailed description helps travelers understand what makes this package special.
-              </p>
-            </div>
-          </div>
-
-          {/* ========================================================================= */}
-          {/* SECTION 3 — PACKAGE HIGHLIGHTS */}
-          {/* ========================================================================= */}
-          <div className="bg-card rounded-xl border border-border/70 p-5 md:p-6 shadow-sm space-y-4">
+          <div className="bg-card rounded-xl border border-border/70 p-5 md:p-6 shadow-sm space-y-5">
             <div className="flex items-center justify-between border-b border-border/50 pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="flex size-6 items-center justify-center rounded-md bg-brand-blue/10 text-brand-blue font-bold text-xs">
-                  3
+                  2
                 </div>
                 <div>
                   <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
-                    Package Highlights
+                    Section 2 — Package Card Information &amp; Live Preview
                   </h3>
                 </div>
               </div>
@@ -599,91 +685,360 @@ export function TravelPackageDialog({
               </span>
             </div>
 
-            {/* Quick Suggestion Chips */}
-            <div className="space-y-2">
-              <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1">
-                <Sparkles className="size-3 text-amber-500" />
-                Quick Suggestions (Click to Add):
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {PRESET_HIGHLIGHTS.map((preset) => {
-                  const isAdded = (formData.highlights || []).includes(preset);
-                  return (
-                    <button
-                      key={preset}
-                      type="button"
-                      onClick={() => handleAddHighlight(preset)}
-                      disabled={isAdded}
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
-                        isAdded
-                          ? "bg-muted text-muted-foreground border-border/50 opacity-60 cursor-not-allowed"
-                          : "bg-background text-foreground border-border hover:border-brand-blue hover:text-brand-blue hover:bg-brand-blue/5"
-                      }`}
-                    >
-                      {isAdded ? <Check className="size-3 text-emerald-600" /> : <Plus className="size-3" />}
-                      {preset}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              {/* Highlights Builder (7 Cols) */}
+              <div className="lg:col-span-7 space-y-4">
+                <div className="space-y-2">
+                  <Label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+                    <Sparkles className="size-3 text-amber-500" />
+                    Quick Suggestion Chips (Click to Add):
+                  </Label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {PRESET_HIGHLIGHTS.map((preset) => {
+                      const isAdded = (formData.highlights || []).includes(preset);
+                      return (
+                        <button
+                          key={preset}
+                          type="button"
+                          onClick={() => handleAddHighlight(preset)}
+                          disabled={isAdded}
+                          className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                            isAdded
+                              ? "bg-muted text-muted-foreground border-border/50 opacity-60 cursor-not-allowed"
+                              : "bg-background text-foreground border-border hover:border-brand-blue hover:text-brand-blue hover:bg-brand-blue/5"
+                          }`}
+                        >
+                          {isAdded ? <Check className="size-3 text-emerald-600" /> : <Plus className="size-3" />}
+                          {preset}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
 
-            {/* Custom Input */}
-            <div className="flex gap-2 pt-1">
-              <Input
-                placeholder="Type a custom highlight (e.g. Scenic blue train ride to Ella, Leopard safari in Yala)"
-                value={highlightInput}
-                onChange={(e) => setHighlightInput(e.target.value)}
-                className="h-9.5 text-xs bg-background flex-1"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    handleAddHighlight();
-                  }
-                }}
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={() => handleAddHighlight()}
-                className="h-9.5 text-xs gap-1.5 border-brand-blue/40 text-brand-blue hover:bg-brand-blue/5 font-semibold shrink-0"
-              >
-                <PlusCircle className="size-4" />
-                Add Highlight
-              </Button>
-            </div>
-
-            {/* Added Highlights Badges */}
-            {(formData.highlights || []).length > 0 ? (
-              <div className="flex flex-wrap gap-2 pt-2 p-3 bg-muted/30 rounded-xl border border-border/60">
-                {(formData.highlights || []).map((hl, idx) => (
-                  <span
-                    key={idx}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-card text-xs font-medium text-navy dark:text-foreground border border-border/80 shadow-xs"
+                <div className="flex gap-2 pt-1">
+                  <Input
+                    placeholder="Add a custom highlight (e.g. Scenic Nine Arch Bridge train ride)"
+                    value={highlightInput}
+                    onChange={(e) => setHighlightInput(e.target.value)}
+                    className="h-9.5 text-xs bg-background flex-1"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleAddHighlight();
+                      }
+                    }}
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleAddHighlight()}
+                    className="h-9.5 text-xs gap-1.5 border-brand-blue/40 text-brand-blue hover:bg-brand-blue/5 font-semibold shrink-0"
                   >
-                    <Star className="size-3.5 text-amber-500 fill-amber-500 shrink-0" />
-                    <span>{hl}</span>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveHighlight(idx)}
-                      className="text-muted-foreground hover:text-brand-red ml-1 transition-colors"
-                      aria-label={`Remove highlight ${hl}`}
-                    >
-                      <X className="size-3.5" />
-                    </button>
-                  </span>
-                ))}
+                    <PlusCircle className="size-4" />
+                    Add Highlight
+                  </Button>
+                </div>
+
+                {/* Highlights List */}
+                {(formData.highlights || []).length > 0 ? (
+                  <div className="flex flex-wrap gap-2 p-3 bg-muted/30 rounded-xl border border-border/60">
+                    {(formData.highlights || []).map((hl, idx) => (
+                      <span
+                        key={idx}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-card text-xs font-medium text-navy dark:text-foreground border border-border/80 shadow-xs"
+                      >
+                        <Star className="size-3.5 text-amber-500 fill-amber-500 shrink-0" />
+                        <span>{hl}</span>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveHighlight(idx)}
+                          className="text-muted-foreground hover:text-brand-red ml-1 transition-colors"
+                          aria-label={`Remove highlight ${hl}`}
+                        >
+                          <X className="size-3.5" />
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-[11px] text-muted-foreground italic">
+                    No highlights added yet. Select quick chips above or type custom highlights.
+                  </p>
+                )}
               </div>
-            ) : (
-              <p className="text-[11px] text-muted-foreground italic">
-                No highlights added yet. Select from suggestions above or enter custom key highlights.
-              </p>
-            )}
+
+              {/* Live Package Card Preview (5 Cols) */}
+              <div className="lg:col-span-5 space-y-2">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-brand-blue uppercase tracking-wider">
+                  <Eye className="size-3.5" />
+                  Live Card Preview (Public Website View):
+                </div>
+
+                <div className="rounded-2xl border border-border/80 bg-card overflow-hidden shadow-md max-w-sm mx-auto transition-all">
+                  <div className="relative aspect-[16/10] bg-muted overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={previewCover}
+                      alt={formData.name || "Package preview"}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src =
+                          "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&auto=format&fit=crop&q=80";
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+
+                    <div className="absolute top-2.5 left-2.5">
+                      <Badge
+                        className={
+                          formData.travelType === "Inbound"
+                            ? "bg-emerald-600 text-white text-[10px] font-bold"
+                            : "bg-blue-600 text-white text-[10px] font-bold"
+                        }
+                      >
+                        {formData.travelType}
+                      </Badge>
+                    </div>
+
+                    <div className="absolute top-2.5 right-2.5">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-sm text-white text-[10px] font-semibold">
+                        <Clock className="size-2.5 text-sky-300" />
+                        {formData.duration || "7 Days / 6 Nights"}
+                      </span>
+                    </div>
+
+                    <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white">
+                      <p className="text-[11px] font-medium flex items-center gap-1 drop-shadow-sm truncate">
+                        <MapPin className="size-3 text-sky-300 shrink-0" />
+                        <span>{formData.destination || "Destination"}</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-4 space-y-2.5">
+                    <h4 className="font-bold text-xs text-navy dark:text-foreground line-clamp-1">
+                      {formData.name || "Package Title Goes Here"}
+                    </h4>
+                    <p className="text-[11px] text-muted-foreground line-clamp-2 leading-relaxed">
+                      {formData.shortDescription || "A memorable journey through scenic sights and culture."}
+                    </p>
+
+                    {/* Highlights mini preview */}
+                    {(formData.highlights || []).length > 0 ? (
+                      <div className="flex flex-wrap gap-1 pt-1">
+                        {(formData.highlights || []).slice(0, 2).map((h, i) => (
+                          <span key={i} className="text-[10px] text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-1.5 py-0.5 rounded flex items-center gap-1">
+                            <Star className="size-2.5 fill-amber-500 text-amber-500" />
+                            <span className="truncate max-w-[120px]">{h}</span>
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    <div className="flex items-center justify-between pt-2 border-t border-border/50">
+                      <div>
+                        <span className="text-[9px] uppercase font-bold text-muted-foreground block">
+                          Starting From
+                        </span>
+                        <span className="text-xs font-bold text-navy dark:text-foreground">
+                          {parsedPriceNum != null ? (
+                            `${formData.currency === "LKR" ? "LKR" : "USD"} ${parsedPriceNum.toLocaleString()}`
+                          ) : (
+                            "Price on Request"
+                          )}
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-bold text-brand-blue flex items-center gap-1">
+                        View Package <ArrowRight className="size-3" />
+                      </span>
+                    </div>
+
+                    <Button
+                      type="button"
+                      size="sm"
+                      className="w-full h-8 text-xs font-bold bg-brand-blue text-white rounded-lg gap-1.5"
+                    >
+                      <Send className="size-3" />
+                      Send Inquiry
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* ========================================================================= */}
-          {/* SECTION 4 — WHAT'S INCLUDED */}
+          {/* SECTION 3 — DAY-BY-DAY ITINERARY BUILDER */}
+          {/* ========================================================================= */}
+          <div className="bg-card rounded-xl border border-border/70 p-5 md:p-6 shadow-sm space-y-5">
+            <div className="flex items-center justify-between border-b border-border/50 pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="flex size-6 items-center justify-center rounded-md bg-brand-blue/10 text-brand-blue font-bold text-xs">
+                  3
+                </div>
+                <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
+                  Section 3 — Day-by-Day Itinerary Builder
+                </h3>
+              </div>
+              <span className="text-xs font-semibold text-brand-blue">
+                {(formData.itinerary || []).length} days configured
+              </span>
+            </div>
+
+            {/* List of existing days */}
+            {(formData.itinerary || []).length > 0 ? (
+              <div className="space-y-4">
+                {(formData.itinerary || []).map((day, idx) => (
+                  <div
+                    key={idx}
+                    className="p-4 rounded-xl border border-border/80 bg-background space-y-3 shadow-xs"
+                  >
+                    <div className="flex items-center justify-between border-b border-border/40 pb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-md bg-brand-blue text-white text-xs font-bold font-mono">
+                          Day {String(day.day).padStart(2, "0")}
+                        </span>
+                        <span className="text-xs font-bold text-navy dark:text-foreground">
+                          {day.title}
+                        </span>
+                      </div>
+
+                      {/* Day Action Buttons */}
+                      <div className="flex items-center gap-1">
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          disabled={idx === 0}
+                          onClick={() => handleMoveDay(idx, "up")}
+                          className="h-7 w-7 p-0 text-muted-foreground hover:text-foreground"
+                          title="Move Day Up"
+                        >
+                          <ArrowUp className="size-3.5" />
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          disabled={idx === (formData.itinerary || []).length - 1}
+                          onClick={() => handleMoveDay(idx, "down")}
+                          className="h-7 w-7 p-0 text-muted-foreground hover:text-foreground"
+                          title="Move Day Down"
+                        >
+                          <ArrowDown className="size-3.5" />
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleDeleteDay(idx)}
+                          className="h-7 w-7 p-0 text-muted-foreground hover:text-brand-red ml-1"
+                          title="Delete Day"
+                        >
+                          <Trash2 className="size-3.5" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <Label className="text-[11px] font-semibold text-muted-foreground">
+                          Day Title / Headline:
+                        </Label>
+                        <Input
+                          value={day.title}
+                          onChange={(e) => handleUpdateDay(idx, { title: e.target.value })}
+                          className="h-8.5 text-xs bg-card font-medium"
+                          placeholder="e.g. Arrival & Sigiriya Fortress Sunset"
+                        />
+                      </div>
+
+                      <div className="space-y-1">
+                        <Label className="text-[11px] font-semibold text-muted-foreground">
+                          Day Location(s):
+                        </Label>
+                        <Input
+                          value={day.location || ""}
+                          onChange={(e) => handleUpdateDay(idx, { location: e.target.value })}
+                          className="h-8.5 text-xs bg-card"
+                          placeholder="e.g. BIA Airport & Sigiriya"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <Label className="text-[11px] font-semibold text-muted-foreground">
+                        Day Description &amp; Milestones:
+                      </Label>
+                      <Textarea
+                        rows={2}
+                        value={day.description}
+                        onChange={(e) => handleUpdateDay(idx, { description: e.target.value })}
+                        className="text-xs bg-card min-h-[60px]"
+                        placeholder="Detailed itinerary breakdown for this day..."
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+
+            {/* Form to add a new day */}
+            <div className="p-4 rounded-xl border border-dashed border-brand-blue/40 bg-brand-blue/5 space-y-3">
+              <div className="flex items-center gap-2 text-xs font-bold text-brand-blue">
+                <PlusCircle className="size-4" />
+                Add Day {String((formData.itinerary || []).length + 1).padStart(2, "0")} Itinerary:
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <Label className="text-[11px] font-semibold text-foreground">Day Title:</Label>
+                  <Input
+                    placeholder="e.g. Scenic Hill Country Train & Nine Arch Bridge"
+                    value={newDayTitle}
+                    onChange={(e) => setNewDayTitle(e.target.value)}
+                    className="h-8.5 text-xs bg-background"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-[11px] font-semibold text-foreground">Location:</Label>
+                  <Input
+                    placeholder="e.g. Kandy to Ella"
+                    value={newDayLocation}
+                    onChange={(e) => setNewDayLocation(e.target.value)}
+                    className="h-8.5 text-xs bg-background"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <Label className="text-[11px] font-semibold text-foreground">Activities &amp; Highlights:</Label>
+                <Textarea
+                  rows={2}
+                  placeholder="Describe morning, afternoon and evening schedule for this day..."
+                  value={newDayDesc}
+                  onChange={(e) => setNewDayDesc(e.target.value)}
+                  className="text-xs bg-background min-h-[60px]"
+                />
+              </div>
+
+              <Button
+                type="button"
+                size="sm"
+                onClick={handleAddItineraryDay}
+                disabled={!newDayTitle.trim() && !newDayDesc.trim()}
+                className="h-8.5 text-xs font-semibold bg-brand-blue hover:bg-brand-blue-dark text-white gap-1.5"
+              >
+                <Plus className="size-3.5" />
+                Add Day to Itinerary
+              </Button>
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* SECTION 4 — INCLUDED SERVICES */}
           {/* ========================================================================= */}
           <div className="bg-card rounded-xl border border-border/70 p-5 md:p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-border/50 pb-3">
@@ -692,11 +1047,11 @@ export function TravelPackageDialog({
                   4
                 </div>
                 <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
-                  What&apos;s Included
+                  Section 4 — What&apos;s Included &amp; Services
                 </h3>
               </div>
               <span className="text-xs font-semibold text-emerald-600">
-                {(formData.includedItems || []).length} items included
+                {(formData.includedItems || []).length} inclusions selected
               </span>
             </div>
 
@@ -740,7 +1095,7 @@ export function TravelPackageDialog({
               <Label className="text-xs font-semibold">Add Custom Included Feature:</Label>
               <div className="flex gap-2">
                 <Input
-                  placeholder="e.g. Wildlife Safari Jeep entrance fee, English speaking naturalist guide"
+                  placeholder="e.g. Safari Jeep permit, Naturalist English-speaking guide"
                   value={customIncludedInput}
                   onChange={(e) => setCustomIncludedInput(e.target.value)}
                   className="h-9.5 text-xs bg-background flex-1"
@@ -759,12 +1114,12 @@ export function TravelPackageDialog({
                   className="h-9.5 text-xs gap-1.5 border-emerald-600/40 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 font-semibold shrink-0"
                 >
                   <PlusCircle className="size-4" />
-                  Add Item
+                  Add Feature
                 </Button>
               </div>
             </div>
 
-            {/* Custom Tag Display if non-preset items exist */}
+            {/* Custom Inclusions Tag List */}
             {(formData.includedItems || []).some((item) => !PRESET_INCLUDED_OPTIONS.includes(item)) ? (
               <div className="flex flex-wrap gap-2 pt-1">
                 {(formData.includedItems || [])
@@ -789,7 +1144,7 @@ export function TravelPackageDialog({
               </div>
             ) : null}
 
-            {/* Additional Inclusions Notes */}
+            {/* Additional Inclusions Details */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
               <div className="space-y-1.5">
                 <Label htmlFor="pkg-accom" className="text-xs font-semibold">
@@ -798,7 +1153,7 @@ export function TravelPackageDialog({
                 <Textarea
                   id="pkg-accom"
                   rows={2}
-                  placeholder="e.g. 4-Star & 5-Star Boutique Hotels, luxury eco-lodges with daily breakfast"
+                  placeholder="e.g. 4-Star & 5-Star luxury boutique resorts with private pool villas"
                   value={formData.accommodation || ""}
                   onChange={(e) => updateField("accommodation", e.target.value)}
                   className="text-xs bg-background"
@@ -812,7 +1167,7 @@ export function TravelPackageDialog({
                 <Textarea
                   id="pkg-trans"
                   rows={2}
-                  placeholder="e.g. Private air-conditioned luxury vehicle with dedicated English-speaking chauffeur-guide"
+                  placeholder="e.g. Private air-conditioned luxury executive van with dedicated chauffeur"
                   value={formData.transportation || ""}
                   onChange={(e) => updateField("transportation", e.target.value)}
                   className="text-xs bg-background"
@@ -822,7 +1177,7 @@ export function TravelPackageDialog({
           </div>
 
           {/* ========================================================================= */}
-          {/* SECTION 5 — WHAT TO EXPECT */}
+          {/* SECTION 5 — WHAT TO EXPECT & EXPERIENCE */}
           {/* ========================================================================= */}
           <div className="bg-card rounded-xl border border-border/70 p-5 md:p-6 shadow-sm space-y-4">
             <div className="flex items-center gap-2.5 border-b border-border/50 pb-3">
@@ -830,25 +1185,22 @@ export function TravelPackageDialog({
                 5
               </div>
               <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
-                What to Expect
+                Section 5 — What to Expect &amp; Experience Details
               </h3>
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="pkg-expect" className="text-xs font-semibold">
-                Travel Experience, Activity Pace &amp; Practical Advice
+                What Customers Can Expect (Activity Pace, Climate, Cultural Etiquette, Packing Tips)
               </Label>
               <Textarea
                 id="pkg-expect"
                 rows={4}
-                placeholder="Describe the overall pace, physical activity level, climate advice, attire guidelines for religious/cultural sites, photography tips, and travel nuances..."
+                placeholder="Describe what travelers should anticipate: physical activity levels, climate nuances, attire recommendations for sacred sites, and journey flow..."
                 value={formData.whatToExpect || ""}
                 onChange={(e) => updateField("whatToExpect", e.target.value)}
-                className="text-xs leading-relaxed bg-background min-h-[100px]"
+                className="text-xs leading-relaxed bg-background min-h-[90px]"
               />
-              <p className="text-[11px] text-muted-foreground">
-                Guides travelers on what clothes to pack, weather preparation, and daily activity intensity.
-              </p>
             </div>
           </div>
 
@@ -860,21 +1212,26 @@ export function TravelPackageDialog({
               <div className="flex size-6 items-center justify-center rounded-md bg-brand-blue/10 text-brand-blue font-bold text-xs">
                 6
               </div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
-                Entry Requirements &amp; Visa Information
-              </h3>
+              <div>
+                <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
+                  Section 6 — Entry Requirements &amp; Visa Information (Optional)
+                </h3>
+                <p className="text-[11px] text-muted-foreground">
+                  If left empty, no placeholder content will be displayed on the public page.
+                </p>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
               <div className="space-y-1.5">
                 <Label htmlFor="pkg-entry" className="text-xs font-semibold flex items-center gap-1.5">
                   <ShieldAlert className="size-3.5 text-brand-blue" />
-                  Entry &amp; Health Requirements
+                  Entry Requirements
                 </Label>
                 <Textarea
                   id="pkg-entry"
-                  rows={4}
-                  placeholder="e.g. Passport must be valid for at least 6 months from arrival date. Return air ticket and proof of sufficient funds required."
+                  rows={3}
+                  placeholder="e.g. Passport valid for 6+ months from entry date."
                   value={formData.entryRequirements || ""}
                   onChange={(e) => updateField("entryRequirements", e.target.value)}
                   className="text-xs leading-relaxed bg-background"
@@ -884,12 +1241,12 @@ export function TravelPackageDialog({
               <div className="space-y-1.5">
                 <Label htmlFor="pkg-visa" className="text-xs font-semibold flex items-center gap-1.5">
                   <Globe2 className="size-3.5 text-brand-blue" />
-                  Visa Guidelines &amp; ETA Information
+                  Visa Information
                 </Label>
                 <Textarea
                   id="pkg-visa"
-                  rows={4}
-                  placeholder="e.g. Electronic Travel Authorization (ETA) required before departure. Our visa desk can handle processing or travelers can apply online."
+                  rows={3}
+                  placeholder="e.g. Sri Lanka ETA tourist visa assistance provided by Miracle International."
                   value={formData.visaInformation || ""}
                   onChange={(e) => updateField("visaInformation", e.target.value)}
                   className="text-xs leading-relaxed bg-background"
@@ -899,7 +1256,7 @@ export function TravelPackageDialog({
           </div>
 
           {/* ========================================================================= */}
-          {/* SECTION 7 — PACKAGE IMAGES */}
+          {/* SECTION 7 — PACKAGE IMAGES & GALLERY */}
           {/* ========================================================================= */}
           <div className="bg-card rounded-xl border border-border/70 p-5 md:p-6 shadow-sm space-y-5">
             <div className="flex items-center justify-between border-b border-border/50 pb-3">
@@ -908,7 +1265,7 @@ export function TravelPackageDialog({
                   7
                 </div>
                 <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
-                  Package Images &amp; Gallery
+                  Section 7 — Package Images &amp; Gallery Management
                 </h3>
               </div>
               <span className="text-xs font-semibold text-brand-blue">
@@ -918,7 +1275,6 @@ export function TravelPackageDialog({
 
             {/* Upload Area / URL Input */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Local File Upload Dropzone */}
               <div
                 onClick={() => fileInputRef.current?.click()}
                 className="border-2 border-dashed border-border/80 hover:border-brand-blue rounded-xl p-6 text-center cursor-pointer transition-colors bg-muted/20 hover:bg-brand-blue/5 flex flex-col items-center justify-center gap-2"
@@ -935,15 +1291,14 @@ export function TravelPackageDialog({
                   <Upload className="size-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-foreground">Click to browse or upload images</p>
+                  <p className="text-xs font-semibold text-foreground">Click to upload package images</p>
                   <p className="text-[11px] text-muted-foreground mt-0.5">Supports PNG, JPG, WEBP formats</p>
                 </div>
               </div>
 
-              {/* Add by Image URL */}
               <div className="p-5 rounded-xl border border-border/70 bg-muted/10 space-y-3 flex flex-col justify-center">
                 <Label htmlFor="pkg-img-url" className="text-xs font-semibold">
-                  Or Add Image by Direct Web URL:
+                  Or Add Image by Direct URL:
                 </Label>
                 <div className="flex gap-2">
                   <Input
@@ -970,9 +1325,6 @@ export function TravelPackageDialog({
                     Add URL
                   </Button>
                 </div>
-                <p className="text-[11px] text-muted-foreground">
-                  Paste high-resolution photo links from your CDN or image host.
-                </p>
               </div>
             </div>
 
@@ -980,7 +1332,7 @@ export function TravelPackageDialog({
             {(formData.images || []).length > 0 ? (
               <div className="space-y-2">
                 <Label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Gallery Previews (Click star to set Cover Image):
+                  Gallery Previews (Star = Set as Cover, Arrows = Reorder, Trash = Remove):
                 </Label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                   {(formData.images || []).map((img, idx) => {
@@ -1001,7 +1353,6 @@ export function TravelPackageDialog({
                             alt={`Preview ${idx + 1}`}
                             className="w-full h-full object-cover"
                             onError={(e) => {
-                              // fallback if invalid image url
                               (e.target as HTMLImageElement).src =
                                 "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&auto=format&fit=crop&q=60";
                             }}
@@ -1013,7 +1364,7 @@ export function TravelPackageDialog({
                           ) : null}
                         </div>
 
-                        {/* Card Footer Bar */}
+                        {/* Card Action Bar */}
                         <div className="p-2 bg-card border-t border-border/60 flex items-center justify-between text-xs">
                           <button
                             type="button"
@@ -1025,32 +1376,44 @@ export function TravelPackageDialog({
                             }`}
                           >
                             <Star className={`size-3.5 ${isCover ? "fill-brand-blue text-brand-blue" : ""}`} />
-                            {isCover ? "Main Cover" : "Make Cover"}
+                            {isCover ? "Cover" : "Set Cover"}
                           </button>
 
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveImage(idx)}
-                            className="p-1 text-muted-foreground hover:text-brand-red transition-colors rounded hover:bg-red-50 dark:hover:bg-red-950/40"
-                            aria-label="Remove image"
-                          >
-                            <Trash2 className="size-3.5" />
-                          </button>
+                          <div className="flex items-center gap-0.5">
+                            <button
+                              type="button"
+                              disabled={idx === 0}
+                              onClick={() => handleMoveImage(idx, "left")}
+                              className="p-1 text-muted-foreground hover:text-foreground disabled:opacity-30"
+                              title="Move Left"
+                            >
+                              <MoveLeft className="size-3" />
+                            </button>
+                            <button
+                              type="button"
+                              disabled={idx === (formData.images || []).length - 1}
+                              onClick={() => handleMoveImage(idx, "right")}
+                              className="p-1 text-muted-foreground hover:text-foreground disabled:opacity-30"
+                              title="Move Right"
+                            >
+                              <MoveRight className="size-3" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveImage(idx)}
+                              className="p-1 text-muted-foreground hover:text-brand-red ml-0.5"
+                              title="Remove"
+                            >
+                              <Trash2 className="size-3.5" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     );
                   })}
                 </div>
               </div>
-            ) : (
-              <div className="p-6 rounded-xl bg-muted/20 border border-border/50 text-center text-muted-foreground">
-                <ImageIcon className="size-8 mx-auto mb-2 text-muted-foreground/50" />
-                <p className="text-xs font-semibold">No images added yet</p>
-                <p className="text-[11px] text-muted-foreground mt-0.5">
-                  Upload package photos or add image links to showcase this travel itinerary.
-                </p>
-              </div>
-            )}
+            ) : null}
           </div>
 
           {/* ========================================================================= */}
@@ -1062,7 +1425,7 @@ export function TravelPackageDialog({
                 8
               </div>
               <h3 className="text-sm font-bold uppercase tracking-wider text-navy dark:text-foreground">
-                Package Status
+                Section 8 — Package Publishing Status
               </h3>
             </div>
 
@@ -1099,7 +1462,7 @@ export function TravelPackageDialog({
                 </div>
                 <p className="text-xs font-semibold text-navy dark:text-foreground">Draft Mode</p>
                 <p className="text-[11px] text-muted-foreground mt-0.5">
-                  Saved privately for internal admin review before public release.
+                  Saved privately for internal admin review.
                 </p>
               </div>
 
@@ -1115,9 +1478,9 @@ export function TravelPackageDialog({
                   <Badge className="bg-slate-700 text-white font-semibold text-xs">Inactive</Badge>
                   {formData.status === "Inactive" ? <Check className="size-4 text-slate-700 dark:text-slate-300" /> : null}
                 </div>
-                <p className="text-xs font-semibold text-navy dark:text-foreground">Archived / Inactive</p>
+                <p className="text-xs font-semibold text-navy dark:text-foreground">Inactive / Archived</p>
                 <p className="text-[11px] text-muted-foreground mt-0.5">
-                  Temporarily hidden or archived itinerary.
+                  Temporarily hidden from public website.
                 </p>
               </div>
             </div>
@@ -1125,7 +1488,7 @@ export function TravelPackageDialog({
         </div>
 
         {/* ========================================================================= */}
-        {/* SECTION 9 — STICKY ACTIONS FOOTER */}
+        {/* STICKY ACTIONS FOOTER */}
         {/* ========================================================================= */}
         <DialogFooter className="p-4 px-6 border-t border-border/80 bg-background/95 backdrop-blur flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
           <div className="text-xs text-muted-foreground order-2 sm:order-1">
