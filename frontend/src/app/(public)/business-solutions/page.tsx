@@ -253,7 +253,11 @@ export default function Page() {
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="xl" className="bg-white">
+            <Button
+              asChild
+              variant="secondary-hero"
+              size="xl"
+            >
               <a href="#solutions">Explore 8 Solutions</a>
             </Button>
           </div>
@@ -390,7 +394,7 @@ export default function Page() {
                   index === 0 ? "bg-brand-red" : "bg-brand-blue-muted",
                 )}
               />
-              <span className="text-brand-blue-muted/25 hidden text-4xl leading-none font-bold lg:block">
+              <span className="text-[#5B7FAE] hidden text-4xl leading-none font-bold lg:block">
                 {step}
               </span>
               <span className="text-brand-blue-muted flex size-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-xs">

@@ -399,7 +399,7 @@ function BusinessProcess({ detail }: { detail: BusinessDetail }) {
             <span
               className={cn(
                 "hidden text-5xl leading-none font-bold lg:block",
-                light ? "text-brand-blue/25" : "text-brand-blue-muted/30",
+                light ? "text-[#5B7FAE]" : "text-brand-blue-muted/30",
               )}
             >
               0{index + 1}

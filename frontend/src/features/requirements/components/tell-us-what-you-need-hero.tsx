@@ -127,7 +127,12 @@ export function TellUsWhatYouNeedHero() {
                 Fill Intake Form <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </a>
             </Button>
-            <Button asChild variant="outline" size="xl" className="bg-white/80">
+            <Button
+              asChild
+              variant="secondary-hero"
+              size="xl"
+              className="font-bold"
+            >
               <Link href={ROUTES.public.contact}>Speak to an Advisor</Link>
             </Button>
           </div>

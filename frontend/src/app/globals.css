@@ -335,3 +335,23 @@ body > .theme-light {
     @apply outline-ring outline-2 outline-offset-2;
   }
 }
+
+/* Solid Secondary Hero CTA Button */
+[data-variant="secondary-hero"],
+[data-variant="hero-secondary"] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+}
+
+[data-variant="secondary-hero"]:hover,
+[data-variant="hero-secondary"]:hover {
+  background-color: #f8fafc !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
+

@@ -114,11 +114,19 @@ export function TravelSubpageHero({
               </Button>
 
               {secondary ? (
-                <Button asChild variant="outline" size="xl" className="bg-white/80">
+                <Button
+                  asChild
+                  variant="secondary-hero"
+                  size="xl"
+                >
                   <Link href={secondary.href}>{secondary.label}</Link>
                 </Button>
               ) : (
-                <Button asChild variant="outline" size="xl" className="bg-white/80">
+                <Button
+                  asChild
+                  variant="secondary-hero"
+                  size="xl"
+                >
                   <Link href={ROUTES.public.travelTourism}>Explore All Packages</Link>
                 </Button>
               )}

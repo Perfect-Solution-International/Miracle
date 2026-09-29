@@ -1223,7 +1223,11 @@ export function ImportExportLanding({
                   Submit Import / Export Request
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
-                <Button size="xl" variant="outline" asChild>
+                <Button
+                  size="xl"
+                  variant="secondary-hero"
+                  asChild
+                >
                   <a href="#services">Explore Our Services</a>
                 </Button>
               </div>

@@ -5,7 +5,6 @@ import {
   ClipboardList,
   Compass,
   Eye,
-  Globe2,
   Handshake,
   Headphones,
   Layers3,
@@ -147,16 +146,22 @@ export default function Page() {
     <main className="bg-white">
       <section
         aria-labelledby="about-hero-heading"
-        className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
+        className="relative isolate overflow-hidden border-b border-slate-200/80 md:!bg-fixed"
+        style={{
+          backgroundImage: 'url("/images/about/about-hero-bg.png")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+          className="pointer-events-none absolute inset-0 bg-[rgba(6,18,35,0.30)]"
         />
 
-        <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
+        <div className="container-page relative flex items-center py-20 sm:py-28 md:min-h-[600px]">
           <div className="max-w-2xl space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs">
               <span className="relative flex size-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
@@ -166,15 +171,15 @@ export default function Page() {
 
             <h1
               id="about-hero-heading"
-              className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+              className="text-white text-4xl leading-[1.08] font-extrabold tracking-tight [text-shadow:_0_2px_12px_rgba(5,15,30,0.7)] sm:text-5xl lg:text-6xl"
             >
               Built to Connect Business,{" "}
-              <span className="bg-gradient-to-r from-brand-blue via-indigo-600 to-navy bg-clip-text text-transparent">
+              <span className="text-white">
                 Opportunity &amp; Growth.
               </span>
             </h1>
 
-            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
+            <p className="text-white/90 text-base leading-relaxed [text-shadow:_0_1px_8px_rgba(5,15,30,0.7)] sm:text-lg">
               Miracle International connects businesses and individuals with global opportunities
               through integrated business solutions, enterprise technology, tourism, and international trade operations.
             </p>
@@ -186,48 +191,13 @@ export default function Page() {
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
+              <Button
+                asChild
+                variant="secondary-hero"
+                size="xl"
+              >
                 <Link href={ROUTES.public.contact}>Contact Our Team</Link>
               </Button>
-            </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-2xl">
-            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
-              <Image
-                src={SITE_MEDIA.businessMeeting.src}
-                alt={SITE_MEDIA.businessMeeting.alt}
-                fill
-                preload
-                sizes="(min-width: 1024px) 52vw, 100vw"
-                className="object-cover"
-              />
-              <div
-                aria-hidden="true"
-                className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
-              />
-              <div className="absolute bottom-5 left-5 right-5 text-white">
-                <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
-                  <Handshake className="size-3.5" />
-                  International Vision
-                </span>
-                <p className="text-base sm:text-lg font-bold">
-                  Bridging Markets · Empowering Growth
-                </p>
-              </div>
-            </div>
-
-            {/* Floating Glass Pill */}
-            <div className="shadow-xl absolute -bottom-5 right-4 left-4 flex items-center justify-between rounded-2xl border border-white/80 bg-white/95 px-6 py-3.5 backdrop-blur-md sm:right-6 sm:left-6">
-              <span className="text-ink text-xs sm:text-sm font-bold flex items-center gap-1.5">
-                <Globe2 className="size-4 text-brand-blue" />
-                Global Reach
-              </span>
-              <ArrowRight aria-hidden="true" className="text-brand-blue/50 size-4" />
-              <span className="text-brand-blue text-xs sm:text-sm font-bold flex items-center gap-1.5">
-                <ShieldCheck className="size-4 text-brand-blue" />
-                Single Strategic Partner
-              </span>
             </div>
           </div>
         </div>
@@ -415,7 +385,7 @@ export default function Page() {
                   index === 0 ? "bg-brand-red" : "bg-brand-blue",
                 )}
               />
-              <span className="hidden text-5xl leading-none font-bold text-brand-blue/25 lg:block">
+              <span className="hidden text-5xl leading-none font-bold text-[#5B7FAE] lg:block">
                 {step}
               </span>
               <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-slate-200/80 bg-white text-brand-blue shadow-[0_10px_30px_rgba(15,23,42,0.06)]">

@@ -54,6 +54,9 @@ export interface PublicNavFeature {
   cta: string;
   /** Small photo behind the panel copy, for menus where a visual helps (e.g. Travel & Tourism). */
   image?: SiteImage;
+  imagePosition?: string;
+  overlayClassName?: string;
+  disableGlow?: boolean;
 }
 
 export type PublicNavItem =
@@ -264,6 +267,10 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
         "Share one requirement. Our team coordinates the suppliers and services behind it.",
       href: ROUTES.public.tellUsWhatYouNeed,
       cta: "Submit a requirement",
+      image: SITE_MEDIA.services.panel,
+      imagePosition: "center bottom",
+      overlayClassName: "bg-navy/80",
+      disableGlow: true,
     },
   },
   {

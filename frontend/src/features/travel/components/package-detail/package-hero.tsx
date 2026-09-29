@@ -115,7 +115,7 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Button>
               <Button
-                variant="outline"
+                variant="secondary-hero"
                 size="xl"
                 onClick={() => setInquiryOpen(true)}
                 className="gap-2"

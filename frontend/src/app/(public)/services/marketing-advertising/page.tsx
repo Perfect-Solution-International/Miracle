@@ -375,7 +375,7 @@ export default function Page() {
                 aria-hidden="true"
               />
               <span
-                className="text-brand-blue/25 text-5xl leading-none font-bold"
+                className="text-[#5B7FAE] text-5xl leading-none font-bold"
                 aria-hidden="true"
               >
                 0{index + 1}

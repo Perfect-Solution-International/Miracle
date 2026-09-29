@@ -200,7 +200,7 @@ export function TradingLanding({
               <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A clearer way to trade</p>
               <h1 className="text-ink mt-5 max-w-2xl text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">Trading Solutions for Local &amp; Global Markets</h1>
               <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed sm:text-xl">Connect with suppliers, buyers and products through simple and reliable trading solutions designed for businesses of all sizes.</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={() => setIsFormOpen(true)}>Start a Trading Request <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="outline" asChild><a href="#services">Explore Trading Services</a></Button></div>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={() => setIsFormOpen(true)}>Start a Trading Request <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="secondary-hero" asChild><a href="#services">Explore Trading Services</a></Button></div>
             </div>
             <div className="relative min-h-[360px] overflow-hidden rounded-3xl border border-blue-100 bg-white p-3 shadow-xl shadow-blue-100/60 sm:min-h-[430px]">
               <Image src={SITE_MEDIA.warehouse.src} alt={SITE_MEDIA.warehouse.alt} fill priority sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover" />

@@ -169,7 +169,7 @@ export default function Page() {
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="xl" className="text-ink">
+          <Button asChild variant="secondary-hero" size="xl">
             <a href="#services">Explore Services</a>
           </Button>
         </div>

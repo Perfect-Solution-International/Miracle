@@ -454,7 +454,11 @@ export function ServicesOverview() {
                   Explore All Services
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
-                <Button size="xl" variant="outline" onClick={openForm} className="bg-white/80 backdrop-blur-sm">
+                <Button
+                  size="xl"
+                  variant="secondary-hero"
+                  onClick={openForm}
+                >
                   Tell Us What You Need
                 </Button>
               </div>

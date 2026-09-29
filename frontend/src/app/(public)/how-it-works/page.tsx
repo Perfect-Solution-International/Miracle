@@ -169,7 +169,11 @@ export default function Page() {
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
+            <Button
+              asChild
+              variant="secondary-hero"
+              size="xl"
+            >
               <a href="#steps">Explore the 5 Steps</a>
             </Button>
           </div>

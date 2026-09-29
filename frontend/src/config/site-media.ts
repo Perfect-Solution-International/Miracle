@@ -98,6 +98,10 @@ export const SITE_MEDIA = {
       src: unsplash("1552664730-d307ca884978"),
       alt: "Business professionals collaborating in a bright international office",
     },
+    panel: {
+      src: "/images/services/services-hero-bg.png",
+      alt: "Global business services and trade operations",
+    },
     introduction: {
       src: unsplash("1504384308090-c894fdcc538d"),
       alt: "Entrepreneur reviewing a business plan at a modern workspace",

@@ -228,7 +228,11 @@ export function FranchiseLanding({
                 <Button size="xl" variant="accent" onClick={openForm} className="shadow-lg shadow-brand-red/20">
                   Explore Opportunities <ArrowRight data-icon="inline-end" />
                 </Button>
-                <Button size="xl" variant="outline" onClick={openForm}>
+                <Button
+                  size="xl"
+                  variant="secondary-hero"
+                  onClick={openForm}
+                >
                   Get Franchise Support
                 </Button>
               </div>
