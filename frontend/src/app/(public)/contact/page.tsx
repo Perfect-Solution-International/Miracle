@@ -4,17 +4,13 @@ import {
   ChevronRight,
   Code2,
   FileText,
-  Handshake,
   MessageSquare,
   Plane,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
-import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { SocialLinks } from "@/components/common/social-links";
@@ -29,6 +25,8 @@ import {
 } from "@/features/contact";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
+
+import lightPageStyles from "../light-page.module.css";
 
 const TITLE = "Contact Us";
 const DESCRIPTION =
@@ -103,7 +101,7 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
     </>
   );
   const className =
-    "flex items-center gap-4 rounded-2xl border bg-white p-5 shadow-soft transition-all";
+    "flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition-all";
 
   if (!href) return <div className={className}>{content}</div>;
 
@@ -128,25 +126,25 @@ export default function Page() {
   const email = CONTACT_CHANNELS.find((channel) => channel.title === "Email");
 
   return (
-    <main>
+    <main className="bg-white">
       <section
         aria-labelledby="contact-hero-heading"
-        className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
+        className="relative isolate overflow-hidden border-b border-slate-200/80 md:!bg-fixed"
+        style={{
+          backgroundImage: 'url("/images/contact/contact-hero-bg.png")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
-        />
-        <div
-          aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)] opacity-50"
+          className="pointer-events-none absolute inset-0 bg-[rgba(6,18,35,0.30)]"
         />
 
-        <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
+        <div className="container-page relative flex items-center py-20 sm:py-28 md:min-h-[600px]">
           <div className="max-w-2xl space-y-5">
-            <Breadcrumb items={[{ label: TITLE }]} />
-
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs">
               <span className="relative flex size-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
@@ -156,15 +154,15 @@ export default function Page() {
 
             <h1
               id="contact-hero-heading"
-              className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+              className="text-white text-4xl leading-[1.08] font-extrabold tracking-tight [text-shadow:_0_2px_12px_rgba(5,15,30,0.7)] sm:text-5xl lg:text-6xl"
             >
               Let&apos;s Talk About{" "}
-              <span className="bg-gradient-to-r from-brand-blue via-indigo-600 to-navy bg-clip-text text-transparent">
+              <span className="text-white">
                 What You Need.
               </span>
             </h1>
 
-            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
+            <p className="text-white/90 text-base leading-relaxed [text-shadow:_0_1px_8px_rgba(5,15,30,0.7)] sm:text-lg">
               Reach out with an inquiry, quotation request or business requirement. Our
               multidisciplinary team is ready to structure the right solution for you.
             </p>
@@ -176,39 +174,15 @@ export default function Page() {
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </a>
               </Button>
-              <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
+              <Button
+                asChild
+                variant="secondary-hero"
+                size="xl"
+              >
                 <Link href={ROUTES.public.tellUsWhatYouNeed}>Share a Requirement</Link>
               </Button>
             </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-2xl">
-            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
-              <Image
-                src={SITE_MEDIA.handshake.src}
-                alt={SITE_MEDIA.handshake.alt}
-                fill
-                preload
-                sizes="(min-width: 1024px) 52vw, 100vw"
-                className="object-cover"
-              />
-              <div
-                aria-hidden="true"
-                className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
-              />
-              <div className="absolute bottom-5 left-5 right-5 text-white">
-                <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
-                  <Handshake className="size-3.5" />
-                  Client Partnership
-                </span>
-                <p className="text-base sm:text-lg font-bold">
-                  Open Channels For Quick Collaboration
-                </p>
-              </div>
-            </div>
-
-            {/* Floating Glass Pill */}
-            <div className="shadow-xl absolute -bottom-5 right-4 left-4 grid gap-3 rounded-2xl border border-white/80 bg-white/95 p-3.5 backdrop-blur-md sm:right-6 sm:left-6 sm:grid-cols-2">
+            <div className="flex flex-wrap gap-x-6 gap-y-3 pt-3">
               {[phone, email].map((channel) => {
                 if (!channel) return null;
                 const Icon = channel.icon;
@@ -216,16 +190,16 @@ export default function Page() {
                   <a
                     key={channel.title}
                     href={channel.href}
-                    className="group flex min-w-0 items-center gap-3 rounded-xl px-2 py-1"
+                    className="group flex min-w-0 items-center gap-3 text-white"
                   >
-                    <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-lg">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/70">
                       <Icon aria-hidden="true" className="size-4" />
                     </span>
                     <span className="min-w-0">
-                      <span className="text-ink block text-xs font-bold">
+                      <span className="block text-xs font-bold">
                         {channel.title}
                       </span>
-                      <span className="text-muted-foreground group-hover:text-brand-blue block truncate text-xs">
+                      <span className="block truncate text-xs text-white/90 group-hover:text-white">
                         {channel.lines[0]}
                       </span>
                     </span>
@@ -263,7 +237,7 @@ export default function Page() {
 
       <Section
         aria-labelledby="service-direction-heading"
-        className="bg-brand-blue-light/25"
+        className="bg-slate-50"
       >
         <SectionHeading
           id="service-direction-heading"
@@ -305,6 +279,7 @@ export default function Page() {
         primary={{ label: "Request a Quotation", href: ROUTES.public.requestQuotation }}
         secondary={{ label: "Visit Our FAQ", href: ROUTES.public.faq }}
         headingId="contact-cta-heading"
+        className={lightPageStyles.lightCta}
       />
     </main>
   );

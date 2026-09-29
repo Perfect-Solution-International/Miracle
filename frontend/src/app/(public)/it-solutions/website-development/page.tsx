@@ -32,7 +32,7 @@ import Link from "next/link";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
 import { MediaFrame } from "@/components/common/media-frame";
-import { PageHero } from "@/components/common/page-hero";
+import { ItDetailHero } from "@/features/it-solutions/components/it-detail-hero";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
@@ -226,7 +226,7 @@ const benefits: IconItem[] = [
 export default function Page() {
   return (
     <>
-      <PageHero
+      <ItDetailHero
         eyebrow="IT Solutions"
         title={TITLE}
         description={DESCRIPTION}
@@ -243,11 +243,11 @@ export default function Page() {
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="xl" className="text-ink">
+          <Button asChild variant="secondary-hero" size="xl">
             <a href="#services">View Services</a>
           </Button>
         </div>
-      </PageHero>
+      </ItDetailHero>
 
       {/* Introduction */}
       <Section aria-labelledby="intro-heading">

@@ -21,6 +21,7 @@ const eslintConfig = defineConfig([
           ignoreRestSiblings: true,
         },
       ],
+      "react-hooks/set-state-in-effect": "warn",
     },
   },
   // Override default ignores of eslint-config-next.

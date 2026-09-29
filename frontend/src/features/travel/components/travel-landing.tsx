@@ -2,47 +2,68 @@
 
 import { useMemo, useState } from "react";
 
+import landingStyles from "@/app/(public)/landing-surfaces.module.css";
+import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inquiry-modal";
+
 import { CustomizeTripModal, CustomizeTripSection } from "./customize-trip-section";
 import { InboundTravelSection, OutboundTravelSection } from "./inbound-outbound-section";
 import { TravelHero } from "./travel-hero";
 import { TravelPackagesSection } from "./travel-packages-section";
 import { TravelServicesSection } from "./travel-services-section";
-import type { TravelPackageDetail } from "../types/travel-package-detail.types";
+import { useTravelStore } from "@/lib/storage/travel-store";
+import type { TravelPackage } from "@/components/admin-travel/types";
 
 export function TravelLanding({
   initialPackages,
 }: {
-  initialPackages: readonly TravelPackageDetail[];
+  initialPackages?: readonly TravelPackage[];
 }) {
+  const { packages: storePackages } = useTravelStore();
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState<string | undefined>();
-  const [searchFilter, setSearchFilter] = useState<{ destination: string; travelType: string }>({
+  const [searchFilter, setSearchFilter] = useState<{
+    destination: string;
+    travelType: string;
+  }>({
     destination: "",
     travelType: "all",
   });
 
+  const allPackages = initialPackages ?? storePackages.filter((p) => p.status !== "Inactive");
+
   const filteredPackages = useMemo(() => {
-    return initialPackages.filter((pkg) => {
+    return allPackages.filter((pkg) => {
+      const title = pkg.name;
+      const destination = pkg.destination;
+      const tagline = pkg.shortDescription || pkg.description || "";
+      const country = pkg.country || "";
+
       if (searchFilter.destination) {
         const destQuery = searchFilter.destination.toLowerCase().trim();
-        const matchesLocation = pkg.location.toLowerCase().includes(destQuery);
-        const matchesTitle = pkg.title.toLowerCase().includes(destQuery);
-        const matchesTagline = pkg.tagline.toLowerCase().includes(destQuery);
-        const matchesDestinations = pkg.destinations.some((d) =>
-          d.toLowerCase().includes(destQuery),
-        );
-        if (!matchesLocation && !matchesTitle && !matchesTagline && !matchesDestinations) {
+        const matchesDestination = destination.toLowerCase().includes(destQuery);
+        const matchesTitle = title.toLowerCase().includes(destQuery);
+        const matchesTagline = tagline.toLowerCase().includes(destQuery);
+        const matchesCountry = country.toLowerCase().includes(destQuery);
+        if (
+          !matchesDestination &&
+          !matchesTitle &&
+          !matchesTagline &&
+          !matchesCountry
+        ) {
           return false;
         }
       }
       if (searchFilter.travelType && searchFilter.travelType !== "all") {
-        if (pkg.travelType !== searchFilter.travelType) {
+        if (searchFilter.travelType === "Inbound" && pkg.travelType !== "Inbound") {
+          return false;
+        }
+        if (searchFilter.travelType === "Outbound" && pkg.travelType !== "Outbound") {
           return false;
         }
       }
       return true;
     });
-  }, [initialPackages, searchFilter]);
+  }, [allPackages, searchFilter]);
 
   const handleExplore = (query: { destination: string; travelType: string }) => {
     setSearchFilter(query);
@@ -52,8 +73,8 @@ export function TravelLanding({
     }
   };
 
-  const handleOpenCustomizeWithPackage = (pkg: TravelPackageDetail) => {
-    setSelectedDestination(pkg.location);
+  const handleOpenCustomizeWithPackage = (pkg: TravelPackage) => {
+    setSelectedDestination(pkg.destination);
     setIsCustomizeOpen(true);
   };
 
@@ -64,7 +85,7 @@ export function TravelLanding({
 
   return (
     <>
-      <main>
+      <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
         {/* 1. Hero Section with Light Background and Professional Search Bar */}
         <TravelHero onExplore={handleExplore} />
 
@@ -77,7 +98,9 @@ export function TravelLanding({
         {/* 4. Travel Packages Section */}
         <TravelPackagesSection
           packages={filteredPackages}
-          isFiltered={Boolean(searchFilter.destination || searchFilter.travelType !== "all")}
+          isFiltered={Boolean(
+            searchFilter.destination || searchFilter.travelType !== "all",
+          )}
           onCustomizePackage={handleOpenCustomizeWithPackage}
         />
 
@@ -88,11 +111,12 @@ export function TravelLanding({
         <CustomizeTripSection onOpenModal={handleOpenCustomize} />
       </main>
 
-      {/* Centered Trip Customization Modal */}
-      <CustomizeTripModal
+      {/* Unified Trip Customization / Inquiry Modal */}
+      <PublicTravelInquiryModal
         open={isCustomizeOpen}
-        onClose={() => setIsCustomizeOpen(false)}
-        initialDestination={selectedDestination}
+        onOpenChange={setIsCustomizeOpen}
+        defaultDestination={selectedDestination}
+        mode="customize"
       />
     </>
   );

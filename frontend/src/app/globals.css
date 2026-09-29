@@ -80,10 +80,10 @@
   --brand-red-dark: #b8171a;
   --navy: #07162e;
   --navy-light: #0e2447;
-  --surface: #f5f7fa;
+  --surface: #ffffff;
   --ink: #0d1726;
 
-  --background: #f7f7f5;
+  --background: #ffffff;
 
   --page-texture:
     linear-gradient(155deg, transparent 0%, rgb(190 195 198 / 0.22) 18%, transparent 32%),
@@ -177,29 +177,13 @@
     @apply bg-background text-foreground font-sans;
     position: relative;
     isolation: isolate;
-    background-color: #f5f5f3;
+    background-color: #ffffff;
   }
   .dark body {
     background-color: var(--background);
   }
   body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image: var(--page-texture);
-    background-size:
-      125% 110%,
-      140% 120%,
-      150% 130%,
-      100% 100%;
-    background-position:
-      top left,
-      center,
-      bottom right,
-      center;
-    background-repeat: no-repeat;
+    display: none;
   }
   .dark body:not(:has(> .theme-light))::before {
     content: none;
@@ -241,19 +225,19 @@ body > .theme-light {
   }
 }
 
-/* Faint engineering grid used behind hero and dark sections. */
+/* Engineering grid pattern completely disabled globally per user request */
 @utility bg-grid {
-  background-image:
-    linear-gradient(to right, rgb(17 80 168 / 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(17 80 168 / 0.06) 1px, transparent 1px);
-  background-size: 56px 56px;
+  background-image: none !important;
 }
 
 @utility bg-grid-inverse {
-  background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
+  background-image: none !important;
+}
+
+.bg-grid,
+.bg-grid-inverse {
+  background-image: none !important;
+  display: none !important;
 }
 
 /* Scroll reveal with zero JavaScript. Browsers without scroll-driven
@@ -351,3 +335,23 @@ body > .theme-light {
     @apply outline-ring outline-2 outline-offset-2;
   }
 }
+
+/* Solid Secondary Hero CTA Button */
+[data-variant="secondary-hero"],
+[data-variant="hero-secondary"] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+}
+
+[data-variant="secondary-hero"]:hover,
+[data-variant="hero-secondary"]:hover {
+  background-color: #f8fafc !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
+

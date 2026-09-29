@@ -1,0 +1,28 @@
+.solidCard {
+  border-color: rgb(203 213 225 / 80%);
+  background: #fff;
+  box-shadow: 0 10px 30px rgb(15 23 42 / 5%);
+}
+
+.serviceCard {
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-2px);
+  border-color: rgb(148 163 184 / 70%);
+  box-shadow: 0 14px 36px rgb(15 23 42 / 8%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .serviceCard {
+    transition: none;
+  }
+
+  .serviceCard:hover {
+    transform: none;
+  }
+}

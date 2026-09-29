@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -407,20 +406,25 @@ export function ServicesOverview() {
     <>
       <main>
         {/* ── 1. Hero Section ── */}
-        <section className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20">
+        <section
+          className="relative isolate overflow-hidden border-b border-slate-200/80 pt-8 pb-14 lg:pt-14 lg:pb-20 md:!bg-fixed"
+          style={{
+            backgroundImage: 'url("/images/services/services-hero-bg.png")',
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-emerald-500/15 via-brand-blue/10 to-teal-500/10 blur-[100px]"
-          />
-          <div
-            aria-hidden="true"
-            className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)] opacity-50"
+            className="pointer-events-none absolute inset-0 -z-10"
+            style={{
+              background: "linear-gradient(to right, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.05) 100%)",
+            }}
           />
 
           <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
             <div className="max-w-2xl space-y-5">
-              <Breadcrumb items={[{ label: "Services" }]} />
-
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
                 <span className="relative flex size-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-600 opacity-75" />
@@ -450,28 +454,20 @@ export function ServicesOverview() {
                   Explore All Services
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
-                <Button size="xl" variant="outline" onClick={openForm} className="bg-white/80 backdrop-blur-sm">
+                <Button
+                  size="xl"
+                  variant="secondary-hero"
+                  onClick={openForm}
+                >
                   Tell Us What You Need
                 </Button>
               </div>
             </div>
 
             <div className="relative mx-auto w-full max-w-2xl">
-              <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
-                <Image
-                  src={SITE_MEDIA.services.hero.src}
-                  alt={SITE_MEDIA.services.hero.alt}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 52vw, 100vw"
-                  className="object-cover"
-                />
-                <div
-                  aria-hidden="true"
-                  className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
-                />
-                <div className="absolute bottom-5 left-5 right-5 text-white">
-                  <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
+              <div className="relative aspect-[4/3]">
+                <div className="absolute bottom-5 left-5 right-5 text-navy">
+                  <span className="bg-white/80 rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-navy mb-2">
                     <Globe2 className="size-3.5" />
                     Strategic Commerce
                   </span>
@@ -485,7 +481,7 @@ export function ServicesOverview() {
         </section>
 
         {/* ── 2. Services Grid ── */}
-        <section id="main-services" className="section-y bg-slate-50/70 scroll-mt-24 border-b border-slate-200/70">
+        <section id="main-services" className="section-y bg-white scroll-mt-24 border-b border-slate-200/70">
           <div className="container-page space-y-12">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <span className="bg-brand-blue-light text-brand-blue rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
@@ -595,7 +591,7 @@ export function ServicesOverview() {
         </section>
 
         {/* ── 4. Process ── */}
-        <section className="section-y bg-slate-50/70">
+        <section className="section-y bg-[#f8fafc]">
           <div className="container-page">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <span className="bg-brand-blue-light text-brand-blue rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">

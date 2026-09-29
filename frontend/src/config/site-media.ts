@@ -98,6 +98,10 @@ export const SITE_MEDIA = {
       src: unsplash("1552664730-d307ca884978"),
       alt: "Business professionals collaborating in a bright international office",
     },
+    panel: {
+      src: "/images/services/services-hero-bg.png",
+      alt: "Global business services and trade operations",
+    },
     introduction: {
       src: unsplash("1504384308090-c894fdcc538d"),
       alt: "Entrepreneur reviewing a business plan at a modern workspace",
@@ -324,17 +328,17 @@ export const SITE_MEDIA = {
     alt: "International professionals collaborating in a modern global work environment",
   },
   inboundHero: {
-    src: "/images/travel/sigiriya-inbound-hero.jpg",
-    alt: "Ancient Sigiriya rock fortress rising above green forest canopy in Sri Lanka",
+    src: "/images/travel/inbound-hero.jpg",
+    alt: "Sri Lanka Inbound travel - Ceylon tea hills, coastal resorts, and tropical waterfalls",
   },
   travelCategoryCards: {
     inbound: {
-      src: "/images/travel/sigiriya-inbound-hero.jpg",
-      alt: "Ancient Sigiriya rock fortress rising above green forest canopy in Sri Lanka",
+      src: "/images/travel/inbound-hero.jpg",
+      alt: "Sri Lanka Inbound travel - Ceylon tea hills, coastal resorts, and tropical waterfalls",
     },
     outbound: {
-      src: unsplash("1500835556837-99ac94a94552"),
-      alt: "Aircraft wing above the clouds during an international flight",
+      src: "/images/travel/outbound-hero.jpg",
+      alt: "Worldwide Outbound travel - Thailand island landscapes, Maldives water villas, and Singapore cityscapes",
     },
     familyHolidays: {
       src: unsplash("1475503572774-15a45e5d60b9"),

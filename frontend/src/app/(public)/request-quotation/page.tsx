@@ -8,7 +8,6 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { ROUTES } from "@/config/routes";
@@ -39,17 +38,8 @@ export default function Page() {
           aria-hidden="true"
           className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-96 w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
         />
-        <div
-          aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 opacity-60 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-        />
 
         <div className="container-page flex flex-col items-center text-center">
-          <Breadcrumb
-            items={[{ label: "Quotations" }, { label: "Request a Quotation" }]}
-            className="mb-6"
-          />
-
           {/* Glowing Status Pill */}
           <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
             <span className="relative flex size-2">

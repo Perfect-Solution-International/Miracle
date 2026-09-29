@@ -54,6 +54,9 @@ export interface PublicNavFeature {
   cta: string;
   /** Small photo behind the panel copy, for menus where a visual helps (e.g. Travel & Tourism). */
   image?: SiteImage;
+  imagePosition?: string;
+  overlayClassName?: string;
+  disableGlow?: boolean;
 }
 
 export type PublicNavItem =
@@ -255,6 +258,7 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
     kind: "menu",
     title: "Services",
     href: ROUTES.public.services,
+    separateLinkAndTrigger: true,
     groups: [{ title: "Services", links: MAIN_NAV_SERVICE_LINKS }],
     feature: {
       eyebrow: "Not sure where to start?",
@@ -263,6 +267,10 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
         "Share one requirement. Our team coordinates the suppliers and services behind it.",
       href: ROUTES.public.tellUsWhatYouNeed,
       cta: "Submit a requirement",
+      image: SITE_MEDIA.services.panel,
+      imagePosition: "center bottom",
+      overlayClassName: "bg-navy/80",
+      disableGlow: true,
     },
   },
   {
@@ -289,9 +297,9 @@ export const PUBLIC_MAIN_NAV: readonly PublicNavItem[] = [
     groups: [{ title: "Travel Services", links: TRAVEL_NAV_LINKS }],
     feature: {
       eyebrow: "Featured Package",
-      title: "Sri Lanka Highlights",
-      description: "Sigiriya, Kandy, Ella and Galle on one 7-day itinerary.",
-      href: ROUTES.public.travelPackage("sri-lanka-highlights"),
+      title: "Sri Lanka Signature Heritage & Wildlife",
+      description: "Sigiriya, Kandy, Nuwara Eliya, Yala, and Galle Fort on a premier 10-day expedition.",
+      href: ROUTES.public.travelPackage("sri-lanka-signature-heritage-wildlife"),
       cta: "View Package",
       image: SITE_MEDIA.travelDestinations.sigiriya,
     },

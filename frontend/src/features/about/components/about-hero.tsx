@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { SITE_MEDIA } from "@/config/site-media";
 
 /**
@@ -25,7 +24,6 @@ export function AboutHero() {
 
       <div className="container-page grid gap-6 py-14 lg:grid-cols-[1.4fr_1fr] lg:items-start lg:gap-10 lg:py-20">
         <div className="flex flex-col gap-4">
-          <Breadcrumb items={[{ label: "About Us" }]} />
           <h1
             id="about-heading"
             className="text-ink max-w-xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl"

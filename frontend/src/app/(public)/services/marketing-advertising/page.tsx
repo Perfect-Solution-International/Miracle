@@ -20,7 +20,6 @@ import {
   Target,
 } from "lucide-react";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
@@ -144,17 +143,11 @@ export default function Page() {
     <main>
       <Section
         spacing="none"
-        className="bg-brand-blue-light/40 bg-grid"
+        className="bg-white border-b border-slate-100"
         containerClassName="grid gap-10 py-12 md:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:gap-16 lg:py-20"
       >
         <div className="max-w-2xl">
-          <Breadcrumb
-            items={[
-              { label: "Services", href: ROUTES.public.services },
-              { label: "Marketing & Advertising" },
-            ]}
-          />
-          <div className="mt-9">
+          <div>
             <Eyebrow>Marketing &amp; Advertising</Eyebrow>
             <h1 className="text-ink mt-5 max-w-xl text-4xl leading-[1.1] font-bold tracking-tight sm:text-5xl lg:text-[3.5rem]">
               Marketing &amp; Advertising Solutions
@@ -337,10 +330,6 @@ export default function Page() {
       </Section>
 
       <Section tone="navy" aria-labelledby="channels-heading">
-        <div
-          aria-hidden="true"
-          className="bg-grid-inverse pointer-events-none absolute inset-0 -z-10"
-        />
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <SectionHeading
             eyebrow="Channels"
@@ -386,7 +375,7 @@ export default function Page() {
                 aria-hidden="true"
               />
               <span
-                className="text-brand-blue/25 text-5xl leading-none font-bold"
+                className="text-[#5B7FAE] text-5xl leading-none font-bold"
                 aria-hidden="true"
               >
                 0{index + 1}

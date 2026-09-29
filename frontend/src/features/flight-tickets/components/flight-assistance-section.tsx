@@ -77,7 +77,7 @@ const BOOKING_STEPS = [
 /** "Flight Ticket Assistance" — balanced two-column layout: details on the left, request form on the right. */
 export function FlightAssistanceSection() {
   return (
-    <Section className="bg-slate-50/60 py-14 sm:py-20" aria-labelledby="flight-assistance-heading">
+    <Section className="bg-white py-14 sm:py-20 border-t border-slate-100" aria-labelledby="flight-assistance-heading">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 items-start">
         {/* Left Column: Flight Coordination Details & Steps */}
         <div className="flex flex-col gap-8 lg:col-span-5">

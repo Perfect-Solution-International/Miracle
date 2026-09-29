@@ -2,9 +2,7 @@ import { ArrowRight, Check, ChevronRight, Network } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
-import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
@@ -18,157 +16,66 @@ import {
 } from "../data/business-detail";
 
 function BusinessHero({ detail }: { detail: BusinessDetail }) {
-  const dark = detail.heroDark;
   return (
-    <Section
-      spacing="none"
-      tone={dark ? "navy" : "default"}
+    <section
       aria-labelledby="business-detail-heading"
-      className={cn(
-        "relative isolate overflow-hidden",
-        dark ? undefined : "bg-white/70 backdrop-blur-md",
-      )}
-      containerClassName="grid gap-10 py-12 md:py-16 lg:grid-cols-[1fr_0.96fr] lg:items-center lg:gap-16 lg:py-20"
+      className="relative isolate overflow-hidden bg-white"
     >
-      {/* Liquid Ambient Glow Mesh */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 left-1/2 -z-10 -translate-x-1/2 h-96 w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+      <Image
+        src={detail.image.src}
+        alt=""
+        fill
+        preload
+        sizes="100vw"
+        className="object-cover object-center"
       />
       <div
         aria-hidden="true"
-        className={cn(
-          "absolute inset-0 -z-10 opacity-65",
-          dark ? "bg-grid-inverse" : "bg-grid",
-        )}
+        className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.78)_70%,rgba(255,255,255,0.20)_100%)] md:bg-[linear-gradient(to_right,rgba(255,255,255,0.99)_0%,rgba(255,255,255,0.97)_34%,rgba(255,255,255,0.78)_52%,rgba(255,255,255,0.28)_72%,rgba(255,255,255,0.02)_100%)]"
       />
-      <div className="max-w-2xl">
-        <Breadcrumb
-          tone={dark ? "inverse" : "default"}
-          items={[
-            { label: "Business Solutions", href: ROUTES.public.businessSolutions },
-            { label: detail.title },
-          ]}
-        />
-        {/* Pulsing Live Badge Pill */}
-        <div className="mt-8">
-          <div
-            className={cn(
-              "inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 backdrop-blur-md shadow-xs border",
-              dark
-                ? "border-white/20 bg-white/10 text-white"
-                : "border-brand-blue/20 bg-brand-blue/5 text-brand-blue",
-            )}
-          >
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
+
+      <div className="container-page relative z-10 flex min-h-[620px] items-center py-16 sm:py-20 lg:min-h-[680px] lg:py-24">
+        <div className="w-full max-w-2xl md:max-w-[60%] lg:max-w-[53%] xl:max-w-[49%]">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-white px-4 py-1.5 text-brand-blue shadow-xs">
             <span className="relative flex size-2">
-              <span
-                className={cn(
-                  "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
-                  dark ? "bg-brand-red" : "bg-brand-blue",
-                )}
-              />
-              <span
-                className={cn(
-                  "relative inline-flex size-2 rounded-full",
-                  dark ? "bg-brand-red" : "bg-brand-blue",
-                )}
-              />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
             </span>
-            <span className="text-xs font-bold tracking-widest uppercase">
-              {detail.title}
-            </span>
+            <span className="text-xs font-bold tracking-widest uppercase">{detail.title}</span>
+          </div>
+          <h1
+            id="business-detail-heading"
+            className="text-navy mt-5 max-w-2xl text-4xl leading-[1.09] font-extrabold tracking-tight sm:text-5xl md:text-[2.75rem] lg:text-[3.4rem]"
+          >
+            {detail.headline}
+          </h1>
+          <p className="text-ink mt-6 max-w-xl text-lg leading-relaxed font-semibold">{detail.lead}</p>
+          <p className="text-slate-700 mt-4 max-w-xl text-base leading-relaxed">{detail.introduction}</p>
+          <ul className="mt-6 flex flex-wrap gap-2" aria-label="Service highlights">
+            {detail.heroHighlights.map((highlight) => (
+              <li
+                key={highlight}
+                className="text-navy inline-flex items-center gap-2 rounded-full border border-brand-blue/15 bg-white/95 px-3 py-1.5 text-xs font-semibold shadow-xs"
+              >
+                <Check aria-hidden="true" className="size-3.5 text-brand-blue" />
+                {highlight}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button asChild variant="accent" size="xl" className="shadow-lg shadow-brand-red/20">
+              <Link href={detail.cta.href}>
+                {detail.cta.label} <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button asChild variant="secondary-hero" size="xl">
+              <Link href={ROUTES.public.businessSolutions}>Explore Business Solutions</Link>
+            </Button>
           </div>
         </div>
-        <h1
-          id="business-detail-heading"
-          className={cn(
-            "mt-5 max-w-2xl text-4xl leading-[1.09] font-extrabold tracking-tight sm:text-5xl lg:text-[3.5rem]",
-            dark ? "text-white" : "text-ink",
-          )}
-        >
-          {detail.headline}
-        </h1>
-        <p
-          className={cn(
-            "mt-6 max-w-xl text-lg leading-relaxed font-semibold",
-            dark ? "text-white/90" : "text-ink/90",
-          )}
-        >
-          {detail.lead}
-        </p>
-        <p
-          className={cn(
-            "mt-4 max-w-xl leading-relaxed text-base",
-            dark ? "text-white/70" : "text-muted-foreground",
-          )}
-        >
-          {detail.introduction}
-        </p>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl" className="shadow-lg shadow-brand-red/20">
-            <Link href={detail.cta.href}>
-              {detail.cta.label} <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
-          <Button asChild variant={dark ? "outline-inverse" : "outline"} size="xl">
-            <Link href={ROUTES.public.businessSolutions}>Explore Business Solutions</Link>
-          </Button>
-        </div>
       </div>
-      <div className="relative mx-auto w-full max-w-xl pb-12 pl-4 sm:pl-8">
-        <div
-          aria-hidden="true"
-          className={cn(
-            "bg-gradient-to-tr from-brand-blue/30 to-brand-red/20 absolute top-5 h-[76%] w-[76%] rounded-[2rem] blur-xl opacity-80",
-            detail.reverseFeature ? "right-0" : "left-0",
-          )}
-        />
-        <div className="shadow-2xl relative mx-3 aspect-[1.18] overflow-hidden rounded-[1.75rem] border-4 border-white bg-slate-100">
-          <Image
-            src={detail.image.src}
-            alt={detail.image.alt}
-            fill
-            preload
-            sizes="(min-width: 1280px) 550px, (min-width: 1024px) 45vw, 90vw"
-            className="object-cover transition-transform duration-700 hover:scale-105"
-          />
-          <div
-            aria-hidden="true"
-            className="from-navy/40 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
-          />
-        </div>
-        <div
-          className={cn(
-            "shadow-2xl absolute bottom-0 w-[44%] overflow-hidden rounded-2xl border-4 border-white bg-white backdrop-blur-sm",
-            detail.reverseFeature ? "left-0" : "right-0",
-          )}
-        >
-          <div className="relative aspect-[1.35]">
-            <Image
-              src={detail.insetImage.src}
-              alt={detail.insetImage.alt}
-              fill
-              sizes="(min-width: 1024px) 230px, 40vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
-        <div
-          className={cn(
-            "border-border/70 shadow-xl absolute bottom-8 max-w-[58%] rounded-2xl border bg-white/95 backdrop-blur-md px-4 py-3",
-            detail.reverseFeature ? "right-0" : "left-0",
-          )}
-        >
-          <span
-            aria-hidden="true"
-            className="bg-brand-red mr-2 inline-block size-2 rounded-full animate-pulse"
-          />
-          <span className="text-brand-blue-dark text-xs font-bold sm:text-sm">
-            {detail.heroLabel}
-          </span>
-        </div>
-      </div>
-    </Section>
+    </section>
   );
 }
 
@@ -387,9 +294,6 @@ function BusinessProcess({ detail }: { detail: BusinessDetail }) {
       aria-labelledby="process-heading"
       className={light ? "bg-brand-blue-light/30" : undefined}
     >
-      {!light ? (
-        <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
-      ) : null}
       <SectionHeading
         id="process-heading"
         eyebrow="Our Process"
@@ -417,7 +321,7 @@ function BusinessProcess({ detail }: { detail: BusinessDetail }) {
             <span
               className={cn(
                 "hidden text-5xl leading-none font-bold lg:block",
-                light ? "text-brand-blue/25" : "text-brand-blue-muted/30",
+                light ? "text-[#5B7FAE]" : "text-brand-blue-muted/30",
               )}
             >
               0{index + 1}

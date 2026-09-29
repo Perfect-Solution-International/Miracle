@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 
-import { Breadcrumb, type BreadcrumbItem } from "@/components/common/breadcrumb";
+import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -1195,17 +1195,11 @@ export function ImportExportLanding({
             aria-hidden="true"
             className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-[450px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
           />
-          <div
-            aria-hidden="true"
-            className="bg-grid absolute inset-0 -z-10 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-          />
 
           <div className="container-page grid items-center gap-12 py-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14 lg:py-24">
             <div className="max-w-2xl">
-              <Breadcrumb items={breadcrumbs} />
-              
               {/* Pulsing Live Badge Pill */}
-              <div className="mt-7">
+              <div>
                 <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
                   <span className="relative flex size-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
@@ -1229,7 +1223,11 @@ export function ImportExportLanding({
                   Submit Import / Export Request
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
-                <Button size="xl" variant="outline" asChild>
+                <Button
+                  size="xl"
+                  variant="secondary-hero"
+                  asChild
+                >
                   <a href="#services">Explore Our Services</a>
                 </Button>
               </div>
@@ -1268,19 +1266,7 @@ export function ImportExportLanding({
 
         <section id="services" className="section-y bg-white">
           <div className="container-page">
-            <div className="max-w-3xl">
-              <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-                Two ways to move forward
-              </p>
-              <h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Import &amp; Export Solutions
-              </h2>
-              <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed">
-                Tell us what you need to import or export, and our team will help
-                coordinate the relevant sourcing and trade requirements.
-              </p>
-            </div>
-            <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <div className="grid gap-6 lg:grid-cols-2">
               <FeatureCard
                 title="Import"
                 description="Source products from international markets and coordinate the import process based on your requirements."
@@ -1316,18 +1302,9 @@ export function ImportExportLanding({
         <section className="section-y bg-surface">
           <div className="container-page">
             <div className="max-w-3xl">
-              <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-                Product categories
-              </p>
-              <h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
+              <h2 className="text-ink text-4xl font-extrabold tracking-tight sm:text-5xl">
                 Product Categories
               </h2>
-              <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed">
-                Explore the types of products we can help you source, supply, import, or
-                export. These categories are examples, not limitations. If you need a
-                product that is not listed, simply tell us what you need and we will
-                review your requirement.
-              </p>
             </div>
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {CATEGORIES.map(([title, description, Icon, image]) => (

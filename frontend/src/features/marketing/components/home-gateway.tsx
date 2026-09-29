@@ -442,23 +442,39 @@ export function HomeGateway() {
   return (
     <div className="relative overflow-hidden">
       {/* ─────────────────────────────────────────────────────────────
-          1. HERO SECTION: Liquid Glass Enterprise Aesthetic
+          1. HERO SECTION: Full-Bleed Wide Panoramic Hero
       ───────────────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-16 lg:pt-16 lg:pb-24">
-        {/* Subtle Ambient Liquid Mesh Background */}
+      <section
+        aria-labelledby="home-gateway-hero-heading"
+        className="relative isolate overflow-hidden bg-white border-b border-slate-200/70 min-h-[580px] lg:min-h-[660px] flex items-center"
+      >
+        {/* 1. Underlying Screen-Wide Hero Background Image */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[550px] w-[800px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
-        />
-        <div
-          aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)]"
+          className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+          style={{
+            backgroundImage: 'url("/images/home/home-hero-bg.jpg")',
+            backgroundPosition: "right center",
+          }}
         />
 
-        <div className="container-page">
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
+        {/* 2. Soft-White Gradient on Left Area (ensures crisp, 100% legibility on all viewports) */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent lg:from-white/95 lg:via-white/60 lg:to-transparent pointer-events-none"
+        />
+
+        {/* 3. Bottom Melt to Next Section */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+        />
+
+        {/* 4. Left-Aligned Content Container */}
+        <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
+          <div className="grid lg:grid-cols-12 items-center">
             {/* Left Content Column */}
-            <div className="space-y-6 lg:col-span-7">
+            <div className="space-y-6 max-w-2xl lg:col-span-7 xl:col-span-6">
               {/* Badge with glowing pulse */}
               <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
                 <span className="relative flex size-2">
@@ -468,7 +484,10 @@ export function HomeGateway() {
                 Integrated Global Business &amp; Travel Solutions
               </div>
 
-              <h1 className="text-ink text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl leading-[1.08]">
+              <h1
+                id="home-gateway-hero-heading"
+                className="text-ink text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl leading-[1.08]"
+              >
                 One Trusted Partner For{" "}
                 <span className="bg-gradient-to-r from-brand-blue via-indigo-600 to-navy bg-clip-text text-transparent">
                   Business, Tech &amp; Global Growth.
@@ -485,51 +504,37 @@ export function HomeGateway() {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-                <Button size="xl" onClick={openForm} className="shadow-lift gap-2">
+                <Button size="xl" onClick={openForm} className="shadow-lift gap-2 bg-brand-blue hover:bg-brand-blue-dark">
                   <Sparkles className="size-4.5" />
                   Tell Us What You Need
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
-                <Button size="xl" variant="outline" asChild className="bg-white/80 backdrop-blur-sm">
+                <Button
+                  size="xl"
+                  variant="secondary-hero"
+                  asChild
+                  className="bg-white/90 backdrop-blur-sm border-slate-200 hover:bg-white shadow-xs"
+                >
                   <Link href="#pillars">Explore Core Pillars</Link>
                 </Button>
               </div>
-            </div>
 
-            {/* Right Visual Card with Layered Floating Elements */}
-            <div className="relative lg:col-span-5">
-              <div className="relative aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden rounded-3xl border-4 border-white shadow-2xl">
-                <Image
-                  src={SITE_MEDIA.investment.partnership.src}
-                  alt={SITE_MEDIA.investment.partnership.alt}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 45vw, 100vw"
-                  className="object-cover"
-                />
-                <div className="from-navy/70 via-navy/20 to-transparent absolute inset-0 bg-gradient-to-t" />
-
-                {/* Bottom Overlay Label */}
-                <div className="absolute bottom-5 left-5 right-5 text-white">
-                  <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
-                    <Globe2 className="size-3.5" />
-                    International Reach
+              {/* Trust Indicators Strip */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                {[
+                  "Verified Corporate Advisory",
+                  "Cross-Border Trade Network",
+                  "Full-Stack IT Engineering",
+                  "Licensed Global Travel Desk",
+                ].map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white/80 px-3 py-1 text-xs font-bold text-ink shadow-2xs backdrop-blur-xs"
+                  >
+                    <CheckCircle2 className="size-3.5 text-brand-blue" />
+                    <span>{tag}</span>
                   </span>
-                  <p className="text-base sm:text-lg font-bold">
-                    Connecting Opportunities Across Continents
-                  </p>
-                </div>
-              </div>
-
-              {/* Floating Glassmorphic Pill */}
-              <div className="absolute -top-4 -left-4 hidden sm:flex items-center gap-3 rounded-2xl border border-white/80 bg-white/90 p-3 shadow-xl backdrop-blur-md">
-                <div className="flex size-10 items-center justify-center rounded-xl bg-brand-blue text-white shadow-xs">
-                  <CheckCircle2 className="size-5" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-ink">Verified Advisory</p>
-                  <p className="text-[11px] text-muted-foreground">Expert Multi-Sector Support</p>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -539,7 +544,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           2. CORE PILLARS: Interactive 4-Pillar Solutions Grid
       ───────────────────────────────────────────────────────────── */}
-      <section id="pillars" className="section-y bg-slate-50/70 border-y border-slate-200/70 scroll-mt-20">
+      <section id="pillars" className="section-y bg-white border-t border-slate-100 scroll-mt-20">
         <div className="container-page">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="bg-brand-blue-light text-brand-blue rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
@@ -617,7 +622,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           3. IN-DEPTH SUMMARY: Business Solutions
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-white">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="space-y-6 lg:col-span-6">
             <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
@@ -685,7 +690,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           4. IN-DEPTH SUMMARY: IT & Digital Solutions
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-slate-50/80 border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="order-2 lg:order-1 relative lg:col-span-6">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 shadow-xl">
@@ -753,7 +758,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           5. IN-DEPTH SUMMARY: Travel & Tourism
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-white border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="space-y-6 lg:col-span-6">
             <span className="bg-sky-100 text-sky-700 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
@@ -821,7 +826,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           6. IN-DEPTH SUMMARY: Global Trade, Franchise & Investment
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-slate-50/80 border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="bg-emerald-100 text-emerald-700 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
@@ -922,7 +927,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           7. VALUE PROPOSITIONS: Why Work With Miracle International
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-white border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="bg-brand-red/10 text-brand-red rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
@@ -962,10 +967,6 @@ export function HomeGateway() {
           8. HOW IT WORKS: Executive 5-Step Process Timeline
       ───────────────────────────────────────────────────────────── */}
       <section className="section-y bg-navy relative isolate overflow-hidden text-white">
-        <div
-          aria-hidden="true"
-          className="bg-grid-inverse absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_50%,transparent_90%)]"
-        />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-40 -left-40 -z-10 size-96 rounded-full bg-brand-blue/20 blur-[120px]"
@@ -1016,7 +1017,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           9. DIRECT ACTION BANNER: Tell Us What You Need
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-gradient-to-b from-slate-50 to-white">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page">
           <div className="relative isolate overflow-hidden rounded-3xl border border-brand-blue/20 bg-gradient-to-r from-brand-blue-light/40 via-white to-brand-blue-light/30 p-8 sm:p-12 shadow-lift">
             <div className="grid items-center gap-8 lg:grid-cols-12">
@@ -1049,7 +1050,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           10. CONTACT STRIP & EXECUTIVE SUPPORT
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-white border-t border-slate-200/70">
+      <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="space-y-6 lg:col-span-7">
             <div>

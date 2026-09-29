@@ -1,33 +1,49 @@
 "use client";
 
-import { ArrowRight, CalendarDays, MapPin, SlidersHorizontal, Star, Users } from "lucide-react";
+import { ArrowRight, CalendarDays, Compass, MapPin, SlidersHorizontal, Star, Users } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inquiry-modal";
 import { ROUTES } from "@/config/routes";
 
-import { CustomizeTripModal } from "../customize-trip-section";
 import type { TravelPackageDetail } from "../../types/travel-package-detail.types";
 
 /**
  * Package detail banner: full-bleed photo, breadcrumb, package overview card,
- * and direct interactive "Book This Package" & "Customize This Package" actions.
+ * and a "Send Inquiry" CTA that opens the existing travel inquiry modal
+ * pre-filled with this package's info. No customer login required.
  */
 export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
-  const [plannerModal, setPlannerModal] = useState<{
-    open: boolean;
-    mode: "book" | "customize";
-  }>({
-    open: false,
-    mode: "book",
-  });
+  const [inquiryOpen, setInquiryOpen] = useState(false);
+
+  // Map the static TravelPackageDetail into the shape the inquiry modal expects
+  const inquiryPackage = {
+    id: detail.slug,
+    slug: detail.slug,
+    name: detail.title,
+    travelType: detail.travelDirection,
+    destination: detail.location,
+    country: detail.location,
+    duration: `${detail.duration.days} Days / ${detail.duration.nights} Nights`,
+    price: null,
+    currency: (detail.travelDirection === "Inbound" ? "USD" : "USD") as "USD" | "LKR",
+    shortDescription: detail.tagline,
+    description: detail.about,
+    highlights: detail.highlights as string[],
+    includedItems: detail.included as string[],
+    images: [detail.image.src],
+    coverImage: detail.image.src,
+    status: "Active" as const,
+    createdAt: "",
+  };
 
   return (
     <>
-      <section className="bg-surface border-b">
+      <section className="bg-white border-b border-slate-100">
         <div className="container-page pt-8 pb-10 md:pt-10 md:pb-14">
+          {/* Hero Image */}
           <div className="relative aspect-[16/7] overflow-hidden rounded-3xl shadow-sm">
             <Image
               src={detail.image.src}
@@ -40,17 +56,9 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
             <div className="from-navy/70 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
           </div>
 
-          <Breadcrumb
-            className="mt-6"
-            items={[
-              { label: "Travel & Tourism", href: ROUTES.public.travelTourism },
-              { label: "Packages", href: `${ROUTES.public.travelTourism}#packages` },
-              { label: detail.title },
-            ]}
-          />
-
           <div className="shadow-lift mt-6 flex flex-col gap-6 rounded-3xl border bg-white p-6 sm:p-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="flex flex-col gap-4">
+              {/* Badges */}
               <div className="flex flex-wrap items-center gap-2">
                 {detail.popular ? (
                   <span className="bg-brand-red/10 text-brand-red inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold">
@@ -58,6 +66,10 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
                     Popular Package
                   </span>
                 ) : null}
+                <span className="bg-slate-100 text-ink inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold">
+                  <Compass aria-hidden="true" className="text-brand-blue size-3.5" />
+                  {detail.travelDirection} Tour
+                </span>
                 <span className="bg-slate-100 text-ink inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold">
                   <MapPin aria-hidden="true" className="text-brand-blue size-3.5" />
                   {detail.location}
@@ -68,6 +80,7 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
                 </span>
               </div>
 
+              {/* Title & tagline */}
               <div>
                 <h1 className="text-ink text-3xl leading-tight font-extrabold sm:text-4xl">
                   {detail.title}
@@ -77,6 +90,7 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
                 </p>
               </div>
 
+              {/* Duration & price */}
               <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5">
                 <span className="text-ink inline-flex w-fit items-center gap-1.5 text-sm font-semibold">
                   <CalendarDays aria-hidden="true" className="text-brand-blue size-4" />
@@ -88,21 +102,24 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
               </div>
             </div>
 
+            {/* CTA Buttons */}
             <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
               <Button
                 variant="accent"
                 size="xl"
-                onClick={() => setPlannerModal({ open: true, mode: "book" })}
+                onClick={() => setInquiryOpen(true)}
                 className="gap-2"
+                id="hero-send-inquiry-btn"
               >
-                Book This Package
+                Send Inquiry
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Button>
               <Button
-                variant="outline"
+                variant="secondary-hero"
                 size="xl"
-                onClick={() => setPlannerModal({ open: true, mode: "customize" })}
+                onClick={() => setInquiryOpen(true)}
                 className="gap-2"
+                id="hero-customize-btn"
               >
                 <SlidersHorizontal aria-hidden="true" className="size-4" />
                 Customize This Package
@@ -112,12 +129,12 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
         </div>
       </section>
 
-      {/* Interactive Trip / Package Planner Modal */}
-      <CustomizeTripModal
-        open={plannerModal.open}
-        onClose={() => setPlannerModal((prev) => ({ ...prev, open: false }))}
-        packageDetail={detail}
-        mode={plannerModal.mode}
+      {/* Inquiry Modal – pre-filled with package data */}
+      <PublicTravelInquiryModal
+        open={inquiryOpen}
+        onOpenChange={setInquiryOpen}
+        defaultPackage={inquiryPackage}
+        defaultInquiryType={detail.travelDirection === "Inbound" ? "Inbound Tour" : "Outbound Tour"}
       />
     </>
   );

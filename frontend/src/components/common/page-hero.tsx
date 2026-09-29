@@ -4,7 +4,7 @@ import Image from "next/image";
 import type { SiteImage } from "@/config/site-media";
 import { cn } from "@/lib/utils";
 
-import { Breadcrumb, type BreadcrumbItem } from "./breadcrumb";
+import type { BreadcrumbItem } from "./breadcrumb";
 import { Eyebrow } from "./eyebrow";
 import { MediaFrame } from "./media-frame";
 
@@ -32,7 +32,7 @@ export function PageHero({
   description: string;
   eyebrow?: string;
   badgeText?: string;
-  breadcrumbs: readonly BreadcrumbItem[];
+  breadcrumbs?: readonly BreadcrumbItem[];
   image?: SiteImage;
   stats?: readonly PageHeroStat[];
   /** CTA row or other supporting content under the description. */
@@ -53,10 +53,6 @@ export function PageHero({
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 left-1/2 -z-10 -translate-x-1/2 h-96 w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
       />
-      <div
-        aria-hidden="true"
-        className="bg-grid absolute inset-0 -z-10 opacity-60 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-      />
 
       <div
         className={cn(
@@ -65,8 +61,6 @@ export function PageHero({
         )}
       >
         <div className="flex flex-col items-start gap-6">
-          <Breadcrumb items={breadcrumbs} />
-
           {/* Glowing Status Pill */}
           <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
             <span className="relative flex size-2">

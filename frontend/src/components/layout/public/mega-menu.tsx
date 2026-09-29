@@ -126,23 +126,45 @@ function MenuFeature({ feature }: { feature: PublicNavFeature }) {
   return (
     <div className="bg-navy relative isolate flex flex-col justify-between gap-6 overflow-hidden p-6 text-white">
       {feature.image ? (
-        <>
-          <Image
-            src={feature.image.src}
-            alt={feature.image.alt}
-            fill
-            sizes="15rem"
-            className="-z-20 object-cover"
-          />
-          <div className="from-navy via-navy/85 absolute inset-0 -z-10 bg-gradient-to-t to-navy/40" />
-        </>
-      ) : (
-        <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
-      )}
-      <div
-        aria-hidden="true"
-        className="bg-brand-blue absolute -right-16 -bottom-16 -z-10 size-48 rounded-full opacity-50 blur-3xl"
-      />
+        feature.imagePosition ? (
+          <>
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 -z-20"
+              style={{
+                backgroundImage: `url(${feature.image.src})`,
+                backgroundSize: "cover",
+                backgroundPosition: feature.imagePosition,
+                backgroundRepeat: "no-repeat",
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className={cn(
+                "absolute inset-0 -z-10",
+                feature.overlayClassName ?? "bg-navy/80",
+              )}
+            />
+          </>
+        ) : (
+          <>
+            <Image
+              src={feature.image.src}
+              alt={feature.image.alt}
+              fill
+              sizes="15rem"
+              className="-z-20 object-cover"
+            />
+            <div className="from-navy via-navy/85 absolute inset-0 -z-10 bg-gradient-to-t to-navy/40" />
+          </>
+        )
+      ) : null}
+      {!feature.disableGlow ? (
+        <div
+          aria-hidden="true"
+          className="bg-brand-blue absolute -right-16 -bottom-16 -z-10 size-48 rounded-full opacity-50 blur-3xl"
+        />
+      ) : null}
       <div className="space-y-3">
         <p className="text-brand-blue-muted flex items-center gap-2 text-[0.7rem] font-bold tracking-[0.16em] uppercase">
           <span aria-hidden="true" className="bg-brand-red h-0.5 w-4 rounded-full" />

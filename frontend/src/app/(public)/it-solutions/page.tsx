@@ -19,7 +19,6 @@ import {
   Settings2,
   Sparkles,
   Target,
-  TrendingUp,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -27,7 +26,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
@@ -38,8 +36,8 @@ import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
 
-import { AnimatedKeyboardBackground } from "./animated-keyboard-background";
-import keyboardStyles from "./animated-keyboard-background.module.css";
+import landingStyles from "../landing-surfaces.module.css";
+import circuitStyles from "./animated-circuit-background.module.css";
 
 const TITLE = "IT Solutions";
 const DESCRIPTION =
@@ -96,7 +94,7 @@ const services: readonly Service[] = [
     image: SITE_MEDIA.itSolutions.softwareDevelopment,
   },
   {
-    title: "POS Systems",
+    title: "POS System Development",
     description:
       "Reliable sales, stock and reporting systems for everyday business operations.",
     icon: MonitorCog,
@@ -162,12 +160,18 @@ const process: (IconItem & { step: string })[] = [
   },
   {
     step: "05",
-    title: "Implement",
+    title: "Test",
+    description: "Review the solution against the agreed workflows and needs.",
+    icon: Check,
+  },
+  {
+    step: "06",
+    title: "Deploy",
     description: "Introduce the system with a clear, supported transition.",
     icon: Settings2,
   },
   {
-    step: "06",
+    step: "07",
     title: "Support",
     description: "Keep the solution useful as your business evolves.",
     icon: Headphones,
@@ -206,111 +210,80 @@ const businessBenefits = [
   { title: "A stronger foundation for growth", icon: ChartNoAxesCombined },
 ] as const;
 
+const businessNeeds = [
+  { title: "Establish a professional online presence", description: "Give customers a clear, reliable place to understand your business and take the next step.", href: ROUTES.public.websiteDevelopment },
+  { title: "Replace manual workflows", description: "Turn repeated handoffs and disconnected tasks into a more consistent way of working.", href: ROUTES.public.softwareDevelopment },
+  { title: "Manage sales and stock", description: "Bring transactions, inventory and everyday reporting into a practical retail workflow.", href: ROUTES.public.posSystemDevelopment },
+  { title: "Connect business information", description: "Make relevant operational information easier for teams and managers to use.", href: ROUTES.public.businessManagementSystems },
+  { title: "Improve customer and internal processes", description: "Choose digital tools that reduce friction for the people who use them.", href: ROUTES.public.digitalSolutions },
+  { title: "Automate repetitive work", description: "Identify routine steps that could be handled more consistently through automation.", href: ROUTES.public.businessAutomation },
+  { title: "Plan the next technology improvement", description: "Assess options, priorities and the right sequence before committing to a solution.", href: ROUTES.public.itConsulting },
+] as const;
+
+const connectedServices = [
+  { title: "Business Solutions", description: "Connect technology decisions to business planning, operations and growth priorities.", href: ROUTES.public.businessSolutions },
+  { title: "Trading Services", description: "Link sales, stock or supplier workflows to wider trading requirements when relevant.", href: ROUTES.public.servicesTrading },
+  { title: "Explore All Services", description: "See the broader support available when a requirement reaches beyond technology.", href: ROUTES.public.services },
+] as const;
+
 export default function Page() {
   return (
-    <main className={keyboardStyles.page}>
-      <AnimatedKeyboardBackground />
+    <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
       <section
         aria-labelledby="it-solutions-hero-heading"
-        className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
+        className={`relative isolate overflow-hidden bg-white ${landingStyles.travelHero}`}
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-indigo-500/15 via-brand-blue/10 to-purple-500/10 blur-[100px]"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
+          style={{ backgroundImage: 'url("/images/it-solutions/it-hero-bg.png")' }}
         />
+        <div aria-hidden="true" className="absolute inset-0 bg-white/25" />
         <div
           aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)] opacity-50"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.62)_0%,rgba(255,255,255,0.30)_42%,rgba(255,255,255,0.08)_78%,rgba(255,255,255,0.18)_100%)]"
         />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-white/55 via-transparent to-white" />
+        <div className="container-page relative z-10 flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
+          <Eyebrow className="rounded-full border border-white/80 bg-white px-4 py-1.5 font-extrabold text-navy shadow-sm">
+            Technology Engineering &amp; Digital Solutions
+          </Eyebrow>
 
-        <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
-          <div className="max-w-2xl space-y-5">
-            <Breadcrumb items={[{ label: TITLE }]} />
+          <h1
+            id="it-solutions-hero-heading"
+            className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl"
+          >
+            Technology That Moves{" "}
+            <span className="text-navy">
+              Your Business Forward.
+            </span>
+          </h1>
 
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/60 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-600 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-indigo-600" />
-              </span>
-              Technology Engineering &amp; Digital Solutions
-            </div>
+          <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
+            {DESCRIPTION}
+          </p>
 
-            <h1
-              id="it-solutions-hero-heading"
-              className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+            <Button asChild variant="accent" size="xl" className="shadow-lift">
+              <a href="#services">
+                Explore Our IT Solutions
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="secondary-hero"
+              size="xl"
             >
-              Technology That Moves{" "}
-              <span className="bg-gradient-to-r from-indigo-600 via-brand-blue to-navy bg-clip-text text-transparent">
-                Your Business Forward.
-              </span>
-            </h1>
-
-            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-              {DESCRIPTION}
-            </p>
-
-            <div className="flex flex-col gap-3 sm:flex-row pt-2">
-              <Button asChild variant="accent" size="xl" className="shadow-lift">
-                <a href="#services">
-                  Explore Our IT Solutions
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
-                <Link href={ROUTES.public.contact}>Talk to Our Tech Team</Link>
-              </Button>
-            </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-2xl">
-            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
-              <Image
-                src={SITE_MEDIA.itSolutions.hero.src}
-                alt={SITE_MEDIA.itSolutions.hero.alt}
-                fill
-                preload
-                sizes="(min-width: 1024px) 52vw, 100vw"
-                className="object-cover"
-              />
-              <div
-                aria-hidden="true"
-                className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
-              />
-              <div className="absolute bottom-5 left-5 right-5 text-white">
-                <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
-                  <Code2 className="size-3.5" />
-                  Full-Stack Engineering
-                </span>
-                <p className="text-base sm:text-lg font-bold">
-                  Robust Systems Built For Mission-Critical Operations
-                </p>
-              </div>
-            </div>
-
-            {/* Floating Glass Pill */}
-            <div className="shadow-xl absolute -bottom-5 right-4 left-4 flex items-center justify-between rounded-2xl border border-white/80 bg-white/95 px-6 py-3.5 backdrop-blur-md sm:right-6 sm:left-6">
-              <span className="text-ink text-xs sm:text-sm font-bold flex items-center gap-1.5">
-                <Code2 className="size-4 text-indigo-600" />
-                Build
-              </span>
-              <ArrowRight aria-hidden="true" className="text-indigo-600/50 size-4" />
-              <span className="text-ink text-xs sm:text-sm font-bold flex items-center gap-1.5">
-                <Bot className="size-4 text-indigo-600" />
-                Automate
-              </span>
-              <ArrowRight aria-hidden="true" className="text-indigo-600/50 size-4" />
-              <span className="text-indigo-600 text-xs sm:text-sm font-bold flex items-center gap-1.5">
-                <TrendingUp className="size-4 text-indigo-600" />
-                Scale
-              </span>
-            </div>
+              <Link href={ROUTES.public.contact}>Talk to Our Tech Team</Link>
+            </Button>
           </div>
         </div>
       </section>
 
       <Section
         aria-labelledby="it-overview-heading"
-        containerClassName="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16"
+        containerClassName="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-12"
       >
         <div>
           <SectionHeading
@@ -319,14 +292,17 @@ export default function Page() {
             title="Digital Solutions for a More Efficient, Connected Business"
             description="We design practical, scalable technology around the way your business works. From customer-facing experiences to the systems behind daily operations, every solution starts with a clear business need."
           />
-          <Button asChild variant="outline" size="xl" className="mt-7">
+          <p className="text-muted-foreground mt-4 max-w-xl text-sm leading-relaxed sm:text-base">
+            A useful solution can reduce repeated manual steps, connect information across teams, improve how customers interact with the business and make the next stage of growth easier to plan.
+          </p>
+          <Button asChild variant="outline" size="xl" className="mt-5">
             <a href="#how-we-work">
               Learn More About Our Approach
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </a>
           </Button>
         </div>
-        <div className="relative pb-8">
+        <div className="relative">
           <div className="shadow-lift relative aspect-[3/2] overflow-hidden rounded-3xl border border-white">
             <Image
               src={SITE_MEDIA.itSolutions.overview.src}
@@ -340,12 +316,17 @@ export default function Page() {
               className="from-navy/25 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
             />
           </div>
-          <div className="shadow-soft relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border bg-white sm:grid-cols-2">
+          <div
+            className={cn(
+              "shadow-soft relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border sm:grid-cols-2",
+              circuitStyles.solidCard,
+            )}
+          >
             {overviewBenefits.map(({ title, description, icon: Icon }, index) => (
               <div
                 key={title}
                 className={cn(
-                  "flex gap-3 p-4",
+                  "flex gap-3 p-3.5",
                   index % 2 === 1 && "sm:border-l",
                   index > 1 && "border-t",
                 )}
@@ -368,7 +349,7 @@ export default function Page() {
       <Section
         id="services"
         aria-labelledby="it-services-heading"
-        className="bg-brand-blue-light/25 scroll-mt-24"
+        className="scroll-mt-24"
       >
         <SectionHeading
           id="it-services-heading"
@@ -377,11 +358,15 @@ export default function Page() {
           title="Comprehensive IT Solutions to Support Your Business"
           description="Choose a specialist service or bring us the wider challenge. Our team connects the right technology around your requirement."
         />
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
           {services.map((service, index) => (
             <li
               key={service.title}
-              className="group/card shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition-shadow"
+              className={cn(
+                "group/card shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-2xl border transition-shadow",
+                circuitStyles.solidCard,
+                circuitStyles.serviceCard,
+              )}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
@@ -423,43 +408,50 @@ export default function Page() {
         </ul>
       </Section>
 
-      <Section id="how-we-work" tone="navy" aria-labelledby="it-process-heading">
-        <div
-          aria-hidden="true"
-          className="bg-grid-inverse absolute inset-0 -z-20 opacity-75"
+      <Section aria-labelledby="it-needs-heading">
+        <SectionHeading
+          id="it-needs-heading"
+          eyebrow="Solutions for Different Business Needs"
+          title="Start With the Work You Need to Improve"
+          description="The right solution depends on the problem, the people using it and the information they need. These common needs can help you find a useful starting point."
         />
+        <ul className="mt-10 grid gap-x-10 md:grid-cols-2">
+          {businessNeeds.map(({ title, description, href }, index) => (
+            <li key={title} className="flex gap-4 border-t border-slate-200 py-5">
+              <span className="text-brand-blue shrink-0 text-sm font-bold">0{index + 1}</span>
+              <div>
+                <h3 className="text-ink text-base font-bold">{title}</h3>
+                <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
+                <Link href={href} className="text-brand-blue mt-3 inline-flex items-center gap-1.5 text-sm font-semibold hover:underline">
+                  Explore solution <ArrowRight aria-hidden="true" className="size-4" />
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section
+        id="how-we-work"
+        aria-labelledby="it-process-heading"
+      >
         <SectionHeading
           id="it-process-heading"
           eyebrow="How We Work"
           title="A Clear Process From Idea to Implementation"
           description="A focused process keeps decisions visible, the solution practical and the work connected to your goals."
-          tone="inverse"
         />
-        <ol className="border-brand-blue-muted/35 relative mt-12 grid gap-7 border-l pl-7 lg:mt-16 lg:grid-cols-6 lg:gap-5 lg:border-t lg:border-l-0 lg:pl-0">
-          {process.map(({ step, title, description, icon: Icon }, index) => (
-            <li key={step} className="relative flex gap-4 lg:flex-col lg:gap-5 lg:pt-8">
-              <span
-                aria-hidden="true"
-                className={cn(
-                  "ring-navy absolute top-5 -left-[2.05rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
-                  index === 0 ? "bg-brand-red" : "bg-brand-blue-muted",
-                )}
-              />
-              <span className="text-brand-blue-muted/25 hidden text-5xl leading-none font-bold lg:block">
-                {step}
-              </span>
-              <span className="text-brand-blue-muted flex size-11 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5">
-                <Icon aria-hidden="true" className="size-5" />
-              </span>
-              <div>
-                <span className="text-brand-blue-muted text-xs font-bold tracking-widest lg:hidden">
-                  {step}
+        <ol className="mt-10 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+          {process.map(({ step, title, description, icon: Icon }) => (
+            <li key={step} className="border-t border-slate-200 pt-5">
+              <div className="flex items-center justify-between">
+                <span className="text-brand-blue text-sm font-bold tracking-widest">{step}</span>
+                <span className="text-brand-blue flex size-10 items-center justify-center rounded-xl bg-brand-blue-light">
+                  <Icon aria-hidden="true" className="size-5" />
                 </span>
-                <h3 className="font-bold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/60">
-                  {description}
-                </p>
               </div>
+              <h3 className="text-ink mt-4 text-lg font-bold">{title}</h3>
+              <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
             </li>
           ))}
         </ol>
@@ -467,23 +459,23 @@ export default function Page() {
 
       <Section
         aria-labelledby="it-why-heading"
-        containerClassName="grid gap-12 lg:grid-cols-[0.82fr_0.9fr_0.82fr] lg:items-center lg:gap-10"
+        containerClassName="grid gap-8 lg:grid-cols-[0.85fr_0.9fr_0.85fr] lg:items-center lg:gap-8"
       >
         <div>
           <SectionHeading
             id="it-why-heading"
-            eyebrow="Why Choose Miracle International"
-            title="More Than Technology. A Partner for Your Growth."
-            description="We connect technology decisions to the wider business, helping you choose and build solutions that are useful today and adaptable tomorrow."
+            eyebrow="Technology With a Business Purpose"
+            title="Choose What Helps the Business Work Better"
+            description="We begin with the requirement, the people and the workflow. That helps avoid adding tools without a clear purpose and keeps each technology decision connected to useful work today and room to adapt tomorrow."
           />
-          <Button asChild variant="outline" size="xl" className="mt-7">
+          <Button asChild variant="outline" size="xl" className="mt-5">
             <Link href={ROUTES.public.contact}>
               Talk to Our Team
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>
           </Button>
         </div>
-        <div className="shadow-lift relative aspect-[4/5] overflow-hidden rounded-3xl">
+        <div className="shadow-lift relative aspect-[4/4.2] overflow-hidden rounded-3xl">
           <Image
             src={SITE_MEDIA.itSolutions.partnership.src}
             alt={SITE_MEDIA.itSolutions.partnership.alt}
@@ -498,13 +490,13 @@ export default function Page() {
         </div>
         <ul className="border-brand-blue/15 border-t">
           {reasons.map(({ title, description, icon: Icon }) => (
-            <li key={title} className="border-brand-blue/15 flex gap-4 border-b py-5">
-              <span className="bg-brand-blue-light text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-full">
-                <Icon aria-hidden="true" className="size-5" />
+            <li key={title} className="border-brand-blue/15 flex gap-3.5 border-b py-3">
+              <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-full">
+                <Icon aria-hidden="true" className="size-4.5" />
               </span>
               <div>
-                <h3 className="text-ink font-bold">{title}</h3>
-                <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+                <h3 className="text-ink font-bold text-sm sm:text-base">{title}</h3>
+                <p className="text-muted-foreground mt-0.5 text-xs sm:text-sm leading-relaxed">
                   {description}
                 </p>
               </div>
@@ -514,9 +506,41 @@ export default function Page() {
       </Section>
 
       <Section
+        aria-labelledby="it-connected-heading"
+        containerClassName="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16"
+      >
+        <div className="shadow-lift relative aspect-[4/3] overflow-hidden rounded-3xl">
+          <Image
+            src={SITE_MEDIA.itSolutions.cta.src}
+            alt={SITE_MEDIA.itSolutions.cta.alt}
+            fill
+            sizes="(min-width: 1024px) 46vw, 100vw"
+            className="object-cover"
+          />
+        </div>
+        <div>
+          <SectionHeading
+            id="it-connected-heading"
+            eyebrow="Connected Solutions"
+            title="Technology Can Support a Wider Business Plan"
+            description="Some requirements reach beyond one system. We can connect an IT solution with relevant business planning, trading or other services when the work calls for it."
+          />
+          <ul className="mt-7 border-t border-brand-blue/15">
+            {connectedServices.map(({ title, description, href }) => (
+              <li key={title} className="border-b border-brand-blue/15 py-4">
+                <Link href={href} className="text-brand-blue inline-flex items-center gap-2 font-bold hover:underline">
+                  {title} <ArrowRight aria-hidden="true" className="size-4" />
+                </Link>
+                <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      <Section
         aria-labelledby="it-benefits-heading"
-        className="bg-brand-blue-light/25"
-        containerClassName="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16"
+        containerClassName="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-12"
       >
         <div>
           <SectionHeading
@@ -525,16 +549,16 @@ export default function Page() {
             title="Better Systems. Better Decisions. Better Growth."
             description="Connected technology helps teams work with less friction, gives management a clearer view and creates a stronger foundation for sustainable growth."
           />
-          <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
+          <ul className="mt-6 grid gap-x-8 sm:grid-cols-2">
             {businessBenefits.map(({ title, icon: Icon }) => (
               <li
                 key={title}
-                className="border-brand-blue/15 flex items-center gap-3 border-b py-4"
+                className="border-brand-blue/15 flex items-center gap-3.5 border-b py-3 sm:py-3.5"
               >
-                <span className="text-brand-blue shadow-soft flex size-9 shrink-0 items-center justify-center rounded-lg bg-white">
+                <span className="text-brand-blue shadow-soft flex size-8 shrink-0 items-center justify-center rounded-lg bg-white">
                   <Icon aria-hidden="true" className="size-4" />
                 </span>
-                <span className="text-ink text-sm font-semibold">{title}</span>
+                <span className="text-ink text-sm font-semibold sm:text-base">{title}</span>
                 <Check aria-hidden="true" className="text-brand-blue/45 ml-auto size-4" />
               </li>
             ))}
@@ -556,7 +580,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
-        className="bg-transparent"
+        className={landingStyles.ctaSection}
         eyebrow="Ready to Get Started?"
         title="Let's Build the Right IT Solution for Your Business"
         description="Tell us what you want to achieve and our team will help you find the most practical and effective way forward."

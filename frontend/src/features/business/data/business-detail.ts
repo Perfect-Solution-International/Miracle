@@ -45,8 +45,7 @@ export type BusinessDetail = {
   lead: string;
   introduction: string;
   image: SiteImage;
-  insetImage: SiteImage;
-  heroLabel: string;
+  heroHighlights: readonly string[];
   overview: string;
   overviewPoints: readonly string[];
   capabilities: readonly { title: string; description: string; icon: LucideIcon }[];
@@ -68,7 +67,6 @@ export type BusinessDetail = {
   featuredLast?: boolean;
   reverseFeature?: boolean;
   lightProcess?: boolean;
-  heroDark?: boolean;
 };
 
 export const BUSINESS_DETAILS = {
@@ -79,9 +77,8 @@ export const BUSINESS_DETAILS = {
     lead: "Move from an initial idea to practical decisions about the business you want to build.",
     introduction:
       "We help you examine the opportunity, understand the market and organize the first steps toward setup and launch.",
-    image: SITE_MEDIA.businessSolutions.startBusinessHero,
-    insetImage: SITE_MEDIA.businessSolutions.startBusinessInset,
-    heroLabel: "From idea to launch",
+    image: SITE_MEDIA.businessSolutions.startBusiness,
+    heroHighlights: ["Idea & Market Review", "Business Planning", "Setup Coordination", "Growth Readiness"],
     overview:
       "Starting well means asking the right questions early. We bring structure to the idea, connect it to real operating needs and help you prepare for the decisions ahead.",
     overviewPoints: [
@@ -183,8 +180,7 @@ export const BUSINESS_DETAILS = {
     introduction:
       "Our consultation support helps you understand the situation, assess options and choose a practical direction.",
     image: SITE_MEDIA.businessSolutions.businessConsultationHero,
-    insetImage: SITE_MEDIA.businessSolutions.businessConsultationInset,
-    heroLabel: "Perspective for progress",
+    heroHighlights: ["Requirement Review", "Practical Advice", "Options Assessment", "Action Priorities"],
     overview:
       "Useful advice starts with the realities of your business. We listen to the challenge, consider the wider context and work with you toward decisions you can act on.",
     overviewPoints: [
@@ -289,8 +285,7 @@ export const BUSINESS_DETAILS = {
     introduction:
       "We help organize the thinking behind a business so the next decisions are clearer and more practical.",
     image: SITE_MEDIA.businessSolutions.businessPlanningHero,
-    insetImage: SITE_MEDIA.businessSolutions.businessPlanningInset,
-    heroLabel: "Clarity before action",
+    heroHighlights: ["Business Objectives", "Market Planning", "Operations Roadmap", "Resource Planning"],
     overview:
       "A useful business plan is a working guide. It brings your market direction, operating approach, resources and growth priorities into one coherent picture.",
     overviewPoints: [
@@ -387,9 +382,8 @@ export const BUSINESS_DETAILS = {
     lead: "Coordinate the people, resources and systems needed to turn a plan into an operating business.",
     introduction:
       "We help bring the practical setup pieces together so your team can prepare to launch with greater clarity.",
-    image: SITE_MEDIA.businessSolutions.businessSetupHero,
-    insetImage: SITE_MEDIA.businessSolutions.businessSetupInset,
-    heroLabel: "Prepare to operate",
+    image: SITE_MEDIA.businessSolutions.businessSetup,
+    heroHighlights: ["Setup Requirements", "Supplier Coordination", "Operating Systems", "Launch Preparation"],
     overview:
       "Establishing a business involves many connected decisions. We help organize setup requirements, identify what is needed and coordinate the next steps.",
     overviewPoints: [
@@ -501,8 +495,7 @@ export const BUSINESS_DETAILS = {
     introduction:
       "We help established businesses assess what growth requires and coordinate the support behind it.",
     image: SITE_MEDIA.businessSolutions.businessExpansionHero,
-    insetImage: SITE_MEDIA.businessSolutions.businessExpansionInset,
-    heroLabel: "Build on what works",
+    heroHighlights: ["Growth Assessment", "Capacity Planning", "Market Options", "Expansion Readiness"],
     overview:
       "Growth is easier to manage when the operating model, suppliers, systems and partnerships are ready for it. We help bring those considerations together.",
     overviewPoints: [
@@ -604,8 +597,7 @@ export const BUSINESS_DETAILS = {
     introduction:
       "We help clarify requirements, explore sourcing options and coordinate practical equipment decisions.",
     image: SITE_MEDIA.businessSolutions.machineryEquipmentHero,
-    insetImage: SITE_MEDIA.businessSolutions.machineryEquipmentInset,
-    heroLabel: "Built for operations",
+    heroHighlights: ["Requirement Assessment", "Equipment Options", "Supplier Coordination", "Implementation Support"],
     overview:
       "Equipment decisions affect capacity, workflows and delivery. We start with the operational requirement, then work through selection, sourcing and implementation considerations.",
     overviewPoints: [
@@ -701,7 +693,6 @@ export const BUSINESS_DETAILS = {
     },
     featuredLast: true,
     reverseFeature: true,
-    heroDark: true,
   },
   technology: {
     title: "Business Technology",
@@ -711,8 +702,7 @@ export const BUSINESS_DETAILS = {
     introduction:
       "We help identify digital systems and improvements that make operations easier to manage and adapt.",
     image: SITE_MEDIA.businessSolutions.businessTechnologyHero,
-    insetImage: SITE_MEDIA.businessSolutions.businessTechnologyInset,
-    heroLabel: "Business + technology",
+    heroHighlights: ["Digital Systems", "Process Automation", "IT Integration", "Scalable Solutions"],
     overview:
       "Useful technology solves an operational problem. We begin with how work happens, then consider systems, automation and reporting that can support the business.",
     overviewPoints: [
@@ -815,8 +805,7 @@ export const BUSINESS_DETAILS = {
     introduction:
       "Our support helps businesses work through everyday needs and prepare for what comes next.",
     image: SITE_MEDIA.businessSolutions.businessSupportHero,
-    insetImage: SITE_MEDIA.businessSolutions.businessSupportInset,
-    heroLabel: "Progress beyond launch",
+    heroHighlights: ["Operating Priorities", "Ongoing Guidance", "Team Coordination", "Next-Step Support"],
     overview:
       "Launching is only one milestone. As the business operates and grows, new supplier, technology and operational questions arise. We help keep the response coordinated.",
     overviewPoints: [

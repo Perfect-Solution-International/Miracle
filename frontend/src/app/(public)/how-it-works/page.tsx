@@ -19,7 +19,6 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { Button } from "@/components/ui/button";
@@ -139,16 +138,8 @@ export default function Page() {
           aria-hidden="true"
           className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
         />
-        <div
-          aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)] opacity-50"
-        />
 
         <div className="container-page max-w-4xl text-center space-y-5">
-          <div className="flex justify-center">
-            <Breadcrumb items={[{ label: TITLE }]} />
-          </div>
-
           <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
             <span className="relative flex size-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
@@ -178,7 +169,11 @@ export default function Page() {
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
+            <Button
+              asChild
+              variant="secondary-hero"
+              size="xl"
+            >
               <a href="#steps">Explore the 5 Steps</a>
             </Button>
           </div>

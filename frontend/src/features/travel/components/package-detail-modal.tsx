@@ -139,7 +139,7 @@ export function PackageDetailModal({
               {pkg.included.map((item) => (
                 <div
                   key={item}
-                  className="flex items-start gap-2.5 rounded-xl border border-slate-200/90 bg-slate-50/70 p-3 text-sm transition-colors hover:bg-brand-blue-light/30"
+                  className="flex items-start gap-2.5 rounded-xl border border-slate-200/90 bg-white p-3 text-sm transition-colors hover:border-brand-blue/30 shadow-xs"
                 >
                   <span className="bg-brand-blue text-white mt-0.5 inline-flex size-4.5 shrink-0 items-center justify-center rounded-full">
                     <Check aria-hidden="true" className="size-3 stroke-[3]" />
@@ -151,7 +151,7 @@ export function PackageDetailModal({
           </div>
 
           {/* ── 2. Clean Left-Content / Right-Image Layout: "What to Expect" ── */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               {/* Left Column (What to Expect Details) */}
               <div className="flex flex-col gap-4 lg:col-span-7">
@@ -171,7 +171,7 @@ export function PackageDetailModal({
                   {pkg.whatToExpect.map((item, index) => (
                     <div
                       key={item.title}
-                      className="flex items-start gap-3.5 rounded-xl border border-slate-100 bg-slate-50/50 p-3.5"
+                      className="flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs"
                     >
                       <span className="bg-brand-blue text-white flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-bold mt-0.5">
                         0{index + 1}
@@ -239,7 +239,7 @@ export function PackageDetailModal({
           {/* ── 3. Practical Information & Logistics ── */}
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {/* Accommodation & Transport */}
-            <div className="rounded-2xl border border-slate-200/90 bg-slate-50/50 p-4.5 flex flex-col gap-2">
+            <div className="rounded-2xl border border-slate-200/90 bg-white p-4.5 flex flex-col gap-2 shadow-xs">
               <div className="flex items-center gap-2 text-brand-blue">
                 <Bed className="size-4.5" />
                 <h4 className="text-ink text-sm font-bold">Accommodation &amp; Stays</h4>
@@ -251,7 +251,7 @@ export function PackageDetailModal({
             </div>
 
             {/* Transportation */}
-            <div className="rounded-2xl border border-slate-200/90 bg-slate-50/50 p-4.5 flex flex-col gap-2">
+            <div className="rounded-2xl border border-slate-200/90 bg-white p-4.5 flex flex-col gap-2 shadow-xs">
               <div className="flex items-center gap-2 text-brand-blue">
                 <Car className="size-4.5" />
                 <h4 className="text-ink text-sm font-bold">Dedicated Transportation</h4>
@@ -263,7 +263,7 @@ export function PackageDetailModal({
             </div>
 
             {/* Visa & Travel Support */}
-            <div className="rounded-2xl border border-slate-200/90 bg-slate-50/50 p-4.5 flex flex-col gap-2 sm:col-span-2 lg:col-span-1">
+            <div className="rounded-2xl border border-slate-200/90 bg-white p-4.5 flex flex-col gap-2 sm:col-span-2 lg:col-span-1 shadow-xs">
               <div className="flex items-center gap-2 text-brand-blue">
                 <FileCheck className="size-4.5" />
                 <h4 className="text-ink text-sm font-bold">Visa &amp; Entry Support</h4>
@@ -286,7 +286,7 @@ export function PackageDetailModal({
             {pkg.destinations.map((dest) => (
               <span
                 key={dest}
-                className="bg-slate-100 text-ink rounded-lg px-2.5 py-1 text-xs font-medium"
+                className="bg-white border border-slate-200/80 text-ink rounded-lg px-2.5 py-1 text-xs font-medium"
               >
                 {dest}
               </span>
@@ -295,7 +295,7 @@ export function PackageDetailModal({
         </div>
 
         {/* ── Modal Footer Bar ── */}
-        <div className="border-t border-slate-100 bg-slate-50 px-6 py-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="border-t border-slate-100 bg-white px-6 py-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <span className="text-muted-foreground block text-xs">Starting Quote</span>
             <span className="text-ink text-lg font-extrabold">{pkg.startingPrice}</span>
@@ -348,7 +348,7 @@ export function PackageDetailModal({
                 }
               }}
             >
-              Book This Package
+              Send Inquiry
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Button>
           </div>

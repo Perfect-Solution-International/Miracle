@@ -1,0 +1,193 @@
+.page {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: clip;
+  padding: 10px;
+  background: transparent;
+}
+
+.page > section {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid rgb(203 213 225 / 55%);
+  border-radius: 24px;
+  background: rgb(255 255 255 / 94%);
+  box-shadow: 0 8px 28px rgb(15 23 42 / 5%);
+}
+
+.page > section:nth-of-type(2n + 3) {
+  background: #ffffff;
+}
+
+.page > section:first-of-type {
+  background: rgb(255 255 255 / 90%);
+}
+
+.page > section:not(:first-of-type) {
+  padding-block: 3rem;
+}
+
+.page > section.travelHero {
+  background: rgb(255 255 255 / 10%);
+  border-color: rgb(255 255 255 / 55%);
+}
+
+@media (min-width: 768px) {
+  .page > section.travelHero {
+    min-height: 600px;
+  }
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgb(6 18 35 / 34%);
+  pointer-events: none;
+}
+
+.travelHero > :global(.container-page) {
+  position: relative;
+  z-index: 2;
+}
+
+.lightProcess :global(.bg-grid-inverse) {
+  opacity: 0;
+}
+
+.lightProcess {
+  color: var(--foreground);
+}
+
+.lightProcess :global(.ring-navy) {
+  --tw-ring-color: #e2e8f0;
+}
+
+.lightProcess :global(.text-white) {
+  color: var(--ink);
+}
+
+.lightProcess :global(.text-white\/70),
+.lightProcess :global(.text-white\/60) {
+  color: var(--muted-foreground);
+}
+
+.lightProcess :global(.text-brand-blue-muted) {
+  color: var(--brand-blue);
+}
+
+.lightProcess :global(.text-brand-blue-muted\/25) {
+  color: #5B7FAE;
+}
+
+.ctaSection :global(.container-page > div) {
+  border: 1px solid rgb(203 213 225 / 80%);
+  background: #fff;
+  box-shadow: 0 20px 60px rgb(15 23 42 / 6%);
+  padding-block: 2rem !important;
+}
+
+@media (min-width: 640px) {
+  .ctaSection :global(.container-page > div) {
+    padding-block: 2.5rem !important;
+  }
+}
+
+.ctaSection :global(.container-page > div > div[aria-hidden="true"]) {
+  display: none;
+}
+
+.ctaSection :global(.backdrop-blur-md) {
+  backdrop-filter: none;
+}
+
+.ctaSection :global(.bg-white\/10) {
+  background: #eff6ff;
+}
+
+.ctaSection :global(h2) {
+  color: var(--ink);
+}
+
+.ctaSection :global(p.text-white\/75),
+.ctaSection :global(p.text-white\/80) {
+  color: var(--muted-foreground);
+}
+
+.ctaSection :global(.text-brand-blue-muted) {
+  color: var(--brand-blue);
+}
+
+.ctaSection :global(a[data-variant="outline-inverse"]) {
+  border-color: rgb(17 80 168 / 25%);
+  color: var(--brand-blue);
+}
+
+.ctaSection :global(a[data-variant="outline-inverse"]:hover) {
+  background: #f8fafc;
+}
+
+@media (min-width: 1024px) {
+  .page > section:not(:first-of-type) {
+    padding-block: 4rem;
+  }
+}
+
+/* ── Solution-page variant ──────────────────────────────────────────────────
+   Apply alongside .page to replace the floating-card layout with a
+   continuous, full-width section layout. Drop the outer card chrome
+   (gap / padding / border-radius / border / shadow) while keeping the
+   Travel-hero transparent-background for the first section and preserving
+   all inner component styles (service cards, images, etc.).
+   -------------------------------------------------------------------------- */
+.solutionPage {
+  gap: 0;
+  padding: 0;
+}
+
+/* Remove card chrome from every section */
+.solutionPage > section {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Hero: stay transparent so the fixed page-background shows through */
+.solutionPage > section:first-of-type {
+  background: transparent;
+}
+
+/* Non-hero sections: solid backgrounds with compact, balanced vertical rhythm */
+.solutionPage > section:not(:first-of-type) {
+  background: #fff;
+  padding-block: 2.5rem !important;
+}
+
+/* All non-hero sections maintain clean white background */
+.solutionPage > section:nth-of-type(2n + 3) {
+  background: #ffffff !important;
+}
+
+@media (min-width: 1024px) {
+  .solutionPage > section:not(:first-of-type) {
+    padding-block: 3.25rem !important;
+  }
+}
+
+@media (min-width: 80rem) {
+  .solutionPage > section:not(:first-of-type) {
+    padding-block: 3.75rem !important;
+  }
+}
+
+.solutionPage > section.ctaSection {
+  padding-block: 2rem 2.5rem !important;
+}
+
+

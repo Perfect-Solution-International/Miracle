@@ -17,7 +17,6 @@ export function WhyChooseSection({
 }) {
   return (
     <Section tone="navy" aria-labelledby="why-heading">
-      <div aria-hidden="true" className="bg-grid-inverse absolute inset-0 -z-10" />
       <div
         aria-hidden="true"
         className="bg-brand-blue absolute -top-48 right-0 -z-10 size-[36rem] rounded-full opacity-25 blur-3xl"

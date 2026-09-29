@@ -1,6 +1,5 @@
 import {
   ArrowRight,
-  Briefcase,
   Building2,
   ChartColumn,
   Check,
@@ -14,6 +13,7 @@ import {
   Network,
   Package,
   Rocket,
+  SearchCheck,
   Settings2,
   ShieldCheck,
   TrendingUp,
@@ -24,7 +24,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
@@ -34,6 +33,8 @@ import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA, type SiteImage } from "@/config/site-media";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
+
+import landingStyles from "../landing-surfaces.module.css";
 
 const TITLE = "Business Solutions";
 const DESCRIPTION =
@@ -140,33 +141,57 @@ const overviewValues: IconItem[] = [
 ];
 
 const journey: (IconItem & { step: string })[] = [
-  { step: "01", title: "Idea", description: "Clarify the opportunity.", icon: Lightbulb },
+  { step: "01", title: "Idea", description: "Test the need, audience and potential value of the idea.", icon: Lightbulb },
   {
     step: "02",
-    title: "Planning",
-    description: "Set direction and priorities.",
+    title: "Plan",
+    description: "Set priorities, resources and a practical direction.",
     icon: Compass,
   },
   {
     step: "03",
     title: "Setup",
-    description: "Coordinate essential resources.",
+    description: "Coordinate people, suppliers, systems and requirements.",
     icon: Building2,
   },
-  { step: "04", title: "Launch", description: "Put the plan into motion.", icon: Rocket },
+  { step: "04", title: "Operate", description: "Put the plan into motion and organize day-to-day work.", icon: Rocket },
   {
     step: "05",
-    title: "Growth",
-    description: "Strengthen daily operations.",
+    title: "Grow",
+    description: "Improve capacity, visibility and coordination as demand changes.",
     icon: ChartColumn,
   },
   {
     step: "06",
-    title: "Expansion",
-    description: "Prepare for what comes next.",
+    title: "Scale",
+    description: "Assess what needs to change before taking on a larger opportunity.",
     icon: Globe2,
   },
 ];
+
+const workingProcess = [
+  { title: "Understand", description: "Discuss the goal, current position and the decision you need to make.", icon: Headphones },
+  { title: "Assess", description: "Review practical requirements, constraints and the options available.", icon: SearchCheck },
+  { title: "Plan", description: "Set priorities and a sequence of actions suited to the business.", icon: ClipboardList },
+  { title: "Coordinate", description: "Bring relevant people, suppliers and services into the work.", icon: Network },
+  { title: "Deliver", description: "Work through the agreed steps and review progress as needs change.", icon: Check },
+  { title: "Support", description: "Stay available for operational questions and the next stage of work.", icon: Headphones },
+] as const;
+
+const commonNeeds = [
+  { title: "Starting a new business", description: "Clarify an idea, assess the opportunity and organize launch priorities.", href: ROUTES.public.businessStart },
+  { title: "Improving an existing operation", description: "Review workflows, coordination and the systems that support everyday work.", href: ROUTES.public.businessSupport },
+  { title: "Planning expansion", description: "Consider capacity, resources and operating changes before moving into a new opportunity.", href: ROUTES.public.businessExpansion },
+  { title: "Introducing technology", description: "Match useful digital systems to a defined business problem or process.", href: ROUTES.public.businessTechnology },
+  { title: "Sourcing machinery and equipment", description: "Define operational needs and compare equipment options and implementation considerations.", href: ROUTES.public.businessMachinery },
+  { title: "Organizing connected support", description: "Bring planning, setup, sourcing and specialist services into a coordinated approach.", href: ROUTES.public.businessConsultation },
+] as const;
+
+const connectedServices = [
+  { title: "IT Solutions", description: "Digital systems and technology work when an operating need calls for them.", href: ROUTES.public.itSolutions },
+  { title: "Trading Services", description: "Supplier and buyer connections can support sourcing or market activity.", href: ROUTES.public.servicesTrading },
+  { title: "Import & Export", description: "Cross-border documentation and logistics support can connect to supply plans.", href: ROUTES.public.servicesImportExport },
+] as const;
 
 const advantages: IconItem[] = [
   {
@@ -214,109 +239,63 @@ const businessOutcomes = [
 
 export default function Page() {
   return (
-    <main>
+    <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
       <section
         aria-labelledby="business-solutions-hero-heading"
-        className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
+        className={`relative isolate overflow-hidden bg-white ${landingStyles.travelHero}`}
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
+          style={{ backgroundImage: 'url("/images/business-solutions/business-background.png")' }}
         />
+        <div aria-hidden="true" className="absolute inset-0 bg-white/25" />
         <div
           aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_80%)] opacity-50"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.62)_0%,rgba(255,255,255,0.30)_42%,rgba(255,255,255,0.08)_78%,rgba(255,255,255,0.18)_100%)]"
         />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-white/55 via-transparent to-white" />
+        <div className="container-page relative z-10 flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
+          <Eyebrow className="rounded-full border border-white/80 bg-white/95 px-4 py-1.5 font-extrabold text-navy shadow-sm backdrop-blur-md">
+            Business Solutions &amp; Enterprise Growth
+          </Eyebrow>
 
-        <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
-          <div className="max-w-2xl space-y-5">
-            <Breadcrumb items={[{ label: TITLE }]} />
+          <h1
+            id="business-solutions-hero-heading"
+            className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl"
+          >
+            Build Smarter.{" "}
+            <span className="text-navy">
+              Grow Stronger.
+            </span>
+          </h1>
 
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
-              </span>
-              Business Solutions &amp; Enterprise Growth
-            </div>
+          <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
+            Practical business support designed to help turn ideas, plans and
+            opportunities into well-organized, sustainable, and scalable operations.
+          </p>
 
-            <h1
-              id="business-solutions-hero-heading"
-              className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+            <Button asChild variant="accent" size="xl" className="shadow-lift">
+              <Link href={ROUTES.public.tellUsWhatYouNeed}>
+                Start Your Business Journey
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="secondary-hero"
+              size="xl"
             >
-              Build Smarter.{" "}
-              <span className="bg-gradient-to-r from-brand-blue via-indigo-600 to-navy bg-clip-text text-transparent">
-                Grow Stronger.
-              </span>
-            </h1>
-
-            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-              Practical business support designed to help turn ideas, plans and
-              opportunities into well-organized, sustainable, and scalable operations.
-            </p>
-
-            <div className="flex flex-col gap-3 sm:flex-row pt-2">
-              <Button asChild variant="accent" size="xl" className="shadow-lift">
-                <Link href={ROUTES.public.tellUsWhatYouNeed}>
-                  Start Your Business Journey
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="xl" className="bg-white/80 backdrop-blur-sm">
-                <a href="#solutions">Explore 8 Solutions</a>
-              </Button>
-            </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-2xl">
-            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white">
-              <Image
-                src={SITE_MEDIA.businessSolutions.hero.src}
-                alt={SITE_MEDIA.businessSolutions.hero.alt}
-                fill
-                preload
-                sizes="(min-width: 1024px) 52vw, 100vw"
-                className="object-cover"
-              />
-              <div
-                aria-hidden="true"
-                className="from-navy/55 via-navy/10 to-transparent absolute inset-0 bg-gradient-to-t"
-              />
-              <div className="absolute bottom-5 left-5 right-5 text-white">
-                <span className="bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-white mb-2">
-                  <Briefcase className="size-3.5" />
-                  Strategic Execution
-                </span>
-                <p className="text-base sm:text-lg font-bold">
-                  Structuring Ideas Into Thriving Businesses
-                </p>
-              </div>
-            </div>
-
-            {/* Floating Glass Pill */}
-            <div className="shadow-xl absolute -bottom-5 right-4 left-4 flex items-center justify-between rounded-2xl border border-white/80 bg-white/95 px-6 py-3.5 backdrop-blur-md sm:right-6 sm:left-6">
-              <span className="text-ink text-xs sm:text-sm font-bold flex items-center gap-1.5">
-                <Lightbulb className="size-4 text-brand-blue" />
-                Idea
-              </span>
-              <ArrowRight aria-hidden="true" className="text-brand-blue/50 size-4" />
-              <span className="text-ink text-xs sm:text-sm font-bold flex items-center gap-1.5">
-                <Compass className="size-4 text-brand-blue" />
-                Plan
-              </span>
-              <ArrowRight aria-hidden="true" className="text-brand-blue/50 size-4" />
-              <span className="text-brand-blue text-xs sm:text-sm font-bold flex items-center gap-1.5">
-                <TrendingUp className="size-4 text-brand-blue" />
-                Growth
-              </span>
-            </div>
+              <a href="#solutions">Explore 8 Solutions</a>
+            </Button>
           </div>
         </div>
       </section>
 
       <Section
         aria-labelledby="business-overview-heading"
-        containerClassName="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16"
+        containerClassName="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-12"
       >
         <SectionHeading
           id="business-overview-heading"
@@ -324,7 +303,7 @@ export default function Page() {
           title="Practical Support for Every Stage of Business"
           description="Miracle International supports businesses from initial planning and setup through sourcing, technology, operations and growth. We connect the right services around the challenge in front of you."
         />
-        <div className="relative pb-8">
+        <div className="relative">
           <div className="shadow-lift relative aspect-[3/2] overflow-hidden rounded-3xl border border-white">
             <Image
               src={SITE_MEDIA.businessSolutions.overview.src}
@@ -343,7 +322,7 @@ export default function Page() {
               <div
                 key={title}
                 className={cn(
-                  "flex gap-3 p-4",
+                  "flex gap-3 p-3.5",
                   index % 2 === 1 && "sm:border-l",
                   index > 1 && "border-t",
                 )}
@@ -366,7 +345,7 @@ export default function Page() {
       <Section
         id="solutions"
         aria-labelledby="business-services-heading"
-        className="bg-brand-blue-light/25 scroll-mt-24"
+        className="scroll-mt-24"
       >
         <SectionHeading
           id="business-services-heading"
@@ -375,7 +354,7 @@ export default function Page() {
           title="Find the Support for Your Next Move"
           description="Eight connected services support the business journey from the first idea through daily operations and expansion."
         />
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
           {services.map((service, index) => (
             <li
               key={service.title}
@@ -421,11 +400,12 @@ export default function Page() {
         </ul>
       </Section>
 
-      <Section id="journey" tone="navy" aria-labelledby="business-journey-heading">
-        <div
-          aria-hidden="true"
-          className="bg-grid-inverse absolute inset-0 -z-20 opacity-75"
-        />
+      <Section
+        id="journey"
+        tone="navy"
+        aria-labelledby="business-journey-heading"
+        className={landingStyles.lightProcess}
+      >
         <SectionHeading
           id="business-journey-heading"
           eyebrow="The Business Journey"
@@ -433,28 +413,28 @@ export default function Page() {
           description="The right support at the right moment helps turn uncertainty into practical progress."
           tone="inverse"
         />
-        <ol className="border-brand-blue-muted/35 relative mt-12 grid gap-7 border-l pl-7 lg:mt-16 lg:grid-cols-6 lg:gap-5 lg:border-t lg:border-l-0 lg:pl-0">
+        <ol className="border-brand-blue-muted/35 relative mt-8 grid gap-6 border-l pl-6 lg:mt-10 lg:grid-cols-6 lg:gap-4 lg:border-t lg:border-l-0 lg:pl-0">
           {journey.map(({ step, title, description, icon: Icon }, index) => (
-            <li key={step} className="relative flex gap-4 lg:flex-col lg:gap-5 lg:pt-8">
+            <li key={step} className="relative flex gap-3.5 lg:flex-col lg:gap-3.5 lg:pt-5">
               <span
                 aria-hidden="true"
                 className={cn(
-                  "ring-navy absolute top-5 -left-[2.05rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
+                  "ring-navy absolute top-4 -left-[1.8rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
                   index === 0 ? "bg-brand-red" : "bg-brand-blue-muted",
                 )}
               />
-              <span className="text-brand-blue-muted/25 hidden text-5xl leading-none font-bold lg:block">
+              <span className="text-[#5B7FAE] hidden text-4xl leading-none font-bold lg:block">
                 {step}
               </span>
-              <span className="text-brand-blue-muted flex size-11 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5">
-                <Icon aria-hidden="true" className="size-5" />
+              <span className="text-brand-blue-muted flex size-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-xs">
+                <Icon aria-hidden="true" className="size-4.5" />
               </span>
               <div>
                 <span className="text-brand-blue-muted text-xs font-bold tracking-widest lg:hidden">
                   {step}
                 </span>
-                <h3 className="font-bold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/60">
+                <h3 className="font-bold text-white text-base">{title}</h3>
+                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-white/60">
                   {description}
                 </p>
               </div>
@@ -463,9 +443,73 @@ export default function Page() {
         </ol>
       </Section>
 
+      <Section aria-labelledby="business-process-heading">
+        <SectionHeading
+          id="business-process-heading"
+          eyebrow="How We Work With Businesses"
+          title="A Practical Way to Move Work Forward"
+          description="The approach starts with your requirement and adapts to its scope. Each step helps connect decisions to the work that follows."
+        />
+        <ol className="mt-10 grid gap-x-8 gap-y-7 md:grid-cols-2 lg:grid-cols-3">
+          {workingProcess.map(({ title, description, icon: Icon }, index) => (
+            <li key={title} className="flex gap-4 border-t border-slate-200 pt-5">
+              <span className="text-brand-blue flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-blue-light">
+                <Icon aria-hidden="true" className="size-5" />
+              </span>
+              <div>
+                <span className="text-brand-blue text-xs font-bold tracking-widest">0{index + 1}</span>
+                <h3 className="text-ink mt-1 text-lg font-bold">{title}</h3>
+                <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section aria-labelledby="business-needs-heading">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+          <div>
+            <SectionHeading
+              id="business-needs-heading"
+              eyebrow="Common Business Needs"
+              title="Support Shaped Around the Work at Hand"
+              description="A requirement may start in one area and touch several others. These are examples of the situations our Business Solutions can help you explore."
+            />
+            <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
+              {commonNeeds.map(({ title, description, href }) => (
+                <li key={title} className="border-b border-slate-200 py-4">
+                  <h3 className="text-ink text-sm font-bold sm:text-base">{title}</h3>
+                  <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
+                  <Link href={href} className="text-brand-blue mt-3 inline-flex items-center gap-1 text-sm font-semibold hover:underline">
+                    Explore support <ArrowRight aria-hidden="true" className="size-4" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <aside className="self-start rounded-3xl border border-brand-blue/15 bg-brand-blue-light/35 p-6 sm:p-8">
+            <span className="text-brand-blue text-xs font-bold tracking-widest uppercase">Connected Business Support</span>
+            <h3 className="text-ink mt-3 text-2xl font-extrabold tracking-tight">When One Requirement Spans Several Services</h3>
+            <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+              Business planning can lead to technology, sourcing or cross-border needs. We help identify which services are relevant and coordinate the next steps around the same objective.
+            </p>
+            <ul className="mt-6 border-t border-brand-blue/15">
+              {connectedServices.map(({ title, description, href }) => (
+                <li key={title} className="border-b border-brand-blue/15 py-4">
+                  <Link href={href} className="text-brand-blue inline-flex items-center gap-1.5 font-bold hover:underline">
+                    {title} <ArrowRight aria-hidden="true" className="size-4" />
+                  </Link>
+                  <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </Section>
+
       <Section
         aria-labelledby="business-advantages-heading"
-        containerClassName="grid gap-12 lg:grid-cols-[0.82fr_0.9fr_0.82fr] lg:items-center lg:gap-10"
+        containerClassName="grid gap-8 lg:grid-cols-[0.85fr_0.9fr_0.85fr] lg:items-center lg:gap-8"
       >
         <div>
           <SectionHeading
@@ -474,14 +518,14 @@ export default function Page() {
             title="A Partner Built Around Your Progress"
             description="We connect practical guidance, people, sourcing and technology around the wider needs of a business."
           />
-          <Button asChild variant="outline" size="xl" className="mt-7">
+          <Button asChild variant="outline" size="xl" className="mt-5">
             <Link href={ROUTES.public.contact}>
               Talk to Our Team
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>
           </Button>
         </div>
-        <div className="shadow-lift relative aspect-[4/5] overflow-hidden rounded-3xl">
+        <div className="shadow-lift relative aspect-[4/4.2] overflow-hidden rounded-3xl">
           <Image
             src={SITE_MEDIA.businessSolutions.partnership.src}
             alt={SITE_MEDIA.businessSolutions.partnership.alt}
@@ -496,13 +540,13 @@ export default function Page() {
         </div>
         <ul className="border-brand-blue/15 border-t">
           {advantages.map(({ title, description, icon: Icon }) => (
-            <li key={title} className="border-brand-blue/15 flex gap-4 border-b py-4">
-              <span className="bg-brand-blue-light text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-full">
-                <Icon aria-hidden="true" className="size-5" />
+            <li key={title} className="border-brand-blue/15 flex gap-3.5 border-b py-3">
+              <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-full">
+                <Icon aria-hidden="true" className="size-4.5" />
               </span>
               <div>
-                <h3 className="text-ink font-bold">{title}</h3>
-                <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+                <h3 className="text-ink font-bold text-sm sm:text-base">{title}</h3>
+                <p className="text-muted-foreground mt-0.5 text-xs sm:text-sm leading-relaxed">
                   {description}
                 </p>
               </div>
@@ -513,9 +557,8 @@ export default function Page() {
 
       <Section
         aria-labelledby="business-outcomes-heading"
-        className="bg-brand-blue-light/25"
       >
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
           <SectionHeading
             id="business-outcomes-heading"
             eyebrow="Business Outcomes"
@@ -526,9 +569,9 @@ export default function Page() {
             {businessOutcomes.map((title) => (
               <li
                 key={title}
-                className="border-brand-blue/15 flex items-center gap-4 border-b py-5"
+                className="border-brand-blue/15 flex items-center gap-3.5 border-b py-3 sm:py-3.5"
               >
-                <span className="text-brand-blue shadow-soft flex size-9 shrink-0 items-center justify-center rounded-lg bg-white">
+                <span className="text-brand-blue shadow-soft flex size-8 shrink-0 items-center justify-center rounded-lg bg-white">
                   <Check aria-hidden="true" className="size-4" />
                 </span>
                 <span className="text-ink text-sm font-semibold sm:text-base">
@@ -541,6 +584,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        className={landingStyles.ctaSection}
         eyebrow="Ready to Move Forward?"
         title="Let's Turn Your Business Plans Into Practical Progress"
         description="Tell us where your business is today and what you want to achieve next. Our team will help identify the most practical way forward."

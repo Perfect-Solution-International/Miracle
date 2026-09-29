@@ -1,11 +1,9 @@
 "use client";
 
 import { Calendar, Compass, MapPin, Search, Users } from "lucide-react";
-import Image from "next/image";
 import { useState, type FormEvent } from "react";
 
 import { Eyebrow } from "@/components/common/eyebrow";
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -14,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SITE_MEDIA } from "@/config/site-media";
 
 const TRAVEL_TYPES = [
   { value: "all", label: "All Travel Types" },
@@ -65,33 +62,52 @@ export function TravelHero({
   return (
     <section
       aria-labelledby="travel-hero-heading"
-      className="relative isolate overflow-hidden border-b bg-slate-50"
+      className="relative isolate overflow-hidden border-b border-slate-200/70 bg-white"
     >
-      {/* Light, Bright, Clean Travel Background */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <Image
-          src={SITE_MEDIA.travelHeroBright.src}
-          alt={SITE_MEDIA.travelHeroBright.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div className="from-white/92 via-white/82 to-white/96 absolute inset-0 bg-gradient-to-b" />
-      </div>
+      {/* 1. Underlying Cinematic Hero Image */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 md:bg-fixed"
+        style={{
+          backgroundImage: 'url("/images/travel/travel-hero-cinematic.png")',
+        }}
+      />
 
-      <div className="container-page flex flex-col items-center gap-5 py-12 text-center sm:py-16 md:py-20">
-        <Breadcrumb items={[{ label: "Travel & Tourism" }]} />
-        <Eyebrow tone="default">Miracle International Travel &amp; Tourism</Eyebrow>
+      {/* 2. Soft-White Overall Wash (lightens image without washing it out completely) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-white/35"
+      />
+
+      {/* 3. Soft-White Vignette & Edge Blend (softens left, right, and corners into the light page) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.15)_0%,rgba(255,255,255,0.5)_65%,rgba(255,255,255,0.92)_100%)]"
+      />
+
+      {/* 4. Vertical Smooth Melt (top navbar connection & bottom section seamless blend) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-b from-white/90 via-transparent to-white/95"
+      />
+
+      {/* Content */}
+      <div className="container-page relative z-10 flex flex-col items-center gap-5 pt-20 pb-12 text-center sm:pt-28 sm:pb-16 md:pt-36 md:pb-20">
+        <Eyebrow
+          tone="default"
+          className="rounded-full border border-white/80 bg-white/95 px-4 py-1.5 font-extrabold text-navy shadow-sm backdrop-blur-md"
+        >
+          Miracle International Travel &amp; Tourism
+        </Eyebrow>
 
         <h1
           id="travel-hero-heading"
-          className="text-ink max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl md:text-6xl"
+          className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl"
         >
           Travel Beyond Boundaries
         </h1>
 
-        <p className="text-muted-foreground max-w-2xl text-base leading-relaxed sm:text-lg">
+        <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
           Explore destinations, plan customized journeys, arrange flights, and get travel
           support with Miracle International.
         </p>
@@ -114,7 +130,7 @@ export function TravelHero({
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
                   placeholder="Where do you want to go?"
-                  className="text-ink placeholder:text-slate-400 w-full bg-transparent text-sm font-semibold focus:outline-none"
+                  className="text-ink w-full bg-transparent text-sm font-semibold placeholder:text-slate-400 focus:outline-none"
                 />
               </div>
             </div>

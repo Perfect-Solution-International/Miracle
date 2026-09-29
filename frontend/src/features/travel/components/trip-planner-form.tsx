@@ -67,10 +67,12 @@ function mapInterestsFromPackage(pkg?: TravelPackageDetail | null): string[] {
   return ["Sightseeing", "Beach & Relaxation"];
 }
 
+import type { TravelPackage } from "@/components/admin-travel/types";
+
 export interface TripPlannerFormProps {
   className?: string;
   defaultDestination?: string;
-  packageDetail?: TravelPackageDetail | null;
+  packageDetail?: TravelPackage | TravelPackageDetail | null;
   mode?: "book" | "customize";
   onSuccess?: () => void;
 }
@@ -90,29 +92,50 @@ export function TripPlannerForm({
 
   const getComputedDefaults = (): TripPlannerFormInput => {
     if (packageDetail) {
-      const destinationText =
-        packageDetail.destinations?.length > 0
+      const isLegacyDetail = "destinations" in packageDetail;
+      const title = isLegacyDetail ? packageDetail.title : packageDetail.name;
+      const destinationText = isLegacyDetail
+        ? packageDetail.destinations?.length > 0
           ? packageDetail.destinations.join(", ")
-          : packageDetail.location;
+          : packageDetail.location
+        : packageDetail.destination + (packageDetail.country ? `, ${packageDetail.country}` : "");
+
+      const durationStr = isLegacyDetail
+        ? `${packageDetail.duration.days} Days / ${packageDetail.duration.nights} Nights`
+        : packageDetail.duration;
+
+      const priceStr = isLegacyDetail
+        ? packageDetail.startingPrice
+        : packageDetail.price
+        ? `${packageDetail.currency ?? "USD"} ${packageDetail.price.toLocaleString()}`
+        : "Price on Request";
 
       const specialReq = isBooking
-        ? `Package Booking Inquiry: ${packageDetail.title} (${packageDetail.duration.days} Days / ${packageDetail.duration.nights} Nights, ${packageDetail.location}). Starting Quote: ${packageDetail.startingPrice}.`
-        : `Customization based on: ${packageDetail.title} (${packageDetail.duration.days} Days / ${packageDetail.duration.nights} Nights).`;
+        ? `Package Booking Inquiry: ${title} (${durationStr}, ${destinationText}). Quote: ${priceStr}.`
+        : `Customization based on: ${title} (${durationStr}, ${destinationText}).`;
+
+      const locationStr = isLegacyDetail ? packageDetail.location : (packageDetail.country || packageDetail.destination);
+      const isSriLanka = locationStr.toLowerCase().includes("sri lanka");
+
+      const travelTypeStr = isLegacyDetail ? packageDetail.travelType : (packageDetail.travelType === "Inbound" ? "Cultural" : "Leisure");
+      const accomStr = isLegacyDetail
+        ? mapAccommodationPreference(packageDetail.accommodation?.title)
+        : packageDetail.accommodation || "Comfort (4-star)";
 
       return {
         fullName: "",
         email: "",
         phone: "",
-        startingLocation: isBooking ? (packageDetail.location.includes("Sri Lanka") ? "International" : "Colombo, Sri Lanka") : "",
+        startingLocation: isBooking ? (isSriLanka ? "International" : "Colombo, Sri Lanka") : "",
         destination: destinationText,
         startDate: "",
         endDate: "",
         travelers: 2,
         budgetRange: "$1,500 – $3,000",
-        accommodation: mapAccommodationPreference(packageDetail.accommodation?.title),
-        transportation: "Private chauffeur",
-        travelType: mapPackageTypeToOption(packageDetail.travelType),
-        interests: mapInterestsFromPackage(packageDetail),
+        accommodation: accomStr,
+        transportation: !isLegacyDetail && packageDetail.transportation ? packageDetail.transportation : "Private chauffeur",
+        travelType: mapPackageTypeToOption(travelTypeStr),
+        interests: isLegacyDetail ? mapInterestsFromPackage(packageDetail) : ["Sightseeing", "Cultural & Heritage"],
         specialRequirements: specialReq,
       };
     }
@@ -145,9 +168,15 @@ export function TripPlannerForm({
   }, [packageDetail, mode, defaultDestination]);
 
   function onSubmit(values: TripPlannerInput) {
+    const pkgTitle = packageDetail
+      ? "title" in packageDetail
+        ? packageDetail.title
+        : packageDetail.name
+      : "";
+
     if (isBooking && packageDetail) {
       toast.success(`Booking request received, ${values.fullName}!`, {
-        description: `We have received your booking inquiry for ${packageDetail.title}. Our travel desk will contact you shortly to confirm dates and arrangements.`,
+        description: `We have received your booking inquiry for ${pkgTitle}. Our travel desk will contact you shortly to confirm dates and arrangements.`,
       });
     } else {
       toast.success(`Thanks, ${values.fullName}!`, {
@@ -166,39 +195,55 @@ export function TripPlannerForm({
         noValidate
       >
         {/* Selected Package Banner */}
-        {packageDetail ? (
-          <div className="flex items-center gap-3.5 rounded-2xl border border-brand-blue/20 bg-brand-blue-light/40 p-3 sm:p-4 shadow-xs">
-            <div className="relative size-16 shrink-0 overflow-hidden rounded-xl border border-white shadow-xs">
-              <Image
-                src={packageDetail.image.src}
-                alt={packageDetail.image.alt}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <span
-                  className={cn(
-                    "rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-                    isBooking
-                      ? "bg-brand-blue text-white"
-                      : "bg-brand-red text-white",
-                  )}
-                >
-                  {isBooking ? "Package Booking Mode" : "Customizing Package"}
-                </span>
-                <span className="text-muted-foreground text-xs font-semibold">
-                  {packageDetail.duration.days} Days / {packageDetail.duration.nights} Nights
-                </span>
+        {packageDetail ? (() => {
+          const isLegacy = "destinations" in packageDetail;
+          const pkgTitle = isLegacy ? packageDetail.title : packageDetail.name;
+          const imgSrc = isLegacy
+            ? packageDetail.image.src
+            : (packageDetail.coverImage || packageDetail.images?.[0] || "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&auto=format&fit=crop&q=80");
+          const durationLabel = isLegacy
+            ? `${packageDetail.duration.days} Days / ${packageDetail.duration.nights} Nights`
+            : packageDetail.duration;
+          const priceLabel = isLegacy
+            ? packageDetail.startingPrice
+            : packageDetail.price != null
+            ? `${packageDetail.currency ?? "USD"} ${packageDetail.price.toLocaleString()}`
+            : "Price on Request";
+
+          return (
+            <div className="flex items-center gap-3.5 rounded-2xl border border-brand-blue/20 bg-brand-blue-light/40 p-3 sm:p-4 shadow-xs">
+              <div className="relative size-16 shrink-0 overflow-hidden rounded-xl border border-white shadow-xs">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imgSrc}
+                  alt={pkgTitle}
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <p className="text-ink truncate text-sm sm:text-base font-bold mt-1">
-                {packageDetail.title}
-              </p>
-              <p className="text-brand-blue text-xs font-extrabold">{packageDetail.startingPrice}</p>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span
+                    className={cn(
+                      "rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
+                      isBooking
+                        ? "bg-brand-blue text-white"
+                        : "bg-brand-red text-white",
+                    )}
+                  >
+                    {isBooking ? "Package Booking Mode" : "Customizing Package"}
+                  </span>
+                  <span className="text-muted-foreground text-xs font-semibold">
+                    {durationLabel}
+                  </span>
+                </div>
+                <p className="text-ink truncate text-sm sm:text-base font-bold mt-1">
+                  {pkgTitle}
+                </p>
+                <p className="text-brand-blue text-xs font-extrabold">{priceLabel}</p>
+              </div>
             </div>
-          </div>
-        ) : null}
+          );
+        })() : null}
 
         <div className="grid gap-4 sm:grid-cols-2">
           <FormField

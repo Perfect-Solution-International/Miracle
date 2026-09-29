@@ -17,7 +17,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-import { Breadcrumb } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
@@ -69,16 +68,10 @@ export function TellUsWhatYouNeedHero() {
         aria-hidden="true"
         className="pointer-events-none absolute -top-32 left-1/2 -z-10 -translate-x-1/2 h-[520px] w-full max-w-7xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/12 blur-[120px]"
       />
-      <div
-        aria-hidden="true"
-        className="bg-grid absolute inset-0 -z-10 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-      />
 
       <div className="container-page">
-        {/* Breadcrumb & Pulsing Status Badge */}
+        {/* Pulsing Status Badge */}
         <div className="flex flex-col items-center text-center">
-          <Breadcrumb items={[{ label: "Tell Us What You Need" }]} className="mb-5" />
-
           <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
             <span className="relative flex size-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
@@ -134,7 +127,12 @@ export function TellUsWhatYouNeedHero() {
                 Fill Intake Form <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </a>
             </Button>
-            <Button asChild variant="outline" size="xl" className="bg-white/80">
+            <Button
+              asChild
+              variant="secondary-hero"
+              size="xl"
+              className="font-bold"
+            >
               <Link href={ROUTES.public.contact}>Speak to an Advisor</Link>
             </Button>
           </div>

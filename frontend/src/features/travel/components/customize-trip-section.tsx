@@ -9,6 +9,7 @@ import { Section } from "@/components/common/section";
 import { Button } from "@/components/ui/button";
 import { SITE_MEDIA } from "@/config/site-media";
 
+import type { TravelPackage } from "@/components/admin-travel/types";
 import { TripPlannerForm } from "./trip-planner-form";
 import type { TravelPackageDetail } from "../types/travel-package-detail.types";
 
@@ -23,7 +24,7 @@ export interface CustomizeTripModalProps {
   open: boolean;
   onClose: () => void;
   initialDestination?: string;
-  packageDetail?: TravelPackageDetail | null;
+  packageDetail?: TravelPackage | TravelPackageDetail | null;
   mode?: "book" | "customize";
 }
 
@@ -75,16 +76,25 @@ export function CustomizeTripModal({
           <p className="text-brand-red text-xs font-bold tracking-wider uppercase">
             {isBooking ? "Package Booking Request" : "Miracle Travel Desk"}
           </p>
-          <h2
-            id="customize-modal-title"
-            className="text-ink mt-1 text-2xl font-extrabold sm:text-3xl"
-          >
-            {isBooking
-              ? `Book ${packageDetail?.title || "Package"}`
-              : packageDetail
-                ? `Customize: ${packageDetail.title}`
-                : "Customize Your Trip"}
-          </h2>
+          {(() => {
+            const pkgTitle = packageDetail
+              ? "title" in packageDetail
+                ? packageDetail.title
+                : packageDetail.name
+              : "";
+            return (
+              <h2
+                id="customize-modal-title"
+                className="text-ink mt-1 text-2xl font-extrabold sm:text-3xl"
+              >
+                {isBooking
+                  ? `Book ${pkgTitle || "Package"}`
+                  : pkgTitle
+                    ? `Customize: ${pkgTitle}`
+                    : "Customize Your Trip"}
+              </h2>
+            );
+          })()}
           <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
             {isBooking
               ? "Confirm your travel dates and traveler details. Our team will verify availability and arrange your booking."
@@ -126,10 +136,9 @@ export function CustomizeTripSection({
       <Section
         id="customize-trip"
         aria-labelledby="customize-trip-heading"
-        className="scroll-mt-24 py-12 lg:py-16"
+        className="bg-white scroll-mt-24 py-12 lg:py-16 border-t border-slate-100"
       >
-        <div className="shadow-soft rounded-3xl border bg-white p-6 sm:p-10 lg:p-12">
-          <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+        <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
             {/* Travel Image with compact proportions */}
             <div className="relative aspect-[4/3] max-h-80 w-full overflow-hidden rounded-2xl sm:max-h-96">
               <Image
@@ -182,7 +191,6 @@ export function CustomizeTripSection({
               </div>
             </div>
           </div>
-        </div>
       </Section>
 
       {!onOpenModal ? (

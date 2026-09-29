@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
 
+import { TravelManagementView } from "@/components/admin-travel/travel-management-view";
 import { requirePermission } from "@/server/dal/require-permission";
-import { PlaceholderPage } from "@/components/layout/placeholder-page";
 
 export const metadata: Metadata = {
-  title: "Travel",
+  title: "Tour Management | Miracle International Admin",
+  description: "Manage travel packages, bookings and customer travel requests.",
   robots: { index: false, follow: false },
 };
 
-export default async function Page() {
-  // Authorisation is enforced here, not in the layout: layouts do not
-  // re-render between sibling routes, so each page checks for itself.
+export default async function TravelAdminPage() {
   await requirePermission("travel.manage");
 
-  return (
-    <PlaceholderPage title={"Travel"} description={"Travel services and itineraries."} />
-  );
+  return <TravelManagementView />;
 }
