@@ -67,11 +67,13 @@ export function AppSidebar({ portal }: { portal: Portal }) {
       </Link>
 
       <div className="flex-1 space-y-6 overflow-y-auto">
-        {sections.map((section) => (
-          <div key={section.title} className="space-y-1">
-            <h2 className="text-muted-foreground px-2 text-xs font-medium tracking-wide uppercase">
-              {section.title}
-            </h2>
+        {sections.map((section, idx) => (
+          <div key={section.title || `sec-${idx}`} className="space-y-1">
+            {section.title ? (
+              <h2 className="text-muted-foreground px-2 text-xs font-medium tracking-wide uppercase">
+                {section.title}
+              </h2>
+            ) : null}
             <ul className="space-y-0.5">
               {section.items.map((item) => (
                 <li key={item.href}>

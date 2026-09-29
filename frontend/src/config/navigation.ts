@@ -14,6 +14,7 @@ import {
   LifeBuoy,
   MessageSquare,
   Package,
+  Palmtree,
   Plane,
   Receipt,
   Settings,
@@ -270,7 +271,7 @@ const STAFF_NAV: readonly NavSection[] = [
 
 const ADMIN_NAV: readonly NavSection[] = [
   {
-    title: "Overview",
+    title: "",
     items: [
       {
         title: "Dashboard",
@@ -281,12 +282,12 @@ const ADMIN_NAV: readonly NavSection[] = [
     ],
   },
   {
-    title: "Travel & Tourism",
+    title: "Tour",
     items: [
       {
         title: "Inbound Tours",
         href: ROUTES.admin.travelInbound,
-        icon: Plane,
+        icon: Palmtree,
         permissions: ["travel.manage"],
         matchNested: false,
       },
@@ -297,23 +298,29 @@ const ADMIN_NAV: readonly NavSection[] = [
         permissions: ["travel.manage"],
         matchNested: false,
       },
-      {
-        title: "Inquiries",
-        href: ROUTES.admin.travelInquiries,
-        icon: MessageSquare,
-        permissions: ["travel.manage"],
-        matchNested: true,
-      },
     ],
   },
   {
-    title: "Platform",
+    title: "",
     items: [
+      {
+        title: "Inquiries",
+        href: ROUTES.admin.inquiries,
+        icon: MessageSquare,
+        permissions: [],
+        matchNested: true,
+      },
       {
         title: "Settings",
         href: ROUTES.admin.settings,
         icon: Settings,
-        permissions: ["settings.manage"],
+        permissions: [],
+      },
+      {
+        title: "Profile",
+        href: ROUTES.admin.profile,
+        icon: UserCircle,
+        permissions: [],
       },
     ],
   },

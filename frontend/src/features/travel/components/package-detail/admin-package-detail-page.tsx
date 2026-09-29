@@ -40,15 +40,18 @@ import { ROUTES } from "@/config/routes";
 import { getStoredPackages } from "@/lib/storage/travel-store";
 import type { TravelPackage } from "@/components/admin-travel/types";
 
-const PLACEHOLDER_IMG =
-  "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&auto=format&fit=crop&q=80";
+const PLACEHOLDER_INBOUND =
+  "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80"; // Sigiriya Rock Fortress
+const PLACEHOLDER_OUTBOUND =
+  "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&auto=format&fit=crop&q=80"; // Dubai Marina
 
 export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [customizeOpen, setCustomizeOpen] = useState(false);
 
-  const coverImage = pkg.coverImage || pkg.images?.[0] || PLACEHOLDER_IMG;
   const isInbound = pkg.travelType === "Inbound";
+  const coverImage =
+    pkg.coverImage || pkg.images?.[0] || (isInbound ? PLACEHOLDER_INBOUND : PLACEHOLDER_OUTBOUND);
 
   // Price formatting
   const formattedPrice =
@@ -626,7 +629,7 @@ function RelatedAdminPackages({ pkg }: { pkg: TravelPackage }) {
             const cover =
               relPkg.coverImage ||
               relPkg.images?.[0] ||
-              PLACEHOLDER_IMG;
+              (relPkg.travelType === "Inbound" ? PLACEHOLDER_INBOUND : PLACEHOLDER_OUTBOUND);
 
             const href = relPkg.slug
               ? ROUTES.public.travelPackage(relPkg.slug)

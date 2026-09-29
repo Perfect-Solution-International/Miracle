@@ -36,7 +36,7 @@ export function getStoredPackages(): TravelPackage[] {
     const parsed: TravelPackage[] = JSON.parse(raw);
     let modified = false;
 
-    // Sanitize packages: Inbound packages MUST be in LKR and have proper place imagery
+    // Sanitize packages: Inbound packages MUST be in LKR and have proper authentic Sri Lanka place imagery
     const sanitized = parsed.map((pkg) => {
       let updated = { ...pkg };
       if (updated.travelType === "Inbound") {
@@ -45,6 +45,54 @@ export function getStoredPackages(): TravelPackage[] {
           if (updated.price && updated.price < 50000) {
             updated.price = updated.price * 100; // e.g. 1650 -> 165000
           }
+          modified = true;
+        }
+
+        // Ensure Sri Lanka specific place images
+        if (
+          !updated.coverImage ||
+          updated.coverImage.includes("photo-1469854523086") ||
+          updated.coverImage.includes("photo-1506744038136") ||
+          updated.coverImage.includes("photo-1476514525535")
+        ) {
+          if (
+            updated.slug?.includes("coastal") ||
+            updated.name.toLowerCase().includes("coast") ||
+            updated.name.toLowerCase().includes("bentota")
+          ) {
+            updated.coverImage =
+              "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80"; // Galle Fort & Lighthouse
+          } else {
+            updated.coverImage =
+              "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80"; // Sigiriya Lion Rock
+          }
+          modified = true;
+        }
+
+        if (updated.slug === "sri-lanka-signature-heritage-wildlife") {
+          updated.coverImage =
+            "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80"; // Sigiriya
+          updated.images = [
+            "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock Fortress
+            "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Temple of the Tooth
+            "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Dutch Fort & Lighthouse
+            "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo City & Skyline
+            "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge
+            "https://images.unsplash.com/photo-1581852017103-68accd55096a?w=1200&auto=format&fit=crop&q=80", // Yala Wildlife Elephant Safari
+          ];
+          modified = true;
+        }
+
+        if (updated.slug === "sri-lanka-coastal-cultural-escape") {
+          updated.coverImage =
+            "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80"; // Galle Lighthouse
+          updated.images = [
+            "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Fort
+            "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Sacred Tooth Relic
+            "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock Fortress
+            "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo Highlights
+            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80", // Bentota Golden Beach
+          ];
           modified = true;
         }
       }
