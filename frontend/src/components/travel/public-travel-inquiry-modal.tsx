@@ -4,6 +4,7 @@ import {
   BedDouble,
   Calendar,
   Car,
+  Check,
   CheckCircle2,
   Clock,
   Compass,
@@ -16,8 +17,8 @@ import {
   Plane,
   Send,
   ShieldCheck,
-  SlidersHorizontal,
   Sparkles,
+  Tag,
   Upload,
   Users,
   X,
@@ -68,7 +69,13 @@ const DEFAULT_FORM: PublicTravelInquiryFormData = {
   whatsappNumber: "",
   inquiryType: "Inbound Tour",
   selectedPackage: "",
+  packageId: "",
+  packageSlug: "",
   destination: "",
+  country: "",
+  duration: "",
+  packagePrice: null,
+  packageCurrency: "LKR",
   preferredTravelDate: "",
   travelers: 2,
   additionalRequirements: "",
@@ -133,6 +140,14 @@ export function PublicTravelInquiryModal({
           : "Inbound Tour"
         : defaultInquiryType;
 
+      const pkgCountry =
+        defaultPackage?.country ||
+        (defaultPackage?.travelType === "Inbound" ? "Sri Lanka" : "");
+
+      const pkgCurrency =
+        defaultPackage?.currency ||
+        (defaultPackage?.travelType === "Inbound" ? "LKR" : "USD");
+
       // Extract matching default interests from package highlights if available
       const preselectedInterests: string[] = [];
       if (defaultPackage) {
@@ -152,16 +167,21 @@ export function PublicTravelInquiryModal({
         contactNumber: "",
         whatsappNumber: "",
         inquiryType: inqType,
+        travelType: defaultPackage?.travelType || (inqType === "Outbound Tour" ? "Outbound" : "Inbound"),
         selectedPackage: defaultPackage?.name || "",
+        packageId: defaultPackage?.id || "",
+        packageSlug: defaultPackage?.slug || "",
         destination:
           defaultPackage?.destination ||
           defaultDestination ||
           (inqType === "Inbound Tour" ? "Sri Lanka" : ""),
+        country: pkgCountry,
+        duration: defaultPackage?.duration || "",
+        packagePrice: defaultPackage?.price ?? null,
+        packageCurrency: pkgCurrency,
         preferredTravelDate: "",
         travelers: 2,
-        additionalRequirements: defaultPackage?.duration
-          ? `Package Duration: ${defaultPackage.duration}`
-          : "",
+        additionalRequirements: "",
         documents: [],
       });
     }
@@ -233,14 +253,27 @@ export function PublicTravelInquiryModal({
     ? defaultPackage.travelType === "Inbound"
     : formData.inquiryType === "Inbound Tour";
 
+  const packageCountry =
+    defaultPackage?.country ||
+    (defaultPackage?.travelType === "Inbound" ? "Sri Lanka" : "");
+
+  const packageCurrency =
+    defaultPackage?.currency ||
+    (defaultPackage?.travelType === "Inbound" ? "LKR" : "USD");
+
+  const formattedPrice =
+    defaultPackage?.price != null
+      ? `${packageCurrency} ${defaultPackage.price.toLocaleString()}`
+      : "Price on Request";
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl xl:max-w-5xl w-[96vw] max-h-[92vh] flex flex-col p-0 rounded-3xl shadow-2xl bg-white border border-slate-200 overflow-hidden">
+      <DialogContent className="max-w-4xl xl:max-w-5xl w-[96vw] max-h-[92vh] flex flex-col p-0 rounded-3xl shadow-2xl bg-white text-slate-900 border border-slate-200 overflow-hidden">
         {submittedRef ? (
           /* ========================================================================= */
           /* SUCCESS STATE VIEW */
           /* ========================================================================= */
-          <div className="p-8 sm:p-12 flex flex-col items-center text-center space-y-6 bg-white overflow-y-auto">
+          <div className="p-8 sm:p-12 flex flex-col items-center text-center space-y-6 bg-white overflow-y-auto text-slate-900">
             <div className="flex size-20 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 shadow-inner">
               <CheckCircle2 className="size-12" />
             </div>
@@ -252,35 +285,67 @@ export function PublicTravelInquiryModal({
               <h3 className="text-2xl sm:text-3xl font-extrabold text-navy tracking-tight">
                 Travel Request Received Successfully!
               </h3>
-              <p className="text-sm text-muted-foreground max-w-lg mx-auto leading-relaxed">
+              <p className="text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
                 Thank you for reaching out to Miracle International. Our dedicated travel desk has
                 received your travel preferences and will get back to you with a customized
                 itinerary and quote within 24 hours.
               </p>
             </div>
 
-            <div className="w-full max-w-md rounded-2xl bg-slate-50 border border-slate-200 p-5 text-xs space-y-2.5 text-left">
+            <div className="w-full max-w-lg rounded-2xl bg-slate-50 border border-slate-200 p-5 text-xs space-y-2.5 text-left shadow-xs">
               <div className="flex justify-between py-1 border-b border-slate-200">
-                <span className="text-muted-foreground">Traveler Name:</span>
-                <span className="font-bold text-ink">{formData.fullName}</span>
+                <span className="text-slate-600 font-medium">Traveler Name:</span>
+                <span className="font-bold text-slate-900">{formData.fullName}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-slate-200">
-                <span className="text-muted-foreground">Travel Type:</span>
+                <span className="text-slate-600 font-medium">Travel Type:</span>
                 <span className="font-bold text-brand-blue">{formData.inquiryType}</span>
               </div>
               {formData.selectedPackage ? (
-                <div className="flex justify-between py-1 border-b border-slate-200">
-                  <span className="text-muted-foreground">Selected Package:</span>
-                  <span className="font-bold text-ink">{formData.selectedPackage}</span>
-                </div>
+                <>
+                  <div className="flex justify-between py-1 border-b border-slate-200">
+                    <span className="text-slate-600 font-medium">Selected Package:</span>
+                    <span className="font-bold text-slate-900 text-right">{formData.selectedPackage}</span>
+                  </div>
+                  {formData.destination ? (
+                    <div className="flex justify-between py-1 border-b border-slate-200">
+                      <span className="text-slate-600 font-medium">Destination:</span>
+                      <span className="font-semibold text-slate-800">{formData.destination}</span>
+                    </div>
+                  ) : null}
+                  {formData.country ? (
+                    <div className="flex justify-between py-1 border-b border-slate-200">
+                      <span className="text-slate-600 font-medium">Country:</span>
+                      <span className="font-semibold text-slate-800">{formData.country}</span>
+                    </div>
+                  ) : null}
+                  {formData.duration ? (
+                    <div className="flex justify-between py-1 border-b border-slate-200">
+                      <span className="text-slate-600 font-medium">Duration:</span>
+                      <span className="font-semibold text-slate-800">{formData.duration}</span>
+                    </div>
+                  ) : null}
+                  {formData.packagePrice != null ? (
+                    <div className="flex justify-between py-1 border-b border-slate-200">
+                      <span className="text-slate-600 font-medium">Package Price:</span>
+                      <span className="font-bold text-navy">
+                        {formData.packageCurrency} {formData.packagePrice.toLocaleString()}
+                      </span>
+                    </div>
+                  ) : null}
+                </>
               ) : null}
+              <div className="flex justify-between py-1 border-b border-slate-200">
+                <span className="text-slate-600 font-medium">Contact Email:</span>
+                <span className="font-bold text-slate-900">{formData.email}</span>
+              </div>
               <div className="flex justify-between py-1">
-                <span className="text-muted-foreground">Contact Email:</span>
-                <span className="font-bold text-ink">{formData.email}</span>
+                <span className="text-slate-600 font-medium">Contact Phone:</span>
+                <span className="font-bold text-slate-900">{formData.contactNumber}</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-muted-foreground bg-blue-50/60 px-4 py-2.5 rounded-xl border border-blue-100">
+            <div className="flex items-center gap-2 text-xs text-slate-600 bg-blue-50/70 px-4 py-2.5 rounded-xl border border-blue-100">
               <ShieldCheck className="size-4 text-brand-blue shrink-0" />
               <span>
                 No online payment or registration required. All bookings are managed personally by our tour consultants.
@@ -307,9 +372,9 @@ export function PublicTravelInquiryModal({
                   </div>
                   <div>
                     <DialogTitle className="text-xl sm:text-2xl font-extrabold text-navy tracking-tight">
-                      Send Travel Inquiry &amp; Trip Details
+                      {defaultPackage ? "Send Package Inquiry" : "Send Travel Inquiry & Trip Details"}
                     </DialogTitle>
-                    <DialogDescription className="text-xs sm:text-sm text-muted-foreground mt-0.5">
+                    <DialogDescription className="text-xs sm:text-sm text-slate-600 mt-0.5 font-medium">
                       No payment or account required. Share your requirements and our travel desk will craft your perfect itinerary.
                     </DialogDescription>
                   </div>
@@ -317,67 +382,95 @@ export function PublicTravelInquiryModal({
               </div>
             </DialogHeader>
 
-            <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 bg-white">
+            <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 bg-white text-slate-900">
               {error ? (
                 <div className="rounded-xl bg-red-50 border border-red-200 p-3.5 text-xs font-semibold text-brand-red">
                   {error}
                 </div>
               ) : null}
 
-              {/* Package Banner if prefilled */}
+              {/* ========================================================================= */}
+              {/* PRE-FILLED SELECTED PACKAGE SUMMARY CARD (VISIBLE IMMEDIATELY) */}
+              {/* ========================================================================= */}
               {defaultPackage ? (
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-50 border border-brand-blue/20 shadow-xs">
-                  <div className="flex items-center gap-3.5">
-                    {defaultPackage.coverImage ? (
-                      <div className="relative size-16 sm:size-18 rounded-xl overflow-hidden shrink-0 border border-slate-200">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={defaultPackage.coverImage}
-                          alt={defaultPackage.name}
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                    ) : null}
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <Badge
-                          className={
-                            isInbound
-                              ? "bg-emerald-600 text-white font-bold text-[10px]"
-                              : "bg-blue-600 text-white font-bold text-[10px]"
-                          }
-                        >
-                          {isInbound ? "Inbound Tour" : "Outbound Tour"}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground flex items-center gap-1 font-mono">
-                          <Clock className="size-3 text-brand-blue" />
-                          {defaultPackage.duration}
-                        </span>
-                      </div>
-                      <h4 className="text-sm font-bold text-navy mt-1 line-clamp-1">
-                        {defaultPackage.name}
-                      </h4>
-                      <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
-                        <MapPin className="size-3 text-sky-500 shrink-0" />
-                        <span>{defaultPackage.destination}</span>
-                      </p>
+                <div className="rounded-2xl border-2 border-brand-blue/30 bg-gradient-to-r from-blue-50/70 via-slate-50 to-emerald-50/40 p-5 sm:p-6 shadow-sm space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/80 pb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="flex size-6 items-center justify-center rounded-full bg-brand-blue text-white text-xs font-bold">
+                        <Check className="size-3.5 stroke-[3]" />
+                      </span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-brand-blue">
+                        Selected Package Summary (Pre-filled Automatically)
+                      </span>
                     </div>
+                    <Badge
+                      className={
+                        isInbound
+                          ? "bg-emerald-600 text-white font-bold text-[11px] px-3 py-0.5"
+                          : "bg-blue-600 text-white font-bold text-[11px] px-3 py-0.5"
+                      }
+                    >
+                      {isInbound ? "Inbound Tour (Sri Lanka)" : "Outbound Tour (International)"}
+                    </Badge>
                   </div>
 
-                  <div className="sm:text-right border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-200">
-                    <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">
-                      Package Price
-                    </span>
-                    <span className="text-base font-extrabold text-navy">
-                      {defaultPackage.price != null
-                        ? `${defaultPackage.currency === "LKR" ? "LKR" : "USD"} ${defaultPackage.price.toLocaleString()}`
-                        : "Price on Request"}
-                    </span>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      {defaultPackage.coverImage ? (
+                        <div className="relative size-18 sm:size-20 rounded-xl overflow-hidden shrink-0 border border-slate-300 shadow-xs">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={defaultPackage.coverImage}
+                            alt={defaultPackage.name}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      ) : null}
+
+                      <div className="space-y-1">
+                        <h4 className="text-base sm:text-lg font-black text-slate-900 leading-snug">
+                          {defaultPackage.name}
+                        </h4>
+
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-700 font-semibold pt-0.5">
+                          <span className="flex items-center gap-1.5 text-slate-800">
+                            <MapPin className="size-3.5 text-brand-blue shrink-0" />
+                            <span>{defaultPackage.destination}</span>
+                          </span>
+
+                          {packageCountry ? (
+                            <span className="flex items-center gap-1.5 text-slate-800">
+                              <Globe2 className="size-3.5 text-emerald-600 shrink-0" />
+                              <span>{packageCountry}</span>
+                            </span>
+                          ) : null}
+
+                          <span className="flex items-center gap-1.5 text-slate-800 font-mono">
+                            <Clock className="size-3.5 text-amber-600 shrink-0" />
+                            <span>{defaultPackage.duration}</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="sm:text-right border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-200 w-full sm:w-auto shrink-0">
+                      <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider block">
+                        Package Price
+                      </span>
+                      <span className="text-lg sm:text-xl font-black text-navy">
+                        {formattedPrice}
+                      </span>
+                      <span className="text-[11px] text-slate-500 block font-medium">
+                        Currency: <strong className="text-slate-800">{packageCurrency}</strong>
+                      </span>
+                    </div>
                   </div>
                 </div>
               ) : null}
 
-              {/* 2-Column Form Layout on Desktop */}
+              {/* ========================================================================= */}
+              {/* CUSTOMER INQUIRY FORM FIELDS */}
+              {/* ========================================================================= */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 {/* ── LEFT COLUMN: Personal & Contact Details ── */}
@@ -385,12 +478,12 @@ export function PublicTravelInquiryModal({
                   <div className="flex items-center gap-2 text-brand-blue pb-2 border-b border-slate-100">
                     <Users className="size-4" />
                     <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
-                      1. Personal &amp; Contact Details
+                      1. Your Contact Information
                     </h3>
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="inq-name" className="text-xs font-bold text-slate-700">
+                    <Label htmlFor="inq-name" className="text-xs font-bold text-slate-800">
                       Full Name <span className="text-brand-red">*</span>
                     </Label>
                     <Input
@@ -398,13 +491,13 @@ export function PublicTravelInquiryModal({
                       placeholder="e.g. Johnathan Smith"
                       value={formData.fullName}
                       onChange={(e) => updateField("fullName", e.target.value)}
-                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                      className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl focus:border-brand-blue"
                       required
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="inq-email" className="text-xs font-bold text-slate-700">
+                    <Label htmlFor="inq-email" className="text-xs font-bold text-slate-800">
                       Email Address <span className="text-brand-red">*</span>
                     </Label>
                     <Input
@@ -413,14 +506,14 @@ export function PublicTravelInquiryModal({
                       placeholder="e.g. name@example.com"
                       value={formData.email}
                       onChange={(e) => updateField("email", e.target.value)}
-                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                      className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl focus:border-brand-blue"
                       required
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="inq-phone" className="text-xs font-bold text-slate-700">
-                      Contact Phone <span className="text-brand-red">*</span>
+                    <Label htmlFor="inq-phone" className="text-xs font-bold text-slate-800">
+                      Contact Number <span className="text-brand-red">*</span>
                     </Label>
                     <Input
                       id="inq-phone"
@@ -428,14 +521,14 @@ export function PublicTravelInquiryModal({
                       placeholder="e.g. +94 77 123 4567"
                       value={formData.contactNumber}
                       onChange={(e) => updateField("contactNumber", e.target.value)}
-                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                      className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl focus:border-brand-blue"
                       required
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="inq-whatsapp" className="text-xs font-bold text-slate-700">
-                      WhatsApp Number <span className="text-[11px] text-muted-foreground font-normal">(Optional)</span>
+                    <Label htmlFor="inq-whatsapp" className="text-xs font-bold text-slate-800">
+                      WhatsApp Number <span className="text-[11px] text-slate-500 font-normal">(Optional)</span>
                     </Label>
                     <Input
                       id="inq-whatsapp"
@@ -443,66 +536,77 @@ export function PublicTravelInquiryModal({
                       placeholder="e.g. +94 77 123 4567"
                       value={formData.whatsappNumber || ""}
                       onChange={(e) => updateField("whatsappNumber", e.target.value)}
-                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                      className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl focus:border-brand-blue"
                     />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <Label htmlFor="inq-type" className="text-xs font-bold text-slate-700">
-                      Tour Type <span className="text-brand-red">*</span>
-                    </Label>
-                    <Select
-                      value={formData.inquiryType}
-                      onValueChange={(val) => updateField("inquiryType", val as InquiryType)}
-                    >
-                      <SelectTrigger id="inq-type" className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl">
-                        <SelectValue placeholder="Select type" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-white border-slate-200">
-                        <SelectItem value="Inbound Tour">Inbound Tour (Sri Lanka Visit)</SelectItem>
-                        <SelectItem value="Outbound Tour">Outbound Tour (International Travel)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  {/* If NO default package is provided (General Inquiry fallback mode) */}
+                  {!defaultPackage ? (
+                    <div className="space-y-1.5 pt-1">
+                      <Label htmlFor="inq-type" className="text-xs font-bold text-slate-800">
+                        Travel Type <span className="text-brand-red">*</span>
+                      </Label>
+                      <Select
+                        value={formData.inquiryType}
+                        onValueChange={(val) => {
+                          updateField("inquiryType", val as InquiryType);
+                          updateField("travelType", val.includes("Outbound") ? "Outbound" : "Inbound");
+                        }}
+                      >
+                        <SelectTrigger id="inq-type" className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 font-medium rounded-xl">
+                          <SelectValue placeholder="Select type" className="text-slate-900" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-white text-slate-900 border-slate-200">
+                          <SelectItem value="Inbound Tour" className="text-slate-900 font-medium">Inbound Tour (Sri Lanka Visit)</SelectItem>
+                          <SelectItem value="Outbound Tour" className="text-slate-900 font-medium">Outbound Tour (International Travel)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  ) : null}
                 </div>
 
-                {/* ── RIGHT COLUMN: Travel Plan & Schedule ── */}
+                {/* ── RIGHT COLUMN: Travel Dates & Party Details ── */}
                 <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
                   <div className="flex items-center gap-2 text-brand-blue pb-2 border-b border-slate-100">
                     <Compass className="size-4" />
                     <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
-                      2. Travel Schedule &amp; Party
+                      2. Travel Schedule &amp; Party Size
                     </h3>
                   </div>
 
-                  <div className="space-y-1.5">
-                    <Label htmlFor="inq-pkg" className="text-xs font-bold text-slate-700">
-                      Package / Tour Name <span className="text-[11px] text-muted-foreground font-normal">(Editable for Custom Tour)</span>
-                    </Label>
-                    <Input
-                      id="inq-pkg"
-                      placeholder="e.g. Sri Lanka Signature Heritage Expedition or Custom Tour"
-                      value={formData.selectedPackage}
-                      onChange={(e) => updateField("selectedPackage", e.target.value)}
-                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
-                    />
-                  </div>
+                  {/* If general inquiry without pre-selected package, allow typing package or destination */}
+                  {!defaultPackage ? (
+                    <>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="inq-pkg" className="text-xs font-bold text-slate-800">
+                          Package / Tour Topic
+                        </Label>
+                        <Input
+                          id="inq-pkg"
+                          placeholder="e.g. Custom Holiday or Specific Attraction"
+                          value={formData.selectedPackage}
+                          onChange={(e) => updateField("selectedPackage", e.target.value)}
+                          className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl"
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <Label htmlFor="inq-dest" className="text-xs font-bold text-slate-800">
+                          Destination(s) / Preferred Places
+                        </Label>
+                        <Input
+                          id="inq-dest"
+                          placeholder="e.g. Sigiriya, Kandy, Nuwara Eliya, Galle"
+                          value={formData.destination}
+                          onChange={(e) => updateField("destination", e.target.value)}
+                          className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl"
+                        />
+                      </div>
+                    </>
+                  ) : null}
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="inq-dest" className="text-xs font-bold text-slate-700">
-                      Destination(s) / Preferred Places
-                    </Label>
-                    <Input
-                      id="inq-dest"
-                      placeholder="e.g. Sigiriya, Kandy, Nuwara Eliya, Galle"
-                      value={formData.destination}
-                      onChange={(e) => updateField("destination", e.target.value)}
-                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="inq-date" className="text-xs font-bold text-slate-700">
+                    <Label htmlFor="inq-date" className="text-xs font-bold text-slate-800">
                       Preferred Travel Date
                     </Label>
                     <Input
@@ -510,13 +614,13 @@ export function PublicTravelInquiryModal({
                       type="date"
                       value={formData.preferredTravelDate}
                       onChange={(e) => updateField("preferredTravelDate", e.target.value)}
-                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                      className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 font-medium rounded-xl"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="inq-travelers" className="text-xs font-bold text-slate-700">
-                      Total Travelers
+                    <Label htmlFor="inq-travelers" className="text-xs font-bold text-slate-800">
+                      Number of Travelers
                     </Label>
                     <Input
                       id="inq-travelers"
@@ -525,19 +629,19 @@ export function PublicTravelInquiryModal({
                       placeholder="e.g. 2 Adults, 1 Child"
                       value={formData.travelers}
                       onChange={(e) => updateField("travelers", e.target.value)}
-                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                      className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 font-medium rounded-xl"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-bold text-slate-700">Accommodation Preference</Label>
+                    <Label className="text-xs font-bold text-slate-800">Accommodation Preference</Label>
                     <Select value={accommodationPref} onValueChange={setAccommodationPref}>
-                      <SelectTrigger className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl">
-                        <SelectValue />
+                      <SelectTrigger className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 font-medium rounded-xl">
+                        <SelectValue className="text-slate-900" />
                       </SelectTrigger>
-                      <SelectContent className="bg-white border-slate-200">
+                      <SelectContent className="bg-white text-slate-900 border-slate-200">
                         {ACCOMMODATION_OPTIONS.map((opt) => (
-                          <SelectItem key={opt} value={opt}>
+                          <SelectItem key={opt} value={opt} className="text-slate-900 font-medium">
                             {opt}
                           </SelectItem>
                         ))}
@@ -548,20 +652,20 @@ export function PublicTravelInquiryModal({
 
               </div>
 
-              {/* ── CUSTOMIZATION & INTERESTS (FULL WIDTH) ── */}
-              <div className="space-y-5 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+              {/* ── CUSTOMIZATION & ADDITIONAL REQUIREMENTS ── */}
+              <div className="space-y-5 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs text-slate-900">
                 <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                   <div className="flex items-center gap-2 text-brand-blue">
                     <Sparkles className="size-4 text-amber-500" />
                     <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
-                      3. Customization &amp; Special Preferences
+                      3. Additional Requirements &amp; Preferences
                     </h3>
                   </div>
-                  <span className="text-[11px] text-muted-foreground">Select all that apply</span>
+                  <span className="text-[11px] text-slate-500 font-medium">Select all that apply</span>
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-xs font-bold text-slate-700">
+                  <Label className="text-xs font-bold text-slate-800">
                     Experiences &amp; Tour Focus
                   </Label>
                   <div className="flex flex-wrap gap-2">
@@ -572,10 +676,10 @@ export function PublicTravelInquiryModal({
                           key={interest}
                           type="button"
                           onClick={() => toggleInterest(interest)}
-                          className={`text-xs px-3.5 py-2 rounded-xl border transition-all font-medium ${
+                          className={`text-xs px-3.5 py-2 rounded-xl border transition-all font-semibold ${
                             isSelected
                               ? "bg-brand-blue text-white border-brand-blue shadow-xs font-bold"
-                              : "bg-white text-slate-700 border-slate-200 hover:border-brand-blue/50"
+                              : "bg-white text-slate-800 border-slate-300 hover:border-brand-blue/60 hover:bg-slate-50"
                           }`}
                         >
                           {interest}
@@ -587,14 +691,14 @@ export function PublicTravelInquiryModal({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-bold text-slate-700">Transportation Preference</Label>
+                    <Label className="text-xs font-bold text-slate-800">Transportation Preference</Label>
                     <Select value={transportPref} onValueChange={setTransportPref}>
-                      <SelectTrigger className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl">
-                        <SelectValue />
+                      <SelectTrigger className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 font-medium rounded-xl">
+                        <SelectValue className="text-slate-900" />
                       </SelectTrigger>
-                      <SelectContent className="bg-white border-slate-200">
+                      <SelectContent className="bg-white text-slate-900 border-slate-200">
                         {TRANSPORT_OPTIONS.map((opt) => (
-                          <SelectItem key={opt} value={opt}>
+                          <SelectItem key={opt} value={opt} className="text-slate-900 font-medium">
                             {opt}
                           </SelectItem>
                         ))}
@@ -603,10 +707,10 @@ export function PublicTravelInquiryModal({
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-bold text-slate-700">Document Attachment (Optional)</Label>
+                    <Label className="text-xs font-bold text-slate-800">Optional Document Upload</Label>
                     <div
                       onClick={() => fileInputRef.current?.click()}
-                      className="border border-dashed border-slate-300 hover:border-brand-blue rounded-xl h-11 px-3 flex items-center justify-between cursor-pointer transition-colors bg-white"
+                      className="border border-dashed border-slate-300 hover:border-brand-blue rounded-xl h-11 px-3 flex items-center justify-between cursor-pointer transition-colors bg-white text-slate-900"
                     >
                       <input
                         ref={fileInputRef}
@@ -615,7 +719,7 @@ export function PublicTravelInquiryModal({
                         onChange={handleFileUpload}
                         className="hidden"
                       />
-                      <span className="text-xs sm:text-sm text-muted-foreground truncate">
+                      <span className="text-xs sm:text-sm text-slate-600 font-medium truncate">
                         {uploadedFiles.length > 0
                           ? `${uploadedFiles.length} file(s) attached`
                           : "Upload flight tickets / notes (PDF, PNG, JPG)"}
@@ -630,14 +734,14 @@ export function PublicTravelInquiryModal({
                     {uploadedFiles.map((fn, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-xs font-mono border border-slate-200"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-xs font-mono text-slate-800 border border-slate-300"
                       >
                         <FileUp className="size-3.5 text-brand-blue" />
                         <span className="truncate max-w-[200px]">{fn}</span>
                         <button
                           type="button"
                           onClick={() => handleRemoveFile(idx)}
-                          className="text-muted-foreground hover:text-brand-red ml-1"
+                          className="text-slate-400 hover:text-brand-red ml-1"
                         >
                           <X className="size-3.5" />
                         </button>
@@ -648,8 +752,8 @@ export function PublicTravelInquiryModal({
 
                 {/* Additional notes textarea */}
                 <div className="space-y-1.5 pt-1">
-                  <Label htmlFor="inq-reqs" className="text-xs font-bold text-slate-700">
-                    Additional Requirements or Custom Requests
+                  <Label htmlFor="inq-reqs" className="text-xs font-bold text-slate-800">
+                    Additional Requirements or Special Requests
                   </Label>
                   <Textarea
                     id="inq-reqs"
@@ -657,13 +761,13 @@ export function PublicTravelInquiryModal({
                     placeholder="Tell us any specific destinations, hotel preferences, dietary requirements, pacing, or special celebrations..."
                     value={formData.additionalRequirements || ""}
                     onChange={(e) => updateField("additionalRequirements", e.target.value)}
-                    className="text-xs sm:text-sm bg-white border-slate-200 rounded-xl p-3"
+                    className="text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl p-3 focus:border-brand-blue"
                   />
                 </div>
               </div>
 
               {/* Bottom Guarantee Banner */}
-              <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-100 text-xs sm:text-sm text-muted-foreground flex items-center gap-3">
+              <div className="p-4 rounded-2xl bg-blue-50/80 border border-blue-200 text-xs sm:text-sm text-slate-700 flex items-center gap-3">
                 <ShieldCheck className="size-5 text-brand-blue shrink-0" />
                 <span>
                   <strong>Miracle International Travel Guarantee:</strong> Our travel desk will review your details and prepare a tailor-made quotation within 24 hours. Zero booking obligations or upfront fees.
@@ -677,7 +781,7 @@ export function PublicTravelInquiryModal({
                   variant="outline"
                   size="lg"
                   onClick={() => onOpenChange(false)}
-                  className="h-11 text-xs sm:text-sm px-6 rounded-xl font-bold"
+                  className="h-11 text-xs sm:text-sm px-6 rounded-xl font-bold border-slate-300 text-slate-700 hover:bg-slate-100"
                 >
                   Cancel
                 </Button>

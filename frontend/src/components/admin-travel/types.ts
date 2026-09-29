@@ -34,6 +34,7 @@ export interface ItineraryDay {
   day: number;
   title: string;
   description: string;
+  location?: string;
   image?: string;
 }
 
@@ -110,7 +111,12 @@ export interface TravelInquiry {
   travelType: TravelType;
   packageName: string;
   packageId?: string;
+  packageSlug?: string;
   destination: string;
+  country?: string;
+  duration?: string;
+  packagePrice?: number | null;
+  packageCurrency?: Currency;
   travelDate: string;
   travelers: string | number;
   additionalRequirements?: string;
@@ -128,8 +134,15 @@ export interface PublicTravelInquiryFormData {
   contactNumber: string;
   whatsappNumber?: string;
   inquiryType: InquiryType;
+  travelType?: TravelType;
   selectedPackage: string;
+  packageId?: string;
+  packageSlug?: string;
   destination: string;
+  country?: string;
+  duration?: string;
+  packagePrice?: number | null;
+  packageCurrency?: Currency;
   preferredTravelDate: string;
   travelers: string | number;
   additionalRequirements?: string;

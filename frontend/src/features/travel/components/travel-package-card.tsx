@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inquiry-modal";
 import type { TravelPackage } from "@/components/admin-travel/types";
+import { getPackageCoverImage } from "@/lib/travel/package-image-helper";
 
 export function TravelPackageCard({
   pkg,
@@ -29,10 +30,7 @@ export function TravelPackageCard({
 
   const slug = pkg.slug || pkg.id;
   const name = pkg.name;
-  const coverImage =
-    pkg.coverImage ||
-    pkg.images?.[0] ||
-    "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&auto=format&fit=crop&q=80";
+  const coverImage = getPackageCoverImage(pkg);
   const durationStr = pkg.duration;
   const destinationStr = pkg.destination + (pkg.country ? ` (${pkg.country})` : "");
   const descriptionStr = pkg.shortDescription || pkg.description;
@@ -111,7 +109,7 @@ export function TravelPackageCard({
 
             {highlights.length > 0 ? (
               <div className="flex flex-wrap gap-1.5 pt-1">
-                {highlights.slice(0, 2).map((hl, i) => (
+                {highlights.slice(0, 2).map((hl: string, i: number) => (
                   <span
                     key={i}
                     className="inline-flex items-center gap-1 text-[11px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md truncate max-w-[130px]"

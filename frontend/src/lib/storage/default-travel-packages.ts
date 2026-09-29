@@ -1,7 +1,8 @@
 import type { TravelPackage } from "@/components/admin-travel/types";
 
-// Default authentic initial packages (ready for admin modification or public display)
+// Curated authentic packages with high-resolution imagery matched to each destination & travel experience
 export const DEFAULT_PACKAGES: TravelPackage[] = [
+  // ── INBOUND 1: Cultural & Wildlife Expedition (10 Days) ───────────────────
   {
     id: "pkg-inbound-01",
     slug: "sri-lanka-signature-heritage-wildlife",
@@ -106,15 +107,17 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
       "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock
       "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Temple of the Tooth
       "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Fort Lighthouse
-      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo & Sigiriya Panoramic
       "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge
       "https://images.unsplash.com/photo-1581852017103-68accd55096a?w=1200&auto=format&fit=crop&q=80", // Yala Wildlife Elephant Safari
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo City & Coast
     ],
     coverImage:
       "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock
     status: "Active",
     createdAt: "Sep 28, 2026",
   },
+
+  // ── INBOUND 2: Classic Culture & Coastline Escape (7 Days) ────────────────
   {
     id: "pkg-inbound-02",
     slug: "sri-lanka-coastal-cultural-escape",
@@ -187,17 +190,173 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
     entryRequirements: "Passport valid for at least 6 months.",
     visaInformation: "Sri Lanka ETA tourist visa assistance provided.",
     images: [
-      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Fort
-      "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Temple of the Tooth
-      "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock Fortress
-      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo Highlights
+      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Coast
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80", // Bentota Golden Beach
+      "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Temple
+      "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo Highlights
     ],
     coverImage:
       "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Coast
     status: "Active",
     createdAt: "Sep 28, 2026",
   },
+
+  // ── INBOUND 3: Hill Country, Ella & Scenic Tea Trails (6 Days) ────────────
+  {
+    id: "pkg-inbound-03",
+    slug: "sri-lanka-hill-country-ella-tea-trails",
+    name: "Hill Country, Ella & Misty Tea Trails",
+    travelType: "Inbound",
+    destination: "Kandy, Nuwara Eliya, Horton Plains & Ella",
+    country: "Sri Lanka",
+    duration: "6 Days / 5 Nights",
+    price: 155000,
+    currency: "LKR",
+    shortDescription:
+      "Ride the world-famous blue train through misty Ceylon tea valleys, hike Little Adam's Peak, and explore Ella Nine Arch Bridge.",
+    description:
+      "Immerse yourself in the emerald mountains of Sri Lanka's central highlands. Experience the legendary scenic train from Kandy to Ella, tour historic colonial tea estates, hike through cloud forests in Horton Plains to World's End, and witness panoramic waterfalls.",
+    highlights: [
+      "Iconic Kandy-to-Ella scenic mountain train ride",
+      "Demodara Nine Arch Bridge sunrise photoshoot",
+      "Little Adam's Peak & Ella Rock trekking",
+      "Ceylon tea factory tour & private tasting",
+      "Horton Plains National Park & World's End",
+      "Ramboda and Ravana scenic waterfalls",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Arrival & Transfer to Royal Kandy",
+        description: "Airport reception and scenic drive through tropical valleys to the hillside city of Kandy.",
+      },
+      {
+        day: 2,
+        title: "Kandy Cultural Sights & Peradeniya Gardens",
+        description: "Visit the Temple of the Tooth Relic and stroll among orchid houses at Peradeniya Royal Botanic Gardens.",
+      },
+      {
+        day: 3,
+        title: "Scenic Highland Blue Train to Nuwara Eliya",
+        description: "Board the reserved first-class train winding past waterfalls and tea estates into 'Little England'.",
+      },
+      {
+        day: 4,
+        title: "World's End Trekking & Journey to Ella",
+        description: "Dawn expedition across Horton Plains plateau, then transfer to the picturesque mountain village of Ella.",
+      },
+      {
+        day: 5,
+        title: "Nine Arch Bridge, Little Adam's Peak & Ravana Falls",
+        description: "Explore the architectural marvel of Nine Arch Bridge, hike Little Adam's Peak, and swim near Ravana Falls.",
+      },
+      {
+        day: 6,
+        title: "Highland Descent & Departure Transfer",
+        description: "Scenic descent to Colombo or airport transfer with memories of Sri Lanka's breathtaking misty mountains.",
+      },
+    ],
+    includedItems: [
+      "Accommodation",
+      "Transportation",
+      "Airport Transfer",
+      "Guided Tours",
+      "Sightseeing",
+    ],
+    includedServices: "Colonial tea bungalows and mountain view boutique hotels, reserved train tickets, private van.",
+    accommodation: "Heritage tea bungalows and luxury mountain view suites in Ella",
+    transportation: "Private air-conditioned vehicle and scenic train ticket reservations",
+    whatToExpect: "Cool highland temperatures, scenic photography opportunities, and gentle mountain hiking.",
+    entryRequirements: "Passport valid for 6+ months.",
+    visaInformation: "Online Sri Lanka ETA tourist visa assistance included.",
+    images: [
+      "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge & Blue Train
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&auto=format&fit=crop&q=80", // Nuwara Eliya Tea Hills
+      "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1200&auto=format&fit=crop&q=80", // Little Adam's Peak Ella
+      "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Lake & Heritage
+    ],
+    coverImage:
+      "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge
+    status: "Active",
+    createdAt: "Sep 28, 2026",
+  },
+
+  // ── INBOUND 4: Big Game Safari & Wilderness Expedition (5 Days) ───────────
+  {
+    id: "pkg-inbound-04",
+    slug: "sri-lanka-wildlife-safari-expedition",
+    name: "Sri Lanka Wildlife Safari & Leopard Trail",
+    travelType: "Inbound",
+    destination: "Udawalawe, Yala National Park & Mirissa",
+    country: "Sri Lanka",
+    duration: "5 Days / 4 Nights",
+    price: 180000,
+    currency: "LKR",
+    shortDescription:
+      "Encounter wild Asian elephants, leopards, and sloth bears across Yala and Udawalawe with open-top 4x4 safaris.",
+    description:
+      "Dedicated wildlife adventure through Sri Lanka's richest national parks. Search for the elusive Sri Lankan leopard in Yala, observe orphan elephants at Udawalawe Elephant Transit Home, and witness wild blue whales and dolphins off the coast of Mirissa.",
+    highlights: [
+      "Exclusive dawn & dusk 4x4 leopard game drives in Yala",
+      "Udawalawe elephant herds & Transit Home rehabilitation visit",
+      "Minneriya / Bundala exotic bird sanctuary wetlands",
+      "Mirissa blue whale watching excursion",
+      "Luxury glamping in air-conditioned safari tents",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Arrival & Transfer to Udawalawe Wilderness",
+        description: "Welcome at airport and direct transfer to your eco safari lodge bordering Udawalawe National Park.",
+      },
+      {
+        day: 2,
+        title: "Udawalawe Elephant Safari & Journey to Yala",
+        description: "Morning open-top jeep safari observing wild elephant herds, followed by transfer to Yala National Park.",
+      },
+      {
+        day: 3,
+        title: "Full Day Big Game Leopard Safari in Yala",
+        description: "Dawn-to-dusk tracking of leopards, sloth bears, crocodiles, spotted deer, and vibrant hornbills.",
+      },
+      {
+        day: 4,
+        title: "Southern Coast Transfer & Sunset in Mirissa",
+        description: "Drive along the southern coastline to Mirissa. Relax at Coconut Tree Hill for golden hour photography.",
+      },
+      {
+        day: 5,
+        title: "Morning Blue Whale Cruise & Departure",
+        description: "Early catamaran cruise to spot majestic blue whales and spinner dolphins before airport transfer.",
+      },
+    ],
+    includedItems: [
+      "Accommodation",
+      "Transportation",
+      "Airport Transfer",
+      "Guided Tours",
+      "Sightseeing",
+      "Activities",
+    ],
+    includedServices: "Safari tented luxury camp stays, private 4x4 jeeps with park trackers, all park entrance permits.",
+    accommodation: "Luxury Safari Tented Camp & Beachfront Boutique Resort",
+    transportation: "Customized 4x4 open-top safari jeeps and private van",
+    whatToExpect: "Thrilling wildlife encounters, early morning starts for optimal animal sightings, and tropical warmth.",
+    entryRequirements: "Passport valid for 6+ months.",
+    visaInformation: "Online Sri Lanka ETA tourist visa assistance provided.",
+    images: [
+      "https://images.unsplash.com/photo-1581852017103-68accd55096a?w=1200&auto=format&fit=crop&q=80", // Yala Wildlife Elephant
+      "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&auto=format&fit=crop&q=80", // Mirissa Coconut Tree Hill
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80", // Golden Beach
+    ],
+    coverImage:
+      "https://images.unsplash.com/photo-1581852017103-68accd55096a?w=1200&auto=format&fit=crop&q=80", // Yala Wildlife Elephant
+    status: "Active",
+    createdAt: "Sep 28, 2026",
+  },
+
+  // ── OUTBOUND 1: Dubai & Abu Dhabi Premium Holiday (6 Days) ────────────────
   {
     id: "pkg-outbound-01",
     slug: "dubai-luxury-desert-city-escape",
@@ -266,13 +425,15 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
     entryRequirements: "Passport valid for 6+ months from travel date.",
     visaInformation: "UAE Tourist Visa processing handled directly by our visa desk.",
     images: [
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&auto=format&fit=crop&q=80",
     ],
     coverImage:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&auto=format&fit=crop&q=80",
     status: "Active",
     createdAt: "Sep 28, 2026",
   },
+
+  // ── OUTBOUND 2: Maldives Paradise Island Retreat (5 Days) ─────────────────
   {
     id: "pkg-outbound-02",
     slug: "maldives-island-luxury-resort-getaway",
@@ -335,10 +496,10 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
     entryRequirements: "Passport valid for minimum 6 months.",
     visaInformation: "Free 30-day tourist visa on arrival for all nationalities with confirmed stay.",
     images: [
-      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&auto=format&fit=crop&q=80",
     ],
     coverImage:
-      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&auto=format&fit=crop&q=80",
     status: "Active",
     createdAt: "Sep 28, 2026",
   },

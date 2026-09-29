@@ -65,8 +65,8 @@ const INBOUND_SERVICES = [
 ] as const;
 
 const INBOUND_HERO_IMAGE = {
-  src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1600&q=80",
-  alt: "Sigiriya ancient rock fortress rising above lush green forest in Sri Lanka",
+  src: "https://images.unsplash.com/photo-1588598198321-9735fd52455b?auto=format&fit=crop&w=1600&q=80",
+  alt: "Sigiriya ancient rock fortress rising above lush green forest canopy in Sri Lanka",
 };
 
 export function InboundToursView() {

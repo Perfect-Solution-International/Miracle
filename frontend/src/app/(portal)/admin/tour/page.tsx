@@ -5,11 +5,11 @@ import { requirePermission } from "@/server/dal/require-permission";
 
 export const metadata: Metadata = {
   title: "Tour Management | Miracle International Admin",
-  description: "Manage travel packages, bookings and customer travel requests.",
+  description: "Manage all travel packages, itineraries, and publishing status.",
   robots: { index: false, follow: false },
 };
 
-export default async function TravelAdminPage() {
+export default async function TourAdminPage() {
   await requirePermission("travel.manage");
 
   return <TravelManagementView />;

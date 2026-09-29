@@ -6,6 +6,7 @@ import {
   Briefcase,
   Building2,
   ClipboardList,
+  Compass,
   FileSpreadsheet,
   FileText,
   Globe2,
@@ -285,15 +286,22 @@ const ADMIN_NAV: readonly NavSection[] = [
     title: "Tour",
     items: [
       {
+        title: "All Tours",
+        href: ROUTES.admin.tourAll,
+        icon: Compass,
+        permissions: ["travel.manage"],
+        matchNested: false,
+      },
+      {
         title: "Inbound Tours",
-        href: ROUTES.admin.travelInbound,
+        href: ROUTES.admin.tourInbound,
         icon: Palmtree,
         permissions: ["travel.manage"],
         matchNested: false,
       },
       {
         title: "Outbound Tours",
-        href: ROUTES.admin.travelOutbound,
+        href: ROUTES.admin.tourOutbound,
         icon: Globe2,
         permissions: ["travel.manage"],
         matchNested: false,

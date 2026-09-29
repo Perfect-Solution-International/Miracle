@@ -35,23 +35,20 @@ import { Breadcrumb } from "@/components/common/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inquiry-modal";
+import { CustomizeTripModal } from "@/features/travel/components/customize-trip-section";
 import { PackageReviewsSection } from "./package-reviews-section";
 import { ROUTES } from "@/config/routes";
 import { getStoredPackages } from "@/lib/storage/travel-store";
 import type { TravelPackage } from "@/components/admin-travel/types";
 
-const PLACEHOLDER_INBOUND =
-  "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80"; // Sigiriya Rock Fortress
-const PLACEHOLDER_OUTBOUND =
-  "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&auto=format&fit=crop&q=80"; // Dubai Marina
+import { getPackageCoverImage } from "@/lib/travel/package-image-helper";
 
 export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [customizeOpen, setCustomizeOpen] = useState(false);
 
   const isInbound = pkg.travelType === "Inbound";
-  const coverImage =
-    pkg.coverImage || pkg.images?.[0] || (isInbound ? PLACEHOLDER_INBOUND : PLACEHOLDER_OUTBOUND);
+  const coverImage = getPackageCoverImage(pkg);
 
   // Price formatting
   const formattedPrice =
@@ -467,7 +464,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                   )}
                 </div>
 
-                <div className="border-t border-slate-100 pt-5 space-y-3">
+                <div className="border-t border-slate-100 pt-5 space-y-2.5">
                   <Button
                     size="lg"
                     onClick={() => setInquiryOpen(true)}
@@ -476,6 +473,16 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                   >
                     <Send className="size-4" />
                     Send Travel Inquiry
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    onClick={() => setCustomizeOpen(true)}
+                    className="w-full border-brand-blue/30 text-brand-blue hover:bg-brand-blue/5 font-bold h-11 rounded-xl text-xs gap-2"
+                    id="pkg-customize-trip-btn"
+                  >
+                    <SlidersHorizontal className="size-4" />
+                    Customize This Trip
                   </Button>
                 </div>
 
@@ -543,14 +550,23 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
       <RelatedAdminPackages pkg={pkg} />
 
       {/* Mobile Sticky Floating CTA Bar */}
-      <div className="sticky bottom-0 z-30 border-t bg-white/95 px-4 py-3 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur-md sm:hidden flex items-center">
+      <div className="sticky bottom-0 z-30 border-t bg-white/95 px-4 py-3 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur-md sm:hidden flex items-center gap-2">
         <Button
           size="lg"
-          className="w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-xs h-11 gap-2 rounded-xl shadow-md"
+          variant="outline"
+          className="flex-1 border-brand-blue/30 text-brand-blue font-bold text-xs h-11 gap-1.5 rounded-xl shadow-xs"
+          onClick={() => setCustomizeOpen(true)}
+        >
+          <SlidersHorizontal className="size-3.5" />
+          Customize Trip
+        </Button>
+        <Button
+          size="lg"
+          className="flex-1 bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-xs h-11 gap-1.5 rounded-xl shadow-md"
           onClick={() => setInquiryOpen(true)}
         >
-          <Send className="size-4" />
-          Send Travel Inquiry
+          <Send className="size-3.5" />
+          Send Inquiry
         </Button>
       </div>
 
@@ -560,6 +576,14 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
         onOpenChange={setInquiryOpen}
         defaultPackage={pkg}
         defaultInquiryType={isInbound ? "Inbound Tour" : "Outbound Tour"}
+      />
+
+      {/* Customization Modal */}
+      <CustomizeTripModal
+        open={customizeOpen}
+        onClose={() => setCustomizeOpen(false)}
+        packageDetail={pkg}
+        mode="customize"
       />
     </>
   );
@@ -576,7 +600,7 @@ function RelatedAdminPackages({ pkg }: { pkg: TravelPackage }) {
         (p) =>
           p.travelType === pkg.travelType &&
           p.id !== pkg.id &&
-          p.status !== "Inactive",
+          p.status === "Active",
       )
       .slice(0, 3);
     setRelated(filtered);
@@ -626,10 +650,7 @@ function RelatedAdminPackages({ pkg }: { pkg: TravelPackage }) {
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((relPkg) => {
-            const cover =
-              relPkg.coverImage ||
-              relPkg.images?.[0] ||
-              (relPkg.travelType === "Inbound" ? PLACEHOLDER_INBOUND : PLACEHOLDER_OUTBOUND);
+            const cover = getPackageCoverImage(relPkg);
 
             const href = relPkg.slug
               ? ROUTES.public.travelPackage(relPkg.slug)

@@ -1,20 +1,16 @@
 "use client";
 
 import {
-  CalendarCheck,
+  Archive,
   CheckCircle2,
-  Clock,
-  Compass,
+  FileEdit,
   Globe2,
-  Package,
-  Plane,
   Plus,
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 import { AdminStatCard } from "@/components/admin-dashboard/admin-stat-card";
-import { Button } from "@/components/ui/button";
 import { useTravelStore } from "@/lib/storage/travel-store";
 import { AdminTravelNavHeader } from "./admin-travel-nav-header";
 import { TravelPackageDetailsDialog } from "./travel-package-details-dialog";
@@ -25,7 +21,6 @@ import type { TravelPackage, TravelPackageFormData } from "./types";
 export function TravelOutboundView() {
   const {
     outboundPackages,
-    inquiries,
     addPackage,
     updatePackage,
     deletePackage,
@@ -37,10 +32,11 @@ export function TravelOutboundView() {
   const [viewPackage, setViewPackage] = useState<TravelPackage | null>(null);
   const [viewPackageModalOpen, setViewPackageModalOpen] = useState(false);
 
+  // Exact real statistics from actual package data
+  const totalOutboundCount = outboundPackages.length;
   const activeCount = outboundPackages.filter((p) => p.status === "Active").length;
   const draftCount = outboundPackages.filter((p) => p.status === "Draft").length;
-  const outboundInquiries = inquiries.filter((i) => i.travelType === "Outbound");
-  const pendingInquiriesCount = outboundInquiries.filter((i) => i.status === "New" || i.status === "Reviewing").length;
+  const inactiveCount = outboundPackages.filter((p) => p.status === "Inactive").length;
 
   const handleOpenAdd = () => {
     setEditingPackage(null);
@@ -61,13 +57,14 @@ export function TravelOutboundView() {
     const target = outboundPackages.find((p) => p.id === id);
     if (!target) return;
     deletePackage(id);
-    toast.success(`Outbound package "${target.name}" deleted.`);
+    toast.success(`Outbound package "${target.name}" removed.`);
   };
 
   const handleSubmitPackage = (data: TravelPackageFormData, editId?: string) => {
     const payload: TravelPackageFormData = {
       ...data,
       travelType: "Outbound",
+      currency: data.currency || "USD",
     };
 
     if (editId) {
@@ -83,11 +80,11 @@ export function TravelOutboundView() {
     <div className="space-y-6">
       <AdminTravelNavHeader onAddPackage={handleOpenAdd} addPackageLabel="+ Add Outbound Package" />
 
-      {/* Summary Stats for Outbound */}
+      {/* Real Statistics from actual package data */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <AdminStatCard
-          label="Outbound Packages"
-          value={String(outboundPackages.length)}
+          label="Total Outbound Packages"
+          value={String(totalOutboundCount)}
           icon={Globe2}
           hint="All international tour packages"
           accentColor="blue"
@@ -96,23 +93,22 @@ export function TravelOutboundView() {
           label="Active Packages"
           value={String(activeCount)}
           icon={CheckCircle2}
-          hint="Publicly visible on website"
+          hint="Publicly live on website"
           accentColor="navy"
         />
         <AdminStatCard
-          label="Draft Itineraries"
+          label="Draft Packages"
           value={String(draftCount)}
-          icon={Package}
-          hint="Unpublished packages"
+          icon={FileEdit}
+          hint="Unpublished drafts"
           accentColor="blue"
         />
         <AdminStatCard
-          label="Outbound Inquiries"
-          value={String(outboundInquiries.length)}
-          icon={Clock}
-          hint={pendingInquiriesCount > 0 ? `${pendingInquiriesCount} awaiting review` : "All inquiries up to date"}
-          highlight={pendingInquiriesCount > 0}
-          accentColor={pendingInquiriesCount > 0 ? "red" : "navy"}
+          label="Inactive Packages"
+          value={String(inactiveCount)}
+          icon={Archive}
+          hint="Archived / hidden"
+          accentColor="navy"
         />
       </div>
 
@@ -123,6 +119,8 @@ export function TravelOutboundView() {
         onEditPackage={handleEdit}
         onDeletePackage={handleDelete}
         onAddPackage={handleOpenAdd}
+        title="Outbound Tour Packages"
+        description="Manage international holiday packages, flight itineraries, Dubai/Maldives tours, and status."
       />
 
       {/* Modals */}
@@ -131,6 +129,7 @@ export function TravelOutboundView() {
         onOpenChange={setPackageModalOpen}
         onSubmit={handleSubmitPackage}
         editingPackage={editingPackage}
+        defaultTravelType="Outbound"
       />
 
       <TravelPackageDetailsDialog
