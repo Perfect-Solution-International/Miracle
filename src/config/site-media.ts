@@ -19,6 +19,14 @@ const unsplash = (id: string) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=2000&q=80`;
 
 export const SITE_MEDIA = {
+  aboutHero: {
+    src: "/images/about/about-hero-bg.png",
+    alt: "Business colleagues celebrating a successful collaboration",
+  },
+  contactHero: {
+    src: "/images/contact/contact-hero-bg.png",
+    alt: "Business professionals shaking hands at a meeting",
+  },
   heroPort: {
     src: unsplash("1578575437130-527eed3abbec"),
     alt: "Container ship being loaded by gantry cranes at an international port",

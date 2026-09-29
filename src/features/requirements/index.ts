@@ -4,6 +4,7 @@ export { CreateRequirementForm } from "./components/create-requirement-form";
 export { TellUsWhatYouNeedHero } from "./components/tell-us-what-you-need-hero";
 export { SourcingCtaSection } from "./components/sourcing-cta-section";
 export { RequirementInquiryForm } from "./components/requirement-inquiry-form";
+export { ServiceRequirementDialog } from "./components/service-requirement-dialog";
 export { WhyShareCard } from "./components/why-share-card";
 export { NeedHelpCard } from "./components/need-help-card";
 export { SidebarTestimonialCard } from "./components/sidebar-testimonial-card";

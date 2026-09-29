@@ -50,7 +50,7 @@ export function ContactForm() {
   }
 
   return (
-    <div id="contact-form" className="shadow-lift rounded-3xl border bg-white p-6 sm:p-8">
+    <div id="contact-form" className="scroll-mt-24 rounded-3xl border border-slate-200/80 bg-white p-6 shadow-soft sm:p-8 lg:p-10">
       <Eyebrow>Send Us a Message</Eyebrow>
       <h2 className="text-ink mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
         Tell Us What You Need

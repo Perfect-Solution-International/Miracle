@@ -19,7 +19,7 @@ const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=
  */
 function MapPreview() {
   return (
-    <div className="bg-brand-blue-light relative isolate flex min-h-80 flex-col overflow-hidden rounded-2xl border">
+    <div className="relative isolate flex min-h-80 flex-col overflow-hidden rounded-3xl border border-brand-blue/10 bg-[#f1f7fc] shadow-soft">
 
       <Link
         href={MAPS_SEARCH_URL}
@@ -39,12 +39,12 @@ function MapPreview() {
         </span>
       </div>
 
-      <div className="shadow-soft m-4 flex items-center justify-between gap-4 rounded-xl bg-white p-4">
+      <div className="shadow-soft m-4 flex flex-col items-start gap-4 rounded-2xl bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-ink font-bold">{APP_CONFIG.name}</p>
           <p className="text-muted-foreground text-sm">{APP_CONFIG.support.address}</p>
         </div>
-        <Button asChild variant="outline" size="sm" className="shrink-0">
+        <Button asChild variant="outline" size="sm" className="shrink-0 bg-white">
           <Link href={MAPS_SEARCH_URL} target="_blank" rel="noopener noreferrer">
             View on Google Maps
             <ArrowRight data-icon="inline-end" aria-hidden="true" />
@@ -57,7 +57,7 @@ function MapPreview() {
 
 function OfficeInviteCard() {
   return (
-    <div className="relative isolate min-h-80 overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
+    <div className="relative isolate min-h-80 overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-soft">
       <Image
         src={SITE_MEDIA.cityTowers.src}
         alt={SITE_MEDIA.cityTowers.alt}
@@ -96,7 +96,7 @@ function OfficeInviteCard() {
 
 export function LocationSection() {
   return (
-    <Section spacing="compact" aria-label="Office location">
+    <Section spacing="compact" aria-label="Office location" className="bg-white">
       <div className="grid gap-6 lg:grid-cols-2">
         <MapPreview />
         <OfficeInviteCard />

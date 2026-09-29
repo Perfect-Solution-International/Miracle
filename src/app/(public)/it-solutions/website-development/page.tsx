@@ -27,7 +27,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
@@ -38,6 +37,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
+import { ServiceRequirementDialog } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Website Development";
@@ -102,7 +102,8 @@ const services: IconItem[] = [
 const reasons = [
   {
     title: "Tailored to your business",
-    description: "No generic templates. Every site is planned around your goals and customers.",
+    description:
+      "No generic templates. Every site is planned around your goals and customers.",
   },
   {
     title: "Clear pricing and timelines",
@@ -208,7 +209,8 @@ const benefits: IconItem[] = [
   },
   {
     title: "Secure Development",
-    description: "SSL, secure forms and best practices that protect your site and visitors.",
+    description:
+      "SSL, secure forms and best practices that protect your site and visitors.",
     icon: ShieldCheck,
   },
   {
@@ -237,12 +239,15 @@ export default function Page() {
         image={SITE_MEDIA.itSolutions.websiteDevelopmentHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl">
-            <Link href={ROUTES.public.tellUsWhatYouNeed}>
-              Start Your Website Project
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
+          <ServiceRequirementDialog
+            context="it"
+            trigger={
+              <Button variant="accent" size="xl">
+                Start Your Website Project
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Button>
+            }
+          />
           <Button asChild variant="secondary-hero" size="xl">
             <a href="#services">View Services</a>
           </Button>
@@ -424,6 +429,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        serviceContext="it"
         eyebrow="Ready to Go Online?"
         title="Start Your Website Project"
         description="Tell us about your business and goals. Our team will recommend the right website solution, timeline and cost."

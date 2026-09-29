@@ -146,20 +146,21 @@ export default function Page() {
     <main className="bg-white">
       <section
         aria-labelledby="about-hero-heading"
-        className="relative isolate overflow-hidden border-b border-slate-200/80 md:!bg-fixed"
+        className="relative isolate overflow-hidden bg-white"
         style={{
-          backgroundImage: 'url("/images/about/about-hero-bg.png")',
+          backgroundImage: `url("${SITE_MEDIA.aboutHero.src}")`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "center right",
           backgroundRepeat: "no-repeat",
         }}
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[rgba(6,18,35,0.30)]"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/5 max-sm:from-white/95 max-sm:via-white/85 max-sm:to-white/55"
         />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white" />
 
-        <div className="container-page relative flex items-center py-20 sm:py-28 md:min-h-[600px]">
+        <div className="container-page relative flex min-h-[560px] items-center py-20 sm:py-28 md:min-h-[640px]">
           <div className="max-w-2xl space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs">
               <span className="relative flex size-2">
@@ -171,15 +172,15 @@ export default function Page() {
 
             <h1
               id="about-hero-heading"
-              className="text-white text-4xl leading-[1.08] font-extrabold tracking-tight [text-shadow:_0_2px_12px_rgba(5,15,30,0.7)] sm:text-5xl lg:text-6xl"
+              className="text-navy text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
             >
               Built to Connect Business,{" "}
-              <span className="text-white">
+              <span className="text-navy">
                 Opportunity &amp; Growth.
               </span>
             </h1>
 
-            <p className="text-white/90 text-base leading-relaxed [text-shadow:_0_1px_8px_rgba(5,15,30,0.7)] sm:text-lg">
+            <p className="max-w-xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
               Miracle International connects businesses and individuals with global opportunities
               through integrated business solutions, enterprise technology, tourism, and international trade operations.
             </p>
@@ -193,8 +194,9 @@ export default function Page() {
               </Button>
               <Button
                 asChild
-                variant="secondary-hero"
+                variant="outline"
                 size="xl"
+                className="border-slate-200 bg-white text-navy shadow-sm hover:bg-slate-50"
               >
                 <Link href={ROUTES.public.contact}>Contact Our Team</Link>
               </Button>
@@ -228,7 +230,7 @@ export default function Page() {
             </p>
           </div>
         </div>
-        <div className="shadow-lift relative aspect-[3/2] overflow-hidden rounded-3xl border border-white">
+        <div className="relative aspect-[3/2] overflow-hidden rounded-3xl shadow-soft">
           <Image
             src={SITE_MEDIA.handshake.src}
             alt={SITE_MEDIA.handshake.alt}
@@ -236,28 +238,15 @@ export default function Page() {
             sizes="(min-width: 1024px) 52vw, 100vw"
             className="object-cover"
           />
-          <div
-            aria-hidden="true"
-            className="from-navy/45 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
-          />
-          <div className="absolute right-5 bottom-5 left-5 rounded-2xl border border-slate-200/80 bg-white/95 p-5 text-ink shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-sm sm:left-auto sm:max-w-xs">
-            <p className="text-brand-blue text-xs font-bold tracking-[0.16em] uppercase">
-              One Connected Platform
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Trade, business, travel and technology support brought together around the
-              requirement.
-            </p>
-          </div>
         </div>
       </Section>
 
       <Section
         aria-labelledby="purpose-heading"
-        className="bg-slate-50"
+        className="border-t border-slate-100"
         containerClassName="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16"
       >
-        <div className="shadow-lift relative aspect-[4/5] max-h-[36rem] overflow-hidden rounded-3xl border border-white">
+        <div className="relative aspect-[4/5] max-h-[36rem] overflow-hidden rounded-3xl shadow-soft">
           <Image
             src={SITE_MEDIA.cityTowers.src}
             alt={SITE_MEDIA.cityTowers.alt}
@@ -368,7 +357,7 @@ export default function Page() {
         </ul>
       </Section>
 
-      <Section id="how-we-work" className="bg-slate-50" aria-labelledby="company-process-heading">
+      <Section id="how-we-work" className="border-y border-slate-100" aria-labelledby="company-process-heading">
         <SectionHeading
           id="company-process-heading"
           eyebrow="How We Work"
@@ -381,18 +370,18 @@ export default function Page() {
               <span
                 aria-hidden="true"
                 className={cn(
-                  "absolute top-5 -left-[2.05rem] z-10 size-2.5 rounded-full ring-4 ring-slate-50 lg:-top-[0.35rem] lg:left-0",
+                  "absolute top-5 -left-[2.05rem] z-10 size-2.5 rounded-full ring-4 ring-white lg:-top-[0.35rem] lg:left-0",
                   index === 0 ? "bg-brand-red" : "bg-brand-blue",
                 )}
               />
-              <span className="hidden text-5xl leading-none font-bold text-[#5B7FAE] lg:block">
+              <span className="hidden text-5xl leading-none font-bold text-brand-blue lg:block">
                 {step}
               </span>
               <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-slate-200/80 bg-white text-brand-blue shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
                 <Icon aria-hidden="true" className="size-5" />
               </span>
               <div>
-                <span className="text-brand-blue text-xs font-bold tracking-widest lg:hidden">
+                <span className="text-brand-blue text-lg font-extrabold tracking-widest lg:hidden">
                   {step}
                 </span>
                 <h3 className="font-bold text-ink">{title}</h3>
@@ -442,9 +431,7 @@ export default function Page() {
         </ul>
       </Section>
 
-      <div className="bg-slate-50">
-        <GlobalPresenceSection />
-      </div>
+      <GlobalPresenceSection />
 
       <CtaBanner
         eyebrow="Start a Conversation"

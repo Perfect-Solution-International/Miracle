@@ -27,7 +27,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
@@ -37,6 +36,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
+import { ServiceRequirementDialog } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "POS System Development";
@@ -233,12 +233,15 @@ export default function Page() {
         image={SITE_MEDIA.itSolutions.posSystemHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl">
-            <Link href={ROUTES.public.tellUsWhatYouNeed}>
-              Get Your POS System
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
+          <ServiceRequirementDialog
+            context="it"
+            trigger={
+              <Button variant="accent" size="xl">
+                Get Your POS System
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Button>
+            }
+          />
           <Button asChild variant="secondary-hero" size="xl">
             <a href="#features">Explore Features</a>
           </Button>
@@ -368,6 +371,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        serviceContext="it"
         eyebrow="Ready to Upgrade Your Counter?"
         title="Get a POS System Made for Your Business"
         description="Tell us about your business and our team will recommend the right POS setup, hardware and pricing."
