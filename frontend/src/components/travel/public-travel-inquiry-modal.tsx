@@ -126,13 +126,25 @@ export function PublicTravelInquiryModal({
       setSubmittedRef(null);
       setError("");
       setUploadedFiles([]);
-      setSelectedInterests([]);
 
       const inqType: InquiryType = defaultPackage
         ? defaultPackage.travelType === "Outbound"
           ? "Outbound Tour"
           : "Inbound Tour"
         : defaultInquiryType;
+
+      // Extract matching default interests from package highlights if available
+      const preselectedInterests: string[] = [];
+      if (defaultPackage) {
+        const text = `${defaultPackage.name} ${defaultPackage.destination} ${defaultPackage.highlights?.join(" ")} ${defaultPackage.shortDescription || ""}`.toLowerCase();
+        INTEREST_OPTIONS.forEach((opt) => {
+          const keyWords = opt.toLowerCase().split(/[\s&/]+/);
+          if (keyWords.some((kw) => kw.length > 3 && text.includes(kw))) {
+            preselectedInterests.push(opt);
+          }
+        });
+      }
+      setSelectedInterests(preselectedInterests);
 
       setFormData({
         fullName: "",
@@ -147,7 +159,9 @@ export function PublicTravelInquiryModal({
           (inqType === "Inbound Tour" ? "Sri Lanka" : ""),
         preferredTravelDate: "",
         travelers: 2,
-        additionalRequirements: "",
+        additionalRequirements: defaultPackage?.duration
+          ? `Package Duration: ${defaultPackage.duration}`
+          : "",
         documents: [],
       });
     }
@@ -221,7 +235,7 @@ export function PublicTravelInquiryModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-5xl w-[95vw] max-h-[92vh] flex flex-col p-0 rounded-3xl shadow-2xl bg-white border border-slate-200 overflow-hidden">
+      <DialogContent className="max-w-4xl xl:max-w-5xl w-[96vw] max-h-[92vh] flex flex-col p-0 rounded-3xl shadow-2xl bg-white border border-slate-200 overflow-hidden">
         {submittedRef ? (
           /* ========================================================================= */
           /* SUCCESS STATE VIEW */
@@ -275,7 +289,7 @@ export function PublicTravelInquiryModal({
 
             <Button
               onClick={() => onOpenChange(false)}
-              className="bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-xs px-10 h-11 rounded-xl shadow-md"
+              className="bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-sm px-10 h-11 rounded-xl shadow-md"
             >
               Done / Return to Website
             </Button>
@@ -288,14 +302,14 @@ export function PublicTravelInquiryModal({
             <DialogHeader className="p-6 pb-4 border-b border-slate-200 bg-white">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="flex size-11 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue shrink-0 shadow-xs">
-                    <Palmtree className="size-5" />
+                  <div className="flex size-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue shrink-0 shadow-xs">
+                    <Palmtree className="size-6" />
                   </div>
                   <div>
                     <DialogTitle className="text-xl sm:text-2xl font-extrabold text-navy tracking-tight">
                       Send Travel Inquiry &amp; Trip Details
                     </DialogTitle>
-                    <DialogDescription className="text-xs text-muted-foreground mt-0.5">
+                    <DialogDescription className="text-xs sm:text-sm text-muted-foreground mt-0.5">
                       No payment or account required. Share your requirements and our travel desk will craft your perfect itinerary.
                     </DialogDescription>
                   </div>
@@ -364,10 +378,10 @@ export function PublicTravelInquiryModal({
               ) : null}
 
               {/* 2-Column Form Layout on Desktop */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 {/* ── LEFT COLUMN: Personal & Contact Details ── */}
-                <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
+                <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
                   <div className="flex items-center gap-2 text-brand-blue pb-2 border-b border-slate-100">
                     <Users className="size-4" />
                     <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
@@ -376,7 +390,7 @@ export function PublicTravelInquiryModal({
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="inq-name" className="text-xs font-bold text-ink">
+                    <Label htmlFor="inq-name" className="text-xs font-bold text-slate-700">
                       Full Name <span className="text-brand-red">*</span>
                     </Label>
                     <Input
@@ -384,80 +398,76 @@ export function PublicTravelInquiryModal({
                       placeholder="e.g. Johnathan Smith"
                       value={formData.fullName}
                       onChange={(e) => updateField("fullName", e.target.value)}
-                      className="h-10 text-xs bg-white border-slate-200"
+                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
                       required
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    <div className="space-y-1.5">
-                      <Label htmlFor="inq-email" className="text-xs font-bold text-ink">
-                        Email Address <span className="text-brand-red">*</span>
-                      </Label>
-                      <Input
-                        id="inq-email"
-                        type="email"
-                        placeholder="e.g. name@example.com"
-                        value={formData.email}
-                        onChange={(e) => updateField("email", e.target.value)}
-                        className="h-10 text-xs bg-white border-slate-200"
-                        required
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <Label htmlFor="inq-phone" className="text-xs font-bold text-ink">
-                        Contact Phone <span className="text-brand-red">*</span>
-                      </Label>
-                      <Input
-                        id="inq-phone"
-                        type="tel"
-                        placeholder="e.g. +94 77 123 4567"
-                        value={formData.contactNumber}
-                        onChange={(e) => updateField("contactNumber", e.target.value)}
-                        className="h-10 text-xs bg-white border-slate-200"
-                        required
-                      />
-                    </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="inq-email" className="text-xs font-bold text-slate-700">
+                      Email Address <span className="text-brand-red">*</span>
+                    </Label>
+                    <Input
+                      id="inq-email"
+                      type="email"
+                      placeholder="e.g. name@example.com"
+                      value={formData.email}
+                      onChange={(e) => updateField("email", e.target.value)}
+                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                      required
+                    />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    <div className="space-y-1.5">
-                      <Label htmlFor="inq-whatsapp" className="text-xs font-bold text-ink">
-                        WhatsApp Number <span className="text-[10px] text-muted-foreground font-normal">(Optional)</span>
-                      </Label>
-                      <Input
-                        id="inq-whatsapp"
-                        type="tel"
-                        placeholder="e.g. +94 77 123 4567"
-                        value={formData.whatsappNumber || ""}
-                        onChange={(e) => updateField("whatsappNumber", e.target.value)}
-                        className="h-10 text-xs bg-white border-slate-200"
-                      />
-                    </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="inq-phone" className="text-xs font-bold text-slate-700">
+                      Contact Phone <span className="text-brand-red">*</span>
+                    </Label>
+                    <Input
+                      id="inq-phone"
+                      type="tel"
+                      placeholder="e.g. +94 77 123 4567"
+                      value={formData.contactNumber}
+                      onChange={(e) => updateField("contactNumber", e.target.value)}
+                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                      required
+                    />
+                  </div>
 
-                    <div className="space-y-1.5">
-                      <Label htmlFor="inq-type" className="text-xs font-bold text-ink">
-                        Tour Type <span className="text-brand-red">*</span>
-                      </Label>
-                      <Select
-                        value={formData.inquiryType}
-                        onValueChange={(val) => updateField("inquiryType", val as InquiryType)}
-                      >
-                        <SelectTrigger id="inq-type" className="h-10 text-xs bg-white border-slate-200">
-                          <SelectValue placeholder="Select type" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-white border-slate-200">
-                          <SelectItem value="Inbound Tour">Inbound Tour (Sri Lanka Visit)</SelectItem>
-                          <SelectItem value="Outbound Tour">Outbound Tour (International Travel)</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="inq-whatsapp" className="text-xs font-bold text-slate-700">
+                      WhatsApp Number <span className="text-[11px] text-muted-foreground font-normal">(Optional)</span>
+                    </Label>
+                    <Input
+                      id="inq-whatsapp"
+                      type="tel"
+                      placeholder="e.g. +94 77 123 4567"
+                      value={formData.whatsappNumber || ""}
+                      onChange={(e) => updateField("whatsappNumber", e.target.value)}
+                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="inq-type" className="text-xs font-bold text-slate-700">
+                      Tour Type <span className="text-brand-red">*</span>
+                    </Label>
+                    <Select
+                      value={formData.inquiryType}
+                      onValueChange={(val) => updateField("inquiryType", val as InquiryType)}
+                    >
+                      <SelectTrigger id="inq-type" className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl">
+                        <SelectValue placeholder="Select type" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border-slate-200">
+                        <SelectItem value="Inbound Tour">Inbound Tour (Sri Lanka Visit)</SelectItem>
+                        <SelectItem value="Outbound Tour">Outbound Tour (International Travel)</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
 
-                {/* ── RIGHT COLUMN: Travel Plan & Dates ── */}
-                <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
+                {/* ── RIGHT COLUMN: Travel Plan & Schedule ── */}
+                <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
                   <div className="flex items-center gap-2 text-brand-blue pb-2 border-b border-slate-100">
                     <Compass className="size-4" />
                     <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
@@ -466,52 +476,63 @@ export function PublicTravelInquiryModal({
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label htmlFor="inq-dest" className="text-xs font-bold text-ink">
+                    <Label htmlFor="inq-pkg" className="text-xs font-bold text-slate-700">
+                      Package / Tour Name <span className="text-[11px] text-muted-foreground font-normal">(Editable for Custom Tour)</span>
+                    </Label>
+                    <Input
+                      id="inq-pkg"
+                      placeholder="e.g. Sri Lanka Signature Heritage Expedition or Custom Tour"
+                      value={formData.selectedPackage}
+                      onChange={(e) => updateField("selectedPackage", e.target.value)}
+                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="inq-dest" className="text-xs font-bold text-slate-700">
                       Destination(s) / Preferred Places
                     </Label>
                     <Input
                       id="inq-dest"
-                      placeholder="e.g. Sigiriya, Kandy, Nuwara Eliya, Galle / Dubai, Maldives"
+                      placeholder="e.g. Sigiriya, Kandy, Nuwara Eliya, Galle"
                       value={formData.destination}
                       onChange={(e) => updateField("destination", e.target.value)}
-                      className="h-10 text-xs bg-white border-slate-200"
+                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    <div className="space-y-1.5">
-                      <Label htmlFor="inq-date" className="text-xs font-bold text-ink">
-                        Preferred Travel Date
-                      </Label>
-                      <Input
-                        id="inq-date"
-                        type="date"
-                        value={formData.preferredTravelDate}
-                        onChange={(e) => updateField("preferredTravelDate", e.target.value)}
-                        className="h-10 text-xs bg-white border-slate-200"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <Label htmlFor="inq-travelers" className="text-xs font-bold text-ink">
-                        Total Travelers
-                      </Label>
-                      <Input
-                        id="inq-travelers"
-                        type="number"
-                        min="1"
-                        placeholder="e.g. 2 Adults, 1 Child"
-                        value={formData.travelers}
-                        onChange={(e) => updateField("travelers", e.target.value)}
-                        className="h-10 text-xs bg-white border-slate-200"
-                      />
-                    </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="inq-date" className="text-xs font-bold text-slate-700">
+                      Preferred Travel Date
+                    </Label>
+                    <Input
+                      id="inq-date"
+                      type="date"
+                      value={formData.preferredTravelDate}
+                      onChange={(e) => updateField("preferredTravelDate", e.target.value)}
+                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                    />
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-bold text-ink">Accommodation Preference</Label>
+                    <Label htmlFor="inq-travelers" className="text-xs font-bold text-slate-700">
+                      Total Travelers
+                    </Label>
+                    <Input
+                      id="inq-travelers"
+                      type="number"
+                      min="1"
+                      placeholder="e.g. 2 Adults, 1 Child"
+                      value={formData.travelers}
+                      onChange={(e) => updateField("travelers", e.target.value)}
+                      className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label className="text-xs font-bold text-slate-700">Accommodation Preference</Label>
                     <Select value={accommodationPref} onValueChange={setAccommodationPref}>
-                      <SelectTrigger className="h-10 text-xs bg-white border-slate-200">
+                      <SelectTrigger className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="bg-white border-slate-200">
@@ -527,43 +548,48 @@ export function PublicTravelInquiryModal({
 
               </div>
 
-              {/* ── CUSTOMIZATION & INTERESTS ── */}
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
+              {/* ── CUSTOMIZATION & INTERESTS (FULL WIDTH) ── */}
+              <div className="space-y-5 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
                 <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                   <div className="flex items-center gap-2 text-brand-blue">
                     <Sparkles className="size-4 text-amber-500" />
                     <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
-                      3. Customization &amp; Preferences
+                      3. Customization &amp; Special Preferences
                     </h3>
                   </div>
-                  <span className="text-[11px] text-muted-foreground">Select options</span>
+                  <span className="text-[11px] text-muted-foreground">Select all that apply</span>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {INTEREST_OPTIONS.map((interest) => {
-                    const isSelected = selectedInterests.includes(interest);
-                    return (
-                      <button
-                        key={interest}
-                        type="button"
-                        onClick={() => toggleInterest(interest)}
-                        className={`text-xs px-3.5 py-1.5 rounded-xl border transition-all font-medium ${
-                          isSelected
-                            ? "bg-brand-blue text-white border-brand-blue shadow-xs font-bold"
-                            : "bg-white text-slate-700 border-slate-200 hover:border-brand-blue/50"
-                        }`}
-                      >
-                        {interest}
-                      </button>
-                    );
-                  })}
+                <div className="space-y-2">
+                  <Label className="text-xs font-bold text-slate-700">
+                    Experiences &amp; Tour Focus
+                  </Label>
+                  <div className="flex flex-wrap gap-2">
+                    {INTEREST_OPTIONS.map((interest) => {
+                      const isSelected = selectedInterests.includes(interest);
+                      return (
+                        <button
+                          key={interest}
+                          type="button"
+                          onClick={() => toggleInterest(interest)}
+                          className={`text-xs px-3.5 py-2 rounded-xl border transition-all font-medium ${
+                            isSelected
+                              ? "bg-brand-blue text-white border-brand-blue shadow-xs font-bold"
+                              : "bg-white text-slate-700 border-slate-200 hover:border-brand-blue/50"
+                          }`}
+                        >
+                          {interest}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-bold text-ink">Transportation Preference</Label>
+                    <Label className="text-xs font-bold text-slate-700">Transportation Preference</Label>
                     <Select value={transportPref} onValueChange={setTransportPref}>
-                      <SelectTrigger className="h-10 text-xs bg-white border-slate-200">
+                      <SelectTrigger className="h-11 text-xs sm:text-sm bg-white border-slate-200 rounded-xl">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="bg-white border-slate-200">
@@ -577,10 +603,10 @@ export function PublicTravelInquiryModal({
                   </div>
 
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-bold text-ink">Document Attachment (Optional)</Label>
+                    <Label className="text-xs font-bold text-slate-700">Document Attachment (Optional)</Label>
                     <div
                       onClick={() => fileInputRef.current?.click()}
-                      className="border border-dashed border-slate-300 hover:border-brand-blue rounded-xl h-10 px-3 flex items-center justify-between cursor-pointer transition-colors bg-white"
+                      className="border border-dashed border-slate-300 hover:border-brand-blue rounded-xl h-11 px-3 flex items-center justify-between cursor-pointer transition-colors bg-white"
                     >
                       <input
                         ref={fileInputRef}
@@ -589,10 +615,10 @@ export function PublicTravelInquiryModal({
                         onChange={handleFileUpload}
                         className="hidden"
                       />
-                      <span className="text-xs text-muted-foreground truncate">
+                      <span className="text-xs sm:text-sm text-muted-foreground truncate">
                         {uploadedFiles.length > 0
                           ? `${uploadedFiles.length} file(s) attached`
-                          : "Upload notes / flight tickets (PDF, PNG, JPG)"}
+                          : "Upload flight tickets / notes (PDF, PNG, JPG)"}
                       </span>
                       <Upload className="size-4 text-brand-blue shrink-0 ml-2" />
                     </div>
@@ -604,16 +630,16 @@ export function PublicTravelInquiryModal({
                     {uploadedFiles.map((fn, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 text-xs font-mono border border-slate-200"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-xs font-mono border border-slate-200"
                       >
-                        <FileUp className="size-3 text-brand-blue" />
-                        <span className="truncate max-w-[160px]">{fn}</span>
+                        <FileUp className="size-3.5 text-brand-blue" />
+                        <span className="truncate max-w-[200px]">{fn}</span>
                         <button
                           type="button"
                           onClick={() => handleRemoveFile(idx)}
                           className="text-muted-foreground hover:text-brand-red ml-1"
                         >
-                          <X className="size-3" />
+                          <X className="size-3.5" />
                         </button>
                       </span>
                     ))}
@@ -622,25 +648,25 @@ export function PublicTravelInquiryModal({
 
                 {/* Additional notes textarea */}
                 <div className="space-y-1.5 pt-1">
-                  <Label htmlFor="inq-reqs" className="text-xs font-bold text-ink">
-                    Additional Requirements or Special Requests
+                  <Label htmlFor="inq-reqs" className="text-xs font-bold text-slate-700">
+                    Additional Requirements or Custom Requests
                   </Label>
                   <Textarea
                     id="inq-reqs"
                     rows={3}
-                    placeholder="Tell us any specific hotels, meal preferences, pacing requests, or celebrations..."
+                    placeholder="Tell us any specific destinations, hotel preferences, dietary requirements, pacing, or special celebrations..."
                     value={formData.additionalRequirements || ""}
                     onChange={(e) => updateField("additionalRequirements", e.target.value)}
-                    className="text-xs bg-white border-slate-200"
+                    className="text-xs sm:text-sm bg-white border-slate-200 rounded-xl p-3"
                   />
                 </div>
               </div>
 
               {/* Bottom Guarantee Banner */}
-              <div className="p-3.5 rounded-2xl bg-blue-50/70 border border-blue-100 text-xs text-muted-foreground flex items-center gap-2.5">
+              <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-100 text-xs sm:text-sm text-muted-foreground flex items-center gap-3">
                 <ShieldCheck className="size-5 text-brand-blue shrink-0" />
                 <span>
-                  <strong>Miracle International Travel Guarantee:</strong> Our tour specialists will review your requirements and design a customized quote within 24 hours. Zero booking obligations.
+                  <strong>Miracle International Travel Guarantee:</strong> Our travel desk will review your details and prepare a tailor-made quotation within 24 hours. Zero booking obligations or upfront fees.
                 </span>
               </div>
 
@@ -651,16 +677,16 @@ export function PublicTravelInquiryModal({
                   variant="outline"
                   size="lg"
                   onClick={() => onOpenChange(false)}
-                  className="h-11 text-xs px-6 rounded-xl font-bold"
+                  className="h-11 text-xs sm:text-sm px-6 rounded-xl font-bold"
                 >
                   Cancel
                 </Button>
                 <Button
                   type="submit"
                   size="lg"
-                  className="h-11 text-xs px-8 rounded-xl bg-brand-blue hover:bg-brand-blue-dark text-white font-bold shadow-md gap-2"
+                  className="h-11 text-xs sm:text-sm px-8 rounded-xl bg-brand-blue hover:bg-brand-blue-dark text-white font-bold shadow-md gap-2"
                 >
-                  <Send className="size-3.5" />
+                  <Send className="size-4" />
                   Submit Travel Request
                 </Button>
               </div>

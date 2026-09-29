@@ -49,23 +49,6 @@ export function AdminTravelNavHeader({
       badgeColor: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300",
       description: "International Packages",
     },
-    {
-      label: "All Packages",
-      href: "/admin/travel/packages",
-      icon: Package,
-      count: packages.length,
-      badgeColor: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200",
-      description: "Full Catalogue",
-    },
-    {
-      label: "Travel Inquiries",
-      href: "/admin/travel/inquiries",
-      icon: Inbox,
-      count: inquiries.length,
-      newCount: newInquiriesCount,
-      badgeColor: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300",
-      description: "Customer Requests & Replies",
-    },
   ];
 
   return (
@@ -75,22 +58,22 @@ export function AdminTravelNavHeader({
         <div>
           <div className="flex items-center gap-2">
             <h1 className="font-heading text-2xl font-bold tracking-tight text-navy dark:text-foreground">
-              Travel Management
+              Tour Management
             </h1>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand-blue border border-blue-200 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900">
               <Compass className="size-3.5" />
-              Inquiry-Based Desk
+              Tour Packages Desk
             </span>
           </div>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Manage inbound and outbound tour packages, review traveler inquiries, and communicate directly with customers.
+            Manage Inbound (Sri Lanka) and Outbound (International) tour packages, pricing, itineraries, and publishing status.
           </p>
         </div>
 
         {onAddPackage ? (
           <Button
             onClick={onAddPackage}
-            className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-semibold gap-1.5 shadow-sm h-9 self-start sm:self-auto"
+            className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-semibold gap-1.5 shadow-sm h-9 self-start sm:self-auto rounded-xl"
           >
             <Plus className="size-4" />
             {addPackageLabel}
@@ -109,7 +92,7 @@ export function AdminTravelNavHeader({
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium transition-all border",
+                "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition-all border",
                 isActive
                   ? "bg-card text-brand-blue border-brand-blue/30 shadow-xs font-semibold"
                   : "bg-muted/30 text-muted-foreground border-transparent hover:bg-muted hover:text-foreground",
@@ -117,14 +100,9 @@ export function AdminTravelNavHeader({
             >
               <Icon className={cn("size-4", isActive ? "text-brand-blue" : "text-muted-foreground")} />
               <span>{item.label}</span>
-              <span className={cn("px-1.5 py-0.2 rounded-full text-[10px] font-bold", item.badgeColor)}>
+              <span className={cn("px-2 py-0.5 rounded-full text-[10px] font-bold", item.badgeColor)}>
                 {item.count}
               </span>
-              {item.newCount && item.newCount > 0 ? (
-                <span className="bg-brand-red text-white text-[9px] font-bold px-1.5 py-0.2 rounded-full animate-pulse">
-                  {item.newCount} New
-                </span>
-              ) : null}
             </Link>
           );
         })}

@@ -107,12 +107,14 @@ export const ROUTES = {
     travelInbound: "/admin/travel/inbound",
     travelOutbound: "/admin/travel/outbound",
     travelInquiries: "/admin/travel/inquiries",
+    inquiries: "/admin/inquiries",
     visa: "/admin/visa",
     itServices: "/admin/it-services",
     support: "/admin/support",
     cms: "/admin/cms",
     reports: "/admin/reports",
     settings: "/admin/settings",
+    profile: "/admin/profile",
   },
 } as const;
 

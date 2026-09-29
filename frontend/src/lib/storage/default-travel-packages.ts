@@ -7,21 +7,22 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
     slug: "sri-lanka-signature-heritage-wildlife",
     name: "Sri Lanka Signature Heritage & Wildlife Expedition",
     travelType: "Inbound",
-    destination: "Sigiriya, Kandy, Nuwara Eliya, Yala, Galle",
+    destination: "Sigiriya, Kandy, Nuwara Eliya, Yala, Galle, Colombo",
     country: "Sri Lanka",
     duration: "10 Days / 9 Nights",
     price: 240000,
     currency: "LKR",
     shortDescription:
-      "A premier 10-day private journey across ancient kingdoms, misty tea hills, and leopard safaris.",
+      "A premier 10-day private journey across Sigiriya rock fortress, Kandy temples, Ella tea hills, Yala safaris, Galle Fort, and Colombo.",
     description:
-      "Experience the very best of Sri Lanka with our signature private expedition. Starting in the cultural triangle, ascend the Sigiriya rock fortress, wander through royal botanical gardens in Kandy, board the scenic blue train to the highlands, and embark on thrilling game drives in Yala National Park before relaxing in historic Galle Fort.",
+      "Experience the very best of Sri Lanka with our signature private expedition. Starting in the cultural triangle, ascend the Sigiriya rock fortress, wander through royal botanical gardens in Kandy, board the scenic blue train to the highlands, and embark on thrilling game drives in Yala National Park before exploring historic Galle Fort and Colombo city.",
     highlights: [
       "Sigiriya Lion Rock Fortress climb",
       "Temple of the Tooth Relic in Kandy",
-      "Scenic tea country train journey",
+      "Scenic Ella Nine Arch Bridge train journey",
       "Big game safari in Yala National Park",
       "UNESCO Galle Dutch Fort walking tour",
+      "Colombo City Highlights & Shopping",
     ],
     itinerary: [
       {
@@ -82,7 +83,7 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
         day: 10,
         title: "Colombo City Highlights & Airport Departure",
         description:
-          "Scenic coastal expressway drive to Colombo for last-minute shopping and sightseeing before transfer to BIA for your flight home.",
+          "Scenic coastal expressway drive to Colombo for sightseeing, Lotus Tower, and last-minute shopping before transfer to BIA for your flight home.",
       },
     ],
     includedItems: [
@@ -102,43 +103,45 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
     entryRequirements: "Passport valid for minimum 6 months from departure date.",
     visaInformation: "Online ETA tourist visa pre-approval required prior to boarding.",
     images: [
-      "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1566296517066-d5607df2e2b3?w=1200&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock
+      "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Temple of the Tooth
+      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Fort Lighthouse
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo & Sigiriya Panoramic
+      "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80", // Ella Nine Arch Bridge
+      "https://images.unsplash.com/photo-1581852017103-68accd55096a?w=1200&auto=format&fit=crop&q=80", // Yala Wildlife Elephant Safari
     ],
     coverImage:
-      "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock
     status: "Active",
     createdAt: "Sep 28, 2026",
   },
   {
     id: "pkg-inbound-02",
     slug: "sri-lanka-coastal-cultural-escape",
-    name: "Classic Sri Lanka Culture & Coastline",
+    name: "Classic Sri Lanka Culture & Coastline Escape",
     travelType: "Inbound",
-    destination: "Colombo, Dambulla, Kandy, Bentota & Galle",
+    destination: "Colombo, Dambulla, Sigiriya, Kandy, Bentota & Galle",
     country: "Sri Lanka",
     duration: "7 Days / 6 Nights",
     price: 165000,
     currency: "LKR",
     shortDescription:
-      "A scenic 7-day tour combining cultural monuments with pristine tropical golden beaches.",
+      "A scenic 7-day tour combining Sigiriya, Kandy cultural monuments, Colombo highlights, and Galle Fort coastline.",
     description:
-      "Explore the UNESCO World Heritage Golden Cave Temple of Dambulla, experience cultural dance performances in Kandy, and unwind at beachfront luxury resorts in Bentota.",
+      "Explore the UNESCO World Heritage Golden Cave Temple of Dambulla, ascend Sigiriya rock fortress, experience the sacred Temple of the Tooth in Kandy, explore Colombo, and unwind at beachfront luxury resorts near Galle Fort.",
     highlights: [
-      "Dambulla Cave Temples",
-      "Kandy Lake & Spice Gardens",
+      "Sigiriya Lion Rock Citadel",
+      "Temple of the Tooth in Kandy",
+      "Galle Fort colonial ramparts & lighthouse",
+      "Colombo City sightseeing",
       "Madu River boat safari in Balapitiya",
       "Water sports in Bentota beach",
-      "Galle Fort colonial ramparts",
     ],
     itinerary: [
       {
         day: 1,
         title: "Arrival & Cultural Triangle Transfer",
-        description: "Warm welcome at Colombo BIA airport and comfortable transfer to Dambulla.",
+        description: "Warm welcome at Colombo BIA airport and comfortable transfer to Dambulla & Sigiriya.",
       },
       {
         day: 2,
@@ -147,8 +150,8 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
       },
       {
         day: 3,
-        title: "Royal Botanical Gardens & Kandy City Tour",
-        description: "Explore Peradeniya botanical gardens and the sacred Temple of the Tooth Relic.",
+        title: "Royal Botanical Gardens & Kandy Temple of the Tooth",
+        description: "Explore Peradeniya botanical gardens and the sacred Temple of the Tooth Relic in Kandy.",
       },
       {
         day: 4,
@@ -163,12 +166,12 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
       {
         day: 6,
         title: "Day Trip to Galle Fort & Sea Turtle Conservation",
-        description: "Visit the historic Portuguese and Dutch ramparts of Galle Fort and a sea turtle sanctuary.",
+        description: "Visit the historic Portuguese and Dutch ramparts of Galle Fort, lighthouse, and a sea turtle sanctuary.",
       },
       {
         day: 7,
         title: "Colombo City Highlights & Departure",
-        description: "Sightseeing in the capital city followed by airport transfer for your departure.",
+        description: "Sightseeing in the capital city of Colombo followed by airport transfer for your departure.",
       },
     ],
     includedItems: [
@@ -184,12 +187,14 @@ export const DEFAULT_PACKAGES: TravelPackage[] = [
     entryRequirements: "Passport valid for at least 6 months.",
     visaInformation: "Sri Lanka ETA tourist visa assistance provided.",
     images: [
-      "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Fort
+      "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&auto=format&fit=crop&q=80", // Kandy Temple of the Tooth
+      "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=1200&auto=format&fit=crop&q=80", // Sigiriya Rock Fortress
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200&auto=format&fit=crop&q=80", // Colombo Highlights
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80", // Bentota Golden Beach
     ],
     coverImage:
-      "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&auto=format&fit=crop&q=80", // Galle Lighthouse & Coast
     status: "Active",
     createdAt: "Sep 28, 2026",
   },

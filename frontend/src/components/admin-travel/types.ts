@@ -4,17 +4,29 @@ export type PackageStatus = "Active" | "Draft" | "Inactive";
 
 export type Currency = "USD" | "LKR";
 
-export type InquiryType = "Inbound Tour" | "Outbound Tour";
+export type InquiryType =
+  | "Inbound Tour"
+  | "Outbound Tour"
+  | "Customize Trip"
+  | "Flight Tickets"
+  | "Visa Services"
+  | "Work Visa"
+  | "Import & Export"
+  | "Trading & Sourcing"
+  | "Business Solutions"
+  | "General Inquiry"
+  | (string & {});
 
 export type InquiryStatus =
   | "New"
-  | "Pending"
   | "Reviewing"
+  | "In Progress"
   | "Replied"
-  | "Confirmed"
-  | "Rescheduled"
   | "Completed"
-  | "Cancelled";
+  | "Cancelled"
+  | "Pending"
+  | "Confirmed"
+  | "Rescheduled";
 
 export type TravelRequestStatus = InquiryStatus;
 
