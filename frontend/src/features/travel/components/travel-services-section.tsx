@@ -14,9 +14,8 @@ export function TravelServicesSection({
   return (
     <Section
       id="services"
-      tone="surface"
       aria-labelledby="travel-services-heading"
-      className="scroll-mt-24 py-12 lg:py-16"
+      className="bg-white scroll-mt-24 py-12 lg:py-16 border-t border-slate-100"
     >
       <SectionHeading
         id="travel-services-heading"

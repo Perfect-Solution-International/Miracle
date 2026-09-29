@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "id": "inq-1790673125802",
+    "referenceNumber": "TRV-213186",
+    "customerName": "imasha",
+    "customerEmail": "pubuduimasha482@gmail.com",
+    "customerPhone": "+94765436248",
+    "whatsappNumber": "+94765436248",
+    "inquiryType": "Inbound Tour",
+    "travelType": "Inbound",
+    "packageName": "Kandy Sacred Heritage & Royal Cultural Expedition",
+    "packageId": "pkg-inbound-01",
+    "packageSlug": "sri-lanka-signature-heritage-wildlife",
+    "destination": "Sigiriya, Kandy, Nuwara Eliya, Yala, Galle, Colombo",
+    "country": "Sri Lanka",
+    "duration": "10 Days / 9 Nights",
+    "packagePrice": 240000,
+    "packageCurrency": "LKR",
+    "travelDate": "",
+    "travelers": 2,
+    "additionalRequirements": "Accommodation: 5-Star Luxury & Heritage Boutique Hotels\n\nTransport: Private Air-Conditioned Sedan (1-3 Pax)\n\nInterests: Ancient Heritage & Temples, Wildlife & Leopard Safaris, Hill Country & Tea Plantations",
+    "documents": [],
+    "status": "Replied",
+    "submittedDate": "Sep 29, 2026",
+    "replyHistory": [
+      {
+        "id": "rep-1790673179390",
+        "sender": "Miracle International Operations Desk",
+        "senderEmail": "desk@miracleinternational.com",
+        "recipientEmail": "pubuduimasha482@gmail.com",
+        "subject": "Re: Inquiry #TRV-213186 - Kandy Sacred Heritage & Royal Cultural Expedition",
+        "message": "Dear imasha,\n\nThank you for reaching out to Miracle International regarding your Inbound Tour request.\n\nWe have reviewed your inquiry details and are pleased to provide you with the following assistance...\n\nPlease feel free to reply to this email or contact us directly on WhatsApp.\n\nWarm regards,\nMiracle International Team\nhttps://miracleinternational.com",
+        "sentAt": "Sep 29, 2026, 2:42 PM"
+      }
+    ]
+  }
+]

@@ -75,9 +75,8 @@ export function TravelPackagesSection({
   return (
     <Section
       id="packages"
-      tone="surface"
       aria-label="Travel Packages"
-      className="scroll-mt-24 py-10 lg:py-14"
+      className="bg-white scroll-mt-24 py-10 lg:py-14 border-t border-slate-100"
     >
       {title ? (
         <SectionHeading

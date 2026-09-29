@@ -6,7 +6,7 @@ import { VISA_BENEFITS } from "../data/visa-services.content";
 /** "Why Choose Our Visa Assistance?" — kept short by design. */
 export function VisaBenefitsSection() {
   return (
-    <Section tone="surface" aria-labelledby="visa-benefits-heading">
+    <Section className="bg-white py-14 sm:py-20 border-t border-slate-100" aria-labelledby="visa-benefits-heading">
       <SectionHeading
         id="visa-benefits-heading"
         align="center"
