@@ -52,7 +52,11 @@ export function HomeHero() {
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Link>
             </Button>
-            <Button asChild size="xl" variant="outline" className="text-ink">
+            <Button
+              asChild
+              size="xl"
+              variant="secondary-hero"
+            >
               <Link href={ROUTES.public.services}>Explore Our Services</Link>
             </Button>
           </div>

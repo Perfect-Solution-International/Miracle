@@ -25,6 +25,11 @@ const buttonVariants = cva(
         inverse: "bg-white text-brand-blue-dark shadow-sm hover:bg-brand-blue-light",
         "outline-inverse":
           "border-white/30 bg-transparent text-white hover:border-white/60 hover:bg-white/10 aria-expanded:bg-white/10",
+        // Public hero secondary CTA variant: 100% solid corporate style without glass / opacity / backdrop-blur
+        "secondary-hero":
+          "border border-slate-300 bg-white text-slate-900 shadow-sm backdrop-blur-none opacity-100 hover:bg-slate-50 hover:border-slate-400 hover:text-slate-900 active:bg-slate-100",
+        "hero-secondary":
+          "border border-slate-300 bg-white text-slate-900 shadow-sm backdrop-blur-none opacity-100 hover:bg-slate-50 hover:border-slate-400 hover:text-slate-900 active:bg-slate-100",
       },
       size: {
         default:

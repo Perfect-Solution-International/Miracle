@@ -83,7 +83,7 @@
 }
 
 .lightProcess :global(.text-brand-blue-muted\/25) {
-  color: rgb(17 80 168 / 60%);
+  color: #5B7FAE;
 }
 
 .ctaSection :global(.container-page > div) {

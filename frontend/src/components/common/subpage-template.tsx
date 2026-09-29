@@ -125,7 +125,11 @@ export function SubpageTemplate({
                     </Button>
                   )}
                   {secondaryAction && (
-                    <Button asChild variant="outline" size="xl" className="bg-white/80">
+                    <Button
+                      asChild
+                      variant="secondary-hero"
+                      size="xl"
+                    >
                       <Link href={secondaryAction.href}>{secondaryAction.label}</Link>
                     </Button>
                   )}

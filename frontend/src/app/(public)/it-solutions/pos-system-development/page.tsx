@@ -239,7 +239,7 @@ export default function Page() {
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="xl" className="text-ink">
+          <Button asChild variant="secondary-hero" size="xl">
             <a href="#features">Explore Features</a>
           </Button>
         </div>

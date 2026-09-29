@@ -486,7 +486,11 @@ export function HomeGateway() {
                   Tell Us What You Need
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
-                <Button size="xl" variant="outline" asChild className="bg-white/80 backdrop-blur-sm">
+                <Button
+                  size="xl"
+                  variant="secondary-hero"
+                  asChild
+                >
                   <Link href="#pillars">Explore Core Pillars</Link>
                 </Button>
               </div>
