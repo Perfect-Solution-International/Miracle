@@ -69,7 +69,7 @@ export function TravelServicesSection({
               ) : (
                 <Link
                   href={card.href}
-                  className="group/card shadow-soft hover:shadow-lift hover:border-brand-blue/50 flex h-full flex-col rounded-2xl border border-slate-200/90 bg-white p-6 transition-all cursor-pointer"
+                  className="group/card shadow-soft hover:shadow-lift hover:border-brand-blue/50 flex h-full flex-col rounded-2xl border border-slate-200/90 bg-white p-6 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {cardBody}
                 </Link>

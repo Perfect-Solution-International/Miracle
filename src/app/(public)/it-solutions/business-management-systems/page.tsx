@@ -31,6 +31,7 @@ import type { Metadata } from "next";
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
 import { ItDetailHero } from "@/features/it-solutions/components/it-detail-hero";
+import { ItProcessGrid } from "@/features/it-solutions/components/it-process-grid";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
@@ -344,35 +345,12 @@ export default function Page() {
       </Section>
 
       {/* Process */}
-      <Section tone="navy" aria-labelledby="process-heading">
-        <SectionHeading
-          id="process-heading"
-          eyebrow="Our Process"
-          title="How We Build Your System"
-          description="A structured, seven-step process from first analysis to ongoing support."
-          align="center"
-          tone="inverse"
-        />
-        <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-16 lg:grid-cols-3">
-          {buildProcess.map((item) => (
-            <li
-              key={item.step}
-              className="reveal rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.06]"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-brand-blue-muted inline-flex size-11 items-center justify-center rounded-lg bg-white/10">
-                  <item.icon aria-hidden="true" className="size-5" />
-                </span>
-                <span className="text-3xl font-extrabold text-white/20">{item.step}</span>
-              </div>
-              <h3 className="mt-5 text-lg font-bold text-white">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/65">
-                {item.description}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </Section>
+      <ItProcessGrid
+        eyebrow="Our Process"
+        title="How We Build Your System"
+        description="A structured, seven-step process from first analysis to ongoing support."
+        steps={buildProcess}
+      />
 
       {/* Benefits */}
       <Section aria-labelledby="benefits-heading">
@@ -397,6 +375,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        tone="light"
         serviceContext="it"
         eyebrow="Ready to Take Control?"
         title="Transform the Way You Manage Your Business"

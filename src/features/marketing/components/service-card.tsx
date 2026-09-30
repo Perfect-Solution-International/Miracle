@@ -24,7 +24,7 @@ export function ServiceCard({
     return (
       <article
         className={cn(
-          "group bg-navy has-[a:focus-visible]:ring-ring relative isolate flex min-h-[26rem] flex-col justify-end overflow-hidden rounded-2xl p-7 text-white has-[a:focus-visible]:ring-2 sm:p-9",
+          "group bg-navy has-[a:focus-visible]:ring-ring relative isolate flex min-h-[26rem] cursor-pointer flex-col justify-end overflow-hidden rounded-2xl p-7 text-white has-[a:focus-visible]:ring-2 sm:p-9",
           className,
         )}
       >
@@ -65,7 +65,7 @@ export function ServiceCard({
   return (
     <article
       className={cn(
-        "group bg-card hover:border-brand-blue/30 hover:shadow-soft has-[a:focus-visible]:ring-ring relative flex items-center gap-4 rounded-2xl border p-5 transition-all duration-300 sm:flex-col sm:items-stretch sm:gap-6 sm:p-6 has-[a:focus-visible]:ring-2",
+        "group bg-card hover:border-brand-blue/30 hover:shadow-soft has-[a:focus-visible]:ring-ring relative flex cursor-pointer items-center gap-4 rounded-2xl border p-5 transition-all duration-300 sm:flex-col sm:items-stretch sm:gap-6 sm:p-6 has-[a:focus-visible]:ring-2",
         className,
       )}
     >

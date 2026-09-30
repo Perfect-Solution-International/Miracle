@@ -310,28 +310,27 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section tone="navy" aria-labelledby="channels-heading">
+      <Section className="bg-white" aria-labelledby="channels-heading">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <SectionHeading
             eyebrow="Channels"
             title="Reach Customers Across Multiple Touchpoints"
             description="The right mix depends on where your audience is and what you want them to do. We help the channels work together as one clear message."
-            tone="inverse"
             id="channels-heading"
           />
           <div className="grid gap-3 sm:grid-cols-2">
             {channels.map(([title, description, Icon]) => (
               <div
                 key={title}
-                className="flex items-start gap-4 rounded-xl border border-white/15 bg-white/5 px-4 py-4"
+                className="flex items-start gap-4 rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-sm"
               >
                 <Icon
                   aria-hidden="true"
-                  className="text-brand-blue-muted mt-0.5 size-5 shrink-0"
+                  className="text-brand-blue mt-0.5 size-5 shrink-0"
                 />
                 <div>
-                  <h3 className="font-semibold text-white">{title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-white/65">
+                  <h3 className="text-ink font-semibold">{title}</h3>
+                  <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
                     {description}
                   </p>
                 </div>

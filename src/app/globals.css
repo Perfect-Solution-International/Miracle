@@ -193,9 +193,11 @@
   }
 }
 
-/* The public shell has a bg-background utility; let the fixed texture show through it. */
-body > .theme-light {
-  background-color: transparent;
+/* Keep transparent public sections on white even when the system theme is dark. */
+.theme-light,
+.dark .theme-light {
+  background-color: #ffffff;
+  color-scheme: light;
 }
 
 /* ---------------------------------------------------------------------------
