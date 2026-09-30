@@ -201,7 +201,7 @@ export default function Page() {
               return (
                 <div
                   key={stepItem.step}
-                  className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-brand-blue/40"
+                  className="group rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
                 >
                   <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
                     <div className="flex items-center gap-4 lg:col-span-4">
@@ -261,7 +261,7 @@ export default function Page() {
               return (
                 <div
                   key={adv.title}
-                  className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
+                  className="rounded-2xl public-card-clickable p-6"
                 >
                   <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
                     <Icon className="size-5.5" />
@@ -294,3 +294,4 @@ export default function Page() {
     </main>
   );
 }
+

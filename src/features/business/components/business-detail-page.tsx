@@ -150,7 +150,7 @@ function BusinessCapabilities({ detail }: { detail: BusinessDetail }) {
             <article
               key={title}
               className={cn(
-                "group hover:border-brand-blue/30 border-border/80 shadow-soft relative flex min-h-48 flex-col rounded-2xl border bg-white p-6 transition-all duration-200 motion-safe:hover:-translate-y-1",
+                "group hover:border-brand-blue border-border/80 shadow-soft relative flex min-h-48 flex-col rounded-2xl border bg-white p-6 transition-all duration-200 motion-safe:hover:-translate-y-1",
                 featured && "lg:col-span-2 lg:min-h-56 lg:p-8",
               )}
             >
@@ -441,7 +441,7 @@ function RelatedBusinessSolutions({ current }: { current: BusinessDetailKey }) {
             <Link
               key={key}
               href={related.href}
-              className="group hover:border-brand-blue/30 hover:shadow-lift border-border/80 shadow-soft flex items-center gap-4 rounded-2xl border bg-white p-4 transition-all duration-200 motion-safe:hover:-translate-y-1"
+              className="group hover:border-brand-blue hover:shadow-lift border-border/80 shadow-soft flex items-center gap-4 rounded-2xl border bg-white p-4 transition-all duration-200 motion-safe:hover:-translate-y-1"
             >
               <span className="relative size-16 shrink-0 overflow-hidden rounded-lg">
                 <Image

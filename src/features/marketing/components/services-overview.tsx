@@ -251,7 +251,7 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
               </p>
             </div>
 
-            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
+            <form onSubmit={submit} className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="text-ink block text-xs font-bold mb-1.5">
@@ -487,7 +487,7 @@ export function ServicesOverview() {
                 <Link
                   key={title}
                   href={href}
-                  className="group flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/50 hover:shadow-lift cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+                  className="group flex h-full flex-col justify-between overflow-hidden rounded-2xl public-card-clickable cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
                 >
                   <div>
                     <div className="relative aspect-[16/10] overflow-hidden">
@@ -561,7 +561,7 @@ export function ServicesOverview() {
                 return (
                   <article
                     key={item.title}
-                    className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
+                    className="rounded-2xl border border-slate-200 bg-slate-50/60 p-6 shadow-[0_6px_20px_rgba(15,23,42,0.07)] hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)] hover:-translate-y-1 transition-all duration-300"
                   >
                     <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
                       <Icon className="size-5.5" />
@@ -593,7 +593,7 @@ export function ServicesOverview() {
               {PROCESS.map((item) => (
                 <article
                   key={item.step}
-                  className="relative rounded-2xl border border-slate-200/80 bg-white p-6 shadow-xs"
+                  className="relative rounded-2xl public-card-clickable p-6"
                 >
                   <span className="bg-brand-blue text-white inline-flex size-8 items-center justify-center rounded-full text-xs font-bold shadow-xs">
                     {item.step}
@@ -611,7 +611,7 @@ export function ServicesOverview() {
         {/* ── 5. Action Card ── */}
         <section className="section-y bg-white">
           <div className="container-page">
-            <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-soft">
+            <div className="relative isolate overflow-hidden rounded-2xl public-card p-8 sm:p-12">
               <div className="grid items-center gap-8 lg:grid-cols-12">
                 <div className="space-y-4 lg:col-span-8">
                   <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">

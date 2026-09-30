@@ -101,7 +101,7 @@ export default function Page() {
           {TRAVEL_SERVICE_DETAILS.map(({ icon: Icon, title, description }) => (
             <div
               key={title}
-              className="shadow-soft hover:shadow-lift group flex flex-col items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-6 transition-all"
+              className="group flex flex-col items-start gap-4 rounded-2xl public-card-clickable p-6"
             >
               <div className="bg-brand-blue-light/70 text-brand-blue flex size-12 items-center justify-center rounded-xl transition-colors group-hover:bg-brand-blue group-hover:text-white">
                 <Icon aria-hidden="true" className="size-6" />
@@ -115,3 +115,4 @@ export default function Page() {
     </>
   );
 }
+

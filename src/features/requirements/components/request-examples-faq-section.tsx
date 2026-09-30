@@ -25,7 +25,7 @@ export function RequestExamplesFaqSection() {
           {REQUEST_EXAMPLES.map(({ icon: Icon, label }) => (
             <li
               key={label}
-              className="border-border bg-surface flex flex-col items-center gap-2 rounded-xl border p-4 text-center"
+              className="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
             >
               <span className="bg-brand-blue-light text-brand-blue inline-flex size-10 items-center justify-center rounded-full">
                 <Icon aria-hidden="true" className="size-5" />

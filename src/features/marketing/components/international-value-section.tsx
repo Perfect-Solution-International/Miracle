@@ -20,14 +20,14 @@ export function InternationalValueSection() {
             sizes="(min-width: 1024px) 45vw, 100vw"
             overlay
           />
-          <div className="shadow-lift absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-2xl bg-white p-4 sm:inset-x-6 sm:bottom-6 sm:p-5">
+          <div className="shadow-[0_6px_20px_rgba(15,23,42,0.12)] border border-slate-200/90 absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-2xl bg-white p-4 sm:inset-x-6 sm:bottom-6 sm:p-5">
             <div>
               <p className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
                 From
               </p>
               <p className="text-ink font-bold">Sri Lanka</p>
             </div>
-            <span className="bg-brand-blue inline-flex size-10 items-center justify-center rounded-full text-white">
+            <span className="bg-brand-blue inline-flex size-10 items-center justify-center rounded-full text-white shadow-xs">
               <ArrowLeftRight aria-hidden="true" className="size-4" />
             </span>
             <div className="text-right">
@@ -46,16 +46,18 @@ export function InternationalValueSection() {
             title="Connecting Sri Lankan Businesses With Global Opportunities."
             description="We bridge the gap between local ambition and international supply, handling the coordination that makes cross-border business practical."
           />
-          <ul className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+          <ul className="grid gap-4 sm:grid-cols-2">
             {INTERNATIONAL_VALUE_POINTS.map(({ icon: Icon, title, description }) => (
-              <li key={title} className="border-brand-blue/15 flex gap-3 border-l-2 pl-4">
-                <Icon
-                  aria-hidden="true"
-                  className="text-brand-blue mt-0.5 size-5 shrink-0"
-                />
+              <li
+                key={title}
+                className="group flex gap-3.5 rounded-2xl public-card-clickable p-4"
+              >
+                <span className="bg-brand-blue-light text-brand-blue inline-flex size-9 shrink-0 items-center justify-center rounded-xl shadow-xs transition-colors group-hover:bg-brand-blue group-hover:text-white">
+                  <Icon aria-hidden="true" className="size-4.5" />
+                </span>
                 <div>
-                  <h3 className="text-ink font-bold">{title}</h3>
-                  <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+                  <h3 className="text-ink font-bold text-sm">{title}</h3>
+                  <p className="text-muted-foreground mt-1 text-xs sm:text-sm leading-relaxed">
                     {description}
                   </p>
                 </div>

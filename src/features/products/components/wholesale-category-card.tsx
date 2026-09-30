@@ -25,7 +25,7 @@ export function WholesaleCategoryCard({
   return (
     <article
       className={cn(
-        "group bg-navy has-[a:focus-visible]:ring-ring relative isolate flex aspect-[3/4] cursor-pointer flex-col justify-end overflow-hidden rounded-2xl p-4 text-white has-[a:focus-visible]:ring-2 sm:aspect-[4/5] sm:p-6",
+        "group bg-navy has-[a:focus-visible]:ring-ring relative isolate flex aspect-[3/4] cursor-pointer flex-col justify-end overflow-hidden rounded-2xl border border-slate-200/80 p-4 text-white shadow-[0_6px_20px_rgba(15,23,42,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue hover:shadow-[0_12px_28px_rgba(15,23,42,0.2)] has-[a:focus-visible]:ring-2 sm:aspect-[4/5] sm:p-6",
         wide && "sm:aspect-[4/5] lg:aspect-auto",
         className,
       )}

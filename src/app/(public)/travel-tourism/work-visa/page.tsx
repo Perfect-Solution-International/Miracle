@@ -211,7 +211,7 @@ export default function Page() {
                 {WORK_VISA_PILLARS.map(({ icon: Icon, title, description }) => (
                   <div
                     key={title}
-                    className="shadow-2xs hover:shadow-soft group flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white p-4 transition-all"
+                    className="group flex items-start gap-3.5 rounded-2xl public-card-clickable p-4"
                   >
                     <div className="bg-brand-blue-light/70 text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:bg-brand-blue group-hover:text-white">
                       <Icon aria-hidden="true" className="size-5" />
@@ -274,7 +274,7 @@ export default function Page() {
 
           <div className="mt-10 space-y-4">
             {FAQS.map(({ q, a }) => (
-              <div key={q} className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-soft">
+              <div key={q} className="rounded-2xl public-card p-6">
                 <div className="flex items-start gap-3">
                   <HelpCircle aria-hidden="true" className="text-brand-blue size-5 shrink-0 mt-0.5" />
                   <div>
@@ -290,3 +290,4 @@ export default function Page() {
     </>
   );
 }
+

@@ -59,7 +59,7 @@ export function WhoWeAreSection() {
           </p>
         </div>
 
-        <div className="divide-border divide-y rounded-2xl border p-2 sm:p-3">
+        <div className="divide-slate-200 divide-y rounded-2xl public-card p-2 sm:p-3">
           {MISSION_VISION_VALUES.map(({ icon: Icon, title, id, description, bullets }) => (
             <div key={title} id={id} className="scroll-mt-24 flex gap-4 p-4">
               <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 shrink-0 items-center justify-center rounded-lg">

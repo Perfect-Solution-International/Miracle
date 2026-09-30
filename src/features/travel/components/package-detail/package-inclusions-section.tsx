@@ -21,7 +21,7 @@ export function PackageInclusionsSection({ detail }: { detail: TravelPackageDeta
 
       <div className="mt-8 grid gap-6 lg:grid-cols-12">
         {/* Left / Main Column: Included Services & Experiences */}
-        <div className="rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-soft lg:col-span-7">
+        <div className="rounded-2xl public-card p-6 sm:p-8 lg:col-span-7">
           <h3 className="text-ink text-base font-bold sm:text-lg">
             Included Services &amp; Amenities
           </h3>
@@ -40,7 +40,7 @@ export function PackageInclusionsSection({ detail }: { detail: TravelPackageDeta
         {/* Right Column: Accommodation & Transportation */}
         <div className="flex flex-col gap-6 lg:col-span-5">
           {/* Accommodation */}
-          <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-soft transition-all hover:border-brand-blue/30">
+          <div className="rounded-2xl public-card-clickable p-6">
             <div className="flex items-center gap-3">
               <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-2xl">
                 <BedDouble aria-hidden="true" className="size-5.5" />
@@ -59,7 +59,7 @@ export function PackageInclusionsSection({ detail }: { detail: TravelPackageDeta
           </div>
 
           {/* Transportation */}
-          <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-soft transition-all hover:border-brand-blue/30">
+          <div className="rounded-2xl public-card-clickable p-6">
             <div className="flex items-center gap-3">
               <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-2xl">
                 <Car aria-hidden="true" className="size-5.5" />
@@ -81,3 +81,4 @@ export function PackageInclusionsSection({ detail }: { detail: TravelPackageDeta
     </Section>
   );
 }
+

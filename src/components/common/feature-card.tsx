@@ -30,17 +30,17 @@ export function FeatureCard({
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col gap-5 rounded-xl border p-6 transition-all duration-300",
+        "group relative flex h-full flex-col gap-5 rounded-2xl p-6",
         inverse
-          ? "border-white/10 bg-white/[0.03] hover:border-white/25 hover:bg-white/[0.06]"
-          : "bg-card hover:border-brand-blue/30 hover:shadow-soft",
+          ? "border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-white/25 hover:bg-white/[0.06]"
+          : "public-card-clickable",
         href && "cursor-pointer has-[a:focus-visible]:ring-ring has-[a:focus-visible]:ring-2",
         className,
       )}
     >
       <span
         className={cn(
-          "inline-flex size-11 items-center justify-center rounded-lg transition-colors duration-300",
+          "inline-flex size-11 items-center justify-center rounded-xl transition-colors duration-300 shadow-xs",
           inverse
             ? "text-brand-blue-muted bg-white/10"
             : "bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue group-hover:text-white",

@@ -149,7 +149,7 @@ function TradingRequestModal({ open, onClose }: { open: boolean; onClose: () => 
               <h2 id="trading-request-title" className="text-slate-900 mt-2 text-2xl font-extrabold sm:text-3xl">Trading Request</h2>
               <p className="text-slate-600 mt-1 max-w-xl text-xs sm:text-sm leading-relaxed">Tell us what you need and our trade team will help coordinate the right commercial solution.</p>
             </div>
-            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Full Name" required value={form.fullName} onChange={(value) => update("fullName", value)} placeholder="Your full name" />
                 <Field label="Email Address" required type="email" value={form.email} onChange={(value) => update("email", value)} placeholder="you@example.com" />
@@ -282,7 +282,7 @@ export function TradingLanding({
                   key={title}
                   type="button"
                   onClick={() => setIsFormOpen(true)}
-                  className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-7 text-left shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-400 hover:shadow-md cursor-pointer flex flex-col justify-between"
+                  className="group rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)] cursor-pointer flex flex-col justify-between"
                 >
                   <div>
                     <span className="bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white inline-flex size-12 items-center justify-center rounded-2xl shadow-xs transition-colors duration-300">
@@ -323,7 +323,7 @@ export function TradingLanding({
               {SERVICES.map(([title, description, Icon]) => (
                 <article
                   key={title as string}
-                  className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs hover:border-blue-300 hover:shadow-soft transition-all duration-300"
+                  className="rounded-2xl public-card-clickable p-6"
                 >
                   <span className="bg-blue-50 text-blue-600 inline-flex size-11 items-center justify-center rounded-2xl shadow-2xs">
                     <Icon className="size-5.5" />

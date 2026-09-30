@@ -968,7 +968,7 @@ function RequestModal({
             </div>
             <form
               onSubmit={submit}
-              className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8"
+              className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8"
               noValidate
             >
               <div className="bg-brand-blue-light grid grid-cols-2 gap-1 rounded-xl p-1">
@@ -1148,7 +1148,7 @@ function FeatureCard({
           onAction();
         }
       }}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/50 hover:shadow-lift cursor-pointer select-none"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)] cursor-pointer select-none"
     >
       <div>
         {/* Full-width Card Image */}
@@ -1337,7 +1337,7 @@ export function ImportExportLanding({
                     }
                   }}
                   aria-label={`Request information for ${title}`}
-                  className="group shadow-soft flex min-h-96 flex-col overflow-hidden rounded-2xl border bg-white cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft"
+                  className="group flex min-h-96 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
                 >
                   <div className="relative aspect-[1.45] overflow-hidden">
                     <Image

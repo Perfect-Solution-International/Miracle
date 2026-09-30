@@ -56,7 +56,7 @@ export function TravelPackageCard({
 
   return (
     <>
-      <li className="shadow-soft hover:shadow-lift group/card flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white transition-all hover:border-brand-blue/40">
+      <li className="group/card flex h-full flex-col overflow-hidden rounded-2xl public-card-clickable">
         <Link
           href={detailUrl}
           className="flex flex-1 flex-col focus-visible:outline-none"

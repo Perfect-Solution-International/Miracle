@@ -157,7 +157,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
         ) : (
           <>
             <div className="border-b px-6 py-6 pr-16 sm:px-8"><p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">Miracle International</p><h2 id="investment-modal-title" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">Investment Requirement</h2><p className="text-muted-foreground mt-2 max-w-xl text-sm leading-relaxed">Tell us about your investment interests or business requirements.</p></div>
-            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="text-ink text-sm font-semibold">Full Name *<Input value={form.fullName} onChange={(event) => update("fullName", event.target.value)} placeholder="Your full name" className="mt-2" /></label>
                 <label className="text-ink text-sm font-semibold">Email Address *<Input type="email" value={form.email} onChange={(event) => update("email", event.target.value)} placeholder="you@example.com" className="mt-2" /></label>
@@ -301,7 +301,7 @@ export function InvestmentLanding({
             <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {SUPPORT_TYPES.map(([number, title, description, Icon]) => (
                 <button type="button" key={title} onClick={openForm} className="group text-left">
-                  <article className="hover:border-brand-blue/40 hover:shadow-soft h-full rounded-2xl border border-slate-200/80 bg-white p-6 transition-all duration-300 hover:-translate-y-1">
+                  <article className="h-full rounded-2xl public-card-clickable p-6">
                     <div className="flex items-center justify-between">
                       <span className="text-brand-red text-sm font-bold">{number}</span>
                       <Icon className="text-brand-blue size-7 transition-transform group-hover:scale-110" />
@@ -345,7 +345,7 @@ export function InvestmentLanding({
                     type="button"
                     onClick={openForm}
                     key={title}
-                    className="hover:border-brand-blue/40 flex items-center gap-3 rounded-xl border border-slate-200/80 bg-white p-4 text-left transition-colors"
+                    className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
                   >
                     <Icon className="text-brand-blue size-5 shrink-0" />
                     <span className="text-ink text-sm font-semibold">{title}</span>
@@ -374,7 +374,7 @@ export function InvestmentLanding({
               </p>
               <div className="mt-9 grid gap-3 sm:grid-cols-2">
                 {BUSINESS_OPPORTUNITIES.map(([title, description, Icon]) => (
-                  <article key={title} className="rounded-xl border border-slate-200/80 bg-white p-4">
+                  <article key={title} className="rounded-2xl public-card p-4">
                     <Icon className="text-brand-blue size-5" />
                     <h3 className="text-ink mt-4 text-sm font-bold">{title}</h3>
                     <p className="text-muted-foreground mt-2 text-xs leading-relaxed">{description}</p>
@@ -435,7 +435,7 @@ export function InvestmentLanding({
             </div>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {BUSINESS_IDEAS.map(([title, description]) => (
-                <article key={title} className="rounded-2xl border border-slate-200/80 bg-white p-5">
+                <article key={title} className="rounded-2xl public-card p-5">
                   <Lightbulb className="text-brand-blue size-6" />
                   <h3 className="text-ink mt-5 text-sm font-bold">{title}</h3>
                   <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p>
@@ -492,7 +492,7 @@ export function InvestmentLanding({
             </div>
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {WHY_US.map(([title, description, Icon]) => (
-                <article key={title} className="rounded-2xl border border-slate-200/80 bg-white p-6">
+                <article key={title} className="rounded-2xl public-card p-6">
                   <Icon className="text-brand-blue size-7" />
                   <h3 className="text-ink mt-7 font-bold">{title}</h3>
                   <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p>

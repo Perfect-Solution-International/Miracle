@@ -18,7 +18,7 @@ export function VisaBenefitsSection() {
         {VISA_BENEFITS.map(({ icon: Icon, title, description }) => (
           <li
             key={title}
-            className="flex flex-col items-center gap-3 rounded-2xl border bg-white p-6 text-center"
+            className="flex flex-col items-center gap-3 rounded-2xl public-card p-6 text-center"
           >
             <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-full">
               <Icon aria-hidden="true" className="size-5" />

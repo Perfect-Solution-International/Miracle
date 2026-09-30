@@ -111,7 +111,7 @@ export function PackageReviewsSection({
       : "5.0";
 
   return (
-    <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-soft space-y-6">
+    <div className="rounded-3xl public-card p-6 sm:p-8 space-y-6">
       {/* Header Row */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
@@ -314,7 +314,7 @@ export function PackageReviewsSection({
           {reviews.map((rev) => (
             <div
               key={rev.id}
-              className="p-5 rounded-2xl border border-slate-200/80 bg-white space-y-2.5 transition-all shadow-xs hover:shadow-soft hover:border-slate-300"
+              className="p-5 rounded-2xl public-card-clickable space-y-2.5"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-center gap-2.5">

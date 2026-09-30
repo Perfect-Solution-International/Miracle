@@ -21,7 +21,7 @@ export function SidebarTestimonialCard({
   const testimonial = testimonials[index]!;
 
   return (
-    <figure className="shadow-soft rounded-3xl border bg-white p-6">
+    <figure className="rounded-2xl public-card p-6">
       <div className="flex items-center justify-between gap-3">
         <Quote aria-hidden="true" className="text-brand-red size-6" />
         {testimonial.isSample ? (
@@ -60,3 +60,4 @@ export function SidebarTestimonialCard({
     </figure>
   );
 }
+

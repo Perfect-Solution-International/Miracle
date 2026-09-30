@@ -27,7 +27,7 @@ export function ServiceRequirementDialog({
   defaultService,
 }: {
   trigger: ReactNode;
-  context: ServiceContext;
+  context: "general" | ServiceContext;
   defaultService?: string;
 }) {
   const pathname = usePathname();

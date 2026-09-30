@@ -47,7 +47,7 @@ export function PackageOverviewSection({ detail }: { detail: TravelPackageDetail
           {detail.whatToExpect.map((item, index) => (
             <div
               key={item.title}
-              className="group flex items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-soft transition-all hover:border-brand-blue/40 hover:shadow-lift"
+              className="group flex items-start gap-4 rounded-2xl public-card-clickable p-5"
             >
               <span className="bg-brand-blue text-white flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold mt-0.5">
                 0{index + 1}
@@ -112,3 +112,4 @@ export function PackageOverviewSection({ detail }: { detail: TravelPackageDetail
     </Section>
   );
 }
+
