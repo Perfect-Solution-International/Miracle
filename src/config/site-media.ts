@@ -81,8 +81,8 @@ export const SITE_MEDIA = {
   },
   investment: {
     hero: {
-      src: unsplash("1556761175-b413da4baf72"),
-      alt: "Business professionals reviewing an investment strategy together",
+      src: "/images/services/investment-hero.jpg",
+      alt: "Senior investment advisor and client reviewing financial portfolios in a skyline penthouse office",
     },
     partnership: {
       src: unsplash("1521737711867-e3b97375f902"),
@@ -103,8 +103,8 @@ export const SITE_MEDIA = {
   },
   services: {
     hero: {
-      src: unsplash("1552664730-d307ca884978"),
-      alt: "Business professionals collaborating in a bright international office",
+      src: "/images/services/services-main-hero.jpg",
+      alt: "International business professionals and trade consultants collaborating in a modern corporate boardroom",
     },
     panel: {
       src: "/images/services/services-hero-bg.png",
@@ -115,30 +115,30 @@ export const SITE_MEDIA = {
       alt: "Entrepreneur reviewing a business plan at a modern workspace",
     },
     trading: {
-      src: unsplash("1524758631624-e2822e304c36"),
-      alt: "Business team discussing products and commercial opportunities",
+      src: "/images/services/trading-hero.jpg",
+      alt: "Business partners and trade merchants shaking hands in a commercial showroom",
     },
     franchise: {
-      src: unsplash("1542744173-8e7e53415bb0"),
-      alt: "Entrepreneurs planning a growing business together",
+      src: "/images/services/franchise-hero.jpg",
+      alt: "Franchise director and entrepreneur discussing expansion plans in a modern flagship retail space",
     },
     importExport: {
-      src: unsplash("1566576912321-d58ddd7a6088"),
-      alt: "Cargo containers and logistics operations at a global port",
+      src: "/images/services/import-export-hero.jpg",
+      alt: "Logistics director and trade manager overlooking international shipping containers at a cargo port",
     },
     investment: {
-      src: unsplash("1556742049-0cfed4f6a45d"),
-      alt: "Professionals reviewing business growth and investment information",
+      src: "/images/services/investment-hero.jpg",
+      alt: "Senior investment advisor and executive client reviewing commercial project documents",
     },
     marketing: {
-      src: unsplash("1531482615713-2afd69097998"),
-      alt: "Creative business team developing a marketing strategy",
+      src: "/images/services/marketing-hero.jpg",
+      alt: "Creative brand directors reviewing multi-channel campaigns on a digital display in a modern studio",
     },
   },
   marketingAdvertising: {
     hero: {
-      src: unsplash("1758691736424-4b4273948341"),
-      alt: "Marketing team reviewing a campaign presentation in a boardroom",
+      src: "/images/services/marketing-hero.jpg",
+      alt: "Creative brand directors reviewing multi-channel campaigns on a digital display in a modern studio",
     },
     heroInset: {
       src: unsplash("1777559542650-f2b84a66d30f"),
@@ -155,8 +155,8 @@ export const SITE_MEDIA = {
   },
   franchise: {
     hero: {
-      src: unsplash("1683803055067-1ca1c17cb2b9"),
-      alt: "Entrepreneurs planning a business together around a table of laptops",
+      src: "/images/services/franchise-hero.jpg",
+      alt: "Franchise director and entrepreneur discussing expansion plans in a modern flagship retail space",
     },
     journey: {
       src: unsplash("1758611972678-bc3b29b4718f"),

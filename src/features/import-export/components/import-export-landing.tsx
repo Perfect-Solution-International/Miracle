@@ -1189,38 +1189,33 @@ export function ImportExportLanding({
   return (
     <>
       <main>
-        <section className="relative isolate overflow-hidden border-b border-border/40 bg-white/75 backdrop-blur-md">
-          {/* Liquid Ambient Glow Mesh */}
+        <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-[450px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+            className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
           />
 
-          <div className="container-page grid items-center gap-12 py-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14 lg:py-24">
-            <div className="max-w-2xl">
-              {/* Pulsing Live Badge Pill */}
-              <div>
-                <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
-                  <span className="relative flex size-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
-                    <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
-                  </span>
-                  <span className="text-xs font-bold tracking-widest text-brand-blue uppercase">
-                    Cross-Border Trade & Logistics
-                  </span>
-                </div>
+          <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+            <div className="max-w-2xl space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
+                <span className="bg-brand-red size-1.5 rounded-full" />
+                IMPORT &amp; EXPORT
               </div>
 
-              <h1 className="text-ink mt-5 text-5xl leading-[0.98] font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-                Connecting Products With Global Markets
+              <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                Connect Products.{" "}
+                <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
+                  Connect Markets.
+                </span>
               </h1>
-              <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed sm:text-xl">
-                We help businesses source products internationally and coordinate import
-                and export requirements through practical, end-to-end trade support.
+
+              <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
+                Practical import and export support for sourcing products and connecting businesses across international markets.
               </p>
-              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row">
-                <Button size="xl" variant="accent" onClick={() => openForm()} className="shadow-lg shadow-brand-red/20">
-                  Submit Import / Export Request
+
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+                <Button size="xl" variant="accent" onClick={() => openForm()} className="shadow-lift">
+                  Request Now
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
                 <Button
@@ -1232,34 +1227,21 @@ export function ImportExportLanding({
                 </Button>
               </div>
             </div>
-            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-[2rem] border-8 border-white bg-slate-100 lg:-mr-24 lg:aspect-[16/9] lg:translate-x-6 xl:-mr-40">
-              <Image
-                src={SITE_MEDIA.portAerial.src}
-                alt=""
-                fill
-                aria-hidden="true"
-                sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 56vw, 100vw"
-                className="scale-105 object-cover opacity-60 blur-md"
-              />
-              <Image
-                src={SITE_MEDIA.portAerial.src}
-                alt={SITE_MEDIA.portAerial.alt}
-                fill
-                priority
-                sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 56vw, 100vw"
-                className="scale-[1.02] object-cover brightness-[0.98] saturate-[0.9] transition-transform duration-700 hover:scale-105"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white/65 via-white/15 to-transparent"
-              />
-              <span className="text-ink shadow-soft absolute top-5 left-5 rounded-full bg-white/95 px-4 py-2 text-xs font-bold backdrop-blur-sm">
-                <Globe2
-                  aria-hidden="true"
-                  className="text-brand-blue mr-2 inline size-4"
-                />
-                International trade activity
-              </span>
+
+            <div className="relative mx-auto w-full max-w-xl">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
+                <div className="relative h-full w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src="/images/services/import-export-hero.jpg"
+                    alt="International logistics director and trade manager overseeing shipping operations at a container port"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1310,7 +1292,19 @@ export function ImportExportLanding({
               {CATEGORIES.map(([title, description, Icon, image]) => (
                 <article
                   key={title}
-                  className="group shadow-soft flex min-h-96 flex-col overflow-hidden rounded-2xl border bg-white"
+                  onClick={() =>
+                    setSelectedDetail(getCategoryDetail(title, description, image))
+                  }
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedDetail(getCategoryDetail(title, description, image));
+                    }
+                  }}
+                  aria-label={`Request information for ${title}`}
+                  className="group shadow-soft flex min-h-96 flex-col overflow-hidden rounded-2xl border bg-white cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft"
                 >
                   <div className="relative aspect-[1.45] overflow-hidden">
                     <Image
@@ -1326,21 +1320,18 @@ export function ImportExportLanding({
                       className="absolute bottom-4 left-4 size-6 text-white"
                     />
                   </div>
-                  <div className="p-5">
-                    <h3 className="text-ink font-bold">{title}</h3>
+                  <div className="p-5 flex flex-col flex-1">
+                    <h3 className="text-ink font-bold group-hover:text-brand-blue transition-colors">{title}</h3>
                     <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
                       {description}
                     </p>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setSelectedDetail(getCategoryDetail(title, description, image))
-                      }
-                      className="text-brand-blue mt-4 inline-flex items-center gap-2 text-sm font-bold"
-                    >
-                      View Details
-                      <ArrowRight aria-hidden="true" className="size-4" />
-                    </button>
+                    <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-brand-blue inline-flex items-center gap-1.5 text-sm font-bold group-hover:underline">
+                        Request Now
+                        <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                      <span className="text-xs font-semibold text-muted-foreground">Trade Category</span>
+                    </div>
                   </div>
                 </article>
               ))}

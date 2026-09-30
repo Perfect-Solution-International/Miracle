@@ -406,52 +406,38 @@ export function ServicesOverview() {
     <>
       <main>
         {/* ── 1. Hero Section ── */}
-        <section
-          className="relative isolate overflow-hidden border-b border-slate-200/80 pt-8 pb-14 lg:pt-14 lg:pb-20 md:!bg-fixed"
-          style={{
-            backgroundImage: 'url("/images/services/services-hero-bg.png")',
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
+        <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10"
-            style={{
-              background: "linear-gradient(to right, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.05) 100%)",
-            }}
+            className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
           />
 
-          <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
-            <div className="max-w-2xl space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-600 opacity-75" />
-                  <span className="relative inline-flex size-2 rounded-full bg-emerald-600" />
-                </span>
-                Cross-Border Services &amp; Trade Operations
+          <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+            <div className="max-w-2xl space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
+                <span className="bg-brand-red size-1.5 rounded-full" />
+                OUR SERVICES
               </div>
 
               <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                Global Trade, Franchise &amp;{" "}
-                <span className="bg-gradient-to-r from-emerald-600 via-brand-blue to-navy bg-clip-text text-transparent">
-                  Business Services.
+                Global Services.{" "}
+                <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
+                  Practical Business Solutions.
                 </span>
               </h1>
 
               <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-                Explore our integrated trade, investment, franchise, and marketing capabilities designed to help businesses connect with international markets and professional solutions.
+                Explore professional services designed to help individuals and businesses manage opportunities, trade, travel, and growth with confidence.
               </p>
 
-              <div className="flex flex-col gap-3 sm:flex-row pt-2">
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
                 <Button
                   size="xl"
                   variant="accent"
                   className="shadow-lift"
                   onClick={() => document.getElementById("main-services")?.scrollIntoView({ behavior: "smooth" })}
                 >
-                  Explore All Services
+                  Explore Our Services
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
                 <Button
@@ -464,16 +450,18 @@ export function ServicesOverview() {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-2xl">
-              <div className="relative aspect-[4/3]">
-                <div className="absolute bottom-5 left-5 right-5 text-navy">
-                  <span className="bg-white/80 rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-navy mb-2">
-                    <Globe2 className="size-3.5" />
-                    Strategic Commerce
-                  </span>
-                  <p className="text-base sm:text-lg font-bold">
-                    Coordinated Cross-Border Business Solutions
-                  </p>
+            <div className="relative mx-auto w-full max-w-xl">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
+                <div className="relative h-full w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src="/images/services/services-main-hero.jpg"
+                    alt="International business professionals and consultants collaborating in a modern corporate boardroom"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
                 </div>
               </div>
             </div>
@@ -496,10 +484,11 @@ export function ServicesOverview() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {SERVICES.map(({ number, title, summary, points, href, label, icon: Icon, image, featured }) => (
-                <article
+              {SERVICES.map(({ number, title, summary, points, href, label, icon: Icon, image }) => (
+                <Link
                   key={title}
-                  className="group flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/40 hover:shadow-lift"
+                  href={href}
+                  className="group flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/50 hover:shadow-lift cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
                 >
                   <div>
                     <div className="relative aspect-[16/10] overflow-hidden">
@@ -518,7 +507,7 @@ export function ServicesOverview() {
 
                     <div className="p-6 space-y-4">
                       <div className="flex items-center gap-3">
-                        <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-2xl shadow-xs transition-transform group-hover:scale-110">
+                        <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-2xl shadow-xs transition-transform duration-300 group-hover:scale-110">
                           <Icon className="size-5.5" />
                         </span>
                         <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors">
@@ -542,15 +531,14 @@ export function ServicesOverview() {
                   </div>
 
                   <div className="p-6 pt-0 border-t border-slate-100 mt-4">
-                    <Link
-                      href={href}
-                      className="text-brand-blue inline-flex items-center gap-1.5 text-xs font-bold pt-4 transition-all group-hover:gap-2.5"
+                    <span
+                      className="text-brand-blue inline-flex items-center gap-1.5 text-xs font-bold pt-4 transition-all group-hover:gap-2.5 group-hover:text-brand-blue-dark"
                     >
                       {label}
-                      <ArrowRight className="size-3.5" />
-                    </Link>
+                      <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </span>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           </div>

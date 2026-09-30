@@ -111,19 +111,21 @@ export function PackageHero({ detail }: { detail: TravelPackageDetail }) {
                 className="gap-2"
                 id="hero-send-inquiry-btn"
               >
-                Send Inquiry
+                Inquiry Now
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Button>
-              <Button
-                variant="secondary-hero"
-                size="xl"
-                onClick={() => setInquiryOpen(true)}
-                className="gap-2"
-                id="hero-customize-btn"
-              >
-                <SlidersHorizontal aria-hidden="true" className="size-4" />
-                Customize This Package
-              </Button>
+              {detail.travelDirection === "Inbound" ? (
+                <Button
+                  variant="secondary-hero"
+                  size="xl"
+                  onClick={() => setInquiryOpen(true)}
+                  className="gap-2"
+                  id="hero-customize-btn"
+                >
+                  <SlidersHorizontal aria-hidden="true" className="size-4" />
+                  Customize This Package
+                </Button>
+              ) : null}
             </div>
           </div>
         </div>

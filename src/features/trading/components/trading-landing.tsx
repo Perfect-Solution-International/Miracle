@@ -194,17 +194,55 @@ export function TradingLanding({
   return (
     <>
       <main className="bg-white">
-        <section className="overflow-hidden bg-[linear-gradient(120deg,#f8fbff_0%,#ffffff_55%,#f0f6ff_100%)]">
-          <div className="container-page grid gap-12 py-16 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:py-24">
-            <div className="max-w-2xl">
-              <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A clearer way to trade</p>
-              <h1 className="text-ink mt-5 max-w-2xl text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">Trading Solutions for Local &amp; Global Markets</h1>
-              <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed sm:text-xl">Connect with suppliers, buyers and products through simple and reliable trading solutions designed for businesses of all sizes.</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={() => setIsFormOpen(true)}>Start a Trading Request <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="secondary-hero" asChild><a href="#services">Explore Trading Services</a></Button></div>
+        <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
+          />
+
+          <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+            <div className="max-w-2xl space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
+                <span className="bg-brand-red size-1.5 rounded-full" />
+                TRADING
+              </div>
+
+              <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                Smarter Trading.{" "}
+                <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
+                  Stronger Business Connections.
+                </span>
+              </h1>
+
+              <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
+                Explore local and international trading solutions designed around your product and business requirements.
+              </p>
+
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+                <Button size="xl" variant="accent" onClick={() => setIsFormOpen(true)} className="shadow-lift">
+                  Request Now
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                </Button>
+                <Button size="xl" variant="secondary-hero" asChild>
+                  <a href="#services">Explore Trading Services</a>
+                </Button>
+              </div>
             </div>
-            <div className="relative min-h-[360px] overflow-hidden rounded-3xl border border-blue-100 bg-white p-3 shadow-xl shadow-blue-100/60 sm:min-h-[430px]">
-              <Image src={SITE_MEDIA.warehouse.src} alt={SITE_MEDIA.warehouse.alt} fill priority sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover" />
-              <div className="absolute inset-x-5 bottom-5 flex items-center justify-between rounded-2xl border border-white/70 bg-white/90 p-4 shadow-lg backdrop-blur-sm"><span className="flex items-center gap-2 text-sm font-bold text-brand-blue-dark"><Globe2 className="size-5" /> Local to global connections</span><Ship className="size-6 text-brand-red" /></div>
+
+            <div className="relative mx-auto w-full max-w-xl">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
+                <div className="relative h-full w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src="/images/services/trading-hero.jpg"
+                    alt="Trade partners and commercial suppliers shaking hands across a meeting table"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -167,24 +167,6 @@ export function InboundToursView() {
         </div>
       </section>
 
-      {/* Inquiry Quick Banner (seamlessly connected without hard borders) */}
-      <div className="bg-white py-4 px-4">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs bg-slate-50/70 border border-slate-200/80 rounded-2xl px-5 py-3 shadow-xs">
-          <div className="flex items-center gap-2 text-navy dark:text-foreground font-medium">
-            <Sparkles className="size-4 text-amber-500 shrink-0" />
-            <span>Looking for a bespoke private tour? Send an inquiry and get a customized quote with zero obligation.</span>
-          </div>
-          <Button
-            size="sm"
-            onClick={() => setGeneralInquiryOpen(true)}
-            className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs h-8 px-4 shrink-0 font-semibold gap-1.5 shadow-xs"
-          >
-            <Send className="size-3" />
-            Send Custom Inquiry
-          </Button>
-        </div>
-      </div>
-
       {/* Inbound Packages Grid */}
       <div className="bg-white">
         <div id="inbound-packages" className="container-page scroll-mt-20">

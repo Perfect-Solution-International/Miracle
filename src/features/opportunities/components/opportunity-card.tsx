@@ -64,6 +64,14 @@ export function OpportunityCard({
           <dd className="text-ink font-bold">{opportunity.investmentLabel}</dd>
         </div>
       </dl>
+
+      <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+        <span className="text-brand-blue inline-flex items-center gap-1.5 text-sm font-bold group-hover:underline">
+          Apply Now
+          <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </span>
+        <span className="text-xs font-semibold text-muted-foreground">Opportunity</span>
+      </div>
     </article>
   );
 }
