@@ -66,7 +66,7 @@ export function PackageRelatedSection({ detail }: { detail: TravelPackageDetail 
           {related.map((pkg) => (
             <li
               key={pkg.slug}
-              className="group/card shadow-soft flex cursor-pointer flex-col overflow-hidden rounded-2xl border bg-white transition-shadow hover:shadow-lift"
+              className="group/card flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
             >
               <Link
                 href={ROUTES.public.travelPackage(pkg.slug)}

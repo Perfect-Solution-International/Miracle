@@ -5,6 +5,8 @@ import { Eyebrow } from "@/components/common/eyebrow";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 
+import { ServiceRequirementDialog } from "./service-requirement-dialog";
+
 /**
  * Tell Us What You Need Hero
  */
@@ -64,20 +66,22 @@ export function TellUsWhatYouNeedHero() {
             </p>
 
             <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-              <Button
-                asChild
-                size="xl"
-                className="bg-brand-blue font-bold text-white shadow-md hover:bg-brand-blue-dark"
-              >
-                <a href="#requirement-form">
-                  Submit Your Requirement
-                  <ArrowRight
-                    data-icon="inline-end"
-                    aria-hidden="true"
-                    className="size-4"
-                  />
-                </a>
-              </Button>
+              <ServiceRequirementDialog
+                context="general"
+                trigger={
+                  <Button
+                    size="xl"
+                    className="bg-brand-blue font-bold text-white shadow-md hover:bg-brand-blue-dark"
+                  >
+                    Submit Your Requirement
+                    <ArrowRight
+                      data-icon="inline-end"
+                      aria-hidden="true"
+                      className="size-4"
+                    />
+                  </Button>
+                }
+              />
 
               <Button
                 asChild

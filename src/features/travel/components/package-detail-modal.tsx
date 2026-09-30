@@ -139,7 +139,7 @@ export function PackageDetailModal({
               {pkg.included.map((item) => (
                 <div
                   key={item}
-                  className="flex items-start gap-2.5 rounded-xl border border-slate-200/90 bg-white p-3 text-sm transition-colors hover:border-brand-blue/30 shadow-xs"
+                  className="flex items-start gap-2.5 rounded-xl border border-slate-200/90 bg-white p-3 text-sm transition-colors hover:border-brand-blue shadow-xs"
                 >
                   <span className="bg-brand-blue text-white mt-0.5 inline-flex size-4.5 shrink-0 items-center justify-center rounded-full">
                     <Check aria-hidden="true" className="size-3 stroke-[3]" />

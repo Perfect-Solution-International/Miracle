@@ -101,7 +101,7 @@ export function GlobalPresenceSection() {
 
         <TradeRouteMap />
 
-        <div className="shadow-soft flex flex-col gap-3 rounded-2xl border bg-white p-6">
+        <div className="flex flex-col gap-3 rounded-2xl public-card p-6">
           <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-full">
             <Globe2 aria-hidden="true" className="size-5" />
           </span>
@@ -115,3 +115,4 @@ export function GlobalPresenceSection() {
     </Section>
   );
 }
+

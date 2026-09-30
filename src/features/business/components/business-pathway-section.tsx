@@ -54,7 +54,7 @@ export function BusinessPathwaySection({
         {stages.map((stage, index) => (
           <li
             key={stage.title}
-            className="reveal group hover:border-brand-blue/30 hover:shadow-soft relative flex flex-col rounded-2xl border bg-white p-6 transition-all duration-300"
+            className="reveal group relative flex flex-col rounded-2xl public-card-clickable p-6"
           >
             <span className="text-brand-blue group-hover:bg-brand-blue group-hover:border-brand-blue bg-brand-blue-light shadow-soft relative -mt-12 mb-5 inline-flex size-12 items-center justify-center rounded-full border-2 border-white text-base font-extrabold transition-colors duration-300 group-hover:text-white">
               {String(index + 1).padStart(2, "0")}
@@ -79,3 +79,4 @@ export function BusinessPathwaySection({
     </Section>
   );
 }
+

@@ -203,7 +203,7 @@ export function FaqContent() {
                     "flex items-center gap-3 rounded-2xl px-4 py-3.5 text-left text-sm font-bold transition-all",
                     isActive
                       ? "bg-brand-blue text-white shadow-lg shadow-brand-blue/25"
-                      : "bg-white text-ink/80 hover:bg-brand-blue/5 hover:text-brand-blue border border-border/70",
+                      : "bg-slate-50 text-ink/80 hover:bg-brand-blue/5 hover:text-brand-blue border border-slate-300/80",
                   )}
                 >
                   <Icon className="size-4 shrink-0" />
@@ -213,7 +213,7 @@ export function FaqContent() {
             })}
 
             {/* Direct Advisor Card */}
-            <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
+            <div className="mt-6 rounded-2xl public-card p-6">
               <div className="flex size-10 items-center justify-center rounded-xl bg-brand-blue text-white mb-3">
                 <MessageSquare className="size-5" />
               </div>
@@ -230,7 +230,7 @@ export function FaqContent() {
           {/* Right Accordion List */}
           <div className="flex flex-col gap-4">
             {filteredFaqs.length === 0 ? (
-              <div className="rounded-3xl border border-dashed border-border bg-white p-12 text-center">
+              <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-12 text-center">
                 <HelpCircle className="mx-auto size-12 text-muted-foreground/50 mb-3" />
                 <h3 className="text-lg font-bold text-ink">No matching questions found</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
@@ -254,7 +254,7 @@ export function FaqContent() {
                 return (
                   <div
                     key={faq.id}
-                    className="overflow-hidden rounded-2xl border border-border/80 bg-white shadow-soft transition-all duration-200 hover:border-brand-blue/30"
+                    className="overflow-hidden rounded-2xl public-card-clickable"
                   >
                     <button
                       onClick={() => toggleOpen(faq.id)}
@@ -303,3 +303,4 @@ export function FaqContent() {
     </div>
   );
 }
+

@@ -298,7 +298,7 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
 
             <form
               onSubmit={submit}
-              className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8 space-y-4"
+              className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8 space-y-4"
               noValidate
             >
               <div className="grid gap-4 sm:grid-cols-2">
@@ -561,7 +561,7 @@ export function HomeGateway() {
               return (
                 <div
                   key={pillar.id}
-                  className="group relative flex cursor-pointer flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/40 hover:shadow-lift overflow-hidden has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
+                  className="group relative flex cursor-pointer flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue hover:shadow-lift overflow-hidden has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
                 >
                   <div
                     aria-hidden="true"
@@ -644,7 +644,7 @@ export function HomeGateway() {
                 <Link
                   key={sub.title}
                   href={sub.href}
-                  className="group rounded-xl border border-slate-200/80 bg-slate-50/50 p-3 transition-all hover:bg-brand-blue-light/30 hover:border-brand-blue/30"
+                  className="group rounded-xl border border-slate-200/80 bg-slate-50/50 p-3 transition-all hover:bg-brand-blue-light/30 hover:border-brand-blue"
                 >
                   <p className="text-ink text-xs sm:text-sm font-bold group-hover:text-brand-blue transition-colors flex items-center justify-between">
                     {sub.title}
@@ -944,7 +944,7 @@ export function HomeGateway() {
               return (
                 <div
                   key={val.title}
-                  className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
+                  className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue hover:shadow-soft transition-all"
                 >
                   <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
                     <Icon className="size-5.5" />
@@ -1063,7 +1063,7 @@ export function HomeGateway() {
             <div className="grid gap-4 sm:grid-cols-2">
               <a
                 href={`tel:${APP_CONFIG.support.phone.replace(/\s+/g, "")}`}
-                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue/30"
+                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue"
               >
                 <span className="bg-brand-blue-light text-brand-blue size-10 rounded-xl flex items-center justify-center shrink-0">
                   <Phone className="size-5" />
@@ -1078,7 +1078,7 @@ export function HomeGateway() {
 
               <a
                 href={`mailto:${APP_CONFIG.support.email}`}
-                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue/30"
+                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue"
               >
                 <span className="bg-brand-blue-light text-brand-blue size-10 rounded-xl flex items-center justify-center shrink-0">
                   <Mail className="size-5" />

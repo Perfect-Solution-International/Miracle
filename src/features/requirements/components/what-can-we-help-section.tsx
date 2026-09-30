@@ -41,7 +41,7 @@ export function WhatCanWeHelpSection({ onSelectCategory }: WhatCanWeHelpSectionP
                 key={cat.id}
                 type="button"
                 onClick={() => handleClick(cat.value)}
-                className="group relative flex flex-col items-start text-left rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-brand-blue/50 hover:shadow-md cursor-pointer"
+                className="group relative flex flex-col items-start text-left rounded-2xl public-card-clickable p-5 cursor-pointer"
               >
                 {/* Icon Container */}
                 <div className="flex size-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue transition-colors group-hover:bg-brand-blue group-hover:text-white mb-3.5">
@@ -68,3 +68,4 @@ export function WhatCanWeHelpSection({ onSelectCategory }: WhatCanWeHelpSectionP
     </section>
   );
 }
+

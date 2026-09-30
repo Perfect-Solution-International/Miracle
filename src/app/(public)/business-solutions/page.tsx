@@ -403,17 +403,17 @@ export default function Page() {
               className="from-navy/25 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
             />
           </div>
-          <div className="shadow-soft relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border bg-white sm:grid-cols-2">
+          <div className="shadow-[0_6px_20px_rgba(15,23,42,0.07)] relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border border-slate-200 bg-white sm:grid-cols-2">
             {overviewValues.map(({ title, description, icon: Icon }, index) => (
               <div
                 key={title}
                 className={cn(
                   "flex gap-3 p-3.5",
-                  index % 2 === 1 && "sm:border-l",
-                  index > 1 && "border-t",
+                  index % 2 === 1 && "sm:border-l border-slate-200",
+                  index > 1 && "border-t border-slate-200",
                 )}
               >
-                <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-lg">
+                <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-lg shadow-xs">
                   <Icon aria-hidden="true" className="size-4" />
                 </span>
                 <div>
@@ -444,7 +444,7 @@ export default function Page() {
           {services.map((service, index) => (
             <li
               key={service.title}
-              className="group/card shadow-soft hover:shadow-lift relative flex h-full cursor-pointer flex-col overflow-hidden rounded-[20px] border border-slate-200/90 bg-white transition-all duration-300 hover:border-brand-blue/40 motion-safe:hover:-translate-y-1 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
+              className="group/card relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl public-card-clickable has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                 <Image
@@ -464,7 +464,7 @@ export default function Page() {
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-start gap-3">
-                  <span className="bg-brand-blue-light text-brand-blue group-hover/card:bg-brand-blue flex size-10 shrink-0 items-center justify-center rounded-xl transition-colors group-hover/card:text-white">
+                  <span className="bg-brand-blue-light text-brand-blue group-hover/card:bg-brand-blue flex size-10 shrink-0 items-center justify-center rounded-xl shadow-xs transition-colors group-hover/card:text-white">
                     <service.icon aria-hidden="true" className="size-5" />
                   </span>
                   <h3 className="text-ink group-hover/card:text-brand-blue text-lg leading-snug font-bold transition-colors">
@@ -548,7 +548,7 @@ export default function Page() {
         />
         <ol className="mt-10 grid gap-x-8 gap-y-7 md:grid-cols-2 lg:grid-cols-3">
           {workingProcess.map(({ title, description, icon: Icon }, index) => (
-            <li key={title} className="relative flex gap-4 rounded-2xl border border-slate-300 bg-[#f4f8fd] p-7 shadow-soft">
+            <li key={title} className="relative flex gap-4 rounded-2xl public-card-clickable p-7">
               <span className="text-brand-blue-dark bg-brand-blue-light flex size-11 shrink-0 items-center justify-center rounded-xl border border-brand-blue/25 shadow-xs">
                 <Icon aria-hidden="true" className="size-5" />
               </span>
@@ -621,7 +621,7 @@ export default function Page() {
               ))}
             </ul>
           </div>
-          <aside className="border-brand-blue/15 bg-brand-blue-light/35 self-start rounded-3xl border p-6 sm:p-8">
+          <aside className="public-card self-start rounded-2xl p-6 sm:p-8">
             <span className="text-brand-blue text-xs font-bold tracking-widest uppercase">
               Connected Business Support
             </span>
@@ -745,3 +745,4 @@ export default function Page() {
     </main>
   );
 }
+

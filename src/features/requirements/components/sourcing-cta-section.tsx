@@ -175,7 +175,7 @@ export function SourcingCtaSection() {
                     </DialogDescription>
                   </DialogHeader>
 
-                  <div className="scrollbar-hidden min-h-0 overflow-y-auto p-6 pr-12 sm:p-8 sm:pr-12" tabIndex={0} aria-label="Requirement form">
+                  <div className="public-form-scrollbar min-h-0 overflow-y-auto p-6 pr-12 sm:p-8 sm:pr-12" tabIndex={0} aria-label="Requirement form">
                     <RequirementInquiryForm />
                   </div>
                 </DialogContent>

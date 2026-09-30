@@ -397,7 +397,7 @@ export default function Page() {
             {integrations.map((item) => (
               <li
                 key={item}
-                className="bg-card text-ink flex items-center gap-3 rounded-xl border p-5 text-sm font-semibold"
+                className="flex items-center gap-3 rounded-2xl public-card p-5 text-sm font-semibold text-ink"
               >
                 <span className="bg-brand-blue-light text-brand-blue inline-flex size-7 shrink-0 items-center justify-center rounded-full">
                   <Boxes aria-hidden="true" className="size-4" />

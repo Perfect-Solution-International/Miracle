@@ -36,7 +36,7 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
     </>
   );
 
-  const className = "flex items-center gap-4 rounded-xl border bg-white p-4";
+  const className = "flex items-center gap-4 rounded-2xl public-card-clickable p-4";
 
   if (!href) {
     return <div className={className}>{content}</div>;
@@ -49,7 +49,7 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
-      className={cn(className, "hover:border-brand-blue/30 transition-colors")}
+      className={cn(className, "hover:border-brand-blue transition-colors")}
     >
       {content}
     </a>
@@ -85,3 +85,4 @@ export function ContactDetailsSection() {
     </Section>
   );
 }
+

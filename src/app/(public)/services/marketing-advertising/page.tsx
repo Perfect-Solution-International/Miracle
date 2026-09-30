@@ -249,7 +249,7 @@ export default function Page() {
           {capabilities.map(({ title, description, icon: Icon, featured }) => (
             <article
               key={title}
-              className={`group border-border/80 shadow-soft relative flex min-h-56 flex-col rounded-2xl border bg-white p-6 transition-transform duration-200 hover:-translate-y-1 ${featured ? "lg:col-span-2 lg:min-h-64 lg:p-8" : ""}`}
+              className={`group relative flex min-h-56 flex-col rounded-2xl public-card-clickable p-6 ${featured ? "lg:col-span-2 lg:min-h-64 lg:p-8" : ""}`}
             >
               <div className="bg-brand-blue-light text-brand-blue flex size-11 items-center justify-center rounded-xl">
                 <Icon aria-hidden="true" className="size-5" />
@@ -324,7 +324,7 @@ export default function Page() {
             {channels.map(([title, description, Icon]) => (
               <div
                 key={title}
-                className="flex items-start gap-4 rounded-xl border border-slate-200/80 bg-white p-4 shadow-xs"
+                className="flex items-start gap-4 rounded-2xl public-card-clickable p-4"
               >
                 <Icon
                   aria-hidden="true"
@@ -460,4 +460,5 @@ export default function Page() {
     </main>
   );
 }
+
 

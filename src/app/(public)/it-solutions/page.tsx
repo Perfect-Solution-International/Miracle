@@ -29,7 +29,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
-import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
@@ -283,54 +282,72 @@ export default function Page() {
     <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
       <section
         aria-labelledby="it-solutions-hero-heading"
-        className={`relative isolate overflow-hidden bg-white ${landingStyles.travelHero}`}
+        className="relative isolate flex min-h-[580px] items-center overflow-hidden border-b border-slate-200/80 bg-white lg:min-h-[660px]"
       >
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
-          style={{ backgroundImage: 'url("/images/it-solutions/it-hero-bg.png")' }}
-        />
-        <div aria-hidden="true" className="absolute inset-0 bg-white/25" />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.62)_0%,rgba(255,255,255,0.30)_42%,rgba(255,255,255,0.08)_78%,rgba(255,255,255,0.18)_100%)]"
+          className="absolute inset-0 bg-cover bg-no-repeat"
+          style={{
+            backgroundImage: 'url("/images/it-solutions/it-hero-bg.png")',
+            backgroundPosition: "right center",
+          }}
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-white/55 via-transparent to-white"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent max-sm:via-white/95 max-sm:to-white/65 lg:from-white/95 lg:via-white/70 lg:to-transparent"
         />
-        <div className="container-page relative z-10 flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
-          <Eyebrow className="text-navy rounded-full border border-white/80 bg-white px-4 py-1.5 font-extrabold shadow-sm">
-            Technology Engineering &amp; Digital Solutions
-          </Eyebrow>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent"
+        />
+        <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
+          <div className="max-w-2xl space-y-6">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs">
+              <span
+                aria-hidden="true"
+                className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100"
+              />
+              <span>Technology Engineering &amp; Digital Solutions</span>
+            </div>
 
-          <h1
-            id="it-solutions-hero-heading"
-            className="text-navy max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl md:text-6xl"
-          >
-            Technology That Moves{" "}
-            <span className="text-navy">Your Business Forward.</span>
-          </h1>
+            <h1
+              id="it-solutions-hero-heading"
+              className="text-3xl leading-[1.08] font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem]"
+            >
+              Technology That Moves{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Your Business Forward.
+              </span>
+            </h1>
 
-          <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
-            {DESCRIPTION}
-          </p>
+            <p className="max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+              {DESCRIPTION}
+            </p>
 
-          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-            <Button asChild variant="accent" size="xl" className="shadow-lift">
-              <a href="#services">
-                Explore Our IT Solutions
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </a>
-            </Button>
-            <ServiceRequirementDialog
-              context="it"
-              trigger={
-                <Button variant="secondary-hero" size="xl">
-                  Talk to Our Tech Team
-                </Button>
-              }
-            />
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <Button
+                asChild
+                size="xl"
+                className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3.5 font-semibold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
+              >
+                <a href="#services">
+                  Explore Our IT Solutions
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                </a>
+              </Button>
+              <ServiceRequirementDialog
+                context="it"
+                trigger={
+                  <Button
+                    variant="outline"
+                    size="xl"
+                    className="inline-flex items-center justify-center rounded-xl border-slate-200 bg-white px-6 py-3.5 font-semibold text-slate-800 shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-white"
+                  >
+                    Talk to Our Tech Team
+                  </Button>
+                }
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -374,7 +391,7 @@ export default function Page() {
           </div>
           <div
             className={cn(
-              "shadow-soft relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border sm:grid-cols-2",
+              "shadow-[0_6px_20px_rgba(15,23,42,0.07)] relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border border-slate-200 bg-white sm:grid-cols-2",
               circuitStyles.solidCard,
             )}
           >
@@ -383,11 +400,11 @@ export default function Page() {
                 key={title}
                 className={cn(
                   "flex gap-3 p-3.5",
-                  index % 2 === 1 && "sm:border-l",
-                  index > 1 && "border-t",
+                  index % 2 === 1 && "sm:border-l border-slate-200",
+                  index > 1 && "border-t border-slate-200",
                 )}
               >
-                <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-lg">
+                <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-lg shadow-xs">
                   <Icon aria-hidden="true" className="size-4" />
                 </span>
                 <div>
@@ -418,7 +435,7 @@ export default function Page() {
           {services.map((service, index) => (
             <li
               key={service.title}
-              className="group/card shadow-soft hover:shadow-lift relative flex h-full cursor-pointer flex-col overflow-hidden rounded-[20px] border border-slate-200/90 bg-white transition-all duration-300 hover:border-brand-blue/40 motion-safe:hover:-translate-y-1 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
+              className="group/card relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl public-card-clickable has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                 <Image
@@ -438,7 +455,7 @@ export default function Page() {
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-start gap-3">
-                  <span className="bg-brand-blue-light text-brand-blue group-hover/card:bg-brand-blue flex size-10 shrink-0 items-center justify-center rounded-xl transition-colors group-hover/card:text-white">
+                  <span className="bg-brand-blue-light text-brand-blue group-hover/card:bg-brand-blue flex size-10 shrink-0 items-center justify-center rounded-xl shadow-xs transition-colors group-hover/card:text-white">
                     <service.icon aria-hidden="true" className="size-5" />
                   </span>
                   <h3 className="text-ink group-hover/card:text-brand-blue text-lg leading-snug font-bold transition-colors">
@@ -507,7 +524,7 @@ export default function Page() {
         />
         <ol className="mt-10 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
           {process.map(({ step, title, description, icon: Icon }, index) => (
-            <li key={step} className="relative rounded-2xl border border-slate-300 bg-[#f4f8fd] p-7 shadow-soft">
+            <li key={step} className="relative rounded-2xl public-card-clickable p-7">
               <div className="flex items-center justify-between">
                 <span className="bg-brand-blue inline-flex rounded-md px-2 py-0.5 text-sm font-extrabold tracking-widest text-white">
                   {step}

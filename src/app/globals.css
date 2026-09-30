@@ -51,6 +51,41 @@ body:has(> .theme-light).with-scroll-bars-hidden {
   background: #0d438f;
 }
 
+/* ── Public Page Card System ──────────────────────────────────────────────────
+   Cards use a clearly tinted surface + visible border + definite shadow so
+   they stand out against pure-white page sections with Night Light OFF.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* Static info card — not clickable */
+.public-card {
+  background-color: #F1F5F9;
+  border: 1.5px solid #CBD5E1;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.10);
+}
+
+/* Feature / service card with a light blue tint */
+.public-card-blue {
+  background-color: #EEF4FB;
+  border: 1.5px solid #C7DCF0;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.10);
+}
+
+/* Clickable / interactive card — hover handled entirely in CSS */
+.public-card-clickable {
+  background-color: #F1F5F9;
+  border: 1.5px solid #CBD5E1;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.10);
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.public-card-clickable:hover {
+  background-color: #FFFFFF;
+  border-color: #1150A8;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14);
+  transform: translateY(-4px);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

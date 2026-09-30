@@ -41,10 +41,13 @@ export function CompanyIntroSection() {
             description="Tell us what your business needs — a product, a supplier, a machine, a system, or an entire setup. Miracle International coordinates the solution, from sourcing and quotations through purchase, logistics, delivery, and the supporting services around them."
           />
 
-          <ul className="grid gap-x-8 gap-y-7 sm:grid-cols-2">
+          <ul className="grid gap-4 sm:grid-cols-2">
             {COMPANY_INTRO_HIGHLIGHTS.map(({ icon: Icon, title, description }) => (
-              <li key={title} className="flex gap-4">
-                <span className="border-brand-blue/15 text-brand-blue inline-flex size-11 shrink-0 items-center justify-center rounded-lg border">
+              <li
+                key={title}
+                className="group flex gap-4 rounded-2xl public-card-clickable p-5"
+              >
+                <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 shrink-0 items-center justify-center rounded-xl shadow-xs transition-colors group-hover:bg-brand-blue group-hover:text-white">
                   <Icon aria-hidden="true" className="size-5" />
                 </span>
                 <div className="space-y-1">

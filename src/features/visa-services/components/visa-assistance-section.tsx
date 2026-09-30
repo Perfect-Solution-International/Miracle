@@ -82,7 +82,7 @@ export function VisaAssistanceSection() {
               {VISA_CATEGORIES.map(({ icon: Icon, title, description }) => (
                 <div
                   key={title}
-                  className="shadow-2xs hover:shadow-soft group flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white p-4 transition-all"
+                  className="group flex items-start gap-3.5 rounded-2xl public-card-clickable p-4"
                 >
                   <div className="bg-brand-blue-light/70 text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:bg-brand-blue group-hover:text-white">
                     <Icon aria-hidden="true" className="size-5" />
@@ -99,7 +99,7 @@ export function VisaAssistanceSection() {
           </div>
 
           {/* Checklist & Support Pillars */}
-          <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
+          <div className="rounded-2xl public-card p-5">
             <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">
               Our Assistance Scope
             </p>
@@ -129,3 +129,4 @@ export function VisaAssistanceSection() {
     </Section>
   );
 }
+

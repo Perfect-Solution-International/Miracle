@@ -51,7 +51,7 @@ export function WholesaleCategoriesSection({
           );
         })}
         <li className="reveal col-span-2">
-          <div className="flex h-full flex-col justify-between gap-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:flex-row sm:items-center sm:p-8">
+          <div className="flex h-full flex-col justify-between gap-6 rounded-2xl public-card p-6 sm:flex-row sm:items-center sm:p-8">
             <div className="flex items-start gap-4">
               <span className="text-brand-blue inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-white">
                 <PackageSearch aria-hidden="true" className="size-6" />
@@ -78,3 +78,4 @@ export function WholesaleCategoriesSection({
     </Section>
   );
 }
+

@@ -382,7 +382,7 @@ export function PublicTravelInquiryModal({
               </div>
             </DialogHeader>
 
-            <form onSubmit={handleSubmit} className="scrollbar-hidden flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 bg-white text-slate-900">
+            <form onSubmit={handleSubmit} className="public-form-scrollbar flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 bg-white text-slate-900">
               {error ? (
                 <div className="rounded-xl bg-red-50 border border-red-200 p-3.5 text-xs font-semibold text-brand-red">
                   {error}

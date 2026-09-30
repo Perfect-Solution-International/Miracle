@@ -142,7 +142,7 @@ export function SubpageTemplate({
                   {stats.map((s) => (
                     <div
                       key={s.label}
-                      className="rounded-2xl border border-brand-blue/10 bg-white/90 p-4 shadow-xs backdrop-blur-sm"
+                      className="rounded-2xl public-card p-4 backdrop-blur-sm"
                     >
                       <div className="text-2xl font-black text-navy">{s.value}</div>
                       <div className="text-xs font-bold text-ink/80">{s.label}</div>
@@ -212,7 +212,7 @@ export function SubpageTemplate({
               return (
                 <div
                   key={feat.title}
-                  className="group relative flex flex-col rounded-2xl border border-border/80 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/30 hover:shadow-xl"
+                  className="group relative flex flex-col rounded-2xl public-card-clickable p-6"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex size-12 items-center justify-center rounded-xl bg-brand-blue-light text-brand-blue transition-colors group-hover:bg-brand-blue group-hover:text-white">

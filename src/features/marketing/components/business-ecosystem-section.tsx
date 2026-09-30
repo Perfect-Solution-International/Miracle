@@ -14,18 +14,18 @@ export function BusinessEcosystemSection() {
         description="Different goals, one coordinated partner."
         align="center"
       />
-      <ul className="bg-border mt-12 grid gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:mt-14 lg:grid-cols-3">
+      <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3">
         {BUSINESS_ECOSYSTEM.map(({ icon: Icon, title, description }) => (
           <li
             key={title}
-            className="group hover:bg-surface flex items-center gap-5 bg-white p-6 transition-colors sm:p-8"
+            className="group flex items-center gap-5 rounded-2xl public-card-clickable p-6 sm:p-7"
           >
-            <span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue inline-flex size-12 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 group-hover:text-white">
-              <Icon aria-hidden="true" className="size-5" />
+            <span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue inline-flex size-12 shrink-0 items-center justify-center rounded-xl shadow-xs transition-colors duration-300 group-hover:text-white">
+              <Icon aria-hidden="true" className="size-5.5" />
             </span>
             <div>
-              <h3 className="text-ink font-bold">{title}</h3>
-              <p className="text-muted-foreground mt-1 text-sm">{description}</p>
+              <h3 className="text-ink font-bold text-base">{title}</h3>
+              <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p>
             </div>
           </li>
         ))}
@@ -33,3 +33,4 @@ export function BusinessEcosystemSection() {
     </Section>
   );
 }
+
