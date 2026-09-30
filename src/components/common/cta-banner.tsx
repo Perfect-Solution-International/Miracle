@@ -23,7 +23,7 @@ export function CtaBanner({
   secondary,
   headingId = "cta-heading",
   className,
-  tone = "default",
+  tone: _tone = "default",
   serviceContext,
   defaultService,
 }: {
@@ -38,7 +38,6 @@ export function CtaBanner({
   serviceContext?: ServiceContext;
   defaultService?: string;
 }) {
-  const light = tone === "light";
   return (
     <section
       aria-labelledby={headingId}
@@ -94,7 +93,7 @@ export function CtaBanner({
                     context={serviceContext}
                     defaultService={defaultService}
                     trigger={
-                      <Button variant={light ? "secondary-hero" : "outline-inverse"} size="xl">
+                      <Button variant="secondary-hero" size="xl">
                         {secondary.label}
                       </Button>
                     }
@@ -102,7 +101,7 @@ export function CtaBanner({
                 ) : (
                   <Button
                     asChild
-                    variant={light ? "secondary-hero" : "outline-inverse"}
+                    variant="secondary-hero"
                     size="xl"
                   >
                     <Link href={secondary.href}>{secondary.label}</Link>

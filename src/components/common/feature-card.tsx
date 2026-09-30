@@ -33,7 +33,9 @@ export function FeatureCard({
         "group relative flex h-full flex-col gap-5 rounded-2xl p-6",
         inverse
           ? "border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-white/25 hover:bg-white/[0.06]"
-          : "public-card-clickable",
+          : href
+            ? "public-card-clickable"
+            : "public-card",
         href && "cursor-pointer has-[a:focus-visible]:ring-ring has-[a:focus-visible]:ring-2",
         className,
       )}
