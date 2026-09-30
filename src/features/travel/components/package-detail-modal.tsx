@@ -126,7 +126,7 @@ export function PackageDetailModal({
         </div>
 
         {/* ── Scrollable Modal Body ── */}
-        <div className="overflow-y-auto px-6 py-6 sm:px-8 space-y-8">
+        <div className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8 space-y-8">
           {/* ── 1. Included Services & Features Bar ── */}
           <div>
             <div className="flex items-center gap-2 mb-3.5">

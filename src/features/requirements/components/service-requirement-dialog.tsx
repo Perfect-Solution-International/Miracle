@@ -39,7 +39,7 @@ export function ServiceRequirementDialog({
       <DialogContent
         showCloseButton={false}
         overlayClassName="bg-[rgba(15,30,50,0.5)] supports-backdrop-filter:backdrop-blur-none"
-        className="max-h-[92dvh] w-[calc(100vw-20px)] max-w-[670px] overflow-y-auto rounded-[22px] border border-slate-200 bg-white p-0 shadow-[0_24px_70px_rgba(15,23,42,0.24)] sm:w-[calc(100vw-32px)]"
+        className="flex max-h-[92dvh] w-[calc(100vw-20px)] max-w-[670px] flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white p-0 shadow-[0_24px_70px_rgba(15,23,42,0.24)] sm:w-[calc(100vw-32px)]"
       >
         <div className="sticky top-0 z-20 h-0">
           <DialogClose asChild>
@@ -60,7 +60,9 @@ export function ServiceRequirementDialog({
             Share your business requirements and we will coordinate the ideal solution.
           </DialogDescription>
         </DialogHeader>
-        <RequirementInquiryForm context={context} defaultService={selectedService} />
+        <div className="public-form-scrollbar min-h-0 overflow-y-auto p-2 sm:p-3" tabIndex={0} aria-label="Requirement form">
+          <RequirementInquiryForm context={context} defaultService={selectedService} />
+        </div>
       </DialogContent>
     </Dialog>
   );
