@@ -23,6 +23,7 @@ export function CtaBanner({
   secondary,
   headingId = "cta-heading",
   className,
+  tone = "default",
   serviceContext,
   defaultService,
 }: {
@@ -33,19 +34,29 @@ export function CtaBanner({
   secondary?: CtaAction;
   headingId?: string;
   className?: string;
+  tone?: "default" | "light";
   serviceContext?: ServiceContext;
   defaultService?: string;
 }) {
+  const light = tone === "light";
   return (
     <section
       aria-labelledby={headingId}
       className={cn(
-        "bg-gradient-to-b from-slate-50/80 to-white py-14 md:py-20",
+        "py-14 md:py-20",
+        light ? "bg-white" : "bg-gradient-to-b from-slate-50/80 to-white",
         className,
       )}
     >
       <div className="container-page">
-        <div className="border-brand-blue/30 from-navy via-brand-blue-dark to-navy relative isolate overflow-hidden rounded-3xl border bg-gradient-to-br px-6 py-12 shadow-2xl sm:px-12 md:py-16 lg:px-16">
+        <div
+          className={cn(
+            "relative isolate overflow-hidden rounded-3xl border px-6 py-12 sm:px-12 md:py-16 lg:px-16",
+            light
+              ? "border-slate-200 bg-white shadow-soft"
+              : "border-brand-blue/30 from-navy via-brand-blue-dark to-navy bg-gradient-to-br shadow-2xl",
+          )}
+        >
           {/* Liquid Light Mesh Glow */}
           <div
             aria-hidden="true"
@@ -59,18 +70,26 @@ export function CtaBanner({
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl space-y-4">
               {eyebrow ? (
-                <span className="text-brand-blue-muted inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold tracking-wider uppercase backdrop-blur-md">
+                <span
+                  className={cn(
+                    "inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase backdrop-blur-md",
+                    light ? "bg-brand-blue-light text-brand-blue" : "bg-white/10 text-brand-blue-muted",
+                  )}
+                >
                   <Sparkles className="size-3.5" />
                   {eyebrow}
                 </span>
               ) : null}
               <h2
                 id={headingId}
-                className="text-2xl leading-tight font-extrabold tracking-tight text-white sm:text-3xl lg:text-4xl"
+                className={cn(
+                  "text-2xl leading-tight font-extrabold tracking-tight sm:text-3xl lg:text-4xl",
+                  light ? "text-ink" : "text-white",
+                )}
               >
                 {title}
               </h2>
-              <p className="text-sm leading-relaxed text-white/80 sm:text-base">
+              <p className={cn("text-sm leading-relaxed sm:text-base", light ? "text-muted-foreground" : "text-white/80")}>
                 {description}
               </p>
             </div>
@@ -101,7 +120,7 @@ export function CtaBanner({
                     context={serviceContext}
                     defaultService={defaultService}
                     trigger={
-                      <Button variant="outline-inverse" size="xl">
+                      <Button variant={light ? "secondary-hero" : "outline-inverse"} size="xl">
                         {secondary.label}
                       </Button>
                     }
@@ -109,7 +128,7 @@ export function CtaBanner({
                 ) : (
                   <Button
                     asChild
-                    variant="outline-inverse"
+                    variant={light ? "secondary-hero" : "outline-inverse"}
                     size="xl"
                     className="backdrop-blur-md"
                   >

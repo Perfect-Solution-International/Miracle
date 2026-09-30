@@ -66,7 +66,6 @@ export type BusinessDetail = {
   cta: { title: string; description: string; label: string; href: string };
   featuredLast?: boolean;
   reverseFeature?: boolean;
-  lightProcess?: boolean;
 };
 
 export const BUSINESS_DETAILS = {
@@ -275,7 +274,6 @@ export const BUSINESS_DETAILS = {
     },
     featuredLast: true,
     reverseFeature: true,
-    lightProcess: true,
   },
   planning: {
     title: "Business Planning",
@@ -485,7 +483,6 @@ export const BUSINESS_DETAILS = {
     },
     featuredLast: true,
     reverseFeature: true,
-    lightProcess: true,
   },
   expansion: {
     title: "Business Expansion",
@@ -795,7 +792,6 @@ export const BUSINESS_DETAILS = {
       label: "Explore Business Technology",
       href: ROUTES.public.contact,
     },
-    lightProcess: true,
   },
   support: {
     title: "Business Support",
@@ -896,6 +892,5 @@ export const BUSINESS_DETAILS = {
     },
     featuredLast: true,
     reverseFeature: true,
-    lightProcess: true,
   },
 } satisfies Record<BusinessDetailKey, BusinessDetail>;

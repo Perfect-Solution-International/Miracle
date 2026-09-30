@@ -62,7 +62,7 @@ export default async function Page() {
       <IntakeIndustryGallery />
 
       {/* 5. 4-Stage Executive Workflow Roadmap */}
-      <Section tone="navy" aria-labelledby="process-heading" className="relative isolate overflow-hidden">
+      <Section aria-labelledby="process-heading" className="relative isolate overflow-hidden bg-white">
         {/* Liquid Ambient Glow */}
         <div
           aria-hidden="true"
@@ -70,16 +70,16 @@ export default async function Page() {
         />
 
         <div className="flex flex-col items-center text-center">
-          <p className="text-brand-blue-muted text-xs font-bold tracking-[0.2em] uppercase">
+          <p className="text-brand-blue text-xs font-bold tracking-[0.2em] uppercase">
             Transparent Workflow
           </p>
           <h2
             id="process-heading"
-            className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl"
+            className="text-ink mt-3 max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl"
           >
             How We Deliver Your Requirement
           </h2>
-          <p className="mt-3 max-w-xl text-base text-white/70">
+          <p className="text-muted-foreground mt-3 max-w-xl text-base">
             From initial submission to verified delivery, our 4-stage process ensures total
             clarity, price certainty, and quality control.
           </p>

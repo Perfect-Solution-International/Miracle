@@ -25,7 +25,7 @@ export function WholesaleCategoryCard({
   return (
     <article
       className={cn(
-        "group bg-navy has-[a:focus-visible]:ring-ring relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl p-4 text-white has-[a:focus-visible]:ring-2 sm:aspect-[4/5] sm:p-6",
+        "group bg-navy has-[a:focus-visible]:ring-ring relative isolate flex aspect-[3/4] cursor-pointer flex-col justify-end overflow-hidden rounded-2xl p-4 text-white has-[a:focus-visible]:ring-2 sm:aspect-[4/5] sm:p-6",
         wide && "sm:aspect-[4/5] lg:aspect-auto",
         className,
       )}

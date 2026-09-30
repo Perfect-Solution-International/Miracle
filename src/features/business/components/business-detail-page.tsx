@@ -308,25 +308,22 @@ function BusinessFeature({ detail }: { detail: BusinessDetail }) {
 }
 
 function BusinessProcess({ detail }: { detail: BusinessDetail }) {
-  const light = detail.lightProcess;
   return (
     <Section
-      tone={light ? "default" : "navy"}
       aria-labelledby="process-heading"
-      className={light ? "bg-brand-blue-light/30" : undefined}
+      className="bg-white"
     >
       <SectionHeading
         id="process-heading"
         eyebrow="Our Process"
         title={`How ${detail.title} Moves Forward`}
         description="A clear sequence keeps the work focused, while leaving room to adapt to your business."
-        tone={light ? "default" : "inverse"}
       />
       <ol
         className={cn(
           "relative mt-12 grid gap-7 border-l pl-7 lg:mt-14 lg:gap-5 lg:border-t lg:border-l-0 lg:pl-0",
           detail.process.length === 6 ? "lg:grid-cols-6" : "lg:grid-cols-5",
-          light ? "border-brand-blue/25" : "border-white/25",
+          "border-brand-blue/25",
         )}
       >
         {detail.process.map(({ title, description, icon: Icon }, index) => (
@@ -335,46 +332,28 @@ function BusinessProcess({ detail }: { detail: BusinessDetail }) {
               aria-hidden="true"
               className={cn(
                 "absolute top-5 -left-[2.05rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
-                light ? "ring-brand-blue-light" : "ring-navy",
-                index === 0 ? "bg-brand-red" : "bg-brand-blue-muted",
+                "ring-brand-blue-light",
+                index === 0 ? "bg-brand-red" : "bg-brand-blue",
               )}
             />
             <span
-              className={cn(
-                "hidden text-5xl leading-none font-bold lg:block",
-                light ? "text-[#5B7FAE]" : "text-brand-blue-muted/30",
-              )}
+              className="hidden text-5xl leading-none font-bold text-[#5B7FAE] lg:block"
             >
               0{index + 1}
             </span>
             <span
-              className={cn(
-                "flex size-10 shrink-0 items-center justify-center rounded-xl border",
-                light
-                  ? "border-brand-blue/15 text-brand-blue bg-white"
-                  : "text-brand-blue-muted border-white/20 bg-white/5",
-              )}
+              className="text-brand-blue bg-brand-blue-light flex size-10 shrink-0 items-center justify-center rounded-xl border border-brand-blue/15"
             >
               <Icon aria-hidden="true" className="size-5" />
             </span>
             <div>
               <span
-                className={cn(
-                  "text-xs font-bold tracking-[0.16em] lg:hidden",
-                  light ? "text-brand-blue" : "text-brand-blue-muted",
-                )}
+                className="text-brand-blue text-xs font-bold tracking-[0.16em] lg:hidden"
               >
                 0{index + 1}
               </span>
-              <h3 className={cn("font-bold", light ? "text-ink" : "text-white")}>
-                {title}
-              </h3>
-              <p
-                className={cn(
-                  "mt-2 text-sm leading-relaxed",
-                  light ? "text-muted-foreground" : "text-white/65",
-                )}
-              >
+              <h3 className="text-ink font-bold">{title}</h3>
+              <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
                 {description}
               </p>
             </div>
@@ -506,6 +485,7 @@ export function BusinessDetailPage({ service }: { service: BusinessDetailKey }) 
       <WhyMiracle detail={detail} />
       <RelatedBusinessSolutions current={service} />
       <CtaBanner
+        tone={service === "start" ? "light" : "default"}
         serviceContext="business"
         defaultService={detail.title}
         eyebrow="Your Next Step"

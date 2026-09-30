@@ -325,33 +325,32 @@ export default function Page() {
       </Section>
 
       {/* Consulting process — connected timeline, distinct from other pages' numbered grids */}
-      <Section tone="navy" aria-labelledby="process-heading">
+      <Section className="bg-white" aria-labelledby="process-heading">
         <SectionHeading
           id="process-heading"
           eyebrow="Our Process"
           title="Our Consulting Process"
           description="A structured, seven-step engagement from first conversation to ongoing optimisation."
           align="center"
-          tone="inverse"
         />
         <ol className="relative mt-12 flex flex-col gap-8 lg:mt-16">
           <span
             aria-hidden="true"
-            className="absolute top-2 bottom-2 left-[1.375rem] w-px bg-white/15 sm:left-6"
+            className="bg-brand-blue/20 absolute top-2 bottom-2 left-[1.375rem] w-px sm:left-6"
           />
           {consultingProcess.map((item) => (
             <li key={item.step} className="reveal relative flex gap-5 sm:gap-6">
-              <span className="border-brand-blue-muted/40 bg-navy text-brand-blue-muted relative z-10 inline-flex size-11 shrink-0 items-center justify-center rounded-full border-2 sm:size-12">
+              <span className="border-brand-blue/30 bg-brand-blue-light text-brand-blue relative z-10 inline-flex size-11 shrink-0 items-center justify-center rounded-full border-2 sm:size-12">
                 <item.icon aria-hidden="true" className="size-5" />
               </span>
               <div className="flex-1 space-y-1.5 pt-1">
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-brand-blue-muted text-xs font-bold tracking-[0.18em] uppercase">
+                  <span className="text-brand-blue text-xs font-bold tracking-[0.18em] uppercase">
                     Step {item.step}
                   </span>
-                  <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                  <h3 className="text-ink text-lg font-bold">{item.title}</h3>
                 </div>
-                <p className="max-w-2xl text-sm leading-relaxed text-white/65">
+                <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -431,6 +430,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        tone="light"
         serviceContext="it"
         eyebrow="Ready to Get Started?"
         title="Build a Smarter IT Strategy for Your Business"

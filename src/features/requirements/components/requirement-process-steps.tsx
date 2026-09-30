@@ -14,7 +14,7 @@ export function RequirementProcessSteps({ className }: { className?: string }) {
         return (
           <div
             key={step}
-            className="group relative flex flex-col rounded-3xl border border-white/15 bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/10 hover:shadow-2xl text-left"
+            className="group relative flex flex-col rounded-3xl border border-slate-200 bg-white p-6 text-left shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/30 hover:shadow-lift"
           >
             {/* Top Row: Icon + Step Pill */}
             <div className="flex items-center justify-between">
@@ -28,23 +28,23 @@ export function RequirementProcessSteps({ className }: { className?: string }) {
               >
                 <Icon className="size-6" />
               </div>
-              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-black tracking-widest text-white/90">
+              <span className="text-brand-blue border-brand-blue/20 bg-brand-blue-light rounded-full border px-3 py-1 text-xs font-black tracking-widest">
                 0{step}
               </span>
             </div>
 
             {/* Title & Description */}
             <div className="mt-6">
-              <h3 className="text-lg font-extrabold text-white group-hover:text-brand-blue-muted transition-colors">
+              <h3 className="text-ink group-hover:text-brand-blue text-lg font-extrabold transition-colors">
                 {title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/70">
+              <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
                 {description}
               </p>
             </div>
 
             {/* Step Check indicator */}
-            <div className="mt-auto pt-6 flex items-center gap-1.5 text-xs font-bold text-brand-blue-muted">
+            <div className="text-brand-blue mt-auto flex items-center gap-1.5 pt-6 text-xs font-bold">
               <CheckCircle2 className="size-3.5" />
               <span>Step 0{step} of 04</span>
             </div>
