@@ -58,32 +58,46 @@ body:has(> .theme-light).with-scroll-bars-hidden {
 
 /* Static info card — not clickable */
 .public-card {
-  background-color: #F1F5F9;
-  border: 1.5px solid #CBD5E1;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.10);
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 0.09);
 }
 
 /* Feature / service card with a light blue tint */
 .public-card-blue {
-  background-color: #EEF4FB;
-  border: 1.5px solid #C7DCF0;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.10);
+  background-color: #eef4fb;
+  border: 1px solid #c7dcf0;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 0.09);
 }
 
 /* Clickable / interactive card — hover handled entirely in CSS */
 .public-card-clickable {
-  background-color: #F1F5F9;
-  border: 1.5px solid #CBD5E1;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.10);
-  transition: background-color 0.3s ease, border-color 0.3s ease,
-    box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 0.09);
+  transition: background-color 250ms var(--ease-brand),
+    border-color 250ms var(--ease-brand), box-shadow 250ms var(--ease-brand),
+    transform 250ms var(--ease-brand);
 }
 
-.public-card-clickable:hover {
-  background-color: #FFFFFF;
+.public-card-clickable:hover,
+.public-card-clickable:focus-within {
+  background-color: #ffffff;
   border-color: #1150A8;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14);
+  box-shadow: 0 14px 34px rgb(15 23 42 / 0.14);
   transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-card-clickable {
+    transition-duration: 0.01ms;
+  }
+
+  .public-card-clickable:hover,
+  .public-card-clickable:focus-within {
+    transform: none;
+  }
 }
 
 @theme inline {
@@ -283,6 +297,10 @@ body:has(> .theme-light).with-scroll-bars-hidden {
   color-scheme: light;
 }
 
+.theme-light main {
+  overflow-x: clip;
+}
+
 /* ---------------------------------------------------------------------------
    Public site layout primitives. One container width and one section rhythm
    for every marketing page, so spacing is never chosen ad hoc per section.
@@ -303,14 +321,146 @@ body:has(> .theme-light).with-scroll-bars-hidden {
 }
 
 @utility section-y {
-  padding-block: 4rem;
+  padding-block: 3.75rem;
 
   @media (width >=48rem) {
-    padding-block: 6rem;
+    padding-block: 5rem;
   }
 
   @media (width >=80rem) {
-    padding-block: 7rem;
+    padding-block: 5.75rem;
+  }
+}
+
+/* Shared public hero anatomy. Page-specific copy and imagery remain in each
+   route while height, haze, hierarchy, and CTA spacing stay consistent. */
+.public-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 36.25rem;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid rgb(203 213 225 / 0.75);
+  background: #ffffff;
+}
+
+.public-hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.public-hero-haze {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0.99) 0%,
+    rgb(255 255 255 / 0.96) 42%,
+    rgb(255 255 255 / 0.78) 58%,
+    rgb(255 255 255 / 0.16) 82%,
+    transparent 100%
+  );
+}
+
+.public-hero-fade {
+  pointer-events: none;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 5rem;
+  background: linear-gradient(to top, #ffffff, rgb(255 255 255 / 0.82), transparent);
+}
+
+.public-hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-block: 4rem;
+}
+
+.public-hero-copy {
+  width: 100%;
+  max-width: 42rem;
+}
+
+.public-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  max-width: 100%;
+  border: 1px solid rgb(203 213 225 / 0.9);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.96);
+  padding: 0.375rem 1rem;
+  color: #334155;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 0.08);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.public-hero-title {
+  margin-top: 1.25rem;
+  max-width: 42rem;
+  color: var(--navy);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.07;
+  letter-spacing: -0.035em;
+}
+
+.public-hero-description {
+  margin-top: 1.5rem;
+  max-width: 36rem;
+  color: #475569;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.public-hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+@media (width >=40rem) {
+  .public-hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+@media (width >=64rem) {
+  .public-hero {
+    min-height: 41.25rem;
+  }
+
+  .public-hero-content {
+    padding-block: 6rem;
+  }
+}
+
+@media (width < 48rem) {
+  .public-hero-haze {
+    background: linear-gradient(
+      90deg,
+      rgb(255 255 255 / 0.98) 0%,
+      rgb(255 255 255 / 0.94) 68%,
+      rgb(255 255 255 / 0.7) 100%
+    );
+  }
+
+  .public-hero-badge {
+    white-space: normal;
   }
 }
 
@@ -472,6 +622,57 @@ body:has(> .theme-light).with-scroll-bars-hidden {
   color: #0f172a !important;
 }
 
+/* Public forms and dialogs share one calm, accessible control system. These
+   selectors are active only while the public light shell is mounted. */
+body:has(> .theme-light) [data-slot="dialog-overlay"] {
+  background: rgb(7 22 46 / 0.44);
+  backdrop-filter: blur(3px);
+}
+
+body:has(> .theme-light) [data-slot="dialog-content"] {
+  border: 1px solid #dbe3ec;
+  background: #ffffff;
+  color: var(--ink);
+  box-shadow: 0 24px 72px rgb(15 23 42 / 0.24);
+}
+
+body:has(> .theme-light) [data-slot="input"],
+body:has(> .theme-light) [data-slot="select-trigger"] {
+  min-height: 2.75rem;
+  border-color: #cbd5e1;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+body:has(> .theme-light) [data-slot="textarea"] {
+  min-height: 6.5rem;
+  border-color: #cbd5e1;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+body:has(> .theme-light) [data-slot="form-item"] {
+  gap: 0.5rem;
+}
+
+body:has(> .theme-light) [data-slot="form-label"] {
+  color: #334155;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+body:has(> .theme-light) [data-slot="button"] {
+  transition-duration: 200ms;
+}
+
+body:has(> .theme-light) [data-slot="button"][data-size="xl"] {
+  min-height: 3rem;
+  border-radius: 0.75rem;
+  padding-inline: 1.5rem;
+}
+
 /* Public outline CTAs stay solid white even when the portal theme is dark. */
 .theme-light [data-slot="button"][data-variant="outline"] {
   border-color: #cbd5e1 !important;
@@ -479,6 +680,20 @@ body:has(> .theme-light).with-scroll-bars-hidden {
   color: #0f172a !important;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+}
+
+.theme-light [data-slot="button"][data-variant="outline-inverse"],
+.theme-light [data-slot="button"][data-variant="inverse"] {
+  border-color: #cbd5e1 !important;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  backdrop-filter: none !important;
+}
+
+.theme-light [data-slot="button"][data-variant="outline-inverse"]:hover,
+.theme-light [data-slot="button"][data-variant="inverse"]:hover {
+  border-color: #94a3b8 !important;
+  background-color: #f8fafc !important;
 }
 
 .theme-light [data-slot="button"][data-variant="outline"]:hover {

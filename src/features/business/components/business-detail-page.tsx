@@ -20,7 +20,7 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
   return (
     <section
       aria-labelledby="business-detail-heading"
-      className="relative isolate overflow-hidden bg-white"
+      className="public-hero"
     >
       <Image
         src={detail.image.src}
@@ -28,20 +28,20 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
         fill
         preload
         sizes="100vw"
-        className="object-cover object-center"
+        className="public-hero-media object-cover"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.78)_70%,rgba(255,255,255,0.20)_100%)] md:bg-[linear-gradient(to_right,rgba(255,255,255,0.99)_0%,rgba(255,255,255,0.97)_34%,rgba(255,255,255,0.78)_52%,rgba(255,255,255,0.28)_72%,rgba(255,255,255,0.02)_100%)]"
+        className="public-hero-haze"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white"
+        className="public-hero-fade"
       />
 
-      <div className="container-page relative z-10 flex min-h-[620px] items-center py-16 sm:py-20 lg:min-h-[680px] lg:py-24">
-        <div className="w-full max-w-2xl md:max-w-[60%] lg:max-w-[53%] xl:max-w-[49%]">
-          <div className="border-brand-blue/20 text-brand-blue inline-flex items-center gap-2.5 rounded-full border bg-white px-4 py-1.5 shadow-xs">
+      <div className="container-page public-hero-content">
+        <div className="public-hero-copy md:max-w-[60%] lg:max-w-[53%] xl:max-w-[49%]">
+          <div className="public-hero-badge text-brand-blue">
             <span className="relative flex size-2">
               <span className="bg-brand-blue absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
               <span className="bg-brand-blue relative inline-flex size-2 rounded-full" />
@@ -52,11 +52,11 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
           </div>
           <h1
             id="business-detail-heading"
-            className="text-navy mt-5 max-w-2xl text-4xl leading-[1.09] font-extrabold tracking-tight sm:text-5xl md:text-[2.75rem] lg:text-[3.4rem]"
+            className="public-hero-title"
           >
             {detail.headline}
           </h1>
-          <p className="text-ink mt-6 max-w-xl text-lg leading-relaxed font-semibold">
+          <p className="public-hero-description font-semibold text-slate-700">
             {detail.lead}
           </p>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-700">
@@ -73,7 +73,7 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
               </li>
             ))}
           </ul>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="public-hero-actions">
             <ServiceRequirementDialog
               context="business"
               defaultService={detail.title}

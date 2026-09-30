@@ -195,11 +195,11 @@ export function InvestmentLanding({
     <>
       <main>
         {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
-        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+        <section className="public-hero">
           {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            className="public-hero-media bg-cover bg-no-repeat"
             style={{
               backgroundImage: 'url("/images/services/investment-hero.jpg")',
               backgroundPosition: "right center",
@@ -209,45 +209,45 @@ export function InvestmentLanding({
           {/* Soft-White Gradient on Left Area */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+            className="public-hero-haze"
           />
 
           {/* Bottom Gradient Fade */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+            className="public-hero-fade"
           />
 
           {/* Left-Aligned Content Container */}
-          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
-            <div className="max-w-2xl space-y-6">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+          <div className="container-page public-hero-content">
+            <div className="public-hero-copy">
+              <div className="public-hero-badge">
                 <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
                 <span>Strategic Commercial Investment Advisory</span>
               </div>
 
-              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+              <h1 className="public-hero-title">
                 Strategic Advisory.<br />
                 For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">High-Yield Projects</span><br />
                 <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Equity Growth.</span>
               </h1>
 
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+              <p className="public-hero-description">
                 Miracle International delivers evaluated commercial ventures, strategic partnership structuring, commercial feasibility modeling, and vetted investment opportunities with comprehensive due diligence.
               </p>
 
-              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <div className="public-hero-actions">
                 <Button
                   size="xl"
                   onClick={openForm}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
+                  variant="accent"
+                  className="shadow-md"
                 >
                   <span>Inquiry Now</span>
                 </Button>
                 <Button
                   size="xl"
-                  variant="outline"
-                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
+                  variant="secondary-hero"
                   onClick={openForm}
                 >
                   Explore Investment Projects
