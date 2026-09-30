@@ -474,16 +474,18 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                     <Send className="size-4" />
                     Send Travel Inquiry
                   </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    onClick={() => setCustomizeOpen(true)}
-                    className="w-full border-brand-blue/30 text-brand-blue hover:bg-brand-blue/5 font-bold h-11 rounded-xl text-xs gap-2"
-                    id="pkg-customize-trip-btn"
-                  >
-                    <SlidersHorizontal className="size-4" />
-                    Customize This Trip
-                  </Button>
+                  {isInbound ? (
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={() => setCustomizeOpen(true)}
+                      className="w-full border-brand-blue/30 text-brand-blue hover:bg-brand-blue/5 font-bold h-11 rounded-xl text-xs gap-2"
+                      id="pkg-customize-trip-btn"
+                    >
+                      <SlidersHorizontal className="size-4" />
+                      Customize This Trip
+                    </Button>
+                  ) : null}
                 </div>
 
                 {/* Key Summary List */}
@@ -551,22 +553,24 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
 
       {/* Mobile Sticky Floating CTA Bar */}
       <div className="sticky bottom-0 z-30 border-t bg-white/95 px-4 py-3 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur-md sm:hidden flex items-center gap-2">
-        <Button
-          size="lg"
-          variant="outline"
-          className="flex-1 border-brand-blue/30 text-brand-blue font-bold text-xs h-11 gap-1.5 rounded-xl shadow-xs"
-          onClick={() => setCustomizeOpen(true)}
-        >
-          <SlidersHorizontal className="size-3.5" />
-          Customize Trip
-        </Button>
+        {isInbound ? (
+          <Button
+            size="lg"
+            variant="outline"
+            className="flex-1 border-brand-blue/30 text-brand-blue font-bold text-xs h-11 gap-1.5 rounded-xl shadow-xs"
+            onClick={() => setCustomizeOpen(true)}
+          >
+            <SlidersHorizontal className="size-3.5" />
+            Customize Trip
+          </Button>
+        ) : null}
         <Button
           size="lg"
           className="flex-1 bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-xs h-11 gap-1.5 rounded-xl shadow-md"
           onClick={() => setInquiryOpen(true)}
         >
           <Send className="size-3.5" />
-          Send Inquiry
+          Inquiry Now
         </Button>
       </div>
 

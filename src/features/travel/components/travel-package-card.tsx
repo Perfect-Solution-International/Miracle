@@ -141,7 +141,7 @@ export function TravelPackageCard({
           </div>
         </Link>
 
-        {/* Send Inquiry CTA */}
+        {/* Inquiry Now CTA */}
         <div className="px-5 pb-5 pt-0">
           <Button
             size="sm"
@@ -149,7 +149,7 @@ export function TravelPackageCard({
             className="w-full h-8 text-xs bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold shadow-xs gap-1.5"
           >
             <Send className="size-3" />
-            Send Inquiry
+            Inquiry Now
           </Button>
         </div>
       </li>

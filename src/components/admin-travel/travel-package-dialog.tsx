@@ -1848,7 +1848,7 @@ export function TravelPackageDialog({
                   </div>
 
                   <Button size="sm" className="h-7 text-xs font-semibold bg-brand-blue text-white rounded-lg">
-                    Send Inquiry
+                    Inquiry Now
                   </Button>
                 </div>
               </div>

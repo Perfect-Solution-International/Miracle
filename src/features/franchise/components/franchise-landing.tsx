@@ -112,8 +112,22 @@ const INITIAL_FORM: FormState = {
   confirmation: false,
 };
 
-function SupportModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [form, setForm] = useState<FormState>(INITIAL_FORM);
+function SupportModal({
+  open,
+  onClose,
+  initialBusinessType,
+  initialInterest,
+}: {
+  open: boolean;
+  onClose: () => void;
+  initialBusinessType?: string;
+  initialInterest?: string;
+}) {
+  const [form, setForm] = useState<FormState>(() => ({
+    ...INITIAL_FORM,
+    businessType: initialBusinessType || "",
+    interest: initialInterest || (initialBusinessType ? "Franchise Opportunity" : ""),
+  }));
   const [files, setFiles] = useState<File[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -191,42 +205,48 @@ export function FranchiseLanding({
   breadcrumbs?: readonly BreadcrumbItem[];
 } = {}) {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const openForm = () => setIsFormOpen(true);
+  const [selectedOpportunity, setSelectedOpportunity] = useState<string | undefined>(undefined);
+
+  const openOpportunity = (opportunityTitle: string) => {
+    setSelectedOpportunity(opportunityTitle);
+    setIsFormOpen(true);
+  };
+
+  const openForm = () => {
+    setSelectedOpportunity(undefined);
+    setIsFormOpen(true);
+  };
 
   return (
     <>
       <main>
-        <section className="relative isolate overflow-hidden border-b border-border/40 bg-white/75 backdrop-blur-md">
-          {/* Liquid Ambient Glow Mesh */}
+        <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-[450px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+            className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
           />
 
-          <div className="container-page grid gap-10 py-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:py-24">
-            <div className="max-w-2xl">
-              {/* Pulsing Live Badge Pill */}
-              <div>
-                <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
-                  <span className="relative flex size-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
-                    <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
-                  </span>
-                  <span className="text-xs font-bold tracking-widest text-brand-blue uppercase">
-                    Commercial Franchise Networks
-                  </span>
-                </div>
+          <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+            <div className="max-w-2xl space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
+                <span className="bg-brand-red size-1.5 rounded-full" />
+                FRANCHISE
               </div>
 
-              <h1 className="text-ink mt-5 text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">
-                Build Your Business With a Franchise
+              <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                Build Your Business{" "}
+                <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
+                  With the Right Opportunity.
+                </span>
               </h1>
-              <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed">
-                Explore franchise opportunities and get professional support from business selection and planning to setup, product supply and ongoing operations.
+
+              <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
+                Explore franchise opportunities and practical support for setting up, developing, and expanding franchise businesses.
               </p>
-              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row">
-                <Button size="xl" variant="accent" onClick={openForm} className="shadow-lg shadow-brand-red/20">
-                  Explore Opportunities <ArrowRight data-icon="inline-end" />
+
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+                <Button size="xl" variant="accent" onClick={openForm} className="shadow-lift">
+                  Apply Now <ArrowRight data-icon="inline-end" />
                 </Button>
                 <Button
                   size="xl"
@@ -237,18 +257,20 @@ export function FranchiseLanding({
                 </Button>
               </div>
             </div>
-            <div className="relative min-h-[360px] overflow-hidden rounded-3xl border-4 border-white bg-white p-3 shadow-2xl sm:min-h-[470px]">
-              <Image
-                src={SITE_MEDIA.franchise.hero.src}
-                alt={SITE_MEDIA.franchise.hero.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 52vw, 100vw"
-                className="object-cover transition-transform duration-700 hover:scale-105"
-              />
-              <div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/70 bg-white/95 p-5 backdrop-blur-md shadow-lg">
-                <p className="text-brand-blue text-sm font-bold">A partner for the next stage</p>
-                <p className="text-ink mt-1 font-semibold">From first idea to confident operations.</p>
+
+            <div className="relative mx-auto w-full max-w-xl">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
+                <div className="relative h-full w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src="/images/services/franchise-hero.jpg"
+                    alt="Franchise development director and prospective partner discussing expansion plans in a flagship store"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
+                </div>
               </div>
             </div>
           </div>
@@ -258,7 +280,59 @@ export function FranchiseLanding({
 
         <section className="section-y bg-surface"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Choose your next step</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">How Can We Help You?</h2><p className="text-muted-foreground mt-4 text-lg">Choose the type of franchise support you need.</p></div><div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">{SUPPORT_OPTIONS.map(([number, title, description, Icon]) => <button type="button" key={title} onClick={openForm} className="group text-left"><article className="hover:border-brand-blue/40 hover:shadow-soft h-full rounded-2xl border bg-white p-6 transition-all duration-300 hover:-translate-y-1"><div className="flex items-center justify-between"><span className="text-brand-red text-sm font-bold">{number}</span><Icon className="text-brand-blue size-7 transition-transform group-hover:scale-110" /></div><h3 className="text-ink mt-10 text-xl font-bold">{title}</h3><p className="text-muted-foreground mt-3 text-sm leading-relaxed">{description}</p><span className="text-brand-blue mt-6 inline-flex items-center gap-2 text-sm font-bold">Explore support <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" /></span></article></button>)}</div></div></section>
 
-        <section className="section-y bg-white"><div className="container-page"><div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between"><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Explore by industry</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Franchise Opportunities</h2><p className="text-muted-foreground mt-4 text-lg">Explore business opportunities across different industries.</p></div><button type="button" onClick={openForm} className="text-brand-blue inline-flex items-center gap-2 text-sm font-bold">Looking for something specific? <ArrowRight className="size-4" /></button></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{OPPORTUNITIES.map(([title, description, image]) => <article key={title} className="group overflow-hidden rounded-2xl border bg-white shadow-sm transition-shadow hover:shadow-soft"><div className="relative aspect-[1.65] overflow-hidden"><Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-105" /></div><div className="p-5"><h3 className="text-ink text-lg font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p><button type="button" onClick={openForm} className="text-brand-blue mt-5 inline-flex items-center gap-2 text-sm font-bold">View Opportunities <ArrowRight className="size-4" /></button></div></article>)}</div></div></section>
+        <section className="section-y bg-white">
+          <div className="container-page">
+            <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Explore by industry</p>
+                <h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Franchise Opportunities</h2>
+                <p className="text-muted-foreground mt-4 text-lg">Explore business opportunities across different industries.</p>
+              </div>
+              <button type="button" onClick={openForm} className="text-brand-blue inline-flex items-center gap-2 text-sm font-bold hover:underline">
+                Looking for something specific? <ArrowRight className="size-4" />
+              </button>
+            </div>
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {OPPORTUNITIES.map(([title, description, image]) => (
+                <article
+                  key={title}
+                  onClick={() => openOpportunity(title)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      openOpportunity(title);
+                    }
+                  }}
+                  className="group cursor-pointer overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft flex flex-col"
+                  aria-label={`Apply for ${title} franchise opportunity`}
+                >
+                  <div className="relative aspect-[1.65] overflow-hidden">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-5 flex flex-col flex-1">
+                    <h3 className="text-ink text-lg font-bold group-hover:text-brand-blue transition-colors">{title}</h3>
+                    <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p>
+                    <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-brand-blue inline-flex items-center gap-1.5 text-sm font-bold group-hover:underline">
+                        Apply Now
+                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                      <span className="text-xs font-semibold text-muted-foreground">Franchise Model</span>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
         <section className="section-y bg-white border-t border-slate-100"><div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"><div className="relative min-h-[470px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.franchise.opening.src} alt={SITE_MEDIA.franchise.opening.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A simple customer journey</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">From Idea to Opening Day</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">We support you through every important stage of starting your franchise business.</p><div className="relative mt-9 space-y-6 before:absolute before:top-3 before:bottom-3 before:left-[17px] before:w-px before:bg-brand-blue/25">{JOURNEY.map(([number, title, description]) => <div key={number} className="relative flex gap-5"><span className="bg-brand-blue text-white relative z-10 inline-flex size-9 shrink-0 items-center justify-center rounded-full text-xs font-bold">{number}</span><div><h3 className="text-ink font-bold">{title}</h3><p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p></div></div>)}</div></div></div></section>
 
@@ -272,7 +346,13 @@ export function FranchiseLanding({
 
         <section className="section-y bg-brand-blue-light/45"><div className="container-page relative overflow-hidden rounded-3xl bg-white px-6 py-14 shadow-soft sm:px-12 lg:py-20"><div className="absolute top-0 right-0 h-full w-1/3 bg-[radial-gradient(circle_at_70%_30%,#b9d8fa,transparent_62%)]" /><div className="relative max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Your next move</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Ready to Explore a Franchise Opportunity?</h2><p className="text-muted-foreground mt-5 max-w-xl text-lg leading-relaxed">Tell us about your goals and requirements, and our team will help you explore the next steps.</p><Button size="xl" onClick={openForm} className="mt-8">Get Franchise Support <ArrowRight data-icon="inline-end" /></Button></div></div></section>
       </main>
-      <SupportModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
+      <SupportModal
+        key={selectedOpportunity || "general"}
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        initialBusinessType={selectedOpportunity}
+        initialInterest={selectedOpportunity ? "Franchise Opportunity" : undefined}
+      />
     </>
   );
 }

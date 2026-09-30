@@ -348,7 +348,7 @@ export function PackageDetailModal({
                 }
               }}
             >
-              Send Inquiry
+              Inquiry Now
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Button>
           </div>

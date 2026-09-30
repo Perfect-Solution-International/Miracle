@@ -192,37 +192,33 @@ export function InvestmentLanding({
   return (
     <>
       <main>
-        <section className="relative isolate overflow-hidden border-b border-border/40 bg-white/75 backdrop-blur-md">
-          {/* Liquid Ambient Glow Mesh */}
+        <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-[450px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+            className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
           />
 
-          <div className="container-page grid gap-10 py-16 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:py-24">
-            <div className="max-w-2xl">
-              {/* Pulsing Live Badge Pill */}
-              <div>
-                <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
-                  <span className="relative flex size-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
-                    <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
-                  </span>
-                  <span className="text-xs font-bold tracking-widest text-brand-blue uppercase">
-                    Strategic Business Investment
-                  </span>
-                </div>
+          <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+            <div className="max-w-2xl space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
+                <span className="bg-brand-red size-1.5 rounded-full" />
+                INVESTMENT
               </div>
 
-              <h1 className="text-ink mt-5 text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">
-                Investment Opportunities That Create Possibilities
+              <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                Explore Business Opportunities{" "}
+                <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
+                  With Potential.
+                </span>
               </h1>
-              <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed">
-                Explore business opportunities, investment projects and practical business ideas with professional support from Miracle International.
+
+              <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
+                Discover business opportunities, investment projects, and practical ideas with professional guidance.
               </p>
-              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row">
-                <Button size="xl" variant="accent" onClick={openForm} className="shadow-lg shadow-brand-red/20">
-                  Explore Opportunities <ArrowRight data-icon="inline-end" />
+
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+                <Button size="xl" variant="accent" onClick={openForm} className="shadow-lift">
+                  Apply Now <ArrowRight data-icon="inline-end" />
                 </Button>
                 <Button
                   size="xl"
@@ -233,28 +229,30 @@ export function InvestmentLanding({
                 </Button>
               </div>
             </div>
-            <div className="relative min-h-[360px] overflow-hidden rounded-3xl border-4 border-white bg-white p-3 shadow-2xl sm:min-h-[470px]">
-              <Image
-                src={SITE_MEDIA.investment.hero.src}
-                alt={SITE_MEDIA.investment.hero.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 52vw, 100vw"
-                className="object-cover transition-transform duration-700 hover:scale-105"
-              />
-              <div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/70 bg-white/95 p-5 backdrop-blur-md shadow-lg">
-                <p className="text-brand-blue text-sm font-bold">Ideas become clearer with the right support</p>
-                <p className="text-ink mt-1 font-semibold">Explore, evaluate and coordinate the next step.</p>
+
+            <div className="relative mx-auto w-full max-w-xl">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
+                <div className="relative h-full w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src="/images/services/investment-hero.jpg"
+                    alt="Senior investment advisor and corporate client reviewing investment portfolio projects in a skyline office"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="section-y bg-white"><div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div className="relative min-h-[300px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.investment.partnership.src} alt={SITE_MEDIA.investment.partnership.alt} fill sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover" /></div><div className="max-w-xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A clearer path forward</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Explore New Business &amp; Investment Possibilities</h2><p className="text-muted-foreground mt-5 text-lg leading-relaxed">Whether you are looking for an investment opportunity, exploring a new business idea, or seeking support for an existing project, Miracle International helps connect opportunities with practical business solutions.</p><Button variant="outline" size="lg" onClick={openForm} className="mt-7">Explore Opportunities <ArrowRight data-icon="inline-end" /></Button></div></div></section>
+        <section className="section-y bg-white"><div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div className="relative min-h-[300px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.investment.partnership.src} alt={SITE_MEDIA.investment.partnership.alt} fill sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover" /></div><div className="max-w-xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A clearer path forward</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Explore New Business &amp; Investment Possibilities</h2><p className="text-muted-foreground mt-5 text-lg leading-relaxed">Whether you are looking for an investment opportunity, exploring a new business idea, or seeking support for an existing project, Miracle International helps connect opportunities with practical business solutions.</p><Button variant="outline" size="lg" onClick={openForm} className="mt-7">Apply Now <ArrowRight data-icon="inline-end" /></Button></div></div></section>
 
         <section className="section-y bg-surface"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Start with your goal</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">What Are You Looking For?</h2><p className="text-muted-foreground mt-4 text-lg">Choose the type of investment support you need.</p></div><div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">{SUPPORT_TYPES.map(([number, title, description, Icon]) => <button type="button" key={title} onClick={openForm} className="group text-left"><article className="hover:border-brand-blue/40 hover:shadow-soft h-full rounded-2xl border bg-white p-6 transition-all duration-300 hover:-translate-y-1"><div className="flex items-center justify-between"><span className="text-brand-red text-sm font-bold">{number}</span><Icon className="text-brand-blue size-7 transition-transform group-hover:scale-110" /></div><h3 className="text-ink mt-10 text-xl font-bold">{title}</h3><p className="text-muted-foreground mt-3 text-sm leading-relaxed">{description}</p><span className="text-brand-blue mt-6 inline-flex items-center gap-2 text-sm font-bold">Explore <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" /></span></article></button>)}</div></div></section>
 
-        <section className="section-y bg-white"><div className="container-page grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center"><div className="relative min-h-[470px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.investment.analysis.src} alt={SITE_MEDIA.investment.analysis.alt} fill sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover" /></div><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Explore by sector</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Investment Opportunities</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">Explore opportunities across different business sectors.</p><div className="mt-8 grid gap-3 sm:grid-cols-2">{CATEGORIES.map(([title, Icon]) => <button type="button" onClick={openForm} key={title} className="hover:border-brand-blue/40 flex items-center gap-3 rounded-xl border bg-white p-4 text-left transition-colors"><Icon className="text-brand-blue size-5 shrink-0" /><span className="text-ink text-sm font-semibold">{title}</span><ChevronRight className="text-muted-foreground ml-auto size-4" /></button>)}</div><Button size="lg" onClick={openForm} className="mt-8">Explore Opportunities <ArrowRight data-icon="inline-end" /></Button></div></div></section>
+        <section className="section-y bg-white"><div className="container-page grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center"><div className="relative min-h-[470px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.investment.analysis.src} alt={SITE_MEDIA.investment.analysis.alt} fill sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover" /></div><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Explore by sector</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Investment Opportunities</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">Explore opportunities across different business sectors.</p><div className="mt-8 grid gap-3 sm:grid-cols-2">{CATEGORIES.map(([title, Icon]) => <button type="button" onClick={openForm} key={title} className="hover:border-brand-blue/40 flex items-center gap-3 rounded-xl border bg-white p-4 text-left transition-colors"><Icon className="text-brand-blue size-5 shrink-0" /><span className="text-ink text-sm font-semibold">{title}</span><ChevronRight className="text-muted-foreground ml-auto size-4" /></button>)}</div><Button size="lg" onClick={openForm} className="mt-8">Apply Now <ArrowRight data-icon="inline-end" /></Button></div></div></section>
 
         <section className="section-y bg-white border-t border-slate-100"><div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Ideas with potential</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Business Opportunities</h2><p className="text-muted-foreground mt-4 max-w-xl text-lg leading-relaxed">Explore opportunities to start, expand or participate in different types of businesses.</p><div className="mt-9 grid gap-3 sm:grid-cols-2">{BUSINESS_OPPORTUNITIES.map(([title, description, Icon]) => <article key={title} className="rounded-xl border bg-white p-4"><Icon className="text-brand-blue size-5" /><h3 className="text-ink mt-4 text-sm font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-xs leading-relaxed">{description}</p></article>)}</div></div><div className="relative min-h-[440px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.investment.planning.src} alt={SITE_MEDIA.investment.planning.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div></div></section>
 
@@ -266,7 +264,7 @@ export function InvestmentLanding({
 
         <section className="section-y bg-surface"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Clarity for your next decision</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Practical Support for Your Investment Journey</h2></div><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{WHY_US.map(([title, description, Icon]) => <article key={title} className="rounded-2xl border bg-white p-6"><Icon className="text-brand-blue size-7" /><h3 className="text-ink mt-7 font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p></article>)}</div></div></section>
 
-        <section className="section-y bg-brand-blue-light/45"><div className="container-page relative overflow-hidden rounded-3xl bg-white px-6 py-14 shadow-soft sm:px-12 lg:py-20"><Image src={SITE_MEDIA.investment.hero.src} alt="" fill sizes="100vw" className="object-cover opacity-10" /><div className="relative max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Your next possibility</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Have an Investment Idea or Requirement?</h2><p className="text-muted-foreground mt-5 max-w-xl text-lg leading-relaxed">Tell us what you are looking for and our team will help you explore the available business and investment possibilities.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={openForm}>Submit Investment Requirement <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="outline" onClick={openForm}>Explore Opportunities</Button></div></div></div></section>
+        <section className="section-y bg-brand-blue-light/45"><div className="container-page relative overflow-hidden rounded-3xl bg-white px-6 py-14 shadow-soft sm:px-12 lg:py-20"><Image src={SITE_MEDIA.investment.hero.src} alt="" fill sizes="100vw" className="object-cover opacity-10" /><div className="relative max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Your next possibility</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Have an Investment Idea or Requirement?</h2><p className="text-muted-foreground mt-5 max-w-xl text-lg leading-relaxed">Tell us what you are looking for and our team will help you explore the available business and investment possibilities.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={openForm}>Submit Investment Requirement <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="outline" onClick={openForm}>Apply Now</Button></div></div></div></section>
       </main>
       <RequestModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </>

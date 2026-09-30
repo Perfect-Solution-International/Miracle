@@ -169,24 +169,6 @@ export function OutboundToursView() {
         </div>
       </section>
 
-      {/* Inquiry Quick Banner on White (seamlessly connected) */}
-      <div className="bg-white py-4 px-4">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs bg-slate-50/70 border border-slate-200/80 rounded-2xl px-5 py-3 shadow-xs">
-          <div className="flex items-center gap-2 text-navy dark:text-foreground font-medium">
-            <Sparkles className="size-4 text-amber-500 shrink-0" />
-            <span>Planning an international trip with family or friends? Submit an inquiry for customized packages and airfares.</span>
-          </div>
-          <Button
-            size="sm"
-            onClick={() => setGeneralInquiryOpen(true)}
-            className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs h-8 px-4 shrink-0 font-semibold gap-1.5 shadow-xs"
-          >
-            <Send className="size-3" />
-            Send Outbound Inquiry
-          </Button>
-        </div>
-      </div>
-
       {/* Outbound Packages Grid on White */}
       <div className="bg-white">
         <div id="outbound-packages" className="container-page scroll-mt-20">
