@@ -129,20 +129,21 @@ export default function Page() {
     <main className="bg-white">
       <section
         aria-labelledby="contact-hero-heading"
-        className="relative isolate overflow-hidden border-b border-slate-200/80 md:!bg-fixed"
+        className="relative isolate overflow-hidden bg-white"
         style={{
-          backgroundImage: 'url("/images/contact/contact-hero-bg.png")',
+          backgroundImage: `url("${SITE_MEDIA.contactHero.src}")`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "center right",
           backgroundRepeat: "no-repeat",
         }}
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[rgba(6,18,35,0.30)]"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/5 max-sm:from-white/95 max-sm:via-white/85 max-sm:to-white/55"
         />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white" />
 
-        <div className="container-page relative flex items-center py-20 sm:py-28 md:min-h-[600px]">
+        <div className="container-page relative flex min-h-[560px] items-center py-20 sm:py-28 md:min-h-[640px]">
           <div className="max-w-2xl space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs">
               <span className="relative flex size-2">
@@ -154,15 +155,15 @@ export default function Page() {
 
             <h1
               id="contact-hero-heading"
-              className="text-white text-4xl leading-[1.08] font-extrabold tracking-tight [text-shadow:_0_2px_12px_rgba(5,15,30,0.7)] sm:text-5xl lg:text-6xl"
+              className="text-navy text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
             >
               Let&apos;s Talk About{" "}
-              <span className="text-white">
+              <span className="text-navy">
                 What You Need.
               </span>
             </h1>
 
-            <p className="text-white/90 text-base leading-relaxed [text-shadow:_0_1px_8px_rgba(5,15,30,0.7)] sm:text-lg">
+            <p className="max-w-xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
               Reach out with an inquiry, quotation request or business requirement. Our
               multidisciplinary team is ready to structure the right solution for you.
             </p>
@@ -176,8 +177,9 @@ export default function Page() {
               </Button>
               <Button
                 asChild
-                variant="secondary-hero"
+                variant="outline"
                 size="xl"
+                className="border-slate-200 bg-white text-navy shadow-sm hover:bg-slate-50"
               >
                 <Link href={ROUTES.public.tellUsWhatYouNeed}>Share a Requirement</Link>
               </Button>
@@ -190,16 +192,16 @@ export default function Page() {
                   <a
                     key={channel.title}
                     href={channel.href}
-                    className="group flex min-w-0 items-center gap-3 text-white"
+                    className="group flex min-w-0 items-center gap-3 text-navy"
                   >
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/70">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-brand-blue/15 bg-white text-brand-blue">
                       <Icon aria-hidden="true" className="size-4" />
                     </span>
                     <span className="min-w-0">
                       <span className="block text-xs font-bold">
                         {channel.title}
                       </span>
-                      <span className="block truncate text-xs text-white/90 group-hover:text-white">
+                      <span className="block truncate text-xs text-slate-700 group-hover:text-brand-blue">
                         {channel.lines[0]}
                       </span>
                     </span>
@@ -237,7 +239,7 @@ export default function Page() {
 
       <Section
         aria-labelledby="service-direction-heading"
-        className="bg-slate-50"
+        className="border-y border-slate-100"
       >
         <SectionHeading
           id="service-direction-heading"

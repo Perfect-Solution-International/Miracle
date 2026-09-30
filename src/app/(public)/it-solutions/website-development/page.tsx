@@ -27,17 +27,18 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
 import { MediaFrame } from "@/components/common/media-frame";
 import { ItDetailHero } from "@/features/it-solutions/components/it-detail-hero";
+import { ItProcessGrid } from "@/features/it-solutions/components/it-process-grid";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
+import { ServiceRequirementDialog } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Website Development";
@@ -102,7 +103,8 @@ const services: IconItem[] = [
 const reasons = [
   {
     title: "Tailored to your business",
-    description: "No generic templates. Every site is planned around your goals and customers.",
+    description:
+      "No generic templates. Every site is planned around your goals and customers.",
   },
   {
     title: "Clear pricing and timelines",
@@ -208,7 +210,8 @@ const benefits: IconItem[] = [
   },
   {
     title: "Secure Development",
-    description: "SSL, secure forms and best practices that protect your site and visitors.",
+    description:
+      "SSL, secure forms and best practices that protect your site and visitors.",
     icon: ShieldCheck,
   },
   {
@@ -237,12 +240,15 @@ export default function Page() {
         image={SITE_MEDIA.itSolutions.websiteDevelopmentHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl">
-            <Link href={ROUTES.public.tellUsWhatYouNeed}>
-              Start Your Website Project
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
+          <ServiceRequirementDialog
+            context="it"
+            trigger={
+              <Button variant="accent" size="xl">
+                Start Your Website Project
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Button>
+            }
+          />
           <Button asChild variant="secondary-hero" size="xl">
             <a href="#services">View Services</a>
           </Button>
@@ -332,35 +338,12 @@ export default function Page() {
       </Section>
 
       {/* Development process */}
-      <Section tone="navy" aria-labelledby="process-heading">
-        <SectionHeading
-          id="process-heading"
-          eyebrow="How We Work"
-          title="Our Website Development Process"
-          description="A clear, six-step process that keeps your project on time and on budget."
-          align="center"
-          tone="inverse"
-        />
-        <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-16 lg:grid-cols-3">
-          {developmentProcess.map((item) => (
-            <li
-              key={item.step}
-              className="reveal rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.06]"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-brand-blue-muted inline-flex size-11 items-center justify-center rounded-lg bg-white/10">
-                  <item.icon aria-hidden="true" className="size-5" />
-                </span>
-                <span className="text-3xl font-extrabold text-white/20">{item.step}</span>
-              </div>
-              <h3 className="mt-5 text-lg font-bold text-white">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/65">
-                {item.description}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </Section>
+      <ItProcessGrid
+        eyebrow="How We Work"
+        title="Our Website Development Process"
+        description="A clear, six-step process that keeps your project on time and on budget."
+        steps={developmentProcess}
+      />
 
       {/* Technologies */}
       <Section aria-labelledby="technologies-heading">
@@ -424,6 +407,8 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        tone="light"
+        serviceContext="it"
         eyebrow="Ready to Go Online?"
         title="Start Your Website Project"
         description="Tell us about your business and goals. Our team will recommend the right website solution, timeline and cost."

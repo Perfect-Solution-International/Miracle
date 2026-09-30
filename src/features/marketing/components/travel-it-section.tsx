@@ -31,7 +31,7 @@ export function TravelItSection() {
 
 function ServicePromoCard({ promo }: { promo: ServicePromo }) {
   return (
-    <article className="reveal group flex flex-col overflow-hidden rounded-2xl border bg-white">
+    <article className="reveal group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border bg-white has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring">
       <div className="relative aspect-[16/9] overflow-hidden">
         <Image
           src={promo.image.src}
@@ -76,7 +76,7 @@ function ServicePromoCard({ promo }: { promo: ServicePromo }) {
             variant="outline"
             className="text-ink w-full sm:w-auto"
           >
-            <Link href={promo.cta.href}>
+            <Link href={promo.cta.href} className="after:absolute after:inset-0">
               {promo.cta.label}
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Link>

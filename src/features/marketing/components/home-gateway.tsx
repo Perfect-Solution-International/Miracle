@@ -561,7 +561,7 @@ export function HomeGateway() {
               return (
                 <div
                   key={pillar.id}
-                  className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/40 hover:shadow-lift overflow-hidden"
+                  className="group relative flex cursor-pointer flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/40 hover:shadow-lift overflow-hidden has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
                 >
                   <div
                     aria-hidden="true"
@@ -571,7 +571,7 @@ export function HomeGateway() {
                     )}
                   />
 
-                  <div className="relative z-10 space-y-4">
+                  <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="bg-brand-blue-light text-brand-blue inline-flex size-12 items-center justify-center rounded-2xl shadow-xs transition-transform group-hover:scale-110">
                         <Icon className="size-6" />
@@ -600,10 +600,10 @@ export function HomeGateway() {
                     </ul>
                   </div>
 
-                  <div className="relative z-10 pt-6 mt-6 border-t border-slate-100">
+                  <div className="pt-6 mt-6 border-t border-slate-100">
                     <Link
                       href={pillar.href}
-                      className="text-brand-blue inline-flex items-center gap-1.5 text-xs font-bold transition-all group-hover:gap-2.5"
+                      className="text-brand-blue inline-flex items-center gap-1.5 text-xs font-bold transition-all group-hover:gap-2.5 outline-none after:absolute after:inset-0"
                     >
                       Explore {pillar.title}
                       <ArrowRight className="size-3.5" />
@@ -963,7 +963,7 @@ export function HomeGateway() {
       {/* ─────────────────────────────────────────────────────────────
           8. HOW IT WORKS: Executive 5-Step Process Timeline
       ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-navy relative isolate overflow-hidden text-white">
+      <section className="section-y relative isolate overflow-hidden bg-white">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-40 -left-40 -z-10 size-96 rounded-full bg-brand-blue/20 blur-[120px]"
@@ -971,13 +971,13 @@ export function HomeGateway() {
 
         <div className="container-page">
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="bg-white/10 text-brand-blue-muted rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+            <span className="bg-brand-blue-light text-brand-blue rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
               A Clear Path Forward
             </span>
-            <h2 className="text-white text-3xl font-extrabold tracking-tight sm:text-4xl">
+            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
               How We Work With You
             </h2>
-            <p className="text-white/70 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               A streamlined, transparent five-step process from your initial inquiry to final delivery.
             </p>
           </div>
@@ -986,21 +986,21 @@ export function HomeGateway() {
             {PROCESS_STEPS.map((item, index) => (
               <div
                 key={item.step}
-                className="relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20"
+                className="relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-soft transition-all hover:border-brand-blue/25 hover:shadow-lift"
               >
                 <div>
-                  <span className="text-brand-blue-muted font-extrabold text-sm tracking-wider">
+                  <span className="text-brand-blue font-extrabold text-sm tracking-wider">
                     STEP {item.step}
                   </span>
-                  <h3 className="text-white text-base font-bold mt-2.5">{item.title}</h3>
-                  <p className="text-white/65 text-xs sm:text-sm leading-relaxed mt-2">
+                  <h3 className="text-ink text-base font-bold mt-2.5">{item.title}</h3>
+                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mt-2">
                     {item.description}
                   </p>
                 </div>
                 {index < PROCESS_STEPS.length - 1 ? (
                   <div
                     aria-hidden="true"
-                    className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-20 text-white/30"
+                    className="text-brand-blue/60 hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-20"
                   >
                     <ChevronRight className="size-5" />
                   </div>

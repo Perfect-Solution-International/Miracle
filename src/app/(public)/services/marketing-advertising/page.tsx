@@ -312,7 +312,11 @@ export default function Page() {
         </div>
       </Section>
 
+Imasha
       <Section aria-labelledby="channels-heading" className="bg-white border-t border-slate-100">
+
+      <Section className="bg-white" aria-labelledby="channels-heading">
+develop
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <SectionHeading
             eyebrow="Channels"
@@ -324,15 +328,24 @@ export default function Page() {
             {channels.map(([title, description, Icon]) => (
               <div
                 key={title}
+Imasha
                 className="flex items-start gap-4 rounded-xl border border-slate-200/80 bg-white p-4 shadow-xs"
+
+                className="flex items-start gap-4 rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-sm"
+ develop
               >
                 <Icon
                   aria-hidden="true"
                   className="text-brand-blue mt-0.5 size-5 shrink-0"
                 />
                 <div>
+ Imasha
                   <h3 className="font-semibold text-ink">{title}</h3>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+
+                  <h3 className="text-ink font-semibold">{title}</h3>
+                  <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+ develop
                     {description}
                   </p>
                 </div>

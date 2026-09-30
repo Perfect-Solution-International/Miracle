@@ -27,16 +27,17 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
 import { ItDetailHero } from "@/features/it-solutions/components/it-detail-hero";
+import { ItProcessGrid } from "@/features/it-solutions/components/it-process-grid";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
+import { ServiceRequirementDialog } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "POS System Development";
@@ -233,12 +234,15 @@ export default function Page() {
         image={SITE_MEDIA.itSolutions.posSystemHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl">
-            <Link href={ROUTES.public.tellUsWhatYouNeed}>
-              Get Your POS System
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
+          <ServiceRequirementDialog
+            context="it"
+            trigger={
+              <Button variant="accent" size="xl">
+                Get Your POS System
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Button>
+            }
+          />
           <Button asChild variant="secondary-hero" size="xl">
             <a href="#features">Explore Features</a>
           </Button>
@@ -315,35 +319,12 @@ export default function Page() {
       </Section>
 
       {/* How it works */}
-      <Section tone="navy" aria-labelledby="process-heading">
-        <SectionHeading
-          id="process-heading"
-          eyebrow="How It Works"
-          title="From Setup to Your First Sale"
-          description="A simple, guided process that gets your POS system running with minimal disruption."
-          align="center"
-          tone="inverse"
-        />
-        <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-16 lg:grid-cols-3">
-          {setupProcess.map((item) => (
-            <li
-              key={item.step}
-              className="reveal rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.06]"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-brand-blue-muted inline-flex size-11 items-center justify-center rounded-lg bg-white/10">
-                  <item.icon aria-hidden="true" className="size-5" />
-                </span>
-                <span className="text-3xl font-extrabold text-white/20">{item.step}</span>
-              </div>
-              <h3 className="mt-5 text-lg font-bold text-white">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/65">
-                {item.description}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </Section>
+      <ItProcessGrid
+        eyebrow="How It Works"
+        title="From Setup to Your First Sale"
+        description="A simple, guided process that gets your POS system running with minimal disruption."
+        steps={setupProcess}
+      />
 
       {/* Benefits */}
       <Section aria-labelledby="benefits-heading">
@@ -368,6 +349,8 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        tone="light"
+        serviceContext="it"
         eyebrow="Ready to Upgrade Your Counter?"
         title="Get a POS System Made for Your Business"
         description="Tell us about your business and our team will recommend the right POS setup, hardware and pricing."
