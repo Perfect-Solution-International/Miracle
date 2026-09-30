@@ -6,6 +6,7 @@ import {
   BriefcaseBusiness,
   Building2,
   Check,
+  CheckCircle2,
   ChevronRight,
   CircleDollarSign,
   ClipboardCheck,
@@ -14,6 +15,7 @@ import {
   Lightbulb,
   MapPin,
   PackageCheck,
+  Sparkles,
   Store,
   Users,
   X,
@@ -176,7 +178,7 @@ function SupportModal({
               <h2 id="franchise-modal-title" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">Franchise Support Request</h2>
               <p className="text-muted-foreground mt-2 max-w-xl text-sm leading-relaxed">Tell us about your goals and our team will help you explore the next steps.</p>
             </div>
-            <form onSubmit={submit} className="overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="text-ink text-sm font-semibold">Full Name *<Input value={form.fullName} onChange={(event) => update("fullName", event.target.value)} placeholder="Your full name" className="mt-2" /></label>
                 <label className="text-ink text-sm font-semibold">Email Address *<Input type="email" value={form.email} onChange={(event) => update("email", event.target.value)} placeholder="you@example.com" className="mt-2" /></label>
@@ -220,57 +222,64 @@ export function FranchiseLanding({
   return (
     <>
       <main>
-        <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
+        {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
+        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+          {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
+            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            style={{
+              backgroundImage: 'url("/images/services/franchise-hero.jpg")',
+              backgroundPosition: "right center",
+            }}
           />
 
-          <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+          {/* Soft-White Gradient on Left Area */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+          />
+
+          {/* Bottom Gradient Fade */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+          />
+
+          {/* Left-Aligned Content Container */}
+          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
             <div className="max-w-2xl space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
-                <span className="bg-brand-red size-1.5 rounded-full" />
-                FRANCHISE
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+                <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+                <span>Turnkey Franchise &amp; Business Expansion</span>
               </div>
 
-              <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                Build Your Business{" "}
-                <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
-                  With the Right Opportunity.
-                </span>
+              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+                Turnkey Solutions.<br />
+                For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Franchise Brands</span><br />
+                <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Rapid Expansion.</span>
               </h1>
 
-              <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-                Explore franchise opportunities and practical support for setting up, developing, and expanding franchise businesses.
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+                Miracle International provides end-to-end franchise acquisition, retail rollout structuring, supply chain integration, and turnkey operational launch for aspiring business owners and global brand networks.
               </p>
 
-              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-                <Button size="xl" variant="accent" onClick={openForm} className="shadow-lift">
-                  Apply Now <ArrowRight data-icon="inline-end" />
+              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                <Button
+                  size="xl"
+                  onClick={openForm}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  <span>Inquiry Now</span>
                 </Button>
                 <Button
                   size="xl"
-                  variant="secondary-hero"
+                  variant="outline"
+                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
                   onClick={openForm}
                 >
-                  Get Franchise Support
+                  Explore Franchise Models
                 </Button>
-              </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-xl">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
-                <div className="relative h-full w-full overflow-hidden rounded-2xl">
-                  <Image
-                    src="/images/services/franchise-hero.jpg"
-                    alt="Franchise development director and prospective partner discussing expansion plans in a flagship store"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 45vw, 100vw"
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                  <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
-                </div>
               </div>
             </div>
           </div>
@@ -344,7 +353,7 @@ export function FranchiseLanding({
 
         <section className="section-y bg-surface"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">After the launch</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Support Beyond Setup</h2></div><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{ONGOING_SUPPORT.map(([title, description]) => <article key={title} className="rounded-2xl border bg-white p-6"><Building2 className="text-brand-blue size-7" /><h3 className="text-ink mt-7 font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p></article>)}</div></div></section>
 
-        <section className="section-y bg-brand-blue-light/45"><div className="container-page relative overflow-hidden rounded-3xl bg-white px-6 py-14 shadow-soft sm:px-12 lg:py-20"><div className="absolute top-0 right-0 h-full w-1/3 bg-[radial-gradient(circle_at_70%_30%,#b9d8fa,transparent_62%)]" /><div className="relative max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Your next move</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Ready to Explore a Franchise Opportunity?</h2><p className="text-muted-foreground mt-5 max-w-xl text-lg leading-relaxed">Tell us about your goals and requirements, and our team will help you explore the next steps.</p><Button size="xl" onClick={openForm} className="mt-8">Get Franchise Support <ArrowRight data-icon="inline-end" /></Button></div></div></section>
+        <section className="section-y bg-white"><div className="container-page relative overflow-hidden rounded-3xl border border-slate-200 bg-white px-6 py-14 shadow-soft sm:px-12 lg:py-20"><div className="relative max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Your next move</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Ready to Explore a Franchise Opportunity?</h2><p className="text-muted-foreground mt-5 max-w-xl text-lg leading-relaxed">Tell us about your goals and requirements, and our team will help you explore the next steps.</p><Button size="xl" onClick={openForm} className="mt-8">Get Franchise Support <ArrowRight data-icon="inline-end" /></Button></div></div></section>
       </main>
       <SupportModal
         key={selectedOpportunity || "general"}

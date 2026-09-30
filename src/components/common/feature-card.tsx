@@ -34,7 +34,7 @@ export function FeatureCard({
         inverse
           ? "border-white/10 bg-white/[0.03] hover:border-white/25 hover:bg-white/[0.06]"
           : "bg-card hover:border-brand-blue/30 hover:shadow-soft",
-        href && "has-[a:focus-visible]:ring-ring has-[a:focus-visible]:ring-2",
+        href && "cursor-pointer has-[a:focus-visible]:ring-ring has-[a:focus-visible]:ring-2",
         className,
       )}
     >

@@ -1,7 +1,9 @@
 import {
-  Building2,
+  Briefcase,
   CheckCircle2,
   Clock,
+  Coins,
+  FileCheck,
   FileText,
   Globe2,
   Handshake,
@@ -11,134 +13,183 @@ import {
   MessageSquare,
   Package,
   PencilLine,
+  Plane,
   Search,
   Settings2,
   Ship,
   ShieldCheck,
+  Store,
   Target,
   TrendingUp,
   Users,
   type LucideIcon,
 } from "lucide-react";
 
-export interface IconStat {
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
-}
-
-/** Stat strip under the hero headline. */
-export const HERO_STATS: readonly IconStat[] = [
-  { icon: MessageSquare, title: "One Request", subtitle: "Multiple Solutions" },
-  { icon: Globe2, title: "Local & International", subtitle: "Sourcing" },
-  { icon: Users, title: "Expert Team", subtitle: "Support" },
-  { icon: ShieldCheck, title: "Free Consultation", subtitle: "& Guidance" },
-];
-
-/** The four service icons arranged around the hero's centre emphasis panel. */
-export const HERO_SERVICE_ICONS: readonly { icon: LucideIcon; label: string }[] = [
-  { icon: Package, label: "Products" },
-  { icon: TrendingUp, label: "Investment" },
-  { icon: Ship, label: "Sourcing" },
-  { icon: Laptop2, label: "IT Solutions" },
-];
-
-export interface WhyShareItem {
-  icon: LucideIcon;
+export interface HelpCategoryItem {
+  id: string;
   title: string;
   description: string;
-  accent: "red" | "blue";
+  icon: LucideIcon;
+  value: string;
 }
 
-export const WHY_SHARE_ITEMS: readonly WhyShareItem[] = [
+export const HELP_CATEGORIES: readonly HelpCategoryItem[] = [
   {
-    icon: Target,
-    title: "One Point of Contact",
-    description: "All your business needs in one place.",
-    accent: "red",
+    id: "import-export",
+    title: "Import & Export",
+    description: "International cargo, freight logistics, documentation & customs handling.",
+    icon: Ship,
+    value: "Import & Export",
   },
   {
-    icon: Globe2,
-    title: "Global Network",
-    description: "Access to trusted suppliers and partners worldwide.",
-    accent: "blue",
+    id: "trading",
+    title: "Trading",
+    description: "Commodity trading, supply chain management & cross-border partnerships.",
+    icon: TrendingUp,
+    value: "Trading",
   },
   {
-    icon: Users,
-    title: "Expert Support",
-    description: "Our team will guide you from inquiry to delivery.",
-    accent: "blue",
+    id: "travel-tourism",
+    title: "Travel & Tourism",
+    description: "Inbound Sri Lanka holidays, outbound tour packages & travel planning.",
+    icon: Plane,
+    value: "Travel & Tourism",
   },
   {
-    icon: Clock,
-    title: "Save Time & Cost",
-    description: "We do the research so you can focus on your business.",
-    accent: "blue",
+    id: "visa-services",
+    title: "Visa Services",
+    description: "Tourist, business & work visa documentation, verification & embassy desk.",
+    icon: FileCheck,
+    value: "Visa Services",
   },
   {
-    icon: FileText,
-    title: "Transparent Process",
-    description: "Get quotations, track progress and receive regular updates.",
-    accent: "blue",
+    id: "business-solutions",
+    title: "Business Solutions",
+    description: "Corporate formation, operational advisory, strategy & market entry.",
+    icon: Briefcase,
+    value: "Business Solutions",
   },
   {
-    icon: Settings2,
-    title: "End-to-End Solutions",
-    description: "From sourcing to delivery and beyond.",
-    accent: "blue",
+    id: "franchise-opportunities",
+    title: "Franchise Opportunities",
+    description: "Brand acquisitions, franchise partnerships, master licensing & expansion.",
+    icon: Store,
+    value: "Franchise Opportunities",
+  },
+  {
+    id: "investment-opportunities",
+    title: "Investment Opportunities",
+    description: "Direct investment ventures, joint partnerships & capital project funding.",
+    icon: Coins,
+    value: "Investment Opportunities",
+  },
+  {
+    id: "marketing-advertising",
+    title: "Marketing & Advertising",
+    description: "Brand identity, performance advertising, digital campaigns & PR strategy.",
+    icon: Megaphone,
+    value: "Marketing & Advertising",
+  },
+  {
+    id: "it-solutions",
+    title: "IT Solutions",
+    description: "Custom software development, web applications, mobile apps & POS systems.",
+    icon: Laptop2,
+    value: "IT Solutions",
+  },
+  {
+    id: "other-requirements",
+    title: "Other Requirements",
+    description: "Custom procurement, specialized enterprise support or unique projects.",
+    icon: HelpCircle,
+    value: "Other Requirements",
   },
 ];
 
-export interface ProcessStepItem {
-  step: number;
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  accent: "red" | "blue";
-}
+export const REQUIREMENT_TYPE_OPTIONS: readonly string[] = [
+  "Import & Export",
+  "Trading",
+  "Travel & Tourism",
+  "Visa Services",
+  "Business Solutions",
+  "Franchise Opportunities",
+  "Investment Opportunities",
+  "Marketing & Advertising",
+  "IT Solutions",
+  "Other Requirements",
+];
 
-export const HOW_IT_WORKS_STEPS: readonly ProcessStepItem[] = [
+
+export const TIMELINE_OPTIONS: readonly string[] = [
+  "Immediately (Urgent)",
+  "Within 2 weeks",
+  "Within 1 month",
+  "1–3 months",
+  "3–6 months",
+  "Flexible / Not sure yet",
+];
+
+export const BUDGET_RANGE_OPTIONS: readonly string[] = [
+  "Under LKR 100,000 / $500",
+  "LKR 100,000 – LKR 500,000 / $500 – $2,000",
+  "LKR 500,000 – LKR 2,000,000 / $2,000 – $7,000",
+  "LKR 2,000,000 – LKR 10,000,000 / $7,000 – $35,000",
+  "Above LKR 10,000,000 / $35,000+",
+  "Flexible / Custom Budget",
+];
+
+export const HOW_IT_WORKS_STEPS = [
   {
     step: 1,
-    icon: PencilLine,
-    title: "Submit Your Request",
-    description: "Tell us what you need through the form.",
-    accent: "red",
+    title: "Tell Us Your Requirement",
+    description: "Share what you need, your specifications, preferred timeline, or destination.",
   },
   {
     step: 2,
-    icon: Search,
-    title: "We Analyze",
-    description: "Our team reviews your requirements.",
-    accent: "blue",
+    title: "We Review Your Request",
+    description: "Our specialist team analyzes your requirements to determine the best approach.",
   },
   {
     step: 3,
-    icon: FileText,
-    title: "Get Solutions",
-    description: "We provide the best options and quotations.",
-    accent: "red",
+    title: "We Contact You",
+    description: "We reach out directly with a clear proposal, transparent quotation, or consultation.",
   },
   {
     step: 4,
-    icon: CheckCircle2,
-    title: "You Decide",
-    description: "Choose the best solution and we handle the rest.",
-    accent: "blue",
+    title: "We Work on the Solution",
+    description: "Upon your approval, we execute the sourcing, logistics, bookings, or project delivery.",
   },
-];
+] as const;
 
-export const REQUEST_EXAMPLES: readonly { icon: LucideIcon; label: string }[] = [
-  { icon: Package, label: "Products and Materials" },
-  { icon: Settings2, label: "Machinery and Equipment" },
-  { icon: Ship, label: "Import & Export Services" },
-  { icon: Building2, label: "Business Setup Support" },
-  { icon: Search, label: "Travel & Visa Services" },
-  { icon: Laptop2, label: "IT Solutions (Web, POS, Software)" },
-  { icon: Megaphone, label: "Marketing & Advertising" },
-  { icon: Handshake, label: "Investment & Franchise Opportunities" },
-  { icon: HelpCircle, label: "Other Business Needs" },
-];
+export const REQUEST_EXAMPLES = [
+  { icon: Ship, label: "Industrial Packaging & Factory Machinery" },
+  { icon: Globe2, label: "Bulk Consumer Goods & Food Product Sourcing" },
+  { icon: Laptop2, label: "Custom ERP, POS & Mobile App Development" },
+  { icon: Plane, label: "VIP & Corporate Travel Packages to Sri Lanka" },
+  { icon: FileCheck, label: "Work & Investor Visa Advisory Support" },
+  { icon: Store, label: "Franchise Partnerships & Retail Expansion" },
+] as const;
+
+export const WHY_SHARE_ITEMS = [
+  {
+    icon: ShieldCheck,
+    title: "Verified Global Network",
+    description: "Every supplier, service provider, and partner is vetted for compliance and quality.",
+    accent: "text-brand-blue",
+  },
+  {
+    icon: Clock,
+    title: "24-Hour Review SLA",
+    description: "Our dedicated sector coordinators review and respond with initial assessments in 24 hours.",
+    accent: "text-amber-600",
+  },
+  {
+    icon: Handshake,
+    title: "Transparent & Direct",
+    description: "No hidden fees or ambiguous terms. You receive clear pricing, timelines, and execution roadmaps.",
+    accent: "text-emerald-600",
+  },
+] as const;
 
 export const REQUIREMENT_FAQS: readonly { question: string; answer: string }[] = [
   {
@@ -168,31 +219,3 @@ export const REQUIREMENT_FAQS: readonly { question: string; answer: string }[] =
   },
 ];
 
-export const REQUIREMENT_TYPE_OPTIONS: readonly string[] = [
-  "Products & Materials",
-  "Machinery & Equipment",
-  "Import & Export Services",
-  "Business Setup Support",
-  "Travel & Visa Services",
-  "IT Solutions",
-  "Marketing & Advertising",
-  "Investment & Franchise",
-  "Other",
-];
-
-export const TIMELINE_OPTIONS: readonly string[] = [
-  "Immediately",
-  "Within 1 month",
-  "1–3 months",
-  "3–6 months",
-  "Not sure yet",
-];
-
-export const BUDGET_RANGE_OPTIONS: readonly string[] = [
-  "Under $1,000",
-  "$1,000 – $5,000",
-  "$5,000 – $20,000",
-  "$20,000 – $50,000",
-  "Above $50,000",
-  "Prefer not to say",
-];

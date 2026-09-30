@@ -335,7 +335,7 @@ export default function Page() {
             <li key={title}>
               <Link
                 href={href}
-                className="group shadow-soft hover:border-brand-blue/30 hover:shadow-lift flex h-full flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
+                className="group shadow-soft hover:border-brand-blue/30 hover:shadow-lift flex h-full cursor-pointer flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue flex size-11 items-center justify-center rounded-xl transition-colors group-hover:text-white">
                   <Icon aria-hidden="true" className="size-5" />

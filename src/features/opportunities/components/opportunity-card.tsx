@@ -20,7 +20,7 @@ export function OpportunityCard({
   return (
     <article
       className={cn(
-        "group hover:border-brand-blue/30 hover:shadow-soft has-[a:focus-visible]:ring-ring relative flex h-full flex-col rounded-2xl border bg-white p-6 transition-all duration-300 has-[a:focus-visible]:ring-2 sm:p-7",
+        "group hover:border-brand-blue/30 hover:shadow-soft has-[a:focus-visible]:ring-ring relative flex h-full cursor-pointer flex-col rounded-2xl border bg-white p-6 transition-all duration-300 has-[a:focus-visible]:ring-2 sm:p-7",
         className,
       )}
     >

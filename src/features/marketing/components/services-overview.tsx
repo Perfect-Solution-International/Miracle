@@ -241,7 +241,6 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
           <>
             <div className="border-b border-slate-100 bg-gradient-to-r from-slate-50 via-white to-brand-blue-light/20 px-6 py-5 pr-14 sm:px-8">
               <span className="bg-brand-blue-light text-brand-blue inline-flex items-center gap-1.5 rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="size-3" />
                 Miracle Services Desk
               </span>
               <h2 id="services-request-title" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">
@@ -252,7 +251,7 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
               </p>
             </div>
 
-            <form onSubmit={submit} className="overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
+            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="text-ink block text-xs font-bold mb-1.5">
@@ -405,64 +404,64 @@ export function ServicesOverview() {
   return (
     <>
       <main>
-        {/* ── 1. Hero Section ── */}
-        <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
+        {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
+        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+          {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
+            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            style={{
+              backgroundImage: 'url("/images/services/services-main-hero.jpg")',
+              backgroundPosition: "right center",
+            }}
           />
 
-          <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+          {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+          />
+
+          {/* Bottom Gradient Fade to Next Section */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+          />
+
+          {/* Left-Aligned Content Container */}
+          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
             <div className="max-w-2xl space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
-                <span className="bg-brand-red size-1.5 rounded-full" />
-                OUR SERVICES
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+                <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+                <span>Integrated Global Business &amp; Travel Solutions</span>
               </div>
 
-              <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                Global Services.{" "}
-                <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
-                  Practical Business Solutions.
-                </span>
+              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+                One Trusted Partner<br />
+                For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Business, Tech</span><br />
+                <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Global Growth.</span>
               </h1>
 
-              <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-                Explore professional services designed to help individuals and businesses manage opportunities, trade, travel, and growth with confidence.
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+                Miracle International empowers enterprises and individuals through strategic <strong className="font-semibold text-slate-900">Business Solutions</strong>, cutting-edge <strong className="font-semibold text-slate-900">IT &amp; Software Engineering</strong>, premium <strong className="font-semibold text-slate-900">Travel &amp; Tourism</strong>, and reliable <strong className="font-semibold text-slate-900">Cross-Border Trade</strong>.
               </p>
 
-              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
                 <Button
                   size="xl"
-                  variant="accent"
-                  className="shadow-lift"
-                  onClick={() => document.getElementById("main-services")?.scrollIntoView({ behavior: "smooth" })}
-                >
-                  Explore Our Services
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </Button>
-                <Button
-                  size="xl"
-                  variant="secondary-hero"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
                   onClick={openForm}
                 >
-                  Tell Us What You Need
+                  <span>Inquiry Now</span>
                 </Button>
-              </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-xl">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
-                <div className="relative h-full w-full overflow-hidden rounded-2xl">
-                  <Image
-                    src="/images/services/services-main-hero.jpg"
-                    alt="International business professionals and consultants collaborating in a modern corporate boardroom"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 45vw, 100vw"
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                  <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
-                </div>
+                <Button
+                  size="xl"
+                  variant="outline"
+                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
+                  onClick={() => document.getElementById("main-services")?.scrollIntoView({ behavior: "smooth" })}
+                >
+                  Explore Core Pillars
+                </Button>
               </div>
             </div>
           </div>
@@ -610,12 +609,12 @@ export function ServicesOverview() {
         </section>
 
         {/* ── 5. Action Card ── */}
-        <section className="section-y bg-gradient-to-b from-slate-50 to-white">
+        <section className="section-y bg-white">
           <div className="container-page">
-            <div className="relative isolate overflow-hidden rounded-3xl border border-brand-blue/20 bg-gradient-to-r from-brand-blue-light/40 via-white to-brand-blue-light/30 p-8 sm:p-12 shadow-lift">
+            <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-soft">
               <div className="grid items-center gap-8 lg:grid-cols-12">
                 <div className="space-y-4 lg:col-span-8">
-                  <span className="bg-brand-blue text-white rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                  <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
                     Start a Conversation
                   </span>
                   <h2 className="text-ink text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
@@ -627,11 +626,9 @@ export function ServicesOverview() {
                 </div>
                 <div className="flex flex-col sm:flex-row lg:flex-col lg:items-end justify-center gap-3 lg:col-span-4">
                   <Button size="xl" onClick={openForm} className="shadow-lift gap-2 w-full sm:w-auto">
-                    <Sparkles className="size-4.5" />
                     Tell Us What You Need
-                    <ArrowRight data-icon="inline-end" aria-hidden="true" />
                   </Button>
-                  <Button size="lg" variant="outline" asChild className="bg-white/90">
+                  <Button size="lg" variant="outline" asChild>
                     <Link href={ROUTES.public.contact}>Talk to Our Advisors</Link>
                   </Button>
                 </div>

@@ -340,65 +340,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                 </div>
               ) : null}
 
-              {/* 6. What to Expect */}
-              {pkg.whatToExpect ? (
-                <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-soft space-y-4">
-                  <div className="flex items-center gap-2 text-brand-blue">
-                    <Compass className="size-5" />
-                    <h2 className="text-xs font-bold uppercase tracking-wider">Travel Experience</h2>
-                  </div>
-                  <h3 className="font-heading text-2xl font-extrabold text-ink">
-                    What to Expect
-                  </h3>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                    {pkg.whatToExpect}
-                  </p>
-                </div>
-              ) : null}
-
-              {/* 7. Entry Requirements & Visa Information */}
-              {(pkg.entryRequirements || pkg.visaInformation) ? (
-                <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-soft space-y-4">
-                  <div className="flex items-center gap-2 text-brand-blue">
-                    <Stamp className="size-5" />
-                    <h2 className="text-xs font-bold uppercase tracking-wider">Entry &amp; Visa Information</h2>
-                  </div>
-                  <h3 className="font-heading text-2xl font-extrabold text-ink">
-                    Important Travel Guidelines
-                  </h3>
-                  <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-3 shadow-xs">
-                    {pkg.entryRequirements ? (
-                      <div className="flex items-start gap-3">
-                        <ShieldCheck className="size-4.5 text-brand-blue shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                            Passport &amp; Entry Requirements
-                          </p>
-                          <p className="text-xs sm:text-sm font-medium text-ink mt-0.5">
-                            {pkg.entryRequirements}
-                          </p>
-                        </div>
-                      </div>
-                    ) : null}
-
-                    {pkg.visaInformation ? (
-                      <div className="flex items-start gap-3 border-t border-slate-100 pt-3">
-                        <Stamp className="size-4.5 text-brand-blue shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                            Visa Assistance
-                          </p>
-                          <p className="text-xs sm:text-sm font-medium text-ink mt-0.5">
-                            {pkg.visaInformation}
-                          </p>
-                        </div>
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              ) : null}
-
-              {/* 8. Photo Gallery */}
+              {/* Photo Gallery */}
               {pkg.images && pkg.images.length > 0 ? (
                 <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-soft space-y-6">
                   <div className="flex items-center gap-2 text-brand-blue">

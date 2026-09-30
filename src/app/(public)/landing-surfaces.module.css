@@ -57,35 +57,6 @@
   z-index: 2;
 }
 
-.lightProcess :global(.bg-grid-inverse) {
-  opacity: 0;
-}
-
-.lightProcess {
-  color: var(--foreground);
-}
-
-.lightProcess :global(.ring-navy) {
-  --tw-ring-color: #e2e8f0;
-}
-
-.lightProcess :global(.text-white) {
-  color: var(--ink);
-}
-
-.lightProcess :global(.text-white\/70),
-.lightProcess :global(.text-white\/60) {
-  color: var(--muted-foreground);
-}
-
-.lightProcess :global(.text-brand-blue-muted) {
-  color: var(--brand-blue);
-}
-
-.lightProcess :global(.text-brand-blue-muted\/25) {
-  color: #5B7FAE;
-}
-
 .ctaSection :global(.container-page > div) {
   border: 1px solid rgb(203 213 225 / 80%);
   background: #fff;

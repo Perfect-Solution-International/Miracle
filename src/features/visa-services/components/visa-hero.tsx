@@ -63,24 +63,6 @@ export function VisaHero() {
               Tell us about your destination and travel plans. Miracle International assists with document verification, embassy submissions, and step-by-step guidance.
             </p>
 
-            {/* Badges Strip */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-1">
-              {[
-                { icon: FileCheck, title: "Document Verification & Review" },
-                { icon: ShieldCheck, title: "Embassy Checklist Guidance" },
-                { icon: Headphones, title: "Dedicated Visa Desk Care" },
-                { icon: Sparkles, title: "Fast-Track Form Assistance" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md transition-all hover:scale-105"
-                >
-                  <item.icon className="size-3.5 text-brand-blue" />
-                  <span>{item.title}</span>
-                </div>
-              ))}
-            </div>
-
             {/* Action Buttons */}
             <div className="mt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
               <Button
@@ -90,14 +72,13 @@ export function VisaHero() {
               >
                 <a href="#visa-request-form">
                   Request Visa Assistance
-                  <ArrowRight className="size-4 ml-2" />
                 </a>
               </Button>
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="h-11 sm:h-12 rounded-full border-white/90 bg-white/95 px-7 text-sm font-bold text-navy shadow-sm backdrop-blur-md hover:bg-white"
+                className="h-11 sm:h-12 rounded-full border-slate-300 bg-white px-7 text-sm font-bold text-navy shadow-sm hover:bg-slate-50"
               >
                 <Link href={ROUTES.public.travelTourism}>
                   All Travel &amp; Tours

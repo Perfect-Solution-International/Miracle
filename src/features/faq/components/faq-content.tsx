@@ -213,7 +213,7 @@ export function FaqContent() {
             })}
 
             {/* Direct Advisor Card */}
-            <div className="mt-6 rounded-3xl border border-brand-blue/20 bg-gradient-to-br from-brand-blue/10 via-white to-white p-6 shadow-soft">
+            <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
               <div className="flex size-10 items-center justify-center rounded-xl bg-brand-blue text-white mb-3">
                 <MessageSquare className="size-5" />
               </div>
