@@ -420,10 +420,10 @@ export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
       { title: "About Us", href: ROUTES.public.about },
       { title: "How It Works", href: ROUTES.public.howItWorks },
       { title: "Tell Us What You Need", href: ROUTES.public.tellUsWhatYouNeed },
-      { title: "Request Quotation", href: ROUTES.public.requestQuotation },
       { title: "Contact Us", href: ROUTES.public.contact },
       { title: "FAQ", href: ROUTES.public.faq },
     ],
+
   },
 ];
 

@@ -5,6 +5,7 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   Check,
+  CheckCircle2,
   ChevronDown,
   CircleHelp,
   FileUp,
@@ -15,6 +16,7 @@ import {
   PackageCheck,
   Search,
   ShieldCheck,
+  Sparkles,
   Truck,
   Users,
   X,
@@ -1136,38 +1138,63 @@ function FeatureCard({
   onAction: () => void;
 }) {
   return (
-    <article className="group shadow-soft hover:shadow-lift overflow-hidden rounded-3xl border bg-white transition-shadow">
-      <div className="relative aspect-[1.8] overflow-hidden">
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-        />
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onAction}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onAction();
+        }
+      }}
+      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/50 hover:shadow-lift cursor-pointer select-none"
+    >
+      <div>
+        {/* Full-width Card Image */}
+        <div className="relative aspect-[1.8] overflow-hidden">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </div>
+
+        {/* Card Content Area */}
+        <div className="p-7 sm:p-8 pb-0">
+          <h3 className="text-ink text-2xl font-extrabold group-hover:text-brand-blue transition-colors">
+            {title}
+          </h3>
+          <p className="text-muted-foreground mt-3 leading-relaxed">
+            {description}
+          </p>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+            {points.map((point) => (
+              <li
+                key={point}
+                className="text-ink flex items-center gap-2 text-sm font-semibold"
+              >
+                <span className="size-1.5 rounded-full bg-blue-600 shrink-0" aria-hidden="true" />
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className="p-7 sm:p-8">
-        <h3 className="text-ink text-2xl font-extrabold">{title}</h3>
-        <p className="text-muted-foreground mt-3 leading-relaxed">{description}</p>
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-          {points.map((point) => (
-            <li
-              key={point}
-              className="text-ink flex items-center gap-2 text-sm font-semibold"
-            >
-              <Check aria-hidden="true" className="text-brand-blue size-4 shrink-0" />
-              {point}
-            </li>
-          ))}
-        </ul>
-        <Button size="lg" onClick={onAction} className="mt-7">
+
+      {/* Action CTA Area */}
+      <div className="p-7 sm:p-8 pt-6">
+        <span className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-blue px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all group-hover:bg-brand-blue-dark group-hover:shadow-lg">
           {action}
-          <ArrowRight data-icon="inline-end" aria-hidden="true" />
-        </Button>
+          <ArrowRight data-icon="inline-end" aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />
+        </span>
       </div>
-    </article>
+    </div>
   );
 }
+
 
 export function ImportExportLanding({
   breadcrumbs = [{ label: "Import & Export" }],
@@ -1189,58 +1216,64 @@ export function ImportExportLanding({
   return (
     <>
       <main>
-        <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
+        {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
+        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+          {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
+            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            style={{
+              backgroundImage: 'url("/images/services/import-export-hero.jpg")',
+              backgroundPosition: "right center",
+            }}
           />
 
-          <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+          {/* Soft-White Gradient on Left Area */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+          />
+
+          {/* Bottom Gradient Fade */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+          />
+
+          {/* Left-Aligned Content Container */}
+          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
             <div className="max-w-2xl space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
-                <span className="bg-brand-red size-1.5 rounded-full" />
-                IMPORT &amp; EXPORT
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+                <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+                <span>International Freight &amp; Customs Clearance</span>
               </div>
 
-              <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                Connect Products.{" "}
-                <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
-                  Connect Markets.
-                </span>
+              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+                Seamless Logistics.<br />
+                For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Global Freight, Customs</span><br />
+                <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Cross-Border Trade.</span>
               </h1>
 
-              <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-                Practical import and export support for sourcing products and connecting businesses across international markets.
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+                Miracle International delivers dependable cross-border shipping, freight forwarding, verified customs clearance, and compliant international supply chain solutions connecting worldwide markets.
               </p>
 
-              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-                <Button size="xl" variant="accent" onClick={() => openForm()} className="shadow-lift">
-                  Request Now
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                <Button
+                  size="xl"
+                  onClick={() => openForm()}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  <span>Inquiry Now</span>
                 </Button>
                 <Button
                   size="xl"
-                  variant="secondary-hero"
+                  variant="outline"
+                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
                   asChild
                 >
-                  <a href="#services">Explore Our Services</a>
+                  <a href="#services">Explore Capabilities</a>
                 </Button>
-              </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-xl">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
-                <div className="relative h-full w-full overflow-hidden rounded-2xl">
-                  <Image
-                    src="/images/services/import-export-hero.jpg"
-                    alt="International logistics director and trade manager overseeing shipping operations at a container port"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 45vw, 100vw"
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                  <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
-                </div>
               </div>
             </div>
           </div>
@@ -1401,40 +1434,8 @@ export function ImportExportLanding({
             </div>
           </div>
         </section>
-
-
-        <section className="section-y bg-surface">
-          <div className="container-page">
-            <div className="shadow-soft relative overflow-hidden rounded-3xl bg-white px-6 py-12 sm:px-12 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:py-16">
-              <div>
-                <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-                  Ready to move forward?
-                </p>
-                <h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                  Ready to Explore Global Trade?
-                </h2>
-                <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed">
-                  Tell us what you need to import or export, and let our team help you
-                  explore the right trade solution.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Button size="xl" onClick={() => openForm()}>
-                    Submit Your Requirement
-                    <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                  </Button>
-                  <Button size="xl" variant="outline" asChild>
-                    <a href="/contact">Contact Us</a>
-                  </Button>
-                </div>
-              </div>
-              <div
-                aria-hidden="true"
-                className="border-brand-blue-light absolute -right-12 -bottom-20 hidden size-64 rounded-full border-[24px] lg:block"
-              />
-            </div>
-          </div>
-        </section>
       </main>
+
       <DetailModal
         detail={selectedDetail}
         onClose={() => setSelectedDetail(null)}

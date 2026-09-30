@@ -1,25 +1,12 @@
 import type { Metadata } from "next";
 
-import { CtaBanner } from "@/components/common/cta-banner";
-import { Section } from "@/components/common/section";
 import { ROUTES } from "@/config/routes";
-import {
-  IntakeIndustryGallery,
-  NeedHelpCard,
-  RequestExamplesFaqSection,
-  RequirementInquiryForm,
-  RequirementProcessSteps,
-  SidebarTestimonialCard,
-  SourcingCtaSection,
-  TellUsWhatYouNeedHero,
-  WhyShareCard,
-} from "@/features/requirements";
-import { getPublishedTestimonials } from "@/features/testimonials";
+import { TellUsWhatYouNeedView } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Tell Us What You Need | Miracle International";
 const DESCRIPTION =
-  "Submit your requirements for global product sourcing, enterprise software engineering, industrial machinery, or bespoke travel solutions.";
+  "Submit any business, product, travel, or service requirement to Miracle International. Get customized end-to-end solutions.";
 
 export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
@@ -28,10 +15,18 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 /**
- * Professional, high-converting public requirement intake page
- * Featuring rich sector imagery, visual category selectors, 24h SLA guarantees,
- * and a direct executive consultation workflow.
+ * Professional, modern, clean white "Tell Us What You Need" page.
+ * Features 5 core sections:
+ * 1. Hero Section (Clean white, no images)
+ * 2. What Can We Help You With? (11 category cards with simple icons)
+ * 3. Requirement Form (Full intake form with file upload & confirmation)
+ * 4. How It Works (4-step process)
+ * 5. Final CTA
  */
+ Imasha
+export default function Page() {
+  return <TellUsWhatYouNeedView />;
+
 export default async function Page() {
   const testimonials = await getPublishedTestimonials();
 
@@ -108,4 +103,6 @@ export default async function Page() {
       />
     </>
   );
+develop
 }
+
