@@ -123,24 +123,6 @@ export function OutboundToursView() {
                 Seamless international vacations for Sri Lankan travelers. We handle flight bookings, visa assistance, verified luxury resort stays, and guided worldwide excursions.
               </p>
 
-              {/* Liquid Glass Highlights Badges Strip */}
-              <div className="flex flex-wrap items-center gap-2.5 pt-1">
-                {[
-                  { icon: Plane, title: "Flights & Visa Assistance" },
-                  { icon: Hotel, title: "Verified 5-Star Resorts" },
-                  { icon: Headphones, title: "24/7 Dedicated Trip Care" },
-                  { icon: ShieldCheck, title: "All-Inclusive Options" },
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md transition-all hover:scale-105"
-                  >
-                    <item.icon className="size-3.5 text-brand-blue" />
-                    <span>{item.title}</span>
-                  </div>
-                ))}
-              </div>
-
               {/* Action Buttons */}
               <div className="mt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
                 <Button
@@ -150,7 +132,6 @@ export function OutboundToursView() {
                 >
                   <a href="#outbound-packages">
                     View Outbound Packages
-                    <ArrowRight className="size-4 ml-2" />
                   </a>
                 </Button>
                 <Button

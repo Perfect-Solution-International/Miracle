@@ -7,21 +7,20 @@ import { z } from "zod";
  * form open to anyone, with no backend endpoint yet. See `RequirementInquiryForm`.
  */
 export const requirementInquirySchema = z.object({
-  fullName: z.string().trim().min(2, "Enter your full name."),
-  companyName: z.string().trim().optional(),
-  email: z.string().trim().email("Enter a valid email address."),
-  phone: z.string().trim().min(6, "Enter a valid phone number."),
-  requirementType: z.string().min(1, "Select a category."),
-  subject: z.string().trim().min(3, "Add a short subject.").max(160),
-  details: z
-    .string()
-    .trim()
-    .min(20, "Tell us a little more about what you need (at least 20 characters)."),
-  timeline: z.string().min(1, "Select your preferred timeline."),
-  budgetRange: z.string().optional(),
+  fullName: z.string().trim().min(2, "Please enter your full name."),
+  email: z.string().trim().email("Please enter a valid email address."),
+  phone: z.string().trim().min(6, "Please enter a valid contact number."),
+  whatsappNumber: z.string().trim().optional(),
+  requirementType: z.string().min(1, "Please select a requirement type."),
+  whatDoYouNeed: z.string().trim().min(3, "Please tell us what you need."),
+  country: z.string().trim().optional(),
+  timeline: z.string().trim().optional(),
+  budgetRange: z.string().trim().optional(),
+  additionalRequirements: z.string().trim().optional(),
   agreeToTerms: z.boolean().refine((value) => value === true, {
-    message: "You must agree before submitting your request.",
+    message: "You must confirm before submitting your requirement.",
   }),
 });
+
 
 export type RequirementInquiryInput = z.infer<typeof requirementInquirySchema>;

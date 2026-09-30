@@ -3,6 +3,7 @@ import {
   Building2,
   ChartColumn,
   Check,
+  CheckCircle2,
   ClipboardList,
   CodeXml,
   Compass,
@@ -16,6 +17,7 @@ import {
   SearchCheck,
   Settings2,
   ShieldCheck,
+  Sparkles,
   TrendingUp,
   UsersRound,
   type LucideIcon,
@@ -240,55 +242,58 @@ const businessOutcomes = [
 export default function Page() {
   return (
     <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
-      <section
-        aria-labelledby="business-solutions-hero-heading"
-        className={`relative isolate overflow-hidden bg-white ${landingStyles.travelHero}`}
-      >
+      {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
+      <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+        {/* Full-Bleed Panoramic Hero Image */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
-          style={{ backgroundImage: 'url("/images/business-solutions/business-background.png")' }}
+          className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+          style={{
+            backgroundImage: 'url("/images/business-solutions/business-solutions-hero.jpg")',
+            backgroundPosition: "right center",
+          }}
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-white/25" />
+
+        {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.62)_0%,rgba(255,255,255,0.30)_42%,rgba(255,255,255,0.08)_78%,rgba(255,255,255,0.18)_100%)]"
+          className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-white/55 via-transparent to-white" />
-        <div className="container-page relative z-10 flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
-          <Eyebrow className="rounded-full border border-white/80 bg-white/95 px-4 py-1.5 font-extrabold text-navy shadow-sm backdrop-blur-md">
-            Business Solutions &amp; Enterprise Growth
-          </Eyebrow>
 
-          <h1
-            id="business-solutions-hero-heading"
-            className="max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl"
-          >
-            Build Smarter.{" "}
-            <span className="text-navy">
-              Grow Stronger.
-            </span>
-          </h1>
+        {/* Bottom Gradient Fade to Next Section */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+        />
 
-          <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
-            Practical business support designed to help turn ideas, plans and
-            opportunities into well-organized, sustainable, and scalable operations.
-          </p>
+        {/* Left-Aligned Content Container */}
+        <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
+          <div className="max-w-2xl space-y-6">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+              <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+              <span>Enterprise Consulting &amp; Business Setup</span>
+            </div>
 
-          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-            <Button asChild variant="accent" size="xl" className="shadow-lift">
-              <Link href={ROUTES.public.tellUsWhatYouNeed}>
-                Start Your Business Journey
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="secondary-hero"
-              size="xl"
-            >
-              <a href="#solutions">Explore 8 Solutions</a>
-            </Button>
+            <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+              Strategic Advisory.<br />
+              For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Enterprise Setup, Scale</span><br />
+              <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Market Growth.</span>
+            </h1>
+
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+              From business planning and corporate incorporation to operational scaling, machinery sourcing, technology integration, and executive business consulting.
+            </p>
+
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5">
+                <Link href={ROUTES.public.tellUsWhatYouNeed}>
+                  <span>Inquiry Now</span>
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="outline" className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs">
+                <a href="#solutions">Explore 8 Solutions</a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

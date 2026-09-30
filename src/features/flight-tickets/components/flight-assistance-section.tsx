@@ -121,30 +121,8 @@ export function FlightAssistanceSection() {
               ))}
             </div>
           </div>
-
-          {/* Simple 3-Step Coordination Process */}
-          <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
-            <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">
-              Simple 3-Step Process
-            </p>
-            <div className="mt-4 space-y-4">
-              {BOOKING_STEPS.map(({ step, icon: Icon, title, description }) => (
-                <div key={step} className="flex items-start gap-3.5">
-                  <div className="relative flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue-light text-brand-blue">
-                    <Icon aria-hidden="true" className="size-5" />
-                    <span className="bg-brand-red absolute -top-1.5 -right-1.5 flex size-4.5 items-center justify-center rounded-full text-[10px] font-bold text-white">
-                      {step}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="text-ink text-sm font-bold">{title}</h4>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
+
 
         {/* Right Column: Request Flight Options Form */}
         <div className="lg:col-span-7">
