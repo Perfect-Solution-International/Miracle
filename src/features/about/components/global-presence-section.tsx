@@ -14,7 +14,7 @@ import { MARKET_DESTINATIONS, MARKET_HUB } from "../data/about.content";
  */
 function TradeRouteMap() {
   return (
-    <div className="bg-brand-blue-light relative isolate overflow-hidden rounded-2xl p-6 sm:p-10">
+    <div className="relative isolate overflow-hidden rounded-3xl border border-brand-blue/10 bg-[#f1f7fc] p-6 shadow-soft sm:p-10">
       <svg viewBox="0 0 100 100" role="presentation" className="aspect-[16/10] w-full">
         {MARKET_DESTINATIONS.map((pin) => {
           const midX = (MARKET_HUB.x + pin.x) / 2;
@@ -77,9 +77,9 @@ export function GlobalPresenceSection() {
   return (
     <Section
       id="global-network"
-      tone="surface"
+      tone="default"
       aria-labelledby="global-presence-heading"
-      className="scroll-mt-24"
+      className="scroll-mt-24 border-t border-slate-100"
     >
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr_0.8fr] lg:items-center lg:gap-10">
         <div className="flex flex-col gap-6">

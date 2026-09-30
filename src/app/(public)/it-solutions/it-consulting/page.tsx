@@ -40,6 +40,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
+import { ServiceRequirementDialog } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "IT Consulting";
@@ -73,17 +74,20 @@ const services: IconItem[] = [
   },
   {
     title: "Software & System Consulting",
-    description: "Advice on building, buying or upgrading the software your business runs on.",
+    description:
+      "Advice on building, buying or upgrading the software your business runs on.",
     icon: CodeXml,
   },
   {
     title: "IT Infrastructure Consulting",
-    description: "Recommendations on servers, networks and infrastructure that fit your scale.",
+    description:
+      "Recommendations on servers, networks and infrastructure that fit your scale.",
     icon: Server,
   },
   {
     title: "Cloud Consulting",
-    description: "Guidance on cloud migration, cost control and choosing the right provider.",
+    description:
+      "Guidance on cloud migration, cost control and choosing the right provider.",
     icon: Cloud,
   },
   {
@@ -93,7 +97,8 @@ const services: IconItem[] = [
   },
   {
     title: "Business Process & Automation Consulting",
-    description: "Find manual bottlenecks and design automated workflows to replace them.",
+    description:
+      "Find manual bottlenecks and design automated workflows to replace them.",
     icon: Workflow,
   },
 ];
@@ -111,12 +116,14 @@ const helpAreas: IconItem[] = [
   },
   {
     title: "Improving Existing IT Systems",
-    description: "Get more value out of the systems you already have before replacing them.",
+    description:
+      "Get more value out of the systems you already have before replacing them.",
     icon: RefreshCcw,
   },
   {
     title: "Reducing Unnecessary IT Costs",
-    description: "Find licences, tools and infrastructure you're paying for but don't need.",
+    description:
+      "Find licences, tools and infrastructure you're paying for but don't need.",
     icon: TrendingDown,
   },
   {
@@ -136,43 +143,50 @@ const consultingProcess = [
     step: "01",
     icon: HandshakeIcon,
     title: "Discovery & Consultation",
-    description: "An initial conversation to understand your business, goals and pain points.",
+    description:
+      "An initial conversation to understand your business, goals and pain points.",
   },
   {
     step: "02",
     icon: FileSearch,
     title: "Current System Assessment",
-    description: "A structured review of your existing software, infrastructure and processes.",
+    description:
+      "A structured review of your existing software, infrastructure and processes.",
   },
   {
     step: "03",
     icon: ClipboardList,
     title: "Requirements Analysis",
-    description: "Define what the business actually needs, separate from what it currently has.",
+    description:
+      "Define what the business actually needs, separate from what it currently has.",
   },
   {
     step: "04",
     icon: Lightbulb,
     title: "IT Strategy & Recommendations",
-    description: "A clear set of recommendations, priorities and a supporting technology plan.",
+    description:
+      "A clear set of recommendations, priorities and a supporting technology plan.",
   },
   {
     step: "05",
     icon: PenTool,
     title: "Solution Planning",
-    description: "Turn recommendations into a practical plan with scope, cost and timeline.",
+    description:
+      "Turn recommendations into a practical plan with scope, cost and timeline.",
   },
   {
     step: "06",
     icon: Rocket,
     title: "Implementation Support",
-    description: "Hands-on support while the recommended solutions are built and deployed.",
+    description:
+      "Hands-on support while the recommended solutions are built and deployed.",
   },
   {
     step: "07",
     icon: TrendingUp,
     title: "Continuous Optimization",
-    description: "Ongoing review to keep your technology aligned as the business changes.",
+    description:
+      "Ongoing review to keep your technology aligned as the business changes.",
   },
 ];
 
@@ -199,7 +213,8 @@ const benefits: string[] = [
 const whyChooseUs: IconItem[] = [
   {
     title: "Business-Focused Consulting",
-    description: "Recommendations judged by business impact, not technology for its own sake.",
+    description:
+      "Recommendations judged by business impact, not technology for its own sake.",
     icon: Target,
   },
   {
@@ -224,7 +239,8 @@ const whyChooseUs: IconItem[] = [
   },
   {
     title: "Ongoing Technical Support",
-    description: "A consulting partner who stays involved after the recommendations are made.",
+    description:
+      "A consulting partner who stays involved after the recommendations are made.",
     icon: LifeBuoy,
   },
 ];
@@ -243,9 +259,14 @@ export default function Page() {
         image={SITE_MEDIA.itSolutions.itConsultingHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl">
-            <Link href={ROUTES.public.tellUsWhatYouNeed}>Get Expert IT Advice</Link>
-          </Button>
+          <ServiceRequirementDialog
+            context="it"
+            trigger={
+              <Button variant="accent" size="xl">
+                Get Expert IT Advice
+              </Button>
+            }
+          />
           <Button asChild variant="secondary-hero" size="xl">
             <Link href={ROUTES.public.contact}>Talk to a Consultant</Link>
           </Button>
@@ -287,7 +308,7 @@ export default function Page() {
           {helpAreas.map((area) => (
             <div
               key={area.title}
-              className="reveal group flex items-start gap-4 rounded-xl border border-transparent p-4 transition-colors duration-300 hover:border-border hover:bg-card"
+              className="reveal group hover:border-border hover:bg-card flex items-start gap-4 rounded-xl border border-transparent p-4 transition-colors duration-300"
             >
               <span className="bg-brand-blue-light text-brand-blue mt-0.5 inline-flex size-10 shrink-0 items-center justify-center rounded-full">
                 <area.icon aria-hidden="true" className="size-5" />
@@ -354,7 +375,7 @@ export default function Page() {
               key={area.title}
               className="reveal border-brand-blue/20 bg-brand-blue-light/40 flex flex-col items-center gap-3 rounded-xl border p-6 text-center"
             >
-              <span className="bg-brand-blue text-white inline-flex size-12 items-center justify-center rounded-full">
+              <span className="bg-brand-blue inline-flex size-12 items-center justify-center rounded-full text-white">
                 <area.icon aria-hidden="true" className="size-5" />
               </span>
               <span className="text-ink text-sm font-bold">{area.title}</span>
@@ -410,6 +431,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        serviceContext="it"
         eyebrow="Ready to Get Started?"
         title="Build a Smarter IT Strategy for Your Business"
         description="Book a consultation and our team will help you identify the right technology priorities for your business."

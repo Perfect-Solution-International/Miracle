@@ -7,6 +7,7 @@ import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
+import { ServiceRequirementDialog } from "@/features/requirements";
 import { cn } from "@/lib/utils";
 
 import {
@@ -33,16 +34,21 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
         aria-hidden="true"
         className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.78)_70%,rgba(255,255,255,0.20)_100%)] md:bg-[linear-gradient(to_right,rgba(255,255,255,0.99)_0%,rgba(255,255,255,0.97)_34%,rgba(255,255,255,0.78)_52%,rgba(255,255,255,0.28)_72%,rgba(255,255,255,0.02)_100%)]"
       />
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white"
+      />
 
       <div className="container-page relative z-10 flex min-h-[620px] items-center py-16 sm:py-20 lg:min-h-[680px] lg:py-24">
         <div className="w-full max-w-2xl md:max-w-[60%] lg:max-w-[53%] xl:max-w-[49%]">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-white px-4 py-1.5 text-brand-blue shadow-xs">
+          <div className="border-brand-blue/20 text-brand-blue inline-flex items-center gap-2.5 rounded-full border bg-white px-4 py-1.5 shadow-xs">
             <span className="relative flex size-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
-              <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
+              <span className="bg-brand-blue absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+              <span className="bg-brand-blue relative inline-flex size-2 rounded-full" />
             </span>
-            <span className="text-xs font-bold tracking-widest uppercase">{detail.title}</span>
+            <span className="text-xs font-bold tracking-widest uppercase">
+              {detail.title}
+            </span>
           </div>
           <h1
             id="business-detail-heading"
@@ -50,27 +56,42 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
           >
             {detail.headline}
           </h1>
-          <p className="text-ink mt-6 max-w-xl text-lg leading-relaxed font-semibold">{detail.lead}</p>
-          <p className="text-slate-700 mt-4 max-w-xl text-base leading-relaxed">{detail.introduction}</p>
+          <p className="text-ink mt-6 max-w-xl text-lg leading-relaxed font-semibold">
+            {detail.lead}
+          </p>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-700">
+            {detail.introduction}
+          </p>
           <ul className="mt-6 flex flex-wrap gap-2" aria-label="Service highlights">
             {detail.heroHighlights.map((highlight) => (
               <li
                 key={highlight}
-                className="text-navy inline-flex items-center gap-2 rounded-full border border-brand-blue/15 bg-white/95 px-3 py-1.5 text-xs font-semibold shadow-xs"
+                className="text-navy border-brand-blue/15 inline-flex items-center gap-2 rounded-full border bg-white/95 px-3 py-1.5 text-xs font-semibold shadow-xs"
               >
-                <Check aria-hidden="true" className="size-3.5 text-brand-blue" />
+                <Check aria-hidden="true" className="text-brand-blue size-3.5" />
                 {highlight}
               </li>
             ))}
           </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button asChild variant="accent" size="xl" className="shadow-lg shadow-brand-red/20">
-              <Link href={detail.cta.href}>
-                {detail.cta.label} <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Link>
-            </Button>
+            <ServiceRequirementDialog
+              context="business"
+              defaultService={detail.title}
+              trigger={
+                <Button
+                  variant="accent"
+                  size="xl"
+                  className="shadow-brand-red/20 shadow-lg"
+                >
+                  {detail.cta.label}{" "}
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                </Button>
+              }
+            />
             <Button asChild variant="secondary-hero" size="xl">
-              <Link href={ROUTES.public.businessSolutions}>Explore Business Solutions</Link>
+              <Link href={ROUTES.public.businessSolutions}>
+                Explore Business Solutions
+              </Link>
             </Button>
           </div>
         </div>
@@ -485,6 +506,8 @@ export function BusinessDetailPage({ service }: { service: BusinessDetailKey }) 
       <WhyMiracle detail={detail} />
       <RelatedBusinessSolutions current={service} />
       <CtaBanner
+        serviceContext="business"
+        defaultService={detail.title}
         eyebrow="Your Next Step"
         title={detail.cta.title}
         description={detail.cta.description}

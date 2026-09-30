@@ -27,7 +27,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
@@ -37,6 +36,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
+import { ServiceRequirementDialog } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Business Management Systems";
@@ -118,7 +118,8 @@ const features: IconItem[] = [
   },
   {
     title: "Real-Time Analytics & Reporting",
-    description: "Dashboards and reports that show exactly how the business is performing.",
+    description:
+      "Dashboards and reports that show exactly how the business is performing.",
     icon: ChartColumn,
   },
   {
@@ -143,7 +144,8 @@ const features: IconItem[] = [
   },
   {
     title: "Secure Data Management",
-    description: "Role-based access, encryption and backups keep business data protected.",
+    description:
+      "Role-based access, encryption and backups keep business data protected.",
     icon: ShieldCheck,
   },
   {
@@ -208,7 +210,8 @@ const buildProcess = [
 const benefits: IconItem[] = [
   {
     title: "Reduced Manual Work",
-    description: "Automation removes repetitive tasks so staff can focus on higher-value work.",
+    description:
+      "Automation removes repetitive tasks so staff can focus on higher-value work.",
     icon: Workflow,
   },
   {
@@ -252,12 +255,19 @@ export default function Page() {
         image={SITE_MEDIA.itSolutions.businessManagementSystemsHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl" className="h-auto min-h-12 whitespace-normal text-center">
-            <Link href={ROUTES.public.tellUsWhatYouNeed}>
-              Transform the Way You Manage Your Business
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
+          <ServiceRequirementDialog
+            context="it"
+            trigger={
+              <Button
+                variant="accent"
+                size="xl"
+                className="h-auto min-h-12 text-center whitespace-normal"
+              >
+                Transform the Way You Manage Your Business
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Button>
+            }
+          />
           <Button asChild variant="secondary-hero" size="xl">
             <a href="#solutions">Explore Solutions</a>
           </Button>
@@ -387,6 +397,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        serviceContext="it"
         eyebrow="Ready to Take Control?"
         title="Transform the Way You Manage Your Business"
         description="Tell us about your operations and our team will recommend the right system, modules and timeline."

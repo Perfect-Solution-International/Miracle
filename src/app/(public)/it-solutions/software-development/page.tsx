@@ -20,7 +20,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
 import { FeatureCard } from "@/components/common/feature-card";
@@ -30,6 +29,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
+import { ServiceRequirementDialog } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Software Development";
@@ -174,7 +174,8 @@ const benefits: { title: string; description: string; icon: LucideIcon }[] = [
   },
   {
     title: "Secure & Reliable",
-    description: "Role-based access, backups and secure coding practices protect your data.",
+    description:
+      "Role-based access, backups and secure coding practices protect your data.",
     icon: ShieldCheck,
   },
   {
@@ -208,12 +209,15 @@ export default function Page() {
         image={SITE_MEDIA.itSolutions.softwareDevelopmentHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl">
-            <Link href={ROUTES.public.tellUsWhatYouNeed}>
-              Start Your Project
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
+          <ServiceRequirementDialog
+            context="it"
+            trigger={
+              <Button variant="accent" size="xl">
+                Start Your Project
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Button>
+            }
+          />
           <Button asChild variant="secondary-hero" size="xl">
             <a href="#services">Explore Services</a>
           </Button>
@@ -282,7 +286,9 @@ export default function Page() {
               key={process.step}
               className="reveal bg-card hover:border-brand-blue/30 hover:shadow-soft rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1"
             >
-              <span className="text-brand-blue text-3xl font-extrabold">{process.step}</span>
+              <span className="text-brand-blue text-3xl font-extrabold">
+                {process.step}
+              </span>
               <h3 className="text-ink mt-4 text-lg font-bold">{process.title}</h3>
               <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
                 {process.description}
@@ -339,6 +345,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        serviceContext="it"
         eyebrow="Ready to Get Started?"
         title="Let's Build the Software Your Business Needs"
         description="Share your idea or requirement and our team will recommend the right solution, timeline and cost."

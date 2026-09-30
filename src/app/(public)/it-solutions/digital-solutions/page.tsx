@@ -39,6 +39,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
+import { ServiceRequirementDialog } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Digital Solutions";
@@ -108,7 +109,8 @@ const solutions: IconItem[] = [
 const transformationPoints: IconItem[] = [
   {
     title: "Process Digitalization",
-    description: "Replace paper forms and manual records with structured digital workflows.",
+    description:
+      "Replace paper forms and manual records with structured digital workflows.",
     icon: RefreshCw,
   },
   {
@@ -118,7 +120,8 @@ const transformationPoints: IconItem[] = [
   },
   {
     title: "Cloud Adoption",
-    description: "Move critical systems to the cloud for uptime, backups and remote access.",
+    description:
+      "Move critical systems to the cloud for uptime, backups and remote access.",
     icon: CloudCog,
   },
   {
@@ -164,8 +167,7 @@ const process = [
     step: "04",
     icon: PenTool,
     title: "Design & Development",
-    description:
-      "Design and build the solution with your workflows and users in mind.",
+    description: "Design and build the solution with your workflows and users in mind.",
   },
   {
     step: "05",
@@ -185,8 +187,7 @@ const process = [
     step: "07",
     icon: TrendingUp,
     title: "Continuous Improvement",
-    description:
-      "Monitor performance and refine the solution as your business evolves.",
+    description: "Monitor performance and refine the solution as your business evolves.",
   },
 ] satisfies (IconItem & { step: string })[];
 
@@ -213,12 +214,14 @@ const benefits: IconItem[] = [
   },
   {
     title: "Real-Time Business Insights",
-    description: "Live dashboards give you an accurate view of the business at any moment.",
+    description:
+      "Live dashboards give you an accurate view of the business at any moment.",
     icon: ScanEye,
   },
   {
     title: "Improved Collaboration",
-    description: "Shared systems keep teams aligned and working from the same information.",
+    description:
+      "Shared systems keep teams aligned and working from the same information.",
     icon: Users,
   },
   {
@@ -245,7 +248,8 @@ const integrations = [
 const whyChooseUs: IconItem[] = [
   {
     title: "Tailored Solutions",
-    description: "Every solution is designed around your specific business, not a generic template.",
+    description:
+      "Every solution is designed around your specific business, not a generic template.",
     icon: Wand2,
   },
   {
@@ -270,7 +274,8 @@ const whyChooseUs: IconItem[] = [
   },
   {
     title: "Business-Focused Approach",
-    description: "Every recommendation is judged by the value it brings to your business.",
+    description:
+      "Every recommendation is judged by the value it brings to your business.",
     icon: TrendingUp,
   },
 ];
@@ -289,12 +294,15 @@ export default function Page() {
         image={SITE_MEDIA.itSolutions.digitalSolutionsHero}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button asChild variant="accent" size="xl">
-            <Link href={ROUTES.public.tellUsWhatYouNeed}>
-              Transform Your Business
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Link>
-          </Button>
+          <ServiceRequirementDialog
+            context="it"
+            trigger={
+              <Button variant="accent" size="xl">
+                Transform Your Business
+                <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              </Button>
+            }
+          />
           <Button asChild variant="secondary-hero" size="xl">
             <Link href={ROUTES.public.contact}>Talk to Our Team</Link>
           </Button>
@@ -446,6 +454,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        serviceContext="it"
         eyebrow="Ready to Get Started?"
         title="Ready to Transform Your Business Digitally?"
         description="Tell us about your operations and our team will recommend the right digital solution and roadmap."
