@@ -72,7 +72,7 @@ export function HomeHero() {
                 asChild
                 size="xl"
                 variant="secondary-hero"
-                className="bg-white/90 backdrop-blur-sm border-slate-200 hover:bg-white shadow-xs"
+                className="shadow-xs"
               >
                 <Link href={ROUTES.public.services}>Explore Our Services</Link>
               </Button>

@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { Eyebrow } from "@/components/common/eyebrow";
@@ -5,42 +6,41 @@ import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 
 /**
- * Tell Us What You Need Hero: Wide panoramic background photography showcasing global trade,
- * international sourcing, and executive coordination on the right, with a clean natural-light surface
- * on the left hosting the headline, value proposition, and call-to-action buttons.
+ * Tell Us What You Need Hero
  */
 export function TellUsWhatYouNeedHero() {
   return (
     <section
       aria-labelledby="tell-us-heading"
-      className="relative isolate overflow-hidden bg-white border-b border-slate-200/70 min-h-[580px] lg:min-h-[660px] flex items-center"
+      className="relative isolate flex min-h-[580px] items-center overflow-hidden border-b border-slate-200/70 bg-white lg:min-h-[660px]"
     >
-      {/* 1. Full-Bleed Wide Panoramic Hero Image */}
+      {/* Background Image */}
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
         style={{
-          backgroundImage: 'url("/images/global-business-services-hero-v2.png")',
+          backgroundImage:
+            'url("/images/global-business-services-hero-v2.png")',
           backgroundPosition: "right center",
         }}
       />
 
-      {/* 2. Soft-White Gradient on Left Area (ensures crisp, 100% legibility on all viewports) */}
+      {/* White Gradient */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/20 lg:from-white/95 lg:via-white/60 lg:to-transparent pointer-events-none"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/20 lg:from-white/95 lg:via-white/60 lg:to-transparent"
       />
 
-      {/* 3. Bottom Melt to Next Section */}
+      {/* Bottom Fade */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent"
       />
 
-      {/* 4. Left-Aligned Content Container */}
+      {/* Content */}
       <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
-        <div className="grid lg:grid-cols-12 items-center">
-          <div className="flex flex-col gap-6 max-w-2xl lg:col-span-7 xl:col-span-6">
+        <div className="grid items-center lg:grid-cols-12">
+          <div className="flex max-w-2xl flex-col gap-6 lg:col-span-7 xl:col-span-6">
             <Eyebrow>TELL US WHAT YOU NEED</Eyebrow>
 
             <h1
@@ -57,21 +57,33 @@ export function TellUsWhatYouNeedHero() {
               </span>
             </h1>
 
-            <p className="text-muted-foreground max-w-xl text-base leading-relaxed text-pretty sm:text-lg lg:text-xl font-medium">
-              Have a specific requirement, business idea, product need, or travel request? Tell us what you’re looking for and our team will help you find the right solution.
+            <p className="text-muted-foreground max-w-xl text-base leading-relaxed font-medium text-pretty sm:text-lg lg:text-xl">
+              Have a specific requirement, business idea, product need, or travel
+              request? Tell us what you&apos;re looking for and our team will help
+              you find the right solution.
             </p>
 
-            <div className="flex flex-col gap-3 sm:flex-row pt-1">
-              <Button asChild size="xl" className="hover:bg-brand-blue-dark shadow-md">
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <Button
+                asChild
+                size="xl"
+                className="bg-brand-blue font-bold text-white shadow-md hover:bg-brand-blue-dark"
+              >
                 <a href="#requirement-form">
                   Submit Your Requirement
+                  <ArrowRight
+                    data-icon="inline-end"
+                    aria-hidden="true"
+                    className="size-4"
+                  />
                 </a>
               </Button>
+
               <Button
                 asChild
                 size="xl"
                 variant="secondary-hero"
-                className="bg-white/90 backdrop-blur-sm border-slate-200 hover:bg-white shadow-xs"
+                className="border border-slate-300 bg-white font-bold text-slate-900 shadow-sm hover:bg-slate-50"
               >
                 <Link href={ROUTES.public.services}>
                   Explore Our Services
@@ -84,4 +96,3 @@ export function TellUsWhatYouNeedHero() {
     </section>
   );
 }
-

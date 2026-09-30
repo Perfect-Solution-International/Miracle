@@ -176,7 +176,7 @@ function MenuFeature({ feature }: { feature: PublicNavFeature }) {
       <NavigationMenu.Link asChild>
         <Link
           href={feature.href}
-          className="bg-brand-red hover:bg-brand-red-dark inline-flex h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold whitespace-nowrap transition-colors"
+          className="bg-brand-blue hover:bg-brand-blue-dark inline-flex h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold whitespace-nowrap transition-colors"
         >
           {feature.cta}
           <ArrowRight aria-hidden="true" className="size-4" />

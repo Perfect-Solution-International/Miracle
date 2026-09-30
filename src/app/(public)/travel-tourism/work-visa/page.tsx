@@ -169,7 +169,7 @@ export default function Page() {
                   asChild
                   variant="outline"
                   size="lg"
-                  className="h-11 sm:h-12 rounded-full border-white/90 bg-white/95 px-7 text-sm font-bold text-navy shadow-sm backdrop-blur-md hover:bg-white"
+                  className="h-11 sm:h-12 rounded-full border-slate-300 bg-white px-7 text-sm font-bold text-navy shadow-sm hover:bg-slate-50"
                 >
                   <Link href={ROUTES.public.travelTourism}>
                     All Travel &amp; Tours

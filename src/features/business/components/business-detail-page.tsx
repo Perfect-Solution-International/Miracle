@@ -81,7 +81,7 @@ function BusinessHero({ detail }: { detail: BusinessDetail }) {
                 <Button
                   variant="accent"
                   size="xl"
-                  className="shadow-brand-red/20 shadow-lg"
+                  className="shadow-brand-blue/20 shadow-lg"
                 >
                   {detail.cta.label}{" "}
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />

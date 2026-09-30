@@ -79,7 +79,7 @@ export function TravelHero() {
             size="xl"
             variant="outline"
             asChild
-            className="w-full sm:w-auto min-w-[210px] rounded-full border-2 border-navy/20 bg-white/90 hover:bg-white text-navy font-bold shadow-soft hover:shadow-lift group text-base py-6 px-8 backdrop-blur-sm transition-all hover:scale-105"
+            className="w-full sm:w-auto min-w-[210px] rounded-full border-2 border-slate-300 bg-white hover:bg-slate-50 text-navy font-bold shadow-soft hover:shadow-lift group text-base py-6 px-8 transition-all hover:scale-105"
           >
             <Link href={ROUTES.public.outboundTravel} className="flex items-center justify-center gap-2.5">
               <Globe className="size-5 text-brand-blue transition-transform group-hover:scale-110" />

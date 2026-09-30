@@ -628,7 +628,7 @@ export function ServicesOverview() {
                   <Button size="xl" onClick={openForm} className="shadow-lift gap-2 w-full sm:w-auto">
                     Tell Us What You Need
                   </Button>
-                  <Button size="lg" variant="outline" asChild className="bg-white/90">
+                  <Button size="lg" variant="outline" asChild>
                     <Link href={ROUTES.public.contact}>Talk to Our Advisors</Link>
                   </Button>
                 </div>

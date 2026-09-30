@@ -510,7 +510,7 @@ export function HomeGateway() {
                   size="xl"
                   variant="secondary-hero"
                   asChild
-                  className="bg-white/90 backdrop-blur-sm border-slate-200 hover:bg-white shadow-xs"
+                  className="shadow-xs"
                 >
                   <Link href="#pillars">Explore Core Pillars</Link>
                 </Button>
@@ -1033,7 +1033,7 @@ export function HomeGateway() {
                 <Button size="xl" onClick={openForm} className="shadow-lift gap-2 w-full sm:w-auto">
                   Submit Your Requirement
                 </Button>
-                <Button size="lg" variant="outline" asChild className="bg-white/90">
+                <Button size="lg" variant="outline" asChild>
                   <Link href={ROUTES.public.contact}>Talk to an Advisor</Link>
                 </Button>
               </div>

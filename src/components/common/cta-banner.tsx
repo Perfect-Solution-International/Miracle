@@ -130,7 +130,6 @@ export function CtaBanner({
                     asChild
                     variant={light ? "secondary-hero" : "outline-inverse"}
                     size="xl"
-                    className="backdrop-blur-md"
                   >
                     <Link href={secondary.href}>{secondary.label}</Link>
                   </Button>
