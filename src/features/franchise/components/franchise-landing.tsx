@@ -178,7 +178,7 @@ function SupportModal({
               <h2 id="franchise-modal-title" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">Franchise Support Request</h2>
               <p className="text-muted-foreground mt-2 max-w-xl text-sm leading-relaxed">Tell us about your goals and our team will help you explore the next steps.</p>
             </div>
-            <form onSubmit={submit} className="overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="text-ink text-sm font-semibold">Full Name *<Input value={form.fullName} onChange={(event) => update("fullName", event.target.value)} placeholder="Your full name" className="mt-2" /></label>
                 <label className="text-ink text-sm font-semibold">Email Address *<Input type="email" value={form.email} onChange={(event) => update("email", event.target.value)} placeholder="you@example.com" className="mt-2" /></label>

@@ -673,7 +673,7 @@ function CountryPicker({
               className="pl-9"
             />
           </div>
-          <div className="mt-2 max-h-52 overflow-y-auto">
+          <div className="scrollbar-hidden mt-2 max-h-52 overflow-y-auto">
             {matches.map((country) => (
               <button
                 type="button"
@@ -747,7 +747,7 @@ function DetailModal({
         >
           <X aria-hidden="true" className="size-5" />
         </button>
-        <div className="grid min-h-0 overflow-y-auto lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="scrollbar-hidden grid min-h-0 overflow-y-auto lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative min-h-64 sm:min-h-72 lg:min-h-full">
             <Image
               src={detail.image.src}
@@ -968,7 +968,7 @@ function RequestModal({
             </div>
             <form
               onSubmit={submit}
-              className="overflow-y-auto px-6 py-6 sm:px-8"
+              className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8"
               noValidate
             >
               <div className="bg-brand-blue-light grid grid-cols-2 gap-1 rounded-xl p-1">

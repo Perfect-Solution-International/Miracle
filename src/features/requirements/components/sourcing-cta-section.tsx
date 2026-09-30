@@ -164,7 +164,7 @@ export function SourcingCtaSection() {
                 </DialogTrigger>
 
                 <DialogContent
-                  className="max-h-[90vh] w-full max-w-2xl overflow-y-auto p-0 sm:max-w-2xl"
+                  className="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden p-0 sm:max-w-2xl"
                   showCloseButton
                 >
                   <DialogHeader className="sr-only">
@@ -175,7 +175,7 @@ export function SourcingCtaSection() {
                     </DialogDescription>
                   </DialogHeader>
 
-                  <div className="p-6 sm:p-8">
+                  <div className="scrollbar-hidden min-h-0 overflow-y-auto p-6 pr-12 sm:p-8 sm:pr-12" tabIndex={0} aria-label="Requirement form">
                     <RequirementInquiryForm />
                   </div>
                 </DialogContent>

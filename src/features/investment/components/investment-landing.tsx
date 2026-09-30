@@ -157,7 +157,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
         ) : (
           <>
             <div className="border-b px-6 py-6 pr-16 sm:px-8"><p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">Miracle International</p><h2 id="investment-modal-title" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">Investment Requirement</h2><p className="text-muted-foreground mt-2 max-w-xl text-sm leading-relaxed">Tell us about your investment interests or business requirements.</p></div>
-            <form onSubmit={submit} className="overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="text-ink text-sm font-semibold">Full Name *<Input value={form.fullName} onChange={(event) => update("fullName", event.target.value)} placeholder="Your full name" className="mt-2" /></label>
                 <label className="text-ink text-sm font-semibold">Email Address *<Input type="email" value={form.email} onChange={(event) => update("email", event.target.value)} placeholder="you@example.com" className="mt-2" /></label>

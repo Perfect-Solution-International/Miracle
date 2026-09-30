@@ -149,7 +149,7 @@ function TradingRequestModal({ open, onClose }: { open: boolean; onClose: () => 
               <h2 id="trading-request-title" className="text-slate-900 mt-2 text-2xl font-extrabold sm:text-3xl">Trading Request</h2>
               <p className="text-slate-600 mt-1 max-w-xl text-xs sm:text-sm leading-relaxed">Tell us what you need and our trade team will help coordinate the right commercial solution.</p>
             </div>
-            <form onSubmit={submit} className="overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Full Name" required value={form.fullName} onChange={(value) => update("fullName", value)} placeholder="Your full name" />
                 <Field label="Email Address" required type="email" value={form.email} onChange={(value) => update("email", value)} placeholder="you@example.com" />

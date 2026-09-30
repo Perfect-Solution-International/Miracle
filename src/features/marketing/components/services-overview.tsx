@@ -251,7 +251,7 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
               </p>
             </div>
 
-            <form onSubmit={submit} className="overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
+            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="text-ink block text-xs font-bold mb-1.5">
