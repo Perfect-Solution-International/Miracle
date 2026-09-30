@@ -338,14 +338,7 @@ export default function Page() {
         {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
         <div
           aria-hidden="true"
- Imasha
           className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
-
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
-          style={{
-            backgroundImage: 'url("/images/business-solutions/business-background.png")',
-          }}
- develop
         />
 
         {/* Bottom Gradient Fade to Next Section */}
@@ -353,7 +346,6 @@ export default function Page() {
           aria-hidden="true"
           className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
         />
-Imasha
 
         {/* Left-Aligned Content Container */}
         <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
@@ -363,30 +355,12 @@ Imasha
               <span>Enterprise Consulting &amp; Business Setup</span>
             </div>
 
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-white/55 via-transparent to-white"
-        />
-        <div className="container-page relative z-10 flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
-          <Eyebrow className="text-navy rounded-full border border-white/80 bg-white/95 px-4 py-1.5 font-extrabold shadow-sm backdrop-blur-md">
-            Business Solutions &amp; Enterprise Growth
-          </Eyebrow>
-
-          <h1
-            id="business-solutions-hero-heading"
-            className="text-navy max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl md:text-6xl"
-          >
-            Build Smarter. <span className="text-navy">Grow Stronger.</span>
-          </h1>
- develop
-
             <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
               Strategic Advisory.<br />
               For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Enterprise Setup, Scale</span><br />
               <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Market Growth.</span>
             </h1>
 
- Imasha
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
               From business planning and corporate incorporation to operational scaling, machinery sourcing, technology integration, and executive business consulting.
             </p>
@@ -401,21 +375,6 @@ Imasha
                 <a href="#solutions">Explore 8 Solutions</a>
               </Button>
             </div>
-
-          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-            <ServiceRequirementDialog
-              context="business"
-              trigger={
-                <Button variant="accent" size="xl" className="shadow-lift">
-                  Start Your Business Journey
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </Button>
-              }
-            />
-            <Button asChild variant="secondary-hero" size="xl">
-              <a href="#solutions">Explore 8 Solutions</a>
-            </Button>
- develop
           </div>
         </div>
       </section>
