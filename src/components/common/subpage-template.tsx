@@ -118,7 +118,7 @@ export function SubpageTemplate({
               {(primaryAction || secondaryAction) && (
                 <div className="mt-2 flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-3.5">
                   {primaryAction && (
-                    <Button asChild variant="accent" size="xl" className="shadow-lg shadow-brand-red/20">
+                    <Button asChild variant="accent" size="xl" className="shadow-lg shadow-brand-blue/20">
                       <Link href={primaryAction.href}>
                         {primaryAction.label} <ArrowRight data-icon="inline-end" aria-hidden="true" />
                       </Link>

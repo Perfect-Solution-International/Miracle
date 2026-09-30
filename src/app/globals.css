@@ -357,3 +357,25 @@
   color: #0f172a !important;
 }
 
+/* Public outline CTAs stay solid white even when the portal theme is dark. */
+.theme-light [data-slot="button"][data-variant="outline"] {
+  border-color: #cbd5e1 !important;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.theme-light [data-slot="button"][data-variant="outline"]:hover {
+  background-color: #f8fafc !important;
+}
+
+.theme-light [data-slot="button"][data-variant="default"] {
+  background-color: var(--brand-blue);
+  color: #ffffff;
+}
+
+.theme-light [data-slot="button"][data-variant="default"]:hover {
+  background-color: var(--brand-blue-dark);
+}
+

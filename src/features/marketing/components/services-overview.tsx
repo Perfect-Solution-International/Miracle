@@ -631,7 +631,7 @@ export function ServicesOverview() {
                     Tell Us What You Need
                     <ArrowRight data-icon="inline-end" aria-hidden="true" />
                   </Button>
-                  <Button size="lg" variant="outline" asChild className="bg-white/90">
+                  <Button size="lg" variant="outline" asChild>
                     <Link href={ROUTES.public.contact}>Talk to Our Advisors</Link>
                   </Button>
                 </div>

@@ -121,7 +121,7 @@ export function TellUsWhatYouNeedHero() {
               asChild
               variant="accent"
               size="xl"
-              className="shadow-xl shadow-brand-red/20 font-bold"
+                className="shadow-xl shadow-brand-blue/20 font-bold"
             >
               <a href="#intake-form">
                 Fill Intake Form <ArrowRight data-icon="inline-end" aria-hidden="true" />
