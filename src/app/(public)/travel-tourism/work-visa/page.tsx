@@ -154,24 +154,6 @@ export default function Page() {
                 Get practical support with your work visa process and prepare your travel documentation based on your destination and employment requirements.
               </p>
 
-              {/* Badges Strip */}
-              <div className="flex flex-wrap items-center gap-2.5 pt-1">
-                {[
-                  { icon: FileCheck, title: "Document Verification & Auditing" },
-                  { icon: Stamp, title: "Ministry & Embassy Attestation" },
-                  { icon: ShieldCheck, title: "Official Requirements Checklist" },
-                  { icon: Plane, title: "Relocation & Ticketing Support" },
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md transition-all hover:scale-105"
-                  >
-                    <item.icon className="size-3.5 text-brand-blue" />
-                    <span>{item.title}</span>
-                  </div>
-                ))}
-              </div>
-
               {/* Action Buttons */}
               <div className="mt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
                 <Button
@@ -181,14 +163,13 @@ export default function Page() {
                 >
                   <a href="#work-visa-request">
                     Request Visa Support
-                    <ArrowRight className="size-4 ml-2" />
                   </a>
                 </Button>
                 <Button
                   asChild
                   variant="outline"
                   size="lg"
-                  className="h-11 sm:h-12 rounded-full border-white/90 bg-white/95 px-7 text-sm font-bold text-navy shadow-sm backdrop-blur-md hover:bg-white"
+                  className="h-11 sm:h-12 rounded-full border-slate-300 bg-white px-7 text-sm font-bold text-navy shadow-sm hover:bg-slate-50"
                 >
                   <Link href={ROUTES.public.travelTourism}>
                     All Travel &amp; Tours
@@ -246,12 +227,8 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Compliance Note */}
-            <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs text-xs text-muted-foreground leading-relaxed">
-              <span className="text-ink font-bold block mb-1">Advisory &amp; Logistics Scope</span>
-              Miracle International acts as your document preparation and travel logistics partner. We assist with authentications and clearances according to official government standards.
-            </div>
           </div>
+
 
           {/* Right Column: Work Visa Support Form */}
           <div className="lg:col-span-7">

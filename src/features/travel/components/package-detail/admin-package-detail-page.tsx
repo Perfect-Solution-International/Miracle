@@ -340,65 +340,7 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                 </div>
               ) : null}
 
-              {/* 6. What to Expect */}
-              {pkg.whatToExpect ? (
-                <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-soft space-y-4">
-                  <div className="flex items-center gap-2 text-brand-blue">
-                    <Compass className="size-5" />
-                    <h2 className="text-xs font-bold uppercase tracking-wider">Travel Experience</h2>
-                  </div>
-                  <h3 className="font-heading text-2xl font-extrabold text-ink">
-                    What to Expect
-                  </h3>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                    {pkg.whatToExpect}
-                  </p>
-                </div>
-              ) : null}
-
-              {/* 7. Entry Requirements & Visa Information */}
-              {(pkg.entryRequirements || pkg.visaInformation) ? (
-                <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-soft space-y-4">
-                  <div className="flex items-center gap-2 text-brand-blue">
-                    <Stamp className="size-5" />
-                    <h2 className="text-xs font-bold uppercase tracking-wider">Entry &amp; Visa Information</h2>
-                  </div>
-                  <h3 className="font-heading text-2xl font-extrabold text-ink">
-                    Important Travel Guidelines
-                  </h3>
-                  <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-3 shadow-xs">
-                    {pkg.entryRequirements ? (
-                      <div className="flex items-start gap-3">
-                        <ShieldCheck className="size-4.5 text-brand-blue shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                            Passport &amp; Entry Requirements
-                          </p>
-                          <p className="text-xs sm:text-sm font-medium text-ink mt-0.5">
-                            {pkg.entryRequirements}
-                          </p>
-                        </div>
-                      </div>
-                    ) : null}
-
-                    {pkg.visaInformation ? (
-                      <div className="flex items-start gap-3 border-t border-slate-100 pt-3">
-                        <Stamp className="size-4.5 text-brand-blue shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                            Visa Assistance
-                          </p>
-                          <p className="text-xs sm:text-sm font-medium text-ink mt-0.5">
-                            {pkg.visaInformation}
-                          </p>
-                        </div>
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              ) : null}
-
-              {/* 8. Photo Gallery */}
+              {/* Photo Gallery */}
               {pkg.images && pkg.images.length > 0 ? (
                 <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-soft space-y-6">
                   <div className="flex items-center gap-2 text-brand-blue">
@@ -474,16 +416,18 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                     <Send className="size-4" />
                     Send Travel Inquiry
                   </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    onClick={() => setCustomizeOpen(true)}
-                    className="w-full border-brand-blue/30 text-brand-blue hover:bg-brand-blue/5 font-bold h-11 rounded-xl text-xs gap-2"
-                    id="pkg-customize-trip-btn"
-                  >
-                    <SlidersHorizontal className="size-4" />
-                    Customize This Trip
-                  </Button>
+                  {isInbound ? (
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={() => setCustomizeOpen(true)}
+                      className="w-full border-brand-blue/30 text-brand-blue hover:bg-brand-blue/5 font-bold h-11 rounded-xl text-xs gap-2"
+                      id="pkg-customize-trip-btn"
+                    >
+                      <SlidersHorizontal className="size-4" />
+                      Customize This Trip
+                    </Button>
+                  ) : null}
                 </div>
 
                 {/* Key Summary List */}
@@ -551,22 +495,24 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
 
       {/* Mobile Sticky Floating CTA Bar */}
       <div className="sticky bottom-0 z-30 border-t bg-white/95 px-4 py-3 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur-md sm:hidden flex items-center gap-2">
-        <Button
-          size="lg"
-          variant="outline"
-          className="flex-1 border-brand-blue/30 text-brand-blue font-bold text-xs h-11 gap-1.5 rounded-xl shadow-xs"
-          onClick={() => setCustomizeOpen(true)}
-        >
-          <SlidersHorizontal className="size-3.5" />
-          Customize Trip
-        </Button>
+        {isInbound ? (
+          <Button
+            size="lg"
+            variant="outline"
+            className="flex-1 border-brand-blue/30 text-brand-blue font-bold text-xs h-11 gap-1.5 rounded-xl shadow-xs"
+            onClick={() => setCustomizeOpen(true)}
+          >
+            <SlidersHorizontal className="size-3.5" />
+            Customize Trip
+          </Button>
+        ) : null}
         <Button
           size="lg"
           className="flex-1 bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-xs h-11 gap-1.5 rounded-xl shadow-md"
           onClick={() => setInquiryOpen(true)}
         >
           <Send className="size-3.5" />
-          Send Inquiry
+          Inquiry Now
         </Button>
       </div>
 

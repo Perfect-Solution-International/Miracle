@@ -221,13 +221,13 @@ export const IT_SOLUTION_LINKS: readonly PublicNavLink[] = [
  * core travel services only, per the site's Travel & Tourism structure. */
 export const TRAVEL_NAV_LINKS: readonly PublicNavLink[] = [
   {
-    title: "Inbound Travel (Sri Lanka)",
+    title: "Inbound Tour (Sri Lanka)",
     href: ROUTES.public.inboundTravel,
     description: "Customized tours and local support across Sri Lanka",
     icon: Landmark,
   },
   {
-    title: "Outbound Travel",
+    title: "Outbound Tour",
     href: ROUTES.public.outboundTravel,
     description: "International travel assistance for your destination",
     icon: Globe2,
@@ -394,8 +394,8 @@ export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
   {
     title: "Travel & Tourism",
     links: [
-      { title: "Inbound (Sri Lanka)", href: ROUTES.public.inboundTravel },
-      { title: "Outbound Travel", href: ROUTES.public.outboundTravel },
+      { title: "Inbound Tour (Sri Lanka)", href: ROUTES.public.inboundTravel },
+      { title: "Outbound Tour", href: ROUTES.public.outboundTravel },
       { title: "Visa Services", href: ROUTES.public.visaServices },
       { title: "Flight Tickets", href: ROUTES.public.flightTickets },
       { title: "Work Visa Support", href: ROUTES.public.workVisa },
@@ -420,10 +420,10 @@ export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
       { title: "About Us", href: ROUTES.public.about },
       { title: "How It Works", href: ROUTES.public.howItWorks },
       { title: "Tell Us What You Need", href: ROUTES.public.tellUsWhatYouNeed },
-      { title: "Request Quotation", href: ROUTES.public.requestQuotation },
       { title: "Contact Us", href: ROUTES.public.contact },
       { title: "FAQ", href: ROUTES.public.faq },
     ],
+
   },
 ];
 

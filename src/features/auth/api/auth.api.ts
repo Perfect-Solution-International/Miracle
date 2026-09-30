@@ -32,5 +32,10 @@ export const authApi = {
     api.post<{ verified: boolean }>(API_ROUTES.auth.verifyEmail, { token }),
 
   resendVerification: () =>
-    api.post<{ sent: boolean }>(API_ROUTES.auth.resendVerification),
+    api.post<{ sent: boolean; alreadyVerified: boolean }>(
+      API_ROUTES.auth.resendVerification,
+    ),
+
+  changePassword: (input: { currentPassword: string; newPassword: string }) =>
+    api.post<{ changed: boolean }>(API_ROUTES.auth.changePassword, input),
 };

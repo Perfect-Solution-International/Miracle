@@ -18,11 +18,10 @@ export function WhyShareCard() {
           <li key={title} className="flex items-start gap-3">
             <span
               className={cn(
-                "inline-flex size-9 shrink-0 items-center justify-center rounded-full",
-                accent === "red"
-                  ? "bg-brand-red/10 text-brand-red"
-                  : "bg-brand-blue-light text-brand-blue",
+                "inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-blue-light",
+                accent,
               )}
+
             >
               <Icon aria-hidden="true" className="size-4.5" />
             </span>

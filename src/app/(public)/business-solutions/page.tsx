@@ -1,11 +1,14 @@
 import {
   ArrowRight,
+  ArrowDown,
   Building2,
   ChartColumn,
   Check,
+  CheckCircle2,
   ClipboardList,
   CodeXml,
   Compass,
+  CornerDownLeft,
   Globe2,
   Handshake,
   Headphones,
@@ -16,6 +19,7 @@ import {
   SearchCheck,
   Settings2,
   ShieldCheck,
+  Sparkles,
   TrendingUp,
   UsersRound,
   type LucideIcon,
@@ -319,56 +323,58 @@ const businessOutcomes = [
 export default function Page() {
   return (
     <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
-      <section
-        aria-labelledby="business-solutions-hero-heading"
-        className={`relative isolate overflow-hidden bg-white ${landingStyles.travelHero}`}
-      >
+      {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
+      <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+        {/* Full-Bleed Panoramic Hero Image */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
+          className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
           style={{
-            backgroundImage: 'url("/images/business-solutions/business-background.png")',
+            backgroundImage: 'url("/images/business-solutions/business-solutions-hero.jpg")',
+            backgroundPosition: "right center",
           }}
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-white/25" />
+
+        {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.62)_0%,rgba(255,255,255,0.30)_42%,rgba(255,255,255,0.08)_78%,rgba(255,255,255,0.18)_100%)]"
+          className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
         />
+
+        {/* Bottom Gradient Fade to Next Section */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-white/55 via-transparent to-white"
+          className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
         />
-        <div className="container-page relative z-10 flex flex-col items-center gap-5 pt-20 pb-16 text-center sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
-          <Eyebrow className="text-navy rounded-full border border-white/80 bg-white/95 px-4 py-1.5 font-extrabold shadow-sm backdrop-blur-md">
-            Business Solutions &amp; Enterprise Growth
-          </Eyebrow>
 
-          <h1
-            id="business-solutions-hero-heading"
-            className="text-navy max-w-3xl text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl md:text-6xl"
-          >
-            Build Smarter. <span className="text-navy">Grow Stronger.</span>
-          </h1>
+        {/* Left-Aligned Content Container */}
+        <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
+          <div className="max-w-2xl space-y-6">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+              <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+              <span>Enterprise Consulting &amp; Business Setup</span>
+            </div>
 
-          <p className="max-w-2xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
-            Practical business support designed to help turn ideas, plans and
-            opportunities into well-organized, sustainable, and scalable operations.
-          </p>
+            <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+              Strategic Advisory.<br />
+              For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Enterprise Setup, Scale</span><br />
+              <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Market Growth.</span>
+            </h1>
 
-          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-            <ServiceRequirementDialog
-              context="business"
-              trigger={
-                <Button variant="accent" size="xl" className="shadow-lift">
-                  Start Your Business Journey
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </Button>
-              }
-            />
-            <Button asChild variant="secondary-hero" size="xl">
-              <a href="#solutions">Explore 8 Solutions</a>
-            </Button>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+              From business planning and corporate incorporation to operational scaling, machinery sourcing, technology integration, and executive business consulting.
+            </p>
+
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5">
+                <Link href={ROUTES.public.tellUsWhatYouNeed}>
+                  <span>Inquiry Now</span>
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="outline" className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs">
+                <a href="#solutions">Explore 8 Solutions</a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -434,13 +440,13 @@ export default function Page() {
           title="Find the Support for Your Next Move"
           description="Eight connected services support the business journey from the first idea through daily operations and expansion."
         />
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
+        <ul className="mt-8 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
           {services.map((service, index) => (
             <li
               key={service.title}
-              className="group/card shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition-shadow"
+              className="group/card shadow-soft hover:shadow-lift relative flex h-full cursor-pointer flex-col overflow-hidden rounded-[20px] border border-slate-200/90 bg-white transition-all duration-300 hover:border-brand-blue/40 motion-safe:hover:-translate-y-1 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                 <Image
                   src={service.image.src}
                   alt={service.image.alt}
@@ -450,30 +456,39 @@ export default function Page() {
                 />
                 <div
                   aria-hidden="true"
-                  className="from-navy/60 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+                  className="from-navy/35 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
                 />
-                <span className="absolute top-4 left-4 text-xs font-bold tracking-[0.16em] text-white/85">
+                <span className="text-brand-blue absolute top-4 left-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold shadow-xs backdrop-blur-sm">
                   {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="text-brand-blue shadow-soft absolute right-4 bottom-4 flex size-11 items-center justify-center rounded-xl bg-white/95">
-                  <service.icon aria-hidden="true" className="size-5" />
                 </span>
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <h3 className="text-ink text-lg font-bold">{service.title}</h3>
-                <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+                <div className="flex items-start gap-3">
+                  <span className="bg-brand-blue-light text-brand-blue group-hover/card:bg-brand-blue flex size-10 shrink-0 items-center justify-center rounded-xl transition-colors group-hover/card:text-white">
+                    <service.icon aria-hidden="true" className="size-5" />
+                  </span>
+                  <h3 className="text-ink group-hover/card:text-brand-blue text-lg leading-snug font-bold transition-colors">
+                    <Link
+                      href={service.href}
+                      className="outline-none after:absolute after:inset-0"
+                      aria-label={`Learn more about ${service.title}`}
+                    >
+                      {service.title}
+                    </Link>
+                  </h3>
+                </div>
+                <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
                   {service.description}
                 </p>
-                <Link
-                  href={service.href}
-                  className="group/link text-brand-blue hover:text-brand-blue-dark mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold"
-                >
-                  Learn More
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="size-4 transition-transform group-hover/link:translate-x-1"
-                  />
-                </Link>
+                <div className="mt-auto pt-6">
+                  <span className="text-brand-blue group-hover/card:text-brand-blue-dark flex items-center justify-between border-t border-slate-100 pt-4 text-sm font-bold">
+                    Learn More
+                    <ArrowRight
+                      aria-hidden="true"
+                      className="size-4 transition-transform group-hover/card:translate-x-1"
+                    />
+                  </span>
+                </div>
               </div>
             </li>
           ))}
@@ -482,18 +497,16 @@ export default function Page() {
 
       <Section
         id="journey"
-        tone="navy"
         aria-labelledby="business-journey-heading"
-        className={landingStyles.lightProcess}
+        className="bg-white"
       >
         <SectionHeading
           id="business-journey-heading"
           eyebrow="The Business Journey"
           title="A Clearer Path From Idea to Expansion"
           description="The right support at the right moment helps turn uncertainty into practical progress."
-          tone="inverse"
         />
-        <ol className="border-brand-blue-muted/35 relative mt-8 grid gap-6 border-l pl-6 lg:mt-10 lg:grid-cols-6 lg:gap-4 lg:border-t lg:border-l-0 lg:pl-0">
+        <ol className="border-brand-blue/25 relative mt-8 grid gap-6 border-l pl-6 lg:mt-10 lg:grid-cols-6 lg:gap-4 lg:border-t lg:border-l-0 lg:pl-0">
           {journey.map(({ step, title, description, icon: Icon }, index) => (
             <li
               key={step}
@@ -502,22 +515,22 @@ export default function Page() {
               <span
                 aria-hidden="true"
                 className={cn(
-                  "ring-navy absolute top-4 -left-[1.8rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
-                  index === 0 ? "bg-brand-red" : "bg-brand-blue-muted",
+                  "ring-white absolute top-4 -left-[1.8rem] z-10 size-2.5 rounded-full ring-4 lg:-top-[0.35rem] lg:left-0",
+                  index === 0 ? "bg-brand-red" : "bg-brand-blue",
                 )}
               />
               <span className="hidden text-4xl leading-none font-bold text-[#5B7FAE] lg:block">
                 {step}
               </span>
-              <span className="text-brand-blue-muted flex size-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-xs">
+              <span className="text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-xs">
                 <Icon aria-hidden="true" className="size-4.5" />
               </span>
               <div>
-                <span className="text-brand-blue-muted text-xs font-bold tracking-widest lg:hidden">
+                <span className="text-brand-blue text-xs font-bold tracking-widest lg:hidden">
                   {step}
                 </span>
-                <h3 className="text-base font-bold text-white">{title}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-white/60 sm:text-sm">
+                <h3 className="text-ink text-base font-bold">{title}</h3>
+                <p className="text-muted-foreground mt-1 text-xs leading-relaxed sm:text-sm">
                   {description}
                 </p>
               </div>
@@ -535,19 +548,49 @@ export default function Page() {
         />
         <ol className="mt-10 grid gap-x-8 gap-y-7 md:grid-cols-2 lg:grid-cols-3">
           {workingProcess.map(({ title, description, icon: Icon }, index) => (
-            <li key={title} className="flex gap-4 border-t border-slate-200 pt-5">
-              <span className="text-brand-blue bg-brand-blue-light flex size-11 shrink-0 items-center justify-center rounded-xl">
+            <li key={title} className="relative flex gap-4 rounded-2xl border border-slate-300 bg-[#f4f8fd] p-7 shadow-soft">
+              <span className="text-brand-blue-dark bg-brand-blue-light flex size-11 shrink-0 items-center justify-center rounded-xl border border-brand-blue/25 shadow-xs">
                 <Icon aria-hidden="true" className="size-5" />
               </span>
               <div>
-                <span className="text-brand-blue text-xs font-bold tracking-widest">
+                <span className="bg-brand-blue inline-flex rounded-md px-2 py-0.5 text-xs font-extrabold tracking-widest text-white">
                   0{index + 1}
                 </span>
-                <h3 className="text-ink mt-1 text-lg font-bold">{title}</h3>
+                <h3 className="text-ink mt-2 text-lg font-extrabold">{title}</h3>
                 <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
                   {description}
                 </p>
               </div>
+              {index < workingProcess.length - 1 && (
+                <ArrowDown
+                  aria-hidden="true"
+                  className="text-brand-blue-dark pointer-events-none absolute -bottom-6 left-[42px] size-4 md:hidden"
+                />
+              )}
+              {index < workingProcess.length - 1 && index % 2 === 0 && (
+                <ArrowRight
+                  aria-hidden="true"
+                  className="text-brand-blue-dark pointer-events-none absolute -right-6 top-10 hidden size-4 md:block lg:hidden"
+                />
+              )}
+              {index < workingProcess.length - 1 && index % 2 === 1 && (
+                <CornerDownLeft
+                  aria-hidden="true"
+                  className="text-brand-blue-dark pointer-events-none absolute -bottom-6 right-2 hidden size-5 md:block lg:hidden"
+                />
+              )}
+              {index !== 2 && index < workingProcess.length - 1 && (
+                <ArrowRight
+                  aria-hidden="true"
+                  className="text-brand-blue-dark pointer-events-none absolute -right-6 top-10 hidden size-4 lg:block"
+                />
+              )}
+              {index === 2 && (
+                <CornerDownLeft
+                  aria-hidden="true"
+                  className="text-brand-blue-dark pointer-events-none absolute -bottom-6 right-2 hidden size-5 lg:block"
+                />
+              )}
             </li>
           ))}
         </ol>
@@ -564,17 +607,16 @@ export default function Page() {
             />
             <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
               {commonNeeds.map(({ title, description, href }) => (
-                <li key={title} className="border-b border-slate-200 py-4">
-                  <h3 className="text-ink text-sm font-bold sm:text-base">{title}</h3>
+                <li key={title} className="relative cursor-pointer border-b border-slate-200 py-4 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring">
+                  <h3 className="text-ink text-sm font-bold sm:text-base">
+                    <Link href={href} className="outline-none after:absolute after:inset-0">{title}</Link>
+                  </h3>
                   <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
                     {description}
                   </p>
-                  <Link
-                    href={href}
-                    className="text-brand-blue mt-3 inline-flex items-center gap-1 text-sm font-semibold hover:underline"
-                  >
+                  <span className="text-brand-blue mt-3 inline-flex items-center gap-1 text-sm font-semibold">
                     Explore support <ArrowRight aria-hidden="true" className="size-4" />
-                  </Link>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -593,10 +635,10 @@ export default function Page() {
             </p>
             <ul className="border-brand-blue/15 mt-6 border-t">
               {connectedServices.map(({ title, description, href }) => (
-                <li key={title} className="border-brand-blue/15 border-b py-4">
+                <li key={title} className="border-brand-blue/15 relative cursor-pointer border-b py-4 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring">
                   <Link
                     href={href}
-                    className="text-brand-blue inline-flex items-center gap-1.5 font-bold hover:underline"
+                    className="text-brand-blue inline-flex items-center gap-1.5 font-bold hover:underline outline-none after:absolute after:inset-0"
                   >
                     {title} <ArrowRight aria-hidden="true" className="size-4" />
                   </Link>

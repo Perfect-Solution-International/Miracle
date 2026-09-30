@@ -150,6 +150,7 @@ export interface TravelInquiry {
   duration?: string;
   packagePrice?: number | null;
   packageCurrency?: Currency;
+  budgetRange?: string;
   travelDate: string;
   travelers: string | number;
   additionalRequirements?: string;
@@ -176,6 +177,7 @@ export interface PublicTravelInquiryFormData {
   duration?: string;
   packagePrice?: number | null;
   packageCurrency?: Currency;
+  budgetRange?: string;
   preferredTravelDate: string;
   travelers: string | number;
   additionalRequirements?: string;

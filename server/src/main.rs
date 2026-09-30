@@ -4,6 +4,7 @@ mod error;
 mod middleware;
 mod models;
 mod routes;
+mod services;
 
 use std::net::SocketAddr;
 use axum::{Router, response::IntoResponse};

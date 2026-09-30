@@ -126,7 +126,7 @@ export function PackageDetailModal({
         </div>
 
         {/* ── Scrollable Modal Body ── */}
-        <div className="overflow-y-auto px-6 py-6 sm:px-8 space-y-8">
+        <div className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8 space-y-8">
           {/* ── 1. Included Services & Features Bar ── */}
           <div>
             <div className="flex items-center gap-2 mb-3.5">
@@ -150,93 +150,7 @@ export function PackageDetailModal({
             </div>
           </div>
 
-          {/* ── 2. Clean Left-Content / Right-Image Layout: "What to Expect" ── */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
-            <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-              {/* Left Column (What to Expect Details) */}
-              <div className="flex flex-col gap-4 lg:col-span-7">
-                <div>
-                  <p className="text-brand-red text-xs font-bold tracking-wider uppercase">
-                    Travel Experience
-                  </p>
-                  <h3 className="text-ink mt-1 text-xl font-bold sm:text-2xl">
-                    What to Expect
-                  </h3>
-                  <p className="text-muted-foreground mt-1 text-sm">
-                    Key highlights, activities, and experiences carefully coordinated for you.
-                  </p>
-                </div>
-
-                <div className="space-y-3.5 mt-2">
-                  {pkg.whatToExpect.map((item, index) => (
-                    <div
-                      key={item.title}
-                      className="flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs"
-                    >
-                      <span className="bg-brand-blue text-white flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-bold mt-0.5">
-                        0{index + 1}
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2">
-                          <h4 className="text-ink text-sm font-bold">{item.title}</h4>
-                          {item.badge ? (
-                            <span className="bg-brand-blue-light text-brand-blue rounded-md px-1.5 py-0.5 text-[10px] font-bold">
-                              {item.badge}
-                            </span>
-                          ) : null}
-                        </div>
-                        <p className="text-muted-foreground mt-1 text-xs sm:text-sm leading-relaxed">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right Column (High-Quality Travel Media matching this package) */}
-              <div className="flex flex-col gap-3.5 lg:col-span-5">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-slate-200 shadow-md">
-                  <Image
-                    src={pkg.image.src}
-                    alt={pkg.image.alt}
-                    fill
-                    sizes="(min-width: 1024px) 400px, 100vw"
-                    className="object-cover"
-                  />
-                  <div className="from-navy/70 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
-                    <span className="text-xs font-bold drop-shadow-sm flex items-center gap-1.5">
-                      <MapPin className="size-3.5 text-brand-blue-muted" />
-                      {pkg.location}
-                    </span>
-                    <span className="rounded-full bg-white/90 px-2.5 py-0.5 text-[11px] font-bold text-navy shadow-xs">
-                      {pkg.duration.days} Days Tour
-                    </span>
-                  </div>
-                </div>
-
-                {/* Secondary contextual image */}
-                {primaryImage !== pkg.image ? (
-                  <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-slate-200 shadow-xs">
-                    <Image
-                      src={primaryImage.src}
-                      alt={primaryImage.alt}
-                      fill
-                      sizes="(min-width: 1024px) 400px, 100vw"
-                      className="object-cover"
-                    />
-                    <div className="from-navy/50 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
-                    <span className="absolute bottom-2 left-2.5 text-[11px] font-semibold text-white drop-shadow-sm">
-                      {primaryImage.alt}
-                    </span>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          </div>
-
-          {/* ── 3. Practical Information & Logistics ── */}
+          {/* ── Practical Information & Logistics ── */}
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {/* Accommodation & Transport */}
             <div className="rounded-2xl border border-slate-200/90 bg-white p-4.5 flex flex-col gap-2 shadow-xs">
@@ -348,7 +262,7 @@ export function PackageDetailModal({
                 }
               }}
             >
-              Send Inquiry
+              Inquiry Now
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Button>
           </div>

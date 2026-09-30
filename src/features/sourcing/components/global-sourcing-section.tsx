@@ -12,15 +12,14 @@ import { SITE_MEDIA } from "@/config/site-media";
 import { SOURCING_MARKETS } from "../data/sourcing.content";
 import { SourcingProcessTimeline } from "./sourcing-process-timeline";
 
-/** Homepage sourcing feature on a navy band: markets, visual, and process. */
+/** Homepage sourcing feature: markets, visual, and process. */
 export function GlobalSourcingSection() {
   return (
-    <Section tone="navy" aria-labelledby="sourcing-heading">
+    <Section className="bg-white" aria-labelledby="sourcing-heading">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col gap-10">
           <SectionHeading
             id="sourcing-heading"
-            tone="inverse"
             eyebrow="Global Sourcing"
             title="Source Products From Global Markets"
             description="We work with international manufacturers and wholesalers to find the right product at the right terms, then manage the purchase and logistics so you receive exactly what you ordered."
@@ -30,7 +29,7 @@ export function GlobalSourcingSection() {
             {SOURCING_MARKETS.map((market) => (
               <li
                 key={market.name}
-                className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-4 transition-colors hover:border-white/25"
+                className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-brand-blue/25"
               >
                 <span
                   aria-hidden="true"
@@ -39,8 +38,8 @@ export function GlobalSourcingSection() {
                   {market.code}
                 </span>
                 <div>
-                  <h3 className="font-bold text-white">{market.name}</h3>
-                  <p className="text-sm text-white/60">{market.focus}</p>
+                  <h3 className="text-ink font-bold">{market.name}</h3>
+                  <p className="text-muted-foreground text-sm">{market.focus}</p>
                 </div>
               </li>
             ))}
@@ -53,14 +52,14 @@ export function GlobalSourcingSection() {
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Link>
             </Button>
-            <ArrowLink href={ROUTES.public.globalSourcing} tone="inverse">
+            <ArrowLink href={ROUTES.public.globalSourcing}>
               Learn about sourcing
             </ArrowLink>
           </div>
         </div>
 
         <div className="reveal relative">
-          <div className="relative aspect-square overflow-hidden rounded-full border border-white/10 sm:mx-auto sm:w-4/5 lg:w-full">
+          <div className="relative aspect-square overflow-hidden rounded-full border border-slate-200 sm:mx-auto sm:w-4/5 lg:w-full">
             <Image
               src={SITE_MEDIA.earthNight.src}
               alt={SITE_MEDIA.earthNight.alt}
@@ -68,16 +67,16 @@ export function GlobalSourcingSection() {
               sizes="(min-width: 1024px) 40vw, 80vw"
               className="object-cover"
             />
-            {/* Feathers the photo edge into the navy background. */}
+            {/* Softens the photo edge against the light background. */}
             <div
               aria-hidden="true"
-              className="absolute inset-0 rounded-full shadow-[inset_0_0_80px_40px_var(--navy)]"
+              className="absolute inset-0 rounded-full shadow-[inset_0_0_80px_40px_white]"
             />
           </div>
           {/* Orbit rings evoke trade routes without resorting to a flat map. */}
           <div
             aria-hidden="true"
-            className="absolute inset-[-6%] rounded-full border border-dashed border-white/10 sm:inset-x-[6%] lg:inset-[-6%]"
+            className="absolute inset-[-6%] rounded-full border border-dashed border-slate-200 sm:inset-x-[6%] lg:inset-[-6%]"
           />
           <span
             aria-hidden="true"

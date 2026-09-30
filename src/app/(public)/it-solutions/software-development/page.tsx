@@ -299,14 +299,13 @@ export default function Page() {
       </Section>
 
       {/* Technologies */}
-      <Section tone="navy" aria-labelledby="technologies-heading">
+      <Section className="bg-white" aria-labelledby="technologies-heading">
         <SectionHeading
           id="technologies-heading"
           eyebrow="Technologies"
           title="Modern Technologies and Solutions"
           description="We choose proven tools that suit your project, budget and long-term plans."
           align="center"
-          tone="inverse"
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-16 lg:grid-cols-3">
           {technologies.map((tech) => (
@@ -315,7 +314,6 @@ export default function Page() {
               icon={tech.icon}
               title={tech.title}
               description={tech.description}
-              tone="inverse"
               className="reveal"
             />
           ))}
@@ -345,6 +343,7 @@ export default function Page() {
       </Section>
 
       <CtaBanner
+        tone="light"
         serviceContext="it"
         eyebrow="Ready to Get Started?"
         title="Let's Build the Software Your Business Needs"

@@ -9,12 +9,12 @@ export const QUICK_PLANNER_TRAVEL_TYPES: readonly string[] = [
 ];
 
 export const TRIP_BUDGET_OPTIONS: readonly string[] = [
-  "Under $500",
-  "$500 – $1,500",
-  "$1,500 – $3,000",
-  "$3,000 – $6,000",
-  "Above $6,000",
-  "Not sure yet",
+  "Under LKR 100,000",
+  "LKR 100,000 – LKR 250,000",
+  "LKR 250,000 – LKR 500,000",
+  "LKR 500,000 – LKR 1,000,000",
+  "Above LKR 1,000,000",
+  "Flexible / Custom Budget",
 ];
 
 export const ACCOMMODATION_OPTIONS: readonly string[] = [

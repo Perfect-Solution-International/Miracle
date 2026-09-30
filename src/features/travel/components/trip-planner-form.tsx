@@ -131,7 +131,7 @@ export function TripPlannerForm({
         startDate: "",
         endDate: "",
         travelers: 2,
-        budgetRange: "$1,500 – $3,000",
+        budgetRange: "LKR 250,000 – LKR 500,000",
         accommodation: accomStr,
         transportation: !isLegacyDetail && packageDetail.transportation ? packageDetail.transportation : "Private chauffeur",
         travelType: mapPackageTypeToOption(travelTypeStr),

@@ -5,6 +5,7 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   Check,
+  CheckCircle2,
   ChevronRight,
   Globe2,
   Handshake,
@@ -12,6 +13,7 @@ import {
   Package,
   Ship,
   ShoppingBag,
+  Sparkles,
   Store,
   Truck,
   Users,
@@ -126,26 +128,28 @@ function TradingRequestModal({ open, onClose }: { open: boolean; onClose: () => 
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/25 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="trading-request-title">
-      <div className="bg-popover relative flex max-h-[min(900px,calc(100vh-2rem))] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-white/70 shadow-2xl">
-        <button type="button" onClick={close} aria-label="Close trading request" className="text-muted-foreground hover:bg-muted hover:text-ink absolute top-5 right-5 z-10 inline-flex size-9 items-center justify-center rounded-full transition-colors">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="trading-request-title">
+      <div className="bg-popover relative flex max-h-[min(900px,calc(100vh-2rem))] w-full max-w-2xl flex-col overflow-hidden rounded-3xl border border-slate-200/80 shadow-2xl">
+        <button type="button" onClick={close} aria-label="Close trading request" className="text-muted-foreground hover:bg-slate-100 hover:text-ink absolute top-5 right-5 z-10 inline-flex size-9 items-center justify-center rounded-full transition-colors">
           <X className="size-5" />
         </button>
         {submitted ? (
           <div className="flex min-h-[430px] flex-col items-center justify-center px-6 py-16 text-center sm:px-14">
-            <span className="bg-brand-blue-light text-brand-blue inline-flex size-16 items-center justify-center rounded-full"><Check className="size-8" /></span>
-            <h2 id="trading-request-title" className="text-ink mt-7 text-3xl font-extrabold tracking-tight">Request Submitted Successfully</h2>
-            <p className="text-muted-foreground mt-4 max-w-md leading-relaxed">Our team will review your requirement and contact you shortly.</p>
-            <Button size="lg" onClick={close} className="mt-8">Done</Button>
+            <span className="bg-blue-50 text-blue-600 inline-flex size-16 items-center justify-center rounded-2xl shadow-sm"><Check className="size-8" /></span>
+            <h2 id="trading-request-title" className="text-slate-900 mt-7 text-3xl font-extrabold tracking-tight">Request Submitted Successfully</h2>
+            <p className="text-slate-600 mt-4 max-w-md leading-relaxed text-sm">Our trade specialists will review your requirement and connect with you shortly.</p>
+            <Button size="lg" onClick={close} className="mt-8 bg-blue-600 hover:bg-blue-700 text-white rounded-xl">Done</Button>
           </div>
         ) : (
           <>
-            <div className="border-b px-6 py-6 pr-16 sm:px-8">
-              <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">Miracle International</p>
-              <h2 id="trading-request-title" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">Trading Request</h2>
-              <p className="text-muted-foreground mt-2 max-w-xl text-sm leading-relaxed">Tell us what you need and our team will help you explore the right trading solution.</p>
+            <div className="border-b border-slate-100 bg-gradient-to-r from-slate-50 via-white to-blue-50/20 px-6 py-6 pr-16 sm:px-8">
+              <span className="bg-blue-50 text-blue-700 border border-blue-200/60 inline-flex items-center gap-1.5 rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                Miracle Trading Desk
+              </span>
+              <h2 id="trading-request-title" className="text-slate-900 mt-2 text-2xl font-extrabold sm:text-3xl">Trading Request</h2>
+              <p className="text-slate-600 mt-1 max-w-xl text-xs sm:text-sm leading-relaxed">Tell us what you need and our trade team will help coordinate the right commercial solution.</p>
             </div>
-            <form onSubmit={submit} className="overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Full Name" required value={form.fullName} onChange={(value) => update("fullName", value)} placeholder="Your full name" />
                 <Field label="Email Address" required type="email" value={form.email} onChange={(value) => update("email", value)} placeholder="you@example.com" />
@@ -153,25 +157,25 @@ function TradingRequestModal({ open, onClose }: { open: boolean; onClose: () => 
                 <Field label="WhatsApp Number" optional value={form.whatsappNumber} onChange={(value) => update("whatsappNumber", value)} placeholder="Your WhatsApp number" />
               </div>
               <fieldset className="mt-6">
-                <legend className="text-ink text-sm font-semibold">What Are You Looking For? <span className="text-brand-red">*</span></legend>
+                <legend className="text-slate-900 text-xs font-bold uppercase tracking-wider">What Are You Looking For? <span className="text-red-500">*</span></legend>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {["Product", "Supplier", "Buyer", "Wholesale Supply", "Bulk Order", "Commercial Product Supply", "Other"].map((option) => (
-                    <label key={option} className={cn("border-input hover:border-brand-blue flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2.5 text-sm transition-colors", form.requestType === option && "border-brand-blue bg-brand-blue-light text-brand-blue-dark")}>
-                      <input type="radio" name="requestType" value={option} checked={form.requestType === option} onChange={(event) => update("requestType", event.target.value)} className="accent-brand-blue" />
+                    <label key={option} className={cn("border-slate-200 hover:border-blue-500 flex cursor-pointer items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition-colors", form.requestType === option && "border-blue-600 bg-blue-50/50 text-blue-700 font-bold")}>
+                      <input type="radio" name="requestType" value={option} checked={form.requestType === option} onChange={(event) => update("requestType", event.target.value)} className="accent-blue-600" />
                       {option}
                     </label>
                   ))}
                 </div>
               </fieldset>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <label className="text-ink text-sm font-semibold sm:col-span-2">Product / Business Requirement <span className="text-brand-red">*</span><Textarea value={form.requirement} onChange={(event) => update("requirement", event.target.value)} placeholder="Describe the product, supplier, buyer or opportunity" className="mt-2" rows={4} /></label>
-                <Field label="Country" optional value={form.country} onChange={(value) => update("country", value)} placeholder="Country or market" />
-                <label className="text-ink text-sm font-semibold sm:col-span-2">Additional Requirements <span className="text-muted-foreground font-normal">(Optional)</span><Textarea value={form.additionalRequirements} onChange={(event) => update("additionalRequirements", event.target.value)} placeholder="Anything else we should know?" className="mt-2" rows={3} /></label>
+                <label className="text-slate-900 text-xs font-bold uppercase tracking-wider sm:col-span-2">Product / Business Requirement <span className="text-red-500">*</span><Textarea value={form.requirement} onChange={(event) => update("requirement", event.target.value)} placeholder="Describe the product, supplier, buyer or opportunity..." className="mt-2 text-sm rounded-xl" rows={4} /></label>
+                <Field label="Target Country / Market" optional value={form.country} onChange={(value) => update("country", value)} placeholder="e.g. Sri Lanka, UAE, Global" />
+                <label className="text-slate-900 text-xs font-bold uppercase tracking-wider sm:col-span-2">Additional Requirements <span className="text-muted-foreground font-normal lowercase">(optional)</span><Textarea value={form.additionalRequirements} onChange={(event) => update("additionalRequirements", event.target.value)} placeholder="Volume specifications, delivery timeline, or compliance details..." className="mt-2 text-sm rounded-xl" rows={3} /></label>
               </div>
-              <label className="border-input bg-surface mt-6 block cursor-pointer rounded-xl border border-dashed p-4 text-sm font-semibold text-ink">Optional Document Upload <span className="text-muted-foreground font-normal">(Optional)</span><Input type="file" multiple className="mt-2 block h-auto cursor-pointer border-0 p-0 text-xs shadow-none" /></label>
-              <label className="text-ink mt-6 flex items-start gap-3 text-sm"><input type="checkbox" checked={form.confirmed} onChange={(event) => update("confirmed", event.target.checked)} className="accent-brand-blue mt-0.5 size-4" /><span>I confirm that the information provided is accurate. <span className="text-brand-red">*</span></span></label>
-              {error && <p className="text-brand-red mt-4 text-sm font-semibold" role="alert">{error}</p>}
-              <Button type="submit" size="xl" className="mt-6 w-full">Submit Trading Request <ArrowRight data-icon="inline-end" /></Button>
+              <label className="border-slate-200 bg-slate-50/60 hover:bg-blue-50/30 mt-6 block cursor-pointer rounded-2xl border border-dashed p-4 text-xs font-semibold text-slate-800 transition-colors">Optional Document Upload <span className="text-muted-foreground font-normal">(specifications, catalogs, RFQs)</span><Input type="file" multiple className="mt-2 block h-auto cursor-pointer border-0 p-0 text-xs shadow-none" /></label>
+              <label className="text-slate-700 mt-6 flex items-start gap-2.5 text-xs"><input type="checkbox" checked={form.confirmed} onChange={(event) => update("confirmed", event.target.checked)} className="accent-blue-600 mt-0.5 size-4 rounded" /><span>I confirm that the information provided is accurate. <span className="text-red-500">*</span></span></label>
+              {error && <p className="text-red-600 mt-4 text-xs font-bold" role="alert">{error}</p>}
+              <Button type="submit" size="xl" className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-sm">Submit Trading Request <ArrowRight className="size-4.5" /></Button>
             </form>
           </>
         )}
@@ -181,7 +185,7 @@ function TradingRequestModal({ open, onClose }: { open: boolean; onClose: () => 
 }
 
 function Field({ label, value, onChange, placeholder, type = "text", required = false, optional = false }: { label: string; value: string; onChange: (value: string) => void; placeholder: string; type?: string; required?: boolean; optional?: boolean }) {
-  return <label className="text-ink text-sm font-semibold">{label} {required && <span className="text-brand-red">*</span>}{optional && <span className="text-muted-foreground font-normal">(Optional)</span>}<Input type={type} value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} className="mt-2" /></label>;
+  return <label className="text-slate-900 text-xs font-bold uppercase tracking-wider">{label} {required && <span className="text-red-500">*</span>}{optional && <span className="text-muted-foreground font-normal lowercase">(optional)</span>}<Input type={type} value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} className="mt-2 text-sm rounded-xl" /></label>;
 }
 
 export function TradingLanding({
@@ -194,30 +198,245 @@ export function TradingLanding({
   return (
     <>
       <main className="bg-white">
-        <section className="overflow-hidden bg-[linear-gradient(120deg,#f8fbff_0%,#ffffff_55%,#f0f6ff_100%)]">
-          <div className="container-page grid gap-12 py-16 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:py-24">
-            <div className="max-w-2xl">
-              <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A clearer way to trade</p>
-              <h1 className="text-ink mt-5 max-w-2xl text-5xl leading-[1.02] font-extrabold tracking-tight sm:text-6xl">Trading Solutions for Local &amp; Global Markets</h1>
-              <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed sm:text-xl">Connect with suppliers, buyers and products through simple and reliable trading solutions designed for businesses of all sizes.</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button size="xl" onClick={() => setIsFormOpen(true)}>Start a Trading Request <ArrowRight data-icon="inline-end" /></Button><Button size="xl" variant="secondary-hero" asChild><a href="#services">Explore Trading Services</a></Button></div>
-            </div>
-            <div className="relative min-h-[360px] overflow-hidden rounded-3xl border border-blue-100 bg-white p-3 shadow-xl shadow-blue-100/60 sm:min-h-[430px]">
-              <Image src={SITE_MEDIA.warehouse.src} alt={SITE_MEDIA.warehouse.alt} fill priority sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover" />
-              <div className="absolute inset-x-5 bottom-5 flex items-center justify-between rounded-2xl border border-white/70 bg-white/90 p-4 shadow-lg backdrop-blur-sm"><span className="flex items-center gap-2 text-sm font-bold text-brand-blue-dark"><Globe2 className="size-5" /> Local to global connections</span><Ship className="size-6 text-brand-red" /></div>
+        {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
+        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+          {/* Full-Bleed Panoramic Hero Image */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            style={{
+              backgroundImage: 'url("/images/services/trading-hero.jpg")',
+              backgroundPosition: "right center",
+            }}
+          />
+
+          {/* Soft-White Gradient on Left Area */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+          />
+
+          {/* Bottom Gradient Fade */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+          />
+
+          {/* Left-Aligned Content Container */}
+          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
+            <div className="max-w-2xl space-y-6">
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+                <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+                <span>Global Trade &amp; Commodity Sourcing</span>
+              </div>
+
+              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+                Smarter Trading.<br />
+                For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Products, Suppliers</span><br />
+                <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Global Markets.</span>
+              </h1>
+
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+                Miracle International connects businesses, verified suppliers, and buyers through structured <strong className="font-semibold text-slate-900">Local &amp; International Trade</strong> agreements, verified <strong className="font-semibold text-slate-900">Product Sourcing</strong>, and end-to-end commercial fulfillment.
+              </p>
+
+              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                <Button
+                  size="xl"
+                  onClick={() => setIsFormOpen(true)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  <span>Inquiry Now</span>
+                </Button>
+                <Button
+                  size="xl"
+                  variant="outline"
+                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
+                  asChild
+                >
+                  <a href="#services">Explore Trading Services</a>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="section-y bg-white" aria-labelledby="looking-heading"><div className="container-page"><div className="mx-auto max-w-2xl text-center"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Start with your goal</p><h2 id="looking-heading" className="text-ink mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">What Are You Looking For?</h2><p className="text-muted-foreground mt-4 text-lg">Choose what you need and explore the right trading solution.</p></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{LOOKING_FOR.map(({ title, description, icon: Icon }) => <button key={title} type="button" onClick={() => setIsFormOpen(true)} className="group border-input hover:border-brand-blue hover:shadow-lift rounded-2xl border bg-white p-6 text-left transition-all"><span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue group-hover:text-white inline-flex size-12 items-center justify-center rounded-xl transition-colors"><Icon className="size-6 transition-transform group-hover:scale-110" /></span><h3 className="text-ink mt-7 text-lg font-bold">{title}</h3><p className="text-muted-foreground mt-2 min-h-12 text-sm leading-relaxed">{description}</p><span className="text-brand-blue mt-5 inline-flex items-center gap-1 text-sm font-bold">Start here <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" /></span></button>)}</div></div></section>
+        {/* ── 2. What Are You Looking For? ── */}
+        <section className="section-y bg-white border-b border-slate-200/70" aria-labelledby="looking-heading">
+          <div className="container-page space-y-12">
+            <div className="mx-auto max-w-2xl text-center space-y-3">
+              <span className="bg-blue-50 text-blue-700 border border-blue-200/50 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+                Start With Your Goal
+              </span>
+              <h2 id="looking-heading" className="text-slate-900 text-3xl sm:text-4xl font-extrabold tracking-tight">
+                What Are You Looking For?
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Choose your requirement and explore tailored trading pathways with our specialists.
+              </p>
+            </div>
 
-        <section id="services" className="section-y scroll-mt-20 bg-white border-t border-slate-100" aria-labelledby="services-heading"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Flexible support</p><h2 id="services-heading" className="text-ink mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Our Trading Services</h2><p className="text-muted-foreground mt-4 text-lg">Flexible trading solutions for individuals, businesses and commercial requirements.</p></div><div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{SERVICES.map(([title, description, Icon]) => <article key={title} className="border-input rounded-2xl border bg-white p-6 shadow-sm"><Icon className="text-brand-blue size-6" /><h3 className="text-ink mt-6 font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p></article>)}</div></div></section>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {LOOKING_FOR.map(({ title, description, icon: Icon }) => (
+                <button
+                  key={title}
+                  type="button"
+                  onClick={() => setIsFormOpen(true)}
+                  className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-7 text-left shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-400 hover:shadow-md cursor-pointer flex flex-col justify-between"
+                >
+                  <div>
+                    <span className="bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white inline-flex size-12 items-center justify-center rounded-2xl shadow-xs transition-colors duration-300">
+                      <Icon className="size-6 transition-transform group-hover:scale-110" />
+                    </span>
+                    <h3 className="text-slate-900 mt-6 text-lg font-bold group-hover:text-blue-600 transition-colors">
+                      {title}
+                    </h3>
+                    <p className="text-slate-600 mt-2 text-xs sm:text-sm leading-relaxed">
+                      {description}
+                    </p>
+                  </div>
+                  <span className="text-blue-600 mt-6 inline-flex items-center gap-1.5 text-xs font-bold group-hover:gap-2.5 transition-all">
+                    Start here <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <section className="section-y bg-white border-t border-slate-100" aria-labelledby="process-heading"><div className="container-page"><div className="mx-auto max-w-2xl text-center"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Simple from start to finish</p><h2 id="process-heading" className="text-ink mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">How It Works</h2></div><div className="relative mt-14 grid gap-8 md:grid-cols-4 md:gap-5">{STEPS.map(([title, description], index) => <div key={title} className="relative text-center md:px-3"><div className="bg-brand-blue text-white relative z-10 mx-auto flex size-12 items-center justify-center rounded-full text-sm font-bold shadow-lg shadow-blue-200">0{index + 1}</div><h3 className="text-ink mt-5 font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p>{index < STEPS.length - 1 && <span aria-hidden="true" className="bg-brand-blue/25 absolute top-6 left-[calc(50%+32px)] hidden h-px w-[calc(100%-64px)] md:block" />}</div>)}</div></div></section>
+        {/* ── 3. Our Trading Services ── */}
+        <section id="services" className="section-y scroll-mt-20 bg-slate-50/50 border-b border-slate-200/70" aria-labelledby="services-heading">
+          <div className="container-page space-y-12">
+            <div className="max-w-2xl space-y-3">
+              <span className="bg-blue-50 text-blue-700 border border-blue-200/50 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+                Flexible Support
+              </span>
+              <h2 id="services-heading" className="text-slate-900 text-3xl sm:text-4xl font-extrabold tracking-tight">
+                Our Trading Capabilities
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Comprehensive trading solutions for commercial procurement, wholesale supply, and international market expansion.
+              </p>
+            </div>
 
-        <section className="section-y bg-white border-t border-slate-100" aria-labelledby="global-heading"><div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center"><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">One connected view</p><h2 id="global-heading" className="text-ink mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Connecting Businesses Beyond Borders</h2><p className="text-muted-foreground mt-5 max-w-md leading-relaxed">From a local requirement to an international opportunity, we help bring the right people, products and markets together.</p><div className="mt-7 flex flex-wrap gap-2">{["Suppliers", "Buyers", "Products", "Markets", "International Trade"].map((label) => <span key={label} className="border-brand-blue/15 bg-white text-brand-blue-dark inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold"><MapPin className="size-3.5" />{label}</span>)}</div></div><div className="relative min-h-[300px] overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-sm"><svg aria-hidden="true" viewBox="0 0 800 360" className="absolute inset-0 h-full w-full"><path d="M110 160 C270 35 460 50 680 175" fill="none" stroke="#2f75c9" strokeDasharray="8 10" strokeWidth="2" /><path d="M120 210 C300 310 520 280 700 125" fill="none" stroke="#d74b4b" strokeOpacity=".45" strokeWidth="2" /><path d="M220 100 C350 190 490 170 610 245" fill="none" stroke="#2f75c9" strokeOpacity=".5" strokeWidth="2" /></svg>{MAP_MARKERS.map(([label, left, top]) => <div key={label} className="absolute" style={{ left, top }}><span className="bg-brand-blue block size-3 rounded-full border-2 border-white shadow-md" /><span className="text-brand-blue-dark mt-1 block -translate-x-1/4 text-xs font-bold">{label}</span></div>)}<div className="absolute right-5 bottom-5 rounded-xl bg-white/90 px-3 py-2 text-xs font-bold text-brand-blue-dark shadow-sm"><Users className="mr-1 inline size-3.5" />Connected trade network</div></div></div></section>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {SERVICES.map(([title, description, Icon]) => (
+                <article
+                  key={title as string}
+                  className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs hover:border-blue-300 hover:shadow-soft transition-all duration-300"
+                >
+                  <span className="bg-blue-50 text-blue-600 inline-flex size-11 items-center justify-center rounded-2xl shadow-2xs">
+                    <Icon className="size-5.5" />
+                  </span>
+                  <h3 className="text-slate-900 mt-5 text-base font-bold">{title as string}</h3>
+                  <p className="text-slate-600 mt-2 text-xs sm:text-sm leading-relaxed">{description as string}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <section className="section-y bg-brand-blue-light"><div className="container-page flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center"><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Let&apos;s find the right path</p><h2 className="text-ink mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Looking for a Product, Supplier or Buyer?</h2><p className="text-muted-foreground mt-4 max-w-2xl text-lg">Tell us what you need and our team will help you explore the right trading solution.</p></div><Button size="xl" onClick={() => setIsFormOpen(true)}>Start Trading Request <ArrowRight data-icon="inline-end" /></Button></div></section>
+        {/* ── 4. How It Works ── */}
+        <section className="section-y bg-white border-b border-slate-200/70" aria-labelledby="process-heading">
+          <div className="container-page space-y-12">
+            <div className="mx-auto max-w-2xl text-center space-y-3">
+              <span className="bg-blue-50 text-blue-700 border border-blue-200/50 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+                A Clear Path Forward
+              </span>
+              <h2 id="process-heading" className="text-slate-900 text-3xl sm:text-4xl font-extrabold tracking-tight">
+                How Trading Execution Works
+              </h2>
+            </div>
+
+            <div className="relative grid gap-8 md:grid-cols-4 md:gap-6">
+              {STEPS.map(([title, description], index) => (
+                <div key={title} className="relative text-center md:px-3">
+                  <div className="bg-blue-600 text-white relative z-10 mx-auto flex size-12 items-center justify-center rounded-2xl text-sm font-bold shadow-md shadow-blue-200">
+                    0{index + 1}
+                  </div>
+                  <h3 className="text-slate-900 mt-5 font-bold text-base">{title}</h3>
+                  <p className="text-slate-600 mt-2 text-xs sm:text-sm leading-relaxed">{description}</p>
+                  {index < STEPS.length - 1 && (
+                    <span aria-hidden="true" className="bg-slate-200 absolute top-6 left-[calc(50%+28px)] hidden h-px w-[calc(100%-56px)] md:block" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 5. Connected Trade Network ── */}
+        <section className="section-y bg-slate-50/50 border-b border-slate-200/70" aria-labelledby="global-heading">
+          <div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+            <div className="space-y-4">
+              <span className="bg-blue-50 text-blue-700 border border-blue-200/50 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+                One Connected Network
+              </span>
+              <h2 id="global-heading" className="text-slate-900 text-3xl sm:text-4xl font-extrabold tracking-tight">
+                Connecting Businesses Beyond Borders
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                From a local supplier match to a complex cross-border procurement agreement, we bring verified stakeholders and markets together.
+              </p>
+              <div className="pt-2 flex flex-wrap gap-2">
+                {["Suppliers", "Buyers", "Products", "Markets", "International Trade"].map((label) => (
+                  <span key={label} className="border border-slate-200 bg-white text-slate-700 shadow-2xs inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold">
+                    <MapPin className="size-3.5 text-blue-600" />
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative min-h-[320px] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-6 shadow-soft">
+              <svg aria-hidden="true" viewBox="0 0 800 360" className="absolute inset-0 h-full w-full">
+                <path d="M110 160 C270 35 460 50 680 175" fill="none" stroke="#2563eb" strokeDasharray="8 10" strokeWidth="2" />
+                <path d="M120 210 C300 310 520 280 700 125" fill="none" stroke="#4f46e5" strokeOpacity=".35" strokeWidth="2" />
+                <path d="M220 100 C350 190 490 170 610 245" fill="none" stroke="#2563eb" strokeOpacity=".4" strokeWidth="2" />
+              </svg>
+              {MAP_MARKERS.map(([label, left, top]) => (
+                <div key={label} className="absolute" style={{ left, top }}>
+                  <span className="bg-blue-600 block size-3 rounded-full border-2 border-white shadow-md" />
+                  <span className="text-slate-800 mt-1 block -translate-x-1/4 text-xs font-bold">{label}</span>
+                </div>
+              ))}
+              <div className="absolute right-5 bottom-5 rounded-2xl bg-white/95 px-4 py-2.5 text-xs font-bold text-slate-800 shadow-md border border-slate-100 backdrop-blur-sm">
+                <Users className="mr-1.5 inline size-4 text-blue-600" />
+                Connected Global Trade Desk
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 6. Bottom CTA Card ── */}
+        <section className="section-y bg-white">
+          <div className="container-page">
+            <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-soft">
+              <div className="grid items-center gap-8 lg:grid-cols-12">
+                <div className="space-y-4 lg:col-span-8">
+                  <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                    Start Trading
+                  </span>
+                  <h2 className="text-slate-900 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                    Looking for a Product, Supplier or Buyer?
+                  </h2>
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
+                    Share your requirements with our trade specialists and let us coordinate the ideal sourcing, negotiation, and delivery solution.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row lg:flex-col lg:items-end justify-center gap-3 lg:col-span-4">
+                  <Button
+                    size="xl"
+                    onClick={() => setIsFormOpen(true)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-sm gap-2 w-full sm:w-auto"
+                  >
+                    <span>Start Trading Request</span>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <TradingRequestModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </>

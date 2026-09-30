@@ -5,6 +5,7 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   Check,
+  CheckCircle2,
   ChevronDown,
   CircleHelp,
   FileUp,
@@ -15,6 +16,7 @@ import {
   PackageCheck,
   Search,
   ShieldCheck,
+  Sparkles,
   Truck,
   Users,
   X,
@@ -671,7 +673,7 @@ function CountryPicker({
               className="pl-9"
             />
           </div>
-          <div className="mt-2 max-h-52 overflow-y-auto">
+          <div className="scrollbar-hidden mt-2 max-h-52 overflow-y-auto">
             {matches.map((country) => (
               <button
                 type="button"
@@ -745,7 +747,7 @@ function DetailModal({
         >
           <X aria-hidden="true" className="size-5" />
         </button>
-        <div className="grid min-h-0 overflow-y-auto lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="scrollbar-hidden grid min-h-0 overflow-y-auto lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative min-h-64 sm:min-h-72 lg:min-h-full">
             <Image
               src={detail.image.src}
@@ -966,7 +968,7 @@ function RequestModal({
             </div>
             <form
               onSubmit={submit}
-              className="overflow-y-auto px-6 py-6 sm:px-8"
+              className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8"
               noValidate
             >
               <div className="bg-brand-blue-light grid grid-cols-2 gap-1 rounded-xl p-1">
@@ -1136,38 +1138,63 @@ function FeatureCard({
   onAction: () => void;
 }) {
   return (
-    <article className="group shadow-soft hover:shadow-lift overflow-hidden rounded-3xl border bg-white transition-shadow">
-      <div className="relative aspect-[1.8] overflow-hidden">
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-        />
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onAction}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onAction();
+        }
+      }}
+      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/50 hover:shadow-lift cursor-pointer select-none"
+    >
+      <div>
+        {/* Full-width Card Image */}
+        <div className="relative aspect-[1.8] overflow-hidden">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </div>
+
+        {/* Card Content Area */}
+        <div className="p-7 sm:p-8 pb-0">
+          <h3 className="text-ink text-2xl font-extrabold group-hover:text-brand-blue transition-colors">
+            {title}
+          </h3>
+          <p className="text-muted-foreground mt-3 leading-relaxed">
+            {description}
+          </p>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+            {points.map((point) => (
+              <li
+                key={point}
+                className="text-ink flex items-center gap-2 text-sm font-semibold"
+              >
+                <span className="size-1.5 rounded-full bg-blue-600 shrink-0" aria-hidden="true" />
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className="p-7 sm:p-8">
-        <h3 className="text-ink text-2xl font-extrabold">{title}</h3>
-        <p className="text-muted-foreground mt-3 leading-relaxed">{description}</p>
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-          {points.map((point) => (
-            <li
-              key={point}
-              className="text-ink flex items-center gap-2 text-sm font-semibold"
-            >
-              <Check aria-hidden="true" className="text-brand-blue size-4 shrink-0" />
-              {point}
-            </li>
-          ))}
-        </ul>
-        <Button size="lg" onClick={onAction} className="mt-7">
+
+      {/* Action CTA Area */}
+      <div className="p-7 sm:p-8 pt-6">
+        <span className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-blue px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all group-hover:bg-brand-blue-dark group-hover:shadow-lg">
           {action}
-          <ArrowRight data-icon="inline-end" aria-hidden="true" />
-        </Button>
+          <ArrowRight data-icon="inline-end" aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />
+        </span>
       </div>
-    </article>
+    </div>
   );
 }
+
 
 export function ImportExportLanding({
   breadcrumbs = [{ label: "Import & Export" }],
@@ -1189,77 +1216,65 @@ export function ImportExportLanding({
   return (
     <>
       <main>
-        <section className="relative isolate overflow-hidden border-b border-border/40 bg-white/75 backdrop-blur-md">
-          {/* Liquid Ambient Glow Mesh */}
+        {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
+        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+          {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-28 left-1/2 -z-10 -translate-x-1/2 h-[450px] w-full max-w-6xl rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            style={{
+              backgroundImage: 'url("/images/services/import-export-hero.jpg")',
+              backgroundPosition: "right center",
+            }}
           />
 
-          <div className="container-page grid items-center gap-12 py-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14 lg:py-24">
-            <div className="max-w-2xl">
-              {/* Pulsing Live Badge Pill */}
-              <div>
-                <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 backdrop-blur-md shadow-xs">
-                  <span className="relative flex size-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
-                    <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
-                  </span>
-                  <span className="text-xs font-bold tracking-widest text-brand-blue uppercase">
-                    Cross-Border Trade & Logistics
-                  </span>
-                </div>
+          {/* Soft-White Gradient on Left Area */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+          />
+
+          {/* Bottom Gradient Fade */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+          />
+
+          {/* Left-Aligned Content Container */}
+          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
+            <div className="max-w-2xl space-y-6">
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+                <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+                <span>International Freight &amp; Customs Clearance</span>
               </div>
 
-              <h1 className="text-ink mt-5 text-5xl leading-[0.98] font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-                Connecting Products With Global Markets
+              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+                Seamless Logistics.<br />
+                For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Global Freight, Customs</span><br />
+                <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Cross-Border Trade.</span>
               </h1>
-              <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed sm:text-xl">
-                We help businesses source products internationally and coordinate import
-                and export requirements through practical, end-to-end trade support.
+
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+                Miracle International delivers dependable cross-border shipping, freight forwarding, verified customs clearance, and compliant international supply chain solutions connecting worldwide markets.
               </p>
-              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row">
-                <Button size="xl" variant="accent" onClick={() => openForm()} className="shadow-lg shadow-brand-red/20">
-                  Submit Import / Export Request
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+
+              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                <Button
+                  size="xl"
+                  onClick={() => openForm()}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  <span>Inquiry Now</span>
                 </Button>
                 <Button
                   size="xl"
-                  variant="secondary-hero"
+                  variant="outline"
+                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
                   asChild
                 >
-                  <a href="#services">Explore Our Services</a>
+                  <a href="#services">Explore Capabilities</a>
                 </Button>
               </div>
-            </div>
-            <div className="shadow-2xl relative aspect-[4/3] overflow-hidden rounded-[2rem] border-8 border-white bg-slate-100 lg:-mr-24 lg:aspect-[16/9] lg:translate-x-6 xl:-mr-40">
-              <Image
-                src={SITE_MEDIA.portAerial.src}
-                alt=""
-                fill
-                aria-hidden="true"
-                sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 56vw, 100vw"
-                className="scale-105 object-cover opacity-60 blur-md"
-              />
-              <Image
-                src={SITE_MEDIA.portAerial.src}
-                alt={SITE_MEDIA.portAerial.alt}
-                fill
-                priority
-                sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 56vw, 100vw"
-                className="scale-[1.02] object-cover brightness-[0.98] saturate-[0.9] transition-transform duration-700 hover:scale-105"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white/65 via-white/15 to-transparent"
-              />
-              <span className="text-ink shadow-soft absolute top-5 left-5 rounded-full bg-white/95 px-4 py-2 text-xs font-bold backdrop-blur-sm">
-                <Globe2
-                  aria-hidden="true"
-                  className="text-brand-blue mr-2 inline size-4"
-                />
-                International trade activity
-              </span>
             </div>
           </div>
         </section>
@@ -1310,7 +1325,19 @@ export function ImportExportLanding({
               {CATEGORIES.map(([title, description, Icon, image]) => (
                 <article
                   key={title}
-                  className="group shadow-soft flex min-h-96 flex-col overflow-hidden rounded-2xl border bg-white"
+                  onClick={() =>
+                    setSelectedDetail(getCategoryDetail(title, description, image))
+                  }
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedDetail(getCategoryDetail(title, description, image));
+                    }
+                  }}
+                  aria-label={`Request information for ${title}`}
+                  className="group shadow-soft flex min-h-96 flex-col overflow-hidden rounded-2xl border bg-white cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft"
                 >
                   <div className="relative aspect-[1.45] overflow-hidden">
                     <Image
@@ -1326,26 +1353,23 @@ export function ImportExportLanding({
                       className="absolute bottom-4 left-4 size-6 text-white"
                     />
                   </div>
-                  <div className="p-5">
-                    <h3 className="text-ink font-bold">{title}</h3>
+                  <div className="p-5 flex flex-col flex-1">
+                    <h3 className="text-ink font-bold group-hover:text-brand-blue transition-colors">{title}</h3>
                     <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
                       {description}
                     </p>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setSelectedDetail(getCategoryDetail(title, description, image))
-                      }
-                      className="text-brand-blue mt-4 inline-flex items-center gap-2 text-sm font-bold"
-                    >
-                      View Details
-                      <ArrowRight aria-hidden="true" className="size-4" />
-                    </button>
+                    <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-brand-blue inline-flex items-center gap-1.5 text-sm font-bold group-hover:underline">
+                        Request Now
+                        <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                      <span className="text-xs font-semibold text-muted-foreground">Trade Category</span>
+                    </div>
                   </div>
                 </article>
               ))}
             </div>
-            <div className="bg-brand-blue-light mt-8 grid overflow-hidden rounded-3xl lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="mt-8 grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft lg:grid-cols-[0.9fr_1.1fr]">
               <div className="relative min-h-64 lg:min-h-80">
                 <Image
                   src={SITE_MEDIA.portAerial.src}
@@ -1353,10 +1377,6 @@ export function ImportExportLanding({
                   fill
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   className="object-cover"
-                />
-                <div
-                  aria-hidden="true"
-                  className="to-brand-blue-light/60 lg:to-brand-blue-light absolute inset-0 bg-gradient-to-r from-transparent lg:from-transparent"
                 />
               </div>
               <div className="flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-12">
@@ -1410,40 +1430,8 @@ export function ImportExportLanding({
             </div>
           </div>
         </section>
-
-
-        <section className="section-y bg-surface">
-          <div className="container-page">
-            <div className="shadow-soft relative overflow-hidden rounded-3xl bg-white px-6 py-12 sm:px-12 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:py-16">
-              <div>
-                <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
-                  Ready to move forward?
-                </p>
-                <h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                  Ready to Explore Global Trade?
-                </h2>
-                <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed">
-                  Tell us what you need to import or export, and let our team help you
-                  explore the right trade solution.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Button size="xl" onClick={() => openForm()}>
-                    Submit Your Requirement
-                    <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                  </Button>
-                  <Button size="xl" variant="outline" asChild>
-                    <a href="/contact">Contact Us</a>
-                  </Button>
-                </div>
-              </div>
-              <div
-                aria-hidden="true"
-                className="border-brand-blue-light absolute -right-12 -bottom-20 hidden size-64 rounded-full border-[24px] lg:block"
-              />
-            </div>
-          </div>
-        </section>
       </main>
+
       <DetailModal
         detail={selectedDetail}
         onClose={() => setSelectedDetail(null)}

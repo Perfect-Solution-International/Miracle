@@ -241,7 +241,6 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
           <>
             <div className="border-b border-slate-100 bg-gradient-to-r from-slate-50 via-white to-brand-blue-light/20 px-6 py-5 pr-14 sm:px-8">
               <span className="bg-brand-blue-light text-brand-blue inline-flex items-center gap-1.5 rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="size-3" />
                 Miracle Services Desk
               </span>
               <h2 id="services-request-title" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">
@@ -252,7 +251,7 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
               </p>
             </div>
 
-            <form onSubmit={submit} className="overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
+            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="text-ink block text-xs font-bold mb-1.5">
@@ -405,76 +404,64 @@ export function ServicesOverview() {
   return (
     <>
       <main>
-        {/* ── 1. Hero Section ── */}
-        <section
-          className="relative isolate overflow-hidden border-b border-slate-200/80 pt-8 pb-14 lg:pt-14 lg:pb-20 md:!bg-fixed"
-          style={{
-            backgroundImage: 'url("/images/services/services-hero-bg.png")',
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
+        {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
+        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+          {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10"
+            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
             style={{
-              background: "linear-gradient(to right, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.05) 100%)",
+              backgroundImage: 'url("/images/services/services-main-hero.jpg")',
+              backgroundPosition: "right center",
             }}
           />
 
-          <div className="container-page grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
-            <div className="max-w-2xl space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-600 opacity-75" />
-                  <span className="relative inline-flex size-2 rounded-full bg-emerald-600" />
-                </span>
-                Cross-Border Services &amp; Trade Operations
+          {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+          />
+
+          {/* Bottom Gradient Fade to Next Section */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+          />
+
+          {/* Left-Aligned Content Container */}
+          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
+            <div className="max-w-2xl space-y-6">
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+                <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+                <span>Integrated Global Business &amp; Travel Solutions</span>
               </div>
 
-              <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                Global Trade, Franchise &amp;{" "}
-                <span className="bg-gradient-to-r from-emerald-600 via-brand-blue to-navy bg-clip-text text-transparent">
-                  Business Services.
-                </span>
+              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+                One Trusted Partner<br />
+                For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Business, Tech</span><br />
+                <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Global Growth.</span>
               </h1>
 
-              <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-                Explore our integrated trade, investment, franchise, and marketing capabilities designed to help businesses connect with international markets and professional solutions.
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+                Miracle International empowers enterprises and individuals through strategic <strong className="font-semibold text-slate-900">Business Solutions</strong>, cutting-edge <strong className="font-semibold text-slate-900">IT &amp; Software Engineering</strong>, premium <strong className="font-semibold text-slate-900">Travel &amp; Tourism</strong>, and reliable <strong className="font-semibold text-slate-900">Cross-Border Trade</strong>.
               </p>
 
-              <div className="flex flex-col gap-3 sm:flex-row pt-2">
+              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
                 <Button
                   size="xl"
-                  variant="accent"
-                  className="shadow-lift"
-                  onClick={() => document.getElementById("main-services")?.scrollIntoView({ behavior: "smooth" })}
-                >
-                  Explore All Services
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </Button>
-                <Button
-                  size="xl"
-                  variant="secondary-hero"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
                   onClick={openForm}
                 >
-                  Tell Us What You Need
+                  <span>Inquiry Now</span>
                 </Button>
-              </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-2xl">
-              <div className="relative aspect-[4/3]">
-                <div className="absolute bottom-5 left-5 right-5 text-navy">
-                  <span className="bg-white/80 rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase inline-flex items-center gap-1.5 text-navy mb-2">
-                    <Globe2 className="size-3.5" />
-                    Strategic Commerce
-                  </span>
-                  <p className="text-base sm:text-lg font-bold">
-                    Coordinated Cross-Border Business Solutions
-                  </p>
-                </div>
+                <Button
+                  size="xl"
+                  variant="outline"
+                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
+                  onClick={() => document.getElementById("main-services")?.scrollIntoView({ behavior: "smooth" })}
+                >
+                  Explore Core Pillars
+                </Button>
               </div>
             </div>
           </div>
@@ -496,10 +483,11 @@ export function ServicesOverview() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {SERVICES.map(({ number, title, summary, points, href, label, icon: Icon, image, featured }) => (
-                <article
+              {SERVICES.map(({ number, title, summary, points, href, label, icon: Icon, image }) => (
+                <Link
                   key={title}
-                  className="group flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/40 hover:shadow-lift"
+                  href={href}
+                  className="group flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/50 hover:shadow-lift cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
                 >
                   <div>
                     <div className="relative aspect-[16/10] overflow-hidden">
@@ -518,7 +506,7 @@ export function ServicesOverview() {
 
                     <div className="p-6 space-y-4">
                       <div className="flex items-center gap-3">
-                        <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-2xl shadow-xs transition-transform group-hover:scale-110">
+                        <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-2xl shadow-xs transition-transform duration-300 group-hover:scale-110">
                           <Icon className="size-5.5" />
                         </span>
                         <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors">
@@ -542,15 +530,14 @@ export function ServicesOverview() {
                   </div>
 
                   <div className="p-6 pt-0 border-t border-slate-100 mt-4">
-                    <Link
-                      href={href}
-                      className="text-brand-blue inline-flex items-center gap-1.5 text-xs font-bold pt-4 transition-all group-hover:gap-2.5"
+                    <span
+                      className="text-brand-blue inline-flex items-center gap-1.5 text-xs font-bold pt-4 transition-all group-hover:gap-2.5 group-hover:text-brand-blue-dark"
                     >
                       {label}
-                      <ArrowRight className="size-3.5" />
-                    </Link>
+                      <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </span>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           </div>
@@ -622,12 +609,12 @@ export function ServicesOverview() {
         </section>
 
         {/* ── 5. Action Card ── */}
-        <section className="section-y bg-gradient-to-b from-slate-50 to-white">
+        <section className="section-y bg-white">
           <div className="container-page">
-            <div className="relative isolate overflow-hidden rounded-3xl border border-brand-blue/20 bg-gradient-to-r from-brand-blue-light/40 via-white to-brand-blue-light/30 p-8 sm:p-12 shadow-lift">
+            <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-soft">
               <div className="grid items-center gap-8 lg:grid-cols-12">
                 <div className="space-y-4 lg:col-span-8">
-                  <span className="bg-brand-blue text-white rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                  <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
                     Start a Conversation
                   </span>
                   <h2 className="text-ink text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
@@ -639,11 +626,9 @@ export function ServicesOverview() {
                 </div>
                 <div className="flex flex-col sm:flex-row lg:flex-col lg:items-end justify-center gap-3 lg:col-span-4">
                   <Button size="xl" onClick={openForm} className="shadow-lift gap-2 w-full sm:w-auto">
-                    <Sparkles className="size-4.5" />
                     Tell Us What You Need
-                    <ArrowRight data-icon="inline-end" aria-hidden="true" />
                   </Button>
-                  <Button size="lg" variant="outline" asChild className="bg-white/90">
+                  <Button size="lg" variant="outline" asChild>
                     <Link href={ROUTES.public.contact}>Talk to Our Advisors</Link>
                   </Button>
                 </div>
