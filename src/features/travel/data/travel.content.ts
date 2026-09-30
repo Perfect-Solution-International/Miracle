@@ -37,16 +37,9 @@ export const TRAVEL_SERVICE_CARDS: readonly TravelServiceCard[] = [
     href: ROUTES.public.outboundTravel,
   },
   {
-    icon: SlidersHorizontal,
-    title: "Customized Trips",
-    description:
-      "Bespoke travel itineraries tailored to your dates, interests, preferred destinations, and style.",
-    cta: "Plan Your Trip",
-    href: `${ROUTES.public.travelTourism}#customize-trip`,
-  },
-  {
     icon: Plane,
     title: "Flight Tickets",
+
     description:
       "Competitive domestic and international airfares with route options and airline booking support.",
     cta: "Book Flights",

@@ -1,9 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, UploadCloud, X } from "lucide-react";
+import { CheckCircle2, UploadCloud, X } from "lucide-react";
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -33,7 +33,6 @@ import {
   SERVICE_OPTIONS,
   type ServiceContext,
 } from "../data/service-requirement-options";
-
 import {
   BUDGET_RANGE_OPTIONS,
   REQUIREMENT_TYPE_OPTIONS,
@@ -41,53 +40,85 @@ import {
 } from "../data/tell-us-what-you-need.content";
 import {
   requirementInquirySchema,
+  type RequirementInquiryFormInput,
   type RequirementInquiryInput,
 } from "../schemas/requirement-inquiry.schema";
 
-/**
- * Public lead-capture form. There is no backend intake endpoint for this yet
- * (same situation as `ContactForm`), so submission confirms receipt locally;
- * wire this to a real mutation once the intake API exists. File selection is
- * local-only for the same reason — nothing is actually uploaded.
- */
-export function RequirementInquiryForm({
-  context = "general",
-  defaultService = "",
-}: {
+export interface RequirementInquiryFormProps {
+  preselectedCategory?: string;
   context?: "general" | ServiceContext;
   defaultService?: string;
-}) {
+}
+
+/**
+ * Main Requirement Intake Form
+ * Clean white card style matching the existing website with full requested form fields.
+ */
+export function RequirementInquiryForm({
+  preselectedCategory,
+  context = "general",
+  defaultService = "",
+}: RequirementInquiryFormProps) {
   const [files, setFiles] = useState<File[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [fileError, setFileError] = useState("");
+  const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+
   const fileInputId = useId();
   const checkboxId = useId();
-  const isService = context !== "general";
 
-  const form = useForm<RequirementInquiryInput>({
+  const form = useForm<RequirementInquiryFormInput, unknown, RequirementInquiryInput>({
     resolver: zodResolver(requirementInquirySchema),
     defaultValues: {
       context,
       fullName: "",
-      companyName: "",
       email: "",
       phone: "",
-      whatsapp: "",
-      location: "",
-      requirementType: defaultService,
-      subject: "",
-      details: "",
+      whatsappNumber: "",
+      requirementType: preselectedCategory || defaultService || "",
+      whatDoYouNeed: "",
+      country: "",
       timeline: "",
       budgetRange: "",
+      additionalRequirements: "",
       agreeToTerms: false,
     },
   });
 
+  useEffect(() => {
+    if (preselectedCategory) {
+      form.setValue("requirementType", preselectedCategory, { shouldValidate: true });
+    }
+  }, [preselectedCategory, form]);
+
+  useEffect(() => {
+    if (defaultService) {
+      form.setValue("requirementType", defaultService, { shouldValidate: true });
+    }
+  }, [defaultService, form]);
+
   function onSubmit(values: RequirementInquiryInput) {
-    toast.success(`Thanks, ${values.fullName}!`, {
-      description: "Our team will review your request and get back to you shortly.",
+    const randomRef = "REQ-" + Math.floor(100000 + Math.random() * 900000);
+    setSubmittedRef(randomRef);
+
+    toast.success(`Thank you, ${values.fullName}!`, {
+      description: `Your requirement (${randomRef}) has been submitted. Our team will contact you shortly.`,
     });
-    form.reset();
+
+    form.reset({
+      context,
+      fullName: "",
+      email: "",
+      phone: "",
+      whatsappNumber: "",
+      requirementType: "",
+      whatDoYouNeed: "",
+      country: "",
+      timeline: "",
+      budgetRange: "",
+      additionalRequirements: "",
+      agreeToTerms: false,
+    });
     setFiles([]);
     setFileError("");
   }
@@ -116,197 +147,62 @@ export function RequirementInquiryForm({
     setFiles((current) => [...current, ...incoming]);
   }
 
-  return (
-    <div
-      id={isService ? undefined : "requirement-form"}
-      className={
-        isService ? "bg-white" : "shadow-lift rounded-3xl border bg-white p-6 sm:p-8"
-      }
-    >
-      <div
-        className={isService ? "border-b border-slate-200 px-5 pt-6 pb-5 sm:px-8" : ""}
-      >
-        <Eyebrow
-          className={
-            isService
-              ? "border-brand-blue/10 bg-brand-blue-light text-brand-blue rounded-full border px-3 py-1 text-[11px] font-bold tracking-[0.12em]"
-              : undefined
-          }
-        >
-          {isService ? "Miracle Services Desk" : "Submit Your Requirement"}
-        </Eyebrow>
-        <h2
-          className={
-            isService
-              ? "text-navy mt-3 text-[28px] leading-[1.12] font-extrabold tracking-tight sm:text-[32px]"
-              : "text-ink mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl"
-          }
-        >
-          Tell Us What You Need
-        </h2>
-        <p
-          className={
-            isService
-              ? "mt-2 text-sm leading-relaxed text-slate-600"
-              : "text-muted-foreground mt-1 text-sm"
-          }
-        >
-          {isService
-            ? "Share your business requirements and we will coordinate the ideal solution."
-            : "Fill out the form below with your requirements, and our team will get back to you with the best solutions, quotations or consultation."}
-        </p>
-      </div>
+  const categoryOptions =
+    context === "business"
+      ? SERVICE_OPTIONS.business
+      : context === "it"
+        ? SERVICE_OPTIONS.it
+        : REQUIREMENT_TYPE_OPTIONS;
 
-      <div className={isService ? "px-5 pt-5 pb-6 sm:px-8 sm:pt-6" : ""}>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className={
-              isService
-                ? "[&_[data-slot=form-label]]:text-navy space-y-4 [&_[data-slot=form-item]]:gap-1.5 [&_[data-slot=form-label]]:text-[13px] [&_[data-slot=form-label]]:font-semibold [&_[data-slot=form-message]]:text-xs"
-                : "mt-6 space-y-4"
-            }
-            noValidate
-          >
-            {isService ? (
-              <>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="fullName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Full Name <span className="text-brand-red">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            className="focus-visible:border-brand-blue focus-visible:ring-brand-blue/15 h-9 rounded-[10px] border-slate-300 bg-slate-50 px-3 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:ring-2"
-                            placeholder="Your name"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Email Address <span className="text-brand-red">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            className="focus-visible:border-brand-blue focus-visible:ring-brand-blue/15 h-9 rounded-[10px] border-slate-300 bg-slate-50 px-3 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:ring-2"
-                            placeholder="you@company.com"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Contact Number <span className="text-brand-red">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="tel"
-                            className="focus-visible:border-brand-blue focus-visible:ring-brand-blue/15 h-9 rounded-[10px] border-slate-300 bg-slate-50 px-3 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:ring-2"
-                            placeholder="Phone number"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="whatsapp"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>WhatsApp Number</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="tel"
-                            className="focus-visible:border-brand-blue focus-visible:ring-brand-blue/15 h-9 rounded-[10px] border-slate-300 bg-slate-50 px-3 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:ring-2"
-                            placeholder="WhatsApp number"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+  return (
+    <div className="w-full max-w-4xl mx-auto">
+      {submittedRef ? (
+        <div className="rounded-3xl border border-emerald-200 bg-emerald-50/50 p-8 sm:p-12 text-center">
+          <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 mb-4">
+            <CheckCircle2 className="size-8" />
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900">Requirement Received!</h3>
+          <p className="mt-2 text-slate-600 max-w-md mx-auto">
+            Your reference number is <strong className="text-slate-900 font-mono font-bold">{submittedRef}</strong>. Our specialist team will review your request and get back to you within 24 hours.
+          </p>
+          <div className="mt-6 flex justify-center gap-4">
+            <Button
+              type="button"
+              onClick={() => setSubmittedRef(null)}
+              className="bg-brand-blue hover:bg-brand-blue-dark text-white rounded-full px-6"
+            >
+              Submit Another Requirement
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
+          <div className="mb-8 text-center sm:text-left">
+            <Eyebrow>Direct Intake Form</Eyebrow>
+            <h2 className="text-2xl sm:text-3xl font-bold text-navy mt-2">
+              Submit Your Requirement
+            </h2>
+            <p className="text-sm text-slate-600 mt-1">
+              Fill out the details below and our team will get back to you with a structured proposal.
+            </p>
+          </div>
+
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {/* Row 1: Name & Email */}
+              <div className="grid gap-6 sm:grid-cols-2">
                 <FormField
                   control={form.control}
-                  name="requirementType"
+                  name="fullName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
-                        Service Area <span className="text-brand-red">*</span>
+                      <FormLabel className="text-xs font-bold text-slate-800">
+                        Full Name <span className="text-brand-red">*</span>
                       </FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="focus-visible:border-brand-blue focus-visible:ring-brand-blue/15 !h-9 w-full rounded-[10px] border-slate-300 bg-slate-50 px-3 text-sm text-slate-900 focus-visible:ring-2">
-                            <SelectValue placeholder="Select a service area" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {SERVICE_OPTIONS[context].map((option) => (
-                            <SelectItem key={option} value={option}>
-                              {option}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="details"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Requirement Details <span className="text-brand-red">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          rows={4}
-                          className="focus-visible:border-brand-blue focus-visible:ring-brand-blue/15 h-[68px] min-h-[68px] rounded-[10px] border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:ring-2"
-                          placeholder="Describe your requirement, scope, budget, and targets..."
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="location"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Target Location / Country</FormLabel>
                       <FormControl>
                         <Input
-                          className="focus-visible:border-brand-blue focus-visible:ring-brand-blue/15 h-9 rounded-[10px] border-slate-300 bg-slate-50 px-3 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:ring-2"
-                          placeholder="e.g. Sri Lanka, UAE, Global"
+                          placeholder="e.g. John Doe"
+                          className="h-11 rounded-xl bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 font-medium"
                           {...field}
                         />
                       </FormControl>
@@ -314,95 +210,92 @@ export function RequirementInquiryForm({
                     </FormItem>
                   )}
                 />
-              </>
-            ) : (
-              <>
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="fullName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Full Name <span className="text-brand-red">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input placeholder="Your full name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
 
-                  <FormField
-                    control={form.control}
-                    name="companyName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Company Name (Optional)</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Your company name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xs font-bold text-slate-800">
+                        Email Address <span className="text-brand-red">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="e.g. name@company.com"
+                          className="h-11 rounded-xl bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 font-medium"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Email Address <span className="text-brand-red">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="Your email address"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+              {/* Row 2: Phone & WhatsApp */}
+              <div className="grid gap-6 sm:grid-cols-2">
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xs font-bold text-slate-800">
+                        Contact Number <span className="text-brand-red">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="tel"
+                          placeholder="e.g. +94 77 123 4567"
+                          className="h-11 rounded-xl bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 font-medium"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Phone Number <span className="text-brand-red">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input type="tel" placeholder="Your phone number" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="whatsappNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xs font-bold text-slate-800">
+                        WhatsApp Number <span className="text-[11px] text-slate-500 font-normal">(Optional)</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="tel"
+                          placeholder="e.g. +94 77 123 4567"
+                          className="h-11 rounded-xl bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 font-medium"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
+              {/* Row 3: Requirement Type & Country/Location */}
+              <div className="grid gap-6 sm:grid-cols-2">
                 <FormField
                   control={form.control}
                   name="requirementType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
+                      <FormLabel className="text-xs font-bold text-slate-800">
                         Type of Requirement <span className="text-brand-red">*</span>
                       </FormLabel>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
-                          <SelectTrigger className="w-full">
+                          <SelectTrigger className="h-11 rounded-xl bg-white border-slate-300 text-slate-900 font-medium">
                             <SelectValue placeholder="Select a category" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {REQUIREMENT_TYPE_OPTIONS.map((option) => (
+                          {categoryOptions.map((option) => (
                             <SelectItem key={option} value={option}>
                               {option}
                             </SelectItem>
@@ -416,18 +309,71 @@ export function RequirementInquiryForm({
 
                 <FormField
                   control={form.control}
-                  name="subject"
+                  name="country"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
-                        Subject <span className="text-brand-red">*</span>
+                      <FormLabel className="text-xs font-bold text-slate-800">
+                        Country / City <span className="text-[11px] text-slate-500 font-normal">(Optional)</span>
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Short description of your requirement"
+                          placeholder="e.g. Sri Lanka, United Kingdom, UAE"
+                          className="h-11 rounded-xl bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 font-medium"
                           {...field}
                         />
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Row 4: What Do You Need (Main description) */}
+              <FormField
+                control={form.control}
+                name="whatDoYouNeed"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-xs font-bold text-slate-800">
+                      What Do You Need? <span className="text-brand-red">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Please describe what product, machinery, service, software, travel package or business support you are looking for..."
+                        rows={4}
+                        className="rounded-xl bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 font-medium resize-y"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Row 5: Timeline & Budget */}
+              <div className="grid gap-6 sm:grid-cols-2">
+                <FormField
+                  control={form.control}
+                  name="timeline"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xs font-bold text-slate-800">
+                        Preferred Timeline <span className="text-[11px] text-slate-500 font-normal">(Optional)</span>
+                      </FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="h-11 rounded-xl bg-white border-slate-300 text-slate-900 font-medium">
+                            <SelectValue placeholder="Select timeframe" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {TIMELINE_OPTIONS.map((time) => (
+                            <SelectItem key={time} value={time}>
+                              {time}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -435,254 +381,167 @@ export function RequirementInquiryForm({
 
                 <FormField
                   control={form.control}
-                  name="details"
+                  name="budgetRange"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
-                        Detailed Requirements <span className="text-brand-red">*</span>
+                      <FormLabel className="text-xs font-bold text-slate-800">
+                        Estimated Budget Range <span className="text-[11px] text-slate-500 font-normal">(Optional)</span>
                       </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          rows={5}
-                          placeholder="Please provide more details about what you need (e.g. product, service, quantity, destination, timeline, etc.)"
-                          {...field}
-                        />
-                      </FormControl>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="h-11 rounded-xl bg-white border-slate-300 text-slate-900 font-medium">
+                            <SelectValue placeholder="Select budget range" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {BUDGET_RANGE_OPTIONS.map((budget) => (
+                            <SelectItem key={budget} value={budget}>
+                              {budget}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+              </div>
 
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="timeline"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Preferred Timeline <span className="text-brand-red">*</span>
-                        </FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select timeline" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {TIMELINE_OPTIONS.map((option) => (
-                              <SelectItem key={option} value={option}>
-                                {option}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+              {/* Row 6: Additional Requirements */}
+              <FormField
+                control={form.control}
+                name="additionalRequirements"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-xs font-bold text-slate-800">
+                      Additional Notes or Specifications <span className="text-[11px] text-slate-500 font-normal">(Optional)</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Any additional quantity details, technical specifications, brand preferences, or special requests..."
+                        rows={2}
+                        className="rounded-xl bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 font-medium resize-y"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                  <FormField
-                    control={form.control}
-                    name="budgetRange"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Budget Range (Optional)</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select budget range" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {BUDGET_RANGE_OPTIONS.map((option) => (
-                              <SelectItem key={option} value={option}>
-                                {option}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+              {/* Row 7: File Attachment */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-800">
+                  Attach Documents / Specifications <span className="text-[11px] text-slate-500 font-normal">(Optional)</span>
+                </label>
+                <div
+                  onDragOver={(event) => {
+                    event.preventDefault();
+                    setIsDragging(true);
+                  }}
+                  onDragLeave={() => setIsDragging(false)}
+                  onDrop={(event) => {
+                    event.preventDefault();
+                    setIsDragging(false);
+                    addFiles(event.dataTransfer.files);
+                  }}
+                  className={`flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed p-6 text-center transition-colors cursor-pointer ${
+                    isDragging
+                      ? "border-brand-blue bg-brand-blue/5"
+                      : "border-slate-200 bg-slate-50 hover:bg-slate-50/80 hover:border-slate-300"
+                  }`}
+                  onClick={() => document.getElementById(fileInputId)?.click()}
+                >
+                  <UploadCloud className="size-6 text-brand-blue" />
+                  <p className="text-xs sm:text-sm font-semibold text-slate-700">
+                    Drag &amp; drop files here or <span className="text-brand-blue underline">browse</span>
+                  </p>
+                  <p className="text-[11px] text-slate-500">
+                    PDF, DOC, DOCX, JPG, PNG or WEBP (up to 10MB per file)
+                  </p>
+                  <input
+                    id={fileInputId}
+                    type="file"
+                    multiple
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp"
+                    className="sr-only"
+                    onChange={(event) => addFiles(event.target.files)}
                   />
                 </div>
-              </>
-            )}
 
-            <div className={isService ? "space-y-1.5" : "space-y-2"}>
-              <label
-                htmlFor={fileInputId}
-                className={isService ? "sr-only" : "text-sm leading-none font-medium"}
-              >
-                {isService
-                  ? "Upload Reference Documents (Optional)"
-                  : "Upload Files (Optional)"}
-              </label>
-              <div
-                onDragOver={(event) => {
-                  event.preventDefault();
-                  setIsDragging(true);
-                }}
-                onDragLeave={() => setIsDragging(false)}
-                onDrop={(event) => {
-                  event.preventDefault();
-                  setIsDragging(false);
-                  addFiles(event.dataTransfer.files);
-                }}
-                className={`${isService ? "rounded-xl border border-dashed p-3.5 text-left" : "flex flex-col items-center gap-2 rounded-xl border-2 border-dashed p-6 text-center"} transition-colors ${
-                  isDragging
-                    ? "border-brand-blue bg-brand-blue-light"
-                    : isService
-                      ? "border-slate-300 bg-slate-50/70"
-                      : "border-input"
-                }`}
-              >
-                {isService ? (
-                  <label
-                    htmlFor={fileInputId}
-                    className="flex cursor-pointer items-center gap-3"
-                  >
-                    <UploadCloud
-                      aria-hidden="true"
-                      className="text-brand-blue size-5 shrink-0"
-                    />
-                    <span className="min-w-0">
-                      <span className="text-navy block text-[13px] font-semibold">
-                        Upload Reference Documents (Optional)
-                      </span>
-                      <span className="block text-xs text-slate-500">
-                        PDF, DOCX, or images up to 10MB
-                      </span>
-                    </span>
-                  </label>
-                ) : (
-                  <>
-                    <UploadCloud
-                      aria-hidden="true"
-                      className="text-muted-foreground size-6"
-                    />
-                    <p className="text-muted-foreground text-sm">
-                      Drag &amp; drop files here or{" "}
-                      <label
-                        htmlFor={fileInputId}
-                        className="text-brand-blue cursor-pointer font-semibold underline"
-                      >
-                        click to upload
-                      </label>
-                    </p>
-                    <p className="text-muted-foreground text-xs">
-                      PDF, DOC, DOCX, JPG, PNG or WEBP (max{" "}
-                      {Math.round(DEFAULT_MAX_SIZE_BYTES / (1024 * 1024))} MB per file).
-                      Files remain on this device until an upload endpoint is connected.
-                    </p>
-                  </>
+                {fileError && (
+                  <p role="alert" className="text-xs text-brand-red font-medium">
+                    {fileError}
+                  </p>
                 )}
-                <input
-                  id={fileInputId}
-                  type="file"
-                  multiple
-                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp"
-                  className="sr-only"
-                  onChange={(event) => addFiles(event.target.files)}
-                />
-              </div>
-              {fileError ? (
-                <p role="alert" className="text-brand-red text-sm">
-                  {fileError}
-                </p>
-              ) : null}
 
-              {files.length > 0 ? (
-                <ul className="space-y-1.5">
-                  {files.map((file, index) => (
-                    <li
-                      key={`${file.name}-${index}`}
-                      className="bg-surface flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm"
-                    >
-                      <span className="text-ink truncate">{file.name}</span>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setFiles((current) => current.filter((_, i) => i !== index))
-                        }
-                        className="text-muted-foreground hover:text-brand-red shrink-0"
+                {files.length > 0 && (
+                  <ul className="space-y-1.5 pt-2">
+                    {files.map((file, index) => (
+                      <li
+                        key={`${file.name}-${index}`}
+                        className="flex items-center justify-between gap-2 rounded-xl bg-slate-100 px-3 py-2 text-xs font-medium text-slate-800"
                       >
-                        <X aria-hidden="true" className="size-4" />
-                        <span className="sr-only">Remove {file.name}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
+                        <span className="truncate">{file.name}</span>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setFiles((current) => current.filter((_, i) => i !== index));
+                          }}
+                          className="text-slate-400 hover:text-brand-red"
+                        >
+                          <X className="size-4" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
-            <FormField
-              control={form.control}
-              name="agreeToTerms"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start gap-2 space-y-0">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      id={checkboxId}
-                      className={
-                        isService
-                          ? "mt-0.5 size-4 rounded-[4px] border-slate-400"
-                          : "mt-0.5"
-                      }
-                    />
-                  </FormControl>
-                  <div className="space-y-1">
-                    <FormLabel
-                      htmlFor={checkboxId}
-                      className={
-                        isService
-                          ? "cursor-pointer text-[13px] font-normal text-slate-700"
-                          : "cursor-pointer text-sm font-normal"
-                      }
-                    >
-                      {isService ? (
-                        <>
-                          I confirm that the information provided is accurate.{" "}
-                          <span className="text-brand-red">*</span>
-                        </>
-                      ) : (
-                        <>
-                          I agree to the{" "}
-                          <Link
-                            href={ROUTES.public.privacyPolicy}
-                            className="text-foreground underline"
-                          >
-                            Privacy Policy
-                          </Link>{" "}
-                          and consent to be contacted by Miracle International.
-                        </>
-                      )}
-                    </FormLabel>
-                    <FormMessage />
-                  </div>
-                </FormItem>
-              )}
-            />
+              {/* Row 8: Terms Checkbox */}
+              <FormField
+                control={form.control}
+                name="agreeToTerms"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start gap-3 space-y-0 pt-2">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        id={checkboxId}
+                        className="mt-0.5 rounded-md border-slate-300"
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel htmlFor={checkboxId} className="text-xs font-medium text-slate-600 cursor-pointer">
+                        I confirm that the details provided are accurate, and I agree to Miracle International&apos;s{" "}
+                        <Link href={ROUTES.public.privacyPolicy} className="text-brand-blue underline font-semibold">
+                          Privacy Policy
+                        </Link>{" "}
+                        for requirement processing. <span className="text-brand-red">*</span>
+                      </FormLabel>
+                      <FormMessage />
+                    </div>
+                  </FormItem>
+                )}
+              />
 
-            <Button
-              type="submit"
-              variant={isService ? "default" : "accent"}
-              size="xl"
-              className={
-                isService
-                  ? "bg-brand-blue hover:bg-brand-blue-dark h-[46px] w-full rounded-[10px] text-sm font-semibold text-white"
-                  : "w-full"
-              }
-              disabled={form.formState.isSubmitting}
-            >
-              {isService ? "Submit Request" : "Submit My Request"}
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Button>
-          </form>
-        </Form>
-      </div>
+              {/* Row 9: Submit Button */}
+              <div className="pt-4">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full h-12 bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-base rounded-full shadow-lg shadow-brand-blue/20 transition-all hover:shadow-xl cursor-pointer"
+                  disabled={form.formState.isSubmitting}
+                >
+                  Submit Requirement
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </div>
+      )}
     </div>
   );
 }

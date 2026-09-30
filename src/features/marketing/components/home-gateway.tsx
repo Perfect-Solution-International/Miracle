@@ -283,7 +283,6 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
           <>
             <div className="border-b border-slate-100 bg-gradient-to-r from-slate-50 via-white to-brand-blue-light/20 px-6 py-5 pr-14 sm:px-8">
               <span className="bg-brand-blue-light text-brand-blue inline-flex items-center gap-1.5 rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="size-3" />
                 Miracle International Desk
               </span>
               <h2
@@ -505,9 +504,7 @@ export function HomeGateway() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
                 <Button size="xl" onClick={openForm} className="shadow-lift gap-2 bg-brand-blue hover:bg-brand-blue-dark">
-                  <Sparkles className="size-4.5" />
-                  Tell Us What You Need
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                  Inquiry Now
                 </Button>
                 <Button
                   size="xl"
@@ -778,8 +775,8 @@ export function HomeGateway() {
                 { title: "Visa Assistance", desc: "Tourist & ETA documentation", href: ROUTES.public.visaServices },
                 { title: "Flight Tickets", desc: "Competitive airline ticketing", href: ROUTES.public.flightTickets },
                 { title: "Work Visa Support", desc: "Corporate & work permit advice", href: ROUTES.public.workVisa },
-                { title: "Customized Itineraries", desc: "Tailored to your dates & party", href: `${ROUTES.public.travelTourism}#customize-trip` },
               ].map((sub) => (
+
                 <Link
                   key={sub.title}
                   href={sub.href}
@@ -1034,9 +1031,7 @@ export function HomeGateway() {
               </div>
               <div className="flex flex-col sm:flex-row lg:flex-col lg:items-end justify-center gap-3 lg:col-span-4">
                 <Button size="xl" onClick={openForm} className="shadow-lift gap-2 w-full sm:w-auto">
-                  <Sparkles className="size-4.5" />
                   Submit Your Requirement
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <Link href={ROUTES.public.contact}>Talk to an Advisor</Link>

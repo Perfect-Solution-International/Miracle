@@ -34,9 +34,9 @@ export function HeaderActions() {
       >
         <Link href={ROUTES.public.tellUsWhatYouNeed}>
           Tell Us What You Need
-          <ArrowRight data-icon="inline-end" aria-hidden="true" />
         </Link>
       </Button>
+
     </div>
   );
 }

@@ -86,19 +86,6 @@ export function TravelSubpageHero({
               {description}
             </p>
 
-            {/* Highlights Strip */}
-            <div className="mt-1 flex flex-wrap items-center gap-3">
-              {travelHighlights.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-1.5 rounded-full border border-brand-blue/15 bg-white/90 px-3.5 py-1 text-xs font-bold text-navy shadow-xs backdrop-blur-sm"
-                >
-                  <CheckCircle2 className="size-3.5 text-brand-blue" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-
             {/* Action buttons */}
             <div className="mt-4 flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-3 sm:gap-4">
               <Button
@@ -109,7 +96,6 @@ export function TravelSubpageHero({
               >
                 <Link href={primary.href}>
                   {primary.label}
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Link>
               </Button>
 

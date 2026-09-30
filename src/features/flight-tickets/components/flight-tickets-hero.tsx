@@ -64,24 +64,6 @@ export function FlightTicketsHero() {
               Tell us your travel requirements and let our expert ticketing coordinators find the best routes, premier airlines, and competitive fares for your journey.
             </p>
 
-            {/* Flight Highlights Badges Strip */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-1">
-              {[
-                { icon: Plane, title: "Multi-Airline Route Comparison" },
-                { icon: Coins, title: "Competitive Airfare Rates" },
-                { icon: Headphones, title: "24/7 Ticketing Support" },
-                { icon: ShieldCheck, title: "Flexible Rebooking Care" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md transition-all hover:scale-105"
-                >
-                  <item.icon className="size-3.5 text-brand-blue" />
-                  <span>{item.title}</span>
-                </div>
-              ))}
-            </div>
-
             {/* Action Buttons */}
             <div className="mt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
               <Button
@@ -91,7 +73,6 @@ export function FlightTicketsHero() {
               >
                 <a href="#flight-request-form">
                   Request Flight Tickets
-                  <ArrowRight className="size-4 ml-2" />
                 </a>
               </Button>
               <Button

@@ -574,36 +574,22 @@ export function PublicTravelInquiryModal({
                     </h3>
                   </div>
 
-                  {/* If general inquiry without pre-selected package, allow typing package or destination */}
+                  {/* If general inquiry without pre-selected package, allow typing destination */}
                   {!defaultPackage ? (
-                    <>
-                      <div className="space-y-1.5">
-                        <Label htmlFor="inq-pkg" className="text-xs font-bold text-slate-800">
-                          Package / Tour Topic
-                        </Label>
-                        <Input
-                          id="inq-pkg"
-                          placeholder="e.g. Custom Holiday or Specific Attraction"
-                          value={formData.selectedPackage}
-                          onChange={(e) => updateField("selectedPackage", e.target.value)}
-                          className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl"
-                        />
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <Label htmlFor="inq-dest" className="text-xs font-bold text-slate-800">
-                          Destination(s) / Preferred Places
-                        </Label>
-                        <Input
-                          id="inq-dest"
-                          placeholder="e.g. Sigiriya, Kandy, Nuwara Eliya, Galle"
-                          value={formData.destination}
-                          onChange={(e) => updateField("destination", e.target.value)}
-                          className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl"
-                        />
-                      </div>
-                    </>
+                    <div className="space-y-1.5">
+                      <Label htmlFor="inq-dest" className="text-xs font-bold text-slate-800">
+                        Destination(s) / Preferred Places
+                      </Label>
+                      <Input
+                        id="inq-dest"
+                        placeholder="e.g. Sigiriya, Kandy, Nuwara Eliya, Galle"
+                        value={formData.destination}
+                        onChange={(e) => updateField("destination", e.target.value)}
+                        className="h-11 text-xs sm:text-sm bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 font-medium rounded-xl"
+                      />
+                    </div>
                   ) : null}
+
 
                   <div className="space-y-1.5">
                     <Label htmlFor="inq-date" className="text-xs font-bold text-slate-800">

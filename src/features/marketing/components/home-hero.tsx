@@ -1,11 +1,8 @@
-import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
-
-import { HERO_INDICATORS } from "../data/home.content";
 
 /**
  * Homepage Hero: Wide cinematic background photography showcasing global trade & enterprise
@@ -69,7 +66,6 @@ export function HomeHero() {
               <Button asChild size="xl" className="hover:bg-brand-blue-dark shadow-md">
                 <Link href={ROUTES.public.tellUsWhatYouNeed}>
                   Tell Us What You Need
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Link>
               </Button>
               <Button
@@ -81,20 +77,6 @@ export function HomeHero() {
                 <Link href={ROUTES.public.services}>Explore Our Services</Link>
               </Button>
             </div>
-
-            <ul className="flex flex-wrap gap-x-4 gap-y-2.5 pt-2">
-              {HERO_INDICATORS.map((indicator) => (
-                <li
-                  key={indicator}
-                  className="text-ink flex items-center gap-2 text-xs sm:text-sm font-bold bg-white/80 backdrop-blur-xs px-3.5 py-1.5 rounded-full border border-slate-200/80 shadow-2xs"
-                >
-                  <span className="bg-brand-blue-light text-brand-blue inline-flex size-4.5 items-center justify-center rounded-full">
-                    <Check aria-hidden="true" className="size-3" strokeWidth={3} />
-                  </span>
-                  {indicator}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>

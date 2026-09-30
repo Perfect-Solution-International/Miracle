@@ -5,6 +5,7 @@ import {
   ArrowRight,
   BarChart3,
   Check,
+  CheckCircle2,
   Compass,
   Crosshair,
   FileText,
@@ -141,62 +142,63 @@ const outcomes = [
 export default function Page() {
   return (
     <main>
-      <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
+      {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
+      <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+        {/* Full-Bleed Panoramic Hero Image */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
+          className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+          style={{
+            backgroundImage: 'url("/images/services/marketing-hero.jpg")',
+            backgroundPosition: "right center",
+          }}
         />
 
-        <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+        {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+        />
+
+        {/* Bottom Gradient Fade to Next Section */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+        />
+
+        {/* Left-Aligned Content Container */}
+        <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
           <div className="max-w-2xl space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
-              <span className="bg-brand-red size-1.5 rounded-full" />
-              MARKETING &amp; ADVERTISING
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+              <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+              <span>Targeted Digital Marketing &amp; Brand Growth</span>
             </div>
 
-            <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-              Build Visibility.{" "}
-              <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
-                Reach Global Audiences.
-              </span>
+            <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+              High-Performance Marketing.<br />
+              For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Brand Authority</span><br />
+              <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Global Reach.</span>
             </h1>
 
-            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-              Targeted digital campaigns, brand positioning, and strategic promotion designed to connect your business with high-value customers.
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+              Targeted digital campaigns, multi-channel marketing architecture, brand positioning, and strategic customer acquisition designed to scale your business across local and international markets.
             </p>
 
-            <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-              <Button asChild variant="accent" size="xl" className="shadow-lift">
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5">
                 <Link href={ROUTES.public.contact}>
-                  Discuss Your Needs{" "}
-                  <ArrowRight aria-hidden="true" data-icon="inline-end" />
+                  <span>Inquiry Now</span>
                 </Link>
               </Button>
-              <Button asChild variant="secondary-hero" size="xl">
+              <Button asChild size="xl" variant="outline" className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs">
                 <Link href={ROUTES.public.services}>Explore Capabilities</Link>
               </Button>
-            </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-xl">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
-              <div className="relative h-full w-full overflow-hidden rounded-2xl">
-                <Image
-                  src="/images/services/marketing-hero.jpg"
-                  alt="Creative marketing directors reviewing multi-channel campaigns on digital displays"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 45vw, 100vw"
-                  className="object-cover transition-transform duration-700 hover:scale-105"
-                />
-                <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <Section aria-labelledby="overview-heading" className="bg-white">
+      <Section aria-labelledby="overview-heading" className="bg-white border-t border-slate-100">
         <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-20">
           <div>
             <SectionHeading
@@ -236,7 +238,7 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section aria-labelledby="capabilities-heading" className="bg-brand-blue-light/35">
+      <Section aria-labelledby="capabilities-heading" className="bg-white border-t border-slate-100">
         <SectionHeading
           eyebrow="What We Do"
           title="Marketing & Advertising Capabilities"
@@ -269,7 +271,7 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section aria-labelledby="strategy-heading" className="bg-white">
+      <Section aria-labelledby="strategy-heading" className="bg-white border-t border-slate-100">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="shadow-soft relative aspect-[1.2] overflow-hidden rounded-3xl lg:aspect-[0.98]">
             <Image
@@ -310,7 +312,7 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section className="bg-white" aria-labelledby="channels-heading">
+      <Section aria-labelledby="channels-heading" className="bg-white border-t border-slate-100">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <SectionHeading
             eyebrow="Channels"
@@ -322,15 +324,15 @@ export default function Page() {
             {channels.map(([title, description, Icon]) => (
               <div
                 key={title}
-                className="flex items-start gap-4 rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-sm"
+                className="flex items-start gap-4 rounded-xl border border-slate-200/80 bg-white p-4 shadow-xs"
               >
                 <Icon
                   aria-hidden="true"
                   className="text-brand-blue mt-0.5 size-5 shrink-0"
                 />
                 <div>
-                  <h3 className="text-ink font-semibold">{title}</h3>
-                  <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+                  <h3 className="font-semibold text-ink">{title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                     {description}
                   </p>
                 </div>
@@ -340,7 +342,7 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section aria-labelledby="process-heading" className="bg-white">
+      <Section aria-labelledby="process-heading" className="bg-white border-t border-slate-100">
         <SectionHeading
           eyebrow="Our Process"
           title="A Clear Path From Strategy to Execution"
@@ -369,7 +371,7 @@ export default function Page() {
         </ol>
       </Section>
 
-      <Section aria-labelledby="value-heading" className="bg-brand-blue-light/30">
+      <Section aria-labelledby="value-heading" className="bg-white border-t border-slate-100">
         <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:gap-20">
           <div className="shadow-soft relative aspect-[1.05] overflow-hidden rounded-3xl">
             <Image
@@ -406,7 +408,7 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section aria-labelledby="outcomes-heading" className="bg-white">
+      <Section aria-labelledby="outcomes-heading" className="bg-white border-t border-slate-100">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <SectionHeading
             eyebrow="Service Outcomes"
@@ -429,13 +431,33 @@ export default function Page() {
         </div>
       </Section>
 
-      <CtaBanner
-        eyebrow="Let’s Talk"
-        title="Ready to Strengthen Your Market Presence?"
-        description="Tell us what you want to achieve and our team will help shape the right marketing approach."
-        primary={{ label: "Discuss Your Marketing Needs", href: ROUTES.public.contact }}
-        secondary={{ label: "Contact Us", href: ROUTES.public.contact }}
-      />
+      {/* Clean White Bottom CTA */}
+      <section className="bg-white py-14 sm:py-20 border-t border-slate-100">
+        <div className="container-page">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-slate-50/80 p-8 sm:p-12 lg:p-16 text-center shadow-xs max-w-5xl mx-auto">
+            <Eyebrow>Let’s Talk</Eyebrow>
+            <h2 className="text-ink mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+              Ready to Strengthen Your Market Presence?
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed font-medium">
+              Tell us what you want to achieve and our team will help shape the right marketing approach.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-7 shadow-md">
+                <Link href={ROUTES.public.contact}>
+                  Discuss Your Marketing Needs
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="outline" className="bg-white hover:bg-slate-50 text-slate-800 font-semibold border-slate-300 rounded-xl px-7 shadow-2xs">
+                <Link href={ROUTES.public.contact}>
+                  Contact Us
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
+
