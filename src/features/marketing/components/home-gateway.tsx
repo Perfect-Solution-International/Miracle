@@ -1016,10 +1016,10 @@ export function HomeGateway() {
       ───────────────────────────────────────────────────────────── */}
       <section className="section-y bg-white border-t border-slate-100">
         <div className="container-page">
-          <div className="relative isolate overflow-hidden rounded-3xl border border-brand-blue/20 bg-gradient-to-r from-brand-blue-light/40 via-white to-brand-blue-light/30 p-8 sm:p-12 shadow-lift">
+          <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-soft">
             <div className="grid items-center gap-8 lg:grid-cols-12">
               <div className="space-y-4 lg:col-span-8">
-                <span className="bg-brand-blue text-white rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
                   Direct Requirement Desk
                 </span>
                 <h2 className="text-ink text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">

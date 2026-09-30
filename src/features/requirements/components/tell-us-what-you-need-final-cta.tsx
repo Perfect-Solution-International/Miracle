@@ -8,7 +8,7 @@ export function TellUsWhatYouNeedFinalCta() {
   return (
     <section className="bg-white py-16 sm:py-20">
       <div className="container-page">
-        <div className="max-w-4xl mx-auto rounded-3xl border border-slate-200/80 bg-slate-50/80 p-8 sm:p-12 lg:p-14 text-center shadow-xs">
+        <div className="max-w-4xl mx-auto rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 lg:p-14 text-center shadow-soft">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy tracking-tight">
             Have Something Specific in Mind?
           </h2>

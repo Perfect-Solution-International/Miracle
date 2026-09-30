@@ -411,10 +411,10 @@ export function TradingLanding({
         {/* ── 6. Bottom CTA Card ── */}
         <section className="section-y bg-white">
           <div className="container-page">
-            <div className="relative isolate overflow-hidden rounded-3xl border border-blue-200/80 bg-gradient-to-r from-blue-50 via-white to-blue-50/60 p-8 sm:p-12 shadow-sm">
+            <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-soft">
               <div className="grid items-center gap-8 lg:grid-cols-12">
                 <div className="space-y-4 lg:col-span-8">
-                  <span className="bg-blue-600 text-white rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                  <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
                     Start Trading
                   </span>
                   <h2 className="text-slate-900 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">

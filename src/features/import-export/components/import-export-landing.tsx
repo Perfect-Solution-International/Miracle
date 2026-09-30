@@ -1369,7 +1369,7 @@ export function ImportExportLanding({
                 </article>
               ))}
             </div>
-            <div className="bg-brand-blue-light mt-8 grid overflow-hidden rounded-3xl lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="mt-8 grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft lg:grid-cols-[0.9fr_1.1fr]">
               <div className="relative min-h-64 lg:min-h-80">
                 <Image
                   src={SITE_MEDIA.portAerial.src}
@@ -1377,10 +1377,6 @@ export function ImportExportLanding({
                   fill
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   className="object-cover"
-                />
-                <div
-                  aria-hidden="true"
-                  className="to-brand-blue-light/60 lg:to-brand-blue-light absolute inset-0 bg-gradient-to-r from-transparent lg:from-transparent"
                 />
               </div>
               <div className="flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-12">
