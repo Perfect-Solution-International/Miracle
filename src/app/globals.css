@@ -4,6 +4,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Reserve the scrollbar space on public pages, including while Radix locks body scroll. */
+html:has(body > .theme-light) {
+  scrollbar-gutter: stable;
+}
+
+/* Radix keeps the public page scroll-locked; the stable gutter already reserves its width. */
+body:has(> .theme-light)[data-scroll-locked],
+body:has(> .theme-light).with-scroll-bars-hidden {
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

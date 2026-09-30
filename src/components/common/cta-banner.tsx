@@ -13,7 +13,7 @@ export interface CtaAction {
 }
 
 /**
- * Modern Liquid Enterprise CTA Banner shared across public pages.
+ * Shared white CTA banner for public pages.
  */
 export function CtaBanner({
   eyebrow,
@@ -43,53 +43,27 @@ export function CtaBanner({
     <section
       aria-labelledby={headingId}
       className={cn(
-        "py-14 md:py-20",
-        light ? "bg-white" : "bg-gradient-to-b from-slate-50/80 to-white",
+        "bg-white py-14 md:py-20",
         className,
       )}
     >
       <div className="container-page">
-        <div
-          className={cn(
-            "relative isolate overflow-hidden rounded-3xl border px-6 py-12 sm:px-12 md:py-16 lg:px-16",
-            light
-              ? "border-slate-200 bg-white shadow-soft"
-              : "border-brand-blue/30 from-navy via-brand-blue-dark to-navy bg-gradient-to-br shadow-2xl",
-          )}
-        >
-          {/* Liquid Light Mesh Glow */}
-          <div
-            aria-hidden="true"
-            className="bg-brand-blue/30 pointer-events-none absolute -top-24 -right-24 -z-10 size-96 rounded-full blur-3xl"
-          />
-          <div
-            aria-hidden="true"
-            className="bg-brand-red/20 pointer-events-none absolute -bottom-24 -left-24 -z-10 size-96 rounded-full blur-3xl"
-          />
-
+        <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white px-6 py-12 shadow-soft sm:px-12 md:py-16 lg:px-16">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl space-y-4">
               {eyebrow ? (
-                <span
-                  className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase backdrop-blur-md",
-                    light ? "bg-brand-blue-light text-brand-blue" : "bg-white/10 text-brand-blue-muted",
-                  )}
-                >
+                <span className="bg-brand-blue-light text-brand-blue inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase">
                   <Sparkles className="size-3.5" />
                   {eyebrow}
                 </span>
               ) : null}
               <h2
                 id={headingId}
-                className={cn(
-                  "text-2xl leading-tight font-extrabold tracking-tight sm:text-3xl lg:text-4xl",
-                  light ? "text-ink" : "text-white",
-                )}
+                className="text-ink text-2xl leading-tight font-extrabold tracking-tight sm:text-3xl lg:text-4xl"
               >
                 {title}
               </h2>
-              <p className={cn("text-sm leading-relaxed sm:text-base", light ? "text-muted-foreground" : "text-white/80")}>
+              <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
                 {description}
               </p>
             </div>

@@ -434,7 +434,7 @@ export default function Page() {
       {/* Clean White Bottom CTA */}
       <section className="bg-white py-14 sm:py-20 border-t border-slate-100">
         <div className="container-page">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-slate-50/80 p-8 sm:p-12 lg:p-16 text-center shadow-xs max-w-5xl mx-auto">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 lg:p-16 text-center shadow-soft max-w-5xl mx-auto">
             <Eyebrow>Let’s Talk</Eyebrow>
             <h2 className="text-ink mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
               Ready to Strengthen Your Market Presence?

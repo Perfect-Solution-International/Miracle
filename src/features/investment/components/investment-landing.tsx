@@ -504,7 +504,7 @@ export function InvestmentLanding({
 
         <section className="section-y bg-white border-t border-slate-100">
           <div className="container-page">
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-slate-50/80 px-6 py-14 shadow-xs sm:px-12 lg:py-16 text-center max-w-4xl mx-auto">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white px-6 py-14 shadow-soft sm:px-12 lg:py-16 text-center max-w-4xl mx-auto">
               <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
                 Your next possibility
               </p>
