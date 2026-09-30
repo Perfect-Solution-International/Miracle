@@ -141,79 +141,60 @@ const outcomes = [
 export default function Page() {
   return (
     <main>
-      <Section
-        spacing="none"
-        className="bg-white border-b border-slate-100"
-        containerClassName="grid gap-10 py-12 md:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:gap-16 lg:py-20"
-      >
-        <div className="max-w-2xl">
-          <div>
-            <Eyebrow>Marketing &amp; Advertising</Eyebrow>
-            <h1 className="text-ink mt-5 max-w-xl text-4xl leading-[1.1] font-bold tracking-tight sm:text-5xl lg:text-[3.5rem]">
-              Marketing &amp; Advertising Solutions
+      <section className="relative isolate overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_50%,#eff6ff_100%)] py-14 lg:py-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 right-0 -z-10 h-96 w-96 rounded-full bg-brand-blue/5 blur-3xl"
+        />
+
+        <div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+          <div className="max-w-2xl space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-light/50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-blue">
+              <span className="bg-brand-red size-1.5 rounded-full" />
+              MARKETING &amp; ADVERTISING
+            </div>
+
+            <h1 className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              Build Visibility.{" "}
+              <span className="bg-gradient-to-r from-navy via-brand-blue to-emerald-600 bg-clip-text text-transparent">
+                Reach Global Audiences.
+              </span>
             </h1>
-            <p className="text-ink mt-6 max-w-xl text-lg leading-relaxed font-medium">
-              Build visibility, strengthen your brand, and connect with the right audience
-              through coordinated marketing and advertising support.
+
+            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
+              Targeted digital campaigns, brand positioning, and strategic promotion designed to connect your business with high-value customers.
             </p>
-            <p className="text-muted-foreground mt-4 max-w-xl leading-relaxed">
-              From shaping your message to planning campaigns and digital promotion, we
-              help bring your marketing activity into focus around your business goals.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button asChild variant="accent" size="xl">
+
+            <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+              <Button asChild variant="accent" size="xl" className="shadow-lift">
                 <Link href={ROUTES.public.contact}>
-                  Discuss Your Marketing Needs{" "}
+                  Discuss Your Needs{" "}
                   <ArrowRight aria-hidden="true" data-icon="inline-end" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="xl">
-                <Link href={ROUTES.public.services}>Explore Services</Link>
+              <Button asChild variant="secondary-hero" size="xl">
+                <Link href={ROUTES.public.services}>Explore Capabilities</Link>
               </Button>
             </div>
           </div>
-        </div>
-        <div className="relative mx-auto w-full max-w-xl pb-9 pl-4 sm:pl-8 lg:pb-12">
-          <div
-            className="bg-brand-blue absolute top-4 left-0 h-[78%] w-[75%] rounded-[2rem]"
-            aria-hidden="true"
-          />
-          <div className="shadow-soft relative ml-3 aspect-[1.13] overflow-hidden rounded-[1.75rem] border-4 border-white sm:ml-5">
-            <Image
-              src={SITE_MEDIA.marketingAdvertising.hero.src}
-              alt={SITE_MEDIA.marketingAdvertising.hero.alt}
-              fill
-              priority
-              sizes="(min-width: 1280px) 540px, (min-width: 1024px) 45vw, 90vw"
-              className="object-cover"
-            />
-            <div
-              className="from-navy/35 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
-              aria-hidden="true"
-            />
-          </div>
-          <div className="shadow-soft absolute right-0 bottom-0 w-[45%] overflow-hidden rounded-2xl border-4 border-white bg-white sm:w-[42%]">
-            <div className="relative aspect-[1.35]">
-              <Image
-                src={SITE_MEDIA.marketingAdvertising.heroInset.src}
-                alt={SITE_MEDIA.marketingAdvertising.heroInset.alt}
-                fill
-                sizes="(min-width: 1024px) 220px, 40vw"
-                className="object-cover"
-              />
+
+          <div className="relative mx-auto w-full max-w-xl">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-2.5 shadow-xl shadow-slate-200/60 transition-transform duration-500 hover:scale-[1.01]">
+              <div className="relative h-full w-full overflow-hidden rounded-2xl">
+                <Image
+                  src="/images/services/marketing-hero.jpg"
+                  alt="Creative marketing directors reviewing multi-channel campaigns on digital displays"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="from-navy/30 via-transparent to-transparent absolute inset-0 bg-gradient-to-t" />
+              </div>
             </div>
           </div>
-          <div className="shadow-soft absolute bottom-9 left-0 max-w-[70%] rounded-xl border border-white/80 bg-white px-4 py-3 sm:bottom-12 sm:px-5">
-            <span
-              className="bg-brand-red mr-2 inline-block size-2 rounded-full"
-              aria-hidden="true"
-            />
-            <span className="text-brand-blue-dark text-xs font-bold tracking-wide sm:text-sm">
-              Strategy · Creative · Reach
-            </span>
-          </div>
         </div>
-      </Section>
+      </section>
 
       <Section aria-labelledby="overview-heading" className="bg-white">
         <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-20">

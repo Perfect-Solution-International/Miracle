@@ -1,64 +1,13 @@
 "use client";
 
-import { Calendar, Compass, MapPin, Search, Users } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { ArrowRight, Compass, Globe } from "lucide-react";
+import Link from "next/link";
 
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ROUTES } from "@/config/routes";
 
-const TRAVEL_TYPES = [
-  { value: "all", label: "All Travel Types" },
-  { value: "leisure", label: "Leisure & Holiday" },
-  { value: "adventure", label: "Adventure & Wildlife" },
-  { value: "cultural", label: "Cultural & Heritage" },
-  { value: "luxury", label: "Luxury & Honeymoon" },
-  { value: "family", label: "Family Tours" },
-  { value: "business", label: "Business & MICE" },
-] as const;
-
-const TRAVELER_OPTIONS = [
-  { value: "1", label: "1 Traveler" },
-  { value: "2", label: "2 Travelers" },
-  { value: "3-5", label: "3–5 Travelers" },
-  { value: "6+", label: "6+ Travelers (Group)" },
-] as const;
-
-const DATE_OPTIONS = [
-  { value: "anytime", label: "Flexible Dates" },
-  { value: "this-month", label: "This Month" },
-  { value: "next-month", label: "Next Month" },
-  { value: "season-upcoming", label: "Upcoming Season" },
-] as const;
-
-export function TravelHero({
-  onExplore,
-}: {
-  onExplore?: (query: { destination: string; travelType: string }) => void;
-}) {
-  const [destination, setDestination] = useState("");
-  const [travelType, setTravelType] = useState("all");
-  const [travelDate, setTravelDate] = useState("anytime");
-  const [travelers, setTravelers] = useState("2");
-
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-    if (onExplore) {
-      onExplore({ destination, travelType });
-    } else {
-      const packagesSection = document.getElementById("packages");
-      if (packagesSection) {
-        packagesSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }
-
+export function TravelHero() {
   return (
     <section
       aria-labelledby="travel-hero-heading"
@@ -112,109 +61,35 @@ export function TravelHero({
           support with Miracle International.
         </p>
 
-        {/* Professional Search / Explore Bar */}
-        <form
-          onSubmit={handleSubmit}
-          className="shadow-lift mt-4 w-full max-w-5xl rounded-3xl border border-slate-200/90 bg-white p-2.5 sm:rounded-full sm:p-2 sm:pl-6"
-        >
-          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:divide-x sm:divide-slate-200">
-            {/* 1. Destination */}
-            <div className="flex flex-1 items-center gap-3 px-3 py-2 text-left sm:py-1">
-              <MapPin aria-hidden="true" className="text-brand-blue size-5 shrink-0" />
-              <div className="min-w-0 flex-1">
-                <span className="text-muted-foreground block text-[10px] font-extrabold tracking-wider uppercase">
-                  Destination
-                </span>
-                <input
-                  type="text"
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  placeholder="Where do you want to go?"
-                  className="text-ink w-full bg-transparent text-sm font-semibold placeholder:text-slate-400 focus:outline-none"
-                />
-              </div>
-            </div>
+        {/* Dedicated Inbound & Outbound Tour Buttons */}
+        <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
+          <Button
+            size="xl"
+            asChild
+            className="w-full sm:w-auto min-w-[210px] rounded-full bg-brand-blue hover:bg-brand-blue-dark text-white font-bold shadow-lift group text-base py-6 px-8 transition-all hover:scale-105"
+          >
+            <Link href={ROUTES.public.inboundTravel} className="flex items-center justify-center gap-2.5">
+              <Compass className="size-5 transition-transform group-hover:rotate-45" />
+              <span>Inbound Tours</span>
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Button>
 
-            {/* 2. Travel Type */}
-            <div className="flex flex-1 items-center gap-3 px-3 py-2 text-left sm:py-1">
-              <Compass aria-hidden="true" className="text-brand-blue size-5 shrink-0" />
-              <div className="min-w-0 flex-1">
-                <span className="text-muted-foreground block text-[10px] font-extrabold tracking-wider uppercase">
-                  Travel Type
-                </span>
-                <Select value={travelType} onValueChange={setTravelType}>
-                  <SelectTrigger className="text-ink h-7 border-0 p-0 text-sm font-semibold shadow-none focus:ring-0">
-                    <SelectValue placeholder="All Travel Types" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {TRAVEL_TYPES.map((type) => (
-                      <SelectItem key={type.value} value={type.value}>
-                        {type.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            {/* 3. Travel Date */}
-            <div className="flex flex-1 items-center gap-3 px-3 py-2 text-left sm:py-1">
-              <Calendar aria-hidden="true" className="text-brand-blue size-5 shrink-0" />
-              <div className="min-w-0 flex-1">
-                <span className="text-muted-foreground block text-[10px] font-extrabold tracking-wider uppercase">
-                  Travel Date
-                </span>
-                <Select value={travelDate} onValueChange={setTravelDate}>
-                  <SelectTrigger className="text-ink h-7 border-0 p-0 text-sm font-semibold shadow-none focus:ring-0">
-                    <SelectValue placeholder="Flexible Dates" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {DATE_OPTIONS.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            {/* 4. Number of Travelers */}
-            <div className="flex flex-1 items-center gap-3 px-3 py-2 text-left sm:py-1">
-              <Users aria-hidden="true" className="text-brand-blue size-5 shrink-0" />
-              <div className="min-w-0 flex-1">
-                <span className="text-muted-foreground block text-[10px] font-extrabold tracking-wider uppercase">
-                  Travelers
-                </span>
-                <Select value={travelers} onValueChange={setTravelers}>
-                  <SelectTrigger className="text-ink h-7 border-0 p-0 text-sm font-semibold shadow-none focus:ring-0">
-                    <SelectValue placeholder="2 Travelers" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {TRAVELER_OPTIONS.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            {/* 5. Primary Explore Button */}
-            <div className="pt-2 sm:p-1 sm:pt-1">
-              <Button
-                type="submit"
-                size="lg"
-                className="bg-brand-blue hover:bg-brand-blue-dark w-full rounded-2xl px-7 py-3 font-bold text-white shadow-md sm:w-auto sm:rounded-full"
-              >
-                <Search aria-hidden="true" className="size-4" />
-                Explore
-              </Button>
-            </div>
-          </div>
-        </form>
+          <Button
+            size="xl"
+            variant="outline"
+            asChild
+            className="w-full sm:w-auto min-w-[210px] rounded-full border-2 border-navy/20 bg-white/90 hover:bg-white text-navy font-bold shadow-soft hover:shadow-lift group text-base py-6 px-8 backdrop-blur-sm transition-all hover:scale-105"
+          >
+            <Link href={ROUTES.public.outboundTravel} className="flex items-center justify-center gap-2.5">
+              <Globe className="size-5 text-brand-blue transition-transform group-hover:scale-110" />
+              <span>Outbound Tours</span>
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
 }
+

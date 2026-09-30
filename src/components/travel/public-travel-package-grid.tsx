@@ -218,7 +218,7 @@ export function PublicTravelPackageGrid({
                   </div>
                 </Link>
 
-                {/* Send Inquiry – outside the Link to avoid nested <a> */}
+                {/* Inquiry Now – outside the Link to avoid nested <a> */}
                 <div className="px-5 pb-5 pt-0">
                   <Button
                     size="sm"
@@ -226,7 +226,7 @@ export function PublicTravelPackageGrid({
                     onClick={(e) => handleOpenInquiry(pkg, e)}
                   >
                     <Send className="size-3" />
-                    Send Inquiry
+                    Inquiry Now
                   </Button>
                 </div>
               </div>
