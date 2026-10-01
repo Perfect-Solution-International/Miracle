@@ -1,51 +1,53 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 
+import { ServiceRequirementDialog } from "./service-requirement-dialog";
+
 /**
- * Tell Us What You Need Hero: Wide panoramic background photography showcasing global trade,
- * international sourcing, and executive coordination on the right, with a clean natural-light surface
- * on the left hosting the headline, value proposition, and call-to-action buttons.
+ * Tell Us What You Need Hero
  */
 export function TellUsWhatYouNeedHero() {
   return (
     <section
       aria-labelledby="tell-us-heading"
-      className="relative isolate overflow-hidden bg-white border-b border-slate-200/70 min-h-[580px] lg:min-h-[660px] flex items-center"
+      className="public-hero"
     >
-      {/* 1. Full-Bleed Wide Panoramic Hero Image */}
+      {/* Background Image */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+        className="public-hero-media bg-cover bg-no-repeat"
         style={{
-          backgroundImage: 'url("/images/global-business-services-hero-v2.png")',
+          backgroundImage:
+            'url("/images/global-business-services-hero-v2.png")',
           backgroundPosition: "right center",
         }}
       />
 
-      {/* 2. Soft-White Gradient on Left Area (ensures crisp, 100% legibility on all viewports) */}
+      {/* White Gradient */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/20 lg:from-white/95 lg:via-white/60 lg:to-transparent pointer-events-none"
+        className="public-hero-haze"
       />
 
-      {/* 3. Bottom Melt to Next Section */}
+      {/* Bottom Fade */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+        className="public-hero-fade"
       />
 
-      {/* 4. Left-Aligned Content Container */}
-      <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
-        <div className="grid lg:grid-cols-12 items-center">
-          <div className="flex flex-col gap-6 max-w-2xl lg:col-span-7 xl:col-span-6">
+      {/* Content */}
+      <div className="container-page public-hero-content">
+        <div className="grid items-center lg:grid-cols-12">
+          <div className="public-hero-copy flex flex-col items-start gap-6 lg:col-span-7 xl:col-span-6">
             <Eyebrow>TELL US WHAT YOU NEED</Eyebrow>
 
             <h1
               id="tell-us-heading"
-              className="text-ink text-[2.5rem] leading-[1.05] font-extrabold tracking-[-0.03em] sm:text-5xl lg:text-[3.35rem] xl:text-[3.85rem]"
+              className="public-hero-title mt-0"
             >
               Tell Us What{" "}
               <span className="text-brand-blue relative inline-block">
@@ -57,21 +59,36 @@ export function TellUsWhatYouNeedHero() {
               </span>
             </h1>
 
-            <p className="text-muted-foreground max-w-xl text-base leading-relaxed text-pretty sm:text-lg lg:text-xl font-medium">
-              Have a specific requirement, business idea, product need, or travel request? Tell us what you’re looking for and our team will help you find the right solution.
+            <p className="public-hero-description mt-0 text-pretty">
+              Have a specific requirement, business idea, product need, or travel
+              request? Tell us what you&apos;re looking for and our team will help
+              you find the right solution.
             </p>
 
-            <div className="flex flex-col gap-3 sm:flex-row pt-1">
-              <Button asChild size="xl" className="hover:bg-brand-blue-dark shadow-md">
-                <a href="#requirement-form">
-                  Submit Your Requirement
-                </a>
-              </Button>
+            <div className="public-hero-actions mt-0">
+              <ServiceRequirementDialog
+                context="general"
+                trigger={
+                  <Button
+                    size="xl"
+                    variant="accent"
+                    className="shadow-md"
+                  >
+                    Submit Your Requirement
+                    <ArrowRight
+                      data-icon="inline-end"
+                      aria-hidden="true"
+                      className="size-4"
+                    />
+                  </Button>
+                }
+              />
+
               <Button
                 asChild
                 size="xl"
                 variant="secondary-hero"
-                className="bg-white/90 backdrop-blur-sm border-slate-200 hover:bg-white shadow-xs"
+                className="border border-slate-300 bg-white font-bold text-slate-900 shadow-sm hover:bg-slate-50"
               >
                 <Link href={ROUTES.public.services}>
                   Explore Our Services
@@ -84,4 +101,3 @@ export function TellUsWhatYouNeedHero() {
     </section>
   );
 }
-

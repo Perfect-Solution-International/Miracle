@@ -3,6 +3,12 @@ import type { NextRequest } from "next/server";
 
 import { getServerEnv } from "@/config/environment";
 import { errorResponse, successResponse } from "@/lib/api/api-response";
+import {
+  clearSessionCookies,
+  extractSessionTokens,
+  stripSessionTokens,
+  writeSessionCookies,
+} from "@/lib/auth/session-cookies";
 import { API_ERROR_CODES } from "@/types/api.types";
 
 /**
@@ -26,13 +32,11 @@ const PROXIED_ACTIONS = new Set([
   "resend-verification",
   "forgot-password",
   "reset-password",
+  "change-password",
 ]);
 
-interface TokenPayload {
-  accessToken?: string;
-  refreshToken?: string;
-  expiresIn?: number;
-}
+/** Actions that act on the signed-in user, so need the access token forwarded. */
+const AUTHENTICATED_ACTIONS = new Set(["resend-verification", "change-password"]);
 
 export async function POST(
   request: NextRequest,
@@ -50,6 +54,7 @@ export async function POST(
 
   const env = getServerEnv();
   const cookieStore = await cookies();
+  const cookieNames = { session: env.SESSION_COOKIE_NAME, refresh: env.REFRESH_COOKIE_NAME };
 
   const body: unknown = await request.json().catch(() => ({}));
 
@@ -67,21 +72,32 @@ export async function POST(
     );
   }
 
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    // Forwarded so the backend can record the originating client.
+    "User-Agent": request.headers.get("user-agent") ?? "",
+  };
+
+  if (AUTHENTICATED_ACTIONS.has(action)) {
+    const accessToken = cookieStore.get(env.SESSION_COOKIE_NAME)?.value;
+    if (accessToken) headers["Authorization"] = `Bearer ${accessToken}`;
+  }
+
   let upstream: Response;
   try {
     upstream = await fetch(new URL(`/api/v1/auth/${action}`, env.RUST_API_URL), {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        // Forwarded so the backend can record the originating client.
-        "User-Agent": request.headers.get("user-agent") ?? "",
-      },
+      headers,
       body: JSON.stringify(payload ?? {}),
       cache: "no-store",
       signal: AbortSignal.timeout(env.RUST_API_TIMEOUT_MS),
     });
   } catch {
+    if (action === "logout") {
+      clearSessionCookies(cookieStore, cookieNames);
+      return successResponse({ signedOut: true });
+    }
     return errorResponse(
       {
         code: API_ERROR_CODES.NETWORK_ERROR,
@@ -96,71 +112,71 @@ export async function POST(
   if (action === "logout") {
     // Clear cookies regardless of the upstream result, so the browser is not
     // left holding a session the user asked to end.
-    cookieStore.delete(env.SESSION_COOKIE_NAME);
-    cookieStore.delete(env.REFRESH_COOKIE_NAME);
+    clearSessionCookies(cookieStore, cookieNames);
     return successResponse({ signedOut: true });
   }
 
   if (!upstream.ok) {
+    // A rejected refresh means the session is over; drop the dead cookies.
+    if (action === "refresh" && upstream.status === 401) {
+      clearSessionCookies(cookieStore, cookieNames);
+    }
     // Pass the backend's error envelope straight through, preserving field errors.
     return Response.json(data ?? { success: false }, { status: upstream.status });
   }
 
-  const tokens = extractTokens(data);
-
-  if (tokens.accessToken) {
-    const secure = process.env.NODE_ENV === "production";
-
-    cookieStore.set(env.SESSION_COOKIE_NAME, tokens.accessToken, {
-      httpOnly: true,
-      secure,
-      sameSite: "lax",
-      path: "/",
-      maxAge: tokens.expiresIn ?? 60 * 15,
-    });
-
-    if (tokens.refreshToken) {
-      cookieStore.set(env.REFRESH_COOKIE_NAME, tokens.refreshToken, {
-        httpOnly: true,
-        secure,
-        sameSite: "lax",
-        path: "/",
-        maxAge: 60 * 60 * 24 * 30,
-      });
-    }
-  }
+  writeSessionCookies(cookieStore, cookieNames, extractSessionTokens(data));
 
   // Strip tokens before replying: the browser must never see them.
-  return Response.json(stripTokens(data), { status: upstream.status });
+  return Response.json(stripSessionTokens(data), { status: upstream.status });
 }
 
-function extractTokens(data: unknown): TokenPayload {
-  if (typeof data !== "object" || data === null) return {};
-  const envelope = data as { data?: unknown };
-  const source = (
-    typeof envelope.data === "object" && envelope.data !== null ? envelope.data : data
-  ) as Record<string, unknown>;
+/**
+ * `GET /api/v1/auth/me`. This route shadows the catch-all proxy for every
+ * `/auth/*` path, so the one read endpoint is forwarded here explicitly.
+ */
+export async function GET(
+  _request: NextRequest,
+  context: { params: Promise<{ action: string }> },
+) {
+  const { action } = await context.params;
 
-  return {
-    accessToken:
-      typeof source["accessToken"] === "string" ? source["accessToken"] : undefined,
-    refreshToken:
-      typeof source["refreshToken"] === "string" ? source["refreshToken"] : undefined,
-    expiresIn: typeof source["expiresIn"] === "number" ? source["expiresIn"] : undefined,
-  };
-}
+  if (action !== "me") {
+    return errorResponse(
+      { code: API_ERROR_CODES.NOT_FOUND, message: "Unknown auth action." },
+      404,
+    );
+  }
 
-function stripTokens(data: unknown): unknown {
-  if (typeof data !== "object" || data === null) return data;
+  const env = getServerEnv();
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get(env.SESSION_COOKIE_NAME)?.value;
 
-  const clone = structuredClone(data) as Record<string, unknown>;
-  const target = (
-    typeof clone["data"] === "object" && clone["data"] !== null ? clone["data"] : clone
-  ) as Record<string, unknown>;
+  if (!accessToken) {
+    return errorResponse(
+      { code: API_ERROR_CODES.UNAUTHENTICATED, message: "No active session." },
+      401,
+    );
+  }
 
-  delete target["accessToken"];
-  delete target["refreshToken"];
-  delete target["expiresIn"];
-
-  return clone;
+  try {
+    const upstream = await fetch(new URL("/api/v1/auth/me", env.RUST_API_URL), {
+      headers: { Accept: "application/json", Authorization: `Bearer ${accessToken}` },
+      cache: "no-store",
+      signal: AbortSignal.timeout(env.RUST_API_TIMEOUT_MS),
+    });
+    const data: unknown = await upstream.json().catch(() => null);
+    return Response.json(data ?? { success: false }, {
+      status: upstream.status,
+      headers: { "cache-control": "no-store" },
+    });
+  } catch {
+    return errorResponse(
+      {
+        code: API_ERROR_CODES.NETWORK_ERROR,
+        message: "Unable to reach the authentication service.",
+      },
+      502,
+    );
+  }
 }

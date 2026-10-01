@@ -273,7 +273,7 @@ export function PublicTravelInquiryModal({
           /* ========================================================================= */
           /* SUCCESS STATE VIEW */
           /* ========================================================================= */
-          <div className="p-8 sm:p-12 flex flex-col items-center text-center space-y-6 bg-white overflow-y-auto text-slate-900">
+          <div className="scrollbar-hidden p-8 sm:p-12 flex flex-col items-center text-center space-y-6 bg-white overflow-y-auto text-slate-900">
             <div className="flex size-20 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 shadow-inner">
               <CheckCircle2 className="size-12" />
             </div>
@@ -382,7 +382,7 @@ export function PublicTravelInquiryModal({
               </div>
             </DialogHeader>
 
-            <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 bg-white text-slate-900">
+            <form onSubmit={handleSubmit} className="public-form-scrollbar flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 bg-white text-slate-900">
               {error ? (
                 <div className="rounded-xl bg-red-50 border border-red-200 p-3.5 text-xs font-semibold text-brand-red">
                   {error}

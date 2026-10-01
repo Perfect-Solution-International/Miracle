@@ -234,6 +234,7 @@ export default function Page() {
             </p>
           </div>
 
+ Imasha
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {STEPS.map(({ step, title, description, icon: Icon }) => (
               <div
@@ -247,6 +248,30 @@ export default function Page() {
                     </span>
                     <div className="bg-brand-blue-light/60 text-brand-blue flex size-10 items-center justify-center rounded-xl transition-colors group-hover:bg-brand-blue group-hover:text-white">
                       <Icon className="size-5" aria-hidden="true" />
+
+          <div className="mt-12 space-y-6">
+            {DETAILED_STEPS.map((stepItem) => {
+              const Icon = stepItem.icon;
+              return (
+                <div
+                  key={stepItem.step}
+                  className="group rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
+                >
+                  <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
+                    <div className="flex items-center gap-4 lg:col-span-4">
+                      <span className="bg-brand-blue text-white inline-flex size-14 shrink-0 items-center justify-center rounded-2xl text-lg font-extrabold shadow-sm">
+                        {stepItem.step}
+                      </span>
+                      <div>
+                        <span className="text-brand-blue text-xs font-bold uppercase tracking-wider">
+                          Phase {stepItem.step}
+                        </span>
+                        <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors">
+                          {stepItem.title}
+                        </h3>
+                        <p className="text-muted-foreground text-xs mt-0.5">{stepItem.tagline}</p>
+                      </div>
+ develop
                     </div>
                   </div>
 
@@ -284,6 +309,7 @@ export default function Page() {
             </p>
           </div>
 
+ Imasha
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {SERVICE_AREAS.map(({ title, description, href, icon: Icon }) => (
               <Link
@@ -300,6 +326,22 @@ export default function Page() {
                   </h3>
                   <p className="text-muted-foreground mt-2 text-xs leading-relaxed">
                     {description}
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {ADVANTAGES.map((adv) => {
+              const Icon = adv.icon;
+              return (
+                <div
+                  key={adv.title}
+                  className="rounded-2xl public-card-clickable p-6"
+                >
+                  <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
+                    <Icon className="size-5.5" />
+                  </span>
+                  <h3 className="text-ink text-lg font-bold mt-4">{adv.title}</h3>
+                  <p className="text-muted-foreground text-xs sm:text-sm mt-2 leading-relaxed">
+                    {adv.description}
+ develop
                   </p>
                 </div>
 
@@ -343,3 +385,4 @@ export default function Page() {
     </main>
   );
 }
+

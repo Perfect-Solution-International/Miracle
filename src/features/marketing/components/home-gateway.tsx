@@ -298,7 +298,7 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
 
             <form
               onSubmit={submit}
-              className="overflow-y-auto px-6 py-6 sm:px-8 space-y-4"
+              className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8 space-y-4"
               noValidate
             >
               <div className="grid gap-4 sm:grid-cols-2">
@@ -510,7 +510,7 @@ export function HomeGateway() {
                   size="xl"
                   variant="secondary-hero"
                   asChild
-                  className="bg-white/90 backdrop-blur-sm border-slate-200 hover:bg-white shadow-xs"
+                  className="shadow-xs"
                 >
                   <Link href="#pillars">Explore Core Pillars</Link>
                 </Button>
@@ -561,7 +561,7 @@ export function HomeGateway() {
               return (
                 <div
                   key={pillar.id}
-                  className="group relative flex cursor-pointer flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/40 hover:shadow-lift overflow-hidden has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
+                  className="group relative flex cursor-pointer flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue hover:shadow-lift overflow-hidden has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
                 >
                   <div
                     aria-hidden="true"
@@ -644,7 +644,7 @@ export function HomeGateway() {
                 <Link
                   key={sub.title}
                   href={sub.href}
-                  className="group rounded-xl border border-slate-200/80 bg-slate-50/50 p-3 transition-all hover:bg-brand-blue-light/30 hover:border-brand-blue/30"
+                  className="group rounded-xl border border-slate-200/80 bg-slate-50/50 p-3 transition-all hover:bg-brand-blue-light/30 hover:border-brand-blue"
                 >
                   <p className="text-ink text-xs sm:text-sm font-bold group-hover:text-brand-blue transition-colors flex items-center justify-between">
                     {sub.title}
@@ -944,7 +944,7 @@ export function HomeGateway() {
               return (
                 <div
                   key={val.title}
-                  className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
+                  className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue hover:shadow-soft transition-all"
                 >
                   <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
                     <Icon className="size-5.5" />
@@ -1011,6 +1011,38 @@ export function HomeGateway() {
         </div>
       </section>
 
+Imasha
+      {/* ─────────────────────────────────────────────────────────────
+          9. DIRECT ACTION BANNER: Tell Us What You Need
+      ───────────────────────────────────────────────────────────── */}
+      <section className="section-y bg-white border-t border-slate-100">
+        <div className="container-page">
+          <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-soft">
+            <div className="grid items-center gap-8 lg:grid-cols-12">
+              <div className="space-y-4 lg:col-span-8">
+                <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                  Direct Requirement Desk
+                </span>
+                <h2 className="text-ink text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                  Have a Specific Requirement or Project in Mind?
+                </h2>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl">
+                  Whether you need business advisory, software development, an inbound or outbound holiday package, or global trade support, share your requirement and our team will prepare a structured proposal for you.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row lg:flex-col lg:items-end justify-center gap-3 lg:col-span-4">
+                <Button size="xl" onClick={openForm} className="shadow-lift gap-2 w-full sm:w-auto">
+                  Submit Your Requirement
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href={ROUTES.public.contact}>Talk to an Advisor</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+ develop
 
       {/* ─────────────────────────────────────────────────────────────
           10. CONTACT STRIP & EXECUTIVE SUPPORT
@@ -1033,7 +1065,7 @@ export function HomeGateway() {
             <div className="grid gap-4 sm:grid-cols-2">
               <a
                 href={`tel:${APP_CONFIG.support.phone.replace(/\s+/g, "")}`}
-                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue/30"
+                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue"
               >
                 <span className="bg-brand-blue-light text-brand-blue size-10 rounded-xl flex items-center justify-center shrink-0">
                   <Phone className="size-5" />
@@ -1048,7 +1080,7 @@ export function HomeGateway() {
 
               <a
                 href={`mailto:${APP_CONFIG.support.email}`}
-                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue/30"
+                className="group flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 transition-colors hover:bg-white hover:border-brand-blue"
               >
                 <span className="bg-brand-blue-light text-brand-blue size-10 rounded-xl flex items-center justify-center shrink-0">
                   <Mail className="size-5" />

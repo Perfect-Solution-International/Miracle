@@ -137,7 +137,7 @@ export default function Page() {
                   asChild
                   variant="outline"
                   size="lg"
-                  className="h-11 sm:h-12 rounded-full border-white/90 bg-white/95 px-7 text-sm font-bold text-navy shadow-sm backdrop-blur-md hover:bg-white"
+                  className="h-11 sm:h-12 rounded-full border-slate-300 bg-white px-7 text-sm font-bold text-navy shadow-sm hover:bg-slate-50"
                 >
                   <Link href={ROUTES.public.travelTourism}>
                     All Travel &amp; Tours
@@ -179,7 +179,7 @@ export default function Page() {
                 {WORK_VISA_PILLARS.map(({ icon: Icon, title, description }) => (
                   <div
                     key={title}
-                    className="shadow-2xs hover:shadow-soft group flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white p-4 transition-all"
+                    className="group flex items-start gap-3.5 rounded-2xl public-card-clickable p-4"
                   >
                     <div className="bg-brand-blue-light/70 text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:bg-brand-blue group-hover:text-white">
                       <Icon aria-hidden="true" className="size-5" />
@@ -205,6 +205,60 @@ export default function Page() {
         </div>
       </Section>
 
+ Imasha
+
+      {/* 6-Step Process */}
+      <section className="bg-white px-5 py-16 sm:px-8 md:py-20" aria-labelledby="work-visa-process-heading">
+        <div className="container-page">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-brand-blue text-xs font-bold tracking-[0.16em] uppercase">A clear path forward</p>
+            <h2 id="work-visa-process-heading" className="text-ink mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              From request to readiness
+            </h2>
+          </div>
+          <ol className="mx-auto mt-12 grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-6">
+            {PROCESS_STEPS.map(({ icon: Icon, title }, index) => (
+              <li key={title} className="relative text-center lg:text-left">
+                <div className="bg-brand-blue-light text-brand-blue mx-auto flex size-12 items-center justify-center rounded-xl lg:mx-0">
+                  <Icon aria-hidden="true" className="size-5" />
+                </div>
+                <p className="text-ink mt-4 text-sm font-bold">{title}</p>
+                {index < PROCESS_STEPS.length - 1 ? (
+                  <span aria-hidden="true" className="bg-brand-blue-muted absolute top-6 left-[calc(50%+2.5rem)] hidden h-px w-[calc(100%-1rem)] lg:block" />
+                ) : null}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Helpful Advisory & FAQs */}
+      <Section className="bg-white border-t border-slate-100 py-16 sm:py-20" aria-labelledby="work-visa-faq-heading">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center">
+            <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">Helpful Information</p>
+            <h2 id="work-visa-faq-heading" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">
+              Frequently Asked Questions
+            </h2>
+          </div>
+
+          <div className="mt-10 space-y-4">
+            {FAQS.map(({ q, a }) => (
+              <div key={q} className="rounded-2xl public-card p-6">
+                <div className="flex items-start gap-3">
+                  <HelpCircle aria-hidden="true" className="text-brand-blue size-5 shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-ink text-base font-bold">{q}</h3>
+                    <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{a}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+ develop
     </>
   );
 }
+

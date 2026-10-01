@@ -24,7 +24,7 @@ export function ServiceCard({
     return (
       <article
         className={cn(
-          "group bg-navy has-[a:focus-visible]:ring-ring relative isolate flex min-h-[26rem] cursor-pointer flex-col justify-end overflow-hidden rounded-2xl p-7 text-white has-[a:focus-visible]:ring-2 sm:p-9",
+          "group bg-navy has-[a:focus-visible]:ring-ring relative isolate flex min-h-[26rem] cursor-pointer flex-col justify-end overflow-hidden rounded-2xl border border-slate-200/80 p-7 text-white shadow-[0_6px_20px_rgba(15,23,42,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue hover:shadow-[0_12px_28px_rgba(15,23,42,0.2)] has-[a:focus-visible]:ring-2 sm:p-9",
           className,
         )}
       >
@@ -42,7 +42,7 @@ export function ServiceCard({
         <span className="bg-brand-red absolute top-7 left-7 inline-flex h-7 items-center rounded-full px-3 text-[0.7rem] font-bold tracking-[0.14em] uppercase sm:top-9 sm:left-9">
           Core service
         </span>
-        <span className="mb-5 inline-flex size-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur">
+        <span className="mb-5 inline-flex size-12 items-center justify-center rounded-xl bg-white/10 backdrop-blur shadow-xs">
           <Icon aria-hidden="true" className="size-6" />
         </span>
         <h3 className="text-2xl font-bold sm:text-3xl">
@@ -65,12 +65,12 @@ export function ServiceCard({
   return (
     <article
       className={cn(
-        "group bg-card hover:border-brand-blue/30 hover:shadow-soft has-[a:focus-visible]:ring-ring relative flex cursor-pointer items-center gap-4 rounded-2xl border p-5 transition-all duration-300 sm:flex-col sm:items-stretch sm:gap-6 sm:p-6 has-[a:focus-visible]:ring-2",
+        "group public-card-clickable has-[a:focus-visible]:ring-ring relative flex cursor-pointer items-center gap-4 rounded-2xl p-5 sm:flex-col sm:items-stretch sm:gap-6 sm:p-6 has-[a:focus-visible]:ring-2",
         className,
       )}
     >
       <div className="flex shrink-0 items-start justify-between">
-        <span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue inline-flex size-11 items-center justify-center rounded-lg transition-colors duration-300 group-hover:text-white">
+        <span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue inline-flex size-11 items-center justify-center rounded-xl transition-colors duration-300 group-hover:text-white shadow-xs">
           <Icon aria-hidden="true" className="size-5" />
         </span>
         <ArrowUpRight

@@ -13,12 +13,12 @@ export function HomeHero() {
   return (
     <section
       aria-labelledby="home-hero-heading"
-      className="relative isolate overflow-hidden bg-white border-b border-slate-200/70 min-h-[580px] lg:min-h-[660px] flex items-center"
+      className="public-hero"
     >
       {/* 1. Full-Bleed Wide Panoramic Hero Image */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+        className="public-hero-media bg-cover bg-no-repeat"
         style={{
           backgroundImage: 'url("/images/home/home-hero-bg.jpg")',
           backgroundPosition: "right center",
@@ -28,24 +28,24 @@ export function HomeHero() {
       {/* 2. Soft-White Gradient on Left Area (ensures crisp, 100% legibility on all viewports) */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent lg:from-white/95 lg:via-white/55 lg:to-transparent pointer-events-none"
+        className="public-hero-haze"
       />
 
       {/* 3. Bottom Melt to Next Section */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+        className="public-hero-fade"
       />
 
       {/* 4. Left-Aligned Content Container */}
-      <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
+      <div className="container-page public-hero-content">
         <div className="grid lg:grid-cols-12 items-center">
-          <div className="flex flex-col gap-6 max-w-2xl lg:col-span-7 xl:col-span-6">
+          <div className="public-hero-copy flex flex-col items-start gap-6 lg:col-span-7 xl:col-span-6">
             <Eyebrow>Global Trade • Sourcing • Business Solutions</Eyebrow>
 
             <h1
               id="home-hero-heading"
-              className="text-ink text-[2.5rem] leading-[1.05] font-extrabold tracking-[-0.03em] sm:text-5xl lg:text-[3.35rem] xl:text-[3.85rem]"
+              className="public-hero-title mt-0"
             >
               Everything Your Business Needs,{" "}
               <span className="text-brand-blue relative inline-block">
@@ -57,13 +57,13 @@ export function HomeHero() {
               </span>
             </h1>
 
-            <p className="text-muted-foreground max-w-xl text-base leading-relaxed text-pretty sm:text-lg lg:text-xl font-medium">
+            <p className="public-hero-description mt-0 text-pretty">
               Miracle International connects businesses with products, suppliers, logistics,
               technology, and professional services across international markets.
             </p>
 
-            <div className="flex flex-col gap-3 sm:flex-row pt-1">
-              <Button asChild size="xl" className="hover:bg-brand-blue-dark shadow-md">
+            <div className="public-hero-actions mt-0">
+              <Button asChild variant="accent" size="xl" className="shadow-md">
                 <Link href={ROUTES.public.tellUsWhatYouNeed}>
                   Tell Us What You Need
                 </Link>
@@ -72,7 +72,7 @@ export function HomeHero() {
                 asChild
                 size="xl"
                 variant="secondary-hero"
-                className="bg-white/90 backdrop-blur-sm border-slate-200 hover:bg-white shadow-xs"
+                className="shadow-xs"
               >
                 <Link href={ROUTES.public.services}>Explore Our Services</Link>
               </Button>

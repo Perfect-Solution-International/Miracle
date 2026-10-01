@@ -32,7 +32,7 @@ export function TravelServicesSection({
             <li key={card.title} className="h-full">
               <Link
                 href={card.href}
-                className="group/card shadow-soft hover:shadow-lift hover:border-brand-blue/50 flex h-full flex-col rounded-2xl border border-slate-200/90 bg-white p-6 transition-all cursor-pointer"
+                className="group/card flex h-full flex-col rounded-2xl public-card-clickable p-6 cursor-pointer"
               >
                 <div className="bg-brand-blue-light text-brand-blue group-hover/card:bg-brand-blue inline-flex size-12 items-center justify-center rounded-xl transition-colors group-hover/card:text-white">
                   <Icon aria-hidden="true" className="size-6" />
@@ -65,3 +65,4 @@ export function TravelServicesSection({
     </Section>
   );
 }
+

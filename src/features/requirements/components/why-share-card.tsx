@@ -6,7 +6,7 @@ import { WHY_SHARE_ITEMS } from "../data/tell-us-what-you-need.content";
 /** Sidebar card listing the reasons to submit a requirement through this form. */
 export function WhyShareCard() {
   return (
-    <div className="bg-surface rounded-3xl p-6 sm:p-7">
+    <div className="rounded-2xl public-card p-6 sm:p-7">
       <Eyebrow>Why Share Your Needs With Us?</Eyebrow>
       <h2 className="text-ink mt-2 text-xl font-extrabold tracking-tight">
         We make it easy for you. Just tell us what you need, and we will provide or
@@ -35,3 +35,4 @@ export function WhyShareCard() {
     </div>
   );
 }
+

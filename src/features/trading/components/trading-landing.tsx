@@ -143,7 +143,7 @@ function TradingRequestModal({ open, onClose }: { open: boolean; onClose: () => 
               <h2 id="trading-request-title" className="text-slate-900 mt-2 text-2xl font-extrabold sm:text-3xl">Trading Request</h2>
               <p className="text-slate-600 mt-1 max-w-xl text-xs sm:text-sm leading-relaxed">Tell us what you need and our trade team will help coordinate the right commercial solution.</p>
             </div>
-            <form onSubmit={submit} className="overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Full Name" required value={form.fullName} onChange={(value) => update("fullName", value)} placeholder="Your full name" />
                 <Field label="Email Address" required type="email" value={form.email} onChange={(value) => update("email", value)} placeholder="you@example.com" />
@@ -193,11 +193,11 @@ export function TradingLanding({
     <>
       <main className="bg-white">
         {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
-        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+        <section className="public-hero">
           {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            className="public-hero-media bg-cover bg-no-repeat"
             style={{
               backgroundImage: 'url("/images/services/trading-hero.jpg")',
               backgroundPosition: "right center",
@@ -207,45 +207,45 @@ export function TradingLanding({
           {/* Soft-White Gradient on Left Area */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+            className="public-hero-haze"
           />
 
           {/* Bottom Gradient Fade */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+            className="public-hero-fade"
           />
 
           {/* Left-Aligned Content Container */}
-          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
-            <div className="max-w-2xl space-y-6">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+          <div className="container-page public-hero-content">
+            <div className="public-hero-copy">
+              <div className="public-hero-badge">
                 <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
                 <span>Global Trade &amp; Commodity Sourcing</span>
               </div>
 
-              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+              <h1 className="public-hero-title">
                 Smarter Trading.<br />
                 For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Products, Suppliers</span><br />
                 <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Global Markets.</span>
               </h1>
 
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+              <p className="public-hero-description">
                 Miracle International connects businesses, verified suppliers, and buyers through structured <strong className="font-semibold text-slate-900">Local &amp; International Trade</strong> agreements, verified <strong className="font-semibold text-slate-900">Product Sourcing</strong>, and end-to-end commercial fulfillment.
               </p>
 
-              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <div className="public-hero-actions">
                 <Button
                   size="xl"
                   onClick={() => setIsFormOpen(true)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
+                  variant="accent"
+                  className="shadow-md"
                 >
                   <span>Inquiry Now</span>
                 </Button>
                 <Button
                   size="xl"
-                  variant="outline"
-                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
+                  variant="secondary-hero"
                   asChild
                 >
                   <a href="#services">Explore Trading Services</a>
@@ -276,7 +276,7 @@ export function TradingLanding({
                   key={title}
                   type="button"
                   onClick={() => setIsFormOpen(true)}
-                  className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-7 text-left shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-400 hover:shadow-md cursor-pointer flex flex-col justify-between"
+                  className="group rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)] cursor-pointer flex flex-col justify-between"
                 >
                   <div>
                     <span className="bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white inline-flex size-12 items-center justify-center rounded-2xl shadow-xs transition-colors duration-300">
@@ -317,7 +317,7 @@ export function TradingLanding({
               {SERVICES.map(([title, description, Icon]) => (
                 <article
                   key={title as string}
-                  className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs hover:border-blue-300 hover:shadow-soft transition-all duration-300"
+                  className="rounded-2xl public-card-clickable p-6"
                 >
                   <span className="bg-blue-50 text-blue-600 inline-flex size-11 items-center justify-center rounded-2xl shadow-2xs">
                     <Icon className="size-5.5" />
@@ -377,10 +377,10 @@ export function TradingLanding({
         {/* ── 6. Bottom CTA Card ── */}
         <section className="section-y bg-white">
           <div className="container-page">
-            <div className="relative isolate overflow-hidden rounded-3xl border border-blue-200/80 bg-gradient-to-r from-blue-50 via-white to-blue-50/60 p-8 sm:p-12 shadow-sm">
+            <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-soft">
               <div className="grid items-center gap-8 lg:grid-cols-12">
                 <div className="space-y-4 lg:col-span-8">
-                  <span className="bg-blue-600 text-white rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+                  <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
                     Start Trading
                   </span>
                   <h2 className="text-slate-900 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">

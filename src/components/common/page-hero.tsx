@@ -88,7 +88,7 @@ export function PageHero({
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-brand-blue/10 bg-white/80 p-3.5 shadow-xs backdrop-blur-sm"
+                  className="rounded-2xl public-card p-3.5 backdrop-blur-sm"
                 >
                   <div className="text-xl font-extrabold text-navy sm:text-2xl">
                     {stat.value}

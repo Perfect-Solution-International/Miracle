@@ -23,7 +23,7 @@ export function RequirementProcessSteps({ className }: { className?: string }) {
           {HOW_IT_WORKS_STEPS.map(({ step, title, description }) => (
             <div
               key={step}
-              className="relative flex flex-col rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-xs transition-all duration-200 hover:border-brand-blue/40 hover:shadow-md text-left"
+              className="relative flex flex-col rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)] text-left"
             >
               {/* Step Number Badge */}
               <div className="flex items-center justify-between mb-4">

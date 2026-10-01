@@ -92,7 +92,7 @@ export function TravelSubpageHero({
                 asChild
                 variant="accent"
                 size="xl"
-                className="h-12 rounded-xl px-7 text-base font-bold shadow-xl shadow-brand-red/20 transition-all hover:shadow-2xl sm:h-13 sm:px-8"
+                className="h-12 rounded-xl px-7 text-base font-bold shadow-xl shadow-brand-blue/20 transition-all hover:shadow-2xl sm:h-13 sm:px-8"
               >
                 <Link href={primary.href}>
                   {primary.label}

@@ -45,6 +45,8 @@ The version-matched documentation is bundled in `node_modules/next/dist/docs/`. 
 
 ## Architecture
 
+> The target architecture, current gaps, and migration roadmap are in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
 The codebase is organised by **domain**, not by technical type. A feature owns its API calls, components, hooks, schemas, types, and utilities together, so work on quotations means working in one folder.
 
 ```text

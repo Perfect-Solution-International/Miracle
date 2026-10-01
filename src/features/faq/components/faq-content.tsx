@@ -382,8 +382,13 @@ export function FaqContent() {
                   className={cn(
                     "flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all shadow-2xs",
                     isActive
+ Imasha
                       ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
                       : "bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:text-blue-600",
+
+                      ? "bg-brand-blue text-white shadow-lg shadow-brand-blue/25"
+                      : "bg-slate-50 text-ink/80 hover:bg-brand-blue/5 hover:text-brand-blue border border-slate-300/80",
+ develop
                   )}
                 >
                   <Icon className="size-4 shrink-0" aria-hidden="true" />
@@ -393,11 +398,34 @@ export function FaqContent() {
             })}
           </div>
 
+ Imasha
           {/* FAQ Accordion List */}
           <div className="space-y-4 max-w-4xl">
             {filteredFaqs.length === 0 ? (
               <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-12 text-center shadow-2xs">
                 <HelpCircle className="mx-auto size-12 text-slate-400 mb-3" />
+
+            {/* Direct Advisor Card */}
+            <div className="mt-6 rounded-2xl public-card p-6">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-brand-blue text-white mb-3">
+                <MessageSquare className="size-5" />
+              </div>
+              <h3 className="font-bold text-ink text-base">Have another question?</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Our support team is online 24/7 to help you with bespoke requirements.
+              </p>
+              <Button asChild variant="accent" size="sm" className="mt-4 w-full rounded-xl">
+                <Link href={ROUTES.public.contact}>Contact Support</Link>
+              </Button>
+            </div>
+          </aside>
+
+          {/* Right Accordion List */}
+          <div className="flex flex-col gap-4">
+            {filteredFaqs.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-12 text-center">
+                <HelpCircle className="mx-auto size-12 text-muted-foreground/50 mb-3" />
+develop
                 <h3 className="text-lg font-bold text-ink">No matching questions found</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
                   Try adjusting your search query or reset the category filter.
@@ -419,8 +447,13 @@ export function FaqContent() {
                 const isOpen = !!openIds[id];
                 return (
                   <div
+ Imasha
                     key={id}
                     className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-2xs transition-all duration-200 hover:border-brand-blue/40"
+
+                    key={faq.id}
+                    className="overflow-hidden rounded-2xl public-card-clickable"
+develop
                   >
                     <button
                       type="button"
@@ -456,3 +489,4 @@ export function FaqContent() {
     </main>
   );
 }
+

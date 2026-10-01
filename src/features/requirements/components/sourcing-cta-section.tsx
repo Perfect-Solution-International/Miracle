@@ -35,31 +35,10 @@ export function SourcingCtaSection() {
       aria-labelledby="sourcing-cta-heading"
       className="relative isolate overflow-hidden bg-white"
     >
-      {/* Subtle diagonal background accent */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(135deg, #eaf1fb 0%, #ffffff 45%, #f5f7fa 100%)",
-        }}
-      />
-
       <div className="container-page py-16 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           {/* LEFT: Image panel */}
           <div className="relative">
-            {/* Decorative glow behind image */}
-            <div
-              aria-hidden="true"
-              className="absolute -inset-3 rounded-3xl opacity-60"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 30% 40%, #1150a8 0%, transparent 65%)",
-                filter: "blur(40px)",
-              }}
-            />
-
             <div className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20">
               <Image
                 src="/brand/global-sourcing-hero.jpg"
@@ -162,7 +141,7 @@ export function SourcingCtaSection() {
             {/* Divider */}
             <div
               aria-hidden="true"
-              className="h-px w-full rounded-full bg-gradient-to-r from-brand-blue/20 via-brand-red/20 to-transparent"
+              className="h-px w-full rounded-full bg-slate-200"
             />
 
             {/* CTA button + modal */}
@@ -185,7 +164,7 @@ export function SourcingCtaSection() {
                 </DialogTrigger>
 
                 <DialogContent
-                  className="max-h-[90vh] w-full max-w-2xl overflow-y-auto p-0 sm:max-w-2xl"
+                  className="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden p-0 sm:max-w-2xl"
                   showCloseButton
                 >
                   <DialogHeader className="sr-only">
@@ -196,7 +175,7 @@ export function SourcingCtaSection() {
                     </DialogDescription>
                   </DialogHeader>
 
-                  <div className="p-6 sm:p-8">
+                  <div className="public-form-scrollbar min-h-0 overflow-y-auto p-6 pr-12 sm:p-8 sm:pr-12" tabIndex={0} aria-label="Requirement form">
                     <RequirementInquiryForm />
                   </div>
                 </DialogContent>

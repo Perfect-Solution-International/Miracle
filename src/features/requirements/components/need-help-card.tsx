@@ -11,7 +11,7 @@ import { ROUTES } from "@/config/routes";
  */
 export function NeedHelpCard() {
   return (
-    <div className="shadow-soft rounded-3xl border bg-white p-6">
+    <div className="rounded-2xl public-card p-6">
       <div className="flex items-center gap-4">
         <span className="bg-brand-blue-light text-brand-blue inline-flex size-14 shrink-0 items-center justify-center rounded-full">
           <Headset aria-hidden="true" className="size-6" />
@@ -50,3 +50,4 @@ export function NeedHelpCard() {
     </div>
   );
 }
+

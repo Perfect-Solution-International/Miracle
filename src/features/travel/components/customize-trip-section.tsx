@@ -103,7 +103,7 @@ export function CustomizeTripModal({
         </div>
 
         {/* Form Container */}
-        <div className="overflow-y-auto px-6 py-6 sm:px-8">
+        <div className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8">
           <TripPlannerForm
             defaultDestination={initialDestination}
             packageDetail={packageDetail}

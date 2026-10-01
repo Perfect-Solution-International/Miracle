@@ -18,13 +18,12 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
-        // Marketing-site variants. Red is reserved for the single most important
-        // action in a view; `inverse` pairs are for dark navy and blue surfaces.
+        // Public marketing actions use Miracle blue; secondary actions stay white.
         accent:
-          "bg-brand-red text-white shadow-sm hover:bg-brand-red-dark focus-visible:ring-brand-red/40",
-        inverse: "bg-white text-brand-blue-dark shadow-sm hover:bg-brand-blue-light",
+          "bg-brand-blue text-white shadow-sm hover:bg-brand-blue-dark focus-visible:ring-brand-blue/40",
+        inverse: "border-slate-300 bg-white text-slate-900 shadow-sm hover:bg-slate-50",
         "outline-inverse":
-          "border-white/30 bg-transparent text-white hover:border-white/60 hover:bg-white/10 aria-expanded:bg-white/10",
+          "border-slate-300 bg-white text-slate-900 shadow-sm hover:border-slate-400 hover:bg-slate-50 aria-expanded:bg-slate-50",
         // Public hero secondary CTA variant: 100% solid corporate style without glass / opacity / backdrop-blur
         "secondary-hero":
           "border border-slate-300 bg-white text-slate-900 shadow-sm backdrop-blur-none opacity-100 hover:bg-slate-50 hover:border-slate-400 hover:text-slate-900 active:bg-slate-100",

@@ -74,7 +74,7 @@ export function VisaAssistanceSection() {
               {VISA_CATEGORIES.map(({ icon: Icon, title, description }) => (
                 <div
                   key={title}
-                  className="shadow-2xs hover:shadow-soft group flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white p-4 transition-all"
+                  className="group flex items-start gap-3.5 rounded-2xl public-card-clickable p-4"
                 >
                   <div className="bg-brand-blue-light/70 text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:bg-brand-blue group-hover:text-white">
                     <Icon aria-hidden="true" className="size-5" />
@@ -90,6 +90,28 @@ export function VisaAssistanceSection() {
             </div>
           </div>
 
+Imasha
+
+          {/* Checklist & Support Pillars */}
+          <div className="rounded-2xl public-card p-5">
+            <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">
+              Our Assistance Scope
+            </p>
+            <ul className="mt-4 space-y-3">
+              {SERVICE_PILLARS.map((pillar) => (
+                <li key={pillar} className="flex items-start gap-3">
+                  <CheckCircle2 aria-hidden="true" className="text-brand-blue mt-0.5 size-4.5 shrink-0" />
+                  <span className="text-ink text-xs sm:text-sm font-medium leading-relaxed">{pillar}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-5 border-t border-slate-100 pt-4 flex items-center gap-3 text-xs text-muted-foreground">
+              <Clock aria-hidden="true" className="text-brand-blue size-4 shrink-0" />
+              <span>Fast initial evaluation within 24 to 48 business hours.</span>
+            </div>
+          </div>
+ develop
         </div>
 
         {/* Right Column: Visa Request Form */}
@@ -102,3 +124,4 @@ export function VisaAssistanceSection() {
     </Section>
   );
 }
+

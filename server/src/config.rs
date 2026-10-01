@@ -6,8 +6,22 @@ pub struct Config {
     pub host: String,
     pub port: u16,
     pub jwt_secret: String,
-    pub jwt_expiration_hours: i64,
+    /// Lifetime of the JWT access token.
+    pub access_token_ttl_minutes: i64,
+    /// Refresh-token lifetime when the user ticks "Remember me".
+    pub refresh_token_ttl_days: i64,
+    /// Refresh-token lifetime for an ordinary sign-in.
+    pub session_refresh_ttl_hours: i64,
+    pub email_verification_ttl_hours: i64,
+    pub password_reset_ttl_minutes: i64,
     pub frontend_url: String,
+}
+
+fn env_i64(key: &str, default: i64) -> i64 {
+    env::var(key)
+        .ok()
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(default)
 }
 
 impl Config {
@@ -25,10 +39,11 @@ impl Config {
                 .unwrap_or(8080),
             jwt_secret: env::var("JWT_SECRET")
                 .unwrap_or_else(|_| "miracle_super_secret_jwt_key_development_only_2026".to_string()),
-            jwt_expiration_hours: env::var("JWT_EXPIRATION_HOURS")
-                .ok()
-                .and_then(|h| h.parse().ok())
-                .unwrap_or(24),
+            access_token_ttl_minutes: env_i64("ACCESS_TOKEN_TTL_MINUTES", 60),
+            refresh_token_ttl_days: env_i64("REFRESH_TOKEN_TTL_DAYS", 30),
+            session_refresh_ttl_hours: env_i64("SESSION_REFRESH_TTL_HOURS", 24),
+            email_verification_ttl_hours: env_i64("EMAIL_VERIFICATION_TTL_HOURS", 48),
+            password_reset_ttl_minutes: env_i64("PASSWORD_RESET_TTL_MINUTES", 60),
             frontend_url: env::var("FRONTEND_URL")
                 .unwrap_or_else(|_| "http://localhost:3000".to_string()),
         }

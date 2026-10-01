@@ -10,7 +10,7 @@ export function SourcingProcessTimeline({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-10",
+        "rounded-2xl public-card p-6 sm:p-10",
         className,
       )}
     >
@@ -47,3 +47,4 @@ export function SourcingProcessTimeline({ className }: { className?: string }) {
     </div>
   );
 }
+

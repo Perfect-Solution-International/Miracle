@@ -129,11 +129,11 @@ export default function Page() {
   return (
     <main>
       {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
-      <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+      <section className="public-hero">
         {/* Full-Bleed Panoramic Hero Image */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+          className="public-hero-media bg-cover bg-no-repeat"
           style={{
             backgroundImage: 'url("/images/services/marketing-hero.jpg")',
             backgroundPosition: "right center",
@@ -143,40 +143,40 @@ export default function Page() {
         {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+          className="public-hero-haze"
         />
 
         {/* Bottom Gradient Fade to Next Section */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+          className="public-hero-fade"
         />
 
         {/* Left-Aligned Content Container */}
-        <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
-          <div className="max-w-2xl space-y-6">
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+        <div className="container-page public-hero-content">
+          <div className="public-hero-copy">
+            <div className="public-hero-badge">
               <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
               <span>Targeted Digital Marketing &amp; Brand Growth</span>
             </div>
 
-            <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+            <h1 className="public-hero-title">
               High-Performance Marketing.<br />
               For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Brand Authority</span><br />
               <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Global Reach.</span>
             </h1>
 
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+            <p className="public-hero-description">
               Targeted digital campaigns, multi-channel marketing architecture, brand positioning, and strategic customer acquisition designed to scale your business across local and international markets.
             </p>
 
-            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5">
+            <div className="public-hero-actions">
+              <Button asChild size="xl" variant="accent" className="shadow-md">
                 <Link href={ROUTES.public.contact}>
                   <span>Inquiry Now</span>
                 </Link>
               </Button>
-              <Button asChild size="xl" variant="outline" className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs">
+              <Button asChild size="xl" variant="secondary-hero">
                 <Link href={ROUTES.public.services}>Explore Capabilities</Link>
               </Button>
             </div>
@@ -235,7 +235,7 @@ export default function Page() {
           {capabilities.map(({ title, description, icon: Icon, featured }) => (
             <article
               key={title}
-              className={`group border-border/80 shadow-soft relative flex min-h-56 flex-col rounded-2xl border bg-white p-6 transition-transform duration-200 hover:-translate-y-1 ${featured ? "lg:col-span-2 lg:min-h-64 lg:p-8" : ""}`}
+              className={`group relative flex min-h-56 flex-col rounded-2xl public-card-clickable p-6 ${featured ? "lg:col-span-2 lg:min-h-64 lg:p-8" : ""}`}
             >
               <div className="bg-brand-blue-light text-brand-blue flex size-11 items-center justify-center rounded-xl">
                 <Icon aria-hidden="true" className="size-5" />
@@ -310,7 +310,7 @@ export default function Page() {
             {channels.map(([title, description, Icon]) => (
               <div
                 key={title}
-                className="flex items-start gap-4 rounded-xl border border-slate-200/80 bg-white p-4 shadow-xs"
+                className="flex items-start gap-4 rounded-2xl public-card-clickable p-4"
               >
                 <Icon
                   aria-hidden="true"
@@ -366,7 +366,60 @@ export default function Page() {
         </div>
       </Section>
 
+ Imasha
+
+      <Section aria-labelledby="outcomes-heading" className="bg-white border-t border-slate-100">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <SectionHeading
+            eyebrow="Service Outcomes"
+            title="What This Service Helps You Achieve"
+            id="outcomes-heading"
+          />
+          <div className="grid gap-x-8 sm:grid-cols-2">
+            {outcomes.map((outcome) => (
+              <div
+                key={outcome}
+                className="border-border flex items-center gap-3 border-b py-4"
+              >
+                <span className="bg-brand-blue-light text-brand-blue flex size-8 shrink-0 items-center justify-center rounded-full">
+                  <Check aria-hidden="true" className="size-4" />
+                </span>
+                <span className="text-ink text-sm font-semibold">{outcome}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* Clean White Bottom CTA */}
+      <section className="bg-white py-14 sm:py-20 border-t border-slate-100">
+        <div className="container-page">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 lg:p-16 text-center shadow-soft max-w-5xl mx-auto">
+            <Eyebrow>Let’s Talk</Eyebrow>
+            <h2 className="text-ink mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+              Ready to Strengthen Your Market Presence?
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed font-medium">
+              Tell us what you want to achieve and our team will help shape the right marketing approach.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-7 shadow-md">
+                <Link href={ROUTES.public.contact}>
+                  Discuss Your Marketing Needs
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="outline" className="bg-white hover:bg-slate-50 text-slate-800 font-semibold border-slate-300 rounded-xl px-7 shadow-2xs">
+                <Link href={ROUTES.public.contact}>
+                  Contact Us
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+ develop
     </main>
   );
 }
+
 
