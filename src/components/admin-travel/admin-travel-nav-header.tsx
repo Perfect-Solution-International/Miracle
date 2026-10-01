@@ -65,18 +65,18 @@ export function AdminTravelNavHeader({
   return (
     <div className="space-y-4">
       {/* Top Banner & Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/60 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="font-heading text-2xl font-bold tracking-tight text-navy dark:text-foreground">
+            <h1 className="font-heading text-2xl font-bold tracking-tight text-navy">
               Tour Management
             </h1>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand-blue border border-blue-200 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand-blue border border-blue-100">
               <Compass className="size-3.5" />
               Tour Packages Desk
             </span>
           </div>
-          <p className="text-xs text-muted-foreground mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Manage Inbound (Sri Lanka) and Outbound (International) tour packages, pricing, itineraries, and publishing status.
           </p>
         </div>
@@ -84,7 +84,7 @@ export function AdminTravelNavHeader({
         {onAddPackage ? (
           <Button
             onClick={onAddPackage}
-            className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-semibold gap-1.5 shadow-sm h-9 self-start sm:self-auto rounded-xl"
+            className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-semibold gap-1.5 shadow-2xs h-9 self-start sm:self-auto rounded-xl"
           >
             <Plus className="size-4" />
             {addPackageLabel}
@@ -93,7 +93,7 @@ export function AdminTravelNavHeader({
       </div>
 
       {/* Subcategory Navigation Tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-border/60 pb-2">
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-100 pb-2">
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
           const isActive =
@@ -106,15 +106,22 @@ export function AdminTravelNavHeader({
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition-all border",
+                "flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all border",
                 isActive
-                  ? "bg-card text-brand-blue border-brand-blue/40 shadow-xs font-semibold ring-1 ring-brand-blue/20"
-                  : "bg-muted/30 text-muted-foreground border-transparent hover:bg-muted hover:text-foreground",
+                  ? "bg-white/95 text-brand-blue border-blue-200 shadow-2xs font-bold ring-1 ring-blue-500/10"
+                  : "bg-slate-50/70 text-slate-600 border-slate-200/60 hover:bg-white hover:border-slate-300 hover:text-navy",
               )}
             >
-              <Icon className={cn("size-4", isActive ? "text-brand-blue" : "text-muted-foreground")} />
+              <Icon className={cn("size-3.5", isActive ? "text-brand-blue" : "text-slate-400")} />
               <span>{item.label}</span>
-              <span className={cn("px-2 py-0.5 rounded-full text-[10px] font-bold", item.badgeColor)}>
+              <span
+                className={cn(
+                  "px-2 py-0.5 rounded-full text-[10px] font-bold border",
+                  isActive
+                    ? "bg-blue-50 text-brand-blue border-blue-200/60"
+                    : "bg-slate-100 text-slate-600 border-slate-200/60"
+                )}
+              >
                 {item.count}
               </span>
             </Link>

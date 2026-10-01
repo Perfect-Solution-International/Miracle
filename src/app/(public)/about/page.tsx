@@ -20,7 +20,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
@@ -29,8 +28,6 @@ import { SITE_MEDIA } from "@/config/site-media";
 import { GlobalPresenceSection, MISSION_VISION_VALUES } from "@/features/about";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
-
-import lightPageStyles from "../light-page.module.css";
 
 const TITLE = "About Us";
 const DESCRIPTION =
@@ -433,15 +430,6 @@ export default function Page() {
 
       <GlobalPresenceSection />
 
-      <CtaBanner
-        eyebrow="Start a Conversation"
-        title="Let's Talk About What Your Business Needs Next"
-        description="Share the opportunity, requirement or challenge in front of you. Our team will help identify the most practical next step."
-        primary={{ label: "Contact Us", href: ROUTES.public.contact }}
-        secondary={{ label: "Explore Our Services", href: ROUTES.public.services }}
-        headingId="about-cta-heading"
-        className={lightPageStyles.lightCta}
-      />
     </main>
   );
 }

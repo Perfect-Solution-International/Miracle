@@ -272,7 +272,7 @@ const STAFF_NAV: readonly NavSection[] = [
 
 const ADMIN_NAV: readonly NavSection[] = [
   {
-    title: "",
+    title: "Overview",
     items: [
       {
         title: "Dashboard",
@@ -280,6 +280,11 @@ const ADMIN_NAV: readonly NavSection[] = [
         icon: LayoutDashboard,
         permissions: [],
       },
+    ],
+  },
+  {
+    title: "Travel & Tourism",
+    items: [
       {
         title: "Inbound Tours",
         href: ROUTES.admin.toursInbound,
@@ -294,6 +299,11 @@ const ADMIN_NAV: readonly NavSection[] = [
         permissions: ["travel.manage"],
         matchNested: true,
       },
+    ],
+  },
+  {
+    title: "Operations",
+    items: [
       {
         title: "Inquiries",
         href: ROUTES.admin.inquiries,
@@ -301,6 +311,11 @@ const ADMIN_NAV: readonly NavSection[] = [
         permissions: [],
         matchNested: true,
       },
+    ],
+  },
+  {
+    title: "Account",
+    items: [
       {
         title: "Settings",
         href: ROUTES.admin.settings,

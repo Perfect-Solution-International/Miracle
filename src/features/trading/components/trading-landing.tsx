@@ -61,12 +61,6 @@ const SERVICES = [
   ["Commercial Product Supply", "Supply products for businesses, projects and commercial needs.", BriefcaseBusiness],
 ] as const;
 
-const STEPS = [
-  ["Tell Us What You Need", "Share your product, supplier, buyer or trading requirement."],
-  ["We Explore Options", "Our team identifies suitable products, suppliers or buyers."],
-  ["We Coordinate", "We help coordinate the trading process and requirements."],
-  ["Complete the Trade", "Orders, documentation, logistics and delivery are coordinated as required."],
-] as const;
 
 const MAP_MARKERS = [
   ["Suppliers", "18%", "27%"],
@@ -336,34 +330,6 @@ export function TradingLanding({
           </div>
         </section>
 
-        {/* ── 4. How It Works ── */}
-        <section className="section-y bg-white border-b border-slate-200/70" aria-labelledby="process-heading">
-          <div className="container-page space-y-12">
-            <div className="mx-auto max-w-2xl text-center space-y-3">
-              <span className="bg-blue-50 text-blue-700 border border-blue-200/50 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
-                A Clear Path Forward
-              </span>
-              <h2 id="process-heading" className="text-slate-900 text-3xl sm:text-4xl font-extrabold tracking-tight">
-                How Trading Execution Works
-              </h2>
-            </div>
-
-            <div className="relative grid gap-8 md:grid-cols-4 md:gap-6">
-              {STEPS.map(([title, description], index) => (
-                <div key={title} className="relative text-center md:px-3">
-                  <div className="bg-blue-600 text-white relative z-10 mx-auto flex size-12 items-center justify-center rounded-2xl text-sm font-bold shadow-md shadow-blue-200">
-                    0{index + 1}
-                  </div>
-                  <h3 className="text-slate-900 mt-5 font-bold text-base">{title}</h3>
-                  <p className="text-slate-600 mt-2 text-xs sm:text-sm leading-relaxed">{description}</p>
-                  {index < STEPS.length - 1 && (
-                    <span aria-hidden="true" className="bg-slate-200 absolute top-6 left-[calc(50%+28px)] hidden h-px w-[calc(100%-56px)] md:block" />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* ── 5. Connected Trade Network ── */}
         <section className="section-y bg-slate-50/50 border-b border-slate-200/70" aria-labelledby="global-heading">

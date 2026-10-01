@@ -1,7 +1,5 @@
 import {
   Briefcase,
-  CheckCircle2,
-  Clock,
   Globe2,
   GraduationCap,
   Plane,
@@ -39,12 +37,6 @@ const VISA_CATEGORIES = [
   },
 ] as const;
 
-const SERVICE_PILLARS = [
-  "Comprehensive passport and document specification audit",
-  "Application form verification to avoid costly rejections",
-  "Embassy & VFS biometric appointment scheduling",
-  "Tailored travel insurance and flight reservation advice",
-] as const;
 
 /**
  * Balanced two-column Visa Assistance section:
@@ -98,25 +90,6 @@ export function VisaAssistanceSection() {
             </div>
           </div>
 
-          {/* Checklist & Support Pillars */}
-          <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
-            <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">
-              Our Assistance Scope
-            </p>
-            <ul className="mt-4 space-y-3">
-              {SERVICE_PILLARS.map((pillar) => (
-                <li key={pillar} className="flex items-start gap-3">
-                  <CheckCircle2 aria-hidden="true" className="text-brand-blue mt-0.5 size-4.5 shrink-0" />
-                  <span className="text-ink text-xs sm:text-sm font-medium leading-relaxed">{pillar}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-5 border-t border-slate-100 pt-4 flex items-center gap-3 text-xs text-muted-foreground">
-              <Clock aria-hidden="true" className="text-brand-blue size-4 shrink-0" />
-              <span>Fast initial evaluation within 24 to 48 business hours.</span>
-            </div>
-          </div>
         </div>
 
         {/* Right Column: Visa Request Form */}

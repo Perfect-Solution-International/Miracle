@@ -104,12 +104,6 @@ const channels = [
   ["Web Campaigns", "Bring digital touchpoints together.", Globe2],
 ] as const;
 
-const steps = [
-  ["Discover", "Understand the business, goals, audience and current position."],
-  ["Plan", "Define the message, channels and campaign direction."],
-  ["Execute", "Coordinate content, creative, promotion and campaign activity."],
-  ["Review", "Assess performance and refine future marketing activity."],
-] as const;
 
 const values = [
   [
@@ -130,14 +124,6 @@ const values = [
   ],
 ] as const;
 
-const outcomes = [
-  "Stronger brand visibility",
-  "More consistent messaging",
-  "Better campaign coordination",
-  "Improved digital presence",
-  "Clearer marketing direction",
-  "Scalable marketing support",
-] as const;
 
 export default function Page() {
   return (
@@ -342,34 +328,6 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section aria-labelledby="process-heading" className="bg-white border-t border-slate-100">
-        <SectionHeading
-          eyebrow="Our Process"
-          title="A Clear Path From Strategy to Execution"
-          description="A considered sequence keeps the work focused and gives each activity a purpose."
-          id="process-heading"
-        />
-        <ol className="border-brand-blue/25 mt-11 grid gap-8 border-l pl-6 md:grid-cols-4 md:gap-6 md:border-t md:border-l-0 md:pl-0">
-          {steps.map(([title, description], index) => (
-            <li key={title} className="relative md:pt-7">
-              <span
-                className="bg-brand-red absolute top-2 -left-[1.79rem] size-2.5 rounded-full ring-4 ring-white md:-top-[0.35rem] md:left-0"
-                aria-hidden="true"
-              />
-              <span
-                className="text-[#5B7FAE] text-5xl leading-none font-bold"
-                aria-hidden="true"
-              >
-                0{index + 1}
-              </span>
-              <h3 className="text-ink mt-3 text-lg font-bold">{title}</h3>
-              <p className="text-muted-foreground mt-2 max-w-xs text-sm leading-relaxed">
-                {description}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </Section>
 
       <Section aria-labelledby="value-heading" className="bg-white border-t border-slate-100">
         <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:gap-20">
@@ -408,55 +366,6 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section aria-labelledby="outcomes-heading" className="bg-white border-t border-slate-100">
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <SectionHeading
-            eyebrow="Service Outcomes"
-            title="What This Service Helps You Achieve"
-            id="outcomes-heading"
-          />
-          <div className="grid gap-x-8 sm:grid-cols-2">
-            {outcomes.map((outcome) => (
-              <div
-                key={outcome}
-                className="border-border flex items-center gap-3 border-b py-4"
-              >
-                <span className="bg-brand-blue-light text-brand-blue flex size-8 shrink-0 items-center justify-center rounded-full">
-                  <Check aria-hidden="true" className="size-4" />
-                </span>
-                <span className="text-ink text-sm font-semibold">{outcome}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* Clean White Bottom CTA */}
-      <section className="bg-white py-14 sm:py-20 border-t border-slate-100">
-        <div className="container-page">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-slate-50/80 p-8 sm:p-12 lg:p-16 text-center shadow-xs max-w-5xl mx-auto">
-            <Eyebrow>Let’s Talk</Eyebrow>
-            <h2 className="text-ink mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
-              Ready to Strengthen Your Market Presence?
-            </h2>
-            <p className="text-muted-foreground mt-3 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed font-medium">
-              Tell us what you want to achieve and our team will help shape the right marketing approach.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-7 shadow-md">
-                <Link href={ROUTES.public.contact}>
-                  Discuss Your Marketing Needs
-                </Link>
-              </Button>
-              <Button asChild size="xl" variant="outline" className="bg-white hover:bg-slate-50 text-slate-800 font-semibold border-slate-300 rounded-xl px-7 shadow-2xs">
-                <Link href={ROUTES.public.contact}>
-                  Contact Us
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

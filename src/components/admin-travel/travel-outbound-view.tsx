@@ -90,25 +90,25 @@ export function TravelOutboundView() {
   return (
     <div className="space-y-6 pb-12">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/60 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-5">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="font-heading text-2xl font-bold tracking-tight text-navy dark:text-foreground">
+            <h1 className="font-heading text-2xl font-bold tracking-tight text-navy">
               Outbound Tours
             </h1>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand-blue border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand-blue border border-blue-100">
               <Globe2 className="size-3.5" />
               International Itineraries
             </span>
           </div>
-          <p className="text-xs text-muted-foreground mt-1 max-w-3xl leading-relaxed">
+          <p className="text-xs text-slate-500 mt-1 max-w-3xl leading-relaxed">
             Manage international outbound tour packages, pricing, offers, itineraries and customer-facing travel information.
           </p>
         </div>
 
         <Button
           onClick={handleOpenAdd}
-          className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-semibold gap-1.5 shadow-sm h-9 self-start sm:self-auto rounded-xl shrink-0"
+          className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-semibold gap-1.5 shadow-2xs h-9 self-start sm:self-auto rounded-xl shrink-0"
         >
           <Plus className="size-4" />
           Add Outbound Package

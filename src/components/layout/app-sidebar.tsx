@@ -1,37 +1,46 @@
 "use client";
 
+import { LogOut } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useMemo } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 
+import { BrandLogo } from "@/components/common/brand-logo";
 import {
-  PORTAL_ICONS,
-  PORTAL_LABELS,
   PORTAL_NAVIGATION,
   type NavItem,
   type NavSection,
 } from "@/config/navigation";
-import type { Ability } from "@/lib/permissions/ability";
-import type { Portal } from "@/lib/permissions/roles";
-import { useAuth } from "@/providers/auth-provider";
-import { cn } from "@/lib/utils";
-
-import { LogOut } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-
 import { ROUTES } from "@/config/routes";
-import { clearTestAdminAuthState } from "@/lib/auth/dev-admin-auth";
 import { api } from "@/lib/api/client";
 import { API_ROUTES } from "@/lib/api/endpoints";
+import { clearTestAdminAuthState } from "@/lib/auth/dev-admin-auth";
+import type { Ability } from "@/lib/permissions/ability";
+import type { Portal } from "@/lib/permissions/roles";
+import { cn } from "@/lib/utils";
+import { useAuth } from "@/providers/auth-provider";
 
 /**
- * The one sidebar used by the customer, supplier, staff, and admin portals.
- *
- * Items come from `config/navigation.ts` and are filtered by the current user's
- * ability, so a link is never shown for a page the user cannot open. Adding a
- * module means adding a config entry, not writing another sidebar.
+ * Filter sections according to permissions.
  */
+function filterSections(sections: readonly NavSection[] | undefined, ability: Ability): NavSection[] {
+  if (!sections) return [];
+  return sections
+    .map((section) => ({
+      ...section,
+      items: section.items.filter(
+        (item) => item.permissions.length === 0 || item.permissions.some((p) => ability.can(p))
+      ),
+    }))
+    .filter((section) => section.items.length > 0);
+}
+
+function isItemActive(item: NavItem, pathname: string): boolean {
+  if (pathname === item.href) return true;
+  if (item.matchNested && pathname.startsWith(`${item.href}/`)) return true;
+  return false;
+}
+
 export function AppSidebar({ portal }: { portal: Portal }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -42,8 +51,6 @@ export function AppSidebar({ portal }: { portal: Portal }) {
     () => filterSections(PORTAL_NAVIGATION[portal], ability),
     [portal, ability],
   );
-
-  const PortalIcon = PORTAL_ICONS[portal];
 
   async function handleSignOut() {
     setIsSigningOut(true);
@@ -57,42 +64,46 @@ export function AppSidebar({ portal }: { portal: Portal }) {
   }
 
   return (
-    <nav aria-label="Main navigation" className="flex h-full flex-col gap-6 p-4">
-      <Link
-        href="/"
-        className="focus-visible:ring-ring flex items-center gap-2 rounded-md px-2 py-1 focus-visible:ring-2 focus-visible:outline-none"
-      >
-        <PortalIcon className="text-primary size-5" aria-hidden="true" />
-        <span className="text-sm font-semibold">{PORTAL_LABELS[portal]}</span>
-      </Link>
+    <nav aria-label="Main navigation" className="flex h-full flex-col justify-between bg-white p-4">
+      <div className="space-y-6">
+        {/* Brand Logo Header */}
+        <div className="flex items-center px-2 pt-2 pb-1 border-b border-slate-100">
+          <BrandLogo
+            className="focus-visible:ring-ring rounded-lg focus-visible:ring-2 focus-visible:outline-none"
+            imageClassName="h-8.5 w-auto max-w-[170px]"
+          />
+        </div>
 
-      <div className="flex-1 space-y-6 overflow-y-auto">
-        {sections.map((section, idx) => (
-          <div key={section.title || `sec-${idx}`} className="space-y-1">
-            {section.title ? (
-              <h2 className="text-muted-foreground px-2 text-xs font-medium tracking-wide uppercase">
-                {section.title}
-              </h2>
-            ) : null}
-            <ul className="space-y-0.5">
-              {section.items.map((item) => (
-                <li key={item.href}>
-                  <SidebarLink item={item} isActive={isItemActive(item, pathname)} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {/* Navigation Sections */}
+        <div className="space-y-6 overflow-y-auto pr-1">
+          {sections.map((section, idx) => (
+            <div key={section.title || `sec-${idx}`} className="space-y-1.5">
+              {section.title ? (
+                <h2 className="px-3 text-[11px] font-bold tracking-wider text-slate-400 uppercase">
+                  {section.title}
+                </h2>
+              ) : null}
+              <ul className="space-y-1">
+                {section.items.map((item) => (
+                  <li key={item.href}>
+                    <SidebarLink item={item} isActive={isItemActive(item, pathname)} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="border-t pt-3">
+      {/* Bottom Sign Out Button */}
+      <div className="border-t border-slate-100 pt-3">
         <button
           type="button"
           onClick={handleSignOut}
           disabled={isSigningOut}
-          className="focus-visible:ring-ring text-muted-foreground hover:bg-destructive/10 hover:text-destructive flex w-full items-center gap-2.5 rounded-md px-2 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
+          className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-all hover:bg-red-50 hover:text-red-600 focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:outline-none disabled:opacity-50"
         >
-          <LogOut className="size-4 shrink-0" aria-hidden="true" />
+          <LogOut className="size-4 shrink-0 text-slate-400 transition-colors group-hover:text-red-600" aria-hidden="true" />
           <span className="truncate">{isSigningOut ? "Signing out..." : "Sign out"}</span>
         </button>
       </div>
@@ -106,33 +117,22 @@ function SidebarLink({ item, isActive }: { item: NavItem; isActive: boolean }) {
   return (
     <Link
       href={item.href}
-      // `aria-current` tells assistive technology which page is open, rather
-      // than relying on the highlight colour alone.
       aria-current={isActive ? "page" : undefined}
       className={cn(
-        "focus-visible:ring-ring flex items-center gap-2.5 rounded-md px-2 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:outline-none",
+        "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:outline-none",
         isActive
-          ? "bg-accent text-accent-foreground font-medium"
-          : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
+          ? "bg-blue-50 text-blue-600 font-semibold shadow-2xs shadow-blue-500/10 border-l-3 border-blue-600"
+          : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
       )}
     >
-      <Icon className="size-4 shrink-0" aria-hidden="true" />
+      <Icon
+        className={cn(
+          "size-4.5 shrink-0 transition-colors",
+          isActive ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
+        )}
+        aria-hidden="true"
+      />
       <span className="truncate">{item.title}</span>
     </Link>
   );
-}
-
-/** Drops items and then empty sections the user has no permission for. */
-function filterSections(sections: readonly NavSection[], ability: Ability): NavSection[] {
-  return sections
-    .map((section) => ({
-      ...section,
-      items: section.items.filter((item) => ability.canAny(item.permissions)),
-    }))
-    .filter((section) => section.items.length > 0);
-}
-
-function isItemActive(item: NavItem, pathname: string): boolean {
-  if (pathname === item.href) return true;
-  return item.matchNested === true && pathname.startsWith(`${item.href}/`);
 }

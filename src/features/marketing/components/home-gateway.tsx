@@ -1011,36 +1011,6 @@ export function HomeGateway() {
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────
-          9. DIRECT ACTION BANNER: Tell Us What You Need
-      ───────────────────────────────────────────────────────────── */}
-      <section className="section-y bg-white border-t border-slate-100">
-        <div className="container-page">
-          <div className="relative isolate overflow-hidden rounded-3xl border border-brand-blue/20 bg-gradient-to-r from-brand-blue-light/40 via-white to-brand-blue-light/30 p-8 sm:p-12 shadow-lift">
-            <div className="grid items-center gap-8 lg:grid-cols-12">
-              <div className="space-y-4 lg:col-span-8">
-                <span className="bg-brand-blue text-white rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
-                  Direct Requirement Desk
-                </span>
-                <h2 className="text-ink text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
-                  Have a Specific Requirement or Project in Mind?
-                </h2>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl">
-                  Whether you need business advisory, software development, an inbound or outbound holiday package, or global trade support, share your requirement and our team will prepare a structured proposal for you.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row lg:flex-col lg:items-end justify-center gap-3 lg:col-span-4">
-                <Button size="xl" onClick={openForm} className="shadow-lift gap-2 w-full sm:w-auto">
-                  Submit Your Requirement
-                </Button>
-                <Button size="lg" variant="outline" asChild className="bg-white/90">
-                  <Link href={ROUTES.public.contact}>Talk to an Advisor</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ─────────────────────────────────────────────────────────────
           10. CONTACT STRIP & EXECUTIVE SUPPORT

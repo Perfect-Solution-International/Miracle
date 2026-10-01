@@ -1,296 +1,345 @@
 import {
   ArrowRight,
-  Bot,
   Briefcase,
+  BriefcaseBusiness,
   CheckCircle2,
-  ChevronRight,
-  ClipboardList,
-  Clock3,
+  Code2,
+  Compass,
   FileCheck2,
   Globe2,
   Handshake,
+  Headphones,
+  HelpCircle,
+  Layers3,
   Lightbulb,
-  Lock,
+  Megaphone,
+  MessageSquarePlus,
+  Package,
+  Plane,
   Search,
+  SearchCheck,
   ShieldCheck,
-  Sparkles,
-  Users,
+  SlidersHorizontal,
+  Stamp,
+  Store,
+  TrendingUp,
+  Warehouse,
+  type LucideIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
-import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
+import { SITE_MEDIA } from "@/config/site-media";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "How It Works";
 const DESCRIPTION =
-  "A streamlined, transparent 5-step process from your initial requirement to end-to-end coordinated execution.";
+  "A simple and transparent process to help you find the right business, sourcing, travel, and service solutions.";
 
 export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: ROUTES.public.howItWorks,
+  image: SITE_MEDIA.aboutHero,
 });
 
-const DETAILED_STEPS = [
+/** 6 Core Steps */
+const STEPS = [
   {
     step: "01",
-    title: "Submit Your Requirement",
-    tagline: "Tell us what you need in plain terms",
+    title: "Tell Us What You Need",
     description:
-      "Share your business goal, project scope, travel dates, or technical needs through our online intake form, direct call, or email. Attach any reference materials or specifications.",
-    icon: ClipboardList,
-    points: [
-      "No complex forms required",
-      "Flexible requirement intake",
-      "Direct document attachment support",
-    ],
+      "Customers share their requirement, business idea, travel plan, sourcing need, or service request.",
+    icon: MessageSquarePlus,
   },
   {
     step: "02",
-    title: "Needs Assessment & Feasibility",
-    tagline: "Multidisciplinary specialist review",
+    title: "We Understand Your Requirement",
     description:
-      "Our business advisors, engineers, or travel coordinators analyze your requirements, verify feasibility, and determine the optimal resources, timeline, and cost model.",
-    icon: Search,
-    points: [
-      "Market and operational validation",
-      "Resource & technology evaluation",
-      "Transparent timeline projection",
-    ],
+      "Our team reviews the information and identifies the most suitable way to support the request.",
+    icon: SearchCheck,
   },
   {
     step: "03",
-    title: "Customized Strategy & Proposal",
-    tagline: "Clear deliverables and transparent quotation",
+    title: "Explore Suitable Options",
     description:
-      "We prepare a tailored proposal, detailed itinerary, or technical roadmap detailing the deliverables, milestone schedules, and all-inclusive transparent pricing.",
-    icon: FileCheck2,
-    points: [
-      "Zero hidden fees or unexpected costs",
-      "Clear milestone breakdown",
-      "Customized around your budget",
-    ],
+      "We research, coordinate, and present relevant options based on the customer's requirements.",
+    icon: SlidersHorizontal,
   },
   {
     step: "04",
-    title: "Alignment & Finalization",
-    tagline: "Fine-tune details before kickoff",
+    title: "Review & Discuss",
     description:
-      "Review the proposal with your dedicated coordinator. We adjust options, finalize dates or architecture, and confirm all arrangements with mutual sign-off.",
+      "The customer reviews the available options and discusses any changes or additional requirements with our team.",
     icon: Handshake,
-    points: [
-      "Interactive consultation & revisions",
-      "Agreed service level parameters",
-      "Direct point-of-contact assigned",
-    ],
   },
   {
     step: "05",
-    title: "Coordinated Execution & Support",
-    tagline: "Seamless delivery from start to finish",
+    title: "Confirm Your Solution",
     description:
-      "Our team manages the entire execution—whether running cross-border trade, software deployment, business setup, or personalized travel concierge—with ongoing support.",
-    icon: ShieldCheck,
-    points: [
-      "Real-time milestone updates",
-      "End-to-end quality assurance",
-      "Ongoing advisory and maintenance",
-    ],
+      "Once the details are agreed, we coordinate the next steps required for the selected service or solution.",
+    icon: FileCheck2,
+  },
+  {
+    step: "06",
+    title: "Ongoing Support",
+    description:
+      "We continue to coordinate and support the customer throughout the relevant process.",
+    icon: Headphones,
   },
 ] as const;
 
-const ADVANTAGES = [
+/** Core Areas Supported by Miracle International */
+const SERVICE_AREAS = [
   {
-    title: "One Central Point of Contact",
-    description: "Work with a dedicated coordinator who aligns all specialists behind your goal.",
-    icon: Users,
+    title: "Import & Export",
+    description: "International cargo, documentation, clearance, and cross-border freight coordination.",
+    href: ROUTES.public.servicesImportExport,
+    icon: Globe2,
   },
   {
-    title: "Transparent & Accountable",
-    description: "Full visibility on progress, costs, and deliverables at every stage.",
-    icon: Lock,
+    title: "Wholesale & Products",
+    description: "Bulk sourcing across industrial machinery, commercial equipment, electronics, and materials.",
+    href: ROUTES.public.wholesaleProducts,
+    icon: Package,
   },
   {
-    title: "Agile & Adaptive",
-    description: "Easily adjust priorities and scope as your business conditions evolve.",
-    icon: Lightbulb,
+    title: "Trading",
+    description: "Connecting verified international suppliers and buyers with negotiated trade terms.",
+    href: ROUTES.public.servicesTrading,
+    icon: Warehouse,
   },
   {
-    title: "Guaranteed Confidentiality",
-    description: "Your business models, concepts, and data are treated with strict confidentiality.",
-    icon: ShieldCheck,
+    title: "Travel & Tourism",
+    description: "Curated Sri Lanka inbound packages, outbound holiday itineraries, and custom tours.",
+    href: ROUTES.public.travelTourism,
+    icon: Plane,
+  },
+  {
+    title: "Visa Services",
+    description: "Structured document auditing, embassy checklist guidance, and appointment scheduling support.",
+    href: ROUTES.public.visaServices,
+    icon: Stamp,
+  },
+  {
+    title: "Business Solutions",
+    description: "Advisory, planning, business registration, setup guidance, and strategic growth support.",
+    href: ROUTES.public.businessSolutions,
+    icon: Briefcase,
+  },
+  {
+    title: "Franchise Opportunities",
+    description: "Turnkey franchise models, brand licensing, and operational launch assistance.",
+    href: ROUTES.public.servicesFranchise,
+    icon: Store,
+  },
+  {
+    title: "Investment Opportunities",
+    description: "Vetted business ventures, partnership structures, and commercial growth opportunities.",
+    href: ROUTES.public.servicesInvestment,
+    icon: TrendingUp,
+  },
+  {
+    title: "Marketing & Advertising",
+    description: "Brand positioning, multi-channel promotional campaigns, and targeted digital strategy.",
+    href: ROUTES.public.servicesMarketingAdvertising,
+    icon: Megaphone,
+  },
+  {
+    title: "IT Solutions",
+    description: "Modern websites, custom software development, POS systems, and workflow automation.",
+    href: ROUTES.public.itSolutions,
+    icon: Code2,
   },
 ] as const;
 
 export default function Page() {
   return (
-    <main>
-      {/* ── 1. Liquid Mesh Hero ── */}
+    <main className="bg-white">
+      {/* ── 1. Hero Section ── */}
       <section
         aria-labelledby="how-it-works-hero-heading"
-        className="relative isolate overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-8 pb-14 border-b border-slate-200/80 lg:pt-14 lg:pb-20"
+        className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[500px] lg:min-h-[560px] flex items-center"
       >
+        {/* Full-Bleed Background Image */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-36 left-1/2 -z-10 h-[500px] w-[750px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-brand-blue/15 via-indigo-500/10 to-brand-red/10 blur-[100px]"
+          className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+          style={{
+            backgroundImage: `url("${SITE_MEDIA.aboutHero.src}")`,
+            backgroundPosition: "right center",
+          }}
         />
 
-        <div className="container-page max-w-4xl text-center space-y-5">
-          <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs backdrop-blur-md">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
-              <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
-            </span>
-            Transparent 5-Step Delivery Framework
-          </div>
+        {/* Soft-White Gradient on Left Area */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/20 pointer-events-none"
+        />
 
-          <h1
-            id="how-it-works-hero-heading"
-            className="text-ink text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
-          >
-            A Clear, Structured Path From{" "}
-            <span className="bg-gradient-to-r from-brand-blue via-indigo-600 to-navy bg-clip-text text-transparent">
-              Requirement to Results.
-            </span>
-          </h1>
+        {/* Bottom Gradient Fade */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+        />
 
-          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-            Discover how Miracle International transforms ideas and complex operational needs into seamless, coordinated outcomes.
-          </p>
+        <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
+          <div className="max-w-2xl space-y-5">
+            <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">
+              How It Works
+            </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
-            <Button asChild variant="accent" size="xl" className="shadow-lift">
-              <Link href={ROUTES.public.tellUsWhatYouNeed}>
-                Tell Us What You Need
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="secondary-hero"
-              size="xl"
+            <h1
+              id="how-it-works-hero-heading"
+              className="text-navy text-4xl leading-[1.1] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
             >
-              <a href="#steps">Explore the 5 Steps</a>
-            </Button>
+              How It Works
+            </h1>
+
+            <p className="max-w-xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
+              A simple and transparent process to help you find the right business, sourcing, travel, and service solutions.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3.5 pt-3">
+              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-7 shadow-md">
+                <Link href={ROUTES.public.tellUsWhatYouNeed}>
+                  Tell Us What You Need
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" className="size-4.5" />
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="outline" className="bg-white/90 hover:bg-white text-slate-800 font-semibold border-slate-300 rounded-xl px-7 shadow-2xs">
+                <Link href={ROUTES.public.services}>Explore Our Services</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── 2. Detailed 5-Step Process Breakdown ── */}
-      <section id="steps" className="section-y bg-slate-50/70 border-b border-slate-200/70 scroll-mt-20">
-        <div className="container-page space-y-8">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="bg-brand-blue-light text-brand-blue rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
-              Step-by-Step Roadmap
-            </span>
-            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
-              How We Work With You
+      {/* ── 2. Main 6-Step Process Section ── */}
+      <section className="section-y bg-slate-50/60 border-b border-slate-200/80">
+        <div className="container-page space-y-12">
+          <div className="max-w-2xl">
+            <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">
+              Step-by-step guidance
+            </p>
+            <h2 className="text-ink mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Our 6-Step Process
             </h2>
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-              Every project follows our structured 5-stage lifecycle to ensure predictability and flawless execution.
+            <p className="text-muted-foreground mt-3 text-base sm:text-lg leading-relaxed">
+              We work collaboratively with you from your initial inquiry through to complete solution delivery.
             </p>
           </div>
 
-          <div className="mt-12 space-y-6">
-            {DETAILED_STEPS.map((stepItem) => {
-              const Icon = stepItem.icon;
-              return (
-                <div
-                  key={stepItem.step}
-                  className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-brand-blue/40"
-                >
-                  <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
-                    <div className="flex items-center gap-4 lg:col-span-4">
-                      <span className="bg-brand-blue text-white inline-flex size-14 shrink-0 items-center justify-center rounded-2xl text-lg font-extrabold shadow-sm">
-                        {stepItem.step}
-                      </span>
-                      <div>
-                        <span className="text-brand-blue text-xs font-bold uppercase tracking-wider">
-                          Phase {stepItem.step}
-                        </span>
-                        <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors">
-                          {stepItem.title}
-                        </h3>
-                        <p className="text-muted-foreground text-xs mt-0.5">{stepItem.tagline}</p>
-                      </div>
-                    </div>
-
-                    <div className="lg:col-span-5">
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {stepItem.description}
-                      </p>
-                    </div>
-
-                    <div className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-slate-100 pt-4 lg:pt-0 lg:pl-6">
-                      <ul className="space-y-1.5 text-xs font-medium text-ink">
-                        {stepItem.points.map((p) => (
-                          <li key={p} className="flex items-center gap-2">
-                            <CheckCircle2 className="size-3.5 text-brand-blue shrink-0" />
-                            <span>{p}</span>
-                          </li>
-                        ))}
-                      </ul>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {STEPS.map(({ step, title, description, icon: Icon }) => (
+              <div
+                key={step}
+                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-7 shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-xl text-sm font-extrabold shadow-2xs">
+                      {step}
+                    </span>
+                    <div className="bg-brand-blue-light/60 text-brand-blue flex size-10 items-center justify-center rounded-xl transition-colors group-hover:bg-brand-blue group-hover:text-white">
+                      <Icon className="size-5" aria-hidden="true" />
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
-      {/* ── 3. Strategic Advantages ── */}
-      <section className="section-y bg-white border-b border-slate-200/70">
-        <div className="container-page">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="bg-brand-red/10 text-brand-red rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
-              Client Benefits
-            </span>
-            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Why Our Process Works Better
-            </h2>
-          </div>
+                  <h3 className="text-ink mt-6 text-xl font-bold transition-colors group-hover:text-brand-blue">
+                    {title}
+                  </h3>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {ADVANTAGES.map((adv) => {
-              const Icon = adv.icon;
-              return (
-                <div
-                  key={adv.title}
-                  className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
-                >
-                  <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
-                    <Icon className="size-5.5" />
-                  </span>
-                  <h3 className="text-ink text-lg font-bold mt-4">{adv.title}</h3>
-                  <p className="text-muted-foreground text-xs sm:text-sm mt-2 leading-relaxed">
-                    {adv.description}
+                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                    {description}
                   </p>
                 </div>
-              );
-            })}
+
+                <div className="mt-6 border-t border-slate-100 pt-4 flex items-center gap-2 text-xs font-semibold text-brand-blue">
+                  <CheckCircle2 className="size-4 shrink-0 text-brand-blue" />
+                  <span>Step {step} in our collaboration</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── 4. CTA Banner ── */}
-      <CtaBanner
-        eyebrow="Start Your Journey"
-        title="Ready To Turn Your Plan Into Action?"
-        description="Submit your requirement today and our specialists will coordinate the next practical step with you."
-        primary={{
-          label: "Submit Your Requirement",
-          href: ROUTES.public.tellUsWhatYouNeed,
-        }}
-        secondary={{
-          label: "Contact Our Advisors",
-          href: ROUTES.public.contact,
-        }}
-      />
+      {/* ── 3. How We Help Section ── */}
+      <section className="section-y bg-white border-b border-slate-200/80">
+        <div className="container-page space-y-12">
+          <div className="max-w-2xl">
+            <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">
+              Areas of support
+            </p>
+            <h2 className="text-ink mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              How We Help
+            </h2>
+            <p className="text-muted-foreground mt-3 text-base sm:text-lg leading-relaxed">
+              Miracle International provides dedicated support across multiple specialized services and commercial sectors.
+            </p>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {SERVICE_AREAS.map(({ title, description, href, icon: Icon }) => (
+              <Link
+                key={title}
+                href={href}
+                className="group flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-6 shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft"
+              >
+                <div>
+                  <div className="bg-brand-blue-light/70 text-brand-blue flex size-11 items-center justify-center rounded-xl transition-colors group-hover:bg-brand-blue group-hover:text-white">
+                    <Icon className="size-5.5" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-ink mt-5 text-base font-bold transition-colors group-hover:text-brand-blue">
+                    {title}
+                  </h3>
+                  <p className="text-muted-foreground mt-2 text-xs leading-relaxed">
+                    {description}
+                  </p>
+                </div>
+
+                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-bold text-brand-blue">
+                  <span>Learn more</span>
+                  <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Simple CTA Section ── */}
+      <section className="section-y bg-slate-50/70">
+        <div className="container-page">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-8 sm:p-12 lg:p-16 text-center shadow-soft max-w-4xl mx-auto">
+            <p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">
+              Get in touch
+            </p>
+            <h2 className="text-ink mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+              Have a Requirement in Mind?
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-xl mx-auto text-base sm:text-lg leading-relaxed font-medium">
+              Tell us what you need and our team will help you identify the right next step.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-7 shadow-md">
+                <Link href={ROUTES.public.tellUsWhatYouNeed}>
+                  Tell Us What You Need
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" className="size-4" />
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="outline" className="bg-white hover:bg-slate-50 text-slate-800 font-semibold border-slate-300 rounded-xl px-7 shadow-2xs">
+                <Link href={ROUTES.public.services}>Explore Our Services</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

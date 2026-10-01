@@ -104,18 +104,18 @@ export function TravelPackagesTable({
     });
 
   return (
-    <Card className="rounded-2xl border-border/70 shadow-xs bg-card">
-      <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-border/60">
+    <Card className="rounded-2xl border-slate-200/80 shadow-2xs bg-white/90 backdrop-blur-xs overflow-hidden">
+      <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
           <div className="flex items-center gap-2.5">
-            <CardTitle className="text-base font-bold text-navy dark:text-foreground">
+            <CardTitle className="text-base font-bold text-navy">
               {title}
             </CardTitle>
-            <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand-blue dark:bg-brand-blue/20">
+            <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand-blue border border-blue-100">
               {filteredPackages.length} package{filteredPackages.length !== 1 ? "s" : ""}
             </span>
           </div>
-          <p className="text-xs text-muted-foreground mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             {description}
           </p>
         </div>
@@ -123,43 +123,43 @@ export function TravelPackagesTable({
         {/* Filter, Search & Add Bar */}
         <div className="flex flex-wrap items-center gap-2">
           <div className="relative w-full sm:w-56">
-            <Search className="absolute left-2.5 top-2.5 size-3.5 text-muted-foreground" />
+            <Search className="absolute left-2.5 top-2.5 size-3.5 text-slate-400" />
             <Input
               placeholder="Search package..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-8.5 pl-8 text-xs bg-muted/30 focus-visible:bg-card"
+              className="h-8.5 pl-8 text-xs bg-slate-50/70 border-slate-200/80 rounded-xl focus-visible:bg-white focus-visible:border-blue-500 transition-colors"
             />
           </div>
 
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="h-8.5 w-[130px] text-xs bg-muted/30 font-medium">
+            <SelectTrigger className="h-8.5 w-[130px] text-xs bg-slate-50/70 border-slate-200/80 rounded-xl font-medium">
               <SelectValue placeholder="All Statuses" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="ALL">All Statuses</SelectItem>
-              <SelectItem value="Active">Active</SelectItem>
-              <SelectItem value="Draft">Draft</SelectItem>
-              <SelectItem value="Inactive">Inactive</SelectItem>
+            <SelectContent className="rounded-xl border-slate-200/80 bg-white/95 backdrop-blur-md shadow-xl">
+              <SelectItem value="ALL" className="text-xs">All Statuses</SelectItem>
+              <SelectItem value="Active" className="text-xs">Active</SelectItem>
+              <SelectItem value="Draft" className="text-xs">Draft</SelectItem>
+              <SelectItem value="Inactive" className="text-xs">Inactive</SelectItem>
             </SelectContent>
           </Select>
 
           <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="h-8.5 w-[140px] text-xs bg-muted/30 font-medium">
+            <SelectTrigger className="h-8.5 w-[140px] text-xs bg-slate-50/70 border-slate-200/80 rounded-xl font-medium">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="latest">Latest Updated</SelectItem>
-              <SelectItem value="name_asc">Name (A–Z)</SelectItem>
-              <SelectItem value="price_asc">Price (Low to High)</SelectItem>
-              <SelectItem value="price_desc">Price (High to Low)</SelectItem>
+            <SelectContent className="rounded-xl border-slate-200/80 bg-white/95 backdrop-blur-md shadow-xl">
+              <SelectItem value="latest" className="text-xs">Latest Updated</SelectItem>
+              <SelectItem value="name_asc" className="text-xs">Name (A–Z)</SelectItem>
+              <SelectItem value="price_asc" className="text-xs">Price (Low to High)</SelectItem>
+              <SelectItem value="price_desc" className="text-xs">Price (High to Low)</SelectItem>
             </SelectContent>
           </Select>
 
           <Button
             size="sm"
             onClick={onAddPackage}
-            className="h-8.5 bg-brand-blue hover:bg-brand-blue-dark text-white text-xs gap-1.5 font-semibold shadow-xs rounded-xl"
+            className="h-8.5 bg-brand-blue hover:bg-brand-blue-dark text-white text-xs gap-1.5 font-semibold shadow-2xs rounded-xl"
           >
             <Plus className="size-3.5" />
             {addLabel}
@@ -170,38 +170,38 @@ export function TravelPackagesTable({
       <CardContent className="p-0">
         <div className="overflow-x-auto">
           <Table>
-            <TableHeader className="bg-muted/30">
-              <TableRow className="hover:bg-transparent">
-                <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground pl-6 w-[70px]">
+            <TableHeader className="bg-slate-50/70">
+              <TableRow className="hover:bg-transparent border-slate-200/80">
+                <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500 pl-6 w-[70px]">
                   Cover
                 </TableHead>
-                <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Package Name
                 </TableHead>
-                <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Destination
                 </TableHead>
                 {travelType === "Outbound" ? (
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                     Country
                   </TableHead>
                 ) : null}
-                <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Duration
                 </TableHead>
-                <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Price
                 </TableHead>
-                <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Currency
                 </TableHead>
-                <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Status
                 </TableHead>
-                <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Last Updated
                 </TableHead>
-                <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground text-right pr-6">
+                <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500 text-right pr-6">
                   Actions
                 </TableHead>
               </TableRow>
@@ -213,14 +213,14 @@ export function TravelPackagesTable({
                     colSpan={travelType === "Outbound" ? 10 : 9}
                     className="h-44 text-center"
                   >
-                    <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
-                      <div className="flex size-10 items-center justify-center rounded-full bg-muted/60 mb-2.5">
-                        <Package className="size-5 text-muted-foreground/70" />
+                    <div className="flex flex-col items-center justify-center py-8 text-slate-400">
+                      <div className="flex size-10 items-center justify-center rounded-full bg-slate-100 mb-2.5">
+                        <Package className="size-5 text-slate-400" />
                       </div>
-                      <p className="text-sm font-semibold text-navy dark:text-foreground">
+                      <p className="text-sm font-semibold text-navy">
                         No {travelType.toLowerCase()} tour packages found.
                       </p>
-                      <p className="text-xs text-muted-foreground max-w-sm mt-0.5">
+                      <p className="text-xs text-slate-500 max-w-sm mt-0.5">
                         {searchQuery || statusFilter !== "ALL"
                           ? "No packages match the current filter criteria."
                           : `Create your first ${travelType.toLowerCase()} tour itinerary using the "${addLabel}" button.`}
@@ -230,7 +230,7 @@ export function TravelPackagesTable({
                           size="sm"
                           variant="outline"
                           onClick={onAddPackage}
-                          className="mt-3.5 h-8 text-xs gap-1.5 text-brand-blue border-brand-blue/40 hover:bg-brand-blue/5"
+                          className="mt-3.5 h-8 text-xs gap-1.5 text-brand-blue border-blue-200 hover:bg-blue-50/50 rounded-xl"
                         >
                           <Plus className="size-3.5" />
                           {addLabel}
@@ -248,11 +248,11 @@ export function TravelPackagesTable({
                   return (
                     <TableRow
                       key={pkg.id}
-                      className="group transition-colors hover:bg-muted/30"
+                      className="group transition-colors border-slate-100 hover:bg-slate-50/70"
                     >
                       {/* Cover Image */}
                       <TableCell className="pl-6 py-3">
-                        <div className="size-11 rounded-lg overflow-hidden shrink-0 border border-border/70 bg-muted">
+                        <div className="size-11 rounded-xl overflow-hidden shrink-0 border border-slate-200/80 bg-slate-100">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={coverUrl}
@@ -268,11 +268,11 @@ export function TravelPackagesTable({
                       {/* Package Name */}
                       <TableCell className="py-3 max-w-[220px]">
                         <div className="space-y-0.5">
-                          <p className="font-bold text-xs text-navy dark:text-foreground line-clamp-1 group-hover:text-brand-blue transition-colors">
+                          <p className="font-bold text-xs text-navy line-clamp-1 group-hover:text-brand-blue transition-colors">
                             {pkg.name}
                           </p>
                           {pkg.shortDescription ? (
-                            <p className="text-[11px] text-muted-foreground line-clamp-1">
+                            <p className="text-[11px] text-slate-500 line-clamp-1">
                               {pkg.shortDescription}
                             </p>
                           ) : null}
@@ -280,49 +280,50 @@ export function TravelPackagesTable({
                       </TableCell>
 
                       {/* Destination */}
-                      <TableCell className="py-3 text-xs text-foreground font-medium">
+                      <TableCell className="py-3 text-xs text-slate-700 font-medium">
                         {pkg.destination}
                       </TableCell>
 
                       {/* Country (for Outbound) */}
                       {travelType === "Outbound" ? (
-                        <TableCell className="py-3 text-xs text-muted-foreground">
+                        <TableCell className="py-3 text-xs text-slate-500">
                           {pkg.country || "—"}
                         </TableCell>
                       ) : null}
 
                       {/* Duration */}
-                      <TableCell className="py-3 text-xs text-muted-foreground font-medium">
+                      <TableCell className="py-3 text-xs text-slate-600 font-medium">
                         {pkg.duration}
                       </TableCell>
 
                       {/* Price */}
-                      <TableCell className="py-3 text-xs font-bold text-navy dark:text-foreground">
+                      <TableCell className="py-3 text-xs font-bold text-navy">
                         {pkg.priceOnRequest ? (
-                          <span className="text-[11px] font-medium text-muted-foreground">
+                          <span className="text-[11px] font-medium text-slate-500">
                             On Request
                           </span>
                         ) : pkg.price != null ? (
                           <span>{pkg.price.toLocaleString()}</span>
                         ) : (
-                          <span className="text-muted-foreground font-normal">—</span>
+                          <span className="text-slate-400 font-normal">—</span>
                         )}
                       </TableCell>
 
                       {/* Currency */}
-                      <TableCell className="py-3 text-xs font-semibold text-muted-foreground">
+                      <TableCell className="py-3 text-xs font-semibold text-slate-500">
                         {pkg.currency || (travelType === "Inbound" ? "LKR" : "USD")}
                       </TableCell>
 
                       {/* Status */}
                       <TableCell className="py-3">
                         <Badge
+                          variant="outline"
                           className={
                             pkg.status === "Active"
-                              ? "bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold"
+                              ? "bg-emerald-50 text-emerald-700 border-emerald-200/80 text-[11px] font-semibold"
                               : pkg.status === "Draft"
-                                ? "bg-amber-600 hover:bg-amber-700 text-white text-[11px] font-semibold"
-                                : "bg-slate-600 hover:bg-slate-700 text-white text-[11px] font-semibold"
+                                ? "bg-amber-50 text-amber-700 border-amber-200/80 text-[11px] font-semibold"
+                                : "bg-slate-100 text-slate-700 border-slate-200 text-[11px] font-semibold"
                           }
                         >
                           {pkg.status}
@@ -330,7 +331,7 @@ export function TravelPackagesTable({
                       </TableCell>
 
                       {/* Last Updated */}
-                      <TableCell className="py-3 text-xs text-muted-foreground whitespace-nowrap">
+                      <TableCell className="py-3 text-xs text-slate-500 whitespace-nowrap">
                         {lastUpdateStr}
                       </TableCell>
 
@@ -344,10 +345,10 @@ export function TravelPackagesTable({
                               variant="ghost"
                               onClick={() => onToggleStatus(pkg)}
                               title={isActive ? "Deactivate Package" : "Activate Package"}
-                              className={`size-7.5 p-0 ${
+                              className={`size-7.5 p-0 rounded-lg ${
                                 isActive
                                   ? "text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50"
-                                  : "text-muted-foreground hover:text-emerald-600 hover:bg-muted"
+                                  : "text-slate-400 hover:text-emerald-600 hover:bg-slate-100"
                               }`}
                             >
                               {isActive ? (
@@ -362,7 +363,7 @@ export function TravelPackagesTable({
                             size="sm"
                             variant="ghost"
                             onClick={() => onViewPackage(pkg)}
-                            className="size-7.5 p-0 text-muted-foreground hover:text-brand-blue"
+                            className="size-7.5 p-0 text-slate-400 hover:text-brand-blue rounded-lg"
                             title="View Package"
                           >
                             <Eye className="size-3.5" />
@@ -372,7 +373,7 @@ export function TravelPackagesTable({
                             size="sm"
                             variant="ghost"
                             onClick={() => onEditPackage(pkg)}
-                            className="size-7.5 p-0 text-muted-foreground hover:text-brand-blue"
+                            className="size-7.5 p-0 text-slate-400 hover:text-brand-blue rounded-lg"
                             title="Edit Package"
                           >
                             <Edit3 className="size-3.5" />
@@ -382,7 +383,7 @@ export function TravelPackagesTable({
                             size="sm"
                             variant="ghost"
                             onClick={() => onDeletePackage(pkg.id)}
-                            className="size-7.5 p-0 text-muted-foreground hover:text-brand-red"
+                            className="size-7.5 p-0 text-slate-400 hover:text-brand-red rounded-lg"
                             title="Delete Package"
                           >
                             <Trash2 className="size-3.5" />
@@ -398,12 +399,12 @@ export function TravelPackagesTable({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between border-t border-border/60 px-6 py-3 bg-muted/10 text-xs text-muted-foreground">
+        <div className="flex items-center justify-between border-t border-slate-100 px-6 py-3 bg-slate-50/40 text-xs text-slate-500">
           <span>
-            Showing <strong>{filteredPackages.length}</strong> of <strong>{packages.length}</strong> total packages
+            Showing <strong className="text-slate-700">{filteredPackages.length}</strong> of <strong className="text-slate-700">{packages.length}</strong> total packages
           </span>
-          <span className="text-[11px] text-muted-foreground">
-            * Only packages with status <strong>Active</strong> appear on the public travel website.
+          <span className="text-[11px] text-slate-400">
+            * Only packages with status <strong className="text-emerald-700">Active</strong> appear on the public travel website.
           </span>
         </div>
       </CardContent>

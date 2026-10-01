@@ -90,25 +90,25 @@ export function TravelInboundView() {
   return (
     <div className="space-y-6 pb-12">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/60 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-5">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="font-heading text-2xl font-bold tracking-tight text-navy dark:text-foreground">
+            <h1 className="font-heading text-2xl font-bold tracking-tight text-navy">
               Inbound Tours
             </h1>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 border border-emerald-200/80">
               <Palmtree className="size-3.5" />
               Sri Lanka Itineraries
             </span>
           </div>
-          <p className="text-xs text-muted-foreground mt-1 max-w-3xl leading-relaxed">
+          <p className="text-xs text-slate-500 mt-1 max-w-3xl leading-relaxed">
             Manage Sri Lanka inbound tour packages, pricing, offers, itineraries and customer-facing travel information.
           </p>
         </div>
 
         <Button
           onClick={handleOpenAdd}
-          className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-semibold gap-1.5 shadow-sm h-9 self-start sm:self-auto rounded-xl shrink-0"
+          className="bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-semibold gap-1.5 shadow-2xs h-9 self-start sm:self-auto rounded-xl shrink-0"
         >
           <Plus className="size-4" />
           Add Inbound Package

@@ -1,11 +1,11 @@
-import { Clock, Mail, MapPin, Phone, MessageSquare, type LucideIcon } from "lucide-react";
+import Image from "next/image";
+import { Clock, Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 
 import { BrandLogo } from "@/components/common/brand-logo";
 import { SocialLinks } from "@/components/common/social-links";
 import { APP_CONFIG, CURRENT_YEAR } from "@/config/app";
-import { PUBLIC_FOOTER_NAV, PUBLIC_LEGAL_NAV } from "@/config/public-navigation";
-import { ROUTES } from "@/config/routes";
+import { PUBLIC_FOOTER_NAV } from "@/config/public-navigation";
 
 function ContactItem({
   icon: Icon,
@@ -78,7 +78,7 @@ export function PublicFooter() {
             </div>
           </div>
 
-          {/* Navigation Columns (5 categories matching site offerings) */}
+          {/* Navigation Columns (5 balanced categories matching site offerings) */}
           <nav
             aria-label="Footer"
             className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:grid-cols-5 lg:col-span-8"
@@ -105,23 +105,24 @@ export function PublicFooter() {
           </nav>
         </div>
 
-        {/* Bottom Bar: Copyright & Legal */}
-        <div className="mt-16 flex flex-col-reverse gap-5 border-t border-white/10 pt-8 text-sm md:flex-row md:items-center md:justify-between">
-          <p>
+        {/* Bottom Bar: Copyright & Developer Credit */}
+        <div className="mt-14 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 text-xs text-white/60 sm:flex-row">
+          <p className="text-center sm:text-left">
             &copy; {CURRENT_YEAR} {APP_CONFIG.name}. All rights reserved.
           </p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2">
-            {PUBLIC_LEGAL_NAV.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="rounded-sm transition-colors hover:text-white"
-                >
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+
+          <div className="flex items-center gap-2.5">
+            <span className="text-white/60">Developed by</span>
+            <div className="inline-flex items-center">
+              <Image
+                src="/brand/perfect-solution-logo.png"
+                alt="Perfect Solution International (Pvt) Ltd"
+                width={160}
+                height={160}
+                className="h-8 w-auto rounded-sm object-contain"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </footer>
