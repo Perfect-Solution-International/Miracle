@@ -10,7 +10,6 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { SocialLinks } from "@/components/common/social-links";
@@ -25,8 +24,6 @@ import {
 } from "@/features/contact";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
-
-import lightPageStyles from "../light-page.module.css";
 
 const TITLE = "Contact Us";
 const DESCRIPTION =
@@ -275,15 +272,6 @@ export default function Page() {
 
       <LocationSection />
 
-      <CtaBanner
-        eyebrow="Need More Detail?"
-        title="Tell Us the Requirement and We'll Help You Move Forward"
-        description="For a detailed product, service or project request, send us the specifications and our team will review the next steps with you."
-        primary={{ label: "Request a Quotation", href: ROUTES.public.requestQuotation }}
-        secondary={{ label: "Visit Our FAQ", href: ROUTES.public.faq }}
-        headingId="contact-cta-heading"
-        className={lightPageStyles.lightCta}
-      />
     </main>
   );
 }

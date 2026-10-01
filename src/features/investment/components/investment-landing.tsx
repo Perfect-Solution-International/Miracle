@@ -76,12 +76,6 @@ const SUPPORT_STEPS = [
   ["05", "Connect & Coordinate", "Where applicable, connect relevant parties and coordinate the required business process."],
 ] as const;
 
-const WHY_US = [
-  ["Business Opportunity Guidance", "Make sense of possible directions and next steps.", Lightbulb],
-  ["Market & Business Information", "Review useful context before moving forward.", BarChart3],
-  ["Investment Requirement Support", "Share your goals and get help shaping your requirement.", CircleDollarSign],
-  ["Business Connection & Coordination", "Connect relevant people and coordinate the process where applicable.", Handshake],
-] as const;
 
 type FormState = {
   fullName: string;
@@ -394,31 +388,6 @@ export function InvestmentLanding({
           </div>
         </section>
 
-        <section className="section-y bg-white border-t border-slate-100">
-          <div className="container-page">
-            <div className="max-w-2xl">
-              <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">
-                No invented listings
-              </p>
-              <h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Investment Projects
-              </h2>
-              <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
-                Explore projects that may require investment, business participation or strategic support.
-              </p>
-            </div>
-            <div className="mt-10 rounded-3xl border border-dashed border-slate-300 bg-slate-50/70 px-6 py-14 text-center sm:px-12">
-              <CircleDollarSign className="text-brand-blue mx-auto size-10" />
-              <h3 className="text-ink mt-5 text-2xl font-bold">No Investment Projects Available</h3>
-              <p className="text-muted-foreground mx-auto mt-3 max-w-lg">
-                New opportunities will be added as they become available.
-              </p>
-              <Button size="lg" onClick={openForm} className="mt-7">
-                Submit Your Investment Requirement
-              </Button>
-            </div>
-          </div>
-        </section>
 
         <section className="section-y bg-white border-t border-slate-100">
           <div className="container-page">
@@ -480,6 +449,8 @@ export function InvestmentLanding({
           </div>
         </section>
 
+ Imasha
+
         <section className="section-y bg-white border-t border-slate-100">
           <div className="container-page">
             <div className="max-w-2xl">
@@ -525,6 +496,7 @@ export function InvestmentLanding({
             </div>
           </div>
         </section>
+develop
       </main>
       <RequestModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
 

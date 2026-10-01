@@ -1011,6 +1011,7 @@ export function HomeGateway() {
         </div>
       </section>
 
+Imasha
       {/* ─────────────────────────────────────────────────────────────
           9. DIRECT ACTION BANNER: Tell Us What You Need
       ───────────────────────────────────────────────────────────── */}
@@ -1041,6 +1042,7 @@ export function HomeGateway() {
           </div>
         </div>
       </section>
+ develop
 
       {/* ─────────────────────────────────────────────────────────────
           10. CONTACT STRIP & EXECUTIVE SUPPORT

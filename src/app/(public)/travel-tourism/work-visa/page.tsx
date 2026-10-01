@@ -1,17 +1,8 @@
 import {
-  ArrowRight,
-  BellRing,
   Briefcase,
-  BriefcaseBusiness,
-  CheckCircle2,
-  ClipboardCheck,
   FileCheck,
-  FileSearch,
   HeartPulse,
-  HelpCircle,
-  MessageCircle,
   Plane,
-  Send,
   ShieldCheck,
   Stamp,
 } from "lucide-react";
@@ -74,29 +65,6 @@ const WORK_VISA_PILLARS = [
   },
 ] as const;
 
-const PROCESS_STEPS = [
-  { icon: Send, title: "Request Submitted" },
-  { icon: FileSearch, title: "Document Review" },
-  { icon: MessageCircle, title: "Consultation" },
-  { icon: ClipboardCheck, title: "Visa Guidance" },
-  { icon: BriefcaseBusiness, title: "Application Support" },
-  { icon: BellRing, title: "Status Updates" },
-] as const;
-
-const FAQS = [
-  {
-    q: "What is Miracle International's role in the work visa process?",
-    a: "We act as your professional document preparation, advisory, and travel logistics partner. We help you review, format, and attest your documents correctly according to official embassy rules. We do not recruit or guarantee visa approval, which remains the sole prerogative of the respective government authorities.",
-  },
-  {
-    q: "Which destinations do you support?",
-    a: "We provide documentation guidance for popular employment destinations including the UAE, Qatar, Saudi Arabia, Kuwait, Oman, as well as selected European and East Asian work permit documentation.",
-  },
-  {
-    q: "How early should I begin document preparation?",
-    a: "We recommend commencing your document verification and attestation process 4 to 8 weeks prior to your target deployment, allowing ample time for ministry seals and consulate approvals.",
-  },
-] as const;
 
 export default function Page() {
   return (
@@ -237,6 +205,8 @@ export default function Page() {
         </div>
       </Section>
 
+ Imasha
+
       {/* 6-Step Process */}
       <section className="bg-white px-5 py-16 sm:px-8 md:py-20" aria-labelledby="work-visa-process-heading">
         <div className="container-page">
@@ -287,6 +257,7 @@ export default function Page() {
           </div>
         </div>
       </Section>
+ develop
     </>
   );
 }

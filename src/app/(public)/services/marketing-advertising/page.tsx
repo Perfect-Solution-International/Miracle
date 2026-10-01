@@ -104,12 +104,6 @@ const channels = [
   ["Web Campaigns", "Bring digital touchpoints together.", Globe2],
 ] as const;
 
-const steps = [
-  ["Discover", "Understand the business, goals, audience and current position."],
-  ["Plan", "Define the message, channels and campaign direction."],
-  ["Execute", "Coordinate content, creative, promotion and campaign activity."],
-  ["Review", "Assess performance and refine future marketing activity."],
-] as const;
 
 const values = [
   [
@@ -130,14 +124,6 @@ const values = [
   ],
 ] as const;
 
-const outcomes = [
-  "Stronger brand visibility",
-  "More consistent messaging",
-  "Better campaign coordination",
-  "Improved digital presence",
-  "Clearer marketing direction",
-  "Scalable marketing support",
-] as const;
 
 export default function Page() {
   return (
@@ -342,34 +328,6 @@ export default function Page() {
         </div>
       </Section>
 
-      <Section aria-labelledby="process-heading" className="bg-white border-t border-slate-100">
-        <SectionHeading
-          eyebrow="Our Process"
-          title="A Clear Path From Strategy to Execution"
-          description="A considered sequence keeps the work focused and gives each activity a purpose."
-          id="process-heading"
-        />
-        <ol className="border-brand-blue/25 mt-11 grid gap-8 border-l pl-6 md:grid-cols-4 md:gap-6 md:border-t md:border-l-0 md:pl-0">
-          {steps.map(([title, description], index) => (
-            <li key={title} className="relative md:pt-7">
-              <span
-                className="bg-brand-red absolute top-2 -left-[1.79rem] size-2.5 rounded-full ring-4 ring-white md:-top-[0.35rem] md:left-0"
-                aria-hidden="true"
-              />
-              <span
-                className="text-[#5B7FAE] text-5xl leading-none font-bold"
-                aria-hidden="true"
-              >
-                0{index + 1}
-              </span>
-              <h3 className="text-ink mt-3 text-lg font-bold">{title}</h3>
-              <p className="text-muted-foreground mt-2 max-w-xs text-sm leading-relaxed">
-                {description}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </Section>
 
       <Section aria-labelledby="value-heading" className="bg-white border-t border-slate-100">
         <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:gap-20">
@@ -407,6 +365,8 @@ export default function Page() {
           </div>
         </div>
       </Section>
+
+ Imasha
 
       <Section aria-labelledby="outcomes-heading" className="bg-white border-t border-slate-100">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
@@ -457,6 +417,7 @@ export default function Page() {
           </div>
         </div>
       </section>
+ develop
     </main>
   );
 }

@@ -50,6 +50,10 @@ export interface RequirementInquiryFormProps {
   defaultService?: string;
 }
 
+function generateRequirementRef(): string {
+  return `REQ-${Math.floor(100000 + Math.random() * 900000)}`;
+}
+
 /**
  * Main Requirement Intake Form
  * Clean white card style matching the existing website with full requested form fields.
@@ -98,7 +102,7 @@ export function RequirementInquiryForm({
   }, [defaultService, form]);
 
   function onSubmit(values: RequirementInquiryInput) {
-    const randomRef = "REQ-" + Math.floor(100000 + Math.random() * 900000);
+    const randomRef = generateRequirementRef();
     setSubmittedRef(randomRef);
 
     toast.success(`Thank you, ${values.fullName}!`, {

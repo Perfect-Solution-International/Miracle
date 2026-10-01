@@ -367,16 +367,24 @@ export const PUBLIC_MOBILE_NAV: readonly PublicNavGroup[] = [
 
 export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
   {
-    title: "Business Solutions",
+    title: "Company",
     links: [
-      { title: "Start a Business", href: ROUTES.public.businessStart },
-      { title: "Business Consultation", href: ROUTES.public.businessConsultation },
-      { title: "Business Planning", href: ROUTES.public.businessPlanning },
-      { title: "Business Setup Support", href: ROUTES.public.businessSetup },
-      { title: "Business Expansion", href: ROUTES.public.businessExpansion },
-      { title: "Machinery & Equipment", href: ROUTES.public.businessMachinery },
-      { title: "Business Technology", href: ROUTES.public.businessTechnology },
-      { title: "Business Support", href: ROUTES.public.businessSupport },
+      { title: "About Us", href: ROUTES.public.about },
+      { title: "How It Works", href: ROUTES.public.howItWorks },
+      { title: "Tell Us What You Need", href: ROUTES.public.tellUsWhatYouNeed },
+      { title: "Contact Us", href: ROUTES.public.contact },
+      { title: "FAQ", href: ROUTES.public.faq },
+    ],
+  },
+  {
+    title: "Services",
+    links: [
+      { title: "All Services", href: ROUTES.public.services },
+      { title: "Trading", href: ROUTES.public.servicesTrading },
+      { title: "Franchise", href: ROUTES.public.servicesFranchise },
+      { title: "Import & Export", href: ROUTES.public.servicesImportExport },
+      { title: "Investment Opportunities", href: ROUTES.public.servicesInvestment },
+      { title: "Marketing & Advertising", href: ROUTES.public.servicesMarketingAdvertising },
     ],
   },
   {
@@ -394,7 +402,7 @@ export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
   {
     title: "Travel & Tourism",
     links: [
-      { title: "Inbound Tour (Sri Lanka)", href: ROUTES.public.inboundTravel },
+      { title: "Inbound Tour", href: ROUTES.public.inboundTravel },
       { title: "Outbound Tour", href: ROUTES.public.outboundTravel },
       { title: "Visa Services", href: ROUTES.public.visaServices },
       { title: "Flight Tickets", href: ROUTES.public.flightTickets },
@@ -403,27 +411,15 @@ export const PUBLIC_FOOTER_NAV: readonly PublicNavGroup[] = [
     ],
   },
   {
-    title: "Trade & Services",
+    title: "Business Solutions",
     links: [
-      { title: "All Services", href: ROUTES.public.services },
-      { title: "Trading & Sourcing", href: ROUTES.public.servicesTrading },
-      { title: "Import & Export", href: ROUTES.public.servicesImportExport },
-      { title: "Franchise Solutions", href: ROUTES.public.servicesFranchise },
-      { title: "Investment Support", href: ROUTES.public.servicesInvestment },
-      { title: "Marketing & Ads", href: ROUTES.public.servicesMarketingAdvertising },
-      { title: "Wholesale Products", href: ROUTES.public.wholesaleProducts },
+      { title: "Start a Business", href: ROUTES.public.businessStart },
+      { title: "Business Consultation", href: ROUTES.public.businessConsultation },
+      { title: "Business Planning", href: ROUTES.public.businessPlanning },
+      { title: "Business Setup Support", href: ROUTES.public.businessSetup },
+      { title: "Business Expansion", href: ROUTES.public.businessExpansion },
+      { title: "Business Technology", href: ROUTES.public.businessTechnology },
     ],
-  },
-  {
-    title: "Company & Support",
-    links: [
-      { title: "About Us", href: ROUTES.public.about },
-      { title: "How It Works", href: ROUTES.public.howItWorks },
-      { title: "Tell Us What You Need", href: ROUTES.public.tellUsWhatYouNeed },
-      { title: "Contact Us", href: ROUTES.public.contact },
-      { title: "FAQ", href: ROUTES.public.faq },
-    ],
-
   },
 ];
 

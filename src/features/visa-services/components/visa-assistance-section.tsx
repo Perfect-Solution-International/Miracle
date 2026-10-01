@@ -1,7 +1,5 @@
 import {
   Briefcase,
-  CheckCircle2,
-  Clock,
   Globe2,
   GraduationCap,
   Plane,
@@ -39,12 +37,6 @@ const VISA_CATEGORIES = [
   },
 ] as const;
 
-const SERVICE_PILLARS = [
-  "Comprehensive passport and document specification audit",
-  "Application form verification to avoid costly rejections",
-  "Embassy & VFS biometric appointment scheduling",
-  "Tailored travel insurance and flight reservation advice",
-] as const;
 
 /**
  * Balanced two-column Visa Assistance section:
@@ -98,6 +90,8 @@ export function VisaAssistanceSection() {
             </div>
           </div>
 
+Imasha
+
           {/* Checklist & Support Pillars */}
           <div className="rounded-2xl public-card p-5">
             <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">
@@ -117,6 +111,7 @@ export function VisaAssistanceSection() {
               <span>Fast initial evaluation within 24 to 48 business hours.</span>
             </div>
           </div>
+ develop
         </div>
 
         {/* Right Column: Visa Request Form */}
