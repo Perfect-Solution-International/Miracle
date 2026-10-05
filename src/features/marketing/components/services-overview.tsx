@@ -251,7 +251,7 @@ function RequirementModal({ open, onClose }: { open: boolean; onClose: () => voi
               </p>
             </div>
 
-            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
+            <form onSubmit={submit} className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8 space-y-4" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="text-ink block text-xs font-bold mb-1.5">
@@ -405,11 +405,11 @@ export function ServicesOverview() {
     <>
       <main>
         {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
-        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+        <section className="public-hero">
           {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            className="public-hero-media bg-cover bg-no-repeat"
             style={{
               backgroundImage: 'url("/images/services/services-main-hero.jpg")',
               backgroundPosition: "right center",
@@ -419,45 +419,45 @@ export function ServicesOverview() {
           {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+            className="public-hero-haze"
           />
 
           {/* Bottom Gradient Fade to Next Section */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+            className="public-hero-fade"
           />
 
           {/* Left-Aligned Content Container */}
-          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
-            <div className="max-w-2xl space-y-6">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+          <div className="container-page public-hero-content">
+            <div className="public-hero-copy">
+              <div className="public-hero-badge">
                 <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
                 <span>Integrated Global Business &amp; Travel Solutions</span>
               </div>
 
-              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+              <h1 className="public-hero-title">
                 One Trusted Partner<br />
                 For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Business, Tech</span><br />
                 <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Global Growth.</span>
               </h1>
 
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+              <p className="public-hero-description">
                 Miracle International empowers enterprises and individuals through strategic <strong className="font-semibold text-slate-900">Business Solutions</strong>, cutting-edge <strong className="font-semibold text-slate-900">IT &amp; Software Engineering</strong>, premium <strong className="font-semibold text-slate-900">Travel &amp; Tourism</strong>, and reliable <strong className="font-semibold text-slate-900">Cross-Border Trade</strong>.
               </p>
 
-              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <div className="public-hero-actions">
                 <Button
                   size="xl"
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
+                  variant="accent"
+                  className="shadow-md"
                   onClick={openForm}
                 >
                   <span>Inquiry Now</span>
                 </Button>
                 <Button
                   size="xl"
-                  variant="outline"
-                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
+                  variant="secondary-hero"
                   onClick={() => document.getElementById("main-services")?.scrollIntoView({ behavior: "smooth" })}
                 >
                   Explore Core Pillars
@@ -487,7 +487,7 @@ export function ServicesOverview() {
                 <Link
                   key={title}
                   href={href}
-                  className="group flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/50 hover:shadow-lift cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+                  className="group flex h-full flex-col justify-between overflow-hidden rounded-2xl public-card-clickable cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
                 >
                   <div>
                     <div className="relative aspect-[16/10] overflow-hidden">
@@ -561,7 +561,7 @@ export function ServicesOverview() {
                 return (
                   <article
                     key={item.title}
-                    className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
+                    className="rounded-2xl border border-slate-200 bg-slate-50/60 p-6 shadow-[0_6px_20px_rgba(15,23,42,0.07)] hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)] hover:-translate-y-1 transition-all duration-300"
                   >
                     <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
                       <Icon className="size-5.5" />
@@ -593,7 +593,7 @@ export function ServicesOverview() {
               {PROCESS.map((item) => (
                 <article
                   key={item.step}
-                  className="relative rounded-2xl border border-slate-200/80 bg-white p-6 shadow-xs"
+                  className="relative rounded-2xl public-card-clickable p-6"
                 >
                   <span className="bg-brand-blue text-white inline-flex size-8 items-center justify-center rounded-full text-xs font-bold shadow-xs">
                     {item.step}
@@ -611,7 +611,7 @@ export function ServicesOverview() {
         {/* ── 5. Action Card ── */}
         <section className="section-y bg-white">
           <div className="container-page">
-            <div className="relative isolate overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-soft">
+            <div className="relative isolate overflow-hidden rounded-2xl public-card p-8 sm:p-12">
               <div className="grid items-center gap-8 lg:grid-cols-12">
                 <div className="space-y-4 lg:col-span-8">
                   <span className="bg-brand-blue-light text-brand-blue rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider">

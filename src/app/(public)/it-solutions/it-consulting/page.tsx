@@ -308,7 +308,7 @@ export default function Page() {
           {helpAreas.map((area) => (
             <div
               key={area.title}
-              className="reveal group hover:border-border hover:bg-card flex items-start gap-4 rounded-xl border border-transparent p-4 transition-colors duration-300"
+              className="reveal group flex items-start gap-4 rounded-2xl public-card-clickable p-5"
             >
               <span className="bg-brand-blue-light text-brand-blue mt-0.5 inline-flex size-10 shrink-0 items-center justify-center rounded-full">
                 <area.icon aria-hidden="true" className="size-5" />
@@ -372,7 +372,7 @@ export default function Page() {
           {assessmentAreas.map((area) => (
             <div
               key={area.title}
-              className="reveal border-brand-blue/20 bg-brand-blue-light/40 flex flex-col items-center gap-3 rounded-xl border p-6 text-center"
+              className="reveal flex flex-col items-center gap-3 rounded-2xl border border-brand-blue/20 bg-brand-blue-light/30 p-6 text-center shadow-[0_6px_20px_rgba(15,23,42,0.07)]"
             >
               <span className="bg-brand-blue inline-flex size-12 items-center justify-center rounded-full text-white">
                 <area.icon aria-hidden="true" className="size-5" />
@@ -396,7 +396,7 @@ export default function Page() {
           {benefits.map((benefit) => (
             <li
               key={benefit}
-              className="reveal bg-card text-ink flex items-center gap-3 rounded-xl border p-5 text-sm font-semibold"
+              className="reveal flex items-center gap-3 rounded-2xl public-card p-5 text-sm font-semibold text-ink"
             >
               <span className="bg-brand-blue-light text-brand-blue inline-flex size-7 shrink-0 items-center justify-center rounded-full">
                 <Check aria-hidden="true" className="size-4" strokeWidth={2.5} />
@@ -444,3 +444,4 @@ export default function Page() {
     </>
   );
 }
+

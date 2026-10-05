@@ -1,53 +1,5 @@
 [
   {
-    "id": "pkg-1790673675223",
-    "slug": "vsdgsdgsdgds",
-    "name": "vsdgsdgsdgds",
-    "travelType": "Inbound",
-    "destination": "ihpuhuh",
-    "country": "Sri Lanka",
-    "duration": "8 Days / 9 Nights",
-    "durationDays": 8,
-    "durationNights": 9,
-    "price": 1000,
-    "currency": "LKR",
-    "priceOnRequest": false,
-    "shortDescription": "",
-    "description": "",
-    "highlights": [],
-    "includedItems": [
-      "Accommodation",
-      "Transportation",
-      "Airport Transfer",
-      "Guided Tours"
-    ],
-    "customIncludedItems": [],
-    "includedServices": "",
-    "accommodation": "",
-    "transportation": "",
-    "whatToExpect": "",
-    "whatToExpectImages": [],
-    "entryRequirements": "",
-    "visaInformation": "",
-    "visaNotes": "",
-    "offers": {
-      "enabled": false,
-      "title": "",
-      "description": "",
-      "offerType": "Percentage Discount",
-      "originalPrice": null,
-      "offerPrice": null,
-      "startDate": "",
-      "endDate": "",
-      "status": "Active"
-    },
-    "itinerary": [],
-    "images": [],
-    "coverImage": "",
-    "status": "Active",
-    "createdAt": "Sep 29, 2026"
-  },
-  {
     "id": "pkg-inbound-01",
     "slug": "sri-lanka-signature-heritage-wildlife",
     "name": "Kandy Sacred Heritage & Royal Cultural Expedition",
@@ -363,7 +315,8 @@
     ],
     "coverImage": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&auto=format&fit=crop&q=80",
     "status": "Active",
-    "createdAt": "Sep 28, 2026"
+    "createdAt": "Sep 28, 2026",
+    "updatedAt": "Sep 30, 2026"
   },
   {
     "id": "pkg-outbound-02",

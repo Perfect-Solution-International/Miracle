@@ -324,11 +324,11 @@ export default function Page() {
   return (
     <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
       {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
-      <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+      <section className="public-hero">
         {/* Full-Bleed Panoramic Hero Image */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+          className="public-hero-media bg-cover bg-no-repeat"
           style={{
             backgroundImage: 'url("/images/business-solutions/business-solutions-hero.jpg")',
             backgroundPosition: "right center",
@@ -338,40 +338,40 @@ export default function Page() {
         {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+          className="public-hero-haze"
         />
 
         {/* Bottom Gradient Fade to Next Section */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+          className="public-hero-fade"
         />
 
         {/* Left-Aligned Content Container */}
-        <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
-          <div className="max-w-2xl space-y-6">
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+        <div className="container-page public-hero-content">
+          <div className="public-hero-copy">
+            <div className="public-hero-badge">
               <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
               <span>Enterprise Consulting &amp; Business Setup</span>
             </div>
 
-            <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+            <h1 className="public-hero-title">
               Strategic Advisory.<br />
               For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Enterprise Setup, Scale</span><br />
               <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Market Growth.</span>
             </h1>
 
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+            <p className="public-hero-description">
               From business planning and corporate incorporation to operational scaling, machinery sourcing, technology integration, and executive business consulting.
             </p>
 
-            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-              <Button asChild size="xl" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5">
+            <div className="public-hero-actions">
+              <Button asChild size="xl" variant="accent" className="shadow-md">
                 <Link href={ROUTES.public.tellUsWhatYouNeed}>
                   <span>Inquiry Now</span>
                 </Link>
               </Button>
-              <Button asChild size="xl" variant="outline" className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs">
+              <Button asChild size="xl" variant="secondary-hero">
                 <a href="#solutions">Explore 8 Solutions</a>
               </Button>
             </div>
@@ -403,17 +403,17 @@ export default function Page() {
               className="from-navy/25 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
             />
           </div>
-          <div className="shadow-soft relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border bg-white sm:grid-cols-2">
+          <div className="shadow-[0_6px_20px_rgba(15,23,42,0.07)] relative mx-4 -mt-8 grid overflow-hidden rounded-2xl border border-slate-200 bg-white sm:grid-cols-2">
             {overviewValues.map(({ title, description, icon: Icon }, index) => (
               <div
                 key={title}
                 className={cn(
                   "flex gap-3 p-3.5",
-                  index % 2 === 1 && "sm:border-l",
-                  index > 1 && "border-t",
+                  index % 2 === 1 && "sm:border-l border-slate-200",
+                  index > 1 && "border-t border-slate-200",
                 )}
               >
-                <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-lg">
+                <span className="bg-brand-blue-light text-brand-blue flex size-9 shrink-0 items-center justify-center rounded-lg shadow-xs">
                   <Icon aria-hidden="true" className="size-4" />
                 </span>
                 <div>
@@ -444,7 +444,7 @@ export default function Page() {
           {services.map((service, index) => (
             <li
               key={service.title}
-              className="group/card shadow-soft hover:shadow-lift relative flex h-full cursor-pointer flex-col overflow-hidden rounded-[20px] border border-slate-200/90 bg-white transition-all duration-300 hover:border-brand-blue/40 motion-safe:hover:-translate-y-1 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
+              className="group/card relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl public-card-clickable has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                 <Image
@@ -464,7 +464,7 @@ export default function Page() {
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-start gap-3">
-                  <span className="bg-brand-blue-light text-brand-blue group-hover/card:bg-brand-blue flex size-10 shrink-0 items-center justify-center rounded-xl transition-colors group-hover/card:text-white">
+                  <span className="bg-brand-blue-light text-brand-blue group-hover/card:bg-brand-blue flex size-10 shrink-0 items-center justify-center rounded-xl shadow-xs transition-colors group-hover/card:text-white">
                     <service.icon aria-hidden="true" className="size-5" />
                   </span>
                   <h3 className="text-ink group-hover/card:text-brand-blue text-lg leading-snug font-bold transition-colors">
@@ -548,7 +548,7 @@ export default function Page() {
         />
         <ol className="mt-10 grid gap-x-8 gap-y-7 md:grid-cols-2 lg:grid-cols-3">
           {workingProcess.map(({ title, description, icon: Icon }, index) => (
-            <li key={title} className="relative flex gap-4 rounded-2xl border border-slate-300 bg-[#f4f8fd] p-7 shadow-soft">
+            <li key={title} className="relative flex gap-4 rounded-2xl public-card-clickable p-7">
               <span className="text-brand-blue-dark bg-brand-blue-light flex size-11 shrink-0 items-center justify-center rounded-xl border border-brand-blue/25 shadow-xs">
                 <Icon aria-hidden="true" className="size-5" />
               </span>
@@ -621,7 +621,7 @@ export default function Page() {
               ))}
             </ul>
           </div>
-          <aside className="border-brand-blue/15 bg-brand-blue-light/35 self-start rounded-3xl border p-6 sm:p-8">
+          <aside className="public-card self-start rounded-2xl p-6 sm:p-8">
             <span className="text-brand-blue text-xs font-bold tracking-widest uppercase">
               Connected Business Support
             </span>
@@ -745,3 +745,4 @@ export default function Page() {
     </main>
   );
 }
+

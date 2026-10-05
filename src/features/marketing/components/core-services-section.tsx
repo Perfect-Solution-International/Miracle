@@ -44,7 +44,7 @@ export function CoreServicesSection() {
         <li className="reveal">
           <Link
             href={ROUTES.public.tellUsWhatYouNeed}
-            className="group border-brand-blue/30 hover:border-brand-blue hover:bg-brand-blue flex h-full min-h-48 flex-col justify-between gap-6 rounded-2xl border border-dashed p-6 transition-colors duration-300"
+            className="group flex h-full min-h-48 flex-col justify-between gap-6 rounded-2xl border border-dashed border-brand-blue/40 bg-slate-50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue hover:bg-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
           >
             <MessageSquarePlus
               aria-hidden="true"

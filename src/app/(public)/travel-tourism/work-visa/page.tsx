@@ -1,17 +1,8 @@
 import {
-  ArrowRight,
-  BellRing,
   Briefcase,
-  BriefcaseBusiness,
-  CheckCircle2,
-  ClipboardCheck,
   FileCheck,
-  FileSearch,
   HeartPulse,
-  HelpCircle,
-  MessageCircle,
   Plane,
-  Send,
   ShieldCheck,
   Stamp,
 } from "lucide-react";
@@ -74,29 +65,6 @@ const WORK_VISA_PILLARS = [
   },
 ] as const;
 
-const PROCESS_STEPS = [
-  { icon: Send, title: "Request Submitted" },
-  { icon: FileSearch, title: "Document Review" },
-  { icon: MessageCircle, title: "Consultation" },
-  { icon: ClipboardCheck, title: "Visa Guidance" },
-  { icon: BriefcaseBusiness, title: "Application Support" },
-  { icon: BellRing, title: "Status Updates" },
-] as const;
-
-const FAQS = [
-  {
-    q: "What is Miracle International's role in the work visa process?",
-    a: "We act as your professional document preparation, advisory, and travel logistics partner. We help you review, format, and attest your documents correctly according to official embassy rules. We do not recruit or guarantee visa approval, which remains the sole prerogative of the respective government authorities.",
-  },
-  {
-    q: "Which destinations do you support?",
-    a: "We provide documentation guidance for popular employment destinations including the UAE, Qatar, Saudi Arabia, Kuwait, Oman, as well as selected European and East Asian work permit documentation.",
-  },
-  {
-    q: "How early should I begin document preparation?",
-    a: "We recommend commencing your document verification and attestation process 4 to 8 weeks prior to your target deployment, allowing ample time for ministry seals and consulate approvals.",
-  },
-] as const;
 
 export default function Page() {
   return (
@@ -211,7 +179,7 @@ export default function Page() {
                 {WORK_VISA_PILLARS.map(({ icon: Icon, title, description }) => (
                   <div
                     key={title}
-                    className="shadow-2xs hover:shadow-soft group flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white p-4 transition-all"
+                    className="group flex items-start gap-3.5 rounded-2xl public-card-clickable p-4"
                   >
                     <div className="bg-brand-blue-light/70 text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:bg-brand-blue group-hover:text-white">
                       <Icon aria-hidden="true" className="size-5" />
@@ -236,6 +204,8 @@ export default function Page() {
           </div>
         </div>
       </Section>
+
+ Imasha
 
       {/* 6-Step Process */}
       <section className="bg-white px-5 py-16 sm:px-8 md:py-20" aria-labelledby="work-visa-process-heading">
@@ -274,7 +244,7 @@ export default function Page() {
 
           <div className="mt-10 space-y-4">
             {FAQS.map(({ q, a }) => (
-              <div key={q} className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-soft">
+              <div key={q} className="rounded-2xl public-card p-6">
                 <div className="flex items-start gap-3">
                   <HelpCircle aria-hidden="true" className="text-brand-blue size-5 shrink-0 mt-0.5" />
                   <div>
@@ -287,6 +257,8 @@ export default function Page() {
           </div>
         </div>
       </Section>
+ develop
     </>
   );
 }
+

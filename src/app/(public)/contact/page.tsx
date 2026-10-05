@@ -10,7 +10,6 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { SocialLinks } from "@/components/common/social-links";
@@ -25,8 +24,6 @@ import {
 } from "@/features/contact";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
-
-import lightPageStyles from "../light-page.module.css";
 
 const TITLE = "Contact Us";
 const DESCRIPTION =
@@ -113,7 +110,7 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
       rel={isExternal ? "noopener noreferrer" : undefined}
       className={cn(
         className,
-        "hover:border-brand-blue/30 hover:shadow-lift hover:-translate-y-0.5",
+        "hover:border-brand-blue hover:shadow-lift hover:-translate-y-0.5",
       )}
     >
       {content}
@@ -129,47 +126,49 @@ export default function Page() {
     <main className="bg-white">
       <section
         aria-labelledby="contact-hero-heading"
-        className="relative isolate overflow-hidden bg-white"
-        style={{
-          backgroundImage: `url("${SITE_MEDIA.contactHero.src}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center right",
-          backgroundRepeat: "no-repeat",
-        }}
+        className="public-hero"
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/5 max-sm:from-white/95 max-sm:via-white/85 max-sm:to-white/55"
+          className="public-hero-media bg-cover bg-no-repeat"
+          style={{
+            backgroundImage: `url("${SITE_MEDIA.contactHero.src}")`,
+            backgroundPosition: "right center",
+          }}
         />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white" />
+        <div
+          aria-hidden="true"
+          className="public-hero-haze"
+        />
+        <div
+          aria-hidden="true"
+          className="public-hero-fade"
+        />
 
-        <div className="container-page relative flex min-h-[560px] items-center py-20 sm:py-28 md:min-h-[640px]">
-          <div className="max-w-2xl space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
-              </span>
+        <div className="container-page public-hero-content">
+          <div className="public-hero-copy">
+            <div className="public-hero-badge">
+              <span aria-hidden="true" className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
               Direct Support &amp; Client Advisory
             </div>
 
             <h1
               id="contact-hero-heading"
-              className="text-navy text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+              className="public-hero-title"
             >
               Let&apos;s Talk About{" "}
-              <span className="text-navy">
+              <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 What You Need.
               </span>
             </h1>
 
-            <p className="max-w-xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
+            <p className="public-hero-description">
               Reach out with an inquiry, quotation request or business requirement. Our
               multidisciplinary team is ready to structure the right solution for you.
             </p>
 
-            <div className="flex flex-col gap-3 sm:flex-row pt-2">
-              <Button asChild variant="accent" size="xl" className="shadow-lift">
+            <div className="public-hero-actions">
+              <Button asChild size="xl" variant="accent" className="shadow-md">
                 <a href="#contact-form">
                   Send an Inquiry
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
@@ -177,9 +176,8 @@ export default function Page() {
               </Button>
               <Button
                 asChild
-                variant="outline"
+                variant="secondary-hero"
                 size="xl"
-                className="border-slate-200 bg-white text-navy shadow-sm hover:bg-slate-50"
               >
                 <Link href={ROUTES.public.tellUsWhatYouNeed}>Share a Requirement</Link>
               </Button>
@@ -253,7 +251,7 @@ export default function Page() {
             <li key={title}>
               <Link
                 href={href}
-                className="group shadow-soft hover:border-brand-blue/30 hover:shadow-lift flex h-full flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
+                className="group flex h-full flex-col rounded-2xl public-card-clickable p-6"
               >
                 <span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue flex size-11 items-center justify-center rounded-xl transition-colors group-hover:text-white">
                   <Icon aria-hidden="true" className="size-5" />
@@ -274,15 +272,7 @@ export default function Page() {
 
       <LocationSection />
 
-      <CtaBanner
-        eyebrow="Need More Detail?"
-        title="Tell Us the Requirement and We'll Help You Move Forward"
-        description="For a detailed product, service or project request, send us the specifications and our team will review the next steps with you."
-        primary={{ label: "Request a Quotation", href: ROUTES.public.requestQuotation }}
-        secondary={{ label: "Visit Our FAQ", href: ROUTES.public.faq }}
-        headingId="contact-cta-heading"
-        className={lightPageStyles.lightCta}
-      />
     </main>
   );
 }
+

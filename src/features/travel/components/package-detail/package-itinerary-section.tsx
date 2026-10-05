@@ -17,7 +17,7 @@ export function PackageItinerarySection({ detail }: { detail: TravelPackageDetai
         {detail.itinerary.map((day) => (
           <li
             key={day.day}
-            className="shadow-soft flex gap-4 rounded-2xl border bg-white p-5 sm:gap-6 sm:p-6"
+            className="flex gap-4 rounded-2xl public-card p-5 sm:gap-6 sm:p-6"
           >
             <span className="bg-brand-blue flex size-11 shrink-0 items-center justify-center rounded-full text-sm font-extrabold text-white sm:size-12">
               {String(day.day).padStart(2, "0")}
@@ -38,3 +38,4 @@ export function PackageItinerarySection({ detail }: { detail: TravelPackageDetai
     </Section>
   );
 }
+

@@ -13,7 +13,7 @@ export function PackageLogisticsSection({ detail }: { detail: TravelPackageDetai
       </h2>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <div className="rounded-3xl border bg-white p-6 sm:p-7">
+        <div className="rounded-2xl public-card p-6 sm:p-7">
           <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-full">
             <BedDouble aria-hidden="true" className="size-5" />
           </span>
@@ -26,7 +26,7 @@ export function PackageLogisticsSection({ detail }: { detail: TravelPackageDetai
           </p>
         </div>
 
-        <div className="rounded-3xl border bg-white p-6 sm:p-7">
+        <div className="rounded-2xl public-card p-6 sm:p-7">
           <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-full">
             <Car aria-hidden="true" className="size-5" />
           </span>

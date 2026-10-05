@@ -4,7 +4,6 @@ import Image from "next/image";
 import {
   ArrowRight,
   BriefcaseBusiness,
-  Building2,
   Check,
   CheckCircle2,
   ChevronRight,
@@ -70,14 +69,6 @@ const SETUP_SUPPORT = [
   "Business Setup Assistance",
   "Launch Preparation",
   "Ongoing Business Support",
-] as const;
-
-const SUPPLY_FLOW = ["Product Sourcing", "Bulk Supply", "Import / Procurement", "Distribution", "Franchise Outlet"] as const;
-const ONGOING_SUPPORT = [
-  ["Product Supply", "Keep the products and materials your business needs moving."],
-  ["Distribution Support", "Coordinate delivery and replenishment across your operations."],
-  ["Business Guidance", "Get practical input as your franchise develops."],
-  ["Operational Support", "Access help with the day-to-day needs of your business."],
 ] as const;
 
 function SearchIcon() {
@@ -178,7 +169,7 @@ function SupportModal({
               <h2 id="franchise-modal-title" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">Franchise Support Request</h2>
               <p className="text-muted-foreground mt-2 max-w-xl text-sm leading-relaxed">Tell us about your goals and our team will help you explore the next steps.</p>
             </div>
-            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="text-ink text-sm font-semibold">Full Name *<Input value={form.fullName} onChange={(event) => update("fullName", event.target.value)} placeholder="Your full name" className="mt-2" /></label>
                 <label className="text-ink text-sm font-semibold">Email Address *<Input type="email" value={form.email} onChange={(event) => update("email", event.target.value)} placeholder="you@example.com" className="mt-2" /></label>
@@ -223,11 +214,11 @@ export function FranchiseLanding({
     <>
       <main>
         {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
-        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+        <section className="public-hero">
           {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            className="public-hero-media bg-cover bg-no-repeat"
             style={{
               backgroundImage: 'url("/images/services/franchise-hero.jpg")',
               backgroundPosition: "right center",
@@ -237,45 +228,45 @@ export function FranchiseLanding({
           {/* Soft-White Gradient on Left Area */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+            className="public-hero-haze"
           />
 
           {/* Bottom Gradient Fade */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+            className="public-hero-fade"
           />
 
           {/* Left-Aligned Content Container */}
-          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
-            <div className="max-w-2xl space-y-6">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+          <div className="container-page public-hero-content">
+            <div className="public-hero-copy">
+              <div className="public-hero-badge">
                 <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
                 <span>Turnkey Franchise &amp; Business Expansion</span>
               </div>
 
-              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+              <h1 className="public-hero-title">
                 Turnkey Solutions.<br />
                 For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Franchise Brands</span><br />
                 <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Rapid Expansion.</span>
               </h1>
 
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+              <p className="public-hero-description">
                 Miracle International provides end-to-end franchise acquisition, retail rollout structuring, supply chain integration, and turnkey operational launch for aspiring business owners and global brand networks.
               </p>
 
-              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <div className="public-hero-actions">
                 <Button
                   size="xl"
                   onClick={openForm}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
+                  variant="accent"
+                  className="shadow-md"
                 >
                   <span>Inquiry Now</span>
                 </Button>
                 <Button
                   size="xl"
-                  variant="outline"
-                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
+                  variant="secondary-hero"
                   onClick={openForm}
                 >
                   Explore Franchise Models
@@ -287,7 +278,7 @@ export function FranchiseLanding({
 
         <section className="section-y bg-white"><div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div className="relative min-h-[280px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.franchise.journey.src} alt={SITE_MEDIA.franchise.journey.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div><div className="max-w-xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A clearer way forward</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Your Franchise Journey Starts Here</h2><p className="text-muted-foreground mt-5 text-lg leading-relaxed">Whether you are looking to start a new franchise business, expand an existing business or need support with franchise operations, Miracle International helps you navigate the process with practical business solutions.</p></div></div></section>
 
-        <section className="section-y bg-surface"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Choose your next step</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">How Can We Help You?</h2><p className="text-muted-foreground mt-4 text-lg">Choose the type of franchise support you need.</p></div><div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">{SUPPORT_OPTIONS.map(([number, title, description, Icon]) => <button type="button" key={title} onClick={openForm} className="group text-left"><article className="hover:border-brand-blue/40 hover:shadow-soft h-full rounded-2xl border bg-white p-6 transition-all duration-300 hover:-translate-y-1"><div className="flex items-center justify-between"><span className="text-brand-red text-sm font-bold">{number}</span><Icon className="text-brand-blue size-7 transition-transform group-hover:scale-110" /></div><h3 className="text-ink mt-10 text-xl font-bold">{title}</h3><p className="text-muted-foreground mt-3 text-sm leading-relaxed">{description}</p><span className="text-brand-blue mt-6 inline-flex items-center gap-2 text-sm font-bold">Explore support <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" /></span></article></button>)}</div></div></section>
+        <section className="section-y bg-surface"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Choose your next step</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">How Can We Help You?</h2><p className="text-muted-foreground mt-4 text-lg">Choose the type of franchise support you need.</p></div><div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">{SUPPORT_OPTIONS.map(([number, title, description, Icon]) => <button type="button" key={title} onClick={openForm} className="group text-left"><article className="h-full rounded-2xl public-card-clickable p-6"><div className="flex items-center justify-between"><span className="text-brand-red text-sm font-bold">{number}</span><Icon className="text-brand-blue size-7 transition-transform group-hover:scale-110" /></div><h3 className="text-ink mt-10 text-xl font-bold">{title}</h3><p className="text-muted-foreground mt-3 text-sm leading-relaxed">{description}</p><span className="text-brand-blue mt-6 inline-flex items-center gap-2 text-sm font-bold">Explore support <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" /></span></article></button>)}</div></div></section>
 
         <section className="section-y bg-white">
           <div className="container-page">
@@ -314,7 +305,7 @@ export function FranchiseLanding({
                       openOpportunity(title);
                     }
                   }}
-                  className="group cursor-pointer overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft flex flex-col"
+                  className="group cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)] flex flex-col"
                   aria-label={`Apply for ${title} franchise opportunity`}
                 >
                   <div className="relative aspect-[1.65] overflow-hidden">
@@ -345,15 +336,19 @@ export function FranchiseLanding({
 
         <section className="section-y bg-white border-t border-slate-100"><div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"><div className="relative min-h-[470px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.franchise.opening.src} alt={SITE_MEDIA.franchise.opening.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">A simple customer journey</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">From Idea to Opening Day</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">We support you through every important stage of starting your franchise business.</p><div className="relative mt-9 space-y-6 before:absolute before:top-3 before:bottom-3 before:left-[17px] before:w-px before:bg-brand-blue/25">{JOURNEY.map(([number, title, description]) => <div key={number} className="relative flex gap-5"><span className="bg-brand-blue text-white relative z-10 inline-flex size-9 shrink-0 items-center justify-center rounded-full text-xs font-bold">{number}</span><div><h3 className="text-ink font-bold">{title}</h3><p className="text-muted-foreground mt-1 text-sm leading-relaxed">{description}</p></div></div>)}</div></div></div></section>
 
-        <section className="section-y bg-white"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Prepare with confidence</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">What Do You Need to Start?</h2></div><div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{REQUIREMENTS.map(([title, description, Icon]) => <article key={title} className="rounded-2xl border bg-white p-5"><Icon className="text-brand-blue size-6" /><h3 className="text-ink mt-5 text-sm font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p></article>)}</div><p className="text-muted-foreground mt-7 text-sm">Requirements may vary depending on the selected franchise opportunity.</p></div></section>
+        <section className="section-y bg-white"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Prepare with confidence</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">What Do You Need to Start?</h2></div><div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{REQUIREMENTS.map(([title, description, Icon]) => <article key={title} className="rounded-2xl public-card p-5"><Icon className="text-brand-blue size-6" /><h3 className="text-ink mt-5 text-sm font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p></article>)}</div><p className="text-muted-foreground mt-7 text-sm">Requirements may vary depending on the selected franchise opportunity.</p></div></section>
 
-        <section className="section-y bg-surface"><div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Hands-on coordination</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Complete Franchise Setup Support</h2><p className="text-muted-foreground mt-5 max-w-xl text-lg leading-relaxed">Miracle International can coordinate relevant business, sourcing and setup requirements so you can move from planning to opening with a clearer path.</p><div className="mt-9 grid gap-3 sm:grid-cols-2">{SETUP_SUPPORT.map((item) => <div key={item} className="flex items-center gap-3 rounded-xl border bg-white p-4"><Check className="text-brand-blue size-5 shrink-0" /><span className="text-ink text-sm font-semibold">{item}</span></div>)}</div></div><div className="relative min-h-[390px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.distributionCentre.src} alt={SITE_MEDIA.distributionCentre.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div></div></section>
+        <section className="section-y bg-surface"><div className="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Hands-on coordination</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Complete Franchise Setup Support</h2><p className="text-muted-foreground mt-5 max-w-xl text-lg leading-relaxed">Miracle International can coordinate relevant business, sourcing and setup requirements so you can move from planning to opening with a clearer path.</p><div className="mt-9 grid gap-3 sm:grid-cols-2">{SETUP_SUPPORT.map((item) => <div key={item} className="flex items-center gap-3 rounded-2xl public-card p-4"><Check className="text-brand-blue size-5 shrink-0" /><span className="text-ink text-sm font-semibold">{item}</span></div>)}</div></div><div className="relative min-h-[390px] overflow-hidden rounded-3xl"><Image src={SITE_MEDIA.distributionCentre.src} alt={SITE_MEDIA.distributionCentre.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div></div></section>
 
-        <section className="section-y bg-white"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Connected to our trading network</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Reliable Product Supply for Your Franchise</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">Get the products, materials, equipment and commercial supplies required to operate your franchise.</p></div><div className="mt-12 grid gap-3 sm:grid-cols-5">{SUPPLY_FLOW.map((step, index) => <div key={step} className="relative flex items-center gap-3 rounded-xl border bg-white p-4 sm:block sm:border-0 sm:bg-transparent sm:p-0"><span className="bg-brand-blue-light text-brand-blue inline-flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold">0{index + 1}</span><p className="text-ink text-sm font-bold sm:mt-4">{step}</p>{index < SUPPLY_FLOW.length - 1 && <ArrowRight className="text-brand-blue absolute top-1/2 -right-4 hidden size-5 -translate-y-1/2 sm:block" />}</div>)}</div></div></section>
+Imasha
 
-        <section className="section-y bg-surface"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">After the launch</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Support Beyond Setup</h2></div><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{ONGOING_SUPPORT.map(([title, description]) => <article key={title} className="rounded-2xl border bg-white p-6"><Building2 className="text-brand-blue size-7" /><h3 className="text-ink mt-7 font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p></article>)}</div></div></section>
+
+        <section className="section-y bg-white"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Connected to our trading network</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Reliable Product Supply for Your Franchise</h2><p className="text-muted-foreground mt-4 text-lg leading-relaxed">Get the products, materials, equipment and commercial supplies required to operate your franchise.</p></div><div className="mt-12 grid gap-3 sm:grid-cols-5">{SUPPLY_FLOW.map((step, index) => <div key={step} className="relative flex items-center gap-3 rounded-2xl public-card p-4 sm:block sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none"><span className="bg-brand-blue-light text-brand-blue inline-flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold">0{index + 1}</span><p className="text-ink text-sm font-bold sm:mt-4">{step}</p>{index < SUPPLY_FLOW.length - 1 && <ArrowRight className="text-brand-blue absolute top-1/2 -right-4 hidden size-5 -translate-y-1/2 sm:block" />}</div>)}</div></div></section>
+
+        <section className="section-y bg-surface"><div className="container-page"><div className="max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">After the launch</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Support Beyond Setup</h2></div><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{ONGOING_SUPPORT.map(([title, description]) => <article key={title} className="rounded-2xl public-card p-6"><Building2 className="text-brand-blue size-7" /><h3 className="text-ink mt-7 font-bold">{title}</h3><p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p></article>)}</div></div></section>
 
         <section className="section-y bg-white"><div className="container-page relative overflow-hidden rounded-3xl border border-slate-200 bg-white px-6 py-14 shadow-soft sm:px-12 lg:py-20"><div className="relative max-w-2xl"><p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">Your next move</p><h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Ready to Explore a Franchise Opportunity?</h2><p className="text-muted-foreground mt-5 max-w-xl text-lg leading-relaxed">Tell us about your goals and requirements, and our team will help you explore the next steps.</p><Button size="xl" onClick={openForm} className="mt-8">Get Franchise Support <ArrowRight data-icon="inline-end" /></Button></div></div></section>
+ develop
       </main>
       <SupportModal
         key={selectedOpportunity || "general"}

@@ -31,7 +31,7 @@ export function TravelItSection() {
 
 function ServicePromoCard({ promo }: { promo: ServicePromo }) {
   return (
-    <article className="reveal group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border bg-white has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring">
+    <article className="reveal group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl public-card-clickable has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring">
       <div className="relative aspect-[16/9] overflow-hidden">
         <Image
           src={promo.image.src}

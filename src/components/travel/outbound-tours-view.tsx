@@ -176,7 +176,7 @@ export function OutboundToursView() {
           {OUTBOUND_SERVICES.map(({ icon: Icon, title, description }) => (
             <div
               key={title}
-              className="shadow-soft hover:shadow-lift group flex flex-col items-start gap-4 rounded-2xl border border-slate-200/80 bg-white hover:bg-slate-50/50 dark:bg-card p-6 transition-all"
+              className="group flex flex-col items-start gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_6px_20px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
             >
               <div className="bg-brand-blue-light/70 text-brand-blue flex size-12 items-center justify-center rounded-xl transition-colors group-hover:bg-brand-blue group-hover:text-white">
                 <Icon aria-hidden="true" className="size-6" />

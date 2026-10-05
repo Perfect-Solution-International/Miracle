@@ -237,7 +237,7 @@ export default function Page() {
             {overviewPoints.map((point) => (
               <li
                 key={point}
-                className="bg-card text-ink flex items-start gap-3 rounded-xl border p-5 text-sm font-semibold"
+                className="bg-white text-ink flex items-start gap-3 rounded-2xl border border-slate-200 p-5 text-sm font-semibold shadow-[0_4px_16px_rgba(15,23,42,0.06)]"
               >
                 <span className="bg-brand-blue-light text-brand-blue inline-flex size-7 shrink-0 items-center justify-center rounded-full">
                   <Check aria-hidden="true" className="size-4" strokeWidth={2.5} />
@@ -284,7 +284,7 @@ export default function Page() {
           {developmentProcess.map((process) => (
             <li
               key={process.step}
-              className="reveal bg-card hover:border-brand-blue/30 hover:shadow-soft rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1"
+              className="reveal rounded-2xl public-card-clickable p-6"
             >
               <span className="text-brand-blue text-3xl font-extrabold">
                 {process.step}
@@ -357,3 +357,4 @@ export default function Page() {
     </>
   );
 }
+

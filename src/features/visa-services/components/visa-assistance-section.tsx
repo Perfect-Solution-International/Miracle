@@ -1,7 +1,5 @@
 import {
   Briefcase,
-  CheckCircle2,
-  Clock,
   Globe2,
   GraduationCap,
   Plane,
@@ -39,12 +37,6 @@ const VISA_CATEGORIES = [
   },
 ] as const;
 
-const SERVICE_PILLARS = [
-  "Comprehensive passport and document specification audit",
-  "Application form verification to avoid costly rejections",
-  "Embassy & VFS biometric appointment scheduling",
-  "Tailored travel insurance and flight reservation advice",
-] as const;
 
 /**
  * Balanced two-column Visa Assistance section:
@@ -82,7 +74,7 @@ export function VisaAssistanceSection() {
               {VISA_CATEGORIES.map(({ icon: Icon, title, description }) => (
                 <div
                   key={title}
-                  className="shadow-2xs hover:shadow-soft group flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white p-4 transition-all"
+                  className="group flex items-start gap-3.5 rounded-2xl public-card-clickable p-4"
                 >
                   <div className="bg-brand-blue-light/70 text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:bg-brand-blue group-hover:text-white">
                     <Icon aria-hidden="true" className="size-5" />
@@ -98,8 +90,10 @@ export function VisaAssistanceSection() {
             </div>
           </div>
 
+Imasha
+
           {/* Checklist & Support Pillars */}
-          <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
+          <div className="rounded-2xl public-card p-5">
             <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">
               Our Assistance Scope
             </p>
@@ -117,6 +111,7 @@ export function VisaAssistanceSection() {
               <span>Fast initial evaluation within 24 to 48 business hours.</span>
             </div>
           </div>
+ develop
         </div>
 
         {/* Right Column: Visa Request Form */}
@@ -129,3 +124,4 @@ export function VisaAssistanceSection() {
     </Section>
   );
 }
+
