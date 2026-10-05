@@ -21,6 +21,7 @@ import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
+import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { buildPageMetadata } from "@/lib/seo/metadata";
@@ -181,101 +182,95 @@ export default function Page() {
       </section>
 
       {/* ── 2. Detailed 5-Step Process Breakdown ── */}
-      <section id="steps" className="section-y bg-slate-50/70 border-b border-slate-200/70 scroll-mt-20">
-        <div className="container-page space-y-8">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="bg-brand-blue-light text-brand-blue rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
-              Step-by-Step Roadmap
-            </span>
-            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
-              How We Work With You
-            </h2>
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-              Every project follows our structured 5-stage lifecycle to ensure predictability and flawless execution.
-            </p>
-          </div>
+      <Section
+        id="steps"
+        aria-labelledby="how-it-works-steps-heading"
+        className="scroll-mt-20 bg-slate-50/70"
+      >
+        <SectionHeading
+          id="how-it-works-steps-heading"
+          align="center"
+          eyebrow="Step-by-Step Roadmap"
+          title="How We Work With You"
+          description="Every project follows our structured 5-stage lifecycle to ensure predictability and flawless execution."
+        />
 
-          <div className="mt-12 space-y-6">
-            {DETAILED_STEPS.map((stepItem) => {
-              const Icon = stepItem.icon;
-              return (
-                <div
-                  key={stepItem.step}
-                  className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-brand-blue/40"
-                >
-                  <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
-                    <div className="flex items-center gap-4 lg:col-span-4">
-                      <span className="bg-brand-blue text-white inline-flex size-14 shrink-0 items-center justify-center rounded-2xl text-lg font-extrabold shadow-sm">
-                        {stepItem.step}
+        <div className="mt-10 space-y-6">
+          {DETAILED_STEPS.map((stepItem) => {
+            const Icon = stepItem.icon;
+            return (
+              <div
+                key={stepItem.step}
+                className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-brand-blue/40"
+              >
+                <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
+                  <div className="flex items-center gap-4 lg:col-span-4">
+                    <span className="bg-brand-blue text-white inline-flex size-14 shrink-0 items-center justify-center rounded-2xl text-lg font-extrabold shadow-sm">
+                      {stepItem.step}
+                    </span>
+                    <div>
+                      <span className="text-brand-blue text-xs font-bold uppercase tracking-wider">
+                        Phase {stepItem.step}
                       </span>
-                      <div>
-                        <span className="text-brand-blue text-xs font-bold uppercase tracking-wider">
-                          Phase {stepItem.step}
-                        </span>
-                        <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors">
-                          {stepItem.title}
-                        </h3>
-                        <p className="text-muted-foreground text-xs mt-0.5">{stepItem.tagline}</p>
-                      </div>
-                    </div>
-
-                    <div className="lg:col-span-5">
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {stepItem.description}
-                      </p>
-                    </div>
-
-                    <div className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-slate-100 pt-4 lg:pt-0 lg:pl-6">
-                      <ul className="space-y-1.5 text-xs font-medium text-ink">
-                        {stepItem.points.map((p) => (
-                          <li key={p} className="flex items-center gap-2">
-                            <CheckCircle2 className="size-3.5 text-brand-blue shrink-0" />
-                            <span>{p}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors">
+                        {stepItem.title}
+                      </h3>
+                      <p className="text-muted-foreground text-xs mt-0.5">{stepItem.tagline}</p>
                     </div>
                   </div>
+
+                  <div className="lg:col-span-5">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {stepItem.description}
+                    </p>
+                  </div>
+
+                  <div className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-slate-100 pt-4 lg:pt-0 lg:pl-6">
+                    <ul className="space-y-1.5 text-xs font-medium text-ink">
+                      {stepItem.points.map((p) => (
+                        <li key={p} className="flex items-center gap-2">
+                          <CheckCircle2 className="size-3.5 text-brand-blue shrink-0" />
+                          <span>{p}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
-      </section>
+      </Section>
 
       {/* ── 3. Strategic Advantages ── */}
-      <section className="section-y bg-white border-b border-slate-200/70">
-        <div className="container-page">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="bg-brand-red/10 text-brand-red rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
-              Client Benefits
-            </span>
-            <h2 className="text-ink text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Why Our Process Works Better
-            </h2>
-          </div>
+      <Section aria-labelledby="how-it-works-advantages-heading">
+        <SectionHeading
+          id="how-it-works-advantages-heading"
+          align="center"
+          eyebrow="Client Benefits"
+          title="Why Our Process Works Better"
+        />
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {ADVANTAGES.map((adv) => {
-              const Icon = adv.icon;
-              return (
-                <div
-                  key={adv.title}
-                  className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
-                >
-                  <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
-                    <Icon className="size-5.5" />
-                  </span>
-                  <h3 className="text-ink text-lg font-bold mt-4">{adv.title}</h3>
-                  <p className="text-muted-foreground text-xs sm:text-sm mt-2 leading-relaxed">
-                    {adv.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {ADVANTAGES.map((adv) => {
+            const Icon = adv.icon;
+            return (
+              <div
+                key={adv.title}
+                className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
+              >
+                <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
+                  <Icon className="size-5.5" />
+                </span>
+                <h3 className="text-ink text-lg font-bold mt-4">{adv.title}</h3>
+                <p className="text-muted-foreground text-xs sm:text-sm mt-2 leading-relaxed">
+                  {adv.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
-      </section>
+      </Section>
 
       {/* ── 4. CTA Banner ── */}
       <CtaBanner
