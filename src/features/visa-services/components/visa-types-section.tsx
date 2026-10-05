@@ -23,7 +23,7 @@ export function VisaTypesSection() {
         {VISA_TYPE_CARDS.map(({ slug, icon: Icon, title, description, formValue }) => (
           <li
             key={slug}
-            className="shadow-soft flex flex-col gap-4 rounded-2xl border bg-white p-6"
+            className="flex flex-col gap-4 rounded-2xl public-card-clickable p-6"
           >
             <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-xl">
               <Icon aria-hidden="true" className="size-5" />
@@ -45,3 +45,4 @@ export function VisaTypesSection() {
     </Section>
   );
 }
+

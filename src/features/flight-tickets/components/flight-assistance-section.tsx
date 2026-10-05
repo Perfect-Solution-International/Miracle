@@ -106,7 +106,7 @@ export function FlightAssistanceSection() {
               {FLIGHT_HIGHLIGHTS.map(({ icon: Icon, title, description }) => (
                 <div
                   key={title}
-                  className="shadow-2xs hover:shadow-soft group flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white p-4 transition-all"
+                  className="group flex items-start gap-3.5 rounded-2xl public-card-clickable p-4"
                 >
                   <div className="bg-brand-blue-light/70 text-brand-blue flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors group-hover:bg-brand-blue group-hover:text-white">
                     <Icon aria-hidden="true" className="size-5" />
@@ -132,3 +132,4 @@ export function FlightAssistanceSection() {
     </Section>
   );
 }
+

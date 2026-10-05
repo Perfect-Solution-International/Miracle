@@ -37,7 +37,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { Badge } from "@/components/ui/badge";
@@ -119,16 +119,21 @@ export function AdminInquiriesView() {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
 
   // Reviews State (Tour packages only)
-  const [reviews, setReviews] = useState<PackageReview[]>(() => {
-    if (typeof window === "undefined") return [];
+  const [reviews, setReviews] = useState<PackageReview[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
+  const [reviewStatusFilter, setReviewStatusFilter] = useState<string>("ALL");
+
+  useEffect(() => {
+    setIsMounted(true);
     try {
       const raw = localStorage.getItem(REVIEWS_STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
+      if (raw) {
+        setReviews(JSON.parse(raw));
+      }
     } catch {
-      return [];
+      // ignore
     }
-  });
-  const [reviewStatusFilter, setReviewStatusFilter] = useState<string>("ALL");
+  }, []);
 
   // Summary counts for Status Cards
   const totalCount = inquiries.length;
@@ -312,7 +317,7 @@ export function AdminInquiriesView() {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              Inquiries ({totalCount})
+              Inquiries ({isMounted ? totalCount : 0})
             </button>
             <button
               type="button"
@@ -323,7 +328,7 @@ export function AdminInquiriesView() {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              Tour Reviews ({reviews.length})
+              Tour Reviews ({isMounted ? reviews.length : 0})
             </button>
           </div>
         </div>
@@ -339,29 +344,29 @@ export function AdminInquiriesView() {
             <button
               type="button"
               onClick={() => setStatusFilter("ALL")}
-              className={`p-3.5 rounded-xl border text-left transition-all ${
+              className={`p-3.5 rounded-2xl border text-left transition-all backdrop-blur-xs ${
                 statusFilter === "ALL"
-                  ? "bg-blue-50/80 border-brand-blue text-brand-blue ring-1 ring-brand-blue shadow-xs"
-                  : "bg-card border-border/70 hover:border-border text-foreground"
+                  ? "bg-blue-50/90 border-blue-300 text-brand-blue ring-1 ring-blue-400/40 shadow-xs"
+                  : "bg-white/80 border-slate-200/80 hover:bg-white hover:border-slate-300 text-foreground shadow-2xs"
               }`}
             >
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
                 All Inquiries
               </span>
-              <p className="text-xl font-extrabold text-navy dark:text-foreground mt-0.5 font-heading">
+              <p className="text-xl font-extrabold text-navy mt-0.5 font-heading">
                 {totalCount}
               </p>
-              <span className="text-[10px] text-muted-foreground">Total records</span>
+              <span className="text-[10px] text-slate-400">Total records</span>
             </button>
 
             {/* New */}
             <button
               type="button"
               onClick={() => setStatusFilter("New")}
-              className={`p-3.5 rounded-xl border text-left transition-all ${
+              className={`p-3.5 rounded-2xl border text-left transition-all backdrop-blur-xs ${
                 statusFilter === "New"
-                  ? "bg-emerald-50 border-emerald-600 text-emerald-800 ring-1 ring-emerald-600 shadow-xs"
-                  : "bg-card border-border/70 hover:border-border text-foreground"
+                  ? "bg-emerald-50/90 border-emerald-300 text-emerald-800 ring-1 ring-emerald-400/40 shadow-xs"
+                  : "bg-white/80 border-slate-200/80 hover:bg-white hover:border-slate-300 text-foreground shadow-2xs"
               }`}
             >
               <div className="flex items-center justify-between">
@@ -370,133 +375,133 @@ export function AdminInquiriesView() {
                 </span>
                 {newCount > 0 ? <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" /> : null}
               </div>
-              <p className="text-xl font-extrabold text-emerald-900 dark:text-emerald-200 mt-0.5 font-heading">
+              <p className="text-xl font-extrabold text-emerald-900 mt-0.5 font-heading">
                 {newCount}
               </p>
-              <span className="text-[10px] text-muted-foreground">Needs review</span>
+              <span className="text-[10px] text-slate-400">Needs review</span>
             </button>
 
             {/* Reviewing */}
             <button
               type="button"
               onClick={() => setStatusFilter("Reviewing")}
-              className={`p-3.5 rounded-xl border text-left transition-all ${
+              className={`p-3.5 rounded-2xl border text-left transition-all backdrop-blur-xs ${
                 statusFilter === "Reviewing"
-                  ? "bg-amber-50 border-amber-500 text-amber-800 ring-1 ring-amber-500 shadow-xs"
-                  : "bg-card border-border/70 hover:border-border text-foreground"
+                  ? "bg-amber-50/90 border-amber-300 text-amber-800 ring-1 ring-amber-400/40 shadow-xs"
+                  : "bg-white/80 border-slate-200/80 hover:bg-white hover:border-slate-300 text-foreground shadow-2xs"
               }`}
             >
               <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700">
                 Reviewing
               </span>
-              <p className="text-xl font-extrabold text-amber-900 dark:text-amber-200 mt-0.5 font-heading">
+              <p className="text-xl font-extrabold text-amber-900 mt-0.5 font-heading">
                 {reviewingCount}
               </p>
-              <span className="text-[10px] text-muted-foreground">Assessing</span>
+              <span className="text-[10px] text-slate-400">Assessing</span>
             </button>
 
             {/* Replied */}
             <button
               type="button"
               onClick={() => setStatusFilter("Replied")}
-              className={`p-3.5 rounded-xl border text-left transition-all ${
+              className={`p-3.5 rounded-2xl border text-left transition-all backdrop-blur-xs ${
                 statusFilter === "Replied"
-                  ? "bg-sky-50 border-sky-500 text-sky-800 ring-1 ring-sky-500 shadow-xs"
-                  : "bg-card border-border/70 hover:border-border text-foreground"
+                  ? "bg-sky-50/90 border-sky-300 text-sky-800 ring-1 ring-sky-400/40 shadow-xs"
+                  : "bg-white/80 border-slate-200/80 hover:bg-white hover:border-slate-300 text-foreground shadow-2xs"
               }`}
             >
               <span className="text-[10px] font-bold uppercase tracking-wider text-sky-700">
                 Replied
               </span>
-              <p className="text-xl font-extrabold text-sky-900 dark:text-sky-200 mt-0.5 font-heading">
+              <p className="text-xl font-extrabold text-sky-900 mt-0.5 font-heading">
                 {repliedCount}
               </p>
-              <span className="text-[10px] text-muted-foreground">Quote sent</span>
+              <span className="text-[10px] text-slate-400">Quote sent</span>
             </button>
 
             {/* In Progress */}
             <button
               type="button"
               onClick={() => setStatusFilter("In Progress")}
-              className={`p-3.5 rounded-xl border text-left transition-all ${
+              className={`p-3.5 rounded-2xl border text-left transition-all backdrop-blur-xs ${
                 statusFilter === "In Progress"
-                  ? "bg-blue-50 border-blue-600 text-blue-800 ring-1 ring-blue-600 shadow-xs"
-                  : "bg-card border-border/70 hover:border-border text-foreground"
+                  ? "bg-blue-50/90 border-blue-300 text-blue-800 ring-1 ring-blue-400/40 shadow-xs"
+                  : "bg-white/80 border-slate-200/80 hover:bg-white hover:border-slate-300 text-foreground shadow-2xs"
               }`}
             >
               <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700">
                 In Progress
               </span>
-              <p className="text-xl font-extrabold text-blue-900 dark:text-blue-200 mt-0.5 font-heading">
+              <p className="text-xl font-extrabold text-blue-900 mt-0.5 font-heading">
                 {inProgressCount}
               </p>
-              <span className="text-[10px] text-muted-foreground">Coordinating</span>
+              <span className="text-[10px] text-slate-400">Coordinating</span>
             </button>
 
             {/* Completed */}
             <button
               type="button"
               onClick={() => setStatusFilter("Completed")}
-              className={`p-3.5 rounded-xl border text-left transition-all ${
+              className={`p-3.5 rounded-2xl border text-left transition-all backdrop-blur-xs ${
                 statusFilter === "Completed"
-                  ? "bg-emerald-50 border-emerald-700 text-emerald-900 ring-1 ring-emerald-700 shadow-xs"
-                  : "bg-card border-border/70 hover:border-border text-foreground"
+                  ? "bg-emerald-50/90 border-emerald-300 text-emerald-900 ring-1 ring-emerald-400/40 shadow-xs"
+                  : "bg-white/80 border-slate-200/80 hover:bg-white hover:border-slate-300 text-foreground shadow-2xs"
               }`}
             >
               <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">
                 Completed
               </span>
-              <p className="text-xl font-extrabold text-emerald-950 dark:text-emerald-100 mt-0.5 font-heading">
+              <p className="text-xl font-extrabold text-emerald-950 mt-0.5 font-heading">
                 {completedCount}
               </p>
-              <span className="text-[10px] text-muted-foreground">Finalized</span>
+              <span className="text-[10px] text-slate-400">Finalized</span>
             </button>
 
             {/* Cancelled */}
             <button
               type="button"
               onClick={() => setStatusFilter("Cancelled")}
-              className={`p-3.5 rounded-xl border text-left transition-all ${
+              className={`p-3.5 rounded-2xl border text-left transition-all backdrop-blur-xs ${
                 statusFilter === "Cancelled"
-                  ? "bg-slate-100 border-slate-600 text-slate-900 ring-1 ring-slate-600 shadow-xs"
-                  : "bg-card border-border/70 hover:border-border text-foreground"
+                  ? "bg-slate-100/90 border-slate-300 text-slate-800 ring-1 ring-slate-400/40 shadow-xs"
+                  : "bg-white/80 border-slate-200/80 hover:bg-white hover:border-slate-300 text-foreground shadow-2xs"
               }`}
             >
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600">
                 Cancelled
               </span>
-              <p className="text-xl font-extrabold text-slate-800 dark:text-slate-200 mt-0.5 font-heading">
+              <p className="text-xl font-extrabold text-slate-800 mt-0.5 font-heading">
                 {cancelledCount}
               </p>
-              <span className="text-[10px] text-muted-foreground">Closed</span>
+              <span className="text-[10px] text-slate-400">Closed</span>
             </button>
           </div>
 
           {/* ========================================================================= */}
           {/* 3. SEARCH & FILTER BAR */}
           {/* ========================================================================= */}
-          <Card className="rounded-2xl border-border/70 bg-card shadow-xs">
+          <Card className="rounded-2xl border-slate-200/80 bg-white/90 shadow-2xs backdrop-blur-xs">
             <CardContent className="p-4 space-y-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
                 {/* Search Input */}
                 <div className="relative sm:col-span-2 lg:col-span-2">
-                  <Search className="absolute left-3 top-2.5 size-3.5 text-muted-foreground" />
+                  <Search className="absolute left-3 top-2.5 size-3.5 text-slate-400" />
                   <Input
                     placeholder="Search name, email, phone, ID, destination..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="h-9 pl-8.5 text-xs bg-muted/30 focus-visible:bg-card"
+                    className="h-9 pl-8.5 text-xs bg-slate-50/70 border-slate-200/80 rounded-xl focus-visible:bg-white focus-visible:border-blue-500 transition-colors"
                   />
                 </div>
 
                 {/* Inquiry Type Filter */}
                 <Select value={typeFilter} onValueChange={setTypeFilter}>
-                  <SelectTrigger className="h-9 text-xs bg-muted/30 font-medium">
+                  <SelectTrigger className="h-9 text-xs bg-slate-50/70 border-slate-200/80 rounded-xl font-medium">
                     <SelectValue placeholder="All Inquiry Types" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="rounded-xl border-slate-200/80 bg-white/95 backdrop-blur-md shadow-xl">
                     {INQUIRY_TYPES.map((t) => (
-                      <SelectItem key={t.value} value={t.value}>
+                      <SelectItem key={t.value} value={t.value} className="text-xs">
                         {t.label}
                       </SelectItem>
                     ))}
@@ -505,46 +510,46 @@ export function AdminInquiriesView() {
 
                 {/* Status Filter */}
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="h-9 text-xs bg-muted/30 font-medium">
+                  <SelectTrigger className="h-9 text-xs bg-slate-50/70 border-slate-200/80 rounded-xl font-medium">
                     <SelectValue placeholder="All Statuses" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="ALL">All Statuses</SelectItem>
-                    <SelectItem value="New">New</SelectItem>
-                    <SelectItem value="Reviewing">Reviewing</SelectItem>
-                    <SelectItem value="Replied">Replied</SelectItem>
-                    <SelectItem value="In Progress">In Progress</SelectItem>
-                    <SelectItem value="Completed">Completed</SelectItem>
-                    <SelectItem value="Cancelled">Cancelled</SelectItem>
+                  <SelectContent className="rounded-xl border-slate-200/80 bg-white/95 backdrop-blur-md shadow-xl">
+                    <SelectItem value="ALL" className="text-xs">All Statuses</SelectItem>
+                    <SelectItem value="New" className="text-xs">New</SelectItem>
+                    <SelectItem value="Reviewing" className="text-xs">Reviewing</SelectItem>
+                    <SelectItem value="Replied" className="text-xs">Replied</SelectItem>
+                    <SelectItem value="In Progress" className="text-xs">In Progress</SelectItem>
+                    <SelectItem value="Completed" className="text-xs">Completed</SelectItem>
+                    <SelectItem value="Cancelled" className="text-xs">Cancelled</SelectItem>
                   </SelectContent>
                 </Select>
 
                 {/* Date Filter */}
                 <Select value={dateFilter} onValueChange={setDateFilter}>
-                  <SelectTrigger className="h-9 text-xs bg-muted/30 font-medium">
+                  <SelectTrigger className="h-9 text-xs bg-slate-50/70 border-slate-200/80 rounded-xl font-medium">
                     <SelectValue placeholder="All Time" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="ALL">All Time</SelectItem>
-                    <SelectItem value="today">Today</SelectItem>
-                    <SelectItem value="7days">Last 7 Days</SelectItem>
-                    <SelectItem value="30days">Last 30 Days</SelectItem>
-                    <SelectItem value="thisMonth">This Month</SelectItem>
+                  <SelectContent className="rounded-xl border-slate-200/80 bg-white/95 backdrop-blur-md shadow-xl">
+                    <SelectItem value="ALL" className="text-xs">All Time</SelectItem>
+                    <SelectItem value="today" className="text-xs">Today</SelectItem>
+                    <SelectItem value="7days" className="text-xs">Last 7 Days</SelectItem>
+                    <SelectItem value="30days" className="text-xs">Last 30 Days</SelectItem>
+                    <SelectItem value="thisMonth" className="text-xs">This Month</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {/* Travel Type & Clear Filters Bar */}
-              <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-border/50">
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-semibold text-muted-foreground">Travel Type:</span>
+                  <span className="text-[11px] font-semibold text-slate-500">Travel Type:</span>
                   <button
                     type="button"
                     onClick={() => setTravelTypeFilter("ALL")}
-                    className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
                       travelTypeFilter === "ALL"
-                        ? "bg-brand-blue text-white"
-                        : "bg-muted text-muted-foreground hover:text-foreground"
+                        ? "bg-brand-blue text-white shadow-2xs"
+                        : "bg-slate-100 text-slate-600 hover:bg-slate-200/70"
                     }`}
                   >
                     All
@@ -552,10 +557,10 @@ export function AdminInquiriesView() {
                   <button
                     type="button"
                     onClick={() => setTravelTypeFilter("Inbound")}
-                    className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all flex items-center gap-1 ${
+                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
                       travelTypeFilter === "Inbound"
-                        ? "bg-emerald-600 text-white"
-                        : "bg-muted text-muted-foreground hover:text-foreground"
+                        ? "bg-emerald-600 text-white shadow-2xs"
+                        : "bg-slate-100 text-slate-600 hover:bg-slate-200/70"
                     }`}
                   >
                     <Palmtree className="size-3" />
@@ -564,10 +569,10 @@ export function AdminInquiriesView() {
                   <button
                     type="button"
                     onClick={() => setTravelTypeFilter("Outbound")}
-                    className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all flex items-center gap-1 ${
+                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
                       travelTypeFilter === "Outbound"
-                        ? "bg-blue-600 text-white"
-                        : "bg-muted text-muted-foreground hover:text-foreground"
+                        ? "bg-blue-600 text-white shadow-2xs"
+                        : "bg-slate-100 text-slate-600 hover:bg-slate-200/70"
                     }`}
                   >
                     <Globe2 className="size-3" />
@@ -581,14 +586,14 @@ export function AdminInquiriesView() {
                       variant="ghost"
                       size="sm"
                       onClick={handleClearFilters}
-                      className="h-7 text-xs text-muted-foreground hover:text-brand-red gap-1 px-2"
+                      className="h-7 text-xs text-slate-500 hover:text-brand-red gap-1 px-2 rounded-lg"
                     >
                       <X className="size-3" />
                       Clear Filters
                     </Button>
                   )}
-                  <span className="text-xs text-muted-foreground">
-                    Showing <strong>{filteredInquiries.length}</strong> of {totalCount} inquiries
+                  <span className="text-xs text-slate-500 font-medium">
+                    Showing <strong className="text-slate-700">{filteredInquiries.length}</strong> of {totalCount} inquiries
                   </span>
                 </div>
               </div>
@@ -637,45 +642,45 @@ export function AdminInquiriesView() {
           {/* ========================================================================= */}
           {/* 5. INQUIRIES TABLE */}
           {/* ========================================================================= */}
-          <Card className="rounded-2xl border-border/70 bg-card shadow-xs overflow-hidden">
+          <Card className="rounded-2xl border-slate-200/80 bg-white/90 shadow-2xs backdrop-blur-xs overflow-hidden">
             <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <Table>
-                  <TableHeader className="bg-muted/30">
-                    <TableRow className="hover:bg-transparent">
+                  <TableHeader className="bg-slate-50/70">
+                    <TableRow className="hover:bg-transparent border-slate-200/80">
                       <TableHead className="w-10 pl-6">
                         <input
                           type="checkbox"
                           checked={selectedIds.length > 0 && selectedIds.length === filteredInquiries.length}
                           onChange={(e) => handleSelectAll(e.target.checked)}
-                          className="size-3.5 rounded border-gray-300 text-brand-blue focus:ring-brand-blue"
+                          className="size-3.5 rounded border-slate-300 text-brand-blue focus:ring-brand-blue"
                         />
                       </TableHead>
-                      <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground w-28">
+                      <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500 w-28">
                         Inquiry ID
                       </TableHead>
-                      <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                         Customer
                       </TableHead>
-                      <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                         Inquiry Type
                       </TableHead>
-                      <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                         Service / Package
                       </TableHead>
-                      <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                         Travel Type
                       </TableHead>
-                      <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                         Destination
                       </TableHead>
-                      <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                         Date Submitted
                       </TableHead>
-                      <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500">
                         Status
                       </TableHead>
-                      <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground text-right pr-6">
+                      <TableHead className="text-xs font-bold uppercase tracking-wider text-slate-500 text-right pr-6">
                         Actions
                       </TableHead>
                     </TableRow>
@@ -684,14 +689,14 @@ export function AdminInquiriesView() {
                     {filteredInquiries.length === 0 ? (
                       <TableRow>
                         <TableCell colSpan={10} className="h-48 text-center">
-                          <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
-                            <Inbox className="size-8 text-muted-foreground/50 mb-2" />
-                            <p className="text-sm font-semibold text-navy dark:text-foreground">
+                          <div className="flex flex-col items-center justify-center py-8 text-slate-400">
+                            <Inbox className="size-8 text-slate-300 mb-2" />
+                            <p className="text-sm font-semibold text-navy">
                               {searchQuery || typeFilter !== "ALL" || statusFilter !== "ALL"
                                 ? "No inquiries match your filters."
                                 : "No inquiries yet."}
                             </p>
-                            <p className="text-xs text-muted-foreground max-w-sm mt-0.5">
+                            <p className="text-xs text-slate-500 max-w-sm mt-0.5">
                               {searchQuery || typeFilter !== "ALL" || statusFilter !== "ALL"
                                 ? "Try resetting your search query or selecting a different status category."
                                 : "Customer requests submitted through the website will appear here."}
@@ -701,7 +706,7 @@ export function AdminInquiriesView() {
                                 size="sm"
                                 variant="outline"
                                 onClick={handleClearFilters}
-                                className="mt-3 h-8 text-xs text-brand-blue"
+                                className="mt-3 h-8 text-xs text-brand-blue rounded-xl"
                               >
                                 Clear All Filters
                               </Button>
@@ -716,7 +721,7 @@ export function AdminInquiriesView() {
                         return (
                           <TableRow
                             key={inq.id}
-                            className={`group transition-colors hover:bg-muted/20 ${isSelected ? "bg-blue-50/40" : ""}`}
+                            className={`group transition-colors border-slate-100 hover:bg-slate-50/70 ${isSelected ? "bg-blue-50/40" : ""}`}
                           >
                             {/* Checkbox */}
                             <TableCell className="pl-6 py-3">
@@ -724,27 +729,27 @@ export function AdminInquiriesView() {
                                 type="checkbox"
                                 checked={isSelected}
                                 onChange={() => handleToggleSelectOne(inq.id)}
-                                className="size-3.5 rounded border-gray-300 text-brand-blue focus:ring-brand-blue"
+                                className="size-3.5 rounded border-slate-300 text-brand-blue focus:ring-brand-blue"
                               />
                             </TableCell>
 
                             {/* Inquiry ID */}
-                            <TableCell className="py-3 font-mono text-xs font-bold text-navy dark:text-foreground">
+                            <TableCell className="py-3 font-mono text-xs font-bold text-navy">
                               #{inq.referenceNumber}
                             </TableCell>
 
                             {/* Customer */}
                             <TableCell className="py-3 max-w-[190px]">
                               <div>
-                                <p className="font-bold text-xs text-navy dark:text-foreground">{inq.customerName}</p>
-                                <p className="text-[11px] text-muted-foreground truncate">{inq.customerEmail}</p>
-                                <p className="text-[10px] text-muted-foreground font-mono">{inq.customerPhone}</p>
+                                <p className="font-bold text-xs text-navy group-hover:text-brand-blue transition-colors">{inq.customerName}</p>
+                                <p className="text-[11px] text-slate-500 truncate">{inq.customerEmail}</p>
+                                <p className="text-[10px] text-slate-400 font-mono">{inq.customerPhone}</p>
                               </div>
                             </TableCell>
 
                             {/* Inquiry Type */}
                             <TableCell className="py-3">
-                              <Badge variant="outline" className="text-[10px] font-semibold bg-background">
+                              <Badge variant="outline" className="text-[10px] font-semibold bg-white border-slate-200 text-slate-700">
                                 {inq.inquiryType}
                               </Badge>
                             </TableCell>
@@ -752,11 +757,11 @@ export function AdminInquiriesView() {
                             {/* Service / Package */}
                             <TableCell className="py-3 max-w-[200px]">
                               <div>
-                                <p className="font-semibold text-xs text-foreground truncate">
+                                <p className="font-semibold text-xs text-slate-800 truncate">
                                   {inq.packageName || inq.destination || inq.referenceNumber}
                                 </p>
                                 {inq.country ? (
-                                  <span className="text-[10px] text-muted-foreground block">{inq.country}</span>
+                                  <span className="text-[10px] text-slate-400 block">{inq.country}</span>
                                 ) : null}
                               </div>
                             </TableCell>
@@ -767,43 +772,44 @@ export function AdminInquiriesView() {
                                 <Badge
                                   className={
                                     inq.travelType === "Inbound"
-                                      ? "bg-emerald-50 text-emerald-700 border-emerald-200 text-[10px]"
-                                      : "bg-blue-50 text-blue-700 border-blue-200 text-[10px]"
+                                      ? "bg-emerald-50 text-emerald-700 border-emerald-200/80 text-[10px] font-semibold"
+                                      : "bg-blue-50 text-blue-700 border-blue-200/80 text-[10px] font-semibold"
                                   }
                                   variant="outline"
                                 >
                                   {inq.travelType}
                                 </Badge>
                               ) : (
-                                <span className="text-muted-foreground text-xs">—</span>
+                                <span className="text-slate-400 text-xs">—</span>
                               )}
                             </TableCell>
 
                             {/* Destination */}
-                            <TableCell className="py-3 text-xs text-foreground font-medium">
+                            <TableCell className="py-3 text-xs text-slate-700 font-medium">
                               {inq.destination || inq.country || "—"}
                             </TableCell>
 
                             {/* Date Submitted */}
-                            <TableCell className="py-3 text-xs text-muted-foreground whitespace-nowrap font-mono text-[11px]">
+                            <TableCell className="py-3 text-xs text-slate-500 whitespace-nowrap font-mono text-[11px]">
                               {inq.submittedDate}
                             </TableCell>
 
                             {/* Status Badge */}
                             <TableCell className="py-3">
                               <Badge
+                                variant="outline"
                                 className={
                                   inq.status === "New"
-                                    ? "bg-emerald-600 text-white text-[10px] font-semibold"
+                                    ? "bg-emerald-50 text-emerald-700 border-emerald-200 font-semibold text-[10px]"
                                     : inq.status === "Reviewing"
-                                      ? "bg-amber-600 text-white text-[10px] font-semibold"
+                                      ? "bg-amber-50 text-amber-700 border-amber-200 font-semibold text-[10px]"
                                       : inq.status === "Replied"
-                                        ? "bg-sky-600 text-white text-[10px] font-semibold"
+                                        ? "bg-sky-50 text-sky-700 border-sky-200 font-semibold text-[10px]"
                                         : inq.status === "In Progress"
-                                          ? "bg-blue-600 text-white text-[10px] font-semibold"
+                                          ? "bg-blue-50 text-brand-blue border-blue-200 font-semibold text-[10px]"
                                           : inq.status === "Completed"
-                                            ? "bg-emerald-700 text-white text-[10px] font-semibold"
-                                            : "bg-slate-600 text-white text-[10px] font-semibold"
+                                            ? "bg-emerald-50 text-emerald-800 border-emerald-300 font-semibold text-[10px]"
+                                            : "bg-slate-100 text-slate-700 border-slate-200 font-semibold text-[10px]"
                                 }
                               >
                                 {inq.status}
@@ -824,12 +830,12 @@ export function AdminInquiriesView() {
 
                                 <DropdownMenu>
                                   <DropdownMenuTrigger asChild>
-                                    <Button size="sm" variant="ghost" className="size-7 p-0 text-muted-foreground">
+                                    <Button size="sm" variant="ghost" className="size-7 p-0 text-slate-400 hover:text-slate-700 rounded-lg">
                                       <MoreHorizontal className="size-3.5" />
                                     </Button>
                                   </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="end" className="text-xs">
-                                    <DropdownMenuLabel className="text-[10px] uppercase font-bold text-muted-foreground">
+                                  <DropdownMenuContent align="end" className="text-xs rounded-xl border-slate-200/80 bg-white/95 backdrop-blur-md shadow-xl">
+                                    <DropdownMenuLabel className="text-[10px] uppercase font-bold text-slate-400">
                                       Quick Status Change
                                     </DropdownMenuLabel>
                                     <DropdownMenuItem onClick={() => handleQuickStatusChange(inq.id, "New")}>
@@ -871,11 +877,11 @@ export function AdminInquiriesView() {
               </div>
 
               {/* Table Footer */}
-              <div className="flex items-center justify-between border-t border-border/60 px-6 py-3 bg-muted/10 text-xs text-muted-foreground">
+              <div className="flex items-center justify-between border-t border-slate-100 px-6 py-3 bg-slate-50/40 text-xs text-slate-500">
                 <span>
-                  Showing <strong>{filteredInquiries.length}</strong> of {totalCount} total inquiries
+                  Showing <strong className="text-slate-700">{filteredInquiries.length}</strong> of {totalCount} total inquiries
                 </span>
-                <span className="text-[11px]">Miracle International Private CRM</span>
+                <span className="text-[11px] text-slate-400 font-medium">Miracle International Operations Desk</span>
               </div>
             </CardContent>
           </Card>

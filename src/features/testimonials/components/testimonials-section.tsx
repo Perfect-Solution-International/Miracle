@@ -13,7 +13,7 @@ function TestimonialCard({
 }) {
   return (
     <figure
-      className="relative flex h-full flex-col gap-8 rounded-2xl border border-slate-200 bg-white p-7 shadow-soft sm:p-8"
+      className="relative flex h-full flex-col gap-8 rounded-2xl public-card p-7 sm:p-8"
     >
       <div className="flex items-center justify-between gap-3">
         <Quote aria-hidden="true" className="text-brand-blue size-8" />
@@ -66,3 +66,4 @@ export async function TestimonialsSection() {
     </Section>
   );
 }
+

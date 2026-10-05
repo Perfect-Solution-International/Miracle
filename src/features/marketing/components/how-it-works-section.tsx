@@ -68,7 +68,7 @@ export function HowItWorksSection() {
                     />
                   ) : null}
                 </span>
-                <div className="bg-surface group-hover:border-brand-blue/20 flex-1 rounded-2xl border border-transparent p-6 transition-colors duration-300">
+                <div className="public-card-clickable flex-1 rounded-2xl p-6">
                   <p className="text-brand-red text-xs font-extrabold tracking-[0.16em]">
                     STEP {String(index + 1).padStart(2, "0")}
                   </p>

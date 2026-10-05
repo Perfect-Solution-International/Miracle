@@ -262,7 +262,7 @@ export default function Page() {
             {overviewPoints.map((point) => (
               <li
                 key={point}
-                className="bg-card text-ink flex items-start gap-3 rounded-xl border p-5 text-sm font-semibold"
+                className="flex items-start gap-3 rounded-2xl public-card p-5 text-sm font-semibold text-ink"
               >
                 <span className="bg-brand-blue-light text-brand-blue inline-flex size-7 shrink-0 items-center justify-center rounded-full">
                   <Check aria-hidden="true" className="size-4" strokeWidth={2.5} />

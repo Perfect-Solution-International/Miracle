@@ -36,7 +36,7 @@ export function ItProcessGrid({
         {steps.map((item) => (
           <li
             key={item.step}
-            className="reveal rounded-xl border border-slate-200 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lift"
+            className="reveal rounded-2xl public-card-clickable p-6"
           >
             <div className="flex items-center justify-between">
               <span className="text-brand-blue bg-brand-blue-light inline-flex size-11 items-center justify-center rounded-lg">
@@ -54,3 +54,4 @@ export function ItProcessGrid({
     </Section>
   );
 }
+

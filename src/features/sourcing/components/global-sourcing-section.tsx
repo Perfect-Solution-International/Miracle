@@ -29,7 +29,7 @@ export function GlobalSourcingSection() {
             {SOURCING_MARKETS.map((market) => (
               <li
                 key={market.name}
-                className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-brand-blue/25"
+                className="flex items-center gap-4 rounded-2xl public-card-clickable p-4"
               >
                 <span
                   aria-hidden="true"
@@ -93,3 +93,4 @@ export function GlobalSourcingSection() {
     </Section>
   );
 }
+

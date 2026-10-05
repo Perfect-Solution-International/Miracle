@@ -20,7 +20,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { CtaBanner } from "@/components/common/cta-banner";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
@@ -29,8 +28,6 @@ import { SITE_MEDIA } from "@/config/site-media";
 import { GlobalPresenceSection, MISSION_VISION_VALUES } from "@/features/about";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
-
-import lightPageStyles from "../light-page.module.css";
 
 const TITLE = "About Us";
 const DESCRIPTION =
@@ -146,47 +143,49 @@ export default function Page() {
     <main className="bg-white">
       <section
         aria-labelledby="about-hero-heading"
-        className="relative isolate overflow-hidden bg-white"
-        style={{
-          backgroundImage: `url("${SITE_MEDIA.aboutHero.src}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center right",
-          backgroundRepeat: "no-repeat",
-        }}
+        className="public-hero"
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/5 max-sm:from-white/95 max-sm:via-white/85 max-sm:to-white/55"
+          className="public-hero-media bg-cover bg-no-repeat"
+          style={{
+            backgroundImage: `url("${SITE_MEDIA.aboutHero.src}")`,
+            backgroundPosition: "right center",
+          }}
         />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white" />
+        <div
+          aria-hidden="true"
+          className="public-hero-haze"
+        />
+        <div
+          aria-hidden="true"
+          className="public-hero-fade"
+        />
 
-        <div className="container-page relative flex min-h-[560px] items-center py-20 sm:py-28 md:min-h-[640px]">
-          <div className="max-w-2xl space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
-              </span>
+        <div className="container-page public-hero-content">
+          <div className="public-hero-copy">
+            <div className="public-hero-badge">
+              <span aria-hidden="true" className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
               Corporate Profile &amp; Global Mission
             </div>
 
             <h1
               id="about-hero-heading"
-              className="text-navy text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+              className="public-hero-title"
             >
               Built to Connect Business,{" "}
-              <span className="text-navy">
+              <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Opportunity &amp; Growth.
               </span>
             </h1>
 
-            <p className="max-w-xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
+            <p className="public-hero-description">
               Miracle International connects businesses and individuals with global opportunities
               through integrated business solutions, enterprise technology, tourism, and international trade operations.
             </p>
 
-            <div className="flex flex-col gap-3 sm:flex-row pt-2">
-              <Button asChild variant="accent" size="xl" className="shadow-lift">
+            <div className="public-hero-actions">
+              <Button asChild size="xl" variant="accent" className="shadow-md">
                 <Link href={ROUTES.public.services}>
                   Explore Our Services
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
@@ -194,9 +193,8 @@ export default function Page() {
               </Button>
               <Button
                 asChild
-                variant="outline"
+                variant="secondary-hero"
                 size="xl"
-                className="border-slate-200 bg-white text-navy shadow-sm hover:bg-slate-50"
               >
                 <Link href={ROUTES.public.contact}>Contact Our Team</Link>
               </Button>
@@ -282,7 +280,7 @@ export default function Page() {
               return (
                 <article
                   key={item.title}
-                  className="shadow-soft rounded-2xl border bg-white p-6"
+                  className="rounded-2xl public-card p-6"
                 >
                   <span className="bg-brand-blue-light text-brand-blue flex size-11 items-center justify-center rounded-xl">
                     <Icon aria-hidden="true" className="size-5" />
@@ -296,7 +294,7 @@ export default function Page() {
             })}
           </div>
           {values?.bullets ? (
-            <div className="shadow-soft mt-4 rounded-2xl border bg-white p-6">
+            <div className="mt-4 rounded-2xl public-card p-6">
               <div className="flex items-center gap-3">
                 <span className="bg-brand-blue-light text-brand-blue flex size-11 items-center justify-center rounded-xl">
                   <Lightbulb aria-hidden="true" className="size-5" />
@@ -335,7 +333,7 @@ export default function Page() {
             <li key={title}>
               <Link
                 href={href}
-                className="group shadow-soft hover:border-brand-blue/30 hover:shadow-lift flex h-full cursor-pointer flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="group flex h-full cursor-pointer flex-col rounded-2xl public-card-clickable p-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <span className="bg-brand-blue-light text-brand-blue group-hover:bg-brand-blue flex size-11 items-center justify-center rounded-xl transition-colors group-hover:text-white">
                   <Icon aria-hidden="true" className="size-5" />
@@ -433,15 +431,7 @@ export default function Page() {
 
       <GlobalPresenceSection />
 
-      <CtaBanner
-        eyebrow="Start a Conversation"
-        title="Let's Talk About What Your Business Needs Next"
-        description="Share the opportunity, requirement or challenge in front of you. Our team will help identify the most practical next step."
-        primary={{ label: "Contact Us", href: ROUTES.public.contact }}
-        secondary={{ label: "Explore Our Services", href: ROUTES.public.services }}
-        headingId="about-cta-heading"
-        className={lightPageStyles.lightCta}
-      />
     </main>
   );
 }
+

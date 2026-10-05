@@ -1523,7 +1523,9 @@ export function TravelPackageDialog({
                   <Label className="text-xs font-semibold">Offer Type</Label>
                   <Select
                     value={formData.offers?.offerType || "Percentage Discount"}
-                    onValueChange={(val) => updateOfferField("offerType", val as any)}
+                    onValueChange={(val) =>
+                      updateOfferField("offerType", val as PackageOffer["offerType"])
+                    }
                   >
                     <SelectTrigger className="h-8.5 text-xs bg-background">
                       <SelectValue placeholder="Offer Type" />

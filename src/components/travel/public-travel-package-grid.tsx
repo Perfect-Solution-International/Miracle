@@ -104,7 +104,7 @@ export function PublicTravelPackageGrid({
             return (
               <div
                 key={pkg.id}
-                className="group flex flex-col rounded-2xl border border-border/80 bg-card overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 hover:border-brand-blue/40"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_6px_20px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
               >
                 {/* Entire card is a link */}
                 <Link

@@ -31,17 +31,19 @@ export function WhyChooseSection({
           className="lg:col-span-5"
         />
 
-        <ul className="grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-2 lg:col-span-7">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
           {WHY_CHOOSE_ITEMS.map(({ icon: Icon, title, description }) => (
             <li
               key={title}
-              className="group bg-white p-6 transition-colors duration-300 hover:bg-brand-blue-light/30 sm:p-7"
+              className="group rounded-2xl public-card-clickable p-6 sm:p-7"
             >
-              <Icon
-                aria-hidden="true"
-                className="text-brand-blue size-6 transition-colors"
-              />
-              <h3 className="text-ink mt-5 text-lg font-bold">{title}</h3>
+              <span className="bg-brand-blue-light text-brand-blue inline-flex size-11 items-center justify-center rounded-xl shadow-xs transition-colors group-hover:bg-brand-blue group-hover:text-white">
+                <Icon
+                  aria-hidden="true"
+                  className="size-5.5"
+                />
+              </span>
+              <h3 className="text-ink mt-4 text-lg font-bold">{title}</h3>
               <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p>
             </li>
           ))}

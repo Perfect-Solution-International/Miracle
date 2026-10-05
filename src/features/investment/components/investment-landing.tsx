@@ -76,12 +76,6 @@ const SUPPORT_STEPS = [
   ["05", "Connect & Coordinate", "Where applicable, connect relevant parties and coordinate the required business process."],
 ] as const;
 
-const WHY_US = [
-  ["Business Opportunity Guidance", "Make sense of possible directions and next steps.", Lightbulb],
-  ["Market & Business Information", "Review useful context before moving forward.", BarChart3],
-  ["Investment Requirement Support", "Share your goals and get help shaping your requirement.", CircleDollarSign],
-  ["Business Connection & Coordination", "Connect relevant people and coordinate the process where applicable.", Handshake],
-] as const;
 
 type FormState = {
   fullName: string;
@@ -157,7 +151,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
         ) : (
           <>
             <div className="border-b px-6 py-6 pr-16 sm:px-8"><p className="text-brand-red text-xs font-bold tracking-[0.18em] uppercase">Miracle International</p><h2 id="investment-modal-title" className="text-ink mt-2 text-2xl font-extrabold sm:text-3xl">Investment Requirement</h2><p className="text-muted-foreground mt-2 max-w-xl text-sm leading-relaxed">Tell us about your investment interests or business requirements.</p></div>
-            <form onSubmit={submit} className="scrollbar-hidden overflow-y-auto px-6 py-6 sm:px-8" noValidate>
+            <form onSubmit={submit} className="public-form-scrollbar overflow-y-auto px-6 py-6 sm:px-8" noValidate>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="text-ink text-sm font-semibold">Full Name *<Input value={form.fullName} onChange={(event) => update("fullName", event.target.value)} placeholder="Your full name" className="mt-2" /></label>
                 <label className="text-ink text-sm font-semibold">Email Address *<Input type="email" value={form.email} onChange={(event) => update("email", event.target.value)} placeholder="you@example.com" className="mt-2" /></label>
@@ -195,11 +189,11 @@ export function InvestmentLanding({
     <>
       <main>
         {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
-        <section className="relative isolate overflow-hidden bg-white border-b border-slate-200/80 min-h-[580px] lg:min-h-[660px] flex items-center">
+        <section className="public-hero">
           {/* Full-Bleed Panoramic Hero Image */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
+            className="public-hero-media bg-cover bg-no-repeat"
             style={{
               backgroundImage: 'url("/images/services/investment-hero.jpg")',
               backgroundPosition: "right center",
@@ -209,45 +203,45 @@ export function InvestmentLanding({
           {/* Soft-White Gradient on Left Area */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent lg:from-white/95 lg:via-white/70 lg:to-transparent/10 pointer-events-none"
+            className="public-hero-haze"
           />
 
           {/* Bottom Gradient Fade */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"
+            className="public-hero-fade"
           />
 
           {/* Left-Aligned Content Container */}
-          <div className="container-page relative z-10 w-full py-16 sm:py-20 lg:py-24">
-            <div className="max-w-2xl space-y-6">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs backdrop-blur-sm">
+          <div className="container-page public-hero-content">
+            <div className="public-hero-copy">
+              <div className="public-hero-badge">
                 <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
                 <span>Strategic Commercial Investment Advisory</span>
               </div>
 
-              <h1 className="text-slate-900 text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-tight leading-[1.08]">
+              <h1 className="public-hero-title">
                 Strategic Advisory.<br />
                 For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">High-Yield Projects</span><br />
                 <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Equity Growth.</span>
               </h1>
 
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+              <p className="public-hero-description">
                 Miracle International delivers evaluated commercial ventures, strategic partnership structuring, commercial feasibility modeling, and vetted investment opportunities with comprehensive due diligence.
               </p>
 
-              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <div className="public-hero-actions">
                 <Button
                   size="xl"
                   onClick={openForm}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3.5 shadow-md inline-flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5"
+                  variant="accent"
+                  className="shadow-md"
                 >
                   <span>Inquiry Now</span>
                 </Button>
                 <Button
                   size="xl"
-                  variant="outline"
-                  className="bg-white/95 hover:bg-white text-slate-800 font-semibold border-slate-200/90 rounded-xl px-6 py-3.5 shadow-2xs inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 backdrop-blur-xs"
+                  variant="secondary-hero"
                   onClick={openForm}
                 >
                   Explore Investment Projects
@@ -301,7 +295,7 @@ export function InvestmentLanding({
             <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {SUPPORT_TYPES.map(([number, title, description, Icon]) => (
                 <button type="button" key={title} onClick={openForm} className="group text-left">
-                  <article className="hover:border-brand-blue/40 hover:shadow-soft h-full rounded-2xl border border-slate-200/80 bg-white p-6 transition-all duration-300 hover:-translate-y-1">
+                  <article className="h-full rounded-2xl public-card-clickable p-6">
                     <div className="flex items-center justify-between">
                       <span className="text-brand-red text-sm font-bold">{number}</span>
                       <Icon className="text-brand-blue size-7 transition-transform group-hover:scale-110" />
@@ -345,7 +339,7 @@ export function InvestmentLanding({
                     type="button"
                     onClick={openForm}
                     key={title}
-                    className="hover:border-brand-blue/40 flex items-center gap-3 rounded-xl border border-slate-200/80 bg-white p-4 text-left transition-colors"
+                    className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
                   >
                     <Icon className="text-brand-blue size-5 shrink-0" />
                     <span className="text-ink text-sm font-semibold">{title}</span>
@@ -374,7 +368,7 @@ export function InvestmentLanding({
               </p>
               <div className="mt-9 grid gap-3 sm:grid-cols-2">
                 {BUSINESS_OPPORTUNITIES.map(([title, description, Icon]) => (
-                  <article key={title} className="rounded-xl border border-slate-200/80 bg-white p-4">
+                  <article key={title} className="rounded-2xl public-card p-4">
                     <Icon className="text-brand-blue size-5" />
                     <h3 className="text-ink mt-4 text-sm font-bold">{title}</h3>
                     <p className="text-muted-foreground mt-2 text-xs leading-relaxed">{description}</p>
@@ -394,31 +388,6 @@ export function InvestmentLanding({
           </div>
         </section>
 
-        <section className="section-y bg-white border-t border-slate-100">
-          <div className="container-page">
-            <div className="max-w-2xl">
-              <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">
-                No invented listings
-              </p>
-              <h2 className="text-ink mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Investment Projects
-              </h2>
-              <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
-                Explore projects that may require investment, business participation or strategic support.
-              </p>
-            </div>
-            <div className="mt-10 rounded-3xl border border-dashed border-slate-300 bg-slate-50/70 px-6 py-14 text-center sm:px-12">
-              <CircleDollarSign className="text-brand-blue mx-auto size-10" />
-              <h3 className="text-ink mt-5 text-2xl font-bold">No Investment Projects Available</h3>
-              <p className="text-muted-foreground mx-auto mt-3 max-w-lg">
-                New opportunities will be added as they become available.
-              </p>
-              <Button size="lg" onClick={openForm} className="mt-7">
-                Submit Your Investment Requirement
-              </Button>
-            </div>
-          </div>
-        </section>
 
         <section className="section-y bg-white border-t border-slate-100">
           <div className="container-page">
@@ -435,7 +404,7 @@ export function InvestmentLanding({
             </div>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {BUSINESS_IDEAS.map(([title, description]) => (
-                <article key={title} className="rounded-2xl border border-slate-200/80 bg-white p-5">
+                <article key={title} className="rounded-2xl public-card p-5">
                   <Lightbulb className="text-brand-blue size-6" />
                   <h3 className="text-ink mt-5 text-sm font-bold">{title}</h3>
                   <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p>
@@ -480,6 +449,8 @@ export function InvestmentLanding({
           </div>
         </section>
 
+ Imasha
+
         <section className="section-y bg-white border-t border-slate-100">
           <div className="container-page">
             <div className="max-w-2xl">
@@ -492,7 +463,7 @@ export function InvestmentLanding({
             </div>
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {WHY_US.map(([title, description, Icon]) => (
-                <article key={title} className="rounded-2xl border border-slate-200/80 bg-white p-6">
+                <article key={title} className="rounded-2xl public-card p-6">
                   <Icon className="text-brand-blue size-7" />
                   <h3 className="text-ink mt-7 font-bold">{title}</h3>
                   <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{description}</p>
@@ -525,6 +496,7 @@ export function InvestmentLanding({
             </div>
           </div>
         </section>
+develop
       </main>
       <RequestModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
 
