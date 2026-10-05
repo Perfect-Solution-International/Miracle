@@ -1,17 +1,12 @@
 import {
   ArrowRight,
   Briefcase,
-  BriefcaseBusiness,
-  CheckCircle2,
   Code2,
-  Compass,
   FileCheck2,
   Globe2,
   Handshake,
   Headphones,
-  HelpCircle,
   Layers3,
-  Lightbulb,
   Megaphone,
   MessageSquarePlus,
   Package,
@@ -158,6 +153,30 @@ const SERVICE_AREAS = [
   },
 ] as const;
 
+/** Client Benefits / Strategic Advantages */
+const ADVANTAGES = [
+  {
+    title: "End-to-End Coordination",
+    description: "We handle the complexity across suppliers, logistics, and legal compliance so you can focus on your core business.",
+    icon: Layers3,
+  },
+  {
+    title: "Verified Global Network",
+    description: "Access our established network of trusted suppliers, manufacturers, and trade partners worldwide.",
+    icon: Globe2,
+  },
+  {
+    title: "Transparent Communication",
+    description: "Clear updates, precise timelines, and dedicated account managers ensuring you are always informed.",
+    icon: MessageSquarePlus,
+  },
+  {
+    title: "Tailored Solutions",
+    description: "Every requirement is assessed individually to provide the most efficient and cost-effective outcome.",
+    icon: SlidersHorizontal,
+  },
+] as const;
+
 export default function Page() {
   return (
     <main className="bg-white">
@@ -220,7 +239,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── 2. Detailed 5-Step Process Breakdown ── */}
+      {/* ── 2. Detailed 6-Step Process Breakdown ── */}
       <Section
         id="steps"
         aria-labelledby="how-it-works-steps-heading"
@@ -231,11 +250,11 @@ export default function Page() {
           align="center"
           eyebrow="Step-by-Step Roadmap"
           title="How We Work With You"
-          description="Every project follows our structured 5-stage lifecycle to ensure predictability and flawless execution."
+          description="Every project follows our structured 6-stage lifecycle to ensure predictability and flawless execution."
         />
 
         <div className="mt-10 space-y-6">
-          {DETAILED_STEPS.map((stepItem) => {
+          {STEPS.map((stepItem) => {
             const Icon = stepItem.icon;
             return (
               <div
@@ -243,7 +262,7 @@ export default function Page() {
                 className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-brand-blue/40"
               >
                 <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
-                  <div className="flex items-center gap-4 lg:col-span-4">
+                  <div className="flex items-center gap-4 lg:col-span-5">
                     <span className="bg-brand-blue text-white inline-flex size-14 shrink-0 items-center justify-center rounded-2xl text-lg font-extrabold shadow-sm">
                       {stepItem.step}
                     </span>
@@ -251,28 +270,17 @@ export default function Page() {
                       <span className="text-brand-blue text-xs font-bold uppercase tracking-wider">
                         Phase {stepItem.step}
                       </span>
-                      <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors">
+                      <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors flex items-center gap-2 mt-1">
+                        <Icon className="size-5" />
                         {stepItem.title}
                       </h3>
-                      <p className="text-muted-foreground text-xs mt-0.5">{stepItem.tagline}</p>
                     </div>
                   </div>
 
-                  <div className="lg:col-span-5">
+                  <div className="lg:col-span-7 lg:pl-6 lg:border-l border-slate-100">
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {stepItem.description}
                     </p>
-                  </div>
-
-                  <div className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-slate-100 pt-4 lg:pt-0 lg:pl-6">
-                    <ul className="space-y-1.5 text-xs font-medium text-ink">
-                      {stepItem.points.map((p) => (
-                        <li key={p} className="flex items-center gap-2">
-                          <CheckCircle2 className="size-3.5 text-brand-blue shrink-0" />
-                          <span>{p}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
                 </div>
               </div>
