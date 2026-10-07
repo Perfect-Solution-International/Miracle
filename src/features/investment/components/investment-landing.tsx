@@ -76,6 +76,13 @@ const SUPPORT_STEPS = [
   ["05", "Connect & Coordinate", "Where applicable, connect relevant parties and coordinate the required business process."],
 ] as const;
 
+const WHY_US = [
+  ["Structured Guidance", "Clear frameworks to evaluate business and investment opportunities.", Target],
+  ["Broad Network", "Access to trusted trading, technology and industry partners.", Network],
+  ["Commercial Focus", "Grounded support focused on real operational outcomes.", Building2],
+  ["End-to-End Coordination", "Assistance from initial evaluation through setup and growth.", Rocket],
+] as const;
+
 
 type FormState = {
   fullName: string;
@@ -449,8 +456,6 @@ export function InvestmentLanding({
           </div>
         </section>
 
- Imasha
-
         <section className="section-y bg-white border-t border-slate-100">
           <div className="container-page">
             <div className="max-w-2xl">
@@ -496,7 +501,6 @@ export function InvestmentLanding({
             </div>
           </div>
         </section>
-develop
       </main>
       <RequestModal open={isFormOpen} onClose={() => setIsFormOpen(false)} />
 
