@@ -29,7 +29,7 @@ export default function HomePage() {
           "@type": "Organization",
           name: APP_CONFIG.name,
           url: APP_CONFIG.url,
-          logo: new URL("/brand/miracle-logo.svg", APP_CONFIG.url).toString(),
+          logo: new URL("/brand/logo-rbg.png", APP_CONFIG.url).toString(),
           description: APP_CONFIG.description,
           email: APP_CONFIG.support.email,
           telephone: APP_CONFIG.support.phone,

@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils";
  * names and every usage updates.
  */
 const LOGO_SOURCES = {
-  default: "/brand/miracle-logo.svg",
-  inverse: "/brand/miracle-logo-inverse.svg",
+  default: "/brand/logo-rbg.png",
+  inverse: "/brand/logo-rbg.png",
 } as const;
 
 export function BrandLogo({
@@ -36,11 +36,9 @@ export function BrandLogo({
         src={LOGO_SOURCES[variant]}
         alt={`${APP_CONFIG.name} home`}
         width={220}
-        height={48}
-        // SVG is resolution independent; the optimiser adds nothing.
-        unoptimized
-        preload={preload}
-        className={cn("h-9 w-auto sm:h-10", imageClassName)}
+        height={56}
+        priority={preload}
+        className={cn("h-10 w-auto sm:h-12 object-contain", imageClassName)}
       />
     </Link>
   );
