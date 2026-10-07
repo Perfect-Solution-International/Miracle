@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <div className="flex justify-center">
         <BrandLogo imageClassName="h-10 w-auto sm:h-12" />
       </div>
-      <main id="main-content" className="w-full max-w-md">
+      <main id="main-content" className="w-full">
         {children}
       </main>
       <p className="text-muted-foreground text-xs text-center">

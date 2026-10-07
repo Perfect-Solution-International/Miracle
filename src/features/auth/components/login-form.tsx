@@ -79,8 +79,9 @@ export function LoginForm() {
   }
 
   return (
-    <Card>
-      <CardHeader>
+    <div className="w-full max-w-md mx-auto">
+      <Card>
+        <CardHeader>
         <h1 className="text-xl font-semibold">Sign in</h1>
         <p className="text-muted-foreground text-sm">
           Welcome back. Enter your details to continue.
@@ -201,7 +202,8 @@ export function LoginForm() {
             </Button>
           </form>
         </Form>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
