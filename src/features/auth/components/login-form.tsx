@@ -48,13 +48,16 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    // If proxy bounced the user here (redirectTo is present), it means their 
+    // session cookie is missing or invalid. Do not auto-redirect, otherwise 
+    // we enter an infinite loop with the proxy.
+    if (isAuthenticated && !searchParams.has("redirectTo")) {
       const fallback = user 
         ? PORTAL_HOME[resolvePortal(user.roles)] ?? ROUTES.admin.dashboard 
         : ROUTES.admin.dashboard;
       window.location.href = fallback;
     }
-  }, [isAuthenticated, user]);
+  }, [isAuthenticated, user, searchParams]);
 
   const sessionExpired = searchParams.get("reason") === "session-expired";
 
@@ -198,13 +201,6 @@ export function LoginForm() {
             </Button>
           </form>
         </Form>
-
-        <p className="text-muted-foreground mt-6 text-center text-sm">
-          Don&apos;t have an account?{" "}
-          <Link href={ROUTES.auth.register} className="text-foreground font-medium">
-            Register
-          </Link>
-        </p>
       </CardContent>
     </Card>
   );

@@ -90,9 +90,6 @@ export const getCurrentUser = cache(async (): Promise<SessionUser | null> => {
   const sessionCookie = cookieStore.get(env.SESSION_COOKIE_NAME)?.value;
 
   if (!sessionCookie) {
-    if (process.env.NODE_ENV === "development") {
-      return getTestAdminSessionUser();
-    }
     return null;
   }
 
