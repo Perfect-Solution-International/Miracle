@@ -126,11 +126,8 @@ export function MobileNavigation() {
             </Link>
           </Button>
           <Button asChild variant="outline" size="xl" className="w-full">
-            <Link
-              href={isAuthenticated ? PORTAL_HOME[ability.portal] : ROUTES.auth.login}
-              onClick={close}
-            >
-              {isAuthenticated ? "Go to Dashboard" : "Login"}
+            <Link href={ROUTES.auth.login} onClick={close}>
+              Login
             </Link>
           </Button>
           <div className="text-muted-foreground flex flex-wrap justify-center gap-x-5 gap-y-1 pt-1 text-sm">
