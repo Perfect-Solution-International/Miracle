@@ -13,10 +13,9 @@ export const emailSchema = z
 
 export const passwordSchema = z
   .string()
-  .min(10, "Password must be at least 10 characters")
+  .min(5, "Password must be at least 5 characters")
   .max(128, "Password must be at most 128 characters")
-  .regex(/[a-z]/, "Include at least one lowercase letter")
-  .regex(/[A-Z]/, "Include at least one uppercase letter")
+
   .regex(/[0-9]/, "Include at least one number");
 
 /** Permissive on purpose: this is a global B2B platform, not a single country. */

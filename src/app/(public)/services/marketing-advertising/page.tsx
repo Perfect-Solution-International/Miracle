@@ -95,6 +95,15 @@ const strategy = [
   ["Continuous Improvement", "Review activity and refine the next steps."],
 ] as const;
 
+const outcomes = [
+  "Clearer market positioning",
+  "Higher brand visibility",
+  "Better targeted lead generation",
+  "Consistent message across channels",
+  "Measurable campaign results",
+  "Scalable promotional workflows",
+] as const;
+
 const channels = [
   ["Social Media", "Build visibility and dialogue.", Share2],
   ["Search", "Be present when people look.", Search],
@@ -365,8 +374,6 @@ export default function Page() {
           </div>
         </div>
       </Section>
-
- Imasha
 
       <Section aria-labelledby="outcomes-heading" className="bg-white border-t border-slate-100">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">

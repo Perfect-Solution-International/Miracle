@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
   },
   productionBrowserSourceMaps: false,
   images: {
+    // Disable Next.js image optimization to prevent quality reduction and avoid
+    // terminal errors when routing to static pages without sharp installed.
+    unoptimized: true,
     // Object-storage host for product images and documents. Tighten per environment.
     remotePatterns: [{ protocol: "https", hostname: "**" }],
   },

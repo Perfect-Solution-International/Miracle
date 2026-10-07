@@ -323,55 +323,56 @@ const businessOutcomes = [
 export default function Page() {
   return (
     <main className={`${landingStyles.page} ${landingStyles.solutionPage}`}>
-      {/* ── 1. Hero Section: Full-Width Panoramic Hero with Left Overlay ── */}
-      <section className="public-hero">
-        {/* Full-Bleed Panoramic Hero Image */}
+      {/* ── 1. Hero Section ── */}
+      <section
+        aria-labelledby="business-solutions-hero-heading"
+        className="relative isolate overflow-hidden bg-white"
+        style={{
+          backgroundImage: 'url("/images/business-solutions/business-solutions-hero.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "right center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Left-to-right gradient overlay for legibility */}
         <div
           aria-hidden="true"
-          className="public-hero-media bg-cover bg-no-repeat"
-          style={{
-            backgroundImage: 'url("/images/business-solutions/business-solutions-hero.jpg")',
-            backgroundPosition: "right center",
-          }}
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/10 max-sm:from-white/95 max-sm:via-white/90 max-sm:to-white/60"
         />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white" />
 
-        {/* Soft-White Gradient on Left Area (ensures 100% crisp legibility on all devices) */}
-        <div
-          aria-hidden="true"
-          className="public-hero-haze"
-        />
-
-        {/* Bottom Gradient Fade to Next Section */}
-        <div
-          aria-hidden="true"
-          className="public-hero-fade"
-        />
-
-        {/* Left-Aligned Content Container */}
-        <div className="container-page public-hero-content">
-          <div className="public-hero-copy">
-            <div className="public-hero-badge">
-              <span className="size-2 rounded-full bg-blue-600 ring-4 ring-blue-100" />
-              <span>Enterprise Consulting &amp; Business Setup</span>
+        <div className="container-page relative flex min-h-[580px] items-center py-16 sm:py-20 lg:min-h-[660px] lg:py-24">
+          <div className="max-w-2xl space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white px-3.5 py-1.5 text-xs font-bold text-navy shadow-xs">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-brand-blue" />
+              </span>
+              Enterprise Consulting &amp; Business Setup
             </div>
 
-            <h1 className="public-hero-title">
-              Strategic Advisory.<br />
-              For <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Enterprise Setup, Scale</span><br />
-              <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">&amp; Market Growth.</span>
+            <h1
+              id="business-solutions-hero-heading"
+              className="text-navy text-3xl leading-[1.08] font-extrabold tracking-tight sm:text-4xl lg:text-[3.25rem] xl:text-[3.75rem]"
+            >
+              Strategic Advisory{" "}
+              <span className="text-navy">for Enterprise Setup,</span>
+              <br />
+              <span className="text-brand-blue">Scale &amp; Market Growth.</span>
             </h1>
 
-            <p className="public-hero-description">
+            <p className="max-w-xl text-base leading-relaxed font-medium text-slate-700 sm:text-lg">
               From business planning and corporate incorporation to operational scaling, machinery sourcing, technology integration, and executive business consulting.
             </p>
 
-            <div className="public-hero-actions">
-              <Button asChild size="xl" variant="accent" className="shadow-md">
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <Button asChild variant="accent" size="xl" className="shadow-lift">
                 <Link href={ROUTES.public.tellUsWhatYouNeed}>
-                  <span>Inquiry Now</span>
+                  Inquiry Now
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Link>
               </Button>
-              <Button asChild size="xl" variant="secondary-hero">
+              <Button asChild variant="outline" size="xl" className="border-slate-200 bg-white text-navy shadow-sm hover:bg-slate-50">
                 <a href="#solutions">Explore 8 Solutions</a>
               </Button>
             </div>

@@ -1,11 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, Mail, Lock } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+
+import { useAuth } from "@/providers/auth-provider";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -20,8 +22,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ROUTES } from "@/config/routes";
+import { PORTAL_HOME, ROUTES } from "@/config/routes";
 import { applyBackendErrors } from "@/lib/validation/backend-errors";
+import { resolvePortal } from "@/lib/permissions/roles";
 
 import { useLogin } from "../hooks/use-login";
 import {
@@ -40,8 +43,21 @@ import {
 export function LoginForm() {
   const searchParams = useSearchParams();
   const login = useLogin();
+  const { isAuthenticated, user } = useAuth();
   const [formError, setFormError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    // If proxy bounced the user here (redirectTo is present), it means their 
+    // session cookie is missing or invalid. Do not auto-redirect, otherwise 
+    // we enter an infinite loop with the proxy.
+    if (isAuthenticated && !searchParams.has("redirectTo")) {
+      const fallback = user 
+        ? PORTAL_HOME[resolvePortal(user.roles)] ?? ROUTES.admin.dashboard 
+        : ROUTES.admin.dashboard;
+      window.location.href = fallback;
+    }
+  }, [isAuthenticated, user, searchParams]);
 
   const sessionExpired = searchParams.get("reason") === "session-expired";
 
@@ -63,88 +79,102 @@ export function LoginForm() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <h1 className="text-xl font-semibold">Sign in</h1>
-        <p className="text-muted-foreground text-sm">
-          Welcome back. Enter your details to continue.
-        </p>
-      </CardHeader>
-      <CardContent>
-        {sessionExpired ? (
-          <Alert className="mb-4">
-            <AlertDescription>
-              Your session has expired. Please sign in again.
-            </AlertDescription>
-          </Alert>
-        ) : null}
+    <div className="w-full max-w-md mx-auto">
+      <Card className="border-0 shadow-lg sm:border sm:shadow-sm">
+        <CardHeader className="space-y-2 text-center pb-8">
+          <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
+          <p className="text-muted-foreground text-sm">
+            Enter your email and password to sign in
+          </p>
+        </CardHeader>
+        <CardContent>
+          {sessionExpired ? (
+            <Alert className="mb-6 bg-amber-50 text-amber-900 border-amber-200 dark:bg-amber-950/50 dark:text-amber-200 dark:border-amber-900">
+              <AlertDescription>
+                Your session has expired. Please sign in again.
+              </AlertDescription>
+            </Alert>
+          ) : null}
 
-        {formError ? (
-          <Alert variant="destructive" className="mb-4">
-            <AlertDescription>{formError}</AlertDescription>
-          </Alert>
-        ) : null}
+          {formError ? (
+            <Alert variant="destructive" className="mb-6">
+              <AlertDescription>{formError}</AlertDescription>
+            </Alert>
+          ) : null}
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" noValidate>
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      autoComplete="email"
-                      placeholder="you@company.com"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" noValidate>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email address</FormLabel>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground size-4" aria-hidden="true" />
+                      <FormControl>
+                        <Input
+                          type="email"
+                          autoComplete="email"
+                          placeholder="you@company.com"
+                          className="pl-9"
+                          {...field}
+                        />
+                      </FormControl>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <div className="relative">
-                    <FormControl>
-                      <Input
-                        type={showPassword ? "text" : "password"}
-                        autoComplete="current-password"
-                        className="pr-9"
-                        {...field}
-                      />
-                    </FormControl>
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((value) => !value)}
-                      aria-label={showPassword ? "Hide password" : "Show password"}
-                      className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2"
-                    >
-                      {showPassword ? (
-                        <EyeOff aria-hidden="true" className="size-4" />
-                      ) : (
-                        <Eye aria-hidden="true" className="size-4" />
-                      )}
-                    </button>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center justify-between">
+                      <FormLabel>Password</FormLabel>
+                      <Link
+                        href={ROUTES.auth.forgotPassword}
+                        className="text-brand-blue hover:text-brand-blue-dark text-sm font-medium transition-colors"
+                      >
+                        Forgot password?
+                      </Link>
+                    </div>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground size-4" aria-hidden="true" />
+                      <FormControl>
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          autoComplete="current-password"
+                          className="pl-9 pr-9"
+                          placeholder="••••••••"
+                          {...field}
+                        />
+                      </FormControl>
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((value) => !value)}
+                        aria-label={showPassword ? "Hide password" : "Show password"}
+                        className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors"
+                      >
+                        {showPassword ? (
+                          <EyeOff aria-hidden="true" className="size-4" />
+                        ) : (
+                          <Eye aria-hidden="true" className="size-4" />
+                        )}
+                      </button>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <div className="flex items-center justify-between">
               <FormField
                 control={form.control}
                 name="rememberMe"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center gap-2 space-y-0">
+                  <FormItem className="flex flex-row items-center gap-2 space-y-0 pt-1">
                     <FormControl>
                       <Checkbox
                         checked={field.value}
@@ -154,45 +184,40 @@ export function LoginForm() {
                     </FormControl>
                     <FormLabel
                       htmlFor="rememberMe"
-                      className="cursor-pointer text-sm font-normal"
+                      className="cursor-pointer text-sm font-normal text-muted-foreground"
                     >
-                      Remember me
+                      Remember me for 30 days
                     </FormLabel>
                   </FormItem>
                 )}
               />
-              <Link
-                href={ROUTES.auth.forgotPassword}
-                className="text-muted-foreground hover:text-foreground text-sm"
+
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full mt-2 font-medium"
+                disabled={form.formState.isSubmitting}
               >
-                Forgot password?
-              </Link>
-            </div>
+                {form.formState.isSubmitting ? (
+                  <>
+                    <Loader2 className="animate-spin mr-2" aria-hidden="true" />
+                    Signing in...
+                  </>
+                ) : (
+                  "Sign in"
+                )}
+              </Button>
+            </form>
+          </Form>
 
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={form.formState.isSubmitting}
-            >
-              {form.formState.isSubmitting ? (
-                <>
-                  <Loader2 className="animate-spin" aria-hidden="true" />
-                  Signing in...
-                </>
-              ) : (
-                "Sign in"
-              )}
-            </Button>
-          </form>
-        </Form>
-
-        <p className="text-muted-foreground mt-6 text-center text-sm">
-          Don&apos;t have an account?{" "}
-          <Link href={ROUTES.auth.register} className="text-foreground font-medium">
-            Register
-          </Link>
-        </p>
-      </CardContent>
-    </Card>
+          <p className="text-muted-foreground mt-8 text-center text-sm">
+            Don&apos;t have an account?{" "}
+            <Link href={ROUTES.auth.register} className="text-brand-blue hover:text-brand-blue-dark font-semibold transition-colors">
+              Create an account
+            </Link>
+          </p>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

@@ -24,6 +24,7 @@ import {
   Stamp,
   Truck,
   UserCircle,
+  UserPlus,
   Users,
   Wrench,
 } from "lucide-react";
@@ -143,6 +144,12 @@ const CUSTOMER_NAV: readonly NavSection[] = [
         icon: UserCircle,
         permissions: [],
       },
+      {
+        title: "Create Account",
+        href: ROUTES.auth.register,
+        icon: UserPlus,
+        permissions: [],
+      },
     ],
   },
 ];
@@ -205,6 +212,12 @@ const SUPPLIER_NAV: readonly NavSection[] = [
         title: "Profile",
         href: ROUTES.supplier.profile,
         icon: UserCircle,
+        permissions: [],
+      },
+      {
+        title: "Create Account",
+        href: ROUTES.auth.register,
+        icon: UserPlus,
         permissions: [],
       },
     ],
@@ -326,6 +339,12 @@ const ADMIN_NAV: readonly NavSection[] = [
         title: "Profile",
         href: ROUTES.admin.profile,
         icon: UserCircle,
+        permissions: [],
+      },
+      {
+        title: "Create Account",
+        href: ROUTES.auth.register,
+        icon: UserPlus,
         permissions: [],
       },
     ],

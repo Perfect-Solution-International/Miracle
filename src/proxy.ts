@@ -105,9 +105,9 @@ function route(request: NextRequest, pathname: string, search: string): NextResp
 
   // Signed-in user hitting login/register: send them into the app. The landing
   // portal is resolved server-side, since roles are not readable here.
-  if (hasSession && AUTH_PATHS.includes(pathname)) {
-    return NextResponse.redirect(new URL(ROUTES.public.home, request.url));
-  }
+  // Note: Redirect is now handled by the client component (LoginForm) so we can
+  // resolve the correct portal based on the user's role.
+  // We removed the proxy redirect to allow LoginForm to load and redirect.
 
   // Layouts can't read the pathname themselves, so it's forwarded here for the
   // customer layout to tell the public dashboard route apart from its

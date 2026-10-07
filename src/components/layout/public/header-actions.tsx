@@ -1,32 +1,24 @@
 "use client";
 
-import { ArrowRight, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { PORTAL_HOME, ROUTES } from "@/config/routes";
-import { useAuth } from "@/providers/auth-provider";
+import { ROUTES } from "@/config/routes";
 
-/** Login (or Dashboard when signed in) plus the primary conversion CTA. */
+/** Primary conversion CTA in the public header. */
 export function HeaderActions() {
-  const { isAuthenticated, ability } = useAuth();
-
   return (
     <div className="flex items-center gap-2">
-      {isAuthenticated && (
-        <Button
-          asChild
-          variant="ghost"
-          size="lg"
-          className="text-ink hidden font-semibold md:inline-flex"
-        >
-          <Link href={PORTAL_HOME[ability.portal]}>
-            <LayoutDashboard data-icon="inline-start" aria-hidden="true" />
-            Dashboard
-          </Link>
-        </Button>
-      )}
-
+      <Button
+        asChild
+        variant="outline"
+        size="lg"
+        className="hidden h-10 px-4 font-semibold sm:inline-flex"
+      >
+        <Link href={ROUTES.auth.register}>
+          Create Account
+        </Link>
+      </Button>
       <Button
         asChild
         size="lg"
@@ -36,7 +28,6 @@ export function HeaderActions() {
           Tell Us What You Need
         </Link>
       </Button>
-
     </div>
   );
 }

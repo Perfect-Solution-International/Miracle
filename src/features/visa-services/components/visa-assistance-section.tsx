@@ -1,5 +1,7 @@
 import {
   Briefcase,
+  CheckCircle2,
+  Clock,
   Globe2,
   GraduationCap,
   Plane,
@@ -9,6 +11,13 @@ import { Suspense } from "react";
 import { Section } from "@/components/common/section";
 
 import { VisaRequestForm } from "./visa-request-form";
+
+const SERVICE_PILLARS = [
+  "Comprehensive document checklist & verification",
+  "Application form filling guidance",
+  "Embassy appointment scheduling support",
+  "Flight itinerary & accommodation proof arrangements",
+] as const;
 
 const VISA_CATEGORIES = [
   {
@@ -90,8 +99,6 @@ export function VisaAssistanceSection() {
             </div>
           </div>
 
-Imasha
-
           {/* Checklist & Support Pillars */}
           <div className="rounded-2xl public-card p-5">
             <p className="text-brand-blue text-xs font-bold uppercase tracking-widest">
@@ -111,7 +118,6 @@ Imasha
               <span>Fast initial evaluation within 24 to 48 business hours.</span>
             </div>
           </div>
- develop
         </div>
 
         {/* Right Column: Visa Request Form */}

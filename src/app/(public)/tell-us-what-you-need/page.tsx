@@ -4,7 +4,7 @@ import { ROUTES } from "@/config/routes";
 import { TellUsWhatYouNeedView } from "@/features/requirements";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
-const TITLE = "Tell Us What You Need | Miracle International";
+const TITLE = "Tell Us What You Need";
 const DESCRIPTION =
   "Submit any business, product, travel, or service requirement to Miracle International. Get customized end-to-end solutions.";
 

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 
 import { TravelOutboundView } from "@/components/admin-travel/travel-outbound-view";
@@ -9,8 +10,15 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function AdminOutboundToursPage() {
+async function OutboundToursWithAuth() {
   await requirePermission("travel.manage");
-
   return <TravelOutboundView />;
+}
+
+export default function AdminOutboundToursPage() {
+  return (
+    <Suspense fallback={null}>
+      <OutboundToursWithAuth />
+    </Suspense>
+  );
 }

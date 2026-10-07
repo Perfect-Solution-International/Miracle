@@ -91,7 +91,7 @@
     "coverImage": "https://cdn.getyourguide.com/img/location/5c83eaa670873.jpeg/99.jpg",
     "status": "Active",
     "createdAt": "Sep 28, 2026",
-    "updatedAt": "Sep 29, 2026"
+    "updatedAt": "Oct 7, 2026"
   },
   {
     "id": "pkg-inbound-02",
@@ -380,6 +380,75 @@
       "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&auto=format&fit=crop&q=80"
     ],
     "coverImage": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&auto=format&fit=crop&q=80",
+    "status": "Active",
+    "createdAt": "Sep 28, 2026"
+  },
+  {
+    "id": "pkg-inbound-04",
+    "slug": "sri-lanka-wildlife-safari-expedition",
+    "name": "Sri Lanka Wildlife Safari & Leopard Trail",
+    "travelType": "Inbound",
+    "destination": "Udawalawe, Yala National Park & Mirissa",
+    "country": "Sri Lanka",
+    "duration": "5 Days / 4 Nights",
+    "price": 180000,
+    "currency": "LKR",
+    "shortDescription": "Encounter wild Asian elephants, leopards, and sloth bears across Yala and Udawalawe with open-top 4x4 safaris.",
+    "description": "Dedicated wildlife adventure through Sri Lanka's richest national parks. Search for the elusive Sri Lankan leopard in Yala, observe orphan elephants at Udawalawe Elephant Transit Home, and witness wild blue whales and dolphins off the coast of Mirissa.",
+    "highlights": [
+      "Exclusive dawn & dusk 4x4 leopard game drives in Yala",
+      "Udawalawe elephant herds & Transit Home rehabilitation visit",
+      "Minneriya / Bundala exotic bird sanctuary wetlands",
+      "Mirissa blue whale watching excursion",
+      "Luxury glamping in air-conditioned safari tents"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrival & Transfer to Udawalawe Wilderness",
+        "description": "Welcome at airport and direct transfer to your eco safari lodge bordering Udawalawe National Park."
+      },
+      {
+        "day": 2,
+        "title": "Udawalawe Elephant Safari & Journey to Yala",
+        "description": "Morning open-top jeep safari observing wild elephant herds, followed by transfer to Yala National Park."
+      },
+      {
+        "day": 3,
+        "title": "Full Day Big Game Leopard Safari in Yala",
+        "description": "Dawn-to-dusk tracking of leopards, sloth bears, crocodiles, spotted deer, and vibrant hornbills."
+      },
+      {
+        "day": 4,
+        "title": "Southern Coast Transfer & Sunset in Mirissa",
+        "description": "Drive along the southern coastline to Mirissa. Relax at Coconut Tree Hill for golden hour photography."
+      },
+      {
+        "day": 5,
+        "title": "Morning Blue Whale Cruise & Departure",
+        "description": "Early catamaran cruise to spot majestic blue whales and spinner dolphins before airport transfer."
+      }
+    ],
+    "includedItems": [
+      "Accommodation",
+      "Transportation",
+      "Airport Transfer",
+      "Guided Tours",
+      "Sightseeing",
+      "Activities"
+    ],
+    "includedServices": "Safari tented luxury camp stays, private 4x4 jeeps with park trackers, all park entrance permits.",
+    "accommodation": "Luxury Safari Tented Camp & Beachfront Boutique Resort",
+    "transportation": "Customized 4x4 open-top safari jeeps and private van",
+    "whatToExpect": "Thrilling wildlife encounters, early morning starts for optimal animal sightings, and tropical warmth.",
+    "entryRequirements": "Passport valid for 6+ months.",
+    "visaInformation": "Online Sri Lanka ETA tourist visa assistance provided.",
+    "images": [
+      "https://images.unsplash.com/photo-1581852017103-68accd55096a?w=1200&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1581852017103-68accd55096a?w=1200&auto=format&fit=crop&q=80",
     "status": "Active",
     "createdAt": "Sep 28, 2026"
   }

@@ -1,17 +1,12 @@
 import {
   ArrowRight,
   Briefcase,
-  BriefcaseBusiness,
-  CheckCircle2,
   Code2,
-  Compass,
   FileCheck2,
   Globe2,
   Handshake,
   Headphones,
-  HelpCircle,
   Layers3,
-  Lightbulb,
   Megaphone,
   MessageSquarePlus,
   Package,
@@ -31,6 +26,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/common/section";
+import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
@@ -157,6 +153,30 @@ const SERVICE_AREAS = [
   },
 ] as const;
 
+/** Client Benefits / Strategic Advantages */
+const ADVANTAGES = [
+  {
+    title: "End-to-End Coordination",
+    description: "We handle the complexity across suppliers, logistics, and legal compliance so you can focus on your core business.",
+    icon: Layers3,
+  },
+  {
+    title: "Verified Global Network",
+    description: "Access our established network of trusted suppliers, manufacturers, and trade partners worldwide.",
+    icon: Globe2,
+  },
+  {
+    title: "Transparent Communication",
+    description: "Clear updates, precise timelines, and dedicated account managers ensuring you are always informed.",
+    icon: MessageSquarePlus,
+  },
+  {
+    title: "Tailored Solutions",
+    description: "Every requirement is assessed individually to provide the most efficient and cost-effective outcome.",
+    icon: SlidersHorizontal,
+  },
+] as const;
+
 export default function Page() {
   return (
     <main className="bg-white">
@@ -219,141 +239,85 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── 2. Main 6-Step Process Section ── */}
-      <section className="section-y bg-slate-50/60 border-b border-slate-200/80">
-        <div className="container-page space-y-12">
-          <div className="max-w-2xl">
-            <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">
-              Step-by-step guidance
-            </p>
-            <h2 className="text-ink mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Our 6-Step Process
-            </h2>
-            <p className="text-muted-foreground mt-3 text-base sm:text-lg leading-relaxed">
-              We work collaboratively with you from your initial inquiry through to complete solution delivery.
-            </p>
-          </div>
+      {/* ── 2. Detailed 6-Step Process Breakdown ── */}
+      <Section
+        id="steps"
+        aria-labelledby="how-it-works-steps-heading"
+        className="scroll-mt-20 bg-slate-50/70"
+      >
+        <SectionHeading
+          id="how-it-works-steps-heading"
+          align="center"
+          eyebrow="Step-by-Step Roadmap"
+          title="How We Work With You"
+          description="Every project follows our structured 6-stage lifecycle to ensure predictability and flawless execution."
+        />
 
- Imasha
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {STEPS.map(({ step, title, description, icon: Icon }) => (
+        <div className="mt-10 space-y-6">
+          {STEPS.map((stepItem) => {
+            const Icon = stepItem.icon;
+            return (
               <div
-                key={step}
-                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-7 shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft"
+                key={stepItem.step}
+                className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-brand-blue/40"
               >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-xl text-sm font-extrabold shadow-2xs">
-                      {step}
+                <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
+                  <div className="flex items-center gap-4 lg:col-span-5">
+                    <span className="bg-brand-blue text-white inline-flex size-14 shrink-0 items-center justify-center rounded-2xl text-lg font-extrabold shadow-sm">
+                      {stepItem.step}
                     </span>
-                    <div className="bg-brand-blue-light/60 text-brand-blue flex size-10 items-center justify-center rounded-xl transition-colors group-hover:bg-brand-blue group-hover:text-white">
-                      <Icon className="size-5" aria-hidden="true" />
-
-          <div className="mt-12 space-y-6">
-            {DETAILED_STEPS.map((stepItem) => {
-              const Icon = stepItem.icon;
-              return (
-                <div
-                  key={stepItem.step}
-                  className="group rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-blue hover:shadow-[0_12px_30px_rgba(15,23,42,0.14)]"
-                >
-                  <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
-                    <div className="flex items-center gap-4 lg:col-span-4">
-                      <span className="bg-brand-blue text-white inline-flex size-14 shrink-0 items-center justify-center rounded-2xl text-lg font-extrabold shadow-sm">
-                        {stepItem.step}
+                    <div>
+                      <span className="text-brand-blue text-xs font-bold uppercase tracking-wider">
+                        Phase {stepItem.step}
                       </span>
-                      <div>
-                        <span className="text-brand-blue text-xs font-bold uppercase tracking-wider">
-                          Phase {stepItem.step}
-                        </span>
-                        <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors">
-                          {stepItem.title}
-                        </h3>
-                        <p className="text-muted-foreground text-xs mt-0.5">{stepItem.tagline}</p>
-                      </div>
- develop
+                      <h3 className="text-ink text-xl font-bold group-hover:text-brand-blue transition-colors flex items-center gap-2 mt-1">
+                        <Icon className="size-5" />
+                        {stepItem.title}
+                      </h3>
                     </div>
                   </div>
 
-                  <h3 className="text-ink mt-6 text-xl font-bold transition-colors group-hover:text-brand-blue">
-                    {title}
-                  </h3>
-
-                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-                    {description}
-                  </p>
-                </div>
-
-                <div className="mt-6 border-t border-slate-100 pt-4 flex items-center gap-2 text-xs font-semibold text-brand-blue">
-                  <CheckCircle2 className="size-4 shrink-0 text-brand-blue" />
-                  <span>Step {step} in our collaboration</span>
+                  <div className="lg:col-span-7 lg:pl-6 lg:border-l border-slate-100">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {stepItem.description}
+                    </p>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-      </section>
+      </Section>
 
-      {/* ── 3. How We Help Section ── */}
-      <section className="section-y bg-white border-b border-slate-200/80">
-        <div className="container-page space-y-12">
-          <div className="max-w-2xl">
-            <p className="text-brand-red text-sm font-bold tracking-[0.18em] uppercase">
-              Areas of support
-            </p>
-            <h2 className="text-ink mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              How We Help
-            </h2>
-            <p className="text-muted-foreground mt-3 text-base sm:text-lg leading-relaxed">
-              Miracle International provides dedicated support across multiple specialized services and commercial sectors.
-            </p>
-          </div>
+      {/* ── 3. Strategic Advantages ── */}
+      <Section aria-labelledby="how-it-works-advantages-heading">
+        <SectionHeading
+          id="how-it-works-advantages-heading"
+          align="center"
+          eyebrow="Client Benefits"
+          title="Why Our Process Works Better"
+        />
 
- Imasha
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {SERVICE_AREAS.map(({ title, description, href, icon: Icon }) => (
-              <Link
-                key={title}
-                href={href}
-                className="group flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-6 shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft"
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {ADVANTAGES.map((adv) => {
+            const Icon = adv.icon;
+            return (
+              <div
+                key={adv.title}
+                className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 shadow-xs hover:bg-white hover:border-brand-blue/30 hover:shadow-soft transition-all"
               >
-                <div>
-                  <div className="bg-brand-blue-light/70 text-brand-blue flex size-11 items-center justify-center rounded-xl transition-colors group-hover:bg-brand-blue group-hover:text-white">
-                    <Icon className="size-5.5" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-ink mt-5 text-base font-bold transition-colors group-hover:text-brand-blue">
-                    {title}
-                  </h3>
-                  <p className="text-muted-foreground mt-2 text-xs leading-relaxed">
-                    {description}
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {ADVANTAGES.map((adv) => {
-              const Icon = adv.icon;
-              return (
-                <div
-                  key={adv.title}
-                  className="rounded-2xl public-card-clickable p-6"
-                >
-                  <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
-                    <Icon className="size-5.5" />
-                  </span>
-                  <h3 className="text-ink text-lg font-bold mt-4">{adv.title}</h3>
-                  <p className="text-muted-foreground text-xs sm:text-sm mt-2 leading-relaxed">
-                    {adv.description}
- develop
-                  </p>
-                </div>
-
-                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-bold text-brand-blue">
-                  <span>Learn more</span>
-                  <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                </div>
-              </Link>
-            ))}
-          </div>
+                <span className="bg-brand-blue text-white inline-flex size-11 items-center justify-center rounded-2xl shadow-xs">
+                  <Icon className="size-5.5" />
+                </span>
+                <h3 className="text-ink text-lg font-bold mt-4">{adv.title}</h3>
+                <p className="text-muted-foreground text-xs sm:text-sm mt-2 leading-relaxed">
+                  {adv.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
-      </section>
+      </Section>
 
       {/* ── 4. Simple CTA Section ── */}
       <section className="section-y bg-slate-50/70">

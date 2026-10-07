@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 
 import { AdminDashboardView } from "@/components/admin-dashboard/admin-dashboard-view";
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function AdminDashboardPage() {
+async function DashboardWithAuth() {
   const user = await verifySession();
 
   return (
@@ -17,5 +18,13 @@ export default async function AdminDashboardPage() {
       adminEmail={user.email}
       adminName={user.firstName ? `${user.firstName} ${user.lastName || ""}`.trim() : "Administrator"}
     />
+  );
+}
+
+export default function AdminDashboardPage() {
+  return (
+    <Suspense fallback={null}>
+      <DashboardWithAuth />
+    </Suspense>
   );
 }

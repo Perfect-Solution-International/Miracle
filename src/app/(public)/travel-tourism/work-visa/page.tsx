@@ -2,6 +2,7 @@ import {
   Briefcase,
   FileCheck,
   HeartPulse,
+  HelpCircle,
   Plane,
   ShieldCheck,
   Stamp,
@@ -18,6 +19,30 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLE = "Work Visa Support";
 const DESCRIPTION = "Get professional assistance with your work visa journey, documentation, and employment-related requirements.";
+
+const PROCESS_STEPS = [
+  { icon: FileCheck, title: "1. Requirement Review" },
+  { icon: Stamp, title: "2. Document Preparation" },
+  { icon: ShieldCheck, title: "3. Attestation & Verification" },
+  { icon: Briefcase, title: "4. Submission & Lodgment" },
+  { icon: HeartPulse, title: "5. Medical & Biometrics" },
+  { icon: Plane, title: "6. Departure & Onboarding" },
+] as const;
+
+const FAQS = [
+  {
+    q: "How long does work visa document processing take?",
+    a: "Processing times vary depending on the destination country and specific embassy requirements, typically ranging from 2 to 6 weeks.",
+  },
+  {
+    q: "Do you help with document attestation for foreign employment?",
+    a: "Yes, we provide end-to-end guidance for Ministry of Foreign Affairs, embassy attestations, and certified translations.",
+  },
+  {
+    q: "What destinations do you support for work visas?",
+    a: "We support major employment destinations across the Middle East (GCC), Europe, Asia-Pacific, and North America.",
+  },
+] as const;
 
 export const metadata: Metadata = buildPageMetadata({
   title: TITLE,
@@ -257,7 +282,6 @@ export default function Page() {
           </div>
         </div>
       </Section>
- develop
     </>
   );
 }

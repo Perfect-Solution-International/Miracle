@@ -5,7 +5,7 @@ import { SITE_MEDIA } from "@/config/site-media";
 import { TravelLanding } from "@/features/travel";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
-const TITLE = "Travel & Tourism | Miracle International";
+const TITLE = "Travel & Tourism";
 const DESCRIPTION =
   "Travel beyond boundaries. Explore destinations, plan customized journeys, arrange flights, and get travel support with Miracle International.";
 
