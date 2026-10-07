@@ -43,7 +43,7 @@ export function useLogin() {
             emailVerified: true,
             companyName: "Miracle International",
           },
-          redirectTo: "/admin",
+          redirectTo: ROUTES.admin.dashboard,
         };
       }
 
@@ -54,18 +54,23 @@ export function useLogin() {
       queryClient.clear();
 
       const requested = searchParams.get("redirectTo");
-      const fallback = result.redirectTo ?? PORTAL_HOME[resolvePortal(result.user.roles)];
+      const fallback =
+        result.redirectTo ??
+        PORTAL_HOME[resolvePortal(result.user.roles)] ??
+        ROUTES.admin.dashboard;
 
-      // Only allow internal paths, so a crafted `redirectTo` cannot send the
-      // user to an external site after login.
       const destination =
         requested && requested.startsWith("/") && !requested.startsWith("//")
           ? requested
           : fallback;
 
-      router.replace(destination || ROUTES.public.home);
-      // Re-run server components so the session-aware shell reflects the new user.
-      router.refresh();
+      const targetPath = destination || ROUTES.admin.dashboard;
+      if (typeof window !== "undefined") {
+        window.location.href = targetPath;
+      } else {
+        router.replace(targetPath);
+        router.refresh();
+      }
     },
   });
 }

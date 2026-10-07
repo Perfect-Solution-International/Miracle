@@ -4,8 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+
+import { useAuth } from "@/providers/auth-provider";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -20,8 +22,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ROUTES } from "@/config/routes";
+import { PORTAL_HOME, ROUTES } from "@/config/routes";
 import { applyBackendErrors } from "@/lib/validation/backend-errors";
+import { resolvePortal } from "@/lib/permissions/roles";
 
 import { useLogin } from "../hooks/use-login";
 import {
@@ -40,8 +43,18 @@ import {
 export function LoginForm() {
   const searchParams = useSearchParams();
   const login = useLogin();
+  const { isAuthenticated, user } = useAuth();
   const [formError, setFormError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const fallback = user 
+        ? PORTAL_HOME[resolvePortal(user.roles)] ?? ROUTES.admin.dashboard 
+        : ROUTES.admin.dashboard;
+      window.location.href = fallback;
+    }
+  }, [isAuthenticated, user]);
 
   const sessionExpired = searchParams.get("reason") === "session-expired";
 

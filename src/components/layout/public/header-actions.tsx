@@ -11,6 +11,16 @@ export function HeaderActions() {
     <div className="flex items-center gap-2">
       <Button
         asChild
+        variant="outline"
+        size="lg"
+        className="hidden h-10 px-4 font-semibold sm:inline-flex"
+      >
+        <Link href={ROUTES.auth.register}>
+          Create Account
+        </Link>
+      </Button>
+      <Button
+        asChild
         size="lg"
         className="hover:bg-brand-blue-dark hidden h-10 px-4 font-semibold sm:inline-flex"
       >
