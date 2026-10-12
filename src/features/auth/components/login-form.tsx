@@ -209,13 +209,6 @@ export function LoginForm() {
               </Button>
             </form>
           </Form>
-
-          <p className="text-muted-foreground mt-8 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <Link href={ROUTES.auth.register} className="text-brand-blue hover:text-brand-blue-dark font-semibold transition-colors">
-              Create an account
-            </Link>
-          </p>
         </CardContent>
       </Card>
     </div>
