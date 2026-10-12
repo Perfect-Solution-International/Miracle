@@ -3,7 +3,6 @@ import {
   Globe2,
   Landmark,
   Plane,
-  SlidersHorizontal,
   Stamp,
   type LucideIcon,
 } from "lucide-react";

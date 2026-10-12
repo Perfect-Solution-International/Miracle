@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Check, Clock, FileCheck2, Plane, Ship } from "lucide-react";
+import { Bell, Clock } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -11,7 +11,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ROUTES } from "@/config/routes";

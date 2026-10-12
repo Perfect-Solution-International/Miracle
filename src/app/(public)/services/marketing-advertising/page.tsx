@@ -5,7 +5,6 @@ import {
   ArrowRight,
   BarChart3,
   Check,
-  CheckCircle2,
   Compass,
   Crosshair,
   FileText,
@@ -21,7 +20,6 @@ import {
   Target,
 } from "lucide-react";
 
-import { CtaBanner } from "@/components/common/cta-banner";
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";

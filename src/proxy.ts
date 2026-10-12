@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { AUTH_PATHS, ROUTES, isProtectedPath } from "@/config/routes";
+import { ROUTES, isProtectedPath } from "@/config/routes";
 import {
   clearSessionCookies,
   extractSessionTokens,

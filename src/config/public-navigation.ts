@@ -72,7 +72,6 @@ export type PublicNavItem =
       feature?: PublicNavFeature;
     };
 
-const servicesAnchor = (id: string) => `${ROUTES.public.services}#${id}`;
 const categoryHref = (slug: string) =>
   `${ROUTES.public.products}?category=${encodeURIComponent(slug)}`;
 

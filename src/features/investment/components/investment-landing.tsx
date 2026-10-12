@@ -7,16 +7,13 @@ import {
   BriefcaseBusiness,
   Building2,
   Check,
-  CheckCircle2,
   ChevronRight,
-  CircleDollarSign,
   FileUp,
   Globe2,
   Handshake,
   Lightbulb,
   Network,
   Rocket,
-  Sparkles,
   Target,
   TrendingUp,
   Users,
@@ -184,9 +181,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
   );
 }
 
-export function InvestmentLanding({
-  breadcrumbs = [{ label: "Investment Opportunities" }],
-}: {
+export function InvestmentLanding(_props: {
   breadcrumbs?: readonly BreadcrumbItem[];
 } = {}) {
   const [isFormOpen, setIsFormOpen] = useState(false);

@@ -5,7 +5,6 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   Check,
-  CheckCircle2,
   ChevronDown,
   CircleHelp,
   FileUp,
@@ -16,7 +15,6 @@ import {
   PackageCheck,
   Search,
   ShieldCheck,
-  Sparkles,
   Truck,
   Users,
   X,
@@ -1196,9 +1194,7 @@ function FeatureCard({
 }
 
 
-export function ImportExportLanding({
-  breadcrumbs = [{ label: "Import & Export" }],
-}: {
+export function ImportExportLanding(_props: {
   breadcrumbs?: readonly BreadcrumbItem[];
 } = {}) {
   const [isFormOpen, setIsFormOpen] = useState(false);

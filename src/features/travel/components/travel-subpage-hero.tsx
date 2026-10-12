@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
+import { ShieldCheck, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
@@ -7,7 +7,6 @@ import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
 import type { SiteImage } from "@/config/site-media";
-import { cn } from "@/lib/utils";
 
 export interface TravelSubpageAction {
   label: string;
@@ -38,15 +37,7 @@ export function TravelSubpageHero({
   image,
   primary,
   secondary,
-  breadcrumbs,
-  highlights,
 }: TravelSubpageHeroProps) {
-  const travelHighlights = highlights ?? [
-    "Verified Stays & Transport",
-    "24/7 Dedicated Concierge",
-    "Flexible Customization",
-  ];
-
   return (
     <section
       aria-labelledby="travel-subpage-hero-heading"

@@ -1,11 +1,9 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
 
 import type { SiteImage } from "@/config/site-media";
 import { cn } from "@/lib/utils";
 
 import type { BreadcrumbItem } from "./breadcrumb";
-import { Eyebrow } from "./eyebrow";
 import { MediaFrame } from "./media-frame";
 
 export interface PageHeroStat {
@@ -22,7 +20,6 @@ export function PageHero({
   description,
   eyebrow,
   badgeText,
-  breadcrumbs,
   image,
   stats,
   children,

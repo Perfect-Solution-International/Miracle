@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { CtaBanner } from "@/components/common/cta-banner";
@@ -65,7 +65,6 @@ export function SubpageTemplate({
   title,
   description,
   badgeText = "Miracle International",
-  breadcrumbs,
   image,
   stats,
   features,

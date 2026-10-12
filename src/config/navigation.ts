@@ -1,12 +1,10 @@
 import {
   Banknote,
   Bell,
-  Blocks,
   Boxes,
   Briefcase,
   Building2,
   ClipboardList,
-  Compass,
   FileSpreadsheet,
   FileText,
   Globe2,
@@ -19,14 +17,10 @@ import {
   Plane,
   Receipt,
   Settings,
-  Ship,
   ShoppingCart,
-  Stamp,
   Truck,
   UserCircle,
   UserPlus,
-  Users,
-  Wrench,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 

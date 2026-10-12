@@ -2,16 +2,11 @@
 
 import {
   Building2,
-  Calendar,
   CheckCircle2,
   Clock,
   Compass,
-  FileText,
   Globe2,
-  HelpCircle,
-  Image as ImageIcon,
   MapPin,
-  Palmtree,
   ShieldCheck,
   Star,
   Truck,

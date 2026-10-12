@@ -11,7 +11,6 @@ import {
   Handshake,
   Megaphone,
   Ship,
-  Sparkles,
   TrendingUp,
   Users,
   X,

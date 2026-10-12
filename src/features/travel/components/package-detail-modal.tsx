@@ -6,17 +6,13 @@ import {
   Calendar,
   Car,
   Check,
-  Compass,
   FileCheck,
   Globe2,
   MapPin,
-  ShieldCheck,
   Users,
   X,
-  Sparkles,
   ExternalLink,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -57,8 +53,6 @@ export function PackageDetailModal({
   if (!open || !pkg) return null;
 
   const isInbound = pkg.location.toLowerCase().includes("sri lanka");
-  const primaryImage = pkg.secondaryImage ?? pkg.image;
-
   return (
     <div
       className="bg-navy/45 fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 backdrop-blur-sm"
