@@ -1,12 +1,9 @@
 import {
-  CheckCircle2,
   Clock,
   Coins,
   Globe2,
   Luggage,
-  Send,
   Sparkles,
-  Ticket,
   Users,
 } from "lucide-react";
 
@@ -50,27 +47,6 @@ const FLIGHT_HIGHLIGHTS = [
     title: "Dedicated Ticketing Specialists",
     description:
       "Personalized attention from experienced travel coordinators who ensure optimal seats, meals, and flight timings.",
-  },
-] as const;
-
-const BOOKING_STEPS = [
-  {
-    step: "01",
-    icon: Send,
-    title: "Submit Your Request",
-    description: "Fill in your preferred travel dates, destinations, passengers, and class.",
-  },
-  {
-    step: "02",
-    icon: Ticket,
-    title: "Compare Best Options",
-    description: "Our flight team reviews available airlines, route connections, and quotes.",
-  },
-  {
-    step: "03",
-    icon: CheckCircle2,
-    title: "Confirm & Fly",
-    description: "Choose your ideal schedule, finalize booking, and receive your e-ticket.",
   },
 ] as const;
 

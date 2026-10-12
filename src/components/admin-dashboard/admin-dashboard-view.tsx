@@ -1,37 +1,21 @@
 "use client";
 
 import {
-  Activity,
   ArrowRight,
-  ArrowUpRight,
   BarChart3,
-  Calendar,
   CheckCircle2,
   Clock,
-  Compass,
-  FileCheck2,
-  FileEdit,
   Globe2,
   Inbox,
   Layers,
-  MapPin,
   MessageSquare,
   Palmtree,
-  Plane,
-  Plus,
-  Send,
-  Sparkles,
-  TrendingUp,
-  Users,
-  type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AdminStatCard } from "./admin-stat-card";
 import { AdminInquiryDetailsDialog } from "@/components/admin-inquiries/admin-inquiry-details-dialog";
 import { useTravelStore } from "@/lib/storage/travel-store";
@@ -47,7 +31,6 @@ interface AdminDashboardViewProps {
 }
 
 export function AdminDashboardView({
-  adminEmail = "admin@miracleinternational.com",
   adminName = "Administrator",
 }: AdminDashboardViewProps) {
   const { inquiries, inboundPackages, outboundPackages, updateInquiryStatus, addInquiryReply } =
@@ -97,18 +80,6 @@ export function AdminDashboardView({
   // Package Overview Metrics (Real Data Only)
   const activeInboundCount = inboundPackages.filter((p) => p.status === "Active").length;
   const activeOutboundCount = outboundPackages.filter((p) => p.status === "Active").length;
-
-  // Status breakdown metrics
-  const statusCounts = useMemo(() => {
-    return {
-      New: inquiries.filter((i) => i.status === "New").length,
-      Reviewing: inquiries.filter((i) => i.status === "Reviewing").length,
-      Replied: inquiries.filter((i) => i.status === "Replied").length,
-      "In Progress": inquiries.filter((i) => i.status === "In Progress").length,
-      Completed: inquiries.filter((i) => i.status === "Completed").length,
-      Cancelled: inquiries.filter((i) => i.status === "Cancelled").length,
-    };
-  }, [inquiries]);
 
   // Inquiry Category Breakdown (Real Data Only)
   const categoryBreakdown = useMemo(() => {

@@ -4,7 +4,6 @@ import {
   Building2,
   ChartColumn,
   Check,
-  CheckCircle2,
   ClipboardList,
   CodeXml,
   Compass,
@@ -19,7 +18,6 @@ import {
   SearchCheck,
   Settings2,
   ShieldCheck,
-  Sparkles,
   TrendingUp,
   UsersRound,
   type LucideIcon,
@@ -29,7 +27,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CtaBanner } from "@/components/common/cta-banner";
-import { Eyebrow } from "@/components/common/eyebrow";
 import { Section } from "@/components/common/section";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Button } from "@/components/ui/button";

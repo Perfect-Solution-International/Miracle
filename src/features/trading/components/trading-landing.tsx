@@ -1,19 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import {
   ArrowRight,
   BriefcaseBusiness,
   Check,
-  CheckCircle2,
   ChevronRight,
   Globe2,
   Handshake,
   MapPin,
   Package,
-  Ship,
   ShoppingBag,
-  Sparkles,
   Store,
   Truck,
   Users,
@@ -25,7 +21,6 @@ import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { SITE_MEDIA } from "@/config/site-media";
 import { cn } from "@/lib/utils";
 
 const LOOKING_FOR = [
@@ -182,9 +177,7 @@ function Field({ label, value, onChange, placeholder, type = "text", required = 
   return <label className="text-slate-900 text-xs font-bold uppercase tracking-wider">{label} {required && <span className="text-red-500">*</span>}{optional && <span className="text-muted-foreground font-normal lowercase">(optional)</span>}<Input type={type} value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} className="mt-2 text-sm rounded-xl" /></label>;
 }
 
-export function TradingLanding({
-  breadcrumbs = [{ label: "Trading Solutions" }],
-}: {
+export function TradingLanding(_props: {
   breadcrumbs?: readonly BreadcrumbItem[];
 } = {}) {
   const [isFormOpen, setIsFormOpen] = useState(false);

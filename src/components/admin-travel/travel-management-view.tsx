@@ -2,17 +2,14 @@
 
 import {
   CheckCircle2,
-  Compass,
   Globe2,
   Package,
   Palmtree,
-  Plus,
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 import { AdminStatCard } from "@/components/admin-dashboard/admin-stat-card";
-import { Button } from "@/components/ui/button";
 import { useTravelStore } from "@/lib/storage/travel-store";
 import { AdminTravelNavHeader } from "./admin-travel-nav-header";
 import { TravelPackageDetailsDialog } from "./travel-package-details-dialog";
@@ -25,7 +22,6 @@ export function TravelManagementView() {
     packages,
     inboundPackages,
     outboundPackages,
-    inquiries,
     addPackage,
     updatePackage,
     deletePackage,
@@ -41,7 +37,6 @@ export function TravelManagementView() {
   // Dynamic counts for Summary Cards
   const totalPackagesCount = packages.length;
   const activePackagesCount = packages.filter((p) => p.status === "Active").length;
-  const draftPackagesCount = packages.filter((p) => p.status === "Draft").length;
 
   // Handlers for Packages
   const handleOpenAddPackage = () => {

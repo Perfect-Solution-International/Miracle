@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/sheet";
 import { APP_CONFIG } from "@/config/app";
 import { PUBLIC_MAIN_NAV, PUBLIC_MOBILE_NAV } from "@/config/public-navigation";
-import { PORTAL_HOME, ROUTES } from "@/config/routes";
+import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/providers/auth-provider";
 
@@ -31,7 +31,7 @@ import { isActivePath, isNavItemActive } from "./nav-utils";
  */
 export function MobileNavigation() {
   const pathname = usePathname();
-  const { isAuthenticated, ability } = useAuth();
+  useAuth();
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 

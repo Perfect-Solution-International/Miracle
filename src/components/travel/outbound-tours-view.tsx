@@ -1,19 +1,11 @@
 "use client";
 
 import {
-  ArrowRight,
-  CheckCircle2,
-  Compass,
   Globe2,
   Headphones,
   Hotel,
   Luggage,
-  MapPin,
-  Palmtree,
-  Plane,
-  Send,
   ShieldCheck,
-  Sparkles,
   Ticket,
 } from "lucide-react";
 import Link from "next/link";

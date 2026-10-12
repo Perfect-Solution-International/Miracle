@@ -2,7 +2,6 @@
 
 import {
   ArrowRight,
-  Calendar,
   Clock,
   MapPin,
   Palmtree,

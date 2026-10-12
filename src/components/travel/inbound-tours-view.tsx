@@ -2,13 +2,11 @@
 
 import {
   Car,
-  CheckCircle2,
   Compass,
   Headphones,
   Hotel,
   MapPin,
   Plane,
-  ShieldCheck,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 

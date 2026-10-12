@@ -16,14 +16,6 @@ impl<T> ApiResponse<T> {
             meta: None,
         }
     }
-
-    pub fn with_meta(data: T, meta: ApiMeta) -> Self {
-        Self {
-            success: true,
-            data,
-            meta: Some(meta),
-        }
-    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

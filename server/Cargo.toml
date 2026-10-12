@@ -7,7 +7,6 @@ edition = "2021"
 # Web framework & async runtime
 axum = { version = "0.7", features = ["macros", "multipart"] }
 tokio = { version = "1.37", features = ["full"] }
-tower = { version = "0.4", features = ["util"] }
 tower-http = { version = "0.5", features = ["cors", "trace", "compression-gzip", "timeout"] }
 
 # Database & PostgreSQL
@@ -33,4 +32,3 @@ dotenvy = "0.15"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 thiserror = "1.0"
-anyhow = "1.0"

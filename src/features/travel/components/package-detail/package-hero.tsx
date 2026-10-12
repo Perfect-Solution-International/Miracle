@@ -6,7 +6,6 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inquiry-modal";
-import { ROUTES } from "@/config/routes";
 
 import type { TravelPackageDetail } from "../../types/travel-package-detail.types";
 

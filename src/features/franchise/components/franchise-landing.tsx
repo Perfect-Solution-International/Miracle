@@ -4,9 +4,7 @@ import Image from "next/image";
 import {
   ArrowRight,
   BriefcaseBusiness,
-  Building2,
   Check,
-  CheckCircle2,
   ChevronRight,
   CircleDollarSign,
   ClipboardCheck,
@@ -15,7 +13,6 @@ import {
   Lightbulb,
   MapPin,
   PackageCheck,
-  Sparkles,
   Store,
   Users,
   X,
@@ -26,21 +23,6 @@ import type { BreadcrumbItem } from "@/components/common/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SITE_MEDIA } from "@/config/site-media";
-
-const SUPPLY_FLOW = [
-  "Requirements Assessment",
-  "Product & Equipment Selection",
-  "Commercial Negotiation",
-  "Logistics & Delivery",
-  "On-site Setup & Launch",
-] as const;
-
-const ONGOING_SUPPORT = [
-  ["Supply Chain Management", "Reliable product replenishment and inventory flow."],
-  ["Equipment Maintenance", "Ongoing support for hardware and commercial fixtures."],
-  ["Marketing & Promotion", "Coordinated marketing campaigns for brand growth."],
-  ["Operational Guidance", "Continuous business advice and performance reviews."],
-] as const;
 
 const SUPPORT_OPTIONS = [
   ["01", "Find a Franchise", "Explore franchise business opportunities that match your interests and goals.", SearchIcon],
@@ -76,15 +58,6 @@ const REQUIREMENTS = [
   ["Franchise Agreement", "Review the agreement and responsibilities clearly.", Handshake],
   ["Product & Supply Requirements", "Plan reliable products, materials and replenishment.", Store],
   ["Operational Requirements", "Prepare the systems and routines that support the business.", BriefcaseBusiness],
-] as const;
-
-const SETUP_SUPPORT = [
-  "Business Selection",
-  "Location & Setup Guidance",
-  "Equipment & Product Sourcing",
-  "Business Setup Assistance",
-  "Launch Preparation",
-  "Ongoing Business Support",
 ] as const;
 
 function SearchIcon() {
@@ -208,9 +181,7 @@ function SupportModal({
   );
 }
 
-export function FranchiseLanding({
-  breadcrumbs = [{ label: "Franchise Opportunities" }],
-}: {
+export function FranchiseLanding(_props: {
   breadcrumbs?: readonly BreadcrumbItem[];
 } = {}) {
   const [isFormOpen, setIsFormOpen] = useState(false);

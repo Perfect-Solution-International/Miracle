@@ -2,26 +2,17 @@
 
 import {
   AlertCircle,
-  Building2,
   Camera,
-  CheckCircle2,
-  Clock,
   Eye,
   EyeOff,
-  Globe2,
   KeyRound,
   Loader2,
-  Lock,
-  Mail,
-  MapPin,
-  Phone,
   Save,
   ShieldCheck,
   Trash2,
   Upload,
   User,
   UserCircle,
-  X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -73,7 +64,7 @@ export function AdminProfileView({
     lastLogin: "Today, " + new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),
   });
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
   const [profileError, setProfileError] = useState("");

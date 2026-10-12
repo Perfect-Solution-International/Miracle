@@ -1,9 +1,7 @@
-import { ArrowRight, Coins, Headphones, Plane, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
-import { SITE_MEDIA } from "@/config/site-media";
 
 /**
  * Full-Screen Cinematic Flight Tickets Hero Section with Clean White Tourism Styling.

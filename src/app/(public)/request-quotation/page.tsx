@@ -3,9 +3,7 @@ import {
   Calculator,
   Clock,
   FileCheck,
-  Headphones,
   ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 
 import { CtaBanner } from "@/components/common/cta-banner";

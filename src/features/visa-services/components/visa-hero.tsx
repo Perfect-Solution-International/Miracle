@@ -1,9 +1,7 @@
-import { ArrowRight, CheckCircle2, FileCheck, Headphones, ShieldCheck, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/config/routes";
-import { SITE_MEDIA } from "@/config/site-media";
 
 /**
  * Full-Screen Cinematic Visa Services Hero Section with Clean White Tourism Styling.

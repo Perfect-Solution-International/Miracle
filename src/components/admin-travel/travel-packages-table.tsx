@@ -1,17 +1,13 @@
 "use client";
 
 import {
-  ArrowUpDown,
-  CheckCircle2,
   Edit3,
   Eye,
-  MoreHorizontal,
   Package,
   Plus,
   Power,
   PowerOff,
   Search,
-  SlidersHorizontal,
   Trash2,
 } from "lucide-react";
 import { useState } from "react";
@@ -19,14 +15,6 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -43,7 +31,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import type { PackageStatus, TravelPackage, TravelType } from "./types";
+import type { TravelPackage, TravelType } from "./types";
 import { getPackageCoverImage } from "@/lib/travel/package-image-helper";
 
 interface TravelPackagesTableProps {

@@ -1,16 +1,7 @@
-use axum::{
-    extract::{FromRequestParts, Request},
-    http::request::Parts,
-    middleware::Next,
-    response::Response,
-};
+use axum::{extract::FromRequestParts, http::request::Parts};
 use jsonwebtoken::{decode, DecodingKey, Validation};
 
-use crate::{
-    config::Config,
-    error::AppError,
-    models::{Claims, UserResponse},
-};
+use crate::{config::Config, error::AppError, models::Claims};
 
 pub struct AuthUser(pub Claims);
 

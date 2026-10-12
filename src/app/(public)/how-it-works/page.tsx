@@ -1,28 +1,15 @@
 import {
   ArrowRight,
-  Briefcase,
-  Code2,
   FileCheck2,
   Globe2,
   Handshake,
   Headphones,
   Layers3,
-  Megaphone,
   MessageSquarePlus,
-  Package,
-  Plane,
-  Search,
   SearchCheck,
-  ShieldCheck,
   SlidersHorizontal,
-  Stamp,
-  Store,
-  TrendingUp,
-  Warehouse,
-  type LucideIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/common/section";
@@ -86,70 +73,6 @@ const STEPS = [
     description:
       "We continue to coordinate and support the customer throughout the relevant process.",
     icon: Headphones,
-  },
-] as const;
-
-/** Core Areas Supported by Miracle International */
-const SERVICE_AREAS = [
-  {
-    title: "Import & Export",
-    description: "International cargo, documentation, clearance, and cross-border freight coordination.",
-    href: ROUTES.public.servicesImportExport,
-    icon: Globe2,
-  },
-  {
-    title: "Wholesale & Products",
-    description: "Bulk sourcing across industrial machinery, commercial equipment, electronics, and materials.",
-    href: ROUTES.public.wholesaleProducts,
-    icon: Package,
-  },
-  {
-    title: "Trading",
-    description: "Connecting verified international suppliers and buyers with negotiated trade terms.",
-    href: ROUTES.public.servicesTrading,
-    icon: Warehouse,
-  },
-  {
-    title: "Travel & Tourism",
-    description: "Curated Sri Lanka inbound packages, outbound holiday itineraries, and custom tours.",
-    href: ROUTES.public.travelTourism,
-    icon: Plane,
-  },
-  {
-    title: "Visa Services",
-    description: "Structured document auditing, embassy checklist guidance, and appointment scheduling support.",
-    href: ROUTES.public.visaServices,
-    icon: Stamp,
-  },
-  {
-    title: "Business Solutions",
-    description: "Advisory, planning, business registration, setup guidance, and strategic growth support.",
-    href: ROUTES.public.businessSolutions,
-    icon: Briefcase,
-  },
-  {
-    title: "Franchise Opportunities",
-    description: "Turnkey franchise models, brand licensing, and operational launch assistance.",
-    href: ROUTES.public.servicesFranchise,
-    icon: Store,
-  },
-  {
-    title: "Investment Opportunities",
-    description: "Vetted business ventures, partnership structures, and commercial growth opportunities.",
-    href: ROUTES.public.servicesInvestment,
-    icon: TrendingUp,
-  },
-  {
-    title: "Marketing & Advertising",
-    description: "Brand positioning, multi-channel promotional campaigns, and targeted digital strategy.",
-    href: ROUTES.public.servicesMarketingAdvertising,
-    icon: Megaphone,
-  },
-  {
-    title: "IT Solutions",
-    description: "Modern websites, custom software development, POS systems, and workflow automation.",
-    href: ROUTES.public.itSolutions,
-    icon: Code2,
   },
 ] as const;
 

@@ -1,11 +1,10 @@
 use axum::{
     extract::{Path, Query, State},
     response::IntoResponse,
-    routing::{get, post},
+    routing::get,
     Json, Router,
 };
 use serde::Deserialize;
-use serde_json::json;
 use uuid::Uuid;
 
 use crate::{

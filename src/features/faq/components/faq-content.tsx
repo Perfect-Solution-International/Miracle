@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import {
-  ArrowRight,
   Briefcase,
   ChevronDown,
   Code2,
@@ -19,11 +18,9 @@ import {
   Warehouse,
   type LucideIcon,
 } from "lucide-react";
-import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ROUTES } from "@/config/routes";
 import { SITE_MEDIA } from "@/config/site-media";
 import { cn } from "@/lib/utils";
 

@@ -6,9 +6,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 
 import { TRAVEL_SERVICE_CARDS, type TravelServiceCard } from "../data/travel.content";
 
-export function TravelServicesSection({
-  onOpenCustomize,
-}: {
+export function TravelServicesSection(_props: {
   onOpenCustomize?: () => void;
 }) {
   return (

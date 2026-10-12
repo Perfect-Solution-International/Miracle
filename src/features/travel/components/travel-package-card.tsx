@@ -2,9 +2,7 @@
 
 import {
   ArrowRight,
-  Calendar,
   Clock,
-  Compass,
   MapPin,
   Send,
   Star,

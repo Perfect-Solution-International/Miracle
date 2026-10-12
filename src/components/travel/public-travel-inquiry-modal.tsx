@@ -1,24 +1,17 @@
 "use client";
 
 import {
-  BedDouble,
-  Calendar,
-  Car,
   Check,
   CheckCircle2,
   Clock,
   Compass,
   FileUp,
   Globe2,
-  Mail,
   MapPin,
   Palmtree,
-  Phone,
-  Plane,
   Send,
   ShieldCheck,
   Sparkles,
-  Tag,
   Upload,
   Users,
   X,
@@ -115,7 +108,6 @@ export function PublicTravelInquiryModal({
   defaultPackage,
   defaultInquiryType = "Inbound Tour",
   defaultDestination = "",
-  mode = "inquiry",
   onSuccess,
 }: PublicTravelInquiryModalProps) {
   const { submitInquiry } = useTravelStore();

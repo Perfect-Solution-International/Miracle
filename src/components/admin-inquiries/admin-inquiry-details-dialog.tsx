@@ -1,34 +1,19 @@
 "use client";
 
 import {
-  Calendar,
   Check,
-  CheckCircle2,
-  Clock,
   Download,
-  Eye,
   FileSpreadsheet,
   FileText,
-  FileUp,
-  Globe2,
   History,
   Mail,
-  MapPin,
   MessageSquare,
-  Palmtree,
   Phone,
-  Plane,
   Reply,
   Send,
-  ShieldAlert,
-  ShieldCheck,
-  Sparkles,
   Star,
   Tag,
-  Trash2,
   User,
-  Users,
-  X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -53,7 +38,6 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import type {
-  InquiryReply,
   InquiryStatus,
   PackageReview,
   ReviewStatus,
@@ -88,7 +72,7 @@ export function AdminInquiryDetailsDialog({
 }: AdminInquiryDetailsDialogProps) {
   const [activeTab, setActiveTab] = useState<"details" | "reply" | "history" | "review">("details");
   const [replySender, setReplySender] = useState("Miracle International Operations Desk");
-  const [replySenderEmail, setReplySenderEmail] = useState("desk@miracleinternational.com");
+  const [replySenderEmail] = useState("desk@miracleinternational.com");
   const [replySubject, setReplySubject] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
   const [isSending, setIsSending] = useState(false);

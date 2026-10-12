@@ -3,18 +3,13 @@
 import {
   Compass,
   Globe2,
-  Inbox,
-  Package,
   Palmtree,
-  Plane,
   Plus,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/config/routes";
 import { useTravelStore } from "@/lib/storage/travel-store";
 import { cn } from "@/lib/utils";
 
@@ -28,9 +23,7 @@ export function AdminTravelNavHeader({
   addPackageLabel = "+ Add Package",
 }: AdminTravelNavHeaderProps) {
   const pathname = usePathname();
-  const { packages, inboundPackages, outboundPackages, inquiries } = useTravelStore();
-
-  const newInquiriesCount = inquiries.filter((i) => i.status === "New").length;
+  const { packages, inboundPackages, outboundPackages } = useTravelStore();
 
   const NAV_ITEMS = [
     {
