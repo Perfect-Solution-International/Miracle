@@ -1,5 +1,6 @@
 pub mod admin;
 pub mod auth;
+pub mod contact;
 pub mod health;
 pub mod orders;
 pub mod quotations;
