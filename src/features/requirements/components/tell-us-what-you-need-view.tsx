@@ -20,7 +20,7 @@ export function TellUsWhatYouNeedView() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   return (
-    <div className="bg-white min-h-screen text-slate-900">
+    <div className="min-h-screen bg-white text-slate-900">
       {/* 1. Hero Section */}
       <TellUsWhatYouNeedHero />
 
@@ -30,9 +30,16 @@ export function TellUsWhatYouNeedView() {
       />
 
       {/* 3. Requirement Form Section */}
-      <section className="bg-slate-50/60 py-16 sm:py-20 border-b border-slate-100">
+      <section
+        id="requirement-form"
+        aria-label="Direct intake form"
+        className="scroll-mt-28 border-b border-slate-100 bg-slate-50/60 py-12 sm:py-20"
+      >
         <div className="container-page">
-          <RequirementInquiryForm preselectedCategory={selectedCategory} />
+          <RequirementInquiryForm
+            layout="intake"
+            preselectedCategory={selectedCategory}
+          />
         </div>
       </section>
 
@@ -41,4 +48,3 @@ export function TellUsWhatYouNeedView() {
     </div>
   );
 }
-
