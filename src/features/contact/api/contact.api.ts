@@ -26,14 +26,18 @@ export async function submitContact(
   if (!endpoint) {
     throw new ContactSubmissionError(messages[503]!);
   }
-  const url = new URL(endpoint);
-  if (
-    url.protocol !== "https:" &&
-    !(
-      url.protocol === "http:" &&
-      ["localhost", "127.0.0.1", "[::1]"].includes(url.hostname)
+  let url: URL;
+  try {
+    url = new URL(endpoint);
+    if (
+      url.protocol !== "https:" &&
+      !(
+        url.protocol === "http:" &&
+        ["localhost", "127.0.0.1", "[::1]"].includes(url.hostname)
+      )
     )
-  ) {
+      throw new Error();
+  } catch {
     throw new ContactSubmissionError(messages[503]!);
   }
 
@@ -59,7 +63,12 @@ export async function submitContact(
     body &&
     typeof body === "object" &&
     "success" in body &&
-    body.success === true
+    body.success === true &&
+    "data" in body &&
+    body.data &&
+    typeof body.data === "object" &&
+    "accepted" in body.data &&
+    body.data.accepted === true
   )
     return;
 

@@ -5,6 +5,7 @@ pub mod health;
 pub mod orders;
 pub mod quotations;
 pub mod requirements;
+pub mod requirement_inquiries;
 pub mod travel;
 
 use axum::Router;
