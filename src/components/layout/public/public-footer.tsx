@@ -20,7 +20,7 @@ import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
 
 const headingClassName =
-  "mb-5 text-[0.9375rem] font-[750] tracking-[-0.015em] text-white after:mt-3 after:block after:h-0.5 after:w-7 after:bg-brand-red after:content-['']";
+  "mb-3 text-[0.9375rem] font-[750] tracking-[-0.015em] text-white after:mt-2 after:block after:h-0.5 after:w-7 after:bg-brand-red after:content-['']";
 const contactItemClassName =
   "flex items-start gap-3 wrap-anywhere transition-colors duration-180";
 
@@ -68,16 +68,16 @@ export function PublicFooter() {
     <footer className="text-brand-blue-muted relative isolate bg-[linear-gradient(115deg,var(--navy-light),var(--navy)_75%)] text-[0.8125rem] leading-[1.65] motion-reduce:[&_a]:transition-none [&_a:focus-visible]:rounded-[3px] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-5 [&_a:focus-visible]:outline-white motion-reduce:[&_svg]:transition-none">
       <div className="container-page">
         <section
-          className="relative flex flex-col gap-6 border-b border-white/14 py-8 sm:py-10 lg:flex-row lg:items-center lg:justify-between lg:gap-8"
+          className="relative flex flex-col gap-4 border-b border-white/14 py-5 sm:py-6 lg:flex-row lg:items-center lg:justify-between lg:gap-8"
           aria-labelledby="footer-requirement-title"
         >
           <div>
-            <p className="text-brand-blue-muted mb-2 text-[0.6875rem] font-bold tracking-[0.16em] uppercase">
+            <p className="text-brand-blue-muted mb-1.5 text-[0.6875rem] font-bold tracking-[0.16em] uppercase">
               One partner. Every possibility.
             </p>
             <h2
               id="footer-requirement-title"
-              className="mb-[0.65rem] text-[clamp(1.5rem,2.6vw,2rem)] leading-tight font-[750] tracking-[-0.035em] text-white"
+              className="mb-2 text-[clamp(1.5rem,2.6vw,2rem)] leading-tight font-[750] tracking-[-0.035em] text-white"
             >
               Have a Business Requirement?
             </h2>
@@ -88,13 +88,13 @@ export function PublicFooter() {
           </div>
           <Link
             href={ROUTES.public.tellUsWhatYouNeed}
-            className="bg-brand-red hover:bg-brand-red-dark inline-flex min-h-13 shrink-0 items-center justify-center gap-3 rounded-[0.625rem] px-6 py-3.5 text-sm leading-[1.65] font-bold text-white transition-[background-color,transform] duration-180 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 sm:self-start lg:self-center"
+            className="bg-brand-red hover:bg-brand-red-dark inline-flex min-h-11 shrink-0 items-center justify-center gap-3 rounded-[0.625rem] px-6 py-2.5 text-sm leading-[1.65] font-bold text-white transition-[background-color,transform] duration-180 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 sm:self-start lg:self-center"
           >
             Tell Us What You Need <ArrowRight aria-hidden="true" className="size-4.5" />
           </Link>
         </section>
 
-        <div className="relative grid gap-x-7 gap-y-10 py-11 sm:grid-cols-2 sm:py-14 lg:grid-cols-[minmax(0,1.2fr)_repeat(2,minmax(0,1fr))] xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1.1fr)_minmax(0,1.05fr)_minmax(0,1.25fr)] xl:gap-7 xl:py-15">
+        <div className="relative grid grid-cols-2 gap-x-4 gap-y-7 py-6 sm:gap-x-7 sm:py-8 lg:grid-cols-[minmax(0,1.2fr)_repeat(2,minmax(0,1fr))] xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1.1fr)_minmax(0,1.05fr)_minmax(0,1.25fr)]">
           <div
             className="text-brand-blue-muted pointer-events-none absolute inset-x-0 top-4 opacity-[0.07]"
             aria-hidden="true"
@@ -150,18 +150,18 @@ export function PublicFooter() {
             </svg>
           </div>
 
-          <div className="z-1 min-w-0 sm:col-span-full lg:col-span-1">
+          <div className="z-1 col-span-full min-w-0 lg:col-span-1">
             <BrandLogo
               variant="inverse"
               className="max-w-full rounded-lg bg-white px-3.5 py-3"
               imageClassName="h-auto w-47 max-w-full sm:h-auto"
             />
-            <p className="mt-6 max-w-100 text-sm leading-[1.9] text-white/76 xl:text-[0.8125rem]">
+            <p className="mt-4 max-w-100 text-sm leading-[1.7] text-white/76 xl:text-[0.8125rem]">
               Your global partner for sourcing, business setup, trade, travel, IT
               solutions and more. Tell us what your business needs, and we provide or
               coordinate the solution from A to Z.
             </p>
-            <p className="relative mt-6 pl-7.5 text-[0.8125rem] font-[650] text-white">
+            <p className="relative mt-4 pl-7.5 text-[0.8125rem] font-[650] text-white">
               <Globe2
                 aria-hidden="true"
                 className="text-brand-blue-muted absolute top-1 left-0 size-4.5"
@@ -173,7 +173,7 @@ export function PublicFooter() {
             <SocialLinks
               tone="inverse"
               configuredOnly
-              className="[&_a:hover]:border-brand-red [&_a:hover]:bg-brand-red mt-6 flex-wrap"
+              className="[&_a:hover]:border-brand-red [&_a:hover]:bg-brand-red mt-4 flex-wrap"
             />
           </div>
 
@@ -190,7 +190,7 @@ export function PublicFooter() {
                     <Link
                       href={link.href}
                       className={cn(
-                        "group flex w-fit max-w-full items-baseline gap-1.5 py-1.25 transition-colors duration-180 hover:text-white",
+                        "group flex w-fit max-w-full items-baseline gap-1.5 py-0.75 transition-colors duration-180 hover:text-white sm:py-0.5",
                         link.title === "Tell Us What You Need" && "font-[750] text-white",
                       )}
                     >
@@ -214,7 +214,7 @@ export function PublicFooter() {
               Get in Touch
             </h2>
             <address className="not-italic">
-              <ul className="grid gap-4.5">
+              <ul className="grid gap-3">
                 <ContactItem icon={MapPin} label="Our office">
                   {support.address}
                 </ContactItem>
@@ -239,7 +239,7 @@ export function PublicFooter() {
                 )}
               </ul>
             </address>
-            <div className="mt-6 border-t border-white/12 pt-5">
+            <div className="mt-4 border-t border-white/12 pt-4">
               <p className="mb-2.5 text-white/76">Let’s move your business forward.</p>
               <Link
                 href={ROUTES.public.contact}
@@ -253,7 +253,7 @@ export function PublicFooter() {
       </div>
 
       <div className="border-t border-white/12 bg-black/12 text-[0.6875rem] text-white/65">
-        <div className="container-page flex flex-col items-center justify-between gap-4.5 py-6 text-center lg:flex-row lg:flex-wrap lg:text-left">
+        <div className="container-page flex flex-col items-center justify-between gap-3 py-4 text-center lg:flex-row lg:flex-wrap lg:text-left">
           <p>
             &copy; {CURRENT_YEAR} {APP_CONFIG.name}. All rights reserved.
           </p>
