@@ -37,6 +37,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { APP_CONFIG } from "@/config/app";
+import { PUBLIC_FOOTER_CONTACT } from "@/config/public-footer";
 import type {
   InquiryStatus,
   PackageReview,
@@ -72,7 +74,7 @@ export function AdminInquiryDetailsDialog({
 }: AdminInquiryDetailsDialogProps) {
   const [activeTab, setActiveTab] = useState<"details" | "reply" | "history" | "review">("details");
   const [replySender, setReplySender] = useState("Miracle International Operations Desk");
-  const [replySenderEmail] = useState("desk@miracleinternational.com");
+  const [replySenderEmail] = useState(APP_CONFIG.support.email);
   const [replySubject, setReplySubject] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -93,7 +95,7 @@ export function AdminInquiryDetailsDialog({
         `Re: Inquiry #${inquiry.referenceNumber} - ${inquiry.packageName || inquiry.inquiryType}`,
       );
       setReplyMessage(
-        `Dear ${inquiry.customerName},\n\nThank you for reaching out to Miracle International regarding your ${inquiry.inquiryType} request.\n\nWe have reviewed your inquiry details and are pleased to provide you with the following assistance...\n\nPlease feel free to reply to this email or contact us directly on WhatsApp.\n\nWarm regards,\nMiracle International Team\nhttps://miracleinternational.com`,
+        `Dear ${inquiry.customerName},\n\nThank you for reaching out to Miracle International regarding your ${inquiry.inquiryType} request.\n\nWe have reviewed your inquiry details and are pleased to provide you with the following assistance...\n\nPlease feel free to reply to this email or contact us directly on WhatsApp at ${APP_CONFIG.support.whatsapp}.\n\nWarm regards,\nMiracle International Team\nhttps://${PUBLIC_FOOTER_CONTACT.website}`,
       );
 
       // Check for existing review linked to this package or inquiry

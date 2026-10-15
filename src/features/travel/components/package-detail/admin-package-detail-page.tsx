@@ -32,6 +32,7 @@ import { PublicTravelInquiryModal } from "@/components/travel/public-travel-inqu
 import { CustomizeTripModal } from "@/features/travel/components/customize-trip-section";
 import { PackageReviewsSection } from "./package-reviews-section";
 import { ROUTES } from "@/config/routes";
+import { APP_CONFIG } from "@/config/app";
 import { getStoredPackages } from "@/lib/storage/travel-store";
 import type { TravelPackage } from "@/components/admin-travel/types";
 
@@ -458,11 +459,11 @@ export function AdminPackageDetailPage({ pkg }: { pkg: TravelPackage }) {
                   <div className="pt-1 flex flex-col gap-1 text-[11px] font-semibold text-ink">
                     <span className="flex items-center gap-1.5">
                       <Phone className="size-3 text-brand-blue" />
-                      +94 77 123 4567
+                      {APP_CONFIG.support.phone}
                     </span>
                     <span className="flex items-center gap-1.5">
                       <Mail className="size-3 text-brand-blue" />
-                      travel@miracleinternational.com
+                      {APP_CONFIG.support.email}
                     </span>
                   </div>
                 </div>
