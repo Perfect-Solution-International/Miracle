@@ -3,10 +3,11 @@ import Link from "next/link";
 import {
   ArrowRight,
   ChevronRight,
-  Clock,
   Globe2,
   Mail,
   MapPin,
+  MessageCircle,
+  MessagesSquare,
   Phone,
   type LucideIcon,
 } from "lucide-react";
@@ -14,6 +15,7 @@ import {
 import { BrandLogo } from "@/components/common/brand-logo";
 import { SocialLinks } from "@/components/common/social-links";
 import { APP_CONFIG, CURRENT_YEAR } from "@/config/app";
+import { PUBLIC_FOOTER_CONTACT } from "@/config/public-footer";
 import { PUBLIC_FOOTER_NAV } from "@/config/public-navigation";
 import { ROUTES } from "@/config/routes";
 
@@ -62,7 +64,7 @@ function ContactItem({
 
 /** Server-rendered footer; navigation and contact details retain their shared sources. */
 export function PublicFooter() {
-  const { support } = APP_CONFIG;
+  const contact = PUBLIC_FOOTER_CONTACT;
 
   return (
     <footer className="text-brand-blue-muted relative isolate bg-[linear-gradient(115deg,var(--navy-light),var(--navy)_75%)] text-[0.8125rem] leading-[1.65] motion-reduce:[&_a]:transition-none [&_a:focus-visible]:rounded-[3px] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-5 [&_a:focus-visible]:outline-white motion-reduce:[&_svg]:transition-none">
@@ -194,39 +196,39 @@ export function PublicFooter() {
             </h2>
             <address className="not-italic">
               <ul className="grid gap-3">
-                <ContactItem icon={MapPin} label="Our office">
-                  {support.address}
+                <ContactItem
+                  icon={MapPin}
+                  label="Our office"
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.address)}`}
+                >
+                  {contact.address}
                 </ContactItem>
                 <ContactItem
                   icon={Phone}
                   label="Call us"
-                  href={`tel:${support.phone.replace(/\s+/g, "")}`}
+                  href={`tel:${contact.phone.replace(/\s+/g, "")}`}
                 >
-                  {support.phone}
+                  {contact.phone}
+                </ContactItem>
+                <ContactItem
+                  icon={MessageCircle}
+                  label="WhatsApp"
+                  href={`https://wa.me/${contact.whatsapp.replace(/\D/g, "")}`}
+                >
+                  {contact.whatsapp}
+                </ContactItem>
+                <ContactItem icon={MessagesSquare} label="Telegram / WeChat">
+                  {contact.messaging}
                 </ContactItem>
                 <ContactItem
                   icon={Mail}
                   label="Email us"
-                  href={`mailto:${support.email}`}
+                  href={`mailto:${contact.email}`}
                 >
-                  {support.email}
+                  {contact.email}
                 </ContactItem>
-                {support.hours && (
-                  <ContactItem icon={Clock} label="Business hours">
-                    {support.hours}
-                  </ContactItem>
-                )}
               </ul>
             </address>
-            <div className="mt-4 border-t border-white/12 pt-4">
-              <p className="mb-2.5 text-white/76">Let’s move your business forward.</p>
-              <Link
-                href={ROUTES.public.contact}
-                className="hover:text-brand-blue-muted inline-flex min-h-8 items-center gap-2 font-bold text-white"
-              >
-                Talk to our team <ArrowRight aria-hidden="true" className="size-3.5" />
-              </Link>
-            </div>
           </section>
         </div>
       </div>
