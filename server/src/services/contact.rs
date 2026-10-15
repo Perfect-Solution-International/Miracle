@@ -1,7 +1,10 @@
 use std::{collections::HashMap, net::IpAddr, time::Duration};
 
 use lettre::{
-    message::{header::ContentType, Mailbox},
+    message::{
+        header::{ContentTransferEncoding, ContentType},
+        Attachment, Body, Mailbox, MultiPart, SinglePart,
+    },
     transport::smtp::authentication::Credentials,
     AsyncSmtpTransport, AsyncTransport, Message, Tokio1Executor,
 };
@@ -11,7 +14,13 @@ use sqlx::PgPool;
 use validator::ValidateEmail;
 
 pub const MAIL_FROM: &str = "admin@miracleinternational.lk";
-pub const MAIL_TO: &str = "infomiracle.lk@gmail.com";
+pub const MAIL_TO: &str = "info@miracleinternational.lk";
+
+pub struct MailAttachment {
+    pub name: String,
+    pub content_type: ContentType,
+    pub data: Vec<u8>,
+}
 
 // Deliberately no Debug implementation: this contains mailbox credentials.
 pub struct ContactConfig {
@@ -27,10 +36,11 @@ impl ContactConfig {
     }
 
     pub(crate) fn from_values(get: impl Fn(&str) -> Option<String>) -> Result<Self, &'static str> {
-        let required = |key| {
+        // Report only the setting name, never its value or SMTP credentials.
+        let required = |key: &'static str| {
             get(key)
                 .filter(|v| !v.trim().is_empty() && !v.contains("replace-with"))
-                .ok_or("configuration")
+                .ok_or(key)
         };
         for (key, expected) in [
             ("SMTP_HOST", "smtp.stackmail.com"),
@@ -40,15 +50,15 @@ impl ContactConfig {
             ("MAIL_TO", MAIL_TO),
         ] {
             if required(key)? != expected {
-                return Err("configuration");
+                return Err(key);
             }
         }
-        let origins = parse_origins(&required("ALLOWED_ORIGIN")?)?;
+        let origins = parse_origins(&required("ALLOWED_ORIGIN")?).map_err(|_| "ALLOWED_ORIGIN")?;
         let trusted_proxies = get("CONTACT_TRUSTED_PROXY_IPS")
             .unwrap_or_default()
             .split(',')
             .filter(|v| !v.trim().is_empty())
-            .map(|v| v.trim().parse().map_err(|_| "configuration"))
+            .map(|v| v.trim().parse().map_err(|_| "CONTACT_TRUSTED_PROXY_IPS"))
             .collect::<Result<Vec<IpAddr>, _>>()?;
         Ok(Self {
             origins,
@@ -133,20 +143,38 @@ impl ContactMessage {
         }
     }
 
-    fn email_message(&self) -> Result<Message, &'static str> {
+    fn email_message(&self, attachments: Vec<MailAttachment>) -> Result<Message, &'static str> {
         let phone = if self.phone.is_empty() {
             String::new()
         } else {
             format!("Phone Number: {}\n\n", self.phone)
         };
-        Message::builder()
-            .from(Mailbox::new(Some("Miracle International".into()), MAIL_FROM.parse().map_err(|_| "configuration")?))
+        let builder = Message::builder()
+            .from(Mailbox::new(
+                Some("Miracle International".into()),
+                MAIL_FROM.parse().map_err(|_| "configuration")?,
+            ))
             .to(MAIL_TO.parse().map_err(|_| "configuration")?)
             .reply_to(self.email.parse().map_err(|_| "validation")?)
-            .subject(format!("New Website Inquiry: {}", self.subject))
-            .header(ContentType::TEXT_PLAIN)
-            .body(format!("New Contact Form Submission\n\nFull Name: {}\n\nEmail Address: {}\n\n{}Subject: {}\n\nMessage:\n\n{}\n\nSource: Miracle International Website", self.name, self.email, phone, self.subject, self.message))
-            .map_err(|_| "message")
+            .subject(format!("New Website Inquiry: {}", self.subject));
+        let text = format!("New Contact Form Submission\n\nFull Name: {}\n\nEmail Address: {}\n\n{}Subject: {}\n\nMessage:\n\n{}\n\nSource: Miracle International Website", self.name, self.email, phone, self.subject, self.message);
+        if attachments.is_empty() {
+            builder
+                .header(ContentType::TEXT_PLAIN)
+                .body(text)
+                .map_err(|_| "message")
+        } else {
+            let mut parts = MultiPart::mixed().singlepart(SinglePart::plain(text));
+            for attachment in attachments {
+                let body =
+                    Body::new_with_encoding(attachment.data, ContentTransferEncoding::Base64)
+                        .map_err(|_| "message")?;
+                parts = parts.singlepart(
+                    Attachment::new(attachment.name).body(body, attachment.content_type),
+                );
+            }
+            builder.multipart(parts).map_err(|_| "message")
+        }
     }
 }
 
@@ -170,6 +198,14 @@ pub async fn rate_limit(
 }
 
 pub async fn send(config: &ContactConfig, message: &ContactMessage) -> Result<(), &'static str> {
+    send_with_attachments(config, message, Vec::new()).await
+}
+
+pub async fn send_with_attachments(
+    config: &ContactConfig,
+    message: &ContactMessage,
+    attachments: Vec<MailAttachment>,
+) -> Result<(), &'static str> {
     // relay() uses implicit TLS on 465 and verifies the Stackmail certificate.
     let transport = AsyncSmtpTransport::<Tokio1Executor>::relay("smtp.stackmail.com")
         .map_err(|_| "smtp-configuration")?
@@ -179,7 +215,7 @@ pub async fn send(config: &ContactConfig, message: &ContactMessage) -> Result<()
         ))
         .timeout(Some(Duration::from_secs(15)))
         .build();
-    let email = message.email_message()?;
+    let email = message.email_message(attachments)?;
     tokio::time::timeout(Duration::from_secs(25), transport.send(email))
         .await
         .map_err(|_| "smtp-timeout")?
@@ -233,7 +269,7 @@ mod tests {
 
     #[test]
     fn sender_recipient_and_plain_text_are_fixed() {
-        let mail = message().email_message().unwrap();
+        let mail = message().email_message(Vec::new()).unwrap();
         assert_eq!(mail.envelope().from().unwrap().to_string(), MAIL_FROM);
         assert_eq!(mail.envelope().to()[0].to_string(), MAIL_TO);
         let text = String::from_utf8(mail.formatted()).unwrap();
@@ -241,6 +277,24 @@ mod tests {
         assert!(text.contains("Content-Type: text/plain"));
         assert!(text.contains("New Website Inquiry: General Inquiry"));
         assert!(text.contains("Source: Miracle International Website"));
+    }
+
+    #[test]
+    fn includes_document_bytes_as_a_mime_attachment_with_fixed_envelope() {
+        let mail = message()
+            .email_message(vec![MailAttachment {
+                name: "specification.pdf".into(),
+                content_type: "application/pdf".parse().unwrap(),
+                data: b"%PDF-1.4\nTest".to_vec(),
+            }])
+            .unwrap();
+        assert_eq!(mail.envelope().from().unwrap().to_string(), MAIL_FROM);
+        assert_eq!(mail.envelope().to()[0].to_string(), MAIL_TO);
+        let text = String::from_utf8(mail.formatted()).unwrap();
+        assert!(text.contains("multipart/mixed"));
+        assert!(text.contains("application/pdf"));
+        assert!(text.contains("attachment; filename=\"specification.pdf\""));
+        assert!(text.contains("JVBERi0xLjQKVGVzdA=="));
     }
 
     #[test]
@@ -272,24 +326,30 @@ mod tests {
         .into();
         assert!(ContactConfig::from_values(|k| vars.get(k).map(|v| v.to_string())).is_ok());
         for key in ["SMTP_USER", "SMTP_PASSWORD", "SMTP_HOST", "MAIL_TO"] {
-            assert!(ContactConfig::from_values(|k| if k == key {
-                None
-            } else {
-                vars.get(k).map(|v| v.to_string())
-            })
-            .is_err());
+            assert_eq!(
+                ContactConfig::from_values(|k| if k == key {
+                    None
+                } else {
+                    vars.get(k).map(|v| v.to_string())
+                })
+                .err(),
+                Some(key)
+            );
         }
         for (key, value) in [
             ("SMTP_PORT", "587"),
             ("SMTP_SECURE", "false"),
             ("MAIL_TO", "attacker@example.com"),
         ] {
-            assert!(ContactConfig::from_values(|k| if k == key {
-                Some(value.into())
-            } else {
-                vars.get(k).map(|v| v.to_string())
-            })
-            .is_err());
+            assert_eq!(
+                ContactConfig::from_values(|k| if k == key {
+                    Some(value.into())
+                } else {
+                    vars.get(k).map(|v| v.to_string())
+                })
+                .err(),
+                Some(key)
+            );
         }
     }
 }

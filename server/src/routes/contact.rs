@@ -16,6 +16,12 @@ use crate::{
 };
 
 pub fn router() -> Router<DbPool> {
+    if let Err(setting) = ContactConfig::from_env() {
+        tracing::error!(
+            setting,
+            "contact_email_configuration_invalid; check backend environment and restart"
+        );
+    }
     let cors = CorsLayer::new()
         .allow_origin(AllowOrigin::predicate(|origin: &HeaderValue, _| {
             std::env::var("ALLOWED_ORIGIN")
@@ -33,10 +39,15 @@ pub fn router() -> Router<DbPool> {
     Router::new()
         .route("/contact", post(submit))
         .layer(DefaultBodyLimit::max(32 * 1024))
+        .route(
+            "/requirement-inquiries",
+            post(super::requirement_inquiries::submit)
+                .layer(DefaultBodyLimit::max(16 * 1024 * 1024)),
+        )
         .layer(cors)
 }
 
-fn failure(status: StatusCode, code: &str, message: &str) -> Response {
+pub(super) fn failure(status: StatusCode, code: &str, message: &str) -> Response {
     (
         status,
         [(header::CACHE_CONTROL, "no-store")],
@@ -45,7 +56,7 @@ fn failure(status: StatusCode, code: &str, message: &str) -> Response {
         .into_response()
 }
 
-fn unavailable(stage: &str) -> Response {
+pub(super) fn unavailable(stage: &str) -> Response {
     // Never log SMTP exceptions, credentials or visitor messages.
     tracing::error!(stage, "contact_email_failure");
     failure(
@@ -99,12 +110,15 @@ async fn submit(
         Err(response) => return response,
     };
     match contact::send(&config, &data).await {
-        Ok(()) => (
-            StatusCode::OK,
-            [(header::CACHE_CONTROL, "no-store")],
-            Json(json!({"success": true, "data": {"accepted": true}})),
-        )
-            .into_response(),
+        Ok(()) => {
+            tracing::info!(form = "contact", "contact_email_accepted_by_smtp");
+            (
+                StatusCode::OK,
+                [(header::CACHE_CONTROL, "no-store")],
+                Json(json!({"success": true, "data": {"accepted": true}})),
+            )
+                .into_response()
+        }
         Err(stage) => unavailable(stage),
     }
 }
@@ -118,6 +132,24 @@ async fn validate_submission(
     headers: &HeaderMap,
     payload: Result<Json<ContactMessage>, JsonRejection>,
 ) -> Result<ContactMessage, Response> {
+    enforce_request_limits(config, pool, peer, headers).await?;
+    let data = match payload {
+        Ok(Json(data)) => match data.validate() {
+            Ok(data) => data,
+            Err(fields) => return Err((StatusCode::BAD_REQUEST, [(header::CACHE_CONTROL, "no-store")], Json(json!({"success": false, "error": {"code":"VALIDATION_ERROR", "message":"Check your details."}, "fieldErrors": fields}))).into_response()),
+        },
+        Err(error) => return Err(failure(if error.status() == StatusCode::PAYLOAD_TOO_LARGE { StatusCode::PAYLOAD_TOO_LARGE } else { StatusCode::BAD_REQUEST }, "INVALID_REQUEST", "Enter a valid message within the size limit.")),
+    };
+    enforce_email_limit(pool, &data.email).await?;
+    Ok(data)
+}
+
+pub(super) async fn enforce_request_limits(
+    config: &ContactConfig,
+    pool: &DbPool,
+    peer: IpAddr,
+    headers: &HeaderMap,
+) -> Result<(), Response> {
     match headers.get(header::ORIGIN).and_then(|v| v.to_str().ok()) {
         Some(origin) if config.origins.iter().any(|allowed| allowed == origin) => {}
         _ => {
@@ -150,26 +182,16 @@ async fn validate_submission(
             Err(stage) => return Err(unavailable(stage)),
         }
     }
-    let data = match payload {
-        Ok(Json(data)) => match data.validate() {
-            Ok(data) => data,
-            Err(fields) => return Err((StatusCode::BAD_REQUEST, [(header::CACHE_CONTROL, "no-store")], Json(json!({"success": false, "error": {"code":"VALIDATION_ERROR", "message":"Check your details."}, "fieldErrors": fields}))).into_response()),
-        },
-        Err(error) => return Err(failure(if error.status() == StatusCode::PAYLOAD_TOO_LARGE { StatusCode::PAYLOAD_TOO_LARGE } else { StatusCode::BAD_REQUEST }, "INVALID_REQUEST", "Enter a valid message within the size limit.")),
-    };
-    match contact::rate_limit(
-        pool,
-        &format!("email:{}", data.email.to_lowercase()),
-        3,
-        600,
-    )
-    .await
-    {
+    Ok(())
+}
+
+pub(super) async fn enforce_email_limit(pool: &DbPool, email: &str) -> Result<(), Response> {
+    match contact::rate_limit(pool, &format!("email:{}", email.to_lowercase()), 3, 600).await {
         Ok(Some(retry)) => return Err(limited(retry)),
         Ok(None) => {}
         Err(stage) => return Err(unavailable(stage)),
     }
-    Ok(data)
+    Ok(())
 }
 
 #[cfg(test)]
