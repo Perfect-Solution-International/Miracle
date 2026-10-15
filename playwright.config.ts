@@ -19,6 +19,10 @@ export default defineConfig({
   ],
   webServer: {
     command: "npm run build && npm run start",
+    // Contact specs intercept this endpoint; no live mail.
+    env: {
+      NEXT_PUBLIC_CONTACT_API_URL: "https://api.example/api/v1/contact",
+    },
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

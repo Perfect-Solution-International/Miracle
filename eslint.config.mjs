@@ -33,6 +33,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "build.log",
     "scripts/**",
+    "server/target/**",
   ]),
 ]);
 
