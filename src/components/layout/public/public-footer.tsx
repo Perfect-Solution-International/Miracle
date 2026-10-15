@@ -71,27 +71,6 @@ export function PublicFooter() {
           className="relative flex flex-col gap-4 border-b border-white/14 py-5 sm:py-6 lg:flex-row lg:items-center lg:justify-between lg:gap-8"
           aria-labelledby="footer-requirement-title"
         >
-          <div>
-            <p className="text-brand-blue-muted mb-1.5 text-[0.6875rem] font-bold tracking-[0.16em] uppercase">
-              One partner. Every possibility.
-            </p>
-            <h2
-              id="footer-requirement-title"
-              className="mb-2 text-[clamp(1.5rem,2.6vw,2rem)] leading-tight font-[750] tracking-[-0.035em] text-white"
-            >
-              Have a Business Requirement?
-            </h2>
-            <p className="max-w-xl text-sm leading-[1.65] text-white/74">
-              From international product sourcing to complete business setup, tell us what
-              you need.
-            </p>
-          </div>
-          <Link
-            href={ROUTES.public.tellUsWhatYouNeed}
-            className="bg-brand-red hover:bg-brand-red-dark inline-flex min-h-11 shrink-0 items-center justify-center gap-3 rounded-[0.625rem] px-6 py-2.5 text-sm leading-[1.65] font-bold text-white transition-[background-color,transform] duration-180 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 sm:self-start lg:self-center"
-          >
-            Tell Us What You Need <ArrowRight aria-hidden="true" className="size-4.5" />
-          </Link>
         </section>
 
         <div className="relative grid grid-cols-2 gap-x-4 gap-y-7 py-6 sm:gap-x-7 sm:py-8 lg:grid-cols-[minmax(0,1.2fr)_repeat(2,minmax(0,1fr))] xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1.1fr)_minmax(0,1.05fr)_minmax(0,1.25fr)]">
@@ -273,10 +252,10 @@ export function PublicFooter() {
           <div className="flex items-center gap-2.5">
             <span>Developed by</span>
             <Image
-              src="/brand/perfect-solution-logo.png"
+              src="/psi-logo.png"
               alt="Perfect Solution International (Pvt) Ltd"
-              width={160}
-              height={160}
+              width={1287}
+              height={397}
               className="h-7 w-auto rounded-sm object-contain"
             />
           </div>
