@@ -41,6 +41,7 @@ import {
 } from "@/components/ui/select";
 import { ROUTES } from "@/config/routes";
 import { COUNTRIES } from "@/lib/constants/countries";
+import { ApiError } from "@/lib/api/api-error";
 import { applyBackendErrors } from "@/lib/validation/backend-errors";
 
 import { useRegister } from "../hooks/use-register";
@@ -163,6 +164,12 @@ export function RegisterForm() {
     try {
       await register.mutateAsync(values);
     } catch (error) {
+   
+      if (error instanceof ApiError && error.isConflict) {
+        form.setError("email", { type: "server", message: error.message });
+        showFirstInvalidStep();
+        return;
+      }
       const message = applyBackendErrors(error, form.setError, REGISTER_FIELDS);
       setFormError(message);
       showFirstInvalidStep();
