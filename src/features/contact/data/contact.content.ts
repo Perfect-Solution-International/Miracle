@@ -1,14 +1,10 @@
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, MessagesSquare, Phone } from "lucide-react";
 
 import { APP_CONFIG } from "@/config/app";
 
 import type { ContactChannel } from "../types/contact.types";
 
-/**
- * Built from `APP_CONFIG.support`, the single source of truth for these
- * details (see the TODO there pending the approved company values) — never
- * duplicated or invented here.
- */
+/** Contact details share the footer's approved company values through APP_CONFIG. */
 export const CONTACT_CHANNELS: readonly ContactChannel[] = [
   {
     icon: Phone,
@@ -16,6 +12,19 @@ export const CONTACT_CHANNELS: readonly ContactChannel[] = [
     title: "Phone",
     lines: [APP_CONFIG.support.phone],
     href: `tel:${APP_CONFIG.support.phone.replace(/\s+/g, "")}`,
+  },
+  {
+    icon: MessageCircle,
+    tone: "red",
+    title: "WhatsApp",
+    lines: [APP_CONFIG.support.whatsapp],
+    href: APP_CONFIG.social.whatsapp,
+  },
+  {
+    icon: MessagesSquare,
+    tone: "blue",
+    title: "Telegram / WeChat",
+    lines: [APP_CONFIG.support.messaging],
   },
   {
     icon: Mail,

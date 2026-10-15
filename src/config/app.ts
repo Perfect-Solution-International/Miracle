@@ -1,4 +1,5 @@
 import { clientEnv } from "./environment";
+import { PUBLIC_FOOTER_CONTACT } from "./public-footer";
 
 export const APP_CONFIG = {
   name: "Miracle International",
@@ -9,19 +10,19 @@ export const APP_CONFIG = {
   locale: clientEnv.NEXT_PUBLIC_DEFAULT_LOCALE,
   defaultCurrency: clientEnv.NEXT_PUBLIC_DEFAULT_CURRENCY,
   tagline: "Global Trade • Sourcing • Business Solutions",
-  // TODO: Replace placeholder contact details with the approved company values.
   support: {
-    email: "support@miracle-international.com",
-    phone: "+94 11 000 0000",
-    whatsapp: "+94 77 000 0000",
-    address: "Colombo, Sri Lanka",
+    email: PUBLIC_FOOTER_CONTACT.email,
+    phone: PUBLIC_FOOTER_CONTACT.phone,
+    whatsapp: PUBLIC_FOOTER_CONTACT.whatsapp,
+    messaging: PUBLIC_FOOTER_CONTACT.messaging,
+    address: PUBLIC_FOOTER_CONTACT.address,
     hours: "Monday – Friday, 9:00 AM – 6:00 PM",
   },
   social: {
     facebook: "https://www.facebook.com/",
     instagram: "https://www.instagram.com/",
     linkedin: "https://www.linkedin.com/",
-    whatsapp: "https://wa.me/",
+    whatsapp: `https://wa.me/${PUBLIC_FOOTER_CONTACT.whatsapp.replace(/\D/g, "")}`,
   },
 } as const;
 

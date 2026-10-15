@@ -12,10 +12,7 @@ const MAPS_SEARCH_URL = `https://www.google.com/maps/search/?api=1&query=${MAPS_
 const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}`;
 
 /**
- * Illustrative map preview rather than an embedded, coordinate-pinned map:
- * the office address in `APP_CONFIG` is still a placeholder (see its TODO),
- * so this links out to a live Google Maps search instead of asserting exact
- * coordinates.
+ * Illustrative map preview linking to the approved office address on Google Maps.
  */
 function MapPreview() {
   return (
@@ -78,7 +75,7 @@ function OfficeInviteCard() {
           We Welcome You to Our Office
         </h2>
         <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-          Feel free to visit us at our headquarters in {APP_CONFIG.support.address}. Our
+          Feel free to visit us at {APP_CONFIG.support.address}. Our
           team is happy to meet you and discuss how we can support your business needs.
         </p>
         <div>
