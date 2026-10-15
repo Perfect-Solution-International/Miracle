@@ -3,6 +3,7 @@
  * string literals so a URL change does not require a codebase-wide search.
  */
 export const ROUTES = {
+  sitemap: "/sitemap.xml",
   public: {
     home: "/",
     about: "/about",

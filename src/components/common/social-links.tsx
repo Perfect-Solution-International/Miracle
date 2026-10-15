@@ -57,13 +57,24 @@ const SOCIAL_LINKS = [
 export function SocialLinks({
   tone = "default",
   className,
+  configuredOnly = false,
 }: {
   tone?: "default" | "inverse";
   className?: string;
+  /** Hide platform homepages until an official profile is configured. */
+  configuredOnly?: boolean;
 }) {
+  const links = configuredOnly
+    ? SOCIAL_LINKS.filter(
+        ({ href }) => new URL(href).pathname.replace(/\//g, "").length > 0,
+      )
+    : SOCIAL_LINKS;
+
+  if (links.length === 0) return null;
+
   return (
     <ul className={cn("flex items-center gap-2", className)}>
-      {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+      {links.map(({ label, href, icon: Icon }) => (
         <li key={label}>
           <a
             href={href}
