@@ -16,6 +16,8 @@ npm run dev
 
 The app runs at http://localhost:3000.
 
+Contact email is handled by the existing Rust API and PostgreSQL database. Setup, environment variables and delivery checks are documented in [Contact email deployment](docs/CONTACT_EMAIL_DEPLOYMENT.md).
+
 ### Scripts
 
 | Command                 | Purpose                                            |

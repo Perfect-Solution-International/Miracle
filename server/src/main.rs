@@ -39,9 +39,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 4. Build application router
     let app = Router::new()
-        .nest("/api/v1", api_router())
+        .nest("/api/v1", api_router().layer(cors_layer()).merge(routes::contact::router()))
         .fallback(fallback_handler)
-        .layer(cors_layer())
         .layer(tower_http::trace::TraceLayer::new_for_http())
         .with_state(pool);
 

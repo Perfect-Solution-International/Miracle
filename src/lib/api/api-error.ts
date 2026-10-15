@@ -42,6 +42,9 @@ export class ApiError extends Error {
   get isNotFound(): boolean {
     return this.status === 404;
   }
+  get isConflict(): boolean {
+    return this.status === 409;
+  }
   get isCancelled(): boolean {
     return this.code === API_ERROR_CODES.CANCELLED;
   }

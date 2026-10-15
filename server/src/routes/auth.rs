@@ -406,12 +406,7 @@ pub async fn register(
     .fetch_optional(&pool)
     .await?
     .ok_or_else(|| {
-        let mut fields = HashMap::new();
-        fields.insert(
-            "email".to_string(),
-            vec!["An account with this email already exists".to_string()],
-        );
-        AppError::Validation("An account with this email already exists".to_string(), Some(fields))
+        AppError::Conflict("An account with this email already exists".to_string())
     })?;
 
     let config = Config::from_env();
